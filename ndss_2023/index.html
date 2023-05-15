@@ -1,0 +1,743 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ndss_2023/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../ndss_2022/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2023 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ndss-2023" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2023
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2023
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_fall/" class="md-nav__link">
+        2022_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="ndss-2023">NDSS 2023</h1>
+<p>94 papers accepted. Updated on <strong>2023-05-15</strong>. Note that the title is guessed from the url.</p>
+<p>You can find <a href="https://www.ndss-symposium.org/ndss2023/accepted-papers/">the lastest information here</a>.</p>
+<ul>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/a-robust-counting-sketch-for-data-plane-intrusion-detection/">A Robust Counting Sketch For Data Plane Intrusion Detection</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/a-systematic-study-of-the-consistency-of-two-factor-authentication-user-journeys-on-top-ranked-websites/">A Systematic Study Of The Consistency Of Two Factor Authentication User Journeys On Top Ranked Websites</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/an-os-agnostic-approach-to-memory-forensics/">An Os Agnostic Approach To Memory Forensics</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/authentisense-a-scalable-behavioral-biometrics-authentication-scheme-using-few-shot-learning-for-mobile-platforms/">Authentisense A Scalable Behavioral Biometrics Authentication Scheme Using Few Shot Learning For Mobile Platforms</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/automata-based-automated-detection-of-state-machine-bugs-in-protocol-implementations/">Automata Based Automated Detection Of State Machine Bugs In Protocol Implementations</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/binaryinferno-a-semantic-driven-approach-to-field-inference-for-binary-message-formats/">Binaryinferno A Semantic Driven Approach To Field Inference For Binary Message Formats</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/brokenwire-wireless-disruption-of-ccs-electric-vehicle-charging/">Brokenwire Wireless Disruption Of Ccs Electric Vehicle Charging</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/browser-permission-mechanisms-demystified/">Browser Permission Mechanisms Demystified</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/chargeprint-a-framework-for-internet-scale-discovery-and-security-analysis-of-ev-charging-management-systems/">Chargeprint A Framework For Internet Scale Discovery And Security Analysis Of Ev Charging Management Systems</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/darwin-survival-of-the-fittest-fuzzing-mutators/">Darwin Survival Of The Fittest Fuzzing Mutators</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/detecting-unknown-encrypted-malicious-traffic-in-real-time-via-flow-interaction-graph-analysis/">Detecting Unknown Encrypted Malicious Traffic In Real Time Via Flow Interaction Graph Analysis</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/efficient-dynamic-proof-of-retrievability-for-cold-storage/">Efficient Dynamic Proof Of Retrievability For Cold Storage</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/evasion-attacks-and-defenses-on-smart-home-physical-event-verification/">Evasion Attacks And Defenses On Smart Home Physical Event Verification</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/extrapolating-formal-analysis-to-uncover-attacks-in-bluetooth-passkey-entry-pairing/">Extrapolating Formal Analysis To Uncover Attacks In Bluetooth Passkey Entry Pairing</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/faster-secure-comparisons-with-offline-phase-for-efficient-private-set-intersection/">Faster Secure Comparisons With Offline Phase For Efficient Private Set Intersection</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/fusion-efficient-and-secure-inference-resilient-to-malicious-servers/">Fusion Efficient And Secure Inference Resilient To Malicious Servers</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/ghost-domain-reloaded-vulnerable-links-in-domain-name-delegation-and-revocation/">Ghost Domain Reloaded Vulnerable Links In Domain Name Delegation And Revocation</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/hope-of-delivery-extracting-user-locations-from-mobile-instant-messengers/">Hope Of Delivery Extracting User Locations From Mobile Instant Messengers</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/let-me-unwind-that-for-you-exceptions-to-backward-edge-protection/">Let Me Unwind That For You Exceptions To Backward Edge Protection</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/machine-unlearning-of-features-and-labels/">Machine Unlearning Of Features And Labels</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/mytee-own-the-trusted-execution-environment-on-embedded-devices/">Mytee Own The Trusted Execution Environment On Embedded Devices</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/on-the-anonymity-of-peer-to-peer-network-anonymity-schemes-used-by-cryptocurrencies/">On The Anonymity Of Peer To Peer Network Anonymity Schemes Used By Cryptocurrencies</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/pose-practical-off-chain-smart-contract-execution/">Pose Practical Off Chain Smart Contract Execution</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/post-gdpr-threat-hunting-on-android-phones-dissecting-os-level-safeguards-of-user-unresettable-identifiers/">Post Gdpr Threat Hunting On Android Phones Dissecting Os Level Safeguards Of User Unresettable Identifiers</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/ppa-preference-profiling-attack-against-federated-learning/">Ppa Preference Profiling Attack Against Federated Learning</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/private-certifier-intersection/">Private Certifier Intersection</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/quicforge-client-side-request-forgery-in-quic/">Quicforge Client Side Request Forgery In Quic</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/rovisq-reduction-of-video-service-quality-via-adversarial-attacks-on-deep-learning-based-video-compression/">Rovisq Reduction Of Video Service Quality Via Adversarial Attacks On Deep Learning Based Video Compression</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/securing-federated-sensitive-topic-classification-against-poisoning-attacks/">Securing Federated Sensitive Topic Classification Against Poisoning Attacks</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/smarter-contracts-detecting-vulnerabilities-in-smart-contracts-with-deep-transfer-learning/">Smarter Contracts Detecting Vulnerabilities In Smart Contracts With Deep Transfer Learning</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/tactics-threats-targets-modeling-disinformation-and-its-mitigation/">Tactics Threats Targets Modeling Disinformation And Its Mitigation</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/the-beatrix-resurrections-robust-backdoor-detection-via-gram-matrices/">The Beatrix Resurrections Robust Backdoor Detection Via Gram Matrices</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/towards-automatic-and-precise-heap-layout-manipulation-for-general-purpose-programs/">Towards Automatic And Precise Heap Layout Manipulation For General Purpose Programs</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/trellis-robust-and-scalable-metadata-private-anonymous-broadcast/">Trellis Robust And Scalable Metadata Private Anonymous Broadcast</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/auto-draft-336/">Auto Draft 336</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/your-router-is-my-prober-measuring-ipv6-networks-via-icmp-rate-limiting-side-channels/">Your Router Is My Prober Measuring Ipv6 Networks Via Icmp Rate Limiting Side Channels</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/a-security-study-about-electron-applications-and-a-programming-methodology-to-tame-dom-functionalities/">A Security Study About Electron Applications And A Programming Methodology To Tame Dom Functionalities</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/access-your-tesla-without-your-awareness-compromising-keyless-entry-system-of-model-3/">Access Your Tesla Without Your Awareness Compromising Keyless Entry System Of Model 3</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/accountable-javascript-code-delivery/">Accountable Javascript Code Delivery</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/adversarial-robustness-for-tabular-data-through-cost-and-utility-awareness/">Adversarial Robustness For Tabular Data Through Cost And Utility Awareness</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/anomaly-detection-in-the-open-world-normality-shift-detection-explanation-and-adaptation/">Anomaly Detection In The Open World Normality Shift Detection Explanation And Adaptation</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/assessing-the-impact-of-interface-vulnerabilities-in-compartmentalized-software/">Assessing The Impact Of Interface Vulnerabilities In Compartmentalized Software</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/attacks-as-defenses-designing-robust-audio-captchas-using-attacks-on-automatic-speech-recognition-systems/">Attacks As Defenses Designing Robust Audio Captchas Using Attacks On Automatic Speech Recognition Systems</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/backdoor-attacks-against-dataset-distillation/">Backdoor Attacks Against Dataset Distillation</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/bars-local-robustness-certification-for-deep-learning-based-traffic-analysis-systems/">Bars Local Robustness Certification For Deep Learning Based Traffic Analysis Systems</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/beagle-forensics-of-deep-learning-backdoor-attack-for-better-defense/">Beagle Forensics Of Deep Learning Backdoor Attack For Better Defense</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/blockscope-detecting-and-investigating-propagated-vulnerabilities-in-forked-blockchain-projects/">Blockscope Detecting And Investigating Propagated Vulnerabilities In Forked Blockchain Projects</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/breaking-and-fixing-virtual-channels-domino-attack-and-donner/">Breaking And Fixing Virtual Channels Domino Attack And Donner</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/chkplug-checking-gdpr-compliance-of-wordpress-plugins-via-cross-language-code-property-graph/">Chkplug Checking Gdpr Compliance Of Wordpress Plugins Via Cross Language Code Property Graph</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/copy-on-flip-hardening-ecc-memory-against-rowhammer-attacks/">Copy On Flip Hardening Ecc Memory Against Rowhammer Attacks</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/cryptographic-oracle-based-conditional-payments/">Cryptographic Oracle Based Conditional Payments</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/diffcsp-finding-browser-bugs-in-content-security-policy-enforcement-through-differential-testing/">Diffcsp Finding Browser Bugs In Content Security Policy Enforcement Through Differential Testing</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/do-not-give-a-dog-bread-every-time-he-wags-his-tail-stealing-passwords-through-content-queries-conquer-attacks/">Do Not Give A Dog Bread Every Time He Wags His Tail Stealing Passwords Through Content Queries Conquer Attacks</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/doitrust-dissecting-on-chain-compromised-internet-domains-via-graph-learning/">Doitrust Dissecting On Chain Compromised Internet Domains Via Graph Learning</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/double-and-nothing-understanding-and-detecting-cryptocurrency-giveaway-scams/">Double And Nothing Understanding And Detecting Cryptocurrency Giveaway Scams</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/drone-security-and-the-mysterious-case-of-djis-droneid/">Drone Security And The Mysterious Case Of Djis Droneid</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/edgetdc-on-the-security-of-time-difference-of-arrival-measurements-in-can-bus-systems/">Edgetdc On The Security Of Time Difference Of Arrival Measurements In Can Bus Systems</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/fine-grained-trackability-in-protocol-executions/">Fine Grained Trackability In Protocol Executions</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/focusing-on-pinocchios-nose-a-gradients-scrutinizer-to-thwart-split-learning-hijacking-attacks-using-intrinsic-attributes/">Focusing On Pinocchios Nose A Gradients Scrutinizer To Thwart Split Learning Hijacking Attacks Using Intrinsic Attributes</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/folk-models-of-misinformation-on-social-media/">Folk Models Of Misinformation On Social Media</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/fuzzilli-fuzzing-for-javascript-jit-compiler-vulnerabilities/">Fuzzilli Fuzzing For Javascript Jit Compiler Vulnerabilities</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/he-htlc-revisiting-incentives-in-htlc/">He Htlc Revisiting Incentives In Htlc</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/heteroscore-evaluating-and-mitigating-cloud-security-threats-brought-by-heterogeneity/">Heteroscore Evaluating And Mitigating Cloud Security Threats Brought By Heterogeneity</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/him-of-many-faces-characterizing-billion-scale-adversarial-and-benign-browser-fingerprints-on-commercial-websites/">Him Of Many Faces Characterizing Billion Scale Adversarial And Benign Browser Fingerprints On Commercial Websites</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/how-to-count-bots-in-longitudinal-datasets-of-ip-addresses/">How To Count Bots In Longitudinal Datasets Of Ip Addresses</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/i-still-know-what-you-watched-last-sunday-privacy-of-the-hbbtv-protocol-in-the-european-smart-tv-landscape/">I Still Know What You Watched Last Sunday Privacy Of The Hbbtv Protocol In The European Smart Tv Landscape</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/infomasker-preventing-eavesdropping-using-phoneme-based-noise/">Infomasker Preventing Eavesdropping Using Phoneme Based Noise</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/loki-state-aware-fuzzing-framework-for-the-implementation-of-blockchain-consensus-protocols/">Loki State Aware Fuzzing Framework For The Implementation Of Blockchain Consensus Protocols</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/metawave-attacking-mmwave-sensing-with-meta-material-enhanced-tags/">Metawave Attacking Mmwave Sensing With Meta Material Enhanced Tags</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/navigating-murky-waters-automated-browser-feature-testing-for-uncovering-tracking-vectors/">Navigating Murky Waters Automated Browser Feature Testing For Uncovering Tracking Vectors</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/no-grammar-no-problem-towards-fuzzing-the-linux-kernel-without-system-call-descriptions/">No Grammar No Problem Towards Fuzzing The Linux Kernel Without System Call Descriptions</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/obi-a-multi-path-oblivious-ram-for-forward-and-backward-secure-searchable-encryption/">Obi A Multi Path Oblivious Ram For Forward And Backward Secure Searchable Encryption</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/obsan-an-out-of-bound-sanitizer-to-harden-dnn-executables/">Obsan An Out Of Bound Sanitizer To Harden Dnn Executables</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/optrand-optimistically-responsive-reconfigurable-distributed-randomness/">Optrand Optimistically Responsive Reconfigurable Distributed Randomness</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/parakeet-practical-key-transparency-for-end-to-end-encrypted-messaging/">Parakeet Practical Key Transparency For End To End Encrypted Messaging</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/paralyzing-drones-via-emi-signal-injection-on-sensory-communication-channels/">Paralyzing Drones Via Emi Signal Injection On Sensory Communication Channels</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/partitioning-ethereum-without-eclipsing-it/">Partitioning Ethereum Without Eclipsing It</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/preventing-sim-box-fraud-using-device-model-fingerprinting/">Preventing Sim Box Fraud Using Device Model Fingerprinting</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/privacy-preserving-database-fingerprinting/">Privacy Preserving Database Fingerprinting</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/probflow-using-probabilistic-programming-in-anonymous-communication-networks/">Probflow Using Probabilistic Programming In Anonymous Communication Networks</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/rai2-responsible-identity-audit-governing-the-artificial-intelligence/">Rai2 Responsible Identity Audit Governing The Artificial Intelligence</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/reaas-enabling-adversarially-robust-downstream-classifiers-via-robust-encoder-as-a-service/">Reaas Enabling Adversarially Robust Downstream Classifiers Via Robust Encoder As A Service</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/real-threshold-ecdsa/">Real Threshold Ecdsa</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/redsec-running-encrypted-discretized-neural-networks-in-seconds/">Redsec Running Encrypted Discretized Neural Networks In Seconds</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/rescan-a-middleware-framework-for-realistic-and-robust-black-box-web-application-scanning/">Rescan A Middleware Framework For Realistic And Robust Black Box Web Application Scanning</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/rr-a-fault-model-for-efficient-tee-replication/">Rr A Fault Model For Efficient Tee Replication</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/sometimes-you-arent-what-you-do-mimicry-attacks-against-provenance-graph-host-intrusion-detection-systems/">Sometimes You Arent What You Do Mimicry Attacks Against Provenance Graph Host Intrusion Detection Systems</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/soundlock-a-novel-user-authentication-scheme-for-vr-devices-using-auditory-pupillary-response/">Soundlock A Novel User Authentication Scheme For Vr Devices Using Auditory Pupillary Response</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/stealthyimu-stealing-permission-protected-private-information-from-smartphone-voice-assistant-using-zero-permission-sensors/">Stealthyimu Stealing Permission Protected Private Information From Smartphone Voice Assistant Using Zero Permission Sensors</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/synthdb-synthesizing-database-via-program-analysis-for-security-testing-of-web-applications/">Synthdb Synthesizing Database Via Program Analysis For Security Testing Of Web Applications</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/the-power-of-bamboo-on-the-post-compromise-security-for-searchable-symmetric-encryption/">The Power Of Bamboo On The Post Compromise Security For Searchable Symmetric Encryption</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/thwarting-smartphone-sms-attacks-at-the-radio-interface-layer/">Thwarting Smartphone Sms Attacks At The Radio Interface Layer</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/un-rocking-drones-foundations-of-acoustic-injection-attacks-and-recovery-thereof/">Un Rocking Drones Foundations Of Acoustic Injection Attacks And Recovery Thereof</a></li>
+<li><a href="https://www.ndss-symposium.org/ndss-paper/vulhawk-cross-architecture-vulnerability-detection-with-entropy-based-binary-code-search/">Vulhawk Cross Architecture Vulnerability Detection With Entropy Based Binary Code Search</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>

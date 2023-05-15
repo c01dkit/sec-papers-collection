@@ -1,0 +1,736 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ndss_2021/">
+      
+      
+        <link rel="prev" href="../ndss_2022/">
+      
+      
+        <link rel="next" href="../ccs_2022/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2021 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ndss-2021" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2021
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2021
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_fall/" class="md-nav__link">
+        2022_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="ndss-2021">NDSS 2021</h1>
+<p>87 papers accepted. Updated on <strong>2023-05-15</strong>. </p>
+<p>You can find <a href="https://www.ndss-symposium.org/ndss2021/accepted-papers/">the lastest information here</a>.</p>
+<ul>
+<li>All the Numbers are US: Large-scale Abuse of Contact Discovery in Mobile Messengers</li>
+<li>As Strong As Its Weakest Link: How to Break Blockchain DApps at RPC Service</li>
+<li>Awakening the Web’s Sleeper Agents: Misusing Service Workers for Privacy Leakage</li>
+<li>Bringing Balance to the Force: Dynamic Analysis of the Android Application Framework</li>
+<li>C$^2$SR: Cybercrime Scene Reconstruction for Post-mortem Forensic Analysis</li>
+<li>Deceptive Deletions for Protecting Withdrawn Posts on Social Media Platforms</li>
+<li>DOVE: A Data-Oblivious Virtual Environment</li>
+<li>Evading Voltage-Based Intrusion Detection on Automotive CAN</li>
+<li>Forward and Backward Private Conjunctive Searchable Symmetric Encryption</li>
+<li>From WHOIS to WHOWAS: A Large-Scale Measurement Study of Domain Registration Privacy under the GDPR</li>
+<li>Hey Alexa, is this Skill Safe?: Taking a Closer Look at the Alexa Skill Ecosystem</li>
+<li>Let’s Stride Blindfolded in a Forest: Sublinear Multi-Client Decision Trees Evaluation</li>
+<li>More than a Fair Share: Network Data Remanence Attacks against Secret Sharing-based Schemes</li>
+<li>Obfuscated Access and Search Patterns in Searchable Encryption</li>
+<li>Peerlock: Flexsealing BGP</li>
+<li>POP and PUSH: Demystifying and Defending against (Mach) Port-oriented Programming</li>
+<li>Processing Dangerous Paths – On Security and Privacy of the Portable Document Format</li>
+<li>Reining in the Web’s Inconsistencies with Site Policy</li>
+<li>Rosita: Towards Automatic Elimination of Power-Analysis Leakage in Ciphers</li>
+<li>Screen Gleaning: A Screen Reading TEMPEST Attack on Mobile Devices Exploiting an Electromagnetic Side Channel</li>
+<li>The Abuser Inside Apps: Finding the Culprit Committing Mobile Ad Fraud</li>
+<li>Towards Measuring Supply Chain Attacks on Package Managers for Interpreted Languages</li>
+<li>XDA: Accurate, Robust Disassembly with Transfer Learning</li>
+<li>Zoom on the Keystrokes: Exploiting Video Calls for Keystroke Inference Attacks</li>
+<li>A Devil of a Time: How Vulnerable is NTP to Malicious Timeservers?</li>
+<li>A Formal Analysis of the FIDO UAF Protocol</li>
+<li>ALchemist: Fusing Application and Audit Logs for Precise Attack Provenance without Instrumentation</li>
+<li>BaseSpec: Comparative Analysis of Baseband Software and Cellular Specifications for L3 Protocols</li>
+<li>Bitcontracts: Supporting Smart Contracts in Legacy Blockchains</li>
+<li>CHANCEL: Efficient Multi-client Isolation Under Adversarial Programs</li>
+<li>CV-Inspector: Towards Automating Detection of Adblock Circumvention</li>
+<li>Data Poisoning Attacks to Deep Learning Based Recommender Systems</li>
+<li>Detecting Kernel Memory Leaks in Specialized Modules with Ownership Reasoning</li>
+<li>Differential Training: A Generic Framework to Reduce Label Noises for Android Malware Detection</li>
+<li>Does Every Second Count? Time-based Evolution of Malware Behavior in Sandboxes</li>
+<li>EarArray: Defending against DolphinAttack via Acoustic Attenuation</li>
+<li>Emilia: Catching Iago in Legacy Code</li>
+<li>FARE: Enabling Fine-grained Attack Categorization under Low-quality Labeled Data</li>
+<li>Favocado: Fuzzing Binding Code of JavaScript Engines Using Semantically Correct Test Cases</li>
+<li>FlowLens: Enabling Efficient Flow Classification for ML-based Network Security Applications</li>
+<li>FLTrust: Byzantine-robust Federated Learning via Trust Bootstrapping</li>
+<li>From Library Portability to Para-rehosting: Natively Executing Open-source Microcontroller OSs on Commodity Hardware</li>
+<li>GALA: Greedy ComputAtion for Linear Algebra in Privacy-Preserved Neural Networks</li>
+<li>HERA: Hotpatching of Embedded Real-time Applications</li>
+<li>Hunting the Haunter — Efficient Relational Symbolic Execution for Spectre with HauntedRelSE</li>
+<li>Improving Signal’s Sealed Sender</li>
+<li>IoTSafe: Enforcing Safety and Security Policy with Real IoT Physical Interaction Discovery</li>
+<li>KUBO: Precise and Scalable Detection of User-triggerable Undefined Behavior Bugs in OS Kernel</li>
+<li>Manipulating the Byzantine: Optimizing Model Poisoning Attacks and Defenses for Federated Learning</li>
+<li>MINOS: A Lightweight Real-Time Cryptojacking Detection System</li>
+<li>Mondrian: Comprehensive Inter-domain Network Zoning Architecture</li>
+<li>NetPlier: Probabilistic Network Protocol Reverse Engineering from Message Traces</li>
+<li>OblivSketch: Oblivious Network Measurement as a Cloud Service</li>
+<li>On the Insecurity of SMS One-Time Password Messages against Local Attackers in Modern Mobile Devices</li>
+<li>PFirewall: Semantics-Aware Customizable Data Flow Control for Home Automation Systems</li>
+<li>PGFUZZ: Policy-Guided Fuzzing for Robotic Vehicles</li>
+<li>PHOENIX: Device-Centric Cellular Network Protocol Monitoring using Runtime Verification</li>
+<li>POSEIDON: Privacy-Preserving Federated Neural Network Learning</li>
+<li>Practical Blind Membership Inference Attack via Differential Comparisons</li>
+<li>Practical Non-Interactive Searchable Encryption with Forward and Backward Privacy</li>
+<li>Preventing and Detecting State Inference Attacks on Android</li>
+<li>PrivacyFlash Pro: Automating Privacy Policy Generation for Mobile Apps</li>
+<li>ProPoS: A Probabilistic Proof-of-Stake Protocol</li>
+<li>QPEP: An Actionable Approach to Secure and Performant Broadband From Geostationary Orbit</li>
+<li>RandRunner: Distributed Randomness from Trapdoor VDFs with Strong Uniqueness</li>
+<li>Refining Indirect Call Targets at the Binary Level</li>
+<li>Reinforcement Learning-based Hierarchical Seed Scheduling for Greybox Fuzzing</li>
+<li>ROV++: Improved Deployable Defense against BGP Hijacking</li>
+<li>SerialDetector: Principled and Practical Exploration of Object Injection Vulnerabilities for the Web</li>
+<li>Shadow Attacks: Hiding and Replacing Content in Signed PDFs</li>
+<li>SpecTaint: Speculative Taint Analysis for Discovering Spectre Gadgets</li>
+<li>SquirRL: Automating Attack Analysis on Blockchain Incentive Mechanisms with Deep Reinforcement Learning</li>
+<li>SymQEMU: Compilation-based symbolic execution for binaries</li>
+<li>Tales of Favicons and Caches: Persistent Tracking in Modern Browsers</li>
+<li>TASE: Reducing Latency of Symbolic Execution with Transactional Memory</li>
+<li>The Bluetooth CYBORG: Analysis of the Full Human-Machine Passkey Entry AKE Protocol</li>
+<li>To Err.Is Human: Characterizing the Threat of Unintended URLs in Social Media</li>
+<li>Towards Understanding and Detecting Cyberbullying in Real-world Images</li>
+<li>Trust the Crowd: Wireless Witnessing to Detect Attacks on ADS-B-Based Air-Traffic Surveillance</li>
+<li>Understanding and Detecting International Revenue Share Fraud</li>
+<li>Understanding the Growth and Security Considerations of ECS</li>
+<li>Understanding Worldwide Private Information Collection on Android</li>
+<li>WATSON: Abstracting Behaviors from Audit Logs via Aggregation of Contextual Semantics</li>
+<li>Who’s Hosting the Block Party? Studying Third-Party Blockage of CSP and SRI</li>
+<li>WINNIE : Fuzzing Windows Applications with Harness Synthesis and Fast Cloning</li>
+<li>Your Phone is My Proxy: Detecting and Understanding Mobile Proxy Networks</li>
+<li>Доверя́й, но проверя́й: SFI safety for native-compiled Wasm</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>

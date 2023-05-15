@@ -1,0 +1,867 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ccs_2022/">
+      
+      
+        <link rel="prev" href="../ndss_2021/">
+      
+      
+        <link rel="next" href="../ccs_2021/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2022 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#acm-ccs-2022" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2022
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2022
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_fall/" class="md-nav__link">
+        2022_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="acm-ccs-2022">ACM CCS 2022</h1>
+<p>218 papers accepted. Updated on <strong>2023-05-15</strong>. </p>
+<p>You can find <a href="https://www.sigsac.org/ccs/CCS2022/program/accepted-papers.html">the lastest information here</a>.</p>
+<ul>
+<li>A Run a Day Won't Keep the Hacker Away: Inference Attacks on Endpoint Privacy Zones in Fitness Tracking Social Networks</li>
+<li>A Scalable and Dynamic ACL System for In-Network Defense</li>
+<li>A Symbolic Analysis of Privacy for TLS 1.3 with Encrypted Client Hello</li>
+<li>A Wolf in Sheep's Clothing: Spreading Deadly Pathogens Under the Disguise of Popular Music</li>
+<li>AI/ML for Network Security: The Emperor has no Clothes</li>
+<li>ATTRITION: Attacking Static Hardware Trojan Detection Techniques Using Reinforcement Learning</li>
+<li>Acquirer: A Hybrid Approach to Detecting Algorithmic Complexity Vulnerabilities</li>
+<li>Adversarial Correctness and Privacy for Probabilistic Data Structures</li>
+<li>Am I Private and If So, how Many? Communicating Privacy Guarantees of Differential Privacy with Risk Communication Formats</li>
+<li>An Extensive Study of Residential Proxies in China</li>
+<li>AntMan: Interactive Zero-Knowledge Proofs with Sublinear Communication</li>
+<li>Are Attribute Inference Attacks Just Imputation?</li>
+<li>Auditing Membership Leakages of Multi-Exit Networks</li>
+<li>Automatic Detection of Fake Key Attacks in Secure Messaging</li>
+<li>Automatic Detection of Speculative Execution Combinations</li>
+<li>Batching, Aggregation, and Zero-Knowledge Proofs in Bilinear Accumulators</li>
+<li>Behind the Scenes of RPKI</li>
+<li>Blacktooth: Breaking through the Defense of Bluetooth in Silence</li>
+<li>Blazing Fast PSI from Improved OKVS and Subfield VOLE</li>
+<li>Bolt-Dumbo Transformer: Asynchronous Consensus As Fast As the Pipelined BFT</li>
+<li>Bullshark: DAG BFT Protocols Made Practical</li>
+<li>C2C: Fine-grained Configuration-driven System Call Filtering</li>
+<li>CANflict: Exploiting Peripheral Conflicts for Data-Link Layer Attacks on Automotive Networks</li>
+<li>CERBERUS: Exploring Federated Prediction of Security Events</li>
+<li>CETIS: Retrofitting Intel CET for Generic and Efficient Intra-process Memory Isolation</li>
+<li>CINI MINIS: Domain Isolation for Fault and Combined Security</li>
+<li>Cache Refinement Type for Side-Channel Detection of Cryptographic Software</li>
+<li>Caulk: Lookup Arguments in Sublinear Time</li>
+<li>Cerberus: A Formal Approach to Secure and Efficient Enclave Memory Sharing</li>
+<li>Cerberus: Query-driven Scalable Vulnerability Detection in OAuth Service Provider Implementations</li>
+<li>Chaghri - An FHE-friendly Block Cipher</li>
+<li>Characterizing and Detecting Non-Consensual Photo Sharing on Social Networks</li>
+<li>Clues in Tweets: Twitter-Guided Discovery and Analysis of SMS Spam</li>
+<li>Collect Responsibly But Deliver Arbitrarily? A Study on Cross-User Privacy Leakage in Mobile Apps</li>
+<li>Constant Latency in Sleepy Consensus</li>
+<li>Cross Miniapp Request Forgery: Root Causes, Attacks, and Vulnerability Detection</li>
+<li>DISTINCT: Identity Theft using In-Browser Communications in Dual-Window Single Sign-On</li>
+<li>DPIS: an Enhanced Mechanism for Differentially Private SGD with Importance Sampling</li>
+<li>DangZero: Efficient Use-After-Free Detection via Direct Page Table Access</li>
+<li>Detecting Missing-Permission-Check Vulnerabilities in Distributed Cloud Systems</li>
+<li>Detecting and Measuring Misconfigured Manifest in Android Apps</li>
+<li>Differentially Private Triangle and 4-Cycle Counting in the Shuffle Model</li>
+<li>DirtyCred: Escalating Privilege in Linux Kernel</li>
+<li>Discovering IoT Physical Channel Vulnerabilities</li>
+<li>Distributed, Private, Sparse Histograms in the Two-Server Model</li>
+<li>Do Opt-Outs Really Opt Me Out?</li>
+<li>Don't Kick Over the Beehive: Attacks and Security Analysis on Zigbee</li>
+<li>DriveFuzz: Discovering Autonomous Driving Bugs through Driving Quality-Guided Fuzzing</li>
+<li>Dumbo-NG: Fast Asynchronous BFT Consensus with Throughput-Oblivious Latency</li>
+<li>EIFFeL: Ensuring Integrity for Federated Learning</li>
+<li>ENGRAFT: Enclave-guarded Raft on Byzantine Faulty Nodes</li>
+<li>EchoHand: High Accuracy and Presentation Attack Resistant Hand Authentication on Commodity Mobile Devices</li>
+<li>Efficient Secure Three-Party Sorting with Applications to Data Analysis and Heavy Hitters</li>
+<li>Efficient Zero-Knowledge Proofs on Signed Data with Applications to Verifiable Computation on Data Streams</li>
+<li>Eluding Secure Aggregation in Federated Learning via Model Inconsistency</li>
+<li>Empirical Analysis of EIP-1559: Transaction Fees, Waiting Times, and Consensus Security</li>
+<li>Enforcing Fine-grained Constant-time Policies</li>
+<li>Enhanced Membership Inference Attacks against Machine Learning Models</li>
+<li>Escaping the Confines of Time: Continuous Browser Extension Fingerprinting Through Ephemeral Modifications</li>
+<li>Evocatio: Conjuring Bug Capabilities from a Single PoC</li>
+<li>Exposing the Rat in the Tunnel: Using Traffic Analysis for Tor-based Malware Detection</li>
+<li>FABEO: Fast Attribute-Based Encryption with Optimal Security</li>
+<li>Fast Fully Oblivious Compaction and Shuffling</li>
+<li>Fast Fully Secure Multi-Party Computation over Any Ring with Two-Thirds Honest Majority</li>
+<li>FeIDo: Recoverable FIDO2 Tokens Using Electronic IDs</li>
+<li>Feature Inference Attack on Shapley Values</li>
+<li>Federated Boosted Decision Trees with Differential Privacy</li>
+<li>FenceSitter: Black-box, Content-Agnostic, and Synchronization-Free Enrollment-Phase Attacks on Speaker Recognition Systems</li>
+<li>Feta: Efficient Threshold Designated-Verifier Zero-Knowledge Proofs</li>
+<li>Finding MNEMON: Reviving Memories of Node Embeddings</li>
+<li>Foundations of Coin Mixing Services</li>
+<li>Freely Given Consent? Studying Consent Notice of Third-Party Tracking and Its Violations of GDPR in Android Apps</li>
+<li>Frequency Estimation in the Shuffle Model with Almost a Single Message</li>
+<li>Frequency Throttling Side-Channel Attack</li>
+<li>GearBox: Optimal-size Shard Committees by Leveraging the Safety-Liveness Dichotomy</li>
+<li>Graph Unlearning</li>
+<li>Gringotts: Fast and Accurate Internal Denial-of-Wallet Detection for Serverless Computing</li>
+<li>Group Property Inference Attacks Against Graph Neural Networks</li>
+<li>HammerScope: Observing DRAM Power Consumption Using Rowhammer</li>
+<li>Hammurabi: A Framework for Pluggable, Logic-Based X.509 Certificate Validation Policies</li>
+<li>Harnessing Perceptual Adversarial Patches for Crowd Counting</li>
+<li>HeatDeCam: Detecting Hidden Spy Cameras via Thermal Emissions</li>
+<li>Hecate: Lifting and Shifting On-Premises Workloads to an Untrusted Cloud</li>
+<li>Helping or Hindering? How Browser Extensions Undermine Security</li>
+<li>Hidden in Plain Sight: Exploring Encrypted Channels in Android apps</li>
+<li>How to Hide MetaData in MLS-Like Secure Group Messaging: Simple, Modular, and Post-Quantum</li>
+<li>HyperDbg: Reinventing Hardware-Assisted Debugging</li>
+<li>I'm SPARTACUS, No, I'm SPARTACUS: Proactively Protecting Users from Phishing by Intentionally Triggering Cloaking Behavior</li>
+<li>Ibex: Privacy-preserving Ad Conversion Tracking and Bidding</li>
+<li>Identifying a Training-Set Attack's Target Using Renormalized Influence Estimation</li>
+<li>Improving Line-Point Zero Knowledge: Two Multiplications for the Price of One</li>
+<li>InviCloak: An End-to-End Approach to Privacy and Performance in Web Content Distribution</li>
+<li>JIT-Picking: Differential Fuzzing of JavaScript Engines</li>
+<li>Kryvos: Publicly Tally-Hiding Verifiable E-Voting</li>
+<li>L-SRR: Local Differential Privacy for Location-Based Services with Staircase Randomized Response</li>
+<li>LPGNet: Link Private Graph Networks for Node Classification</li>
+<li>Laconic Private Set-Intersection From Pairings</li>
+<li>Leakage Inversion: Towards Quantifying Privacy in Searchable Encryption</li>
+<li>Leakage and Tamper Resilient Permutation-Based Cryptography</li>
+<li>LibAFL: A Framework to Build Modular and Reusable Fuzzers</li>
+<li>Location Heartbleeding: The Rise of Wi-Fi Spoofing Attack Via Geolocation API</li>
+<li>LoneNeuron: a Highly-Effective Feature-Domain Neural Trojan Using Invisible and Polymorphic Watermarks</li>
+<li>Low-Latency Hardware Private Circuits</li>
+<li>MC^2: Rigorous and Efficient Directed Greybox Fuzzing</li>
+<li>META-BTS: Bootstrapping Precision Beyond the Limit</li>
+<li>Matproofs: Maintainable Matrix Commitment with Efficient Aggregation</li>
+<li>Membership Inference Attacks and Generalization: A Causal Perspective</li>
+<li>Membership Inference Attacks by Exploiting Loss Trajectory</li>
+<li>MetaEmu: An Architecture Agnostic Rehosting Framework for Automotive Firmware</li>
+<li>Microarchitectural Leakage Templates and Their Application to Cache-Based Side Channels</li>
+<li>Microwalk-CI: Practical Side-Channel Analysis for JavaScript Applications</li>
+<li>Minotaur: Multi-Resource Blockchain Consensus</li>
+<li>NFGen: Automatic Non-linear Function Evaluation Code Generator for General-purpose MPC Platforms</li>
+<li>NTRU-u-um: Secure Fully Homomorphic Encryption from NTRU with Small Modulus</li>
+<li>Narrator: Secure and Practical State Continuity for Trusted Execution in the Cloud</li>
+<li>NeVerMore: Exploiting RDMA Mistakes in NVMe-oF Storage Applications</li>
+<li>Non-Distinguishable Inconsistencies as a Deterministic Oracle for Detecting Security Bugs</li>
+<li>On the (In)Security of Secure ROS2</li>
+<li>On the Adaptive Security of the Threshold BLS Signature Scheme</li>
+<li>On the Privacy Risks of Cell-Based NAS Architectures</li>
+<li>On the Success Rate of Side-Channel Attacks on Masked Implementations</li>
+<li>Order-Disorder: Imitation Adversarial Attacks for Black-box Neural Ranking Models</li>
+<li>Overo: Sharing Private Audio Recordings</li>
+<li>P-Verifier: Understanding and Mitigating Security Risks in Cloud-based IoT Access Policies</li>
+<li>PACE: Fully Parallelizable BFT from Reproposable Byzantine Agreement</li>
+<li>PACMem: Enforcing Spatial and Temporal Memory Safety via ARM Pointer Authentication</li>
+<li>PEReDi: Privacy-Enhanced, Regulated and Distributed Central Bank Digital Currencies</li>
+<li>PSI from Ring-OLE</li>
+<li>PalanTír: Optimizing Attack Provenance with Hardware-enhanced System Observability</li>
+<li>PentaGOD: Stepping beyond Traditional GOD with Five Parties</li>
+<li>Perception-Aware Attack: Creating Adversarial Music via Reverse-Engineering Human Perception</li>
+<li>Perils and Mitigation of Security Risks of Cooperation in Mobile-as-a-Gateway IoT</li>
+<li>Phishing URL Detection: A Network-based Approach Robust to Evasion</li>
+<li>Physical Hijacking Attacks against Object Trackers</li>
+<li>Platypus: A Central Bank Digital Currency with Unlinkable Transactions and Privacy-Preserving Regulation</li>
+<li>Poirot: Probabilistically Recommending Protections for the Android Framework</li>
+<li>Post Quantum Noise</li>
+<li>Post-breach Recovery: Protection against White-box Adversarial Examples for Leaked DNN Models</li>
+<li>Power Contracts: Provably Complete Power Leakage Models for Processors</li>
+<li>Practical Settlement Bounds for Proof-of-Work Blockchains</li>
+<li>Practical Volume-Hiding Encrypted Multi-Maps with Optimal Overhead and Beyond</li>
+<li>Practical, Round-Optimal Lattice-Based Blind Signatures</li>
+<li>Privacy Limitations of Interest-based Advertising on The Web: A Post-mortem Empirical Analysis of Google's FLoC</li>
+<li>Private and Reliable Neural Network Inference</li>
+<li>Proof-of-Possession for KEM Certificates using Verifiable Generation</li>
+<li>Protecting Critical Inter-Domain Communication through Flyover Reservations</li>
+<li>Proving UNSAT in Zero Knowledge</li>
+<li>QuerySnout: Automating the Discovery of Attribute Inference Attacks against Query-Based Systems</li>
+<li>ROAST: Robust Asynchronous Schnorr Threshold Signatures</li>
+<li>Ready Raider One: Exploring the Misuse of Cloud Gaming Services</li>
+<li>RedShift: Transparent SNARKs from List Polynomial Commitments</li>
+<li>Reinforced Concrete: A Fast Hash Function for Verifiable Computation</li>
+<li>SFuzz: Slice-based Fuzzing for Real-Time Operating Systems</li>
+<li>SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</li>
+<li>STAR: Secret Sharing for Private Threshold Aggregation Reporting</li>
+<li>Second-Order Low-Randomness d+1 Hardware Sharing of the AES</li>
+<li>Secret-Shared Joins with Multiplicity from Aggregation Trees</li>
+<li>Secure Auctions in the Presence of Rational Adversaries</li>
+<li>Secure Parallel Computation on Privately Partitioned Data and Applications</li>
+<li>Securing Reset Operations in NISQ Quantum Computers</li>
+<li>Selective MPC: Distributed Computation of Differentially Private Key-Value Statistics</li>
+<li>Server-Aided Continuous Group Key Agreement</li>
+<li>Sharp: Short Relaxed Range Proofs</li>
+<li>Shifted Inverse: A General Mechanism for Monotonic Functions under User Differential Privacy</li>
+<li>Shorter Signatures Based on Tailor-Made Minimalist Symmetric-Key Crypto</li>
+<li>Sigstore: Software Signing for Everybody</li>
+<li>Sleepy Channels: Bi-directional Payment Channels without Watchtowers</li>
+<li>SortingHat: Efficient Private Decision Tree Evaluation via Homomorphic Encryption and Transciphering</li>
+<li>SpecDoctor: Differential Fuzz Testing to Find Transient Execution Vulnerabilities</li>
+<li>SpecPatch: Human-In-The-Loop Adversarial Audio Spectrogram Patch Attack on Speech Recognition</li>
+<li>Squirrel: Efficient Synchronized Multi-Signatures from Lattices</li>
+<li>StolenEncoder: Stealing Pre-trained Encoders in Self-supervised Learning</li>
+<li>Strengthening Order Preserving Encryption with Differential Privacy</li>
+<li>StrongBox: A GPU TEE on Arm Endpoints</li>
+<li>Succinct Zero Knowledge for Floating Point Computations</li>
+<li>Succinct Zero-Knowledge Batch Proofs for Set Accumulators</li>
+<li>SymLM: Predicting Function Names in Stripped Binaries via Context-Sensitive Execution-Aware Code Embeddings</li>
+<li>TChecker: Precise Static Inter-Procedural Analysis for Detecting Taint-Style Vulnerabilities in PHP Applications</li>
+<li>TRACER: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</li>
+<li>The Closer You Look, The More You Learn: A Grey-box Approach to Protocol State Machine Learning</li>
+<li>The Generals' Scuttlebutt: Byzantine-Resilient Gossip Protocols</li>
+<li>The Multi-User Security of Triple Encryption, Revisited: Exact Security, Strengthening, and Application to TDES</li>
+<li>Themis: An On-Site Voting System with Systematic Cast-as-intended Verification and Partial Accountability</li>
+<li>Thora: Atomic and Privacy-Preserving Multi-Channel Updates</li>
+<li>Threshold Cryptography as a Service (in the Multiserver and YOSO Models)</li>
+<li>TickTock: Detecting Microphone Status in Laptops Leveraging Electromagnetic Leakage of Clock Signals</li>
+<li>Tidy: Symbolic Verification of Timed Cryptographic Protocols</li>
+<li>Towards Automated Safety Vetting of Smart Contracts in Decentralized Applications</li>
+<li>Truth Serum: Poisoning Machine Learning Models to Reveal Their Secrets</li>
+<li>TurboPack: Honest Majority MPC with Constant Online Communication</li>
+<li>Two-Client Inner-Product Functional Encryption with an Application to Money-Laundering Detection</li>
+<li>Uncovering Intent based Leak of Sensitive Data in Android Framework</li>
+<li>Understanding IoT Security from a Market-Scale Perspective</li>
+<li>Understanding Real-world Threats to Deep Learning Models in Android Apps</li>
+<li>Understanding Security Issues in the NFT Ecosystem</li>
+<li>Understanding and Mitigating Remote Code Execution Vulnerabilities in Cross-platform Ecosystem</li>
+<li>Understanding the How and the Why: Exploring Secure Development Practices through a Course Competition</li>
+<li>Updatable Public Key Encryption from DCR: Efficient Constructions With Stronger Security</li>
+<li>VOProof: Efficient zkSNARKs Generation for Algebra Dummies</li>
+<li>VRust: Automated Vulnerability Detection for Solana Smart Contracts</li>
+<li>VeRSA: Verifiable Registries with Efficient Client Audits from RSA Authenticated Dictionaries</li>
+<li>Victory by KO: Attacking OpenPGP Using Key Overwriting</li>
+<li>Vizard: A Metadata-hiding Data Analytic System with End-to-End Policy Controls</li>
+<li>WINK: Wireless Inference of Numerical Keystrokes via Zero-Training Spatiotemporal Analysis</li>
+<li>Watch Out for Race Condition Attacks When Using Android External Storage</li>
+<li>Watch Your Back: Identifying Cybercrime Financial Relationships in Bitcoin through Back-and-Forth Exploration</li>
+<li>What Your Firmware Tells You Is Not How You Should Emulate It: A Specification-Guided Approach for Firmware Emulation</li>
+<li>When Evil Calls: Targeted Adversarial Voice over IP Network</li>
+<li>When Frodo Flips: End-to-End Key Recovery on FrodoKEM via Rowhammer</li>
+<li>When Good Becomes Evil: Tracking Bluetooth Low Energy Devices via Allowlist-based Side Channel and Its Countermeasure</li>
+<li>Why So Toxic? Measuring and Triggering Toxic Behavior in Open-Domain Chatbots</li>
+<li>Widespread Underestimation of Sensitivity in Differentially Private Libraries and How to Fix It</li>
+<li>Zapper: Smart Contracts with Data and Identity Privacy</li>
+<li>``Is your explanation stable?': A Robustness Evaluation Framework for Feature Attribution</li>
+<li>i-TiRE: Incremental Timed-Release Encryption or How to use Timed-Release Encryption on Blockchains?</li>
+<li>pMPL: A Robust Multi-Party Learning Framework with a Privileged Party</li>
+<li>zkBridge: Trustless Cross-chain Bridges Made Practical</li>
+<li>Cart-ology: Intercepting Targeted Advertising via Ad Network Identity Entanglement</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>

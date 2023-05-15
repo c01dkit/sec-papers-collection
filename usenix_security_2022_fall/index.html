@@ -1,0 +1,728 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/usenix_security_2022_fall/">
+      
+      
+        <link rel="prev" href="../usenix_security_2022_summer/">
+      
+      
+        <link rel="next" href="../usenix_security_2022_winter/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2022_fall - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usenix-sec-2022_fall" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2022_fall
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2022_fall
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="usenix-sec-2022_fall">USENIX Sec 2022_fall</h1>
+<p>79 papers accepted. Updated on <strong>2023-05-15</strong>. </p>
+<p>You can find <a href="https://www.usenix.org/conference/usenixsecurity22/fall-accepted-papers">the lastest information here</a>.</p>
+<ul>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/binkhorst">Security at the End of the Tunnel: The Anatomy of VPN Mental Models Among Experts and Non-Experts in a Corporate Context</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/aliaj">GAROTA: Generalized Active Root-Of-Trust Architecture (for Tiny Embedded Devices)</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/wang-chuhan">A Large-scale and Longitudinal Measurement Study of DKIM Deployment</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/koushki">Neither Access nor Control: A Longitudinal Investigation of the Efficacy of User Access-Control Solutions on Smartphones</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/huang-zhicong">Cheetah: Lean and Fast Secure Two-Party Deep Neural Network Inference</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/liu-ruofan">Inferring Phishing Intention via Webpage Appearance and Dynamics: A Deep Vision Based Approach</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/owens">Electronic Monitoring Smartphone Apps: An Analysis of Risks from Technical, Human-Centered, and Legal Perspectives</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/luo">ppSAT: Towards Two-Party Private SAT Solving</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/geeng">"Like Lesbians Walking the Perimeter": Experiences of U.S. LGBTQ+ Folks With Online Security, Safety, and Privacy Advice</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/wang-zhiwei">CamShield: Securing Smart Cameras through Physical Replication and Isolation</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/xiang">PatchCleanser: Certifiably Robust Defense against Adversarial Patches for Any Image Classifier</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/lin-xu">Phish in Sheep's Clothing: Exploring the Authentication Pitfalls of Browser Fingerprinting</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/he-liang">FreeWill: Automatically Diagnosing Use-after-free Bugs via Reference Miscounting Detection on Binaries</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/cerdeira">ReZone: Disarming TrustZone with TEE Privilege Reduction</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/purnal">Double Trouble: Combined Heterogeneous Attacks on Non-Inclusive Cache Hierarchies</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/solomos">The Dangers of Human Touch: Fingerprinting Browser Extensions through User Actions</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/myung">MundoFuzz: Hypervisor Fuzzing with Statistical Coverage Testing and Grammar Inference</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/pan-exploring">Exploring the Security Boundary of Data Reconstruction via Neuron Exclusivity Analysis</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/imran">SARA: Secure Android Remote Authorization</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/shakevsky">Trust Dies in Darkness: Shedding Light on Samsung's TrustZone Keymaster Design</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/turonova">Counting in Regexes Considered Harmful: Exposing ReDoS Vulnerability of Nonbacktracking Matchers</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/petzi">SCRAPS: Scalable Collective Remote Attestation for Pub-Sub IoT Networks with Untrusted Proxy Verifier</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/wu-yongji">Poisoning Attacks to Local Differential Privacy Protocols for Key-Value Data</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/vadayath">Arbiter: Bridging the Static and Dynamic Divide in Vulnerability Discovery on Binary Programs</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/albrecht">Breaking Bridgefy, again: Adopting libsignal is not enough</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/munyendo">"The Same PIN, Just Longer": On the (In)Security of Upgrading PINs from 4 to 6 Digits</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/slupska-networks">Networks of Care: Tech Abuse Advocates' Digital Security Practices</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/iqbal">Khaleesi: Breaker of Advertising and Tracking Request Chains</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/mink">DeepPhish: Understanding User Trust Towards Artificially Generated Profiles in Online Social Networks</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/tatar">TLB;DR: Enhancing TLB-based Attacks with TLB Desynchronized Reverse Engineering</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zuo">Playing Without Paying: Detecting Vulnerable Payment Verification in Native Binaries of Unity Mobile Games</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/xie">Building an Open, Robust, and Stable Voting-Based Domain Top List</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/bhaskar">Many Roads Lead To Rome: How Packet Headers Influence DNS Censorship Measurement</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/kogler-minefield">Minefield: A Software-only Protection for SGX Enclaves against DVFS Attacks</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/cohen">Attacks on Deidentification's Defenses</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/yoo">In-Kernel Control-Flow Integrity on Commodity OSes using ARM Pointer Authentication</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/karami">Unleash the Simulacrum: Shifting Browser Realities for Robust Extension-Fingerprinting Prevention</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/rizvi">Anycast Agility: Network Playbooks to Fight DDoS</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/li-wen">PolyCruise: A Cross-Language Dynamic Information Flow Analysis</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/imola">Communication-Efficient Triangle Counting under Local Differential Privacy</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/chen-yi">Seeing the Forest for the Trees: Understanding Security Hazards in the 3GPP Ecosystem through Intelligent Analysis on Change Requests</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/srinivasan">Hyperproofs: Aggregating and Maintaining Proofs in Vector Commitments</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/senol">Leaky Forms: A Study of Email and Password Exfiltration Before Form Submission</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/patel">Using Trātṛ to tame Adversarial Synchronization</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/hallyburton">Security Analysis of Camera-LiDAR Fusion Against Black-Box Attacks on Autonomous Vehicles</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/herley">Automated Detection of Automated Traffic</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/leu">Ghost Peak: Practical Distance Reduction Attacks Against HRP UWB Ranging</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/vaishnavi">Transferring Adversarial Robustness Through Robust Representation Matching</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/mahdavi">Constant-weight PIR: Single-round Keyword PIR via Constant-weight Equality Operators</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/bosamiya">Provably-Safe Multilingual Software Sandboxing using WebAssembly</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/datta">ALASTOR: Reconstructing the Provenance of Serverless Intrusions</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/li-changjiang">Seeing is Living? Rethinking the Security of Facial Liveness Verification in the Deepfake Era</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/thudi">On the Necessity of Auditable Algorithmic Definitions for Machine Unlearning</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/pal">Might I Get Pwned: A Second Generation Compromised Credential Checking Service</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/tang">Mitigating Membership Inference Attacks by Self-Distillation Through a Novel Ensemble Architecture</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/wu-qiushi">OS-Aware Vulnerability Prioritization via Differential Severity Analysis</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/angel">Efficient Representation of Numerical Optimization Problems for SNARKs</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/ozdemir">Experimenting with Collaborative zk-SNARKs: Zero-Knowledge Proofs for Distributed Secrets</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/yuan-xiaoyong">Membership Inference Attacks and Defenses in Neural Network Pruning</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/stevens">Efficient Differentially Private Secure Aggregation for Federated Learning via Hardness of Learning with Errors</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen">OpenVPN is Open to VPN Fingerprinting</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/shi">Backporting Security Patches of Web Applications: A Prototype Design and Implementation on Injection Vulnerability Patches</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/shekari">MaDIoT 2.0: Modern High-Wattage IoT Botnet Attacks and Defenses</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/dayanikli">Physical-Layer Attacks Against Pulse Width Modulation-Controlled Actuators</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/blue">Who Are You (I Really Wanna Know)? Detecting Audio DeepFakes Through Vocal Tract Reconstruction</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/jia">Shuffle-based Private Set Union: Faster and More Secure</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/mehta">Pacer: Comprehensive Network Side-Channel Mitigation in the Cloud</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/grubbs">Zero-Knowledge Middleboxes</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/kande">TheHuzz: Instruction Fuzzing of Processors Using Golden-Reference Models for Finding Software-Exploitable Vulnerabilities</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/madathil">Private Signaling</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/barberis">Branch History Injection: On the Effectiveness of Hardware Mitigations Against Cross-Privilege Spectre-v2 Attacks</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zeng">Playing for K(H)eaps: Understanding and Improving Linux Kernel Exploit Reliability</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/mehnaz">Are Your Sensitive Attributes Private? Novel Model Inversion Attribute Inference Attacks on Classification Models</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/hlavacek">Stalloris: RPKI Downgrade Attack</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/koisser">V'CER: Efficient Certificate Validation in Constrained Networks</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/rohlmann">Oops... Code Execution and Content Spoofing: The First Comprehensive Analysis of OpenDocument Signatures</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zhang-lei">Identity Confusion in WebView-based Mobile App-in-app Ecosystems</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/marcelli">How Machine Learning Is Solving the Binary Function Similarity Problem</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/nguyen">FLAME: Taming Backdoors in Federated Learning</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
