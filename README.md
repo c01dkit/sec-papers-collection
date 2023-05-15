@@ -1,4 +1,4 @@
-# A collection of security papers on top publications.
+# A Collection of Security Papers on Top Publications
 
 The following publications are included:
 
@@ -80,13 +80,13 @@ Here is a glance at all papers:
 | ndss | Evading Voltage-Based Intrusion Detection on Automotive CAN | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/evading-voltage-based-intrusion-detection-on-automotive-can) |
 | ndss | Forward and Backward Private Conjunctive Searchable Symmetric Encryption | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/forward-and-backward-private-conjunctive-searchable-symmetric-encryption) |
 | ndss | From WHOIS to WHOWAS: A Large-Scale Measurement Study of Domain Registration Privacy under the GDPR | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/from-whois-to-whowas-a-large-scale-measurement-study-of-domain-registration-privacy-under-the-gdpr) |
-| ndss | Hey Alexa, is this Skill Safe?: Taking a Closer Look at the Alexa Skill Ecosystem | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/hey-alexa-is-this-skill-safe?-taking-a-closer-look-at-the-alexa-skill-ecosystem) |
+| ndss | Hey Alexa, is this Skill Safe?: Taking a Closer Look at the Alexa Skill Ecosystem | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/hey-alexa-is-this-skill-safe-taking-a-closer-look-at-the-alexa-skill-ecosystem) |
 | ndss | Let’s Stride Blindfolded in a Forest: Sublinear Multi-Client Decision Trees Evaluation | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/let’s-stride-blindfolded-in-a-forest-sublinear-multi-client-decision-trees-evaluation) |
 | ndss | More than a Fair Share: Network Data Remanence Attacks against Secret Sharing-based Schemes | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/more-than-a-fair-share-network-data-remanence-attacks-against-secret-sharing-based-schemes) |
 | ndss | Obfuscated Access and Search Patterns in Searchable Encryption | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/obfuscated-access-and-search-patterns-in-searchable-encryption) |
 | ndss | Peerlock: Flexsealing BGP | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/peerlock-flexsealing-bgp) |
 | ndss | POP and PUSH: Demystifying and Defending against (Mach) Port-oriented Programming | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/pop-and-push-demystifying-and-defending-against-mach-port-oriented-programming) |
-| ndss | Processing Dangerous Paths – On Security and Privacy of the Portable Document Format | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/processing-dangerous-paths-–-on-security-and-privacy-of-the-portable-document-format) |
+| ndss | Processing Dangerous Paths – On Security and Privacy of the Portable Document Format | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/processing-dangerous-paths-on-security-and-privacy-of-the-portable-document-format) |
 | ndss | Reining in the Web’s Inconsistencies with Site Policy | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/reining-in-the-web’s-inconsistencies-with-site-policy) |
 | ndss | Rosita: Towards Automatic Elimination of Power-Analysis Leakage in Ciphers | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/rosita-towards-automatic-elimination-of-power-analysis-leakage-in-ciphers) |
 | ndss | Screen Gleaning: A Screen Reading TEMPEST Attack on Mobile Devices Exploiting an Electromagnetic Side Channel | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/screen-gleaning-a-screen-reading-tempest-attack-on-mobile-devices-exploiting-an-electromagnetic-side-channel) |
@@ -94,7 +94,7 @@ Here is a glance at all papers:
 | ndss | Towards Measuring Supply Chain Attacks on Package Managers for Interpreted Languages | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/towards-measuring-supply-chain-attacks-on-package-managers-for-interpreted-languages) |
 | ndss | XDA: Accurate, Robust Disassembly with Transfer Learning | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/xda-accurate-robust-disassembly-with-transfer-learning) |
 | ndss | Zoom on the Keystrokes: Exploiting Video Calls for Keystroke Inference Attacks | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/zoom-on-the-keystrokes-exploiting-video-calls-for-keystroke-inference-attacks) |
-| ndss | A Devil of a Time: How Vulnerable is NTP to Malicious Timeservers? | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/a-devil-of-a-time-how-vulnerable-is-ntp-to-malicious-timeservers?) |
+| ndss | A Devil of a Time: How Vulnerable is NTP to Malicious Timeservers? | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/a-devil-of-a-time-how-vulnerable-is-ntp-to-malicious-timeservers) |
 | ndss | A Formal Analysis of the FIDO UAF Protocol | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/a-formal-analysis-of-the-fido-uaf-protocol) |
 | ndss | ALchemist: Fusing Application and Audit Logs for Precise Attack Provenance without Instrumentation | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/alchemist-fusing-application-and-audit-logs-for-precise-attack-provenance-without-instrumentation) |
 | ndss | BaseSpec: Comparative Analysis of Baseband Software and Cellular Specifications for L3 Protocols | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/basespec-comparative-analysis-of-baseband-software-and-cellular-specifications-for-l3-protocols) |
@@ -104,7 +104,7 @@ Here is a glance at all papers:
 | ndss | Data Poisoning Attacks to Deep Learning Based Recommender Systems | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/data-poisoning-attacks-to-deep-learning-based-recommender-systems) |
 | ndss | Detecting Kernel Memory Leaks in Specialized Modules with Ownership Reasoning | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/detecting-kernel-memory-leaks-in-specialized-modules-with-ownership-reasoning) |
 | ndss | Differential Training: A Generic Framework to Reduce Label Noises for Android Malware Detection | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/differential-training-a-generic-framework-to-reduce-label-noises-for-android-malware-detection) |
-| ndss | Does Every Second Count? Time-based Evolution of Malware Behavior in Sandboxes | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/does-every-second-count?-time-based-evolution-of-malware-behavior-in-sandboxes) |
+| ndss | Does Every Second Count? Time-based Evolution of Malware Behavior in Sandboxes | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/does-every-second-count-time-based-evolution-of-malware-behavior-in-sandboxes) |
 | ndss | EarArray: Defending against DolphinAttack via Acoustic Attenuation | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/eararray-defending-against-dolphinattack-via-acoustic-attenuation) |
 | ndss | Emilia: Catching Iago in Legacy Code | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/emilia-catching-iago-in-legacy-code) |
 | ndss | FARE: Enabling Fine-grained Attack Categorization under Low-quality Labeled Data | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/fare-enabling-fine-grained-attack-categorization-under-low-quality-labeled-data) |
@@ -153,8 +153,8 @@ Here is a glance at all papers:
 | ndss | Understanding the Growth and Security Considerations of ECS | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/understanding-the-growth-and-security-considerations-of-ecs) |
 | ndss | Understanding Worldwide Private Information Collection on Android | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/understanding-worldwide-private-information-collection-on-android) |
 | ndss | WATSON: Abstracting Behaviors from Audit Logs via Aggregation of Contextual Semantics | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/watson-abstracting-behaviors-from-audit-logs-via-aggregation-of-contextual-semantics) |
-| ndss | Who’s Hosting the Block Party? Studying Third-Party Blockage of CSP and SRI | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/who’s-hosting-the-block-party?-studying-third-party-blockage-of-csp-and-sri) |
-| ndss | WINNIE : Fuzzing Windows Applications with Harness Synthesis and Fast Cloning | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/winnie--fuzzing-windows-applications-with-harness-synthesis-and-fast-cloning) |
+| ndss | Who’s Hosting the Block Party? Studying Third-Party Blockage of CSP and SRI | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/who’s-hosting-the-block-party-studying-third-party-blockage-of-csp-and-sri) |
+| ndss | WINNIE : Fuzzing Windows Applications with Harness Synthesis and Fast Cloning | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/winnie-fuzzing-windows-applications-with-harness-synthesis-and-fast-cloning) |
 | ndss | Your Phone is My Proxy: Detecting and Understanding Mobile Proxy Networks | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/your-phone-is-my-proxy-detecting-and-understanding-mobile-proxy-networks) |
 | ndss | Доверя́й, но проверя́й: SFI safety for native-compiled Wasm | 2021 | [link](https://www.ndss-symposium.org/ndss-paper/доверя́й-но-проверя́й-sfi-safety-for-native-compiled-wasm) |
 | ccs | (Un)informed Consent: Studying  GDPR Consent Notices in the Field | 2019 | - |
@@ -1018,7 +1018,7 @@ Here is a glance at all papers:
 | ndss | A View from the Cockpit: Exploring Pilot Reactions to Attacks on Avionic Systems | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/a-view-from-the-cockpit-exploring-pilot-reactions-to-attacks-on-avionic-systems) |
 | ndss | ABSynthe: Automatic Blackbox Side-channel Synthesis on Commodity Microarchitectures | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/absynthe-automatic-blackbox-side-channel-synthesis-on-commodity-microarchitectures) |
 | ndss | Adversarial Classification Under Differential Privacy | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/adversarial-classification-under-differential-privacy) |
-| ndss | Are You Going to Answer That? Measuring User Responses to Anti-Robocall Application Indicators | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/are-you-going-to-answer-that?-measuring-user-responses-to-anti-robocall-application-indicators) |
+| ndss | Are You Going to Answer That? Measuring User Responses to Anti-Robocall Application Indicators | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/are-you-going-to-answer-that-measuring-user-responses-to-anti-robocall-application-indicators) |
 | ndss | Automated Cross-Platform Reverse Engineering of CAN Bus Commands From Mobile Apps | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/automated-cross-platform-reverse-engineering-of-can-bus-commands-from-mobile-apps) |
 | ndss | Automated Discovery of Cross-Plane Event-Based Vulnerabilities in Software-Defined Networking | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/automated-discovery-of-cross-plane-event-based-vulnerabilities-in-software-defined-networking) |
 | ndss | BLAG: Improving the Accuracy of Blacklists | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/blag-improving-the-accuracy-of-blacklists) |
@@ -1028,7 +1028,7 @@ Here is a glance at all papers:
 | ndss | Carnus: Exploring the Privacy Threats of Browser Extension Fingerprinting | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/carnus-exploring-the-privacy-threats-of-browser-extension-fingerprinting) |
 | ndss | CDN Judo: Breaking the CDN DoS Protection with Itself | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/cdn-judo-breaking-the-cdn-dos-protection-with-itself) |
 | ndss | CloudLeak: Large-Scale Deep Learning Models Stealing Through Adversarial Examples | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/cloudleak-large-scale-deep-learning-models-stealing-through-adversarial-examples) |
-| ndss | Complex Security Policy? A Longitudinal Analysis of Deployed Content Security Policies | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/complex-security-policy?-a-longitudinal-analysis-of-deployed-content-security-policies) |
+| ndss | Complex Security Policy? A Longitudinal Analysis of Deployed Content Security Policies | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/complex-security-policy-a-longitudinal-analysis-of-deployed-content-security-policies) |
 | ndss | Compliance Cautions: Investigating Security Issues Associated with U.S. Digital-Security Standards | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/compliance-cautions-investigating-security-issues-associated-with-us-digital-security-standards) |
 | ndss | ConTExT: A Generic Approach for Mitigating Spectre | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/context-a-generic-approach-for-mitigating-spectre) |
 | ndss | Cross-Origin State Inference (COSI) Attacks: Leaking Web Site States through XS-Leaks | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/cross-origin-state-inference-cosi-attacks-leaking-web-site-states-through-xs-leaks) |
@@ -1044,8 +1044,8 @@ Here is a glance at all papers:
 | ndss | DISCO: Sidestepping RPKI’s Deployment Barriers | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/disco-sidestepping-rpki’s-deployment-barriers) |
 | ndss | Dynamic Searchable Encryption with Small Client Storage | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/dynamic-searchable-encryption-with-small-client-storage) |
 | ndss | EASI: Edge-Based Sender Identification on Resource-Constrained Platforms for Automotive Networks | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/easi-edge-based-sender-identification-on-resource-constrained-platforms-for-automotive-networks) |
-| ndss | Encrypted DNS –> Privacy? A Traffic Analysis Perspective | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/encrypted-dns-–>-privacy?-a-traffic-analysis-perspective) |
-| ndss | Et Tu Alexa? When Commodity WiFi Devices Turn into Adversarial Motion Sensors | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/et-tu-alexa?-when-commodity-wifi-devices-turn-into-adversarial-motion-sensors) |
+| ndss | Encrypted DNS –> Privacy? A Traffic Analysis Perspective | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/encrypted-dns-privacy-a-traffic-analysis-perspective) |
+| ndss | Et Tu Alexa? When Commodity WiFi Devices Turn into Adversarial Motion Sensors | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/et-tu-alexa-when-commodity-wifi-devices-turn-into-adversarial-motion-sensors) |
 | ndss | Finding Safety in Numbers with Secure Allegation Escrows | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/finding-safety-in-numbers-with-secure-allegation-escrows) |
 | ndss | FlowPrint: Semi-Supervised Mobile-App Fingerprinting on Encrypted Network Traffic | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/flowprint-semi-supervised-mobile-app-fingerprinting-on-encrypted-network-traffic) |
 | ndss | FUSE: Finding File Upload Bugs via Penetration Testing | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/fuse-finding-file-upload-bugs-via-penetration-testing) |
@@ -1089,7 +1089,7 @@ Here is a glance at all papers:
 | ndss | SPEECHMINER: A Framework for Investigating and Measuring Speculative Execution Vulnerabilities | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/speechminer-a-framework-for-investigating-and-measuring-speculative-execution-vulnerabilities) |
 | ndss | Strong Authentication without Temper-Resistant Hardware and Application to Federated Identities | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/strong-authentication-without-temper-resistant-hardware-and-application-to-federated-identities) |
 | ndss | SurfingAttack: Interactive Hidden Attack on Voice Assistants Using Ultrasonic Guided Waves | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/surfingattack-interactive-hidden-attack-on-voice-assistants-using-ultrasonic-guided-waves) |
-| ndss | SVLAN: Secure & Scalable Network Virtualization | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/svlan-secure--scalable-network-virtualization) |
+| ndss | SVLAN: Secure & Scalable Network Virtualization | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/svlan-secure-scalable-network-virtualization) |
 | ndss | SymTCP: Eluding Stateful Deep Packet Inspection with Automated Discrepancy Discovery | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/symtcp-eluding-stateful-deep-packet-inspection-with-automated-discrepancy-discovery) |
 | ndss | The Attack of the Clones Against Proof-of-Authority | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/the-attack-of-the-clones-against-proof-of-authority) |
 | ndss | TKPERM: Cross-platform Permission Knowledge Transfer to Detect Overprivileged Third-party Applications | 2020 | [link](https://www.ndss-symposium.org/ndss-paper/tkperm-cross-platform-permission-knowledge-transfer-to-detect-overprivileged-third-party-applications) |
@@ -2327,7 +2327,7 @@ Here is a glance at all papers:
 | ndss | NAUTILUS: Fishing for Deep Bugs with Grammars | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/nautilus-fishing-for-deep-bugs-with-grammars) |
 | ndss | Seth: Protecting Existing Smart Contracts Against Re-Entrancy Attacks | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/seth-protecting-existing-smart-contracts-against-re-entrancy-attacks) |
 | ndss | NIC: Detecting Adversarial Samples with Neural Network Invariant Checking | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/nic-detecting-adversarial-samples-with-neural-network-invariant-checking) |
-| ndss | How Bad Can It Git? Characterizing Secret Leakage in Public GitHub Repositories | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/how-bad-can-it-git?-characterizing-secret-leakage-in-public-github-repositories) |
+| ndss | How Bad Can It Git? Characterizing Secret Leakage in Public GitHub Repositories | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/how-bad-can-it-git-characterizing-secret-leakage-in-public-github-repositories) |
 | ndss | DIAT: Data Integrity Attestation for Resilient Collaboration of Autonomous Systems | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/diat-data-integrity-attestation-for-resilient-collaboration-of-autonomous-systems) |
 | ndss | Analyzing Semantic Correctness using Symbolic Execution: A Case Study on PKCS#1 v1.5 Signature Verification | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/analyzing-semantic-correctness-using-symbolic-execution-a-case-study-on-pkcs1-v15-signature-verification) |
 | ndss | Balancing Image Privacy and Usability with Thumbnail-Preserving Encryption | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/balancing-image-privacy-and-usability-with-thumbnail-preserving-encryption) |
@@ -2350,7 +2350,7 @@ Here is a glance at all papers:
 | ndss | Profit: Detecting and Quantifying Side Channels in Networked Applications | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/profit-detecting-and-quantifying-side-channels-in-networked-applications) |
 | ndss | CRCount: Pointer Invalidation with Reference Counting to Mitigate Use-after-free in Legacy C/C++ | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/crcount-pointer-invalidation-with-reference-counting-to-mitigate-use-after-free-in-legacy-c/c) |
 | ndss | Oligo-Snoop: A Non-Invasive Side Channel Attack Against DNA Synthesis Machines | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/oligo-snoop-a-non-invasive-side-channel-attack-against-dna-synthesis-machines) |
-| ndss | maTLS: How to Make TLS middlebox-aware? | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/matls-how-to-make-tls-middlebox-aware?) |
+| ndss | maTLS: How to Make TLS middlebox-aware? | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/matls-how-to-make-tls-middlebox-aware) |
 | usenix_security | Security at the End of the Tunnel: The Anatomy of VPN Mental Models Among Experts and Non-Experts in a Corporate Context | 2022_fall | [link](https://www.usenix.org/conference/usenixsecurity22/presentation/binkhorst) |
 | usenix_security | GAROTA: Generalized Active Root-Of-Trust Architecture (for Tiny Embedded Devices) | 2022_fall | [link](https://www.usenix.org/conference/usenixsecurity22/presentation/aliaj) |
 | usenix_security | A Large-scale and Longitudinal Measurement Study of DKIM Deployment | 2022_fall | [link](https://www.usenix.org/conference/usenixsecurity22/presentation/wang-chuhan) |

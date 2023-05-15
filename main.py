@@ -32,7 +32,7 @@ def save_cache(url, data, time):
 
 def get_html(url):
     res = get_cache(url)
-    if res:
+    if res is not None:
         return etree.HTML(res['data']),res['time']
     proxies = {
         'http': 'http://127.0.0.1:10809',
@@ -114,15 +114,17 @@ def guess_links_from_titles(titles):
     links = []
     for title in titles:
         title = title.strip()
-        for c in r'[@!#$%^&*()_+=`~.,|:\\]':
+        for c in r'[@/!?#$%^&*()_+=`~–.,|:<>\\]':
             title = title.replace(c, '')
         link = title.lower().replace(' ', '-')
+        while '--' in link:
+            link = link.replace('--', '-')
         links.append(link)
     return links
 
 
 def generate_readme(config):
-    banner = """# A collection of security papers on top publications.
+    banner = """# A Collection of Security Papers on Top Publications
 
 The following publications are included:
 
@@ -163,7 +165,7 @@ Here is a glance at all papers:
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(banner)
     print('README.md generated')
-    
+
 if __name__ == '__main__':
     config = get_config()
     update_mkdocs_yml(config)
