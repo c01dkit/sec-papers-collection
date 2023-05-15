@@ -1,8 +1,12 @@
 # IEEE S&P 2023
 
-43 papers accepted. Updated on **2023-05-15**. 
+43 papers accepted. Updated on **2023-05-15**.
+
+
 
 You can find [the lastest information here](https://sp2023.ieee-security.org/program-papers.html).
+
+---
 
 FedRecover: Recovering from Poisoning Attacks in Federated Learning using Historical Information
 

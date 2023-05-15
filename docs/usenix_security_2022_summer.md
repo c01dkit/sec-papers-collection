@@ -1,8 +1,12 @@
 # USENIX Sec 2022_summer
 
-97 papers accepted. Updated on **2023-05-15**. 
+97 papers accepted. Updated on **2023-05-15**.
+
+
 
 You can find [the lastest information here](https://www.usenix.org/conference/usenixsecurity22/summer-accepted-papers).
+
+---
 
 [An Audit of Facebook's Political Ad Policy Enforcement](https://www.usenix.org/conference/usenixsecurity22/presentation/lepochat)
 

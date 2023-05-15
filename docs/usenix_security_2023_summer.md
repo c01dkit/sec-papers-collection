@@ -1,8 +1,12 @@
 # USENIX Sec 2023_summer
 
-91 papers accepted. Updated on **2023-05-15**. 
+91 papers accepted. Updated on **2023-05-15**.
+
+
 
 You can find [the lastest information here](https://www.usenix.org/conference/usenixsecurity23/summer-accepted-papers).
+
+---
 
 [Improving Logging to Reduce Permission Over-Granting Mistakes](https://www.usenix.org/conference/usenixsecurity23/presentation/shen)
 

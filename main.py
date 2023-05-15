@@ -7,7 +7,7 @@ import datetime
 from lxml import etree
 
 def get_config():
-    with open('config.yml', 'r', encoding='utf-8') as f:
+    with open('data.yml', 'r', encoding='utf-8') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
         return config
 
@@ -77,13 +77,15 @@ def generate_md(data):
     d = data['time']
     with open('docs/'+filename+'.md', 'w', encoding='utf-8') as f:
         f.write(f'# {filetitle}\n\n')
-        f.write(f'{len(titles)} papers accepted. Updated on **{d[:10]}**. {note}\n\nYou can find [the lastest information here]({origin_url}).\n\n')
+        f.write(f'{len(titles)} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
         for i in range(len(titles)):
             if links is not None:
                 assert len(titles) == len(links)
-                f.write(f'[{titles[i].strip()}]({base_url}{links[i].strip()})\n\n')
+                t = titles[i].strip().replace('`',"'")
+                f.write(f'[{t}]({base_url}{links[i].strip()})\n\n')
             else:
-                f.write(f'{titles[i].strip()}\n\n')
+                t = titles[i].strip().replace('`',"'")
+                f.write(f'{t}\n\n')
 
 def update_mkdocs_yml(config):
     with open('mkdocs.yml', 'r', encoding='utf-8') as f:
