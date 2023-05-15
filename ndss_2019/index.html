@@ -1,0 +1,906 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ndss_2019/">
+      
+      
+        <link rel="prev" href="../ndss_2020/">
+      
+      
+        <link rel="next" href="../ccs_2022/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2019 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ndss-2019" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2019
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2019
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_fall/" class="md-nav__link">
+        2022_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021_summer/" class="md-nav__link">
+        2021_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021_fall/" class="md-nav__link">
+        2021_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_spring/" class="md-nav__link">
+        2020_spring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_summer/" class="md-nav__link">
+        2020_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_fall/" class="md-nav__link">
+        2020_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2019_fall/" class="md-nav__link">
+        2019_fall
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="ndss-2019">NDSS 2019</h1>
+<p>89 papers accepted. Updated on <strong>2023-05-15</strong>.</p>
+<p>Note that links are guessed from the title.</p>
+<p>You can find <a href="https://www.ndss-symposium.org/ndss2019/accepted-papers/">the lastest information here</a>.</p>
+<hr />
+<h4 id="dont-trust-the-locals-investigating-the-prevalence-of-persistent-client-side-cross-site-scripting-in-the-wild"><a href="https://www.ndss-symposium.org/ndss-paper/don’t-trust-the-locals-investigating-the-prevalence-of-persistent-client-side-cross-site-scripting-in-the-wild">Don’t Trust The Locals: Investigating the Prevalence of Persistent Client-Side Cross-Site Scripting in the Wild</a></h4>
+<h4 id="countering-malicious-processes-with-process-dns-association"><a href="https://www.ndss-symposium.org/ndss-paper/countering-malicious-processes-with-process-dns-association">Countering Malicious Processes with Process-DNS Association</a></h4>
+<h4 id="a-treasury-system-for-cryptocurrencies-enabling-better-collaborative-intelligence"><a href="https://www.ndss-symposium.org/ndss-paper/a-treasury-system-for-cryptocurrencies-enabling-better-collaborative-intelligence">A Treasury System for Cryptocurrencies: Enabling Better Collaborative Intelligence</a></h4>
+<h4 id="the-unexpected-danger-of-ux-features-a-case-of-sensitive-data-leakage-of-drivers-in-ride-hailing-services"><a href="https://www.ndss-symposium.org/ndss-paper/the-unexpected-danger-of-ux-features-a-case-of-sensitive-data-leakage-of-drivers-in-ride-hailing-services">The Unexpected Danger of UX Features: A Case of Sensitive Data Leakage of Drivers in Ride-Hailing Services</a></h4>
+<h4 id="cybercriminal-minds-an-investigative-study-of-cryptocurrency-abuses-in-the-dark-web"><a href="https://www.ndss-symposium.org/ndss-paper/cybercriminal-minds-an-investigative-study-of-cryptocurrency-abuses-in-the-dark-web">Cybercriminal Minds: An investigative study of cryptocurrency abuses in the Dark Web</a></h4>
+<h4 id="giving-state-to-the-stateless-augmenting-trustworthy-computation-with-ledgers"><a href="https://www.ndss-symposium.org/ndss-paper/giving-state-to-the-stateless-augmenting-trustworthy-computation-with-ledgers">Giving State to the Stateless: Augmenting Trustworthy Computation with Ledgers</a></h4>
+<h4 id="data-oblivious-isa-extensions-for-side-channel-resistant-and-high-performance-computing"><a href="https://www.ndss-symposium.org/ndss-paper/data-oblivious-isa-extensions-for-side-channel-resistant-and-high-performance-computing">Data Oblivious ISA Extensions for Side Channel-Resistant and High Performance Computing</a></h4>
+<h4 id="mbeacon-privacy-preserving-beacons-for-dna-methylation-data"><a href="https://www.ndss-symposium.org/ndss-paper/mbeacon-privacy-preserving-beacons-for-dna-methylation-data">MBeacon: Privacy-Preserving Beacons for DNA Methylation Data</a></h4>
+<h4 id="fine-grained-and-controlled-rewriting-in-blockchains-chameleon-hashing-gone-attribute-based"><a href="https://www.ndss-symposium.org/ndss-paper/fine-grained-and-controlled-rewriting-in-blockchains-chameleon-hashing-gone-attribute-based">Fine-Grained and Controlled Rewriting in Blockchains: Chameleon-Hashing Gone Attribute-Based</a></h4>
+<h4 id="timber-v-tag-isolated-memory-bringing-fine-grained-enclaves-to-risc-v"><a href="https://www.ndss-symposium.org/ndss-paper/timber-v-tag-isolated-memory-bringing-fine-grained-enclaves-to-risc-v">TIMBER-V: Tag-Isolated Memory Bringing Fine-grained Enclaves to RISC-V</a></h4>
+<h4 id="master-of-web-puppets-abusing-web-browsers-for-persistent-and-stealthy-computation"><a href="https://www.ndss-symposium.org/ndss-paper/master-of-web-puppets-abusing-web-browsers-for-persistent-and-stealthy-computation">Master of Web Puppets: Abusing Web Browsers for Persistent and Stealthy Computation</a></h4>
+<h4 id="uwb-with-pulse-reordering-securing-ranging-against-relay-and-physical-layer-attacks"><a href="https://www.ndss-symposium.org/ndss-paper/uwb-with-pulse-reordering-securing-ranging-against-relay-and-physical-layer-attacks">UWB with Pulse Reordering: Securing Ranging against Relay and Physical-Layer Attacks</a></h4>
+<h4 id="ml-leaks-model-and-data-independent-membership-inference-attacks-and-defenses-on-machine-learning-models"><a href="https://www.ndss-symposium.org/ndss-paper/ml-leaks-model-and-data-independent-membership-inference-attacks-and-defenses-on-machine-learning-models">ML-Leaks: Model and Data Independent Membership Inference Attacks and Defenses on Machine Learning Models</a></h4>
+<h4 id="distinguishing-attacks-from-legitimate-authentication-traffic-at-scale"><a href="https://www.ndss-symposium.org/ndss-paper/distinguishing-attacks-from-legitimate-authentication-traffic-at-scale">Distinguishing Attacks from Legitimate Authentication Traffic at Scale</a></h4>
+<h4 id="automating-patching-of-vulnerable-open-source-software-versions-in-application-binaries"><a href="https://www.ndss-symposium.org/ndss-paper/automating-patching-of-vulnerable-open-source-software-versions-in-application-binaries">Automating Patching of Vulnerable Open-Source Software Versions in Application Binaries</a></h4>
+<h4 id="textbugger-generating-adversarial-text-against-real-world-applications"><a href="https://www.ndss-symposium.org/ndss-paper/textbugger-generating-adversarial-text-against-real-world-applications">TextBugger: Generating Adversarial Text Against Real-world Applications</a></h4>
+<h4 id="yoda-enabling-computationally-intensive-contracts-on-blockchains-with-byzantine-and-selfish-nodes"><a href="https://www.ndss-symposium.org/ndss-paper/yoda-enabling-computationally-intensive-contracts-on-blockchains-with-byzantine-and-selfish-nodes">YODA: Enabling computationally intensive contracts on blockchains with Byzantine and Selfish nodes</a></h4>
+<h4 id="time-does-not-heal-all-wounds-a-longitudinal-analysis-of-security-mechanism-support-in-mobile-browsers"><a href="https://www.ndss-symposium.org/ndss-paper/time-does-not-heal-all-wounds-a-longitudinal-analysis-of-security-mechanism-support-in-mobile-browsers">Time Does Not Heal All Wounds: A Longitudinal Analysis of Security-Mechanism Support in Mobile Browsers</a></h4>
+<h4 id="please-forget-where-i-was-last-summer-the-privacy-risks-of-public-location-metadata"><a href="https://www.ndss-symposium.org/ndss-paper/please-forget-where-i-was-last-summer-the-privacy-risks-of-public-location-metadata">Please Forget Where I Was Last Summer: The Privacy Risks of Public Location (Meta)Data</a></h4>
+<h4 id="javascript-template-attacks-automatically-inferring-host-information-for-targeted-exploits"><a href="https://www.ndss-symposium.org/ndss-paper/javascript-template-attacks-automatically-inferring-host-information-for-targeted-exploits">JavaScript Template Attacks: Automatically Inferring Host Information for Targeted Exploits</a></h4>
+<h4 id="establishing-software-root-of-trust-unconditionally"><a href="https://www.ndss-symposium.org/ndss-paper/establishing-software-root-of-trust-unconditionally">Establishing Software Root of Trust Unconditionally</a></h4>
+<h4 id="understanding-open-ports-in-android-applications-discovery-diagnosis-and-security-assessment"><a href="https://www.ndss-symposium.org/ndss-paper/understanding-open-ports-in-android-applications-discovery-diagnosis-and-security-assessment">Understanding Open Ports in Android Applications: Discovery, Diagnosis, and Security Assessment</a></h4>
+<h4 id="periscope-an-effective-probing-and-fuzzing-framework-for-the-hardware-os-boundary"><a href="https://www.ndss-symposium.org/ndss-paper/periscope-an-effective-probing-and-fuzzing-framework-for-the-hardware-os-boundary">PeriScope: An Effective Probing and Fuzzing Framework for the Hardware-OS Boundary</a></h4>
+<h4 id="total-recall-persistence-of-password-in-android"><a href="https://www.ndss-symposium.org/ndss-paper/total-recall-persistence-of-password-in-android">Total Recall: Persistence of Password in Android</a></h4>
+<h4 id="dns-cache-based-user-tracking"><a href="https://www.ndss-symposium.org/ndss-paper/dns-cache-based-user-tracking">DNS Cache-Based User Tracking</a></h4>
+<h4 id="thunderclap-exploiting-the-attack-surface-of-operating-system-iommu-protection-with-dma-from-malicious-peripherals"><a href="https://www.ndss-symposium.org/ndss-paper/thunderclap-exploiting-the-attack-surface-of-operating-system-iommu-protection-with-dma-from-malicious-peripherals">Thunderclap: Exploiting the Attack Surface of Operating-System IOMMU Protection with DMA from Malicious Peripherals</a></h4>
+<h4 id="tee-aided-write-protection-against-privileged-data-tampering"><a href="https://www.ndss-symposium.org/ndss-paper/tee-aided-write-protection-against-privileged-data-tampering">TEE-aided Write Protection Against Privileged Data Tampering</a></h4>
+<h4 id="stealthy-adversarial-perturbations-against-real-time-video-classification-systems"><a href="https://www.ndss-symposium.org/ndss-paper/stealthy-adversarial-perturbations-against-real-time-video-classification-systems">Stealthy Adversarial Perturbations Against Real-Time Video Classification Systems</a></h4>
+<h4 id="the-crux-of-voice-insecurity-a-brain-study-of-speaker-legitimacy-detection"><a href="https://www.ndss-symposium.org/ndss-paper/the-crux-of-voice-insecurity-a-brain-study-of-speaker-legitimacy-detection">The Crux of Voice (In)Security: A Brain Study of Speaker Legitimacy Detection</a></h4>
+<h4 id="statistical-privacy-for-streaming-traffic"><a href="https://www.ndss-symposium.org/ndss-paper/statistical-privacy-for-streaming-traffic">Statistical Privacy for Streaming Traffic</a></h4>
+<h4 id="unveiling-your-keystrokes-a-cache-based-side-channel-attack-on-graphics-libraries"><a href="https://www.ndss-symposium.org/ndss-paper/unveiling-your-keystrokes-a-cache-based-side-channel-attack-on-graphics-libraries">Unveiling your keystrokes: A Cache-based Side-channel Attack on Graphics Libraries</a></h4>
+<h4 id="graph-based-security-and-privacy-analytics-via-collective-classification-with-joint-weight-learning-and-propagation"><a href="https://www.ndss-symposium.org/ndss-paper/graph-based-security-and-privacy-analytics-via-collective-classification-with-joint-weight-learning-and-propagation">Graph-based Security and Privacy Analytics via Collective Classification with Joint Weight Learning and Propagation</a></h4>
+<h4 id="cracking-wall-of-confinement-understanding-and-analyzing-malicious-domain-takedowns"><a href="https://www.ndss-symposium.org/ndss-paper/cracking-wall-of-confinement-understanding-and-analyzing-malicious-domain-takedowns">Cracking Wall of Confinement: Understanding and Analyzing Malicious Domain Takedowns</a></h4>
+<h4 id="sabre-protecting-bitcoin-against-routing-attacks"><a href="https://www.ndss-symposium.org/ndss-paper/sabre-protecting-bitcoin-against-routing-attacks">SABRE: Protecting Bitcoin against Routing Attacks</a></h4>
+<h4 id="codealchemist-semantics-aware-code-generation-to-find-vulnerabilities-in-javascript-engines"><a href="https://www.ndss-symposium.org/ndss-paper/codealchemist-semantics-aware-code-generation-to-find-vulnerabilities-in-javascript-engines">CodeAlchemist: Semantics-Aware Code Generation to Find Vulnerabilities in JavaScript Engines</a></h4>
+<h4 id="a-systematic-framework-to-generate-invariants-for-anomaly-detection-in-industrial-control-systems"><a href="https://www.ndss-symposium.org/ndss-paper/a-systematic-framework-to-generate-invariants-for-anomaly-detection-in-industrial-control-systems">A Systematic Framework to Generate Invariants for Anomaly Detection in Industrial Control Systems</a></h4>
+<h4 id="icsref-a-framework-for-automated-reverse-engineering-of-industrial-control-systems-binaries"><a href="https://www.ndss-symposium.org/ndss-paper/icsref-a-framework-for-automated-reverse-engineering-of-industrial-control-systems-binaries">ICSREF: A Framework for Automated Reverse Engineering of Industrial Control Systems Binaries</a></h4>
+<h4 id="coconut-threshold-issuance-selective-disclosure-credentials-with-applications-to-distributed-ledgers"><a href="https://www.ndss-symposium.org/ndss-paper/coconut-threshold-issuance-selective-disclosure-credentials-with-applications-to-distributed-ledgers">Coconut: Threshold Issuance Selective Disclosure Credentials with Applications to Distributed Ledgers</a></h4>
+<h4 id="a-first-look-into-the-facebook-advertising-ecosystem"><a href="https://www.ndss-symposium.org/ndss-paper/a-first-look-into-the-facebook-advertising-ecosystem">A First Look into the Facebook Advertising Ecosystem</a></h4>
+<h4 id="adversarial-attacks-against-automatic-speech-recognition-systems-via-psychoacoustic-hiding"><a href="https://www.ndss-symposium.org/ndss-paper/adversarial-attacks-against-automatic-speech-recognition-systems-via-psychoacoustic-hiding">Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding</a></h4>
+<h4 id="latex-gloves-protecting-browser-extensions-from-probing-and-revelation-attacks"><a href="https://www.ndss-symposium.org/ndss-paper/latex-gloves-protecting-browser-extensions-from-probing-and-revelation-attacks">Latex Gloves: Protecting Browser Extensions from Probing and Revelation Attacks</a></h4>
+<h4 id="vault-fast-bootstrapping-for-cryptocurrencies"><a href="https://www.ndss-symposium.org/ndss-paper/vault-fast-bootstrapping-for-cryptocurrencies">Vault: Fast Bootstrapping for Cryptocurrencies</a></h4>
+<h4 id="roram-efficient-range-oram-with-olog2-n-locality"><a href="https://www.ndss-symposium.org/ndss-paper/roram-efficient-range-oram-with-olog2-n-locality">rORAM: Efficient Range ORAM with O(log2 N) Locality</a></h4>
+<h4 id="iotguard-dynamic-enforcement-of-security-and-safety-policy-in-commodity-iot"><a href="https://www.ndss-symposium.org/ndss-paper/iotguard-dynamic-enforcement-of-security-and-safety-policy-in-commodity-iot">IoTGuard: Dynamic Enforcement of Security and Safety Policy in Commodity IoT</a></h4>
+<h4 id="ginseng-keeping-secrets-in-registers-when-you-distrust-the-operating-system"><a href="https://www.ndss-symposium.org/ndss-paper/ginseng-keeping-secrets-in-registers-when-you-distrust-the-operating-system">Ginseng: Keeping Secrets in Registers When You Distrust the Operating System</a></h4>
+<h4 id="privacy-preserving-multi-hop-locks-for-blockchain-scalability-and-interoperability"><a href="https://www.ndss-symposium.org/ndss-paper/privacy-preserving-multi-hop-locks-for-blockchain-scalability-and-interoperability">Privacy-preserving Multi-hop Locks for Blockchain Scalability and Interoperability</a></h4>
+<h4 id="constructing-an-adversary-solver-for-equihash"><a href="https://www.ndss-symposium.org/ndss-paper/constructing-an-adversary-solver-for-equihash">Constructing an Adversary Solver for Equihash</a></h4>
+<h4 id="one-engine-to-serveem-all-inferring-taint-rules-without-architectural-semantics"><a href="https://www.ndss-symposium.org/ndss-paper/one-engine-to-serve’em-all-inferring-taint-rules-without-architectural-semantics">One Engine To Serve’em All: Inferring Taint Rules Without Architectural Semantics</a></h4>
+<h4 id="nodoze-combatting-threat-alert-fatigue-with-automated-provenance-triage"><a href="https://www.ndss-symposium.org/ndss-paper/nodoze-combatting-threat-alert-fatigue-with-automated-provenance-triage">NoDoze: Combatting Threat Alert Fatigue with Automated Provenance Triage</a></h4>
+<h4 id="how-to-end-password-reuse-on-the-web"><a href="https://www.ndss-symposium.org/ndss-paper/how-to-end-password-reuse-on-the-web">How to end password reuse on the web</a></h4>
+<h4 id="robust-performance-metrics-for-authentication-systems"><a href="https://www.ndss-symposium.org/ndss-paper/robust-performance-metrics-for-authentication-systems">Robust Performance Metrics for Authentication Systems</a></h4>
+<h4 id="practical-hidden-voice-attacks-against-speech-and-speaker-recognition-systems"><a href="https://www.ndss-symposium.org/ndss-paper/practical-hidden-voice-attacks-against-speech-and-speaker-recognition-systems">Practical Hidden Voice Attacks against Speech and Speaker Recognition Systems</a></h4>
+<h4 id="nearby-threats-reversing-analyzing-and-attacking-googles-nearby-connections-on-android"><a href="https://www.ndss-symposium.org/ndss-paper/nearby-threats-reversing-analyzing-and-attacking-google’s-“nearby-connections”-on-android">Nearby Threats: Reversing, Analyzing, and Attacking Google’s “Nearby Connections” on Android</a></h4>
+<h4 id="redqueen-fuzzing-with-input-to-state-correspondence"><a href="https://www.ndss-symposium.org/ndss-paper/redqueen-fuzzing-with-input-to-state-correspondence">REDQUEEN: Fuzzing with Input-to-State Correspondence</a></h4>
+<h4 id="we-value-your-privacy-now-take-some-cookies-measuring-the-gdprs-impact-on-web-privacy"><a href="https://www.ndss-symposium.org/ndss-paper/we-value-your-privacy-…-now-take-some-cookies-measuring-the-gdpr’s-impact-on-web-privacy">We Value Your Privacy … Now Take Some Cookies: Measuring the GDPR’s Impact on Web Privacy</a></h4>
+<h4 id="rigging-research-results-by-manipulating-top-websites-rankings"><a href="https://www.ndss-symposium.org/ndss-paper/rigging-research-results-by-manipulating-top-websites-rankings">Rigging Research Results by Manipulating Top Websites Rankings</a></h4>
+<h4 id="quantity-vs-quality-evaluating-user-interest-profiles-using-ad-preference-managers"><a href="https://www.ndss-symposium.org/ndss-paper/quantity-vs-quality-evaluating-user-interest-profiles-using-ad-preference-managers">Quantity vs. Quality: Evaluating User Interest Profiles Using Ad Preference Managers</a></h4>
+<h4 id="component-based-formal-analysis-of-5g-aka-channel-assumptions-and-session-confusion"><a href="https://www.ndss-symposium.org/ndss-paper/component-based-formal-analysis-of-5g-aka-channel-assumptions-and-session-confusion">Component-Based Formal Analysis of 5G-AKA: Channel Assumptions and Session Confusion</a></h4>
+<h4 id="droidcap-os-support-for-capability-based-permissions-in-android"><a href="https://www.ndss-symposium.org/ndss-paper/droidcap-os-support-for-capability-based-permissions-in-android">DroidCap: OS Support for Capability-based Permissions in Android</a></h4>
+<h4 id="on-the-challenges-of-geographical-avoidance-for-tor"><a href="https://www.ndss-symposium.org/ndss-paper/on-the-challenges-of-geographical-avoidance-for-tor">On the Challenges of Geographical Avoidance for Tor</a></h4>
+<h4 id="exspectre-hiding-malware-in-speculative-execution"><a href="https://www.ndss-symposium.org/ndss-paper/exspectre-hiding-malware-in-speculative-execution">ExSpectre: Hiding Malware in Speculative Execution</a></h4>
+<h4 id="concuroram-high-throughput-stateless-parallel-multi-client-oram"><a href="https://www.ndss-symposium.org/ndss-paper/concuroram-high-throughput-stateless-parallel-multi-client-oram">ConcurORAM: High-Throughput Stateless Parallel Multi-Client ORAM</a></h4>
+<h4 id="nautilus-fishing-for-deep-bugs-with-grammars"><a href="https://www.ndss-symposium.org/ndss-paper/nautilus-fishing-for-deep-bugs-with-grammars">NAUTILUS: Fishing for Deep Bugs with Grammars</a></h4>
+<h4 id="seth-protecting-existing-smart-contracts-against-re-entrancy-attacks"><a href="https://www.ndss-symposium.org/ndss-paper/seth-protecting-existing-smart-contracts-against-re-entrancy-attacks">Seth: Protecting Existing Smart Contracts Against Re-Entrancy Attacks</a></h4>
+<h4 id="nic-detecting-adversarial-samples-with-neural-network-invariant-checking"><a href="https://www.ndss-symposium.org/ndss-paper/nic-detecting-adversarial-samples-with-neural-network-invariant-checking">NIC: Detecting Adversarial Samples with Neural Network Invariant Checking</a></h4>
+<h4 id="how-bad-can-it-git-characterizing-secret-leakage-in-public-github-repositories"><a href="https://www.ndss-symposium.org/ndss-paper/how-bad-can-it-git?-characterizing-secret-leakage-in-public-github-repositories">How Bad Can It Git? Characterizing Secret Leakage in Public GitHub Repositories</a></h4>
+<h4 id="diat-data-integrity-attestation-for-resilient-collaboration-of-autonomous-systems"><a href="https://www.ndss-symposium.org/ndss-paper/diat-data-integrity-attestation-for-resilient-collaboration-of-autonomous-systems">DIAT: Data Integrity Attestation for Resilient Collaboration of Autonomous Systems</a></h4>
+<h4 id="analyzing-semantic-correctness-using-symbolic-execution-a-case-study-on-pkcs1-v15-signature-verification"><a href="https://www.ndss-symposium.org/ndss-paper/analyzing-semantic-correctness-using-symbolic-execution-a-case-study-on-pkcs1-v15-signature-verification">Analyzing Semantic Correctness using Symbolic Execution: A Case Study on PKCS#1 v1.5 Signature Verification</a></h4>
+<h4 id="balancing-image-privacy-and-usability-with-thumbnail-preserving-encryption"><a href="https://www.ndss-symposium.org/ndss-paper/balancing-image-privacy-and-usability-with-thumbnail-preserving-encryption">Balancing Image Privacy and Usability with Thumbnail-Preserving Encryption</a></h4>
+<h4 id="cleaning-up-the-internet-of-evil-things-real-world-evidence-on-isp-and-consumer-efforts-to-remove-mirai"><a href="https://www.ndss-symposium.org/ndss-paper/cleaning-up-the-internet-of-evil-things-real-world-evidence-on-isp-and-consumer-efforts-to-remove-mirai">Cleaning Up the Internet of Evil Things: Real-World Evidence on ISP and Consumer Efforts to Remove Mirai</a></h4>
+<h4 id="privacy-attacks-to-the-4g-and-5g-cellular-paging-protocols-using-side-channel-information"><a href="https://www.ndss-symposium.org/ndss-paper/privacy-attacks-to-the-4g-and-5g-cellular-paging-protocols-using-side-channel-information">Privacy Attacks to the 4G and 5G Cellular Paging Protocols Using Side Channel Information</a></h4>
+<h4 id="digital-healthcare-associated-infection-analysis-of-a-major-multi-campus-hospital-system"><a href="https://www.ndss-symposium.org/ndss-paper/digital-healthcare-associated-infection-analysis-of-a-major-multi-campus-hospital-system">Digital Healthcare-Associated Infection Analysis of a Major Multi-Campus Hospital System</a></h4>
+<h4 id="sanctuary-arming-trustzone-with-user-space-enclaves"><a href="https://www.ndss-symposium.org/ndss-paper/sanctuary-arming-trustzone-with-user-space-enclaves">SANCTUARY: ARMing TrustZone with User-space Enclaves</a></h4>
+<h4 id="rfdids-radio-frequency-based-distributed-intrusion-detection-system-for-the-power-grid"><a href="https://www.ndss-symposium.org/ndss-paper/rfdids-radio-frequency-based-distributed-intrusion-detection-system-for-the-power-grid">RFDIDS: Radio Frequency-based Distributed Intrusion Detection System for the Power Grid</a></h4>
+<h4 id="badbluetooth-breaking-android-security-mechanisms-via-malicious-bluetooth-peripherals"><a href="https://www.ndss-symposium.org/ndss-paper/badbluetooth-breaking-android-security-mechanisms-via-malicious-bluetooth-peripherals">BadBluetooth: Breaking Android Security Mechanisms via Malicious Bluetooth Peripherals</a></h4>
+<h4 id="measurement-and-analysis-of-hajime-a-peer-to-peer-iot-botnet"><a href="https://www.ndss-symposium.org/ndss-paper/measurement-and-analysis-of-hajime-a-peer-to-peer-iot-botnet">Measurement and Analysis of Hajime, a Peer-to-peer IoT Botnet</a></h4>
+<h4 id="neural-machine-translation-inspired-binary-code-similarity-comparison-beyond-function-pairs"><a href="https://www.ndss-symposium.org/ndss-paper/neural-machine-translation-inspired-binary-code-similarity-comparison-beyond-function-pairs">Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</a></h4>
+<h4 id="enemy-at-the-gateways-censorship-resilient-proxy-distribution-using-game-theory"><a href="https://www.ndss-symposium.org/ndss-paper/enemy-at-the-gateways-censorship-resilient-proxy-distribution-using-game-theory">Enemy At the Gateways: Censorship-Resilient Proxy Distribution Using Game Theory</a></h4>
+<h4 id="send-hardest-problems-my-way-probabilistic-path-prioritization-for-hybrid-fuzzing"><a href="https://www.ndss-symposium.org/ndss-paper/send-hardest-problems-my-way-probabilistic-path-prioritization-for-hybrid-fuzzing">Send Hardest Problems My Way: Probabilistic Path Prioritization for Hybrid Fuzzing</a></h4>
+<h4 id="the-use-of-tls-in-censorship-circumvention"><a href="https://www.ndss-symposium.org/ndss-paper/the-use-of-tls-in-censorship-circumvention">The use of TLS in Censorship Circumvention</a></h4>
+<h4 id="obfscuro-a-commodity-obfuscation-engine-on-intel-sgx"><a href="https://www.ndss-symposium.org/ndss-paper/obfscuro-a-commodity-obfuscation-engine-on-intel-sgx">OBFSCURO: A Commodity Obfuscation Engine on Intel SGX</a></h4>
+<h4 id="mind-your-own-business-a-longitudinal-study-of-threats-and-vulnerabilities-in-enterprises"><a href="https://www.ndss-symposium.org/ndss-paper/mind-your-own-business-a-longitudinal-study-of-threats-and-vulnerabilities-in-enterprises">Mind your Own Business: A Longitudinal Study of Threats and Vulnerabilities in Enterprises</a></h4>
+<h4 id="life-after-speech-recognition-fuzzing-semantic-misinterpretation-for-voice-assistant-applications"><a href="https://www.ndss-symposium.org/ndss-paper/life-after-speech-recognition-fuzzing-semantic-misinterpretation-for-voice-assistant-applications">Life after Speech Recognition: Fuzzing Semantic Misinterpretation for Voice Assistant Applications</a></h4>
+<h4 id="neuro-symbolic-execution-augmenting-symbolic-execution-with-neural-constraints"><a href="https://www.ndss-symposium.org/ndss-paper/neuro-symbolic-execution-augmenting-symbolic-execution-with-neural-constraints">Neuro-Symbolic Execution: Augmenting Symbolic Execution with Neural Constraints</a></h4>
+<h4 id="private-continual-release-of-real-valued-data-streams"><a href="https://www.ndss-symposium.org/ndss-paper/private-continual-release-of-real-valued-data-streams">Private Continual Release of Real-Valued Data Streams</a></h4>
+<h4 id="profit-detecting-and-quantifying-side-channels-in-networked-applications"><a href="https://www.ndss-symposium.org/ndss-paper/profit-detecting-and-quantifying-side-channels-in-networked-applications">Profit: Detecting and Quantifying Side Channels in Networked Applications</a></h4>
+<h4 id="crcount-pointer-invalidation-with-reference-counting-to-mitigate-use-after-free-in-legacy-cc"><a href="https://www.ndss-symposium.org/ndss-paper/crcount-pointer-invalidation-with-reference-counting-to-mitigate-use-after-free-in-legacy-c/c">CRCount: Pointer Invalidation with Reference Counting to Mitigate Use-after-free in Legacy C/C++</a></h4>
+<h4 id="oligo-snoop-a-non-invasive-side-channel-attack-against-dna-synthesis-machines"><a href="https://www.ndss-symposium.org/ndss-paper/oligo-snoop-a-non-invasive-side-channel-attack-against-dna-synthesis-machines">Oligo-Snoop: A Non-Invasive Side Channel Attack Against DNA Synthesis Machines</a></h4>
+<h4 id="matls-how-to-make-tls-middlebox-aware"><a href="https://www.ndss-symposium.org/ndss-paper/matls-how-to-make-tls-middlebox-aware?">maTLS: How to Make TLS middlebox-aware?</a></h4>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>

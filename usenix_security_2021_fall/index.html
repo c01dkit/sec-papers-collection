@@ -1,0 +1,931 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/usenix_security_2021_fall/">
+      
+      
+        <link rel="prev" href="../usenix_security_2021_summer/">
+      
+      
+        <link rel="next" href="../usenix_security_2020_spring/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>2021_fall - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usenix-sec-2021_fall" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2021_fall
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_summer/" class="md-nav__link">
+        2023_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023_fall/" class="md-nav__link">
+        2023_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_summer/" class="md-nav__link">
+        2022_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_fall/" class="md-nav__link">
+        2022_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022_winter/" class="md-nav__link">
+        2022_winter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021_summer/" class="md-nav__link">
+        2021_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2021_fall
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_spring/" class="md-nav__link">
+        2020_spring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_summer/" class="md-nav__link">
+        2020_summer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020_fall/" class="md-nav__link">
+        2020_fall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2019_fall/" class="md-nav__link">
+        2019_fall
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="usenix-sec-2021_fall">USENIX Sec 2021_fall</h1>
+<p>115 papers accepted. Updated on <strong>2023-05-15</strong>.</p>
+<p>You can find <a href="https://www.usenix.org/conference/usenixsecurity21/fall-accepted-papers">the lastest information here</a>.</p>
+<hr />
+<h4 id="cacti-captcha-avoidance-via-client-side-tee-integration"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/nakatsuka">CACTI: Captcha Avoidance via Client-side TEE Integration</a></h4>
+<h4 id="obfuscation-resilient-executable-payload-extraction-from-packed-malware"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/cheng-binlin">Obfuscation-Resilient Executable Payload Extraction From Packed Malware</a></h4>
+<h4 id="effect-of-mood-location-trust-and-presence-of-others-on-video-based-social-authentication"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/guo">Effect of Mood, Location, Trust, and Presence of Others on Video-Based Social Authentication</a></h4>
+<h4 id="abusing-hidden-properties-to-attack-the-nodejs-ecosystem"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/xiao">Abusing Hidden Properties to Attack the Node.js Ecosystem</a></h4>
+<h4 id="formally-verified-memory-protection-for-a-commodity-multiprocessor-hypervisor"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/li-shih-wei">Formally Verified Memory Protection for a Commodity Multiprocessor Hypervisor</a></h4>
+<h4 id="passwords-keep-me-safe-understanding-what-children-think-about-passwords"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/theofanos">'Passwords Keep Me Safe' – Understanding What Children Think about Passwords</a></h4>
+<h4 id="domain-shadowing-leveraging-content-delivery-networks-for-robust-blocking-resistant-communications"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wei">Domain Shadowing: Leveraging Content Delivery Networks for Robust Blocking-Resistant Communications</a></h4>
+<h4 id="automatic-policy-generation-for-inter-service-access-control-of-microservices"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/li-xing">Automatic Policy Generation for Inter-Service Access Control of Microservices</a></h4>
+<h4 id="arcus-symbolic-root-cause-analysis-of-exploits-in-production-systems"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/yagemann">ARCUS: Symbolic Root Cause Analysis of Exploits in Production Systems</a></h4>
+<h4 id="polyscope-multi-policy-access-control-analysis-to-compute-authorized-attack-operations-in-android-systems"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lee-yu-tsung">PolyScope: Multi-Policy Access Control Analysis to Compute Authorized Attack Operations in Android Systems</a></h4>
+<h4 id="patchguard-a-provably-robust-defense-against-adversarial-patches-via-small-receptive-fields-and-masking"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/xiang">PatchGuard: A Provably Robust Defense against Adversarial Patches via Small Receptive Fields and Masking</a></h4>
+<h4 id="mid-tracing-screen-photos-via-moire-patterns"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/cheng-yushi">mID: Tracing Screen Photos via Moiré Patterns</a></h4>
+<h4 id="scalable-detection-of-promotional-website-defacements-in-black-hat-seo-campaigns"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/yang-ronghai">Scalable Detection of Promotional Website Defacements in Black Hat SEO Campaigns</a></h4>
+<h4 id="evaluating-in-workflow-messages-for-improving-mental-models-of-end-to-end-encryption"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/akgul">Evaluating In-Workflow Messages for Improving Mental Models of End-to-End Encryption</a></h4>
+<h4 id="lightblue-automatic-profile-aware-debloating-of-bluetooth-stacks"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wu-jianliang">LIGHTBLUE: Automatic Profile-Aware Debloating of Bluetooth Stacks</a></h4>
+<h4 id="privsyn-differentially-private-data-synthesis"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/zhang-zhikun">PrivSyn: Differentially Private Data Synthesis</a></h4>
+<h4 id="disrupting-continuity-of-apples-wireless-ecosystem-security-new-tracking-dos-and-mitm-attacks-on-ios-and-macos-through-bluetooth-low-energy-awdl-and-wi-fi"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/stute">Disrupting Continuity of Apple's Wireless Ecosystem Security: New Tracking, DoS, and MitM Attacks on iOS and macOS Through Bluetooth Low Energy, AWDL, and Wi-Fi</a></h4>
+<h4 id="muse-secure-inference-resilient-to-malicious-clients"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lehmkuhl">Muse: Secure Inference Resilient to Malicious Clients</a></h4>
+<h4 id="i-always-feel-like-somebodys-sensing-me-a-framework-to-detect-identify-and-localize-clandestine-wireless-sensors"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/singh">I Always Feel Like Somebody's Sensing Me! A Framework to Detect, Identify, and Localize Clandestine Wireless Sensors</a></h4>
+<h4 id="m2mon-building-an-mmio-based-security-reference-monitor-for-unmanned-vehicles"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/khan-arslan">M2MON: Building an MMIO-based Security Reference Monitor for Unmanned Vehicles</a></h4>
+<h4 id="systematic-evaluation-of-privacy-risks-of-machine-learning-models"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/song">Systematic Evaluation of Privacy Risks of Machine Learning Models</a></h4>
+<h4 id="its-stressful-having-all-these-phones-investigating-sex-workers-safety-goals-risks-and-practices-online"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/mcdonald">"It's stressful having all these phones": Investigating Sex Workers' Safety Goals, Risks, and Practices Online</a></h4>
+<h4 id="now-im-a-bit-angry-individuals-awareness-perception-and-responses-to-data-breaches-that-affected-them"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/mayer">"Now I'm a bit angry:" Individuals' Awareness, Perception, and Responses to Data Breaches that Affected Them</a></h4>
+<h4 id="pasan-detecting-peripheral-access-concurrency-bugs-within-bare-metal-embedded-applications"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/kim">PASAN: Detecting Peripheral Access Concurrency Bugs within Bare-Metal Embedded Applications</a></h4>
+<h4 id="lzr-identifying-unexpected-internet-services"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/izhikevich">LZR: Identifying Unexpected Internet Services</a></h4>
+<h4 id="explanation-guided-backdoor-poisoning-attacks-against-malware-classifiers"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/severi">Explanation-Guided Backdoor Poisoning Attacks Against Malware Classifiers</a></h4>
+<h4 id="cerebro-a-platform-for-multi-party-cryptographic-collaborative-learning"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/zheng">Cerebro: A Platform for Multi-Party Cryptographic Collaborative Learning</a></h4>
+<h4 id="a-large-scale-interview-study-on-information-security-in-and-attacks-against-small-and-medium-sized-enterprises"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/huaman">A Large-Scale Interview Study on Information Security in and Attacks against Small and Medium-sized Enterprises</a></h4>
+<h4 id="jetset-targeted-firmware-rehosting-for-embedded-systems"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/johnson">Jetset: Targeted Firmware Rehosting for Embedded Systems</a></h4>
+<h4 id="t-miner-a-generative-approach-to-defend-against-trojan-attacks-on-dnn-based-text-classification"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/azizi">T-Miner: A Generative Approach to Defend Against Trojan Attacks on DNN-based Text Classification</a></h4>
+<h4 id="on-the-design-and-misuse-of-microcoded-embedded-processors-a-cautionary-note"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/albartus">On the Design and Misuse of Microcoded (Embedded) Processors — A Cautionary Note</a></h4>
+<h4 id="constraint-guided-directed-greybox-fuzzing"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lee-gwangmu">Constraint-guided Directed Greybox Fuzzing</a></h4>
+<h4 id="automatic-extraction-of-secrets-from-the-transistor-jungle-using-laser-assisted-side-channel-attacks"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/krachenfels">Automatic Extraction of Secrets from the Transistor Jungle using Laser-Assisted Side-Channel Attacks</a></h4>
+<h4 id="fingerprinting-in-style-detecting-browser-extensions-via-injected-style-sheets"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/laperdrix">Fingerprinting in Style: Detecting Browser Extensions via Injected Style Sheets</a></h4>
+<h4 id="fine-grained-dataflow-tracking-with-proximal-gradients"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ryan">Fine Grained Dataflow Tracking with Proximal Gradients</a></h4>
+<h4 id="card-brand-mixup-attack-bypassing-the-pin-in-non-visa-cards-by-using-them-for-visa-transactions"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/basin">Card Brand Mixup Attack: Bypassing the PIN in non-Visa Cards by Using Them for Visa Transactions</a></h4>
+<h4 id="seal-storage-efficient-causality-analysis-on-enterprise-logs-with-query-friendly-compression"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/fei">SEAL: Storage-efficient Causality Analysis on Enterprise Logs with Query-friendly Compression</a></h4>
+<h4 id="android-smarttvs-vulnerability-discovery-via-log-guided-fuzzing"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/aafer">Android SmartTVs Vulnerability Discovery via Log-Guided Fuzzing</a></h4>
+<h4 id="exposing-new-vulnerabilities-of-error-handling-mechanism-in-can"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/serag">Exposing New Vulnerabilities of Error Handling Mechanism in CAN</a></h4>
+<h4 id="defeating-dnn-based-traffic-analysis-systems-in-real-time-with-blind-adversarial-perturbations"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/nasr">Defeating DNN-Based Traffic Analysis Systems in Real-Time With Blind Adversarial Perturbations</a></h4>
+<h4 id="lord-of-the-rings-side-channel-attacks-on-the-cpu-on-chip-ring-interconnect-are-practical"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/paccagnella">Lord of the Ring(s): Side Channel Attacks on the CPU On-Chip Ring Interconnect Are Practical</a></h4>
+<h4 id="automatic-firmware-emulation-through-invalidity-guided-knowledge-inference"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/zhou">Automatic Firmware Emulation through Invalidity-guided Knowledge Inference</a></h4>
+<h4 id="reducing-hsm-reliance-in-payments-through-proxy-re-encryption"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/gaddam">Reducing HSM Reliance in Payments through Proxy Re-Encryption</a></h4>
+<h4 id="examining-the-efficacy-of-decoy-based-and-psychological-cyber-deception"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ferguson-walter">Examining the Efficacy of Decoy-based and Psychological Cyber Deception</a></h4>
+<h4 id="does-logic-locking-work-with-eda-tools"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/han-zhaokun">Does logic locking work with EDA tools?</a></h4>
+<h4 id="exprace-exploiting-kernel-races-through-raising-interrupts"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lee-yoochan">ExpRace: Exploiting Kernel Races through Raising Interrupts</a></h4>
+<h4 id="canary-a-reactive-defense-mechanism-for-controller-area-networks-based-on-active-relays"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/groza">CANARY - a reactive defense mechanism for Controller Area Networks based on Active RelaYs</a></h4>
+<h4 id="clarion-sound-and-clear-provenance-tracking-for-microservice-deployments"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/chen-xutong">CLARION: Sound and Clear Provenance Tracking for Microservice Deployments</a></h4>
+<h4 id="blind-inon-path-attacks-and-applications-to-vpns"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/tolley">Blind In/On-Path Attacks and Applications to VPNs</a></h4>
+<h4 id="jaqen-a-high-performance-switch-native-approach-for-detecting-and-mitigating-volumetric-ddos-attacks-with-programmable-switches"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/liu-zaoxing">Jaqen: A High-Performance Switch-Native Approach for Detecting and Mitigating Volumetric DDoS Attacks with Programmable Switches</a></h4>
+<h4 id="jaw-studying-client-side-csrf-with-hybrid-property-graphs-and-declarative-traversals"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/khodayari">JAW: Studying Client-side CSRF with Hybrid Property Graphs and Declarative Traversals</a></h4>
+<h4 id="on-the-usability-of-authenticity-checks-for-hardware-security-tokens"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/pfeffer">On the Usability of Authenticity Checks for Hardware Security Tokens</a></h4>
+<h4 id="phishpedia-a-hybrid-deep-learning-based-approach-to-visually-identify-phishing-webpages"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lin">Phishpedia: A Hybrid Deep Learning Based Approach to Visually Identify Phishing Webpages</a></h4>
+<h4 id="adcube-webvr-ad-fraud-and-practical-confinement-of-third-party-ads"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lee-hyunjoo">AdCube: WebVR Ad Fraud and Practical Confinement of Third-Party Ads</a></h4>
+<h4 id="injection-attacks-reloaded-tunnelling-malicious-payloads-over-dns"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/jeitner">Injection Attacks Reloaded: Tunnelling Malicious Payloads over DNS</a></h4>
+<h4 id="wheres-crypto-automated-identification-and-classification-of-proprietary-cryptographic-primitives-in-binary-code"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/meijer">Where's Crypto?: Automated Identification and Classification of Proprietary Cryptographic Primitives in Binary Code</a></h4>
+<h4 id="socialheisting-understanding-stolen-facebook-accounts"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/onaolapo">SocialHEISTing: Understanding Stolen Facebook Accounts</a></h4>
+<h4 id="static-detection-of-unsafe-dma-accesses-in-device-drivers"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/bai">Static Detection of Unsafe DMA Accesses in Device Drivers</a></h4>
+<h4 id="causal-analysis-for-software-defined-networking-attacks"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ujcich">Causal Analysis for Software-Defined Networking Attacks</a></h4>
+<h4 id="data-poisoning-attacks-to-local-differential-privacy-protocols"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/cao-xiaoyu">Data Poisoning Attacks to Local Differential Privacy Protocols</a></h4>
+<h4 id="how-to-make-private-distributed-cardinality-estimation-practical-and-get-differential-privacy-for-free"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/hu-changhui">How to Make Private Distributed Cardinality Estimation Practical, and Get Differential Privacy for Free</a></h4>
+<h4 id="slap-improving-physical-adversarial-examples-with-short-lived-adversarial-perturbations"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lovisotto">SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations</a></h4>
+<h4 id="compromised-or-attacker-owned-a-large-scale-classification-and-study-of-hosting-domains-of-malicious-urls"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/desilva">Compromised or Attacker-Owned: A Large Scale Classification and Study of Hosting Domains of Malicious URLs</a></h4>
+<h4 id="helping-users-automatically-find-and-manage-sensitive-expendable-files-in-cloud-storage"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/khan-mohammad">Helping Users Automatically Find and Manage Sensitive, Expendable Files in Cloud Storage</a></h4>
+<h4 id="the-circle-of-life-a-large-scale-study-of-the-iot-malware-lifecycle"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/alrawi-circle">The Circle Of Life: A Large-Scale Study of The IoT Malware Lifecycle</a></h4>
+<h4 id="inexpensive-brainwave-authentication-new-techniques-and-insights-on-user-acceptance"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/arias-cabarcos">Inexpensive Brainwave Authentication: New Techniques and Insights on User Acceptance</a></h4>
+<h4 id="maze-towards-automated-heap-feng-shui"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wang-yan">MAZE: Towards Automated Heap Feng Shui</a></h4>
+<h4 id="selectivetaint-efficient-data-flow-tracking-with-static-binary-rewriting"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/chen-sanchuan">SelectiveTaint: Efficient Data Flow Tracking With Static Binary Rewriting</a></h4>
+<h4 id="experiences-deploying-multi-vantage-point-domain-validation-at-lets-encrypt"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/birge-lee">Experiences Deploying Multi-Vantage-Point Domain Validation at Let's Encrypt</a></h4>
+<h4 id="coco-co-design-and-co-verification-of-masked-software-implementations-on-cpus"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/gigerl">Coco: Co-Design and Co-Verification of Masked Software Implementations on CPUs</a></h4>
+<h4 id="reducing-bias-in-modeling-real-world-password-strength-via-deep-learning-and-dynamic-dictionaries"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/pasquini">Reducing Bias in Modeling Real-world Password Strength via Deep Learning and Dynamic Dictionaries</a></h4>
+<h4 id="waveguard-understanding-and-mitigating-audio-adversarial-examples"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/hussain">WaveGuard: Understanding and Mitigating Audio Adversarial Examples</a></h4>
+<h4 id="using-amnesia-to-detect-credential-database-breaches"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wang-ke-coby">Using Amnesia to Detect Credential Database Breaches</a></h4>
+<h4 id="undo-workarounds-for-kernel-bugs"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/talebi">Undo Workarounds for Kernel Bugs</a></h4>
+<h4 id="smash-synchronized-many-sided-rowhammer-attacks-from-javascript"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ridder">SMASH: Synchronized Many-sided Rowhammer Attacks from JavaScript</a></h4>
+<h4 id="icsfuzz-manipulating-ios-and-repurposing-binary-code-to-enable-instrumented-fuzzing-in-ics-control-applications"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/tychalas">ICSFuzz: Manipulating I/Os and Repurposing Binary Code to Enable Instrumented Fuzzing in ICS Control Applications</a></h4>
+<h4 id="deepreflect-discovering-malicious-functionality-through-binary-reconstruction"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/downing">DeepReflect: Discovering Malicious Functionality through Binary Reconstruction</a></h4>
+<h4 id="whats-in-a-name-exploring-ca-certificate-control"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ma">What's in a Name? Exploring CA Certificate Control</a></h4>
+<h4 id="alpaca-application-layer-protocol-confusion-analyzing-and-mitigating-cracks-in-tls-authentication"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/brinkmann">ALPACA: Application Layer Protocol Confusion - Analyzing and Mitigating Cracks in TLS Authentication</a></h4>
+<h4 id="privatedrop-practical-privacy-preserving-authentication-for-apple-airdrop"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/heinrich">PrivateDrop: Practical Privacy-Preserving Authentication for Apple AirDrop</a></h4>
+<h4 id="graph-backdoor"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/xi">Graph Backdoor</a></h4>
+<h4 id="primeprobe-1-javascript-0-overcoming-browser-based-side-channel-defenses"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/shusterman">Prime+Probe 1, JavaScript 0: Overcoming Browser-based Side-Channel Defenses</a></h4>
+<h4 id="swivel-hardening-webassembly-against-spectre"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/narayan">Swivel: Hardening WebAssembly against Spectre</a></h4>
+<h4 id="entangled-watermarks-as-a-defense-against-model-extraction"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/jia">Entangled Watermarks as a Defense against Model Extraction</a></h4>
+<h4 id="mind-your-weights-a-large-scale-study-on-insufficient-machine-learning-model-protection-in-mobile-apps"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/sun-zhichuang">Mind Your Weight(s): A Large-scale Study on Insufficient Machine Learning Model Protection in Mobile Apps</a></h4>
+<h4 id="breaking-through-binaries-compiler-quality-instrumentation-for-better-binary-only-fuzzing"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/nagy">Breaking Through Binaries: Compiler-quality Instrumentation for Better Binary-only Fuzzing</a></h4>
+<h4 id="cost-aware-robust-tree-ensembles-for-security-applications"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/chen-yizheng">Cost-Aware Robust Tree Ensembles for Security Applications</a></h4>
+<h4 id="too-good-to-be-safe-tricking-lane-detection-in-autonomous-driving-with-crafted-perturbations"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/jing">Too Good to Be Safe: Tricking Lane Detection in Autonomous Driving with Crafted Perturbations</a></h4>
+<h4 id="on-the-routing-aware-peering-against-network-eclipse-attacks-in-bitcoin"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/tran">On the Routing-Aware Peering against Network-Eclipse Attacks in Bitcoin</a></h4>
+<h4 id="mba-blast-unveiling-and-simplifying-mixed-boolean-arithmetic-obfuscation"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/liu-binbin">MBA-Blast: Unveiling and Simplifying Mixed Boolean-Arithmetic Obfuscation</a></h4>
+<h4 id="vscape-assessing-and-escaping-virtual-call-protections"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/chen-kaixiang">VScape: Assessing and Escaping Virtual Call Protections</a></h4>
+<h4 id="mirage-mitigating-conflict-based-cache-attacks-with-a-practical-fully-associative-design"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/saileshwar">MIRAGE: Mitigating Conflict-Based Cache Attacks with a Practical Fully-Associative Design</a></h4>
+<h4 id="sharing-more-and-checking-less-leveraging-common-input-keywords-to-detect-bugs-in-embedded-systems"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/chen-libo">Sharing More and Checking Less: Leveraging Common Input Keywords to Detect Bugs in Embedded Systems</a></h4>
+<h4 id="oblicheck-efficient-verification-of-oblivious-algorithms-with-unobservable-state"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/son">ObliCheck: Efficient Verification of Oblivious Algorithms with Unobservable State</a></h4>
+<h4 id="understanding-malicious-cross-library-data-harvesting-on-android"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wang-jice">Understanding Malicious Cross-library Data Harvesting on Android</a></h4>
+<h4 id="drmi-a-dataset-reduction-technology-based-on-mutual-information-for-black-box-attacks"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/he-yingzhe">DRMI: A Dataset Reduction Technology based on Mutual Information for Black-box Attacks</a></h4>
+<h4 id="fantastic-four-honest-majority-four-party-secure-computation-with-malicious-security"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/dalskov">Fantastic Four: Honest-Majority Four-Party Secure Computation With Malicious Security</a></h4>
+<h4 id="locally-differentially-private-analysis-of-graph-statistics"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/imola">Locally Differentially Private Analysis of Graph Statistics</a></h4>
+<h4 id="eosafe-security-analysis-of-eosio-smart-contracts"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/he-ningyu">EOSAFE: Security Analysis of EOSIO Smart Contracts</a></h4>
+<h4 id="blitz-secure-multi-hop-payments-without-two-phase-commits"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/aumayr">Blitz: Secure Multi-Hop Payments Without Two-Phase Commits</a></h4>
+<h4 id="messy-states-of-wiring-vulnerabilities-in-emerging-personal-payment-systems"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/lou">Messy States of Wiring: Vulnerabilities in Emerging Personal Payment Systems</a></h4>
+<h4 id="swift-super-fast-and-robust-privacy-preserving-machine-learning"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/koti">SWIFT: Super-fast and Robust Privacy-Preserving Machine Learning</a></h4>
+<h4 id="privacy-preserving-and-standard-compatible-aka-protocol-for-5g"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/wang-yuchen">Privacy-Preserving and Standard-Compatible AKA Protocol for 5G</a></h4>
+<h4 id="seapp-bringing-mandatory-access-control-to-android-apps"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/rossi">SEApp: Bringing Mandatory Access Control to Android Apps</a></h4>
+<h4 id="a11y-and-privacy-dont-have-to-be-mutually-exclusive-constraining-accessibility-service-misuse-on-android"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/huang">A11y and Privacy don't have to be mutually exclusive: Constraining Accessibility Service Misuse on Android</a></h4>
+<h4 id="dice-a-formally-verified-implementation-of-dice-measured-boot"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/tao">DICE*: A Formally Verified Implementation of DICE Measured Boot</a></h4>
+<h4 id="research-on-the-security-of-visual-reasoning-captcha"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/gao">Research on the Security of Visual Reasoning CAPTCHA</a></h4>
+<h4 id="smartest-effectively-hunting-vulnerable-transaction-sequences-in-smart-contracts-through-language-model-guided-symbolic-execution"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/so">SmarTest: Effectively Hunting Vulnerable Transaction Sequences in Smart Contracts through Language Model-Guided Symbolic Execution</a></h4>
+<h4 id="gforce-gpu-friendly-oblivious-and-rapid-neural-network-inference"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ng">GForce: GPU-Friendly Oblivious and Rapid Neural Network Inference</a></h4>
+<h4 id="acoustics-to-the-rescue-physical-key-inference-attack-revisited"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/ramesh">Acoustics to the Rescue: Physical Key Inference Attack Revisited</a></h4>
+<h4 id="dolma-securing-speculation-with-the-principle-of-transient-non-observability"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/loughlin">DOLMA: Securing Speculation with the Principle of Transient Non-Observability</a></h4>
+<h4 id="weaponizing-middleboxes-for-tcp-reflected-amplification"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/bock">Weaponizing Middleboxes for TCP Reflected Amplification</a></h4>
+<h4 id="swiped-analyzing-ground-truth-data-of-a-marketplace-for-stolen-debit-and-credit-cards"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/aliapoulios">Swiped: Analyzing Ground-truth Data of a Marketplace for Stolen Debit and Credit Cards</a></h4>
+<h4 id="yarix-scalable-yara-based-malware-intelligence"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/brengel">YARIX: Scalable YARA-based Malware Intelligence</a></h4>
+<h4 id="having-your-cake-and-eating-it-an-analysis-of-concession-abuse-as-a-service"><a href="https://www.usenix.org/conference/usenixsecurity21/presentation/sun-zhibo">Having Your Cake and Eating It: An Analysis of Concession-Abuse-as-a-Service</a></h4>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
