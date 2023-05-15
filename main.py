@@ -82,10 +82,10 @@ def generate_md(data):
             if links is not None:
                 assert len(titles) == len(links)
                 t = titles[i].strip().replace('`',"'")
-                f.write(f'[{t}]({base_url}{links[i].strip()})\n\n')
+                f.write(f'#### [{t}]({base_url}{links[i].strip()})\n\n')
             else:
                 t = titles[i].strip().replace('`',"'")
-                f.write(f'{t}\n\n')
+                f.write(f'#### {t}\n\n')
 
 def update_mkdocs_yml(config):
     with open('mkdocs.yml', 'r', encoding='utf-8') as f:
