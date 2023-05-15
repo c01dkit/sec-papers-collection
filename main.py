@@ -81,10 +81,13 @@ def generate_md(data):
         for i in range(len(titles)):
             if links is not None:
                 assert len(titles) == len(links)
-                t = titles[i].strip().replace('`',"'")
-                f.write(f'#### [{t}]({base_url}{links[i].strip()})\n\n')
+                t = titles[i].strip().replace('`',"'").replace('\n','')
+                if links[i].startswith('http'):
+                    f.write(f'#### [{t}]({links[i].strip()})\n\n')
+                else:
+                    f.write(f'#### [{t}]({base_url}{links[i].strip()})\n\n')
             else:
-                t = titles[i].strip().replace('`',"'")
+                t = titles[i].strip().replace('`',"'").replace('\n','')
                 f.write(f'#### {t}\n\n')
 
 def update_mkdocs_yml(config):
@@ -107,6 +110,60 @@ def guess_titles_from_links(links):
         titles.append(title.title())
     return titles
 
+def guess_links_from_titles(titles):
+    links = []
+    for title in titles:
+        title = title.strip()
+        for c in r'[@!#$%^&*()_+=`~.,|:\\]':
+            title = title.replace(c, '')
+        link = title.lower().replace(' ', '-')
+        links.append(link)
+    return links
+
+
+def generate_readme(config):
+    banner = """# A collection of security papers on top publications.
+
+The following publications are included:
+
+- IEEE S&P (oakland)
+- USENIX Security Symposium (USENIX Sec)
+- ACM CCS
+- NDSS
+
+PRs and issues are warmly welcomed.
+
+To update, simply update `data.yml` and run `main.py` to crawl the latest information.
+
+Here is a glance at all papers:
+
+| Publication | Accepted Papers | Date | Link |
+| :---: | :---: | :---: | :---: |
+"""
+    # traverse docs directory
+    papers = []
+    for file in os.listdir('docs'):
+        if file.endswith('.md') and file != 'index.md':
+            pub = ''
+            for publication in config:
+                if publication in file:
+                   pub = publication
+                   break 
+            with open('docs/'+file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if line.startswith('#### ['):
+                        title = line.split('](')[0][6:]
+                        link = line.split('](')[1][:-2]
+                        papers.append([pub, title.strip(), file[len(pub)+1:-3].strip(), f'[link]({link})'])
+                    elif line.startswith('#### '):
+                        title = line[5:]
+                        papers.append([pub, title.strip(), file[len(pub)+1:-3].strip(), '-'])
+    for paper in papers:
+        banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
+    with open('README.md', 'w', encoding='utf-8') as f:
+        f.write(banner)
+    print('README.md generated')
+    
 if __name__ == '__main__':
     config = get_config()
     update_mkdocs_yml(config)
@@ -120,10 +177,13 @@ if __name__ == '__main__':
                 titles = get_titles(html, site)
                 links = get_links(html, site)
                 note = ''
-                if titles is None and links is not None:
-                    # NDSS do not show the complete title
-                    titles = guess_titles_from_links(links)
-                    
+                if top_site == 'ndss':
+                    if titles is None and links is not None:
+                        # NDSS do not show the complete title
+                        titles = guess_titles_from_links(links)
+                    elif titles is not None and links is None:
+                        # NDSS do not show the link
+                        links = guess_links_from_titles(titles)
                 data = {
                     'filetitle': f'{config[top_site]["name"]} {site["name"]}',
                     'filename': top_site+'_'+site['name'],
@@ -137,3 +197,4 @@ if __name__ == '__main__':
                 generate_md(data)
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
+    generate_readme(config)
