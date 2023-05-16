@@ -1,5 +1,7 @@
 # A Collection of Security Papers on Top Publications
 
+**These papers are sorted by publication and year, and are deployed on the website. Please [click here to visit the website](https://sec.c01dkit.com).**
+    
 The following publications are included:
 
 - IEEE S&P (oakland)
@@ -2348,7 +2350,7 @@ Here is a glance at all papers:
 | ndss | Neuro-Symbolic Execution: Augmenting Symbolic Execution with Neural Constraints | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/neuro-symbolic-execution-augmenting-symbolic-execution-with-neural-constraints) |
 | ndss | Private Continual Release of Real-Valued Data Streams | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/private-continual-release-of-real-valued-data-streams) |
 | ndss | Profit: Detecting and Quantifying Side Channels in Networked Applications | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/profit-detecting-and-quantifying-side-channels-in-networked-applications) |
-| ndss | CRCount: Pointer Invalidation with Reference Counting to Mitigate Use-after-free in Legacy C/C++ | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/crcount-pointer-invalidation-with-reference-counting-to-mitigate-use-after-free-in-legacy-c/c) |
+| ndss | CRCount: Pointer Invalidation with Reference Counting to Mitigate Use-after-free in Legacy C/C++ | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/crcount-pointer-invalidation-with-reference-counting-to-mitigate-use-after-free-in-legacy-c-c) |
 | ndss | Oligo-Snoop: A Non-Invasive Side Channel Attack Against DNA Synthesis Machines | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/oligo-snoop-a-non-invasive-side-channel-attack-against-dna-synthesis-machines) |
 | ndss | maTLS: How to Make TLS middlebox-aware? | 2019 | [link](https://www.ndss-symposium.org/ndss-paper/matls-how-to-make-tls-middlebox-aware) |
 | usenix_security | Security at the End of the Tunnel: The Anatomy of VPN Mental Models Among Experts and Non-Experts in a Corporate Context | 2022_fall | [link](https://www.usenix.org/conference/usenixsecurity22/presentation/binkhorst) |

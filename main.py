@@ -76,6 +76,9 @@ def generate_md(data):
     note = data['note']
     d = data['time']
     with open('docs/'+filename+'.md', 'w', encoding='utf-8') as f:
+        f.write('---\n')
+        f.write(f'title: {filetitle}\n')
+        f.write('---\n\n')
         f.write(f'# {filetitle}\n\n')
         f.write(f'{len(titles)} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
         for i in range(len(titles)):
@@ -114,9 +117,9 @@ def guess_links_from_titles(titles):
     links = []
     for title in titles:
         title = title.strip()
-        for c in r'[@/!?#$%^&*()_+=`~–.,|:<>\\]':
+        for c in r'[@!?#$%^&*()_+=`~–.,|:<>\\]':
             title = title.replace(c, '')
-        link = title.lower().replace(' ', '-')
+        link = title.lower().replace(' ', '-').replace('/', '-')
         while '--' in link:
             link = link.replace('--', '-')
         links.append(link)
@@ -126,6 +129,8 @@ def guess_links_from_titles(titles):
 def generate_readme(config):
     banner = """# A Collection of Security Papers on Top Publications
 
+**These papers are sorted by publication and year, and are deployed on the website. Please [click here to visit the website](https://sec.c01dkit.com).**
+    
 The following publications are included:
 
 - IEEE S&P (oakland)
