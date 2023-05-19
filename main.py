@@ -4,6 +4,8 @@ import yaml
 import hashlib
 import os
 import datetime
+import re
+from pathlib import Path
 from lxml import etree
 
 def get_config():
@@ -30,10 +32,11 @@ def save_cache(url, data, time):
     with open('cache/'+h, 'wb') as f:
         pickle.dump({'data':data,'time':time}, f)
 
-def get_html(url):
-    res = get_cache(url)
-    if res is not None:
-        return etree.HTML(res['data']),res['time']
+def get_html(url, use_cache=True):
+    if use_cache:
+        res = get_cache(url)
+        if res is not None:
+            return etree.HTML(res['data']),res['time']
     proxies = {
         'http': 'http://127.0.0.1:10809',
         'https': 'http://127.0.0.1:10809',
@@ -117,7 +120,7 @@ def guess_links_from_titles(titles):
     links = []
     for title in titles:
         title = title.strip()
-        for c in r'[@!?#$%^&*()_+=`~–.,|:<>\\]':
+        for c in r'[@!?#$%^&*()_+=`~–.,|:<>’\';\\]':
             title = title.replace(c, '')
         link = title.lower().replace(' ', '-').replace('/', '-')
         while '--' in link:
@@ -144,28 +147,24 @@ To update, simply update `data.yml` and run `main.py` to crawl the latest inform
 
 Here is a glance at all papers:
 
-| Publication | Accepted Papers | Date | Link |
+| Publication | Accepted Paper Number | Date | Link |
 | :---: | :---: | :---: | :---: |
 """
     # traverse docs directory
-    papers = []
-    for file in os.listdir('docs'):
-        if file.endswith('.md') and file != 'index.md':
-            pub = ''
-            for publication in config:
-                if publication in file:
-                   pub = publication
-                   break 
-            with open('docs/'+file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if line.startswith('#### ['):
-                        title = line.split('](')[0][6:]
-                        link = line.split('](')[1][:-2]
-                        papers.append([pub, title.strip(), file[len(pub)+1:-3].strip(), f'[link]({link})'])
-                    elif line.startswith('#### '):
-                        title = line[5:]
-                        papers.append([pub, title.strip(), file[len(pub)+1:-3].strip(), '-'])
-    for paper in papers:
+    statistics = []
+    re_paper_num = re.compile(r'(\d+) papers accepted')
+    re_paper_url = re.compile(r'\[the lastest information here\]\((.+)\)')
+    for top_site in config:
+        for site in config[top_site]['sites']:
+            md_file = Path('docs/'+top_site+'_'+site['name']+'.md')
+            if md_file.exists():
+                with open(md_file, 'r', encoding='utf-8') as f:
+                    md = f.read()
+                    paper_num = re_paper_num.findall(md)[0]
+                    paper_url = re_paper_url.findall(md)[0]
+                    statistics.append((config[top_site]['name'], paper_num, site['name'], f'[link]({paper_url})'))
+                
+    for paper in statistics:
         banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(banner)
@@ -178,7 +177,8 @@ if __name__ == '__main__':
         os.mkdir('cache')
     for top_site in config:
         for site in config[top_site]['sites']:
-            html,time = get_html(site['url'])
+            use_cache = site.get('use_cache', True)
+            html,time = get_html(site['url'],use_cache)
             if html is not None:
                 print(f'{config[top_site]["name"]}_{site["name"]} Success')
                 titles = get_titles(html, site)
