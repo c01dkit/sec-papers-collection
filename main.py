@@ -141,6 +141,11 @@ The following publications are included:
 - ACM CCS
 - NDSS
 
+Since some topics on software testing are related to security, the following publication are also included:
+
+- ICSE
+- ISSTA
+
 PRs and issues are warmly welcomed.
 
 To update, simply update `data.yml` and run `main.py` to crawl the latest information.
@@ -180,7 +185,6 @@ if __name__ == '__main__':
             use_cache = site.get('use_cache', True)
             html,time = get_html(site['url'],use_cache)
             if html is not None:
-                print(f'{config[top_site]["name"]}_{site["name"]} Success')
                 titles = get_titles(html, site)
                 links = get_links(html, site)
                 note = ''
@@ -202,6 +206,7 @@ if __name__ == '__main__':
                     'time': time,
                 }
                 generate_md(data)
+                print(f'{config[top_site]["name"]}_{site["name"]} Success')
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
     generate_readme(config)

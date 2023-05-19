@@ -1,34 +1,3 @@
-ccs:
-  name: ACM CCS
-  sites:
-    -
-      year: 2022
-      name: '2022'
-      url: https://www.sigsac.org/ccs/CCS2022/program/accepted-papers.html
-      title_xpath: //div[@class="container"]//table//tr/td[1]/text()
-      link_xpath: ''
-      base_url: ''
-    -
-      year: 2021
-      name: '2021'
-      url: https://www.sigsac.org/ccs/CCS2021/accepted-papers.html
-      title_xpath: //div[@class="row papers-item"]/div/b/text()
-      link_xpath: ''
-      base_url: ''
-    -
-      year: 2020
-      name: '2020'
-      url: https://www.sigsac.org/ccs/CCS2020/accepted-papers.html
-      title_xpath: //div[@class="row papers-item"]/div/b/text()
-      link_xpath: ''
-      base_url: ''
-    -
-      year: 2019
-      name: '2019'
-      url: https://sigsac.org/ccs/CCS2019/index.php/program/accepted-papers/
-      title_xpath: //table[@class="wp-block-table has-fixed-layout"]//tr/td[1]/strong/text()
-      link_xpath: ''
-      base_url: ''
 oakland:
   name: IEEE S&P
   sites:
@@ -67,48 +36,37 @@ oakland:
       title_xpath: //div[@class="list-group-item"]/b/text()
       link_xpath: //div[@class="list-group-item"]/a[1]/@href
       base_url:  https://www.ieee-security.org/TC/SP2019/
-ndss:
-  name: NDSS
+ccs:
+  name: ACM CCS
   sites:
-    -
-      year: 2023
-      name: '2023'
-      url: https://www.ndss-symposium.org/ndss2023/accepted-papers/
-      title_xpath: ''
-      link_xpath: //a[@class="paper-link-abs"]/@href
-      base_url: ''
-      note: 'Note that the title is guessed from the url.'
     -
       year: 2022
       name: '2022'
-      url: https://www.ndss-symposium.org/ndss2022/accepted-papers/
-      title_xpath: //h3[@class="blog-post-title"]/text()
-      link_xpath: //a[@class="paper-link-abs"]/@href
+      url: https://www.sigsac.org/ccs/CCS2022/program/accepted-papers.html
+      title_xpath: //div[@class="container"]//table//tr/td[1]/text()
+      link_xpath: ''
       base_url: ''
-      note: 'Note that some of the paper titles are not complete.'
     -
       year: 2021
       name: '2021'
-      url: https://www.ndss-symposium.org/ndss2021/accepted-papers/
-      title_xpath: //section[@class="new-wrapper"]/p/strong/text()
+      url: https://www.sigsac.org/ccs/CCS2021/accepted-papers.html
+      title_xpath: //div[@class="row papers-item"]/div/b/text()
       link_xpath: ''
-      base_url: https://www.ndss-symposium.org/ndss-paper/
-      note: 'Note that links are guessed from the title.'
+      base_url: ''
     -
       year: 2020
       name: '2020'
-      url: https://www.ndss-symposium.org/ndss2020/accepted-papers/
-      title_xpath: //h3[@class="wp-block-heading"]/text()
-      link_xpath: //a[@class="paper-link-abs"]/@href
-      base_url: https://www.ndss-symposium.org/ndss-paper/
+      url: https://www.sigsac.org/ccs/CCS2020/accepted-papers.html
+      title_xpath: //div[@class="row papers-item"]/div/b/text()
+      link_xpath: ''
+      base_url: ''
     -
       year: 2019
       name: '2019'
-      url: https://www.ndss-symposium.org/ndss2019/accepted-papers/
-      title_xpath: //section[@class="new-wrapper"]/p/strong/text()
+      url: https://sigsac.org/ccs/CCS2019/index.php/program/accepted-papers/
+      title_xpath: //table[@class="wp-block-table has-fixed-layout"]//tr/td[1]/strong/text()
       link_xpath: ''
-      base_url: https://www.ndss-symposium.org/ndss-paper/
-      note: 'Note that links are guessed from the title.'
+      base_url: ''
 usenix_security:
   name: USENIX Sec
   sites:
@@ -189,3 +147,127 @@ usenix_security:
       title_xpath: //h2[@class="node-title"]/a/text()
       link_xpath: //h2[@class="node-title"]/a/@href
       base_url: https://www.usenix.org
+ndss:
+  name: NDSS
+  sites:
+    -
+      year: 2023
+      name: '2023'
+      url: https://www.ndss-symposium.org/ndss2023/accepted-papers/
+      title_xpath: ''
+      link_xpath: //a[@class="paper-link-abs"]/@href
+      base_url: ''
+      note: 'Note that the title is guessed from the url.'
+    -
+      year: 2022
+      name: '2022'
+      url: https://www.ndss-symposium.org/ndss2022/accepted-papers/
+      title_xpath: //h3[@class="blog-post-title"]/text()
+      link_xpath: //a[@class="paper-link-abs"]/@href
+      base_url: ''
+      note: 'Note that some of the paper titles are not complete.'
+    -
+      year: 2021
+      name: '2021'
+      url: https://www.ndss-symposium.org/ndss2021/accepted-papers/
+      title_xpath: //section[@class="new-wrapper"]/p/strong/text()
+      link_xpath: ''
+      base_url: https://www.ndss-symposium.org/ndss-paper/
+      note: 'Note that links are guessed from the title.'
+    -
+      year: 2020
+      name: '2020'
+      url: https://www.ndss-symposium.org/ndss2020/accepted-papers/
+      title_xpath: //h3[@class="wp-block-heading"]/text()
+      link_xpath: //a[@class="paper-link-abs"]/@href
+      base_url: https://www.ndss-symposium.org/ndss-paper/
+    -
+      year: 2019
+      name: '2019'
+      url: https://www.ndss-symposium.org/ndss2019/accepted-papers/
+      title_xpath: //section[@class="new-wrapper"]/p/strong/text()
+      link_xpath: ''
+      base_url: https://www.ndss-symposium.org/ndss-paper/
+      note: 'Note that links are guessed from the title.'
+# issta:
+#   name: ISSTA
+#   sites:
+#     - 
+#       year: 2022
+#       name: '2022'
+icse:
+  name: ICSE
+  sites:
+    -
+      year: 2023
+      name: '2023'
+      url: https://conf.researchr.org/track/icse-2023/icse-2023-technical-track?#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: ''
+      base_url: ''
+    -
+      year: 2022
+      name: '2022'
+      url: https://conf.researchr.org/track/icse-2022/icse-2022-papers?#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[2]/@href
+      base_url: ''
+    -
+      year: 2021
+      name: '2021'
+      url: https://conf.researchr.org/track/icse-2021/icse-2021-papers?#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[2]/@href
+      base_url: ''
+    -
+      year: 2020
+      name: '2020'
+      url: https://2020.icse-conferences.org/track/icse-2020-papers?#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: ''
+      base_url: ''
+    -
+      year: 2019
+      name: '2019'
+      url: https://2019.icse-conferences.org/track/icse-2019-Technical-Papers?#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: ''
+      base_url: ''
+issta:
+  name: ISSTA
+  sites:
+    -
+      year: 2022
+      name: '2022'
+      url: https://conf.researchr.org/track/issta-2022/issta-2022-technical-papers#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[contains(text(),"DOI")]/@href
+      base_url: ''
+    -
+      year: 2021
+      name: '2021'
+      url: https://conf.researchr.org/track/issta-2021/issta-2021-technical-papers#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[contains(text(),"DOI")]/@href
+      base_url: ''
+    -
+      year: 2020
+      name: '2020'
+      url: https://conf.researchr.org/track/issta-2020/issta-2020-papers#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[contains(text(),"DOI")]/@href
+      base_url: ''
+    -
+      year: 2019
+      name: '2019'
+      url: https://conf.researchr.org/track/issta-2019/issta-2019-Technical-Papers#event-overview
+      title_xpath: //*[@id="event-overview"]//tr/td[2]/a[1]/text()
+      link_xpath: ''
+      base_url: ''
+    -
+      year: 2018
+      name: '2018'
+      url: https://conf.researchr.org/track/issta-2018/issta-2018-Technical-Papers
+      title_xpath: //*[@id="About"]//tr/td[2]/a[1]/text()
+      link_xpath: //*[@id="event-overview"]//tr/td[2]/a[contains(text(),"DOI")]/@href
+      base_url: ''
