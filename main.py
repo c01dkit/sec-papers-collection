@@ -132,6 +132,10 @@ def guess_links_from_titles(titles):
 def generate_readme(config):
     banner = """# A Collection of Security Papers on Top Publications
 
+![overview](./img/Snipaste_2023-05-19_16-31-36.png)
+
+![search](./img/Snipaste_2023-05-19_16-32-44.png)
+    
 **These papers are sorted by publication and year, and are deployed on the website. Please [click here to visit the website](https://sec.c01dkit.com).**
     
 The following publications are included:
@@ -152,7 +156,7 @@ To update, simply update `data.yml` and run `main.py` to crawl the latest inform
 
 Here is a glance at all papers:
 
-| Publication | Accepted Paper Number | Date | Link |
+| Publication | Date | Accepted Paper Number | Link |
 | :---: | :---: | :---: | :---: |
 """
     # traverse docs directory
@@ -167,7 +171,7 @@ Here is a glance at all papers:
                     md = f.read()
                     paper_num = re_paper_num.findall(md)[0]
                     paper_url = re_paper_url.findall(md)[0]
-                    statistics.append((config[top_site]['name'], paper_num, site['name'], f'[link]({paper_url})'))
+                    statistics.append((config[top_site]['name'],site['name'], paper_num,  f'[link]({paper_url})'))
                 
     for paper in statistics:
         banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
