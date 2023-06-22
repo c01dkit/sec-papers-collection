@@ -120,8 +120,10 @@ def guess_links_from_titles(titles):
     links = []
     for title in titles:
         title = title.strip()
-        for c in r'[@!?#$%^&*()_+=`~–.,|:<>’\';\\]':
+        for c in r'[@!?#$%^&*()_+=`~–,|:“”’<>\';…\\]':
             title = title.replace(c, '')
+        for c in r'.':
+            title = title.replace(c, "-")
         link = title.lower().replace(' ', '-').replace('/', '-')
         while '--' in link:
             link = link.replace('--', '-')

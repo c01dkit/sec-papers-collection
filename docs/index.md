@@ -6,6 +6,8 @@ A collection of security papers on top publications. You can search the titles (
 - USENIX Security
 - ACM CCS
 - NDSS
+- ICSE
+- ISSTA
 
 This site is still under construction. PRs and issues are welcomed!
 
