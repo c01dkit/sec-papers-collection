@@ -4,219 +4,219 @@ title: IEEE S&P 2020
 
 # IEEE S&P 2020
 
-104 papers accepted. Updated on **2023-05-15**.
+104 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://www.ieee-security.org/TC/SP2020/program-papers.html).
+You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2020.html).
 
 ---
 
-#### A Programming Framework for Differential Privacy with Accuracy Concentration Bounds
+#### [Spectector: Principled Detection of Speculative Information Flows.](https://doi.org/10.1109/SP40000.2020.00011)
 
-#### A Security Analysis of the Facebook Ad Library
+#### [: Practical Cache Attacks from the Network.](https://doi.org/10.1109/SP40000.2020.00082)
 
-#### A Stealthier Partitioning Attack against Bitcoin Peer-to-Peer Network
+#### [SpecCFI: Mitigating Spectre Attacks using CFI Informed Speculation.](https://doi.org/10.1109/SP40000.2020.00033)
 
-#### A Tale of Sea and Sky: On the Security of Maritime VSAT Communications
+#### [LVI: Hijacking Transient Execution through Microarchitectural Load Value Injection.](https://doi.org/10.1109/SP40000.2020.00089)
 
-#### AdGraph: A Graph-Based Approach to Ad and Tracker Blocking
+#### [HydRand: Efficient Continuous Distributed Randomness.](https://doi.org/10.1109/SP40000.2020.00003)
 
-#### An Analysis of Pre-installed Android Software
+#### [OHIE: Blockchain Scaling Made Simple.](https://doi.org/10.1109/SP40000.2020.00008)
 
-#### Are Anonymity-Seekers Just Like Everybody Else?  An Analysis of Contributions to Wikipedia from Tor
+#### [Sync HotStuff: Simple and Practical Synchronous State Machine Replication.](https://doi.org/10.1109/SP40000.2020.00044)
 
-#### Are We Susceptible to Rowhammer?  An End-to-End Methodology for Cloud Providers
+#### [Replicated state machines without replicated execution.](https://doi.org/10.1109/SP40000.2020.00068)
 
-#### Ask the Experts: What Should Be on an IoT Privacy and Security Label?
+#### [ICLab: A Global, Longitudinal Internet Censorship Measurement Platform.](https://doi.org/10.1109/SP40000.2020.00014)
 
-#### Automatic Uncovering of Hidden Behaviors from Input Validation in Mobile Apps
+#### [High Precision Open-World Website Fingerprinting.](https://doi.org/10.1109/SP40000.2020.00015)
 
-#### Automatically Detecting Bystanders in Photos to Reduce Privacy Risks
+#### [Breaking and (Partially) Fixing Provably Secure Onion Routing.](https://doi.org/10.1109/SP40000.2020.00039)
 
-#### BIAS: Bluetooth Impersonation AttackS
+#### [Are anonymity-seekers just like everybody else? An analysis of contributions to Wikipedia from Tor.](https://doi.org/10.1109/SP40000.2020.00053)
 
-#### Binsec/Rel: Efficient Relational Symbolic Execution for Constant-Time at Binary-Level
+#### [Detection of Electromagnetic Interference Attacks on Sensor Systems.](https://doi.org/10.1109/SP40000.2020.00001)
 
-#### Breaking and (Partially) Fixing Provably Secure Onion Routing
+#### [WaveSpy: Remote and Through-wall Screen Attack via mmWave Sensing.](https://doi.org/10.1109/SP40000.2020.00004)
 
-#### Browsing Unicity: On the Limits of Anonymizing Web Tracking Data
+#### [SoK: A Minimalist Approach to Formalizing Analog Sensor Security.](https://doi.org/10.1109/SP40000.2020.00026)
 
-#### Burglars' IoT Paradise: Understanding and Mitigating Security Risks of General Messaging Protocols on IoT Clouds
+#### [Gesture Authentication for Smartphones: Evaluation of Gesture Password Selection Policies.](https://doi.org/10.1109/SP40000.2020.00034)
 
-#### C3APSULe: Cross-FPGA Covert-Channel Attacks through Power Supply Unit Leakage
+#### [Is FIDO2 the Kingslayer of User Authentication? A Comparative Usability Study of FIDO2 Passwordless Authentication.](https://doi.org/10.1109/SP40000.2020.00047)
 
-#### Can Voters Detect Malicious Manipulation of Ballot Marking Devices?
+#### [This PIN Can Be Easily Guessed: Analyzing the Security of Smartphone Unlock PINs.](https://doi.org/10.1109/SP40000.2020.00100)
 
-#### Combating Dependence Explosion in Forensic Analysis Using Alternative Tag Propagation Semantics
+#### [The Value of Collaboration in Convex Machine Learning with Differential Privacy.](https://doi.org/10.1109/SP40000.2020.00025)
 
-#### Cornucopia: Temporal Safety for CHERI Heaps
+#### [Automatically Detecting Bystanders in Photos to Reduce Privacy Risks.](https://doi.org/10.1109/SP40000.2020.00097)
 
-#### CrypTFlow : Secure TensorFlow Inference
+#### [CrypTFlow: Secure TensorFlow Inference.](https://doi.org/10.1109/SP40000.2020.00092)
 
-#### Detection of Electromagnetic Interference Attacks on Sensor Systems
+#### [SoK: Differential Privacy as a Causal Property.](https://doi.org/10.1109/SP40000.2020.00012)
 
-#### Do Cookie Banners Respect My Choice?  Measuring Legal Compliance of Banners from IAB Europe's Transparancy and Consent Framework
+#### [Private resource allocators and their applications.](https://doi.org/10.1109/SP40000.2020.00065)
 
-#### Dragonblood: Analyzing the Dragonfly Handshake of WPA3 and EAP-pwd
+#### [Towards Effective Differential Privacy Communication for Users' Data Sharing Decision and Comprehension.](https://doi.org/10.1109/SP40000.2020.00088)
 
-#### Efficient and Secure Multiparty Computation from Fixed-Key Block Ciphers
+#### [A Programming Framework for Differential Privacy with Accuracy Concentration Bounds.](https://doi.org/10.1109/SP40000.2020.00086)
 
-#### Enabling Rack-scale Confidential Computing using Heterogeneous Trusted Execution Environment
+#### [Security Update Labels: Establishing Economic Incentives for Security Patching of IoT Consumer Products.](https://doi.org/10.1109/SP40000.2020.00021)
 
-#### Even Black Cats Cannot Stay Hidden in the Dark: Full-band De-anonymization of Bluetooth Classic Devices
+#### [Ask the Experts: What Should Be on an IoT Privacy and Security Label?](https://doi.org/10.1109/SP40000.2020.00043)
 
-#### EverCrypt:  A Fast, Verified, Cross-Platform Crytographic Provider
+#### [Burglars' IoT Paradise: Understanding and Mitigating Security Risks of General Messaging Protocols on IoT Clouds.](https://doi.org/10.1109/SP40000.2020.00051)
 
-#### Ex-vivo dynamic analysis framework for Android device drivers
+#### [Towards a Natural Perspective of Smart Homes for Practical Security and Safety Analyses.](https://doi.org/10.1109/SP40000.2020.00062)
 
-#### Flash Boys 2.0: Frontrunning in Decentralized Exchanges, Miner Extractable Value, and Consensus Instability
+#### [Message Time of Arrival Codes: A Fundamental Primitive for Secure Distance Measurement.](https://doi.org/10.1109/SP40000.2020.00010)
 
-#### Flaw Label: Exploiting IPv6 Flow Label
+#### [Dragonblood: Analyzing the Dragonfly Handshake of WPA3 and EAP-pwd.](https://doi.org/10.1109/SP40000.2020.00031)
 
-#### FlyClient: Super-Light Clients for Cryptocurrencies
+#### [Even Black Cats Cannot Stay Hidden in the Dark: Full-band De-anonymization of Bluetooth Classic Devices.](https://doi.org/10.1109/SP40000.2020.00091)
 
-#### Fuzzing JavaScript Engines with Aspect-preserving Mutation
+#### [BIAS: Bluetooth Impersonation AttackS.](https://doi.org/10.1109/SP40000.2020.00093)
 
-#### Gesture Authentication for Smartphones: Evaluation of Gesture Password Selection Policies
+#### [xMP: Selective Memory Protection for Kernel and User Space.](https://doi.org/10.1109/SP40000.2020.00041)
 
-#### High Precision Open-World Website Fingerprinting
+#### [MarkUs: Drop-in use-after-free prevention for low-level languages.](https://doi.org/10.1109/SP40000.2020.00058)
 
-#### HopSkipJumpAttack: A Query-Efficient Decision-Based Attack
+#### [SEIMI: Efficient and Secure SMAP-Enabled Intra-process Memory Isolation.](https://doi.org/10.1109/SP40000.2020.00087)
 
-#### How Not to Prove Your Election Outcome
+#### [Cornucopia: Temporal Safety for CHERI Heaps.](https://doi.org/10.1109/SP40000.2020.00098)
 
-#### Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning
+#### [The Many Kinds of Creepware Used for Interpersonal Attacks.](https://doi.org/10.1109/SP40000.2020.00069)
 
-#### HydRand: Efficient Continuous Distributed Randomness
+#### [How not to prove your election outcome.](https://doi.org/10.1109/SP40000.2020.00048)
 
-#### ICAS: An Extensible Framework for Estimating the Susceptibility of IC Layouts to Additive Trojans
+#### [A Security Analysis of the Facebook Ad Library.](https://doi.org/10.1109/SP40000.2020.00084)
 
-#### ICLab: A Global, Longitudinal Internet Censorship Measurement Platform
+#### [Can Voters Detect Malicious Manipulation of Ballot Marking Devices?](https://doi.org/10.1109/SP40000.2020.00118)
 
-#### IJON: Exploring Deep State Spaces via Fuzzing
+#### [RAMBleed: Reading Bits in Memory Without Accessing Them.](https://doi.org/10.1109/SP40000.2020.00020)
 
-#### Influencing Photo Sharing Decisions on Social Media:  A Case of Paradoxical Findings
+#### [Are We Susceptible to Rowhammer? An End-to-End Methodology for Cloud Providers.](https://doi.org/10.1109/SP40000.2020.00085)
 
-#### Intriguing Properties of Adversarial ML Attacks in the Problem Space
+#### [Leveraging EM Side-Channel Information to Detect Rowhammer Attacks.](https://doi.org/10.1109/SP40000.2020.00060)
 
-#### Is FIDO2 the Kingslayer of User Authentication? A Comparative Usability Study of FIDO2 Passwordless Authentication
+#### [TRRespass: Exploiting the Many Sides of Target Row Refresh.](https://doi.org/10.1109/SP40000.2020.00090)
 
-#### JIT Leaks: Inducing Timing Side Channels through Just-In-Time Compilation
+#### [AdGraph: A Graph-Based Approach to Ad and Tracker Blocking.](https://doi.org/10.1109/SP40000.2020.00005)
 
-#### KARONTE: Detecting Insecure Multi-binary Interactions in Embedded Firmware
+#### [Browsing Unicity: On the Limits of Anonymizing Web Tracking Data.](https://doi.org/10.1109/SP40000.2020.00018)
 
-#### Kobold: Evaluating Decentralized Access Control for Remote NSXPC Methods on iOS
+#### [Do Cookie Banners Respect my Choice? : Measuring Legal Compliance of Banners from IAB Europe's Transparency and Consent Framework.](https://doi.org/10.1109/SP40000.2020.00076)
 
-#### Krace: Data Race Fuzzing for Kernel File Systems
+#### [Meddling Middlemen: Empirical Analysis of the Risks of Data-Saving Mobile Browsers.](https://doi.org/10.1109/SP40000.2020.00077)
 
-#### LVI:  Hijacking Transient Execution through Microarchitectural Load Value Injection
+#### [Efficient and Secure Multiparty Computation from Fixed-Key Block Ciphers.](https://doi.org/10.1109/SP40000.2020.00016)
 
-#### Leveraging EM Side-Channel Information to Detect Rowhammer Attacks
+#### [Path Oblivious Heap: Optimal and Practical Oblivious Priority Queue.](https://doi.org/10.1109/SP40000.2020.00037)
 
-#### MarkUs: Drop-in use-after-free prevention for low-level languages
+#### [Transparent Polynomial Delegation and Its Applications to Zero Knowledge Proof.](https://doi.org/10.1109/SP40000.2020.00052)
 
-#### Meddling Middlemen: Empirical Analysis of the Risks of Data-Saving Mobile Browsers
+#### [Towards Scalable Threshold Cryptosystems.](https://doi.org/10.1109/SP40000.2020.00059)
 
-#### Message Time of Arrival Codes: A Fundamental Primitive for Secure Distance Measurement
+#### [A Stealthier Partitioning Attack against Bitcoin Peer-to-Peer Network.](https://doi.org/10.1109/SP40000.2020.00027)
 
-#### NetCAT:  Practical Cache Attacks for the Network
+#### [Flash Boys 2.0: Frontrunning in Decentralized Exchanges, Miner Extractable Value, and Consensus Instability.](https://doi.org/10.1109/SP40000.2020.00040)
 
-#### Neutaint: Efficient Dynamic Taint Analysis with Neural Networks
+#### [FlyClient: Super-Light Clients for Cryptocurrencies.](https://doi.org/10.1109/SP40000.2020.00049)
 
-#### OAT: Attesting Operation Integrity of Embedded Devices
+#### [ZEXE: Enabling Decentralized Private Computation.](https://doi.org/10.1109/SP40000.2020.00050)
 
-#### OHIE: Blockchain Scaling Made Simple
+#### [The Last Mile: High-Assurance and High-Speed Cryptographic Implementations.](https://doi.org/10.1109/SP40000.2020.00028)
 
-#### PMP: Cost-effective Forced Execution with Probabilistic Memory Pre-planning
+#### [EverCrypt: A Fast, Verified, Cross-Platform Cryptographic Provider.](https://doi.org/10.1109/SP40000.2020.00114)
 
-#### Pangolin:Incremental Hybrid Fuzzing with Polyhedral Path Abstraction
+#### [Rigorous engineering for hardware security: Formal modelling and proof in the CHERI design and implementation process.](https://doi.org/10.1109/SP40000.2020.00055)
 
-#### Path Oblivious Heap: Optimal and Practical Oblivious Priority Queue
+#### [Binsec/Rel: Efficient Relational Symbolic Execution for Constant-Time at Binary-Level.](https://doi.org/10.1109/SP40000.2020.00074)
 
-#### Plundervolt: Software-based Fault Injection Attacks against Intel SGX
+#### [An Analysis of Pre-installed Android Software.](https://doi.org/10.1109/SP40000.2020.00013)
 
-#### Privacy Risks of General-Purpose Language Models
+#### [Kobold: Evaluating Decentralized Access Control for Remote NSXPC Methods on iOS.](https://doi.org/10.1109/SP40000.2020.00023)
 
-#### Private Resource Allocators and Their Applications
+#### [TextExerciser: Feedback-driven Text Input Exercising for Android Applications.](https://doi.org/10.1109/SP40000.2020.00071)
 
-#### Pseudorandom Black Swans: Cache Attacks on CTR_DRBG
+#### [Ex-vivo dynamic analysis framework for Android device drivers.](https://doi.org/10.1109/SP40000.2020.00094)
 
-#### RAMBleed:  Reading Bits in Memory Without Accessing Them
+#### [Automatic Uncovering of Hidden Behaviors From Input Validation in Mobile Apps.](https://doi.org/10.1109/SP40000.2020.00072)
 
-#### Replicated State Machines Without Replicated Execution
+#### [PMP: Cost-effective Forced Execution with Probabilistic Memory Pre-planning.](https://doi.org/10.1109/SP40000.2020.00035)
 
-#### RetroWrite: Statically Instrumenting COTS Binaries for Fuzzing and Sanitization
+#### [Combating Dependence Explosion in Forensic Analysis Using Alternative Tag Propagation Semantics.](https://doi.org/10.1109/SP40000.2020.00064)
 
-#### Rigorous Engineering for Hardware Security:  Formal Modelling and Proof in the CHERI Design and Implementation Process
+#### [TARDIS: Rolling Back The Clock On CMS-Targeting Cyber Attacks.](https://doi.org/10.1109/SP40000.2020.00116)
 
-#### SAVIOR: Towards Bug-Driven Hybrid Testing
+#### [Tactical Provenance Analysis for Endpoint Detection and Response Systems.](https://doi.org/10.1109/SP40000.2020.00096)
 
-#### SEIMI: Efficient and Secure SMAP-Enabled Intra-process Memory Isolation
+#### [Throwing Darts in the Dark? Detecting Bots with Limited Data using Neural Data Augmentation.](https://doi.org/10.1109/SP40000.2020.00079)
 
-#### SEVurity: No Security Without Integrity - Breaking Integrity-Free Memory Encryption with Minimal Assumptions
+#### [JIT Leaks: Inducing Timing Side Channels through Just-In-Time Compilation.](https://doi.org/10.1109/SP40000.2020.00007)
 
-#### SPECCFI:  Mitigating Spectre Attacks Using CFI Imformed Speculation
+#### [The State of the Uniform: Attacks on Encrypted Databases Beyond the Uniform Query Distribution.](https://doi.org/10.1109/SP40000.2020.00029)
 
-#### SPIDER: Enabling Fast Patch Propagation in Related Software Repositories
+#### [Pseudorandom Black Swans: Cache Attacks on CTR_DRBG.](https://doi.org/10.1109/SP40000.2020.00046)
 
-#### Security Update Labels: Establishing Economic Incentives for Security Patching of IoT Consumer Products
+#### [Flaw Label: Exploiting IPv6 Flow Label.](https://doi.org/10.1109/SP40000.2020.00075)
 
-#### Semantic Understanding of Smart Contracts: Executable Operational Semantics of Solidity
+#### [HopSkipJumpAttack: A Query-Efficient Decision-Based Attack.](https://doi.org/10.1109/SP40000.2020.00045)
 
-#### SoK: A Minimalist Approach to Formalizing Analog Sensor Security
+#### [Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning.](https://doi.org/10.1109/SP40000.2020.00115)
 
-#### SoK: Cyber Insurance - Technical Challenges and a System Security Roadmap
+#### [Privacy Risks of General-Purpose Language Models.](https://doi.org/10.1109/SP40000.2020.00095)
 
-#### SoK: Differential Privacy as a Causal Property
+#### [Intriguing Properties of Adversarial ML Attacks in the Problem Space.](https://doi.org/10.1109/SP40000.2020.00073)
 
-#### SoK: Understanding the Prevailing Security Vulnerabilities in TrustZone-assisted TEE Systems
+#### [Influencing Photo Sharing Decisions on Social Media: A Case of Paradoxical Findings.](https://doi.org/10.1109/SP40000.2020.00006)
 
-#### Spectector:  Principled Detection of Speculative Information Flows
+#### [SoK: Cyber Insurance - Technical Challenges and a System Security Roadmap.](https://doi.org/10.1109/SP40000.2020.00019)
 
-#### Sync HotStuff: Simple and Practical Synchronous State Machine Replication
+#### [A Tale of Sea and Sky On the Security of Maritime VSAT Communications.](https://doi.org/10.1109/SP40000.2020.00056)
 
-#### TARDIS: Rolling Back The Clock On CMS-Targeting Cyber Attacks
+#### [I Know Where You Parked Last Summer : Automated Reverse Engineering and Privacy Analysis of Modern Cars.](https://doi.org/10.1109/SP40000.2020.00081)
 
-#### TRRespass:  Exploiting the Many Sides of Target Row Refresh
+#### [SoK: Understanding the Prevailing Security Vulnerabilities in TrustZone-assisted TEE Systems.](https://doi.org/10.1109/SP40000.2020.00061)
 
-#### Tactical Provenance Analysis for Endpoint Detection and Response Systems
+#### [OAT: Attesting Operation Integrity of Embedded Devices.](https://doi.org/10.1109/SP40000.2020.00042)
 
-#### TextExerciser: Feedback-driven Text Input Exercising for Android Applications
+#### [Enabling Rack-scale Confidential Computing using Heterogeneous Trusted Execution Environment.](https://doi.org/10.1109/SP40000.2020.00054)
 
-#### The Last Mile:  High-Assurance and High-Speed Cryptographic Implementations
+#### [Plundervolt: Software-based Fault Injection Attacks against Intel SGX.](https://doi.org/10.1109/SP40000.2020.00057)
 
-#### The Many Kinds of Creepware Used for Interpersonal Attacks
+#### [SEVurity: No Security Without Integrity : Breaking Integrity-Free Memory Encryption with Minimal Assumptions.](https://doi.org/10.1109/SP40000.2020.00080)
 
-#### The State of the Uniform: Attacks on Encrypted Databases Beyond the Uniform Query Distribution
+#### [RetroWrite: Statically Instrumenting COTS Binaries for Fuzzing and Sanitization.](https://doi.org/10.1109/SP40000.2020.00009)
 
-#### The Value of Collaboration in Convex Machine Learning with Differential Privacy
+#### [Unexpected Data Dependency Creation and Chaining: A New Attack to SDN.](https://doi.org/10.1109/SP40000.2020.00017)
 
-#### This PIN Can Be Easily Guessed: Analyzing the Security of Smartphone Unlock PINs
+#### [Neutaint: Efficient Dynamic Taint Analysis with Neural Networks.](https://doi.org/10.1109/SP40000.2020.00022)
 
-#### Throwing Darts in the Dark? Detecting Bots with Limited Data using Neural Data Augmentation
+#### [Karonte: Detecting Insecure Multi-binary Interactions in Embedded Firmware.](https://doi.org/10.1109/SP40000.2020.00036)
 
-#### Towards Effective Differential Privacy Communication for Users' Data Sharing Decision and Comprehension
+#### [SPIDER: Enabling Fast Patch Propagation In Related Software Repositories.](https://doi.org/10.1109/SP40000.2020.00038)
 
-#### Towards Scalable Threshold Cryptosystems
+#### [SAVIOR: Towards Bug-Driven Hybrid Testing.](https://doi.org/10.1109/SP40000.2020.00002)
 
-#### Towards a Natural Perspective of Smart Homes for Practical Security and Safety Analyses
+#### [Ijon: Exploring Deep State Spaces via Fuzzing.](https://doi.org/10.1109/SP40000.2020.00117)
 
-#### Transparent Polynomial Delegation and Its Applications to Zero Knowledge Proof
+#### [Pangolin: Incremental Hybrid Fuzzing with Polyhedral Path Abstraction.](https://doi.org/10.1109/SP40000.2020.00063)
 
-#### Transys: Leveraging Common Security Properties Across Hardware Designs
+#### [Fuzzing JavaScript Engines with Aspect-preserving Mutation.](https://doi.org/10.1109/SP40000.2020.00067)
 
-#### Unexpected Data Dependency Creation and Chaining: A New Attack to SDN
+#### [Krace: Data Race Fuzzing for Kernel File Systems.](https://doi.org/10.1109/SP40000.2020.00078)
 
-#### VerX: Safety Verification of Smart Contracts
+#### [VerX: Safety Verification of Smart Contracts.](https://doi.org/10.1109/SP40000.2020.00024)
 
-#### VeriSmart: A Highly Precise Safety Verifier for Ethereum Smart Contracts
+#### [VERISMART: A Highly Precise Safety Verifier for Ethereum Smart Contracts.](https://doi.org/10.1109/SP40000.2020.00032)
 
-#### WaveSpy: Remote and Through-wall Screen Attack via mmWave Sensing
+#### [Semantic Understanding of Smart Contracts: Executable Operational Semantics of Solidity.](https://doi.org/10.1109/SP40000.2020.00066)
 
-#### ZEXE: Enabling Decentralized Private Computation
+#### [Transys: Leveraging Common Security Properties Across Hardware Designs.](https://doi.org/10.1109/SP40000.2020.00030)
 
-#### _ I Know Where You Parked Last Summer _ Automated Reverse Engineering and Privacy Analysis of Modern Cars
+#### [C3APSULe: Cross-FPGA Covert-Channel Attacks through Power Supply Unit Leakage.](https://doi.org/10.1109/SP40000.2020.00070)
 
-#### xMP: Selective Memory Protection for Kernel and User Space
+#### [ICAS: an Extensible Framework for Estimating the Susceptibility of IC Layouts to Additive Trojans.](https://doi.org/10.1109/SP40000.2020.00083)
 

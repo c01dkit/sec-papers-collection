@@ -4,113 +4,129 @@ title: ISSTA 2021
 
 # ISSTA 2021
 
-51 papers accepted. Updated on **2023-05-19**.
+59 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://conf.researchr.org/track/issta-2021/issta-2021-technical-papers#event-overview).
+You can find [the lastest information here](https://dblp.org/db/conf/issta/issta2021.html).
 
 ---
 
-#### [AdvDoor: Adversarial Backdoor Attack of Deep Learning System](https://doi.org/10.1145/3460319.3464809)
+#### [Automated debugging: past, present, and future (ISSTA impact paper award).](https://doi.org/10.1145/3460319.3472397)
 
-#### [A Lightweight Framework for Function Name Reassignment Based on Large-Scale Stripped Binaries](https://doi.org/10.1145/3460319.3464804)
+#### [Identifying privacy weaknesses from multi-party trigger-action integration platforms.](https://doi.org/10.1145/3460319.3464838)
 
-#### [An Infrastructure Approach to Improving Effectiveness of Android UI Testing Tools](https://doi.org/10.1145/3460319.3464828)
+#### [WebEvo: taming web application evolution via detecting semantic structure changes.](https://doi.org/10.1145/3460319.3464800)
 
-#### [Attack as Defense: Characterizing Adversarial Examples using Robustness](https://doi.org/10.1145/3460319.3464822)
+#### [Modular call graph construction for security scanning of Node.js applications.](https://doi.org/10.1145/3460319.3464836)
 
-#### [Automated Patch Backporting in Linux (Experience Paper)](https://doi.org/10.1145/3460319.3464821)
+#### [Attack as defense: characterizing adversarial examples using robustness.](https://doi.org/10.1145/3460319.3464822)
 
-#### [Automatic Test Suite Generation for Key-Points Detection DNNs using Many-Objective Search (Experience Paper)](https://doi.org/10.1145/3460319.3464802)
+#### [Exposing previously undetectable faults in deep neural networks.](https://doi.org/10.1145/3460319.3464801)
 
-#### [Boosting Symbolic Execution via Constraint Solving Time Prediction (Experience Paper)](https://doi.org/10.1145/3460319.3464813)
+#### [DeepCrime: mutation testing of deep learning systems based on real faults.](https://doi.org/10.1145/3460319.3464825)
 
-#### [Challenges and Opportunities: An In-Depth Empirical Study on Configuration Error Injection Testing](https://doi.org/10.1145/3460319.3464799)
+#### [DeepHyperion: exploring the feature space of deep learning-based systems through illumination search.](https://doi.org/10.1145/3460319.3464811)
 
-#### [Continuous Test Suite Failure Prediction](https://doi.org/10.1145/3460319.3464840)
+#### [Automatic test suite generation for key-points detection DNNs using many-objective search (experience paper).](https://doi.org/10.1145/3460319.3464802)
 
-#### [DeepCrime: Mutation Testing of Deep Learning Systems Based on Real Faults](https://doi.org/10.1145/3460319.3464825)
+#### [Efficient white-box fairness testing through gradient search.](https://doi.org/10.1145/3460319.3464820)
 
-#### [DeepHyperion: Exploring the Feature Space of Deep Learning-Based Systems through Illumination Search](https://doi.org/10.1145/3460319.3464811)
+#### [DialTest: automated testing for recurrent-neural-network-driven dialogue systems.](https://doi.org/10.1145/3460319.3464829)
 
-#### [Deep Just-in-Time Defect Prediction: How Far Are We?](https://doi.org/10.1145/3460319.3464819)
+#### [AdvDoor: adversarial backdoor attack of deep learning system.](https://doi.org/10.1145/3460319.3464809)
 
-#### [DialTest: Automated Testing for Recurrent-Neural-Network-Driven Dialogue Systems](https://doi.org/10.1145/3460319.3464829)
+#### [ModelDiff: testing-based DNN similarity comparison for model reuse detection.](https://doi.org/10.1145/3460319.3464816)
 
-#### [Efficient White-Box Fairness Testing through Gradient Search](https://doi.org/10.1145/3460319.3464820)
+#### [Parema: an unpacking framework for demystifying VM-based Android packers.](https://doi.org/10.1145/3460319.3464839)
 
-#### [Empirical Evaluation of Smart Contract Testing: What Is the Best Choice?](https://doi.org/10.1145/3460319.3464837)
+#### [An infrastructure approach to improving effectiveness of Android UI testing tools.](https://doi.org/10.1145/3460319.3464828)
 
-#### [Empirically Evaluating Readily Available Information for Regression Test Optimization in Continuous Integration](https://doi.org/10.1145/3460319.3464834)
+#### [Semantic matching of GUI events for test reuse: are we there yet?](https://doi.org/10.1145/3460319.3464827)
 
-#### [Exposing Previously Undetectable Faults in Deep Neural Networks](https://doi.org/10.1145/3460319.3464801)
+#### [GUIDER: GUI structure and vision co-guided test script repair for Android apps.](https://doi.org/10.1145/3460319.3464830)
 
-#### [Faster, Deeper, Easier: Crowdsourcing Diagnosis of Microservice Kernel Failure from User Space](https://doi.org/10.1145/3460319.3464805)
+#### [Understanding and finding system setting-related defects in Android apps.](https://doi.org/10.1145/3460319.3464806)
 
-#### [Finding Data Compatibility Bugs with JSON Subschema Checking](https://doi.org/10.1145/3460319.3464796)
+#### [HomDroid: detecting Android covert malware by social-network homophily analysis.](https://doi.org/10.1145/3460319.3464833)
 
-#### [Fixing Dependency Errors for Python Build Reproducibility](https://doi.org/10.1145/3460319.3464797)
+#### [Seed selection for successful fuzzing.](https://doi.org/10.1145/3460319.3464795)
 
-#### [Fuzzing SMT Solvers via Two-Dimensional Input Space Exploration](https://doi.org/10.1145/3460319.3464803)
+#### [Gramatron: effective grammar-aware fuzzing.](https://doi.org/10.1145/3460319.3464814)
 
-#### [Gramatron: Effective Grammar-Aware Fuzzing](https://doi.org/10.1145/3460319.3464814)
+#### [QFuzz: quantitative fuzzing for side channels.](https://doi.org/10.1145/3460319.3464817)
 
-#### [Grammar-Agnostic Symbolic Execution by Token Symbolization](https://doi.org/10.1145/3460319.3464845)
+#### [SAND: a static analysis approach for detecting SQL antipatterns.](https://doi.org/10.1145/3460319.3464818)
 
-#### [GUIDER: GUI Structure and Vision Co-Guided Test Script Repair for Android Apps](https://doi.org/10.1145/3460319.3464830)
+#### [Semantic table structure identification in spreadsheets.](https://doi.org/10.1145/3460319.3464812)
 
-#### [HomDroid: Detecting Android Covert Malware by Social-Network Homophily Analysis](https://doi.org/10.1145/3460319.3464833)
+#### [Runtime detection of memory errors with smart status.](https://doi.org/10.1145/3460319.3464807)
 
-#### [Identifying Privacy Weaknesses from Multi-party Trigger-Action Integration Platforms](https://doi.org/10.1145/3460319.3464838)
+#### [UAFSan: an object-identifier-based dynamic approach for detecting use-after-free vulnerabilities.](https://doi.org/10.1145/3460319.3464835)
 
-#### [iDEV: Exploring and Exploiting Semantic Deviations in ARM Instruction Processing](https://doi.org/10.1145/3460319.3464842)
+#### [Fuzzing SMT solvers via two-dimensional input space exploration.](https://doi.org/10.1145/3460319.3464803)
 
-#### [Interval Constraint-Based Mutation Testing of Numerical Specifications](https://doi.org/10.1145/3460319.3464808)
+#### [Boosting symbolic execution via constraint solving time prediction (experience paper).](https://doi.org/10.1145/3460319.3464813)
 
-#### [Log-Based Slicing for System-Level Test Cases](https://doi.org/10.1145/3460319.3464824)
+#### [Synthesize solving strategy for symbolic execution.](https://doi.org/10.1145/3460319.3464815)
 
-#### [Model-Based Testing of Networked Applications](https://doi.org/10.1145/3460319.3464798)
+#### [Type and interval aware array constraint solving for symbolic execution.](https://doi.org/10.1145/3460319.3464826)
 
-#### [ModelDiff: Testing-Based DNN Similarity Comparison for Model Reuse Detection](https://doi.org/10.1145/3460319.3464816)
+#### [Grammar-agnostic symbolic execution by token symbolization.](https://doi.org/10.1145/3460319.3464845)
 
-#### [Modular Call Graph Construction for Security Scanning of Node.js Applications](https://doi.org/10.1145/3460319.3464836)
+#### [Interval constraint-based mutation testing of numerical specifications.](https://doi.org/10.1145/3460319.3464808)
 
-#### [Parema: An Unpacking Framework for Demystifying VM-Based Android Packers](https://doi.org/10.1145/3460319.3464839)
+#### [Predoo: precision testing of deep learning operators.](https://doi.org/10.1145/3460319.3464843)
 
-#### [Predoo: Precision Testing of Deep Learning Operators](https://doi.org/10.1145/3460319.3464843)
+#### [TERA: optimizing stochastic regression tests in machine learning projects.](https://doi.org/10.1145/3460319.3464844)
 
-#### [QFuzz: Quantitative Fuzzing for Side Channels](https://doi.org/10.1145/3460319.3464817)
+#### [Deep just-in-time defect prediction: how far are we?](https://doi.org/10.1145/3460319.3464819)
 
-#### [RAProducer: Efficiently Diagnose and Reproduce Data Race Bugs for Binaries via Trace Analysis](https://doi.org/10.1145/3460319.3464831)
+#### [Fixing dependency errors for Python build reproducibility.](https://doi.org/10.1145/3460319.3464797)
 
-#### [Runtime Detection of Memory Errors with Smart Status](https://doi.org/10.1145/3460319.3464807)
+#### [Test-case prioritization for configuration testing.](https://doi.org/10.1145/3460319.3464810)
 
-#### [SAND: A Static Analysis Approach for Detecting SQL Antipatterns](https://doi.org/10.1145/3460319.3464818)
+#### [The impact of tool configuration spaces on the evaluation of configurable taint analysis for Android.](https://doi.org/10.1145/3460319.3464823)
 
-#### [Seed Selection for Successful Fuzzing](https://doi.org/10.1145/3460319.3464795)
+#### [Challenges and opportunities: an in-depth empirical study on configuration error injection testing.](https://doi.org/10.1145/3460319.3464799)
 
-#### [Semantic Matching of GUI Events for Test Reuse: Are We There Yet?](https://doi.org/10.1145/3460319.3464827)
+#### [Empirically evaluating readily available information for regression test optimization in continuous integration.](https://doi.org/10.1145/3460319.3464834)
 
-#### [Semantic Table Structure Identification in Spreadsheets](https://doi.org/10.1145/3460319.3464812)
+#### [Toward optimal mc/dc test case generation.](https://doi.org/10.1145/3460319.3464841)
 
-#### [Synthesize Solving Strategy for Symbolic Execution](https://doi.org/10.1145/3460319.3464815)
+#### [Log-based slicing for system-level test cases.](https://doi.org/10.1145/3460319.3464824)
 
-#### [TERA: Optimizing Stochastic Regression Tests in Machine Learning Projects](https://doi.org/10.1145/3460319.3464844)
+#### [Model-based testing of networked applications.](https://doi.org/10.1145/3460319.3464798)
 
-#### [Test-Case Prioritization for Configuration Testing](https://doi.org/10.1145/3460319.3464810)
+#### [Validating static warnings via testing code fragments.](https://doi.org/10.1145/3460319.3464832)
 
-#### [The Impact of Tool Configuration Spaces on the Evaluation of Configurable Taint Analysis for Android](https://doi.org/10.1145/3460319.3464823)
+#### [Continuous test suite failure prediction.](https://doi.org/10.1145/3460319.3464840)
 
-#### [Toward Optimal MC/DC Test Case Generation](https://doi.org/10.1145/3460319.3464841)
+#### [Empirical evaluation of smart contract testing: what is the best choice?](https://doi.org/10.1145/3460319.3464837)
 
-#### [Type and Interval Aware Array Constraint Solving for Symbolic Execution](https://doi.org/10.1145/3460319.3464826)
+#### [iDEV: exploring and exploiting semantic deviations in ARM instruction processing.](https://doi.org/10.1145/3460319.3464842)
 
-#### [UAFSan: An Object-Identifier-Based Dynamic Approach for Detecting Use-After-Free Vulnerabilities](https://doi.org/10.1145/3460319.3464835)
+#### [RAProducer: efficiently diagnose and reproduce data race bugs for binaries via trace analysis.](https://doi.org/10.1145/3460319.3464831)
 
-#### [Understanding and Finding System Setting-Related Defects in Android Apps](https://doi.org/10.1145/3460319.3464806)
+#### [A lightweight framework for function name reassignment based on large-scale stripped binaries.](https://doi.org/10.1145/3460319.3464804)
 
-#### [Validating Static Warnings via Testing Code Fragments](https://doi.org/10.1145/3460319.3464832)
+#### [Finding data compatibility bugs with JSON subschema checking.](https://doi.org/10.1145/3460319.3464796)
 
-#### [WebEvo: Taming Web Application Evolution via Detecting Semantic Structure Changes](https://doi.org/10.1145/3460319.3464800)
+#### [Automated patch backporting in Linux (experience paper).](https://doi.org/10.1145/3460319.3464821)
+
+#### [Faster, deeper, easier: crowdsourcing diagnosis of microservice kernel failure from user space.](https://doi.org/10.1145/3460319.3464805)
+
+#### [echidna-parade: a tool for diverse multicore smart contract fuzzing.](https://doi.org/10.1145/3460319.3469076)
+
+#### [ProFuzzBench: a benchmark for stateful protocol fuzzing.](https://doi.org/10.1145/3460319.3469077)
+
+#### [SCStudio: a secure and efficient integrated development environment for smart contracts.](https://doi.org/10.1145/3460319.3469078)
+
+#### [C4: the C compiler concurrency checker.](https://doi.org/10.1145/3460319.3469079)
+
+#### [TauMed: test augmentation of deep learning in medical diagnosis.](https://doi.org/10.1145/3460319.3469080)
+
+#### [MoScan: a model-based vulnerability scanner for web single sign-on services.](https://doi.org/10.1145/3460319.3469081)
+
+#### [RESTest: automated black-box testing of RESTful web APIs.](https://doi.org/10.1145/3460319.3469082)
 

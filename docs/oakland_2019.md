@@ -4,177 +4,179 @@ title: IEEE S&P 2019
 
 # IEEE S&P 2019
 
-83 papers accepted. Updated on **2023-05-15**.
+84 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://www.ieee-security.org/TC/SP2019/program-papers.html).
+You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2019.html).
 
 ---
 
-#### [An Extensive Formal Security Analysis of the OpenID Financial-grade API](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b054/19skg9V4UjS)
+#### [Spectre Attacks: Exploiting Speculative Execution.](https://doi.org/10.1109/SP.2019.00002)
 
-#### [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a038/19skfc3ZfKo)
+#### [SoK: The Challenges, Pitfalls, and Perils of Using Hardware Performance Counters for Security.](https://doi.org/10.1109/SP.2019.00021)
 
-#### [Attack Directories, Not Caches: Side Channel Attacks in a Non-Inclusive World](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a056/19skfcQwEZq)
+#### [Theory and Practice of Finding Eviction Sets.](https://doi.org/10.1109/SP.2019.00042)
 
-#### [Beyond Credential Stuffing: Password Similarity Models using Neural Networks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a814/19skg2RnrKo)
+#### [Exploiting Correcting Codes: On the Effectiveness of ECC Memory Against Rowhammer Attacks.](https://doi.org/10.1109/SP.2019.00089)
 
-#### [Bitcoin vs. Bitcoin Cash: Coexistence or Downfall of Bitcoin Cash?](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b290/19skgkbbYOs)
+#### [Self-Encrypting Deception: Weaknesses in the Encryption of Solid State Drives.](https://doi.org/10.1109/SP.2019.00088)
 
-#### [Blind Certificate Authorities](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a107/19skfeYNJBu)
+#### [RIDL: Rogue In-Flight Data Load.](https://doi.org/10.1109/SP.2019.00087)
 
-#### [Breaking LTE on Layer Two](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a091/19skfdGbEFa)
+#### [Perun: Virtual Payment Hubs over Cryptocurrencies.](https://doi.org/10.1109/SP.2019.00020)
 
-#### [CaSym: Cache Aware Symbolic Execution for Side Channel Detection and Mitigation](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a381/19skfzwrSeY)
+#### [Redactable Blockchain in the Permissionless Setting.](https://doi.org/10.1109/SP.2019.00039)
 
-#### [Certified Robustness to Adversarial Examples with Differential Privacy](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a726/19skfWzmB1K)
+#### [Proof-of-Stake Sidechains.](https://doi.org/10.1109/SP.2019.00040)
 
-#### [Characterizing Pixel Tracking through the Lens of Disposable Email Services](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a562/19skfKm2NZC)
+#### [Ouroboros Crypsinous: Privacy-Preserving Proof-of-Stake.](https://doi.org/10.1109/SP.2019.00063)
 
-#### [Comprehensive Privacy Analysis of Deep Learning](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b021/19skg8ZskUM)
+#### [Lay Down the Common Metrics: Evaluating Proof-of-Work Consensus Protocols' Security.](https://doi.org/10.1109/SP.2019.00086)
 
-#### [Dangerous Skills: Understanding and Mitigating Security Risks of Voice-Controlled Third-Party Functions on Virtual Personal Assistant Systems](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a263/19skfw8oHZe)
+#### [XCLAIM: Trustless, Interoperable, Cryptocurrency-Backed Assets.](https://doi.org/10.1109/SP.2019.00085)
 
-#### [Data Recovery on Encrypted Databases With k-Nearest Neighbor Query Leakage](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a245/19skfsSzUvm)
+#### [Does Certificate Transparency Break the Web? Measuring Adoption and Error Rate.](https://doi.org/10.1109/SP.2019.00027)
 
-#### [DeepSec: A Uniform Platform for Security Analysis of Deep Learning Models](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a398/19skfzVqzGE)
+#### [EmPoWeb: Empowering Web Applications with Browser Extensions.](https://doi.org/10.1109/SP.2019.00058)
 
-#### [Demystifying Hidden Privacy Settings in Mobile Apps](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a850/19skg3Y4ne0)
+#### ["If HTTPS Were Secure, I Wouldn't Need 2FA" - End User and Administrator Mental Models of HTTPS.](https://doi.org/10.1109/SP.2019.00060)
 
-#### [Differentially Private Model Publishing For Deep Learning](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a326/19skfxZmfFm)
+#### [Fidelius: Protecting User Secrets from Compromised Browsers.](https://doi.org/10.1109/SP.2019.00036)
 
-#### [Does Certificate Transparency Break the Web? Measuring Adoption and Error Rate](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a463/19skfDDURj2)
+#### [Postcards from the Post-HTTP World: Amplification of HTTPS Vulnerabilities in the Web Ecosystem.](https://doi.org/10.1109/SP.2019.00053)
 
-#### [Dominance as a New Trusted Computing Primitive for the Internet of Things](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b223/19skggDcR0s)
+#### [Towards Practical Differentially Private Convex Optimization.](https://doi.org/10.1109/SP.2019.00001)
 
-#### [Drones' Cryptanalysis - Smashing Cryptography with a Flicker](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a832/19skg3hM8Qo)
+#### [PrivKV: Key-Value Data Collection with Local Differential Privacy.](https://doi.org/10.1109/SP.2019.00018)
 
-#### [EmPoWeb: Empowering Web Applications with Browser Extensions](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b073/19skgaklcTC)
+#### [Differentially Private Model Publishing for Deep Learning.](https://doi.org/10.1109/SP.2019.00019)
 
-#### [Exploiting Correcting Codes: On the Effectiveness of ECC Memory Against Rowhammer Attacks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a279/19skfwyNp5e)
+#### [KHyperLogLog: Estimating Reidentifiability and Joinability of Large Data at Scale.](https://doi.org/10.1109/SP.2019.00046)
 
-#### [Exploiting Unintended Feature Leakage in Collaborative Learning](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a497/19skfEG4cHC)
+#### [Characterizing Pixel Tracking through the Lens of Disposable Email Services.](https://doi.org/10.1109/SP.2019.00033)
 
-#### [F-BLEAU: Fast Black-box Leakage Estimation](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b307/19skgkW1Nh6)
+#### [Reasoning Analytically about Password-Cracking Software.](https://doi.org/10.1109/SP.2019.00070)
 
-#### [Fidelius: Protecting User Secrets from Compromised Browsers](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a611/19skfMExri0)
+#### [True2F: Backdoor-Resistant Authentication Tokens.](https://doi.org/10.1109/SP.2019.00048)
 
-#### [Formally Verified Cryptographic Web Applications in WebAssembly](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b002/19skg8v5fZS)
+#### [Beyond Credential Stuffing: Password Similarity Models Using Neural Networks.](https://doi.org/10.1109/SP.2019.00056)
 
-#### [Full-speed Fuzzing: Reducing Fuzzing Overhead through Coverage-guided Tracing](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b122/19skgbGVFEQ)
+#### [The 9 Lives of Bleichenbacher's CAT: New Cache ATtacks on TLS Implementations.](https://doi.org/10.1109/SP.2019.00062)
 
-#### [Fuzzing File Systems via Two-Dimensional Input Space Exploration](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a594/19skfLYOpaw)
+#### [An Extensive Formal Security Analysis of the OpenID Financial-Grade API.](https://doi.org/10.1109/SP.2019.00067)
 
-#### [HOLMES: Real-time APT Detection through Correlation of Suspicious Information Flows](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a447/19skfCf3Bvi)
+#### [Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization.](https://doi.org/10.1109/SP.2019.00003)
 
-#### [Hard Drive of Hearing: Disks that Eavesdrop with a Synthesized Microphone](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a125/19skffuAOaI)
+#### [Iodine: Fast Dynamic Taint Tracking Using Rollback-free Optimistic Hybrid Analysis.](https://doi.org/10.1109/SP.2019.00043)
 
-#### [Helen: Maliciously Secure Coopetitive Learning for Linear Models](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a915/19skg6rDmAU)
+#### [CaSym: Cache Aware Symbolic Execution for Side Channel Detection and Mitigation.](https://doi.org/10.1109/SP.2019.00022)
 
-#### [How Well Do My Results Generalize? Comparing Security and Privacy Survey Results from MTurk, Web, and Telephone Samples](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a227/19skfssKpFu)
+#### [Towards Automated Safety Vetting of PLC Code in Real-World Plants.](https://doi.org/10.1109/SP.2019.00034)
 
-#### ["If HTTPS Were Secure, I Wouldn't Need 2FA" - End User and Administrator Mental Models of HTTPS](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b138/19skgc7BXSU)
+#### [Using Safety Properties to Generate Vulnerability Patches.](https://doi.org/10.1109/SP.2019.00071)
 
-#### [Iodine: Fast Dynamic Taint Tracking Using Rollback-free Optimistic Hybrid Analysis](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a711/19skfUgAmBi)
+#### [Short Text, Large Effect: Measuring the Impact of User Reviews on Android App Security & Privacy.](https://doi.org/10.1109/SP.2019.00012)
 
-#### [KHyperLogLog: Estimating Reidentifiability and Joinability of Large Data at Scale](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a867/19skg4FdoZO)
+#### [Demystifying Hidden Privacy Settings in Mobile Apps.](https://doi.org/10.1109/SP.2019.00054)
 
-#### [Kiss from a Rogue: Evaluating Detectability of Pay-at-the-Pump Card Skimmers](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b208/19skgdVak0g)
+#### [Security of GPS/INS Based On-road Location Tracking Systems.](https://doi.org/10.1109/SP.2019.00068)
 
-#### [LBM: A Security Framework for Peripherals within the Linux Kernel](https://www.ieee-security.org/TC/SP2019/papers/402.pdf)
+#### [Understanding the Security of ARM Debugging Features.](https://doi.org/10.1109/SP.2019.00061)
 
-#### [Lay Down the Common Metrics: Evaluating Proof-of-Work Consensus Protocols' Security](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b190/19skgdows2Q)
+#### [Tap 'n Ghost: A Compilation of Novel Attack Techniques against Smartphone Touchscreens.](https://doi.org/10.1109/SP.2019.00037)
 
-#### [Learning to Reconstruct: Statistical Learning Theory and Encrypted Database Attacks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a513/19skfFpLCE0)
+#### [SensorID: Sensor Calibration Fingerprinting for Smartphones.](https://doi.org/10.1109/SP.2019.00072)
 
-#### [Measuring and Analyzing Search Engine Poisoning of Linguistic Collisions](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a432/19skfB2Yiys)
+#### [Certified Robustness to Adversarial Examples with Differential Privacy.](https://doi.org/10.1109/SP.2019.00044)
 
-#### [NEUZZ: Efficient Fuzzing with Neural Program Smoothing](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a900/19skg5XghG0)
+#### [DEEPSEC: A Uniform Platform for Security Analysis of Deep Learning Model.](https://doi.org/10.1109/SP.2019.00023)
 
-#### [Neural Cleanse: Identifying and Mitigating Backdoor Attacks in Neural Networks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a530/19skfH8dcqc)
+#### [Exploiting Unintended Feature Leakage in Collaborative Learning.](https://doi.org/10.1109/SP.2019.00029)
 
-#### [New Primitives for Actively-Secure MPC mod $2^k$ with Applications to Private Machine Learning](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b325/19skgmsgCsw)
+#### [Neural Cleanse: Identifying and Mitigating Backdoor Attacks in Neural Networks.](https://doi.org/10.1109/SP.2019.00031)
 
-#### [On the Feasibility of Rerouting-Based DDoS Defenses](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a798/19skg2gLbY4)
+#### [Helen: Maliciously Secure Coopetitive Learning for Linear Models.](https://doi.org/10.1109/SP.2019.00045)
 
-#### [On the Security of Two-Round Multi-Signatures](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a780/19skg1Mo73a)
+#### [Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-box Inference Attacks against Centralized and Federated Learning.](https://doi.org/10.1109/SP.2019.00065)
 
-#### [Ouroboros Crypsinous: Privacy-Preserving Proof-of-Stake](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a984/19skg85xmi4)
+#### [Razzer: Finding Kernel Race Bugs through Fuzzing.](https://doi.org/10.1109/SP.2019.00017)
 
-#### [Perun: Virtual Payment Hubs over Cryptocurrencies](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a344/19skfyqk91u)
+#### [ProFuzzer: On-the-fly Input Type Probing for Better Zero-Day Vulnerability Discovery.](https://doi.org/10.1109/SP.2019.00057)
 
-#### [PhishFarm: A Scalable Framework for Measuring the Effectiveness of Evasion Techniques Against Browser Phishing Blacklists](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a762/19skg1c3soU)
+#### [Full-Speed Fuzzing: Reducing Fuzzing Overhead through Coverage-Guided Tracing.](https://doi.org/10.1109/SP.2019.00069)
 
-#### [Port Contention for Fun and Profit](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b036/19skg9qqegU)
+#### [NEUZZ: Efficient Fuzzing with Neural Program Smoothing.](https://doi.org/10.1109/SP.2019.00052)
 
-#### [Postcards from the Post-HTTP World: Amplification of HTTPS Vulnerabilities in the Web Ecosystem](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a948/19skg7hRywM)
+#### [Fuzzing File Systems via Two-Dimensional Input Space Exploration.](https://doi.org/10.1109/SP.2019.00035)
 
-#### [PrivKV: Key-Value Data Collection with Local Differential Privacy](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a311/19skfxzf9Hq)
+#### [F-BLEAU: Fast Black-Box Leakage Estimation.](https://doi.org/10.1109/SP.2019.00073)
 
-#### [ProFuzzer: On-the-fly Input Type Probing for Better Zero-day Vulnerability Discovery](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a882/19skg5iXfcQ)
+#### [Synesthesia: Detecting Screen Content via Remote Acoustic Side Channels.](https://doi.org/10.1109/SP.2019.00074)
 
-#### [Proof-of-Stake Sidechains](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a677/19skfTfR0R2)
+#### [Port Contention for Fun and Profit.](https://doi.org/10.1109/SP.2019.00066)
 
-#### [RIDL: Rogue In-Flight Data Load](https://www.ieee-security.org/TC/SP2019/papers/588.pdf)
+#### [Attack Directories, Not Caches: Side Channel Attacks in a Non-Inclusive World.](https://doi.org/10.1109/SP.2019.00004)
 
-#### [Razzer: Finding Kernel Race Bugs through Fuzzing](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a296/19skfwZLirm)
+#### [Hard Drive of Hearing: Disks that Eavesdrop with a Synthesized Microphone.](https://doi.org/10.1109/SP.2019.00008)
 
-#### [Reasoning Analytically About Password-Cracking Software](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b272/19skgjBZIGs)
+#### ["Should I Worry?" A Cross-Cultural Examination of Account Security Incident Response.](https://doi.org/10.1109/SP.2019.00059)
 
-#### [Redactable Blockchain in the Permissionless Setting](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a662/19skfSPsjL2)
+#### [Bitcoin vs. Bitcoin Cash: Coexistence or Downfall of Bitcoin Cash?](https://doi.org/10.1109/SP.2019.00075)
 
-#### [Resident Evil: Understanding Residential IP Proxy as a Dark Service](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a170/19skfqL9Dhu)
+#### [Stealthy Porn: Understanding Real-World Adversarial Images for Illicit Online Promotion.](https://doi.org/10.1109/SP.2019.00032)
 
-#### [Security of GPS/INS based On-road Location Tracking Systems](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b092/19skgaJT6Bq)
+#### [LBM: A Security Framework for Peripherals within the Linux Kernel.](https://doi.org/10.1109/SP.2019.00041)
 
-#### [Self-Encrypting Deception: Weaknesses in the Encryption of Solid State Drives](https://www.ieee-security.org/TC/SP2019/papers/310.pdf)
+#### [SoK: Shining Light on Shadow Stacks.](https://doi.org/10.1109/SP.2019.00076)
 
-#### [SensorID: Sensor Calibration Fingerprinting for Smartphones](https://www.ieee-security.org/TC/SP2019/papers/405.pdf)
+#### [Kiss from a Rogue: Evaluating Detectability of Pay-at-the-Pump Card Skimmers.](https://doi.org/10.1109/SP.2019.00077)
 
-#### [Short Text, Large Effect: Measuring the Impact of User Reviews on Android App Security & Privacy](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a155/19skfju71AY)
+#### [Blind Certificate Authorities.](https://doi.org/10.1109/SP.2019.00007)
 
-#### ["Should I Worry?" A Cross-Cultural Examination of Account Security Incident Response](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b107/19skgbf6YUw)
+#### [Data Recovery on Encrypted Databases with k-Nearest Neighbor Query Leakage.](https://doi.org/10.1109/SP.2019.00015)
 
-#### [Simple High-Level Code For Cryptographic Arithmetic -- With Proofs, Without Compromises](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a073/19skfdhcXdu)
+#### [Threshold ECDSA from ECDSA Assumptions: The Multiparty Case.](https://doi.org/10.1109/SP.2019.00024)
 
-#### [SoK: General Purpose Compilers for Secure Multi-Party Computation](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a479/19skfEah88o)
+#### [Learning to Reconstruct: Statistical Learning Theory and Encrypted Database Attacks.](https://doi.org/10.1109/SP.2019.00030)
 
-#### [SoK: Sanitizing for Security](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a187/19skfrsAgbm)
+#### [On the Security of Two-Round Multi-Signatures.](https://doi.org/10.1109/SP.2019.00050)
 
-#### [SoK: Security Evaluation of Home-Based IoT Deployment](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a208/19skfrSHm9i)
+#### [New Primitives for Actively-Secure MPC over Rings with Applications to Private Machine Learning.](https://doi.org/10.1109/SP.2019.00078)
 
-#### [SoK: Shining Light on Shadow Stacks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b239/19skghiVT7W)
+#### [Breaking LTE on Layer Two.](https://doi.org/10.1109/SP.2019.00006)
 
-#### [SoK: The Challenges, Pitfalls, and Perils of Using Hardware Performance Counters for Security](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a362/19skfyZwp9u)
+#### [HOLMES: Real-Time APT Detection through Correlation of Suspicious Information Flows.](https://doi.org/10.1109/SP.2019.00026)
 
-#### [Spectre Attacks: Exploiting Speculative Execution](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a019/19skfbE9KUw)
+#### [Touching the Untouchables: Dynamic Security Analysis of the LTE Control Plane.](https://doi.org/10.1109/SP.2019.00038)
 
-#### [Stealthy Porn: Understanding Real-World Adversarial Images for Illicit Online Promotion](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a547/19skfIeU7TO)
+#### [On the Feasibility of Rerouting-Based DDoS Defenses.](https://doi.org/10.1109/SP.2019.00055)
 
-#### [Synesthesia: Detecting Screen Content via Remote Acoustic Side Channels](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b344/19skgn1bhss)
+#### [Resident Evil: Understanding Residential IP Proxy as a Dark Service.](https://doi.org/10.1109/SP.2019.00011)
 
-#### [Tap 'n Ghost: A Compilation of Novel Attack Techniques against Smartphone Touchscreens](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a628/19skfRD5pG8)
+#### [Simple High-Level Code for Cryptographic Arithmetic - With Proofs, Without Compromises.](https://doi.org/10.1109/SP.2019.00005)
 
-#### [The 9 Lives of Bleichenbacher's CAT: New Cache ATtacks on TLS Implementations](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a966/19skg7GQfYs)
+#### [SoK: General Purpose Compilers for Secure Multi-Party Computation.](https://doi.org/10.1109/SP.2019.00028)
 
-#### [The Code That Never Ran: Modeling Attacks on Speculative Evaluation](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a930/19skg6QC42A)
+#### [The Code That Never Ran: Modeling Attacks on Speculative Evaluation.](https://doi.org/10.1109/SP.2019.00047)
 
-#### [Theory and Practice of Finding Eviction Sets](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a695/19skfTIwuZy)
+#### [Formally Verified Cryptographic Web Applications in WebAssembly.](https://doi.org/10.1109/SP.2019.00064)
 
-#### [Threshold ECDSA from ECDSA Assumptions: The Multiparty Case](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a416/19skfAySOLC)
+#### [SoK: Sanitizing for Security.](https://doi.org/10.1109/SP.2019.00010)
 
-#### [Touching the Untouchables: Dynamic Security Analysis of the LTE Control Plane](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a646/19skfSiOrNC)
+#### [Why Does Your Data Leak? Uncovering the Data Leakage in Cloud from Mobile Apps.](https://doi.org/10.1109/SP.2019.00009)
 
-#### [Towards Automated Safety Vetting of PLC Code in Real-World Plants](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a577/19skfKLAHHq)
+#### [Measuring and Analyzing Search Engine Poisoning of Linguistic Collisions.](https://doi.org/10.1109/SP.2019.00025)
 
-#### [Towards Practical Differentially Private Convex Optimization](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a001/19skfb9dtJu)
+#### [How Well Do My Results Generalize? Comparing Security and Privacy Survey Results from MTurk, Web, and Telephone Samples.](https://doi.org/10.1109/SP.2019.00014)
 
-#### [True2F: Backdoor-Resistant Authentication Tokens](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a743/19skg0hQSE8)
+#### [PhishFarm: A Scalable Framework for Measuring the Effectiveness of Evasion Techniques against Browser Phishing Blacklists.](https://doi.org/10.1109/SP.2019.00049)
 
-#### [Understanding the Security of ARM Debugging Features](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b156/19skgcwSgsE)
+#### [SoK: Security Evaluation of Home-Based IoT Deployments.](https://doi.org/10.1109/SP.2019.00013)
 
-#### [Using Safety Properties to Generate Vulnerability Patches](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b174/19skgcZPlJe)
+#### [Dangerous Skills: Understanding and Mitigating Security Risks of Voice-Controlled Third-Party Functions on Virtual Personal Assistant Systems.](https://doi.org/10.1109/SP.2019.00016)
 
-#### [Why Does Your Data Leak? Uncovering the Data Leakage in Cloud from Mobile Apps](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a140/19skfg9brLW)
+#### [Drones' Cryptanalysis - Smashing Cryptography with a Flicker.](https://doi.org/10.1109/SP.2019.00051)
+
+#### [Dominance as a New Trusted Computing Primitive for the Internet of Things.](https://doi.org/10.1109/SP.2019.00084)
 

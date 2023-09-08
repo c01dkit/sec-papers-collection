@@ -4,241 +4,239 @@ title: IEEE S&P 2021
 
 # IEEE S&P 2021
 
-115 papers accepted. Updated on **2023-05-15**.
+114 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://www.ieee-security.org/TC/SP2021/program-papers.html).
+You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2021.html).
 
 ---
 
-#### A Decentralized and Encrypted National Gun Registry
+#### [Using Selective Memoization to Defeat Regular Expression Denial of Service (ReDoS).](https://doi.org/10.1109/SP40001.2021.00032)
 
-#### A First Look at Zoombombing
+#### [Co-Inflow: Coarse-grained Information Flow Control for Java-like Languages.](https://doi.org/10.1109/SP40001.2021.00002)
 
-#### A Novel Dynamic Analysis Infrastructure to Instrument Untrusted Execution Flow Across User-Kernel Spaces
+#### [When Function Signature Recovery Meets Compiler Optimization.](https://doi.org/10.1109/SP40001.2021.00006)
 
-#### A Secure and Formally Verified Linux KVM Hypervisor
+#### [How Did That Get In My Phone? Unwanted App Distribution on Android Devices.](https://doi.org/10.1109/SP40001.2021.00041)
 
-#### A Security Model and Fully Verified Implementation for the IETF QUIC Record Layer
+#### [Android Custom Permissions Demystified: From Privilege Escalation to Design Shortcomings.](https://doi.org/10.1109/SP40001.2021.00070)
 
-#### A2L: Anonymous Atomic Locks for Scalability in Payment Channel Hubs
+#### [Trust, But Verify: A Longitudinal Analysis Of Android OEM Compliance and Customization.](https://doi.org/10.1109/SP40001.2021.00074)
 
-#### ARBITRAR : User-Guided API Misuse Detection
+#### [Detecting AI Trojans Using Meta Neural Analysis.](https://doi.org/10.1109/SP40001.2021.00034)
 
-#### Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding
+#### [Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding.](https://doi.org/10.1109/SP40001.2021.00083)
 
-#### Adversary Instantiation: Lower bounds for differentially private machine learning
+#### [Machine Unlearning.](https://doi.org/10.1109/SP40001.2021.00019)
 
-#### An I/O Separation Model for Formal Verification of Kernel Implementations
+#### [Poltergeist: Acoustic Adversarial Machine Learning against Cameras and Computer Vision.](https://doi.org/10.1109/SP40001.2021.00091)
 
-#### An Interactive Prover for Protocol Verification in the Computational Model
+#### [Invisible for both Camera and LiDAR: Security of Multi-Sensor Fusion based Perception in Autonomous Driving Under Physical-World Attacks.](https://doi.org/10.1109/SP40001.2021.00076)
 
-#### Android Custom Permissions Demystified: From Privilege Escalation to Design Shortcomings
+#### [CANNON: Reliable and Stealthy Remote Shutdown Attacks via Unaltered Automotive Microcontrollers.](https://doi.org/10.1109/SP40001.2021.00122)
 
-#### BUFFing signature schemes beyond unforgeability and the case of post-quantum signatures
+#### [SoK: Quantifying Cyber Risk.](https://doi.org/10.1109/SP40001.2021.00053)
 
-#### Bitcoin-Compatible Virtual Channels
+#### [Self-Supervised Euphemism Detection and Identification for Content Moderation.](https://doi.org/10.1109/SP40001.2021.00075)
 
-#### Black Widow: Blackbox Data-driven Web Scanning
+#### [SoK: Hate, Harassment, and the Changing Landscape of Online Abuse.](https://doi.org/10.1109/SP40001.2021.00028)
 
-#### Bomberman: Defining and Defeating Hardware Ticking Timebombs at Design-time
+#### [Keep the Dirt: Tainted TreeKEM, Adaptively and Actively Secure Continuous Group Key Agreement.](https://doi.org/10.1109/SP40001.2021.00035)
 
-#### Bookworm Game: Automatic Discovery of LTE Vulnerabilities Through Documentation Analysis
+#### [Merkle2: A Low-Latency Transparency Log System.](https://doi.org/10.1109/SP40001.2021.00088)
 
-#### Breaking the Specification: PDF Certification
+#### [Post-quantum WireGuard.](https://doi.org/10.1109/SP40001.2021.00030)
 
-#### CANnon: Reliable and Stealthy Remote Shutdown Attacks via Unaltered Automotive Microcontrollers
+#### [Invisible Probe: Timing Attacks with PCIe Congestion Side-channel.](https://doi.org/10.1109/SP40001.2021.00059)
 
-#### CRYLOGGER: Detecting Crypto Misuses Dynamically
+#### [CacheOut: Leaking Data on Intel CPUs via Cache Evictions.](https://doi.org/10.1109/SP40001.2021.00064)
 
-#### CacheOut: Leaking Data on Intel CPUs via Cache Evictions
+#### [PLATYPUS: Software-based Power Side-Channel Attacks on x86.](https://doi.org/10.1109/SP40001.2021.00063)
 
-#### CanDID: Can-Do Decentralized Identity with Legacy Compatibility, Sybil-Resistance, and Accountability
+#### [Defensive Technology Use by Political Activists During the Sudanese Revolution.](https://doi.org/10.1109/SP40001.2021.00055)
 
-#### Co-Inflow: Coarse-Grained Information Flow Control for Java-like Languages
+#### [DP-Sniper: Black-Box Discovery of Differential Privacy Violations using Classifiers.](https://doi.org/10.1109/SP40001.2021.00081)
 
-#### Compact Certificates of Collective Knowledge
+#### [Is Private Learning Possible with Instance Encoding?](https://doi.org/10.1109/SP40001.2021.00099)
 
-#### Compositional Non-Interference for Fine-Grained Concurrent Programs
+#### [High-Frequency Trading on Decentralized On-Chain Exchanges.](https://doi.org/10.1109/SP40001.2021.00027)
 
-#### Compositional Security for Reentrant Applications
+#### [Ebb-and-Flow Protocols: A Resolution of the Availability-Finality Dilemma.](https://doi.org/10.1109/SP40001.2021.00045)
 
-#### ConDySTA: Context-Aware Dynamic Supplement to Static Taint Analysis
+#### [Red Belly: A Secure, Fair and Scalable Open Blockchain.](https://doi.org/10.1109/SP40001.2021.00087)
 
-#### CrawlPhish: Large-scale Analysis of Client-side Cloaking Techniques in Phishing
+#### [Diane: Identifying Fuzzing Triggers in Apps to Generate Under-constrained Inputs for IoT Devices.](https://doi.org/10.1109/SP40001.2021.00066)
 
-#### Cross Layer Attacks and How to Use Them (for DNS Cache Poisoning, Device Tracking and More)
+#### [Data Privacy in Trigger-Action Systems.](https://doi.org/10.1109/SP40001.2021.00108)
 
-#### Cross-Domain Access Control Encryption -- Arbitrary-policy, Constant-size, Efficient
+#### [Which Privacy and Security Attributes Most Impact Consumers' Risk Perception and Willingness to Purchase IoT Devices?](https://doi.org/10.1109/SP40001.2021.00112)
 
-#### CrossTalk: Speculative Data Leaks Across Cores Are Real
+#### [An Interactive Prover for Protocol Verification in the Computational Model.](https://doi.org/10.1109/SP40001.2021.00078)
 
-#### CryptGPU: Fast Privacy-Preserving Machine Learning on the GPU
+#### [SmartPulse: Automated Checking of Temporal Properties in Smart Contracts.](https://doi.org/10.1109/SP40001.2021.00085)
 
-#### DIANE: Identifying Fuzzing Triggers in Apps to Generate Under-constrained Inputs for IoT Devices
+#### [An I/O Separation Model for Formal Verification of Kernel Implementations.](https://doi.org/10.1109/SP40001.2021.00101)
 
-#### DICE: Automatic Emulation of DMA Input Channels for Dynamic Firmware Analysis
+#### [Diogenes: Lightweight Scalable RSA Modulus Generation with a Dishonest Majority.](https://doi.org/10.1109/SP40001.2021.00025)
 
-#### DIFUZZRTL: Differential Fuzz Testing to Find CPU Bugs
+#### [Refresh When You Wake Up: Proactive Threshold Wallets with Offline Devices.](https://doi.org/10.1109/SP40001.2021.00067)
 
-#### DP-Sniper: Black-Box Discovery of Differential Privacy Violations using Classifiers
+#### [Compact Certificates of Collective Knowledge.](https://doi.org/10.1109/SP40001.2021.00096)
 
-#### Data Privacy in Trigger-Action Systems
+#### [One Engine to Fuzz 'em All: Generic Language Processor Testing with Semantic Validation.](https://doi.org/10.1109/SP40001.2021.00071)
 
-#### Defensive Technology Use by Political Activists During the Sudanese Revolution
+#### [StochFuzz: Sound and Cost-effective Fuzzing of Stripped Binaries by Incremental and Stochastic Rewriting.](https://doi.org/10.1109/SP40001.2021.00109)
 
-#### Detecting AI Trojans Using Meta Neural Analysis
+#### [NtFuzz: Enabling Type-Aware Kernel Fuzzing on Windows with Static Binary Analysis.](https://doi.org/10.1109/SP40001.2021.00114)
 
-#### Detecting Filter List Evasion with Event-Loop-Turn Granularity JavaScript Signatures
+#### [Who is Real Bob? Adversarial Attacks on Speaker Recognition Systems.](https://doi.org/10.1109/SP40001.2021.00004)
 
-#### Did you mix me? Formally Verifying Verifiable Mix Nets in Electronic Voting
+#### [Hear "No Evil", See "Kenansville"*: Efficient and Transferable Black-Box Attacks on Speech Recognition and Voice Identification Systems.](https://doi.org/10.1109/SP40001.2021.00009)
 
-#### Diogenes: Lightweight Scalable RSA Modulus Generation with a Dishonest Majority
+#### [SoK: The Faults in our ASRs: An Overview of Attacks against Automatic Speech Recognition and Speaker Identification Systems.](https://doi.org/10.1109/SP40001.2021.00014)
 
-#### Doing good by fighting fraud: Ethical anti-fraudsystems for mobile payments
+#### [Cross-Domain Access Control Encryption: Arbitrary-policy, Constant-size, Efficient.](https://doi.org/10.1109/SP40001.2021.00023)
 
-#### DynPTA: Combining Static and Dynamic Analysis for Practical Selective Data Protection
+#### [Lightweight Techniques for Private Heavy Hitters.](https://doi.org/10.1109/SP40001.2021.00048)
 
-#### Ebb-and-Flow Protocols: A Resolution of the Availability-Finality Dilemma
+#### [SoK: Computer-Aided Cryptography.](https://doi.org/10.1109/SP40001.2021.00008)
 
-#### Electromagnetic Covert Channels Can Be Super Resilient
+#### [ConDySTA: Context-Aware Dynamic Supplement to Static Taint Analysis.](https://doi.org/10.1109/SP40001.2021.00040)
 
-#### Epochal Signatures for Deniable Group Chats
+#### [OSPREY: Recovery of Variable and Data Structure via Probabilistic Analysis for Stripped Binary.](https://doi.org/10.1109/SP40001.2021.00051)
 
-#### Fingerprinting the Fingerprinters: Learning to Detect Browser Fingerprinting Behaviors
+#### [SoK: All You Ever Wanted to Know About x86/x64 Binary Disassembly But Were Afraid to Ask.](https://doi.org/10.1109/SP40001.2021.00012)
 
-#### Good Bot, Bad Bot: Characterizing Automated Browsing Activity
+#### [Learning Differentially Private Mechanisms.](https://doi.org/10.1109/SP40001.2021.00060)
 
-#### HackEd: A Pedagogical Analysis of Online Vulnerability Discovery Exercises
+#### [Adversary Instantiation: Lower Bounds for Differentially Private Machine Learning.](https://doi.org/10.1109/SP40001.2021.00069)
 
-#### Happer: Unpacking Android Apps via a Hardware-Assisted Approach
+#### [Manipulation Attacks in Local Differential Privacy.](https://doi.org/10.1109/SP40001.2021.00001)
 
-#### Hardware-Software Contracts for Secure Speculation
+#### [Bitcoin-Compatible Virtual Channels.](https://doi.org/10.1109/SP40001.2021.00097)
 
-#### Hear "No Evil", See "Kenansville": Efficient and Transferable Black-Box Attacks on Speech Recognition and Voice Identification Systems
+#### [On the Just-In-Time Discovery of Profit-Generating Transactions in DeFi Protocols.](https://doi.org/10.1109/SP40001.2021.00113)
 
-#### High-Assurance Cryptography in the Spectre Era
+#### [Lockable Signatures for Blockchains: Scriptless Scripts for All Signatures.](https://doi.org/10.1109/SP40001.2021.00065)
 
-#### High-Frequency Trading on Decentralized On-Chain Exchanges
+#### [Randomized Last-Level Caches Are Still Vulnerable to Cache Side-Channel Attacks! But We Can Fix It.](https://doi.org/10.1109/SP40001.2021.00050)
 
-#### How Did That Get In My Phone? Unwanted App Distribution on Android Devices
+#### [Bomberman: Defining and Defeating Hardware Ticking Timebombs at Design-time.](https://doi.org/10.1109/SP40001.2021.00052)
 
-#### Improving Password Guessing via Representation Learning
+#### [Systematic Analysis of Randomization-based Protected Cache Architectures.](https://doi.org/10.1109/SP40001.2021.00011)
 
-#### Invisible Probe: Timing Attacks with PCIe Congestion Side-channel
+#### [SiRnn: A Math Library for Secure RNN Inference.](https://doi.org/10.1109/SP40001.2021.00086)
 
-#### Invisible for both Camera and LiDAR: Security of Multi-Sensor Fusion based Perception in Autonomous Driving Under Physical-World Attacks
+#### [CryptGPU: Fast Privacy-Preserving Machine Learning on the GPU.](https://doi.org/10.1109/SP40001.2021.00098)
 
-#### Is Private Learning Possible with Instance Encoding?
+#### [Proof-of-Learning: Definitions and Practice.](https://doi.org/10.1109/SP40001.2021.00106)
 
-#### Journey to the Center of the Cookie Ecosystem: Unraveling Actors' Roles and Relationships
+#### [PEGASUS: Bridging Polynomial and Non-polynomial Evaluations in Homomorphic Encryption.](https://doi.org/10.1109/SP40001.2021.00043)
 
-#### Keep the Dirt: Tainted TreeKEM, Adaptively and Actively Secure Continuous Group Key Agreement
+#### [Wolverine: Fast, Scalable, and Communication-Efficient Zero-Knowledge Proofs for Boolean and Arithmetic Circuits.](https://doi.org/10.1109/SP40001.2021.00056)
 
-#### Learning Differentially Private Mechanisms
+#### [SoK: Fully Homomorphic Encryption Compilers.](https://doi.org/10.1109/SP40001.2021.00068)
 
-#### Lightweight Techniques for Private Heavy Hitters
+#### [CrawlPhish: Large-scale Analysis of Client-side Cloaking Techniques in Phishing.](https://doi.org/10.1109/SP40001.2021.00021)
 
-#### Linking Bluetooth LE & Classic and Implications for Privacy-Preserving Bluetooth-Based Protocols
+#### [Black Widow: Blackbox Data-driven Web Scanning.](https://doi.org/10.1109/SP40001.2021.00022)
 
-#### Lockable Signatures for Blockchains: Scriptless Scripts for all Signatures
+#### [Fingerprinting the Fingerprinters: Learning to Detect Browser Fingerprinting Behaviors.](https://doi.org/10.1109/SP40001.2021.00017)
 
-#### MAD-HTLC: Because HTLC is Crazy-Cheap to Attack
+#### [A Security Model and Fully Verified Implementation for the IETF QUIC Record Layer.](https://doi.org/10.1109/SP40001.2021.00039)
 
-#### Machine Unlearning
+#### [Cross Layer Attacks and How to Use Them (for DNS Cache Poisoning, Device Tracking and More).](https://doi.org/10.1109/SP40001.2021.00054)
 
-#### Manipulation Attacks in Local Differential Privacy
+#### [Bookworm Game: Automatic Discovery of LTE Vulnerabilities Through Documentation Analysis.](https://doi.org/10.1109/SP40001.2021.00104)
 
-#### Many-out-of-Many Proofs and Applications to Anonymous Zether
+#### [SGUARD: Towards Fixing Vulnerable Smart Contracts Automatically.](https://doi.org/10.1109/SP40001.2021.00057)
 
-#### Merkle^2: A Low-Latency Transparency Log System
+#### [MAD-HTLC: Because HTLC is Crazy-Cheap to Attack.](https://doi.org/10.1109/SP40001.2021.00080)
 
-#### Method Confusion Attack on Bluetooth Pairing
+#### [Compositional Security for Reentrant Applications.](https://doi.org/10.1109/SP40001.2021.00084)
 
-#### NTFUZZ: Enabling Type-Aware Kernel Fuzzing on Windows with Static Binary Analysis
+#### [HackEd: A Pedagogical Analysis of Online Vulnerability Discovery Exercises.](https://doi.org/10.1109/SP40001.2021.00092)
 
-#### OSPREY: Recovery of Variable and Data Structure via Probabilistic Analysis for Stripped Binary
+#### [DifuzzRTL: Differential Fuzz Testing to Find CPU Bugs.](https://doi.org/10.1109/SP40001.2021.00103)
 
-#### On the Anonymity Guarantees of Anonymous Proof-of-Stake Protocols
+#### [When LoRa Meets EMR: Electromagnetic Covert Channels Can Be Super Resilient.](https://doi.org/10.1109/SP40001.2021.00031)
 
-#### On the Just-In-Time Discovery of Profit-Generating Transactions in DeFi Protocols
+#### [Linking Bluetooth LE & Classic and Implications for Privacy-Preserving Bluetooth-Based Protocols.](https://doi.org/10.1109/SP40001.2021.00102)
 
-#### One Engine to Fuzz 'em All: Generic Language Processor Testing with Semantic Validation
+#### [Method Confusion Attack on Bluetooth Pairing.](https://doi.org/10.1109/SP40001.2021.00013)
 
-#### PLATYPUS: Software-based Power Side-Channel Attacks on x86
+#### [CanDID: Can-Do Decentralized Identity with Legacy Compatibility, Sybil-Resistance, and Accountability.](https://doi.org/10.1109/SP40001.2021.00038)
 
-#### Pegasus: Bridging Polynomial and Non-polynomial Evaluations in Homomorphic Encryption
+#### [They Would do Better if They Worked Together: The Case of Interaction Problems Between Password Managers and Websites.](https://doi.org/10.1109/SP40001.2021.00094)
 
-#### Poltergeist: Acoustic Adversarial Machine Learning against Cameras and Computer Vision
+#### [Improving Password Guessing via Representation Learning.](https://doi.org/10.1109/SP40001.2021.00016)
 
-#### Post-Quantum WireGuard
+#### [ARBITRAR: User-Guided API Misuse Detection.](https://doi.org/10.1109/SP40001.2021.00090)
 
-#### Proactive Threshold Wallets with Offline Devices
+#### [Compositional Non-Interference for Fine-Grained Concurrent Programs.](https://doi.org/10.1109/SP40001.2021.00003)
 
-#### Proof-of-Learning: Definitions and Practice
+#### [SoK: Security and Privacy in the Age of Commercial Drones.](https://doi.org/10.1109/SP40001.2021.00005)
 
-#### Randomized Last-Level Caches Are Still Vulnerable to Cache Side-Channel Attacks! But We Can Fix It
+#### [A First Look at Zoombombing.](https://doi.org/10.1109/SP40001.2021.00061)
 
-#### Reading between the Lines: An Extensive Evaluation of the Security and Privacy Implications of EPUB Reading Systems
+#### [Revealer: Detecting and Exploiting Regular Expression Denial-of-Service Vulnerabilities.](https://doi.org/10.1109/SP40001.2021.00062)
 
-#### Real-World Snapshots vs. Theory: Questioning the t-Probing Security Model.
+#### [Breaking the Specification: PDF Certification.](https://doi.org/10.1109/SP40001.2021.00110)
 
-#### Red Belly: A Secure, Fair and Scalable Open Blockchain
+#### [Response-Hiding Encrypted Ranges: Revisiting Security via Parametrized Leakage-Abuse Attacks.](https://doi.org/10.1109/SP40001.2021.00044)
 
-#### Response-Hiding Encrypted Ranges: Revisiting Security via Parametrized Leakage-Abuse Attacks
+#### [A Decentralized and Encrypted National Gun Registry.](https://doi.org/10.1109/SP40001.2021.00072)
 
-#### Revealer: Detecting and Exploiting Regular Expression Denial-of-Service Vulnerabilities
+#### [Zero Knowledge for Everything and Everyone: Fast ZK Processor with Cached ORAM for ANSI C Programs.](https://doi.org/10.1109/SP40001.2021.00089)
 
-#### Runtime Recovery of Web Applications under Zero-Day ReDoS Attacks
+#### [Survivalism: Systematic Analysis of Windows Malware Living-Off-The-Land.](https://doi.org/10.1109/SP40001.2021.00047)
 
-#### SGUARD: Towards Fixing Vulnerable Smart Contracts Automatically
+#### [Runtime Recovery of Web Applications under Zero-Day ReDoS Attacks.](https://doi.org/10.1109/SP40001.2021.00077)
 
-#### SIRNN: A Math Library for Secure RNN Inference
+#### [Good Bot, Bad Bot: Characterizing Automated Browsing Activity.](https://doi.org/10.1109/SP40001.2021.00079)
 
-#### STOCHFUZZ: Sound and Cost-effective Fuzzing of Stripped Binaries by Incremental and Stochastic Rewriting
+#### [Trouble Over-The-Air: An Analysis of FOTA Apps in the Android Ecosystem.](https://doi.org/10.1109/SP40001.2021.00095)
 
-#### Self-Supervised Euphemism Detection and Identification for Content Moderation
+#### [Doing good by fighting fraud: Ethical anti-fraud systems for mobile payments.](https://doi.org/10.1109/SP40001.2021.00100)
 
-#### SmartPulse: Automated Checking of Temporal Properties in Smart Contracts
+#### [Happer: Unpacking Android Apps via a Hardware-Assisted Approach.](https://doi.org/10.1109/SP40001.2021.00105)
 
-#### SoK: All You Ever Wanted to Know About x86/x64 Binary Disassembly but Were Afraid to Ask
+#### [The Provable Security of Ed25519: Theory and Practice.](https://doi.org/10.1109/SP40001.2021.00042)
 
-#### SoK: Computer-Aided Cryptography
+#### [Epochal Signatures for Deniable Group Chats.](https://doi.org/10.1109/SP40001.2021.00058)
 
-#### SoK: Fully Homomorphic Encryption Compilers
+#### [BUFFing signature schemes beyond unforgeability and the case of post-quantum signatures.](https://doi.org/10.1109/SP40001.2021.00093)
 
-#### SoK: Hate, Harassment, and the Changing Landscape of Online Abuse
+#### [Detecting Filter List Evasion with Event-Loop-Turn Granularity JavaScript Signatures.](https://doi.org/10.1109/SP40001.2021.00007)
 
-#### SoK: Quantifying Cyber Risk
+#### [Reading Between the Lines: An Extensive Evaluation of the Security and Privacy Implications of EPUB Reading Systems.](https://doi.org/10.1109/SP40001.2021.00015)
 
-#### SoK: Security and Privacy in the Age of Commercial Drones
+#### [Did you mix me? Formally Verifying Verifiable Mix Nets in Electronic Voting.](https://doi.org/10.1109/SP40001.2021.00033)
 
-#### SoK: The Faults in our ASRs: An Overview of Attacks against Automatic Speech Recognition and Speaker Identification Systems
+#### [The EMV Standard: Break, Fix, Verify.](https://doi.org/10.1109/SP40001.2021.00037)
 
-#### Survivalism: Systematic Analysis of Windows Malware Living-Off-The-Land
+#### [A Secure and Formally Verified Linux KVM Hypervisor.](https://doi.org/10.1109/SP40001.2021.00049)
 
-#### Systematic Analysis of Randomization-Based Protected Cache Architectures
+#### [Many-out-of-Many Proofs and Applications to Anonymous Zether.](https://doi.org/10.1109/SP40001.2021.00026)
 
-#### The EMV Standard: Break, Fix, Verify
+#### [On the Anonymity Guarantees of Anonymous Proof-of-Stake Protocols.](https://doi.org/10.1109/SP40001.2021.00107)
 
-#### The Provable Security of Ed25519: Theory and Practice
+#### [A2L: Anonymous Atomic Locks for Scalability in Payment Channel Hubs.](https://doi.org/10.1109/SP40001.2021.00111)
 
-#### They Would do Better if They Worked Together: The Case of Interaction Problems Between Password Managers and Websites
+#### [CrossTalk: Speculative Data Leaks Across Cores Are Real.](https://doi.org/10.1109/SP40001.2021.00020)
 
-#### Trouble Over-The-Air: An Analysis of FOTA Apps in the Android Ecosystem
+#### [Hardware-Software Contracts for Secure Speculation.](https://doi.org/10.1109/SP40001.2021.00036)
 
-#### Trust, But Verify: A Longitudinal Analysis Of Android OEM Compliance and Customization
+#### [High-Assurance Cryptography in the Spectre Era.](https://doi.org/10.1109/SP40001.2021.00046)
 
-#### Using Selective Memoization to Defeat Regular Expression Denial of Service (ReDoS)
+#### [A Novel Dynamic Analysis Infrastructure to Instrument Untrusted Execution Flow Across User-Kernel Spaces.](https://doi.org/10.1109/SP40001.2021.00024)
 
-#### When Function Signature Recovery Meets Compiler Optimization
+#### [DynPTA: Combining Static and Dynamic Analysis for Practical Selective Data Protection.](https://doi.org/10.1109/SP40001.2021.00082)
 
-#### Which Privacy and Security Attributes Most Impact Consumers‚ Risk Perception and Willingness to Purchase IoT Devices?
+#### [DICE: Automatic Emulation of DMA Input Channels for Dynamic Firmware Analysis.](https://doi.org/10.1109/SP40001.2021.00018)
 
-#### Who is Real Bob? Adversarial Attacks on Speaker Recognition Systems
+#### [Real-World Snapshots vs. Theory: Questioning the t-Probing Security Model.](https://doi.org/10.1109/SP40001.2021.00029)
 
-#### Wolverine: Fast, Scalable, and Communication-Efficient Zero-Knowledge Proofs for Boolean and Arithmetic Circuits
-
-#### Zero Knowledge for Everything and Everyone: Fast ZK Processor with Cached ORAM for ANSI C Programs
+#### [CRYLOGGER: Detecting Crypto Misuses Dynamically.](https://doi.org/10.1109/SP40001.2021.00010)
 

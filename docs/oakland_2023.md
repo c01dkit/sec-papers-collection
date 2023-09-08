@@ -4,403 +4,401 @@ title: IEEE S&P 2023
 
 # IEEE S&P 2023
 
-196 papers accepted. Updated on **2023-05-19**.
+195 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://sp2023.ieee-security.org/program-papers.html).
+You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2023.html).
 
 ---
 
-#### Space Odyssey: An Experimental Software Security Analysis of Satellites
+#### [Scaphy: Detecting Modern ICS Attacks by Correlating Behaviors in SCADA and PHYsical.](https://doi.org/10.1109/SP46215.2023.10179411)
 
-#### SCAPHY: Detecting Modern ICS Attacks by Correlating Behaviors in SCADA and PHYsical
+#### [Shedding Light on Inconsistencies in Grid Cybersecurity: Disconnects and Recommendations.](https://doi.org/10.1109/SP46215.2023.10179343)
 
-#### Shedding Light on Inconsistencies in Grid Cybersecurity: Disconnects and Recommendations
+#### [Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations.](https://doi.org/10.1109/SP46215.2023.10179341)
 
-#### Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations
+#### [SoK: Distributed Randomness Beacons.](https://doi.org/10.1109/SP46215.2023.10179419)
 
-#### SoK: Distributed Randomness Beacons
+#### [WeRLman: To Tackle Whale (Transactions), Go Deep (RL).](https://doi.org/10.1109/SP46215.2023.10179444)
 
-#### WeRLman: To Tackle Whale (Transactions), Go Deep (RL)
+#### [Three Birds with One Stone: Efficient Partitioning Attacks on Interdependent Cryptocurrency Networks.](https://doi.org/10.1109/SP46215.2023.10179456)
 
-#### Three Birds with One Stone: Efficient Partitioning Attacks on Interdependent Cryptocurrency Networks
+#### [Bitcoin-Enhanced Proof-of-Stake Security: Possibilities and Impossibilities.](https://doi.org/10.1109/SP46215.2023.10179426)
 
-#### Bitcoin-Enhanced Proof-of-Stake Security: Possibilities and Impossibilities
+#### [MEGA: Malleable Encryption Goes Awry.](https://doi.org/10.1109/SP46215.2023.10179290)
 
-#### MEGA: Malleable Encryption Goes Awry
+#### [DBREACH: Stealing from Databases Using Compression Side Channels.](https://doi.org/10.1109/SP46215.2023.10179359)
 
-#### Practically-exploitable Cryptographic Vulnerabilities in Matrix
+#### [Weak Fiat-Shamir Attacks on Modern Proof Systems.](https://doi.org/10.1109/SP46215.2023.10179408)
 
-#### DBREACH: Stealing from Databases Using Compression Side-Channels
+#### [Attitudes towards Client-Side Scanning for CSAM, Terrorism, Drug Trafficking, Drug Use and Tax Evasion in Germany.](https://doi.org/10.1109/SP46215.2023.10179417)
 
-#### Weak Fiat-Shamir Attacks on Modern Proof Systems
+#### [Deep perceptual hashing algorithms with hidden dual purpose: when client-side scanning does facial recognition.](https://doi.org/10.1109/SP46215.2023.10179310)
 
-#### Attitudes towards Client-Side Scanning for CSAM, Terrorism, Drug Trafficking, Drug Use and Tax Evasion in Germany
+#### [Public Verification for Private Hash Matching.](https://doi.org/10.1109/SP46215.2023.10179349)
 
-#### Deep perceptual hashing algorithms with hidden dual purpose: when client-side scanning does facial recognition
+#### [Is Cryptographic Deniability Sufficientƒ Non-Expert Perceptions of Deniability in Secure Messaging.](https://doi.org/10.1109/SP46215.2023.10179361)
 
-#### Public Verification for Private Hash Matching
+#### [On the Evolution of (Hateful) Memes by Means of Multimodal Contrastive Learning.](https://doi.org/10.1109/SP46215.2023.10179315)
 
-#### Is Cryptographic Deniability Sufficient? Non-Expert Perceptions of Deniability in Secure Messaging
+#### [Lambretta: Learning to Rank for Twitter Soft Moderation.](https://doi.org/10.1109/SP46215.2023.10179392)
 
-#### On the Evolution of (Hateful) Memes by Means of Multimodal Contrastive Learning
+#### [SoK: Let the Privacy Games Begin! A Unified Treatment of Data Inference Privacy in Machine Learning.](https://doi.org/10.1109/SP46215.2023.10179281)
 
-#### LAMBRETTA: Learning to Rank for Twitter Soft Moderation
+#### [Analyzing Leakage of Personally Identifiable Information in Language Models.](https://doi.org/10.1109/SP46215.2023.10179300)
 
-#### SoK: Let the Privacy Games Begin! A Unified Treatment of Data Inference Privacy in Machine Learning
+#### [Accuracy-Privacy Trade-off in Deep Ensemble: A Membership Inference Perspective.](https://doi.org/10.1109/SP46215.2023.10179463)
 
-#### Analyzing Leakage of Personally Identifiable Information in Language Models
+#### [D-DAE: Defense-Penetrating Model Extraction Attacks.](https://doi.org/10.1109/SP46215.2023.10179406)
 
-#### Accuracy-Privacy Trade-off in Deep Ensemble: A Membership Inference Perspective
+#### [SNAP: Efficient Extraction of Private Properties with Poisoning.](https://doi.org/10.1109/SP46215.2023.10179334)
 
-#### D-DAE: Defense-Penetrating Model Extraction Attacks
+#### [On the (In)security of Peer-to-Peer Decentralized Machine Learning.](https://doi.org/10.1109/SP46215.2023.10179291)
 
-#### SNAP: Efficient Extraction of Private Properties with Poisoning
+#### [Vectorized Batch Private Information Retrieval.](https://doi.org/10.1109/SP46215.2023.10179329)
 
-#### On the (In)security of Peer-to-Peer Decentralized Machine Learning
+#### [RoFL: Robustness of Secure Federated Learning.](https://doi.org/10.1109/SP46215.2023.10179400)
 
-#### Vectorized Batch Private Information Retrieval
+#### [Flamingo: Multi-Round Single-Server Secure Aggregation with Applications to Private Federated Learning.](https://doi.org/10.1109/SP46215.2023.10179434)
 
-#### RoFL: Robustness of Secure Federated Learning
+#### [SoK: Cryptographic Neural-Network Computation.](https://doi.org/10.1109/SP46215.2023.10179483)
 
-#### Flamingo: Multi-Round Single-Server Secure Aggregation with Applications to Private Federated Learning
+#### [FLUTE: Fast and Secure Lookup Table Evaluations.](https://doi.org/10.1109/SP46215.2023.10179345)
 
-#### SoK: Cryptographic Neural-Network Computation
+#### [Bicoptor: Two-round Secure Three-party Non-linear Computation without Preprocessing for Privacy-preserving Machine Learning.](https://doi.org/10.1109/SP46215.2023.10179449)
 
-#### FLUTE: Fast and Secure Lookup Table Evaluations
+#### [Investigating the Password Policy Practices of Website Administrators.](https://doi.org/10.1109/SP46215.2023.10179288)
 
-#### Bicoptor: Two-round Secure Three-party Non-linear Computation without Preprocessing for Privacy-preserving Machine Learning
+#### ["In Eighty Percent of the Cases, I Select the Password for Them": Security and Privacy Challenges, Advice, and Opportunities at Cybercafes in Kenya.](https://doi.org/10.1109/SP46215.2023.10179410)
 
-#### Investigating the Password Policy Practices of Website Administrators
+#### [Towards a Rigorous Statistical Analysis of Empirical Password Datasets.](https://doi.org/10.1109/SP46215.2023.10179431)
 
-#### “In Eighty Percent of the Cases, I Select the Password for Them”: Security and Privacy Challenges, Advice, and Opportunities at Cybercafes in Kenya
+#### [Confident Monte Carlo: Rigorous Analysis of Guessing Curves for Probabilistic Password Models.](https://doi.org/10.1109/SP46215.2023.10179365)
 
-#### Perceptions of Distributed Ledger Technology Key Management – An Interview Study with Finance Professionals
+#### [Not Yet Another Digital ID: Privacy-Preserving Humanitarian Aid Distribution.](https://doi.org/10.1109/SP46215.2023.10179306)
 
-#### Towards a Rigorous Statistical Analysis of Empirical Password Datasets
+#### [Disguising Attacks with Explanation-Aware Backdoors.](https://doi.org/10.1109/SP46215.2023.10179308)
 
-#### Confident Monte Carlo: Rigorous Analysis of Guessing Curves for Probabilistic Password Models
+#### [AI-Guardian: Defeating Adversarial Attacks using Backdoors.](https://doi.org/10.1109/SP46215.2023.10179473)
 
-#### Not Yet Another Digital ID: Privacy-preserving Humanitarian Aid Distribution
+#### [Jigsaw Puzzle: Selective Backdoor Attack to Subvert Malware Classifiers.](https://doi.org/10.1109/SP46215.2023.10179347)
 
-#### Disguising Attacks with Explanation-Aware Backdoors
+#### [BayBFed: Bayesian Backdoor Defense for Federated Learning.](https://doi.org/10.1109/SP46215.2023.10179362)
 
-#### Selective Amnesia: On Efficient, High-Fidelity and Blind Suppression of Backdoor Effects in Trojaned Machine Learning Models
+#### [Redeem Myself: Purifying Backdoors in Deep Learning Models using Self Attention Distillation.](https://doi.org/10.1109/SP46215.2023.10179375)
 
-#### AI-Guardian: Defeating Adversarial Attacks using Backdoors
+#### [Threshold BBS+ Signatures for Distributed Anonymous Credential Issuance.](https://doi.org/10.1109/SP46215.2023.10179470)
 
-#### Jigsaw Puzzle: Selective Backdoor Attack to Subvert Malware Classifiers
+#### [zk-creds: Flexible Anonymous Credentials from zkSNARKs and Existing Identity Infrastructure.](https://doi.org/10.1109/SP46215.2023.10179430)
 
-#### BayBFed: Bayesian Backdoor Defense for Federated Learning
+#### [Private Access Control for Function Secret Sharing.](https://doi.org/10.1109/SP46215.2023.10179295)
 
-#### REDEEM MYSELF: Purifying Backdoors in Deep Learning Models using Self Attention Distillation
+#### [MPCAuth: Multi-factor Authentication for Distributed-trust Systems.](https://doi.org/10.1109/SP46215.2023.10179481)
 
-#### Threshold BBS+ Signatures for Distributed Anonymous Credential Issuance
+#### [Silph: A Framework for Scalable and Accurate Generation of Hybrid MPC Protocols.](https://doi.org/10.1109/SP46215.2023.10179397)
 
-#### zk-creds: Flexible Anonymous Credentials from zkSNARKs and Existing Identity Infrastructure
+#### [SoK: Anti-Facial Recognition Technology.](https://doi.org/10.1109/SP46215.2023.10179445)
 
-#### Private Access Control for Function Secret Sharing
+#### [Spoofing Real-world Face Authentication Systems through Optical Synthesis.](https://doi.org/10.1109/SP46215.2023.10179351)
 
-#### MPCAuth: Multi-factor Authentication for Distributed-trust Systems
+#### [ImU: Physical Impersonating Attack for Face Recognition System with Natural Style Changes.](https://doi.org/10.1109/SP46215.2023.10179360)
 
-#### Silph: A Framework for Scalable and Accurate Generation of Hybrid MPC Protocols
+#### [DepthFake: Spoofing 3D Face Authentication with a 2D Photo.](https://doi.org/10.1109/SP46215.2023.10179429)
 
-#### SoK: Anti-Facial Recognition Technology
+#### [Understanding the (In)Security of Cross-side Face Verification Systems in Mobile Apps: A System Perspective.](https://doi.org/10.1109/SP46215.2023.10179474)
 
-#### Spoofing Real-world Face Authentication Systems through Optical Synthesis
+#### [Breaking Security-Critical Voice Authentication.](https://doi.org/10.1109/SP46215.2023.10179374)
 
-#### ImU: Physical Impersonating Attack for Face Recognition System with Natural Style Changes
+#### [SoK: A Critical Evaluation of Efficient Website Fingerprinting Defenses.](https://doi.org/10.1109/SP46215.2023.10179289)
 
-#### DepthFake: Spoofing 3D Face Authentication with a 2D Photo
+#### [Fashion Faux Pas: Implicit Stylistic Fingerprints for Bypassing Browsers' Anti-Fingerprinting Defenses.](https://doi.org/10.1109/SP46215.2023.10179437)
 
-#### Understanding the (In)Security of Cross-side Face Verification Systems in Mobile Apps: A System Perspective
+#### [Robust Multi-tab Website Fingerprinting Attacks in the Wild.](https://doi.org/10.1109/SP46215.2023.10179464)
 
-#### Breaking Security-Critical Voice Authentication
+#### [Only Pay for What You Leak: Leveraging Sandboxes for a Minimally Invasive Browser Fingerprinting Defense.](https://doi.org/10.1109/SP46215.2023.10179385)
 
-#### SoK: A Critical Evaluation of Efficient Website Fingerprinting Defenses
+#### [It's (DOM) Clobbering Time: Attack Techniques, Prevalence, and Defenses.](https://doi.org/10.1109/SP46215.2023.10179403)
 
-#### Fashion Faux Pas: Implicit Stylistic Fingerprints for Bypassing Browsers' Anti-Fingerprinting Defenses
+#### [Scaling JavaScript Abstract Interpretation to Detect and Exploit Node.js Taint-style Vulnerability.](https://doi.org/10.1109/SP46215.2023.10179352)
 
-#### Robust Multi-tab Website Fingerprinting Attacks in the Wild
+#### [Sound Verification of Security Protocols: From Design to Interoperable Implementations.](https://doi.org/10.1109/SP46215.2023.10179325)
 
-#### Only Pay for What You Leak: Leveraging Sandboxes for a Minimally Invasive Browser Fingerprinting Defense
+#### [Typing High-Speed Cryptography against Spectre v1.](https://doi.org/10.1109/SP46215.2023.10179418)
 
-#### It’s (DOM) Clobbering Time: Attack Techniques, Prevalence, and Defenses
+#### [Less is more: refinement proofs for probabilistic proofs.](https://doi.org/10.1109/SP46215.2023.10179393)
 
-#### Scaling JavaScript Abstract Interpretation to Detect and Exploit Node.js Taint-style Vulnerability
+#### [Owl: Compositional Verification of Security Protocols via an Information-Flow Type System.](https://doi.org/10.1109/SP46215.2023.10179477)
 
-#### Sound Verification of Security Protocols: From Design to Interoperable Implementations
+#### [AUC: Accountable Universal Composability.](https://doi.org/10.1109/SP46215.2023.10179384)
 
-#### Typing High-Speed Cryptography against Spectre v1
+#### [High-Order Masking of Lattice Signatures in Quasilinear Time.](https://doi.org/10.1109/SP46215.2023.10179342)
 
-#### Less is more: refinement proofs for probabilistic proofs
+#### [Practical Timing Side-Channel Attacks on Memory Compression.](https://doi.org/10.1109/SP46215.2023.10179297)
 
-#### OWL: Compositional Verification of Security Protocols via an Information-Flow Type System
+#### [TEEzz: Fuzzing Trusted Applications on COTS Android Devices.](https://doi.org/10.1109/SP46215.2023.10179302)
 
-#### AUC: Accountable Universal Composability
+#### [Half&Half: Demystifying Intel's Directional Branch Predictors for Fast, Secure Partitioned Execution.](https://doi.org/10.1109/SP46215.2023.10179415)
 
-#### High-Order Masking of Lattice Signatures in Quasilinear Time
+#### [Half&Half: Demystifying Intel's Directional Branch Predictors for Fast, Secure Partitioned Execution.](https://doi.org/10.1109/SP46215.2023.10179309)
 
-#### Practical Timing Side-Channel Attacks on Memory Compression
+#### [Improving Developers' Understanding of Regex Denial of Service Tools through Anti-Patterns and Fix Strategies.](https://doi.org/10.1109/SP46215.2023.10179442)
 
-#### TEEzz: Fuzzing Trusted Applications on COTS Android Devices
+#### [Practical Program Modularization with Type-Based Dependence Analysis.](https://doi.org/10.1109/SP46215.2023.10179412)
 
-#### Half&Half: Demystifying Intel’s Directional Branch Predictors for Fast, Secure Partitioned Execution
+#### [WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches.](https://doi.org/10.1109/SP46215.2023.10179433)
 
-#### Improving Developers' Understanding of Regex Denial of Service Tools through Anti-Patterns and Fix Strategies
+#### [SoK: Certified Robustness for Deep Neural Networks.](https://doi.org/10.1109/SP46215.2023.10179303)
 
-#### Practical Program Modularization with Type-Based Dependence Analysis
+#### [RAB: Provable Robustness Against Backdoor Attacks.](https://doi.org/10.1109/SP46215.2023.10179451)
 
-#### WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches
+#### [ObjectSeeker: Certifiably Robust Object Detection against Patch Hiding Attacks via Patch-agnostic Masking.](https://doi.org/10.1109/SP46215.2023.10179319)
 
-#### SoK: Certified Robustness for Deep Neural Networks
+#### [PublicCheck: Public Integrity Verification for Services of Run-time Deep Models.](https://doi.org/10.1109/SP46215.2023.10179380)
 
-#### RAB: Provable Robustness Against Backdoor Attacks
+#### [FedRecover: Recovering from Poisoning Attacks in Federated Learning using Historical Information.](https://doi.org/10.1109/SP46215.2023.10179336)
 
-#### ObjectSeeker: Certifiably Robust Object Detection against Patch Hiding Attacks via Patch-agnostic Masking
+#### [On The Empirical Effectiveness of Unrealistic Adversarial Hardening Against Realistic Adversarial Attacks.](https://doi.org/10.1109/SP46215.2023.10179316)
 
-#### PublicCheck: Public Integrity Verification for Services of Run-time Deep Models
+#### [Rethinking Searchable Symmetric Encryption.](https://doi.org/10.1109/SP46215.2023.10179460)
 
-#### FedRecover: Recovering from Poisoning Attacks in Federated Learning using Historical Information
+#### [Private Collaborative Data Cleaning via Non-Equi PSI.](https://doi.org/10.1109/SP46215.2023.10179396)
 
-#### On The Empirical Effectiveness of Unrealistic Adversarial Hardening Against Realistic Adversarial Attacks
+#### [Private Collaborative Data Cleaning via Non-Equi PSI.](https://doi.org/10.1109/SP46215.2023.10179337)
 
-#### Rethinking Searchable Symmetric Encryption
+#### [SPHINCS+C: Compressing SPHINCS+ With (Almost) No Cost.](https://doi.org/10.1109/SP46215.2023.10179381)
 
-#### Private Collaborative Data Cleaning via Non-Equi PSI
+#### [Threshold Signatures in the Multiverse.](https://doi.org/10.1109/SP46215.2023.10179436)
 
-#### SPHINCS+C: Compressing SPHINCS+ With (Almost) No Cost
+#### [FIDO2, CTAP 2.1, and WebAuthn 2: Provable Security and Post-Quantum Instantiation.](https://doi.org/10.1109/SP46215.2023.10179454)
 
-#### Threshold Signatures in the Multiverse
+#### [Token meets Wallet: Formalizing Privacy and Revocation for FIDO2.](https://doi.org/10.1109/SP46215.2023.10179373)
 
-#### FIDO2, CTAP 2.1, and WebAuthn 2: Provable Security and Post-Quantum Instantiation
+#### [SoK: Taxonomy of Attacks on Open-Source Software Supply Chains.](https://doi.org/10.1109/SP46215.2023.10179304)
 
-#### Token meets Wallet: Formalizing Privacy and Revocation for FIDO2
+#### [It's like flossing your teeth: On the Importance and Challenges of Reproducible Builds for Software Supply Chain Security.](https://doi.org/10.1109/SP46215.2023.10179320)
 
-#### SoK: Taxonomy of Attacks on Open-Source Software Supply Chains
+#### ["Always Contribute Back": A Qualitative Study on Security Challenges of the Open Source Supply Chain.](https://doi.org/10.1109/SP46215.2023.10179378)
 
-#### It’s like flossing your teeth: On the Importance and Challenges of Reproducible Builds for Software Supply Chain Security
+#### [Continuous Intrusion: Characterizing the Security of Continuous Integration Services.](https://doi.org/10.1109/SP46215.2023.10179471)
 
-#### Always Contribute Back: A Qualitative Study on Security Challenges of the Open Source Supply Chain
+#### [Investigating Package Related Security Threats in Software Registries.](https://doi.org/10.1109/SP46215.2023.10179332)
 
-#### Continuous Intrusion: Characterizing the Security of Continuous Integration Services
+#### [ShadowNet: A Secure and Efficient On-device Model Inference System for Convolutional Neural Networks.](https://doi.org/10.1109/SP46215.2023.10179382)
 
-#### Investigating Package Related Security Threats in Software Registries
+#### [Deepfake Text Detection: Limitations and Opportunities.](https://doi.org/10.1109/SP46215.2023.10179387)
 
-#### ShadowNet: A Secure and Efficient On-device Model Inference System for Convolutional Neural Networks
+#### [StyleFool: Fooling Video Classification Systems via Style Transfer.](https://doi.org/10.1109/SP46215.2023.10179383)
 
-#### Deepfake Text Detection: Limitations and Opportunities
+#### [GeeSolver: A Generic, Efficient, and Effortless Solver with Self-Supervised Learning for Breaking Text Captchas.](https://doi.org/10.1109/SP46215.2023.10179379)
 
-#### StyleFool: Fooling Video Classification Systems via Style Transfer
+#### [TrojanModel: A Practical Trojan Attack against Automatic Speech Recognition Systems.](https://doi.org/10.1109/SP46215.2023.10179331)
 
-#### GeeSolver: A Generic, Efficient, and Effortless Solver with Self-Supervised Learning for Breaking Text Captchas
+#### [REGA: Scalable Rowhammer Mitigation with Refresh-Generating Activations.](https://doi.org/10.1109/SP46215.2023.10179327)
 
-#### TrojanModel: A Practical Trojan Attack against Automatic Speech Recognition Systems
+#### [CSI:Rowhammer - Cryptographic Security and Integrity against Rowhammer.](https://doi.org/10.1109/SP46215.2023.10179390)
 
-#### REGA: Scalable Rowhammer Mitigation with Refresh-Generating Activations
+#### [Jolt: Recovering TLS Signing Keys via Rowhammer Faults.](https://doi.org/10.1109/SP46215.2023.10179450)
 
-#### CSI:Rowhammer - Cryptographic Security and Integrity against Rowhammer
+#### [Hide and Seek with Spectres: Efficient discovery of speculative information leaks with random testing.](https://doi.org/10.1109/SP46215.2023.10179391)
 
-#### Jolt: Recovering TLS Signing Keys via Rowhammer Faults
+#### [Spectre Declassified: Reading from the Right Place at the Wrong Time.](https://doi.org/10.1109/SP46215.2023.10179355)
 
-#### Hide and Seek with Spectres: Efficient discovery of speculative vulnerabilities with random testing
+#### [Volttack: Control IoT Devices by Manipulating Power Supply Voltage.](https://doi.org/10.1109/SP46215.2023.10179340)
 
-#### Spectre Declassified: Reading from the Right Place at the Wrong Time
+#### [Inducing Wireless Chargers to Voice Out for Inaudible Command Attacks.](https://doi.org/10.1109/SP46215.2023.10179363)
 
-#### Volttack: Control IoT Devices by Manipulating Power Supply Voltage
+#### [mmSpoof: Resilient Spoofing of Automotive Millimeter-wave Radars using Reflect Array.](https://doi.org/10.1109/SP46215.2023.10179371)
 
-#### Inducing Wireless Chargers to Voice Out for Inaudible Command Attacks
+#### [PLA-LiDAR: Physical Laser Attacks against LiDAR-based 3D Object Detection in Autonomous Vehicle.](https://doi.org/10.1109/SP46215.2023.10179458)
 
-#### mmSpoof: Resilient Spoofing of Automotive Millimeter-wave Radars using Reflect Array
+#### [mmEcho: A mmWave-based Acoustic Eavesdropping Method.](https://doi.org/10.1109/SP46215.2023.10179484)
 
-#### PLA-LiDAR: Physical Laser Attacks against LiDAR-based 3D Object Detection in Autonomous Vehicle
+#### [Side Eye: Characterizing the Limits of POV Acoustic Eavesdropping from Smartphone Cameras with Rolling Shutters and Movable Lenses.](https://doi.org/10.1109/SP46215.2023.10179313)
 
-#### mmEcho: A mmWave-based Acoustic Eavesdropping Method
+#### [3DFed: Adaptive and Extensible Framework for Covert Backdoor Attack in Federated Learning.](https://doi.org/10.1109/SP46215.2023.10179401)
 
-#### Side Eye: Characterizing the Limits of POV Acoustic Eavesdropping from Smartphone Cameras with Rolling Shutters and Movable Lenses
+#### [Scalable and Privacy-Preserving Federated Principal Component Analysis.](https://doi.org/10.1109/SP46215.2023.10179350)
 
-#### ADI: Adversarial Dominating Inputs in Vertical Federated Learning Systems
+#### [Private, Efficient, and Accurate: Protecting Models Trained by Multi-party Learning with Differential Privacy.](https://doi.org/10.1109/SP46215.2023.10179422)
 
-#### 3DFed: Adaptive and Extensible Framework for Covert Backdoor Attack in Federated Learning
+#### [Spectral-DP: Differentially Private Deep Learning through Spectral Perturbation and Filtering.](https://doi.org/10.1109/SP46215.2023.10179457)
 
-#### Scalable and Privacy-Preserving Federated Principal Component Analysis
+#### [ELSA: Secure Aggregation for Federated Learning with Malicious Actors.](https://doi.org/10.1109/SP46215.2023.10179468)
 
-#### Private, Efficient, and Accurate: Protecting Models Trained by Multi-party Learning with Differential Privacy
+#### [No One Drinks From the Firehose: How Organizations Filter and Prioritize Vulnerability Information.](https://doi.org/10.1109/SP46215.2023.10179447)
 
-#### Spectral-DP: Differentially Private Deep Learning through Spectral Perturbation and Filtering
+#### [Vulnerability Discovery for All: Experiences of Marginalization in Vulnerability Discovery.](https://doi.org/10.1109/SP46215.2023.10179478)
 
-#### ELSA: Secure Aggregation for Federated Learning with Malicious Actors
+#### ["We are a startup to the core": A qualitative interview study on the security and privacy development practices in Turkish software startups.](https://doi.org/10.1109/SP46215.2023.10179339)
 
-#### No One Drinks From the Firehose: How Organizations Filter and Prioritize Vulnerability Information
+#### ["How technical do you get? I'm an English teacher": Teaching and Learning Cybersecurity and AI Ethics in High School.](https://doi.org/10.1109/SP46215.2023.10179333)
 
-#### Vulnerability Discovery for All: Experiences of Marginalization in Vulnerability Discovery
+#### [Skilled or Gullibleƒ Gender Stereotypes Related to Computer Security and Privacy.](https://doi.org/10.1109/SP46215.2023.10179469)
 
-#### We are a startup to the core:   A qualitative interview study on the security and privacy development practices in Turkish software startups
+#### [Everybody's Got ML, Tell Me What Else You Have: Practitioners' Perception of ML-Based Security Tools and Explanations.](https://doi.org/10.1109/SP46215.2023.10179321)
 
-#### How technical do you get? I'm an English teacher: Teaching and Learning Cybersecurity and AI Ethics in High School
+#### [Precise Detection of Kernel Data Races with Probabilistic Lockset Analysis.](https://doi.org/10.1109/SP46215.2023.10179366)
 
-#### Skilled or Gullible? Gender Stereotypes Related to Computer Security and Privacy
+#### [SegFuzz: Segmentizing Thread Interleaving to Discover Kernel Concurrency Bugs through Fuzzing.](https://doi.org/10.1109/SP46215.2023.10179398)
 
-#### Everybody’s Got ML, Tell Me What Else You Have: Practitioners' Perception of ML-Based Security Tools and Explanations
+#### [AEM: Facilitating Cross-Version Exploitability Assessment of Linux Kernel Vulnerabilities.](https://doi.org/10.1109/SP46215.2023.10179305)
 
-#### Precise Detection of Kernel Data Races with Probabilistic Lockset Analysis
+#### [AEM: Facilitating Cross-Version Exploitability Assessment of Linux Kernel Vulnerabilities.](https://doi.org/10.1109/SP46215.2023.10179286)
 
-#### SEGFUZZ: Segmentizing Thread Interleaving to Discover Kernel Concurrency Bugs through Fuzzing
+#### [When Top-down Meets Bottom-up: Detecting and Exploiting Use-After-Cleanup Bugs in Linux Kernel.](https://doi.org/10.1109/SP46215.2023.10179356)
 
-#### AEM: Facilitating Cross-Version Exploitability Assessment of Linux Kernel Vulnerabilities
+#### [RSFuzzer: Discovering Deep SMI Handler Vulnerabilities in UEFI Firmware with Hybrid Fuzzing.](https://doi.org/10.1109/SP46215.2023.10179421)
 
-#### When Top-down Meets Bottom-up: Detecting and Exploiting Use-After-Cleanup Bugs in Linux Kernel
+#### [A Theory to Instruct Differentially-Private Learning via Clipping Bias Reduction.](https://doi.org/10.1109/SP46215.2023.10179409)
 
-#### RSFuzzer: Discovering Deep SMI Handler Vulnerabilities in UEFI Firmware with Hybrid Fuzzing
+#### [Continual Observation under User-level Differential Privacy.](https://doi.org/10.1109/SP46215.2023.10179466)
 
-#### A Theory to Instruct Differentially-Private Learning via Clipping Bias Reduction
+#### [Locally Differentially Private Frequency Estimation Based on Convolution Framework.](https://doi.org/10.1109/SP46215.2023.10179389)
 
-#### Continual Observation under User-level Differential Privacy
+#### [Telepath: A Minecraft-based Covert Communication System.](https://doi.org/10.1109/SP46215.2023.10179335)
 
-#### Locally Differentially Private Frequency Estimation Based on Convolution Framework
+#### [Discop: Provably Secure Steganography in Practice Based on "Distribution Copies".](https://doi.org/10.1109/SP46215.2023.10179287)
 
-#### TELEPATH: A Minecraft-based Covert Communication System
+#### [SQUIP: Exploiting the Scheduler Queue Contention Side Channel.](https://doi.org/10.1109/SP46215.2023.10179368)
 
-#### Discop: Provably Secure Steganography in Practice Based on “Distribution Copies”
+#### [Scatter and Split Securely: Defeating Cache Contention and Occupancy Attacks.](https://doi.org/10.1109/SP46215.2023.10179440)
 
-#### SQUIP: Exploiting the Scheduler Queue Contention Side Channel
+#### [DevIOus: Device-Driven Side-Channel Attacks on the IOMMU.](https://doi.org/10.1109/SP46215.2023.10179283)
 
-#### Scatter and Split Securely: Defeating Cache Contention and Occupancy Attacks
+#### [DVFS Frequently Leaks Secrets: Hertzbleed Attacks Beyond SIKE, Cryptography, and CPU-Only Data.](https://doi.org/10.1109/SP46215.2023.10179326)
 
-#### DevIOus: Device-Driven Side-Channel Attacks on the IOMMU
+#### [A Security RISC: Microarchitectural Attacks on Hardware RISC-V CPUs.](https://doi.org/10.1109/SP46215.2023.10179399)
 
-#### TBD
+#### [Examining Zero-Shot Vulnerability Repair with Large Language Models.](https://doi.org/10.1109/SP46215.2023.10179420)
 
-#### A Security RISC: Microarchitectural Attacks on Hardware RISC-V CPUs
+#### [Examining Zero-Shot Vulnerability Repair with Large Language Models.](https://doi.org/10.1109/SP46215.2023.10179324)
 
-#### Examining Zero-Shot Vulnerability Repair with Large Language Models
+#### [Callee: Recovering Call Graphs for Binaries with Transfer and Contrastive Learning.](https://doi.org/10.1109/SP46215.2023.10179482)
 
-#### Callee: Recovering Call Graphs for Binaries with Transfer and Contrastive Learning
+#### [XFL: Naming Functions in Binaries with Extreme Multi-label Learning.](https://doi.org/10.1109/SP46215.2023.10179439)
 
-#### XFL: Naming Functions in Binaries with Extreme Multi-label Learning
+#### [D-ARM: Disassembling ARM Binaries by Lightweight Superset Instruction Interpretation and Graph Modeling.](https://doi.org/10.1109/SP46215.2023.10179307)
 
-#### D-ARM: Disassembling ARM Binaries by Lightweight Superset Instruction Interpretation and Graph Modeling
+#### [GraphSPD: Graph-Based Security Patch Detection with Enriched Code Semantics.](https://doi.org/10.1109/SP46215.2023.10179479)
 
-#### GraphSPD: Graph-Based Security Patch Detection with Enriched Code Semantics
+#### [Effective ReDoS Detection by Principled Vulnerability Modeling and Exploit Generation.](https://doi.org/10.1109/SP46215.2023.10179328)
 
-#### Effective ReDoS Detection by Principled Vulnerability Modeling and Exploit Generation
+#### [SoK: Decentralized Finance (DeFi) Attacks.](https://doi.org/10.1109/SP46215.2023.10179435)
 
-#### SoK: Decentralized Finance (DeFi) Attacks
+#### [BlindHub: Bitcoin-Compatible Privacy-Preserving Payment Channel Hubs Supporting Variable Amounts.](https://doi.org/10.1109/SP46215.2023.10179427)
 
-#### BlindHub: Bitcoin-Compatible Privacy-Preserving Payment Channel Hubs Supporting Variable Amounts
+#### [Optimistic Fast Confirmation While Tolerating Malicious Majority in Blockchains.](https://doi.org/10.1109/SP46215.2023.10179323)
 
-#### Optimistic Fast Confirmation While Tolerating Malicious Majority in Blockchains
+#### [Clockwork Finance: Automated Analysis of Economic Security in Smart Contracts.](https://doi.org/10.1109/SP46215.2023.10179346)
 
-#### Clockwork Finance: Automated Analysis of Economic Security in Smart Contracts
+#### [Tyr: Finding Consensus Failure Bugs in Blockchain System with Behaviour Divergent Model.](https://doi.org/10.1109/SP46215.2023.10179386)
 
-#### Tyr: Finding Consensus Failure Bugs in Blockchain System with Behaviour Divergent Model
+#### [Leaking Arbitrarily Many Secrets: Any-out-of-Many Proofs and Applications to RingCT Protocols.](https://doi.org/10.1109/SP46215.2023.10179292)
 
-#### Leaking Arbitrarily Many Secrets: Any-out-of-Many Proofs and Applications to RingCT Protocols
+#### [Could you clean up the Internet with a Pit of Tar? Investigating tarpit feasibility on Internet worms.](https://doi.org/10.1109/SP46215.2023.10179467)
 
-#### Could you clean up the Internet with a Pit of Tar? Investigating tarpit feasibility on Internet worms
+#### [Beyond Phish: Toward Detecting Fraudulent e-Commerce Websites at Scale.](https://doi.org/10.1109/SP46215.2023.10179461)
 
-#### Beyond Phish: Toward Detecting Fraudulent e-Commerce Websites at Scale
+#### [Limits of I/O Based Ransomware Detection: An Imitation Based Attack.](https://doi.org/10.1109/SP46215.2023.10179372)
 
-#### Limits of I/O Based Ransomware Detection: An Imitation Based Attack
+#### [From Grim Reality to Practical Solution: Malware Classification in Real-World Noise.](https://doi.org/10.1109/SP46215.2023.10179453)
 
-#### From Grim Reality to Practical Solution: Malware Classification in Real-World Noise
+#### [SoK: History is a Vast Early Warning System: Auditing the Provenance of System Intrusions.](https://doi.org/10.1109/SP46215.2023.10179405)
 
-#### SoK: History is a Vast Early Warning System: Auditing the Provenance of System Intrusions
+#### [Collaborative Ad Transparency: Promises and Limitations.](https://doi.org/10.1109/SP46215.2023.10179448)
 
-#### Collaborative Ad Transparency: Promises and Limitations
+#### [Toss a Fault to Your Witcher: Applying Grey-box Coverage-Guided Mutational Fuzzing to Detect SQL and Command Injection Vulnerabilities.](https://doi.org/10.1109/SP46215.2023.10179317)
 
-#### Toss a Fault to Your Witcher: Applying Grey-box Coverage-Guided Mutational Fuzzing to Detect SQL and Command Injection Vulnerabilities
+#### [UTopia: Automatic Generation of Fuzz Driver using Unit Tests.](https://doi.org/10.1109/SP46215.2023.10179394)
 
-#### UTOPIA: Automatic Generation of Fuzz Driver using Unit Tests
+#### [SelectFuzz: Efficient Directed Fuzzing with Selective Path Exploration.](https://doi.org/10.1109/SP46215.2023.10179296)
 
-#### SelectFuzz: Efficient Directed Fuzzing with Selective Path Exploration
+#### [Finding Specification Blind Spots via Fuzz Testing.](https://doi.org/10.1109/SP46215.2023.10179438)
 
-#### Finding Specification Blind Spots via Fuzz Testing
+#### [ODDFuzz: Discovering Java Deserialization Vulnerabilities via Structure-Aware Directed Greybox Fuzzing.](https://doi.org/10.1109/SP46215.2023.10179377)
 
-#### ODDFUZZ: Discovering Java Deserialization Vulnerabilities via Structure-Aware Directed Greybox Fuzzing
+#### [The Leaky Web: Automated Discovery of Cross-Site Information Leaks in Browsers and the Web.](https://doi.org/10.1109/SP46215.2023.10179311)
 
-#### The Leaky Web: Automated Discovery of Cross-Site Information Leaks in Browsers and the Web
+#### [WebSpec: Towards Machine-Checked Analysis of Browser Security Mechanisms.](https://doi.org/10.1109/SP46215.2023.10179465)
 
-#### WebSpec: Towards Machine-Checked Analysis of Browser Security Mechanisms
+#### [Detection of Inconsistencies in Privacy Practices of Browser Extensions.](https://doi.org/10.1109/SP46215.2023.10179338)
 
-#### Detection of Inconsistencies in Privacy Practices of Browser Extensions
+#### [TeSec: Accurate Server-side Attack Investigation for Web Applications.](https://doi.org/10.1109/SP46215.2023.10179402)
 
-#### TeSec: Accurate Server-side Attack Investigation for Web Applications
+#### [RuleKeeper: GDPR-Aware Personal Data Compliance for Web Frameworks.](https://doi.org/10.1109/SP46215.2023.10179395)
 
-#### RuleKeeper: GDPR-Aware Personal Data Compliance for Web Frameworks
+#### [Characterizing Everyday Misuse of Smart Home Devices.](https://doi.org/10.1109/SP46215.2023.10179476)
 
-#### Characterizing Everyday Misuse of Smart Home Devices
+#### ["It's up to the Consumer to be Smart": Understanding the Security and Privacy Attitudes of Smart Home Users on Reddit.](https://doi.org/10.1109/SP46215.2023.10179344)
 
-#### It's up to the Consumer to be Smart: Understanding the Security and Privacy Attitudes of Smart Home Users on Reddit
+#### [User Perceptions and Experiences with Smart Home Updates.](https://doi.org/10.1109/SP46215.2023.10179459)
 
-#### User Perceptions and Experiences with Smart Home Updates
+#### [Design and Evaluation of Inclusive Email Security Indicators for People with Visual Impairments.](https://doi.org/10.1109/SP46215.2023.10179407)
 
-#### Design and Evaluation of Inclusive Email Security Indicators for People with Visual Impairments
+#### [When and Why Do People Want Ad Targeting Explanations? Evidence from a Four-Week, Mixed-Methods Field Study.](https://doi.org/10.1109/SP46215.2023.10179452)
 
-#### When and Why Do People Want Ad Targeting Explanations? Evidence from a Four-Week, Mixed-Methods Field Study
+#### [SecureCells: A Secure Compartmentalized Architecture.](https://doi.org/10.1109/SP46215.2023.10179472)
 
-#### SecureCells: A Secure Compartmentalized Architecture
+#### [WaVe: a verifiably secure WebAssembly sandboxing runtime.](https://doi.org/10.1109/SP46215.2023.10179357)
 
-#### WaVe: A Verifiably Secure WebAssembly Sandboxing Runtime
+#### [μSwitch: Fast Kernel Context Isolation with Implicit Context Switches.](https://doi.org/10.1109/SP46215.2023.10179284)
 
-#### uSWITCH: Fast Kernel Context Isolation with Implicit Context Switches
+#### [Control Flow and Pointer Integrity Enforcement in a Secure Tagged Architecture.](https://doi.org/10.1109/SP46215.2023.10179416)
 
-#### Control Flow and Pointer Integrity Enforcement in a Secure Tagged Architecture
+#### [EC: Embedded Systems Compartmentalization via Intra-Kernel Isolation.](https://doi.org/10.1109/SP46215.2023.10179285)
 
-#### EC: Embedded Systems Compartmentalization via Intra-Kernel Isolation
+#### [Low-Cost Privilege Separation with Compile Time Compartmentalization for Embedded Systems.](https://doi.org/10.1109/SP46215.2023.10179388)
 
-#### Low-Cost Privilege Separation with Compile Time Compartmentalization for Embedded Systems
+#### [One Key to Rule Them All: Secure Group Pairing for Heterogeneous IoT Devices.](https://doi.org/10.1109/SP46215.2023.10179369)
 
-#### One Key to Rule Them All: Secure Group Pairing for Heterogeneous IoT Devices
+#### [Optimistic Access Control for the Smart Home.](https://doi.org/10.1109/SP46215.2023.10179475)
 
-#### Optimistic Access Control for the Smart Home
+#### [Protected or Porous: A Comparative Analysis of Threat Detection Capability of IoT Safeguards.](https://doi.org/10.1109/SP46215.2023.10179282)
 
-#### Protected or Porous: A Comparative Analysis of Threat Detection Capability of IoT Safeguards
+#### [LazyTAP: On-Demand Data Minimization for Trigger-Action Applications.](https://doi.org/10.1109/SP46215.2023.10179425)
 
-#### LazyTAP: On-Demand Data Minimization for Trigger-Action Applications
+#### [Blue's Clues: Practical Discovery of Non-Discoverable Bluetooth Devices.](https://doi.org/10.1109/SP46215.2023.10179358)
 
-#### Blue's Clues: Practical Discovery of Non-Discoverable Bluetooth Devices
+#### [DeHiREC: Detecting Hidden Voice Recorders via ADC Electromagnetic Radiation.](https://doi.org/10.1109/SP46215.2023.10179480)
 
-#### DeHiREC: Detecting Hidden Voice Recorders via ADC Electromagnetic Radiation
+#### [IPvSeeYou: Exploiting Leaked Identifiers in IPv6 for Street-Level Geolocation.](https://doi.org/10.1109/SP46215.2023.10179376)
 
-#### IPvSeeYou: Exploiting Leaked Identifiers in IPv6 for Street-Level Geolocation
+#### [From 5G Sniffing to Harvesting Leakages of Privacy-Preserving Messengers.](https://doi.org/10.1109/SP46215.2023.10179353)
 
-#### From 5G Sniffing to Harvesting Leakages of Privacy-Preserving Messengers
+#### [Man-in-the-Middle Attacks without Rogue AP: When WPAs Meet ICMP Redirects.](https://doi.org/10.1109/SP46215.2023.10179441)
 
-#### Man-in-the-Middle Attacks without Rogue AP: When WPAs Meet ICMP Redirects
+#### [Mew: Enabling Large-Scale and Dynamic Link-Flooding Defenses on Programmable Switches.](https://doi.org/10.1109/SP46215.2023.10179404)
 
-#### Mew: Enabling Large-Scale and Dynamic Link-Flooding Defenses on Programmable Switches
+#### [PCSPOOF: Compromising the Safety of Time-Triggered Ethernet.](https://doi.org/10.1109/SP46215.2023.10179318)
 
-#### PCspooF: Compromising the Safety of Time-Triggered Ethernet
+#### [BLEDiff: Scalable and Property-Agnostic Noncompliance Checking for BLE Implementations.](https://doi.org/10.1109/SP46215.2023.10179330)
 
-#### BLEDiff : Scalable and Property-Agnostic Noncompliance Checking for BLE Implementations
+#### [ViDeZZo: Dependency-aware Virtual Device Fuzzing.](https://doi.org/10.1109/SP46215.2023.10179354)
 
-#### VIDEZZO: Dependency-aware Virtual Device Fuzzing
+#### [DevFuzz: Automatic Device Model-Guided Device Driver Fuzzing.](https://doi.org/10.1109/SP46215.2023.10179293)
 
-#### DEVFUZZ: Automatic Device Model-Guided Device Driver Fuzzing
+#### [SyzDescribe: Principled, Automated, Static Generation of Syscall Descriptions for Kernel Drivers.](https://doi.org/10.1109/SP46215.2023.10179298)
 
-#### SyzDescribe: Principled, Automated, Static Generation of Syscall Descriptions for Kernel Drivers
+#### [QueryX: Symbolic Query on Decompiled Code for Finding Bugs in COTS Binaries.](https://doi.org/10.1109/SP46215.2023.10179314)
 
-#### QueryX: Symbolic Query on Decompiled Code for Finding Bugs in COTS Binaries
+#### [Pyfet: Forensically Equivalent Transformation for Python Binary Decompilation.](https://doi.org/10.1109/SP46215.2023.10179370)
 
-#### PyFET: Forensically Equivalent Transformation for Python Binary Decompilation
+#### [Adaptive Risk-Limiting Comparison Audits.](https://doi.org/10.1109/SP46215.2023.10179424)
 
-#### Adaptive Risk-Limiting Comparison Audits
+#### [Blue Is the New Black (Market): Privacy Leaks and Re-Victimization from Police-Auctioned Cellphones.](https://doi.org/10.1109/SP46215.2023.10179348)
 
-#### Blue Is the New Black (Market): Privacy Leaks and Re-Victimization from Police-Auctioned Cellphones
+#### [No Privacy in the Electronics Repair Industry.](https://doi.org/10.1109/SP46215.2023.10179413)
 
-#### No Privacy in the Electronics Repair Industry
+#### [How IoT Re-using Threatens Your Sensitive Data: Exploring the User-Data Disposal in Used IoT Devices.](https://doi.org/10.1109/SP46215.2023.10179294)
 
-#### How IoT Re-using Threatens Your Sensitive Data: Exploring the User-Data Disposal in Used IoT Devices
+#### [Privacy Leakage via Unrestricted Motion-Position Sensors in the Age of Virtual Reality: A Study of Snooping Typed Input on Virtual Keyboards.](https://doi.org/10.1109/SP46215.2023.10179301)
 
-#### Privacy Leakage via Unrestricted Motion-Position Sensors in the Age of Virtual Reality: A Study of Snooping Typed Input on Virtual Keyboards
+#### [Uncovering User Interactions on Smartphones via Contactless Wireless Charging Side Channels.](https://doi.org/10.1109/SP46215.2023.10179322)
 
-#### Uncovering User Interactions on Smartphones via Contactless Wireless Charging Side Channels
+#### [MagBackdoor: Beware of Your Loudspeaker as A Backdoor For Magnetic Injection Attacks.](https://doi.org/10.1109/SP46215.2023.10179364)
 
-#### MagBackdoor: Beware of Your Loudspeaker as A Backdoor For Magnetic Injection Attacks
+#### [Private Eye: On the Limits of Textual Screen Peeking via Eyeglass Reflections in Video Conferencing.](https://doi.org/10.1109/SP46215.2023.10179423)
 
-#### Private Eye: On the Limits of Textual Screen Peeking via Eyeglass Reflections in Video Conferencing
-
-#### Low-effort VR Headset User Authentication Using Head-reverberated Sounds with Replay Resistance
+#### [Low-effort VR Headset User Authentication Using Head-reverberated Sounds with Replay Resistance.](https://doi.org/10.1109/SP46215.2023.10179367)
 

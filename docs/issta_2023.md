@@ -4,245 +4,287 @@ title: ISSTA 2023
 
 # ISSTA 2023
 
-117 papers accepted. Updated on **2023-06-19**.
+138 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://2023.issta.org/track/issta-2023-technical-papers#event-overview).
+You can find [the lastest information here](https://dblp.org/db/conf/issta/issta2023.html).
 
 ---
 
-#### 1dFuzz: Reproduce 1-day Vulnerabilities with Directed Differential Fuzzing
+#### [CydiOS: A Model-Based Testing Framework for iOS Apps.](https://doi.org/10.1145/3597926.3598033)
 
-#### A Bayesian Framework for Automated Debugging
+#### [Improving Bit-Blasting for Nonlinear Integer Constraints.](https://doi.org/10.1145/3597926.3598034)
 
-#### ACETest: Automated Constraint Extraction for Testing Deep Learning Operators
+#### [CONCORD: Clone-Aware Contrastive Learning for Source Code.](https://doi.org/10.1145/3597926.3598035)
 
-#### A Comprehensive Study on Quality Assurance Tools for Java
+#### [Towards Efficient Fine-Tuning of Pre-trained Code Models: An Experimental Study and Beyond.](https://doi.org/10.1145/3597926.3598036)
 
-#### AGORA: Automated Generation of Test Oracles for REST APIs
+#### [Understanding and Tackling Label Errors in Deep Learning-Based Vulnerability Detection (Experience Paper).](https://doi.org/10.1145/3597926.3598037)
 
-#### Alligator In Vest: A Practical Failure-Diagnosis Framework via Arm Hardware Features
+#### [Pattern-Based Peephole Optimizations with Java JIT Tests.](https://doi.org/10.1145/3597926.3598038)
 
-#### An Empirical Study of Functional Bugs in Android Apps
+#### [Icicle: A Re-designed Emulator for Grey-Box Firmware Fuzzing.](https://doi.org/10.1145/3597926.3598039)
 
-#### An Empirical Study on Concurrency Bugs in Interrupt-driven Embedded Software
+#### [Fine-Grained Code Clone Detection with Block-Based Splitting of Abstract Syntax Tree.](https://doi.org/10.1145/3597926.3598040)
 
-#### An Empirical Study on the Effects of Obfuscation on Static Machine Learning-based Malicious JavaScript Detectors
+#### [Reducing the Memory Footprint of IFDS-Based Data-Flow Analyses using Fine-Grained Garbage Collection.](https://doi.org/10.1145/3597926.3598041)
 
-#### API2vec: Learning Representations of API Sequences for Malware Detection
+#### [Hybrid Inlining: A Framework for Compositional and Context-Sensitive Static Analysis.](https://doi.org/10.1145/3597926.3598042)
 
-#### Applying and Extending the Delta Debugging Algorithm for Elevator Dispatching Algorithms (Experience Paper)
+#### [Green Fuzzing: A Saturation-Based Stopping Criterion using Vulnerability Prediction.](https://doi.org/10.1145/3597926.3598043)
 
-#### A Tale of Two Approximations: Tightening Over-Approximation for DNN Robustness Verification via Under-Approximation
+#### [Testing Graph Database Engines via Query Partitioning.](https://doi.org/10.1145/3597926.3598044)
 
-#### Automated Generation of Security-Centric Descriptions for Smart Contract Bytecode
+#### [Semantic-Based Neural Network Repair.](https://doi.org/10.1145/3597926.3598045)
 
-#### Automated Program Repair from Fuzzing Perspective
+#### [GDsmith: Detecting Bugs in Cypher Graph Database Engines.](https://doi.org/10.1145/3597926.3598046)
 
-#### Automatically Reproducing Android Bug Reports Using Natural Language Processing and Reinforcement Learning
+#### [Loop Invariant Inference through SMT Solving Enhanced Reinforcement Learning.](https://doi.org/10.1145/3597926.3598047)
 
-#### Back Deduction based Testing for Word Sense Disambiguation Ability of Machine Translation Systems
+#### [CODEP: Grammatical Seq2Seq Model for General-Purpose Code Generation.](https://doi.org/10.1145/3597926.3598048)
 
-#### BehAVExplor: Behavior Diversity Guided Testing for Autonomous Driving Systems
+#### [Concept-Based Automated Grading of CS-1 Programming Assignments.](https://doi.org/10.1145/3597926.3598049)
 
-#### Beware of the Unexpected: Bimodal Taint Analysis
+#### [Beware of the Unexpected: Bimodal Taint Analysis.](https://doi.org/10.1145/3597926.3598050)
 
-#### Beyond “Protected” and “Private”: An Empirical Security Analysis of Custom Function Modifiers in Smart Contracts
+#### [DeUEDroid: Detecting Underground Economy Apps Based on UTG Similarity.](https://doi.org/10.1145/3597926.3598051)
 
-#### Building Critical Testing Scenarios for Autonomous Driving from Real Accidents
+#### [Dependency-Aware Metamorphic Testing of Datalog Engines.](https://doi.org/10.1145/3597926.3598052)
 
-#### Catamaran: Low-Overhead Memory Safety Enforcement via Parallel Acceleration
+#### [Fuzzing Deep Learning Compilers with HirGen.](https://doi.org/10.1145/3597926.3598053)
 
-#### CGuard: Scalable and Precise Object Bounds Protection for C
+#### [API2Vec: Learning Representations of API Sequences for Malware Detection.](https://doi.org/10.1145/3597926.3598054)
 
-#### CILIATE: Towards Fairer Class-based Incremental Learning by Dataset and Training Refinement
+#### [June: A Type Testability Transformation for Improved ATG Performance.](https://doi.org/10.1145/3597926.3598055)
 
-#### CodeGrid: A Grid Representation of Code
+#### [A Comprehensive Study on Quality Assurance Tools for Java.](https://doi.org/10.1145/3597926.3598056)
 
-#### CODEP: Grammatical Seq2Seq Model for General-Purpose Code Generation
+#### [Detecting State Inconsistency Bugs in DApps via On-Chain Transaction Replay and Fuzzing.](https://doi.org/10.1145/3597926.3598057)
 
-#### COME: Commit Message Generation with Modification Embedding
+#### [FairRec: Fairness Testing for Deep Recommender Systems.](https://doi.org/10.1145/3597926.3598058)
 
-#### Concept-based Automated Grading of CS-1 Programming Assignments
+#### [ItyFuzz: Snapshot-Based Fuzzer for Smart Contract.](https://doi.org/10.1145/3597926.3598059)
 
-#### CONCORD: Clone-aware Contrastive Learning for Source Code
+#### [Who Judges the Judge: An Empirical Study on Online Judge Tests.](https://doi.org/10.1145/3597926.3598060)
 
-#### ConfFix: Repairing Configuration Compatibility Issues in Android Apps
+#### [Precise and Efficient Patch Presence Test for Android Applications against Code Obfuscation.](https://doi.org/10.1145/3597926.3598061)
 
-#### CoopHance: Cooperative Enhancement for Robustness of Deep Learning Systems
+#### [Detecting Vulnerabilities in Linux-Based Embedded Firmware with SSE-Based On-Demand Alias Analysis.](https://doi.org/10.1145/3597926.3598062)
 
-#### CydiOS: a model-based testing framework for iOS apps
+#### [Definition and Detection of Defects in NFT Smart Contracts.](https://doi.org/10.1145/3597926.3598063)
 
-#### Data Constraint Mining for Automatic Reconciliation Scripts Generation
+#### [Eunomia: Enabling User-Specified Fine-Grained Search in Symbolically Executing WebAssembly Binaries.](https://doi.org/10.1145/3597926.3598064)
 
-#### DDLDroid: Efficiently Detecting Data Loss Issues in Android Apps
+#### [Type Batched Program Reduction.](https://doi.org/10.1145/3597926.3598065)
 
-#### DeepAtash: Focused Test Generation for Deep Learning Systems
+#### [Automatically Reproducing Android Bug Reports using Natural Language Processing and Reinforcement Learning.](https://doi.org/10.1145/3597926.3598066)
 
-#### Definition and Detection of Defects in NFT Smart Contracts
+#### [Large Language Models Are Zero-Shot Fuzzers: Fuzzing Deep-Learning Libraries via Large Language Models.](https://doi.org/10.1145/3597926.3598067)
 
-#### DeFiTainter: Detecting Price Manipulation Vulnerabilities in DeFi Protocols
+#### [Exploring Missed Optimizations in WebAssembly Optimizers.](https://doi.org/10.1145/3597926.3598068)
 
-#### Dependency-Aware Metamorphic Testing of Datalog Engines
+#### [PhysCov: Physical Test Coverage for Autonomous Vehicles.](https://doi.org/10.1145/3597926.3598069)
 
-#### Detecting Condition-related Bugs with Control Flow Graph Neural Network
+#### [Building Critical Testing Scenarios for Autonomous Driving from Real Accidents.](https://doi.org/10.1145/3597926.3598070)
 
-#### Detecting State Inconsistency Bugs in DApps via On-Chain Transaction Replay and Fuzzing
+#### [CILIATE: Towards Fairer Class-Based Incremental Learning by Dataset and Training Refinement.](https://doi.org/10.1145/3597926.3598071)
 
-#### Detecting Vulnerabilities in Linux-based Embedded Firmware with SSE-based On-demand Alias Analysis
+#### [BehAVExplor: Behavior Diversity Guided Testing for Autonomous Driving Systems.](https://doi.org/10.1145/3597926.3598072)
 
-#### DeUEDroid: Detecting Underground Economy Apps Based on UTG Similarity
+#### [In Defense of Simple Techniques for Neural Network Test Case Selection.](https://doi.org/10.1145/3597926.3598073)
 
-#### DyCL: Dynamic Neural Network Compilation Via Program Rewriting and Graph Optimization
+#### [ConfFix: Repairing Configuration Compatibility Issues in Android Apps.](https://doi.org/10.1145/3597926.3598074)
 
-#### Enhancing REST API Testing with NLP Techniques
+#### [Vectorizing Program Ingredients for Better JVM Testing.](https://doi.org/10.1145/3597926.3598075)
 
-#### Eunomia: Enabling User-specified Fine-Grained Search in Symbolically Executing WebAssembly Binaries
+#### [What You See Is What You Get? It Is Not the Case! Detecting Misleading Icons for Mobile Applications.](https://doi.org/10.1145/3597926.3598076)
 
-#### Exploring Missed Optimizations in WebAssembly Optimizers
+#### [Testing the Compiler for a New-Born Programming Language: An Industrial Case Study (Experience Paper).](https://doi.org/10.1145/3597926.3598077)
 
-#### Extracting Inline Tests from Unit Tests
+#### [Quantitative Policy Repair for Access Control on the Cloud.](https://doi.org/10.1145/3597926.3598078)
 
-#### FairRec: Fairness Testing for Deep Recommender Systems
+#### [Validating Multimedia Content Moderation Software via Semantic Fusion.](https://doi.org/10.1145/3597926.3598079)
 
-#### Finding Short Slow Inputs Faster with Grammar-Based Search
+#### [Towards More Realistic Evaluation for Neural Test Oracle Generation.](https://doi.org/10.1145/3597926.3598080)
 
-#### Fine-grained Code Clone Detection with Block-based Splitting of Abstract Syntax Tree
+#### [Back Deduction Based Testing for Word Sense Disambiguation Ability of Machine Translation Systems.](https://doi.org/10.1145/3597926.3598081)
 
-#### Fuzzing Deep Learning Compilers with HirGen
+#### [DyCL: Dynamic Neural Network Compilation Via Program Rewriting and Graph Optimization.](https://doi.org/10.1145/3597926.3598082)
 
-#### Fuzzing Embedded Systems Using Debug Interfaces
+#### [Systematically Producing Test Orders to Detect Order-Dependent Flaky Tests.](https://doi.org/10.1145/3597926.3598083)
 
-#### GDsmith: Detecting Bugs in Cypher Graph Database Engines
+#### [Security Checking of Trigger-Action-Programming Smart Home Integrations.](https://doi.org/10.1145/3597926.3598084)
 
-#### GenCoG: A DSL-Based Approach to Generating Computation Graphs for TVM Testing
+#### [LiResolver: License Incompatibility Resolution for Open Source Software.](https://doi.org/10.1145/3597926.3598085)
 
-#### GrayC: Greybox Fuzzing of Compilers and Analysers for C
+#### [More Precise Regression Test Selection via Reasoning about Semantics-Modifying Changes.](https://doi.org/10.1145/3597926.3598086)
 
-#### Green Fuzzer Benchmarking
+#### [Silent Compiler Bug De-duplication via Three-Dimensional Analysis.](https://doi.org/10.1145/3597926.3598087)
 
-#### Green Fuzzing: A Saturation-based Stopping Criterion using Vulnerability Prediction
+#### [ACETest: Automated Constraint Extraction for Testing Deep Learning Operators.](https://doi.org/10.1145/3597926.3598088)
 
-#### Guided Retraining to Enhance the Detection of Difficult Android Malware
+#### [DDLDroid: Efficiently Detecting Data Loss Issues in Android Apps.](https://doi.org/10.1145/3597926.3598089)
 
-#### Guiding Greybox Fuzzing using Mutation Testing
+#### [To Kill a Mutant: An Empirical Study of Mutation Testing Kills.](https://doi.org/10.1145/3597926.3598090)
 
-#### How Effective are Neural Networks for Fixing Security Vulnerabilities
+#### [iSyn: Semi-automated Smart Contract Synthesis from Legal Financial Agreements.](https://doi.org/10.1145/3597926.3598091)
 
-#### Hybrid Inlining: A Framework for Compositional and Context-Sensitive Static Analysis
+#### [RefBERT: A Two-Stage Pre-trained Framework for Automatic Rename Refactoring.](https://doi.org/10.1145/3597926.3598092)
 
-#### ICICLE: A re-Designed Emulator for Grey-Box Firmware Fuzzing
+#### [CoopHance: Cooperative Enhancement for Robustness of Deep Learning Systems.](https://doi.org/10.1145/3597926.3598093)
 
-#### Improving Binary Code Similarity Transformer Models by Semantics-driven Instruction Deemphasis
+#### [ROME: Testing Image Captioning Systems via Recursive Object Melting.](https://doi.org/10.1145/3597926.3598094)
 
-#### Improving Bit-Blasting for Nonlinear Integer Constraints
+#### [GPUHarbor: Testing GPU Memory Consistency at Large (Experience Paper).](https://doi.org/10.1145/3597926.3598095)
 
-#### Improving Spectrum-Based Localization of Multiple Faults by Iterative Test Suite Reduction
+#### [COME: Commit Message Generation with Modification Embedding.](https://doi.org/10.1145/3597926.3598096)
 
-#### In Defense of Simple Techniques for Neural Network Test Case Selection
+#### [OCFI: Make Function Entry Identification Hard Again.](https://doi.org/10.1145/3597926.3598097)
 
-#### Interpreters for GNN-based Vulnerability Detection: Are We There Yet?
+#### [Catamaran: Low-Overhead Memory Safety Enforcement via Parallel Acceleration.](https://doi.org/10.1145/3597926.3598098)
 
-#### iSyn: Semi-Automated Smart Contract Synthesis from Legal Financial Agreements
+#### [Latent Imitator: Generating Natural Individual Discriminatory Instances for Black-Box Fairness Testing.](https://doi.org/10.1145/3597926.3598099)
 
-#### ItyFuzz: Snapshot-Based Fuzzer for Smart Contract
+#### [Simulation-Based Validation for Autonomous Driving Systems.](https://doi.org/10.1145/3597926.3598100)
 
-#### June: A Type Testability Transformation for Improved ATG Performance
+#### [Automated Program Repair from Fuzzing Perspective.](https://doi.org/10.1145/3597926.3598101)
 
-#### Large Language Models are Zero-Shot Fuzzers: Fuzzing Deep-Learning Libraries via Large Language Models
+#### [1dFuzz: Reproduce 1-Day Vulnerabilities with Directed Differential Fuzzing.](https://doi.org/10.1145/3597926.3598102)
 
-#### Latent Imitator: Generating Natural Individual Discriminatory Instances for Black-Box Fairness Testing
+#### [A Bayesian Framework for Automated Debugging.](https://doi.org/10.1145/3597926.3598103)
 
-#### LiResolver: License Incompatibility Resolution for Open Source Software
+#### [That's a Tough Call: Studying the Challenges of Call Graph Construction for WebAssembly.](https://doi.org/10.1145/3597926.3598104)
 
-#### Loop Invariant Inference through SMT Solving Enhanced Reinforcement Learning
+#### [GenCoG: A DSL-Based Approach to Generating Computation Graphs for TVM Testing.](https://doi.org/10.1145/3597926.3598105)
 
-#### ModelObfuscator: Obfuscating Model Information to Protect Deployed ML-based Systems
+#### [Alligator in Vest: A Practical Failure-Diagnosis Framework via Arm Hardware Features.](https://doi.org/10.1145/3597926.3598106)
 
-#### More Precise Regression Test Selection via Reasoning about Semantics-Modifying Changes
+#### [Guiding Greybox Fuzzing with Mutation Testing.](https://doi.org/10.1145/3597926.3598107)
 
-#### NodeRT: Detecting Races in Node.js Applications Practically
+#### [Testing Automated Driving Systems by Breaking Many Laws Efficiently.](https://doi.org/10.1145/3597926.3598108)
 
-#### OCFI: Make Function Entry Identification Hard Again
+#### [DeepAtash: Focused Test Generation for Deep Learning Systems.](https://doi.org/10.1145/3597926.3598109)
 
-#### $\omega$Test: WebView-Oriented Testing for Android Applications
+#### [SBDT: Search-Based Differential Testing of Certificate Parsers in SSL/TLS Implementations.](https://doi.org/10.1145/3597926.3598110)
 
-#### Pattern-based Peephole Optimizations with Java JIT Tests
+#### [SmartState: Detecting State-Reverting Vulnerabilities in Smart Contracts via Fine-Grained State-Dependency Analysis.](https://doi.org/10.1145/3597926.3598111)
 
-#### PhysCov: Physical Test Coverage for Autonomous Vehicles
+#### [ωTest: WebView-Oriented Testing for Android Applications.](https://doi.org/10.1145/3597926.3598112)
 
-#### Precise and Efficient Patch Presence Test for Android Applications against Code Obfuscation
+#### [ModelObfuscator: Obfuscating Model Information to Protect Deployed ML-Based Systems.](https://doi.org/10.1145/3597926.3598113)
 
-#### Project X: Testing GPU Memory Consistency At Large (Experience Paper)
+#### [AGORA: Automated Generation of Test Oracles for REST APIs.](https://doi.org/10.1145/3597926.3598114)
 
-#### Quantitative Policy Repair for Access Control on the Cloud
+#### [Fuzzing Embedded Systems using Debug Interfaces.](https://doi.org/10.1145/3597926.3598115)
 
-#### Rare Path Guided Fuzzing
+#### [Splendor: Static Detection of Stored XSS in Modern Web Applications.](https://doi.org/10.1145/3597926.3598116)
 
-#### Re2BERT: A Two-stage Pre-trained Framework for Automatic Rename Refactoring
+#### [Applying and Extending the Delta Debugging Algorithm for Elevator Dispatching Algorithms (Experience Paper).](https://doi.org/10.1145/3597926.3598117)
 
-#### Reducing the Memory Footprint of IFDS-based Data-Flow Analyses Using Fine-Grained Garbage Collection
+#### [Finding Short Slow Inputs Faster with Grammar-Based Search.](https://doi.org/10.1145/3597926.3598118)
 
-#### ROME: Testing Image Captioning Systems via Recursive Object Melting
+#### [Transforming Test Suites into Croissants.](https://doi.org/10.1145/3597926.3598119)
 
-#### SBDT: Search-based Differential Testing of Certificate Parsers in SSL/TLS Implementations
+#### [Tai-e: A Developer-Friendly Static Analysis Framework for Java by Harnessing the Good Designs of Classics.](https://doi.org/10.1145/3597926.3598120)
 
-#### Security Checking of Trigger-Action-Programming Smart Home Integrations
+#### [Improving Binary Code Similarity Transformer Models by Semantics-Driven Instruction Deemphasis.](https://doi.org/10.1145/3597926.3598121)
 
-#### Semantic-Based Neural Network Repair
+#### [Data Constraint Mining for Automatic Reconciliation Scripts Generation.](https://doi.org/10.1145/3597926.3598122)
 
-#### Silent Compiler Bug De-duplication via Three-Dimensional Analysis
+#### [Guided Retraining to Enhance the Detection of Difficult Android Malware.](https://doi.org/10.1145/3597926.3598123)
 
-#### Simulation-based Validation for Autonomous Driving Systems
+#### [DeFiTainter: Detecting Price Manipulation Vulnerabilities in DeFi Protocols.](https://doi.org/10.1145/3597926.3598124)
 
-#### SlipCover: Near Zero-Overhead Code Coverage for Python
+#### [Beyond "Protected" and "Private": An Empirical Security Analysis of Custom Function Modifiers in Smart Contracts.](https://doi.org/10.1145/3597926.3598125)
 
-#### SmartState : Detecting State-reverting Vulnerabilities in Smart Contracts via Fine-grained State-dependency Analysis
+#### [Synthesizing Speech Test Cases with Text-to-Speech? An Empirical Study on the False Alarms in Automated Speech Recognition Testing.](https://doi.org/10.1145/3597926.3598126)
 
-#### Splendor: Static Detection of Stored XSS in Modern Web Applications
+#### [A Tale of Two Approximations: Tightening Over-Approximation for DNN Robustness Verification via Under-Approximation.](https://doi.org/10.1145/3597926.3598127)
 
-#### Synthesizing Speech Test Cases with Text-To-Speech? An Empirical Study on the False Alarms in Automated Speech Recognition Testing
+#### [SlipCover: Near Zero-Overhead Code Coverage for Python.](https://doi.org/10.1145/3597926.3598128)
 
-#### Systematically Producing Test-Orders to Detect Order-Dependent Flaky Tests
+#### [Systematic Testing of the Data-Poisoning Robustness of KNN.](https://doi.org/10.1145/3597926.3598129)
 
-#### Systematic Testing of the Data-Poisoning Robustness of KNN
+#### [GrayC: Greybox Fuzzing of Compilers and Analysers for C.](https://doi.org/10.1145/3597926.3598130)
 
-#### Tai-e: A Developer-Friendly Static Analysis Framework for Java by Harnessing the Good Designs of Classics
+#### [Enhancing REST API Testing with NLP Techniques.](https://doi.org/10.1145/3597926.3598131)
 
-#### Testing Automated Driving Systems by Breaking Many Laws Efficiently
+#### [Automated Generation of Security-Centric Descriptions for Smart Contract Bytecode.](https://doi.org/10.1145/3597926.3598132)
 
-#### Testing Graph Database Engines via Query Partitioning
+#### [Toward Automated Detecting Unanticipated Price Feed in Smart Contract.](https://doi.org/10.1145/3597926.3598133)
 
-#### Testing the Compiler for a New-born Programming Language: An Industrial Case Study (Experience Paper)
+#### [Virtual Reality (VR) Automated Testing in the Wild: A Case Study on Unity-Based VR Applications.](https://doi.org/10.1145/3597926.3598134)
 
-#### That's a Tough Call: Studying the Challenges of Call Graph Construction for WebAssembly
+#### [How Effective Are Neural Networks for Fixing Security Vulnerabilities.](https://doi.org/10.1145/3597926.3598135)
 
-#### Third-party Library Dependency for Large-scale SCA in the C/C++ Ecosystem: How Far Are We?
+#### [Rare Path Guided Fuzzing.](https://doi.org/10.1145/3597926.3598136)
 
-#### To Kill a Mutant: An Empirical Study of Mutation Testing Kills
+#### [CGuard: Scalable and Precise Object Bounds Protection for C.](https://doi.org/10.1145/3597926.3598137)
 
-#### Toward Automated Detecting Unanticipated Price Feed in Smart Contract
+#### [An Empirical Study of Functional Bugs in Android Apps.](https://doi.org/10.1145/3597926.3598138)
 
-#### Towards Efficient Fine-tuning of Pre-trained Code Models: An Experimental Study and Beyond
+#### [NodeRT: Detecting Races in Node.js Applications Practically.](https://doi.org/10.1145/3597926.3598139)
 
-#### Towards More Realistic Evaluation for Neural Test Oracle Generation
+#### [An Empirical Study on Concurrency Bugs in Interrupt-Driven Embedded Software.](https://doi.org/10.1145/3597926.3598140)
 
-#### Transforming Test Suites Into Croissants
+#### [CodeGrid: A Grid Representation of Code.](https://doi.org/10.1145/3597926.3598141)
 
-#### Type Batched Program Reduction
+#### [Detecting Condition-Related Bugs with Control Flow Graph Neural Network.](https://doi.org/10.1145/3597926.3598142)
 
-#### Understanding and Tackling Label Errors in Deep Learning-based Vulnerability Detection (Experience Paper)
+#### [Third-Party Library Dependency for Large-Scale SCA in the C/C++ Ecosystem: How Far Are We?](https://doi.org/10.1145/3597926.3598143)
 
-#### Understanding Breaking Changes in the Wild
+#### [Green Fuzzer Benchmarking.](https://doi.org/10.1145/3597926.3598144)
 
-#### Validating Multimedia Content Moderation Software via Semantic Fusion
+#### [Interpreters for GNN-Based Vulnerability Detection: Are We There Yet?](https://doi.org/10.1145/3597926.3598145)
 
-#### Vectorizing Program Ingredients for Better JVM Testing
+#### [An Empirical Study on the Effects of Obfuscation on Static Machine Learning-Based Malicious JavaScript Detectors.](https://doi.org/10.1145/3597926.3598146)
 
-#### Virtual Reality (VR) Automated Testing in the Wild: a Case Study on Unity-Based VR Applications
+#### [Understanding Breaking Changes in the Wild.](https://doi.org/10.1145/3597926.3598147)
 
-#### What You See Is What You Get? It Is Not the Case! Detecting Misleading Icons for Mobile Applications
+#### [Improving Spectrum-Based Localization of Multiple Faults by Iterative Test Suite Reduction.](https://doi.org/10.1145/3597926.3598148)
 
-#### Who Judges the Judge: An Empirical Study on Online Judge Tests
+#### [Extracting Inline Tests from Unit Tests.](https://doi.org/10.1145/3597926.3598149)
+
+#### [DDLDroid: A Static Analyzer for Automatically Detecting Data Loss Issues in Android Applications.](https://doi.org/10.1145/3597926.3604916)
+
+#### [Behaviorally Typed State Machines in TypeScript for Heterogeneous Swarms.](https://doi.org/10.1145/3597926.3604917)
+
+#### [ECSTATIC: Automatic Configuration-Aware Testing and Debugging of Static Analysis Tools.](https://doi.org/10.1145/3597926.3604918)
+
+#### [RustSmith: Random Differential Compiler Testing for Rust.](https://doi.org/10.1145/3597926.3604919)
+
+#### [KeenTune: Automated Tuning Tool for Cloud Application Performance Testing and Optimization.](https://doi.org/10.1145/3597926.3604920)
+
+#### [KDAlloc: The KLEE Deterministic Allocator: Deterministic Memory Allocation during Symbolic Execution and Test Case Replay.](https://doi.org/10.1145/3597926.3604921)
+
+#### [EDHOC-Fuzzer: An EDHOC Protocol State Fuzzer.](https://doi.org/10.1145/3597926.3604922)
+
+#### [MetaData262: Automatic Test Suite Selection for Partial JavaScript Implementations.](https://doi.org/10.1145/3597926.3604923)
+
+#### [RobotBT: Behavior-Tree-Based Test-Case Specification for the Robot Framework.](https://doi.org/10.1145/3597926.3604924)
+
+#### [TreeLine and SlackLine: Grammar-Based Performance Fuzzing on Coffee Break.](https://doi.org/10.1145/3597926.3604925)
+
+#### [Oven: Safe and Live Communication Protocols in Scala, using Synthetic Behavioural Type Analysis.](https://doi.org/10.1145/3597926.3604926)
+
+#### [SymRustC: A Hybrid Fuzzer for Rust.](https://doi.org/10.1145/3597926.3604927)
+
+#### [EvoSpex: A Search-Based Tool for Postcondition Inference.](https://doi.org/10.1145/3597926.3604928)
+
+#### [PExReport-Maven: Creating Pruned Executable Cross-Project Failure Reports in Maven Build System.](https://doi.org/10.1145/3597926.3604929)
+
+#### [Quantitative Robustness Analysis of Neural Networks.](https://doi.org/10.1145/3597926.3605231)
+
+#### [Automatic Testing and Benchmarking for Configurable Static Analysis Tools.](https://doi.org/10.1145/3597926.3605232)
+
+#### [Type Automata.](https://doi.org/10.1145/3597926.3605237)
+
+#### [Harnessing Large Language Models for Simulink Toolchain Testing and Developing Diverse Open-Source Corpora of Simulink Models for Metric and Evolution Analysis.](https://doi.org/10.1145/3597926.3605233)
+
+#### [Fairness Testing for Recommender Systems.](https://doi.org/10.1145/3597926.3605235)
+
+#### [Quantitative Symbolic Similarity Analysis.](https://doi.org/10.1145/3597926.3605238)
+
+#### [Reasoning about MLIR Semantics through Effects and Handlers.](https://doi.org/10.1145/3597926.3605239)
 

@@ -4,75 +4,117 @@ title: ISSTA 2019
 
 # ISSTA 2019
 
-32 papers accepted. Updated on **2023-05-19**.
+53 papers accepted. Updated on **2023-09-08**.
 
 
 
-You can find [the lastest information here](https://conf.researchr.org/track/issta-2019/issta-2019-Technical-Papers#event-overview).
+You can find [the lastest information here](https://dblp.org/db/conf/issta/issta2019.html).
 
 ---
 
-#### Adlib: Analyzer for Mobile Ad Platform Libraries
+#### [Some challenges for software testing research (invited talk paper).](https://doi.org/10.1145/3293882.3338991)
 
-#### A Large-Scale Study of Application Incompatibilities in Android
+#### [From typestate verification to interpretable deep models (invited talk abstract).](https://doi.org/10.1145/3293882.3338992)
 
-#### Assessing the State and Improving the Art of Parallel Testing for C
+#### [Theory and practice of string solvers (invited talk abstract).](https://doi.org/10.1145/3293882.3338993)
 
-#### Automated API-Usage Update for Android Apps
+#### [Crash-avoiding program repair.](https://doi.org/10.1145/3293882.3330558)
 
-#### Automatically Testing Self-Driving Cars with Search-based Procedural Content Generation
+#### [Practical program repair via bytecode mutation.](https://doi.org/10.1145/3293882.3330559)
 
-#### Codebase-Adaptive Detection of Security-Relevant Methods
+#### [TBar: revisiting template-based automated program repair.](https://doi.org/10.1145/3293882.3330577)
 
-#### Crash-avoiding Program Repair
+#### [History-driven build failure fixing: how far are we?](https://doi.org/10.1145/3293882.3330578)
 
-#### DeepFL: Integrating Multiple Fault Diagnosis Dimensions for Deep Fault Localization
+#### [LibID: reliable identification of obfuscated third-party Android libraries.](https://doi.org/10.1145/3293882.3330563)
 
-#### DeepHunter: A Coverage-Guided Fuzz Testing Framework for Deep Neural Networks
+#### [QADroid: regression event selection for Android applications.](https://doi.org/10.1145/3293882.3330550)
 
-#### Deferred Concretization in Symbolic Execution via Fuzzing
+#### [Mining Android crash fixes in the absence of issue- and change-tracking systems.](https://doi.org/10.1145/3293882.3330572)
 
-#### Detecting Memory Errors at Runtime with Source-Level Instrumentation
+#### [Sara: self-replay augmented record and replay for Android in industrial cases.](https://doi.org/10.1145/3293882.3330557)
 
-#### Differentially Testing Soundness and Precision of Program Analyzers
+#### [Root causing flaky tests in a large-scale industrial setting.](https://doi.org/10.1145/3293882.3330570)
 
-#### Effective and Efficient API Misuse Detection via Exception Propagation and Search-based Testing
+#### [Mitigating the effects of flaky tests on mutation testing.](https://doi.org/10.1145/3293882.3330568)
 
-#### Exploiting The Laws of Order in Smart Contracts
+#### [Assessing the state and improving the art of parallel testing for C.](https://doi.org/10.1145/3293882.3330573)
 
-#### Failure Clustering Without Coverage
+#### [Failure clustering without coverage.](https://doi.org/10.1145/3293882.3330561)
 
-#### History-driven Build Failure Fixing: How Far Are We?
+#### [DeepHunter: a coverage-guided fuzz testing framework for deep neural networks.](https://doi.org/10.1145/3293882.3330579)
 
-#### Improving Random GUI Testing with Image-based Widget Detection
+#### [Search-based test and improvement of machine-learning-based anomaly detection systems.](https://doi.org/10.1145/3293882.3330580)
 
-#### Interactive Metamorphic Testing of Debuggers
+#### [DeepFL: integrating multiple fault diagnosis dimensions for deep fault localization.](https://doi.org/10.1145/3293882.3330574)
 
-#### Judge: Identifying, Understanding, and Evaluating Sources of Unsoundness in Call Graphs
+#### [Codebase-adaptive detection of security-relevant methods.](https://doi.org/10.1145/3293882.3330556)
 
-#### Learning User Interface Element Interactions
+#### [Effective and efficient API misuse detection via exception propagation and search-based testing.](https://doi.org/10.1145/3293882.3330552)
 
-#### LibID: Reliable Identification of Obfuscated Third-Party Android Libraries
+#### [Automated API-usage update for Android apps.](https://doi.org/10.1145/3293882.3330571)
 
-#### Mining Android Crash Fixes in the Absence of Issue- and Change-Tracking Systems
+#### [A large-scale study of application incompatibilities in Android.](https://doi.org/10.1145/3293882.3330564)
 
-#### Mitigating the Effects of Flaky Tests on Mutation Testing
+#### [Deferred concretization in symbolic execution via fuzzing.](https://doi.org/10.1145/3293882.3330554)
 
-#### Optimal Context-Sensitive Dynamic Partial Order Reduction with Observers
+#### [Differentially testing soundness and precision of program analyzers.](https://doi.org/10.1145/3293882.3330553)
 
-#### Practical Program Repair via Bytecode Mutation
+#### [Judge: identifying, understanding, and evaluating sources of unsoundness in call graphs.](https://doi.org/10.1145/3293882.3330555)
 
-#### QADroid: Regression Event Selection for Android Applications
+#### [Adlib: analyzer for mobile ad platform libraries.](https://doi.org/10.1145/3293882.3330562)
 
-#### Root Causing Flaky Tests in a Large-scale Industrial Setting
+#### [Interactive metamorphic testing of debuggers.](https://doi.org/10.1145/3293882.3330567)
 
-#### SARA: Self-replay Augmented Record and Replay for Android in Industrial Cases
+#### [TestMig: migrating GUI test cases from iOS to Android.](https://doi.org/10.1145/3293882.3330575)
 
-#### Search-based Test and Improvement of Machine-Learning-Based Anomaly Detection Systems
+#### [Learning user interface element interactions.](https://doi.org/10.1145/3293882.3330569)
 
-#### Semantic Fuzzing with Zest
+#### [Improving random GUI testing with image-based widget detection.](https://doi.org/10.1145/3293882.3330551)
 
-#### TBar: Revisiting Template-based Automated Program Repair
+#### [Automatically testing self-driving cars with search-based procedural content generation.](https://doi.org/10.1145/3293882.3330566)
 
-#### TestMig: Migrating GUI Test Cases from iOS to Android
+#### [Semantic fuzzing with zest.](https://doi.org/10.1145/3293882.3330576)
+
+#### [Detecting memory errors at runtime with source-level instrumentation.](https://doi.org/10.1145/3293882.3330581)
+
+#### [Optimal context-sensitive dynamic partial order reduction with observers.](https://doi.org/10.1145/3293882.3330565)
+
+#### [Exploiting the laws of order in smart contracts.](https://doi.org/10.1145/3293882.3330560)
+
+#### [Go-clone: graph-embedding based clone detector for Golang.](https://doi.org/10.1145/3293882.3338996)
+
+#### [VFQL: combinational static analysis as query language.](https://doi.org/10.1145/3293882.3338997)
+
+#### [VBSAC: a value-based static analyzer for C.](https://doi.org/10.1145/3293882.3338998)
+
+#### [SAFEVM: a safety verifier for Ethereum smart contracts.](https://doi.org/10.1145/3293882.3338999)
+
+#### [CoCoTest: collaborative crowdsourced testing for Android applications.](https://doi.org/10.1145/3293882.3339000)
+
+#### [Androlic: an extensible flow, context, object, field, and path-sensitive static analysis framework for Android.](https://doi.org/10.1145/3293882.3339001)
+
+#### [JQF: coverage-guided property-based testing in Java.](https://doi.org/10.1145/3293882.3339002)
+
+#### [Ukwikora: continuous inspection for keyword-driven testing.](https://doi.org/10.1145/3293882.3339003)
+
+#### [CTRAS: a tool for aggregating and summarizing crowdsourced test reports.](https://doi.org/10.1145/3293882.3339004)
+
+#### [Continuous software performance assessment: detecting performance problems of software libraries on every build.](https://doi.org/10.1145/3293882.3338982)
+
+#### [Mining constraints for grammar fuzzing.](https://doi.org/10.1145/3293882.3338983)
+
+#### [A new dimension of test quality: assessing and generating higher quality unit test cases.](https://doi.org/10.1145/3293882.3338984)
+
+#### [A cost-effective strategy for software vulnerability prediction based on bellwether analysis.](https://doi.org/10.1145/3293882.3338985)
+
+#### [Identifying error code misuses in complex system.](https://doi.org/10.1145/3293882.3338986)
+
+#### [Conditional dynamic partial order reduction and optimality results.](https://doi.org/10.1145/3293882.3338987)
+
+#### [Towards scalable defense of information flow security for distributed systems.](https://doi.org/10.1145/3293882.3338988)
+
+#### [On the correctness of GPU programs.](https://doi.org/10.1145/3293882.3338989)
+
+#### [JNI program analysis with automatically extracted C semantic summary.](https://doi.org/10.1145/3293882.3338990)
 
