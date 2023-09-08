@@ -8,8 +8,8 @@ import re
 from pathlib import Path
 from lxml import etree
 
-def get_config():
-    with open('data.yml', 'r', encoding='utf-8') as f:
+def get_config(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
         return config
 
@@ -69,7 +69,7 @@ def get_links(html, config):
     else:
         return None
     
-def generate_md(data):
+def generate_md(data, fix):
     filetitle = data['filetitle']
     filename = data['filename']
     titles = data['titles']
@@ -85,15 +85,16 @@ def generate_md(data):
         f.write(f'# {filetitle}\n\n')
         f.write(f'{len(titles)} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
         for i in range(len(titles)):
+            t = titles[i].strip().replace('`',"'").replace('\n','')
+            if t in fix:
+                t = fix[t]['']
             if links is not None:
                 assert len(titles) == len(links)
-                t = titles[i].strip().replace('`',"'").replace('\n','')
                 if links[i].startswith('http'):
                     f.write(f'#### [{t}]({links[i].strip()})\n\n')
                 else:
                     f.write(f'#### [{t}]({base_url}{links[i].strip()})\n\n')
             else:
-                t = titles[i].strip().replace('`',"'").replace('\n','')
                 f.write(f'#### {t}\n\n')
 
 def update_mkdocs_yml(config):
@@ -147,7 +148,7 @@ The following publications are included:
 - ACM CCS
 - NDSS
 
-Since some topics on software testing are related to security, the following publication are also included:
+Since some topics on software testing are related to security, the following publications are also included:
 
 - ICSE
 - ISSTA
@@ -182,7 +183,8 @@ Here is a glance at all papers:
     print('README.md generated')
 
 if __name__ == '__main__':
-    config = get_config()
+    config = get_config('data.yml')
+    mf = get_config('manual_fix.yml')
     update_mkdocs_yml(config)
     if not os.path.exists('cache'):
         os.mkdir('cache')
@@ -211,7 +213,7 @@ if __name__ == '__main__':
                     'note': site.get('note', ''),
                     'time': time,
                 }
-                generate_md(data)
+                generate_md(data,mf)
                 print(f'{config[top_site]["name"]}_{site["name"]} Success')
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
