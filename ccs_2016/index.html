@@ -1,0 +1,1478 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ccs_2016/">
+      
+      
+        <link rel="prev" href="../ccs_2017/">
+      
+      
+        <link rel="next" href="../ccs_2015/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>ACM CCS 2016 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Collection of Security Papers" class="md-header__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ACM CCS 2016
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Collection of Security Papers" class="md-nav__button md-logo" aria-label="Collection of Security Papers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/c01dkit/sec-papers-collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        All
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          IEEE S&P
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          IEEE S&P
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2016/" class="md-nav__link">
+        2016
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2015/" class="md-nav__link">
+        2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          ACM CCS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACM CCS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2016
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2015/" class="md-nav__link">
+        2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          USENIX Sec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          USENIX Sec
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2016/" class="md-nav__link">
+        2016
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2015/" class="md-nav__link">
+        2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          NDSS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          NDSS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2016/" class="md-nav__link">
+        2016
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2015/" class="md-nav__link">
+        2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          ICSE
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          ICSE
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2016/" class="md-nav__link">
+        2016
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2015-1/" class="md-nav__link">
+        2015-1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icse_2015-2/" class="md-nav__link">
+        2015-2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          ISSTA
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          ISSTA
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2023/" class="md-nav__link">
+        2023
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2022/" class="md-nav__link">
+        2022
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2020/" class="md-nav__link">
+        2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2019/" class="md-nav__link">
+        2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2018/" class="md-nav__link">
+        2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2017/" class="md-nav__link">
+        2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2016/" class="md-nav__link">
+        2016
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issta_2015/" class="md-nav__link">
+        2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="acm-ccs-2016">ACM CCS 2016</h1>
+<p>195 papers accepted. Updated on <strong>2023-10-06</strong>.</p>
+<p>You can find <a href="https://dblp.org/db/conf/ccs/ccs2016.html">the lastest information here</a>.</p>
+<hr />
+<h4 id="on-the-security-and-performance-of-proof-of-work-blockchains"><a href="https://doi.org/10.1145/2976749.2978341">On the Security and Performance of Proof of Work Blockchains.</a></h4>
+<h4 id="a-secure-sharding-protocol-for-open-blockchains"><a href="https://doi.org/10.1145/2976749.2978389">A Secure Sharding Protocol For Open Blockchains.</a></h4>
+<h4 id="the-honey-badger-of-bft-protocols"><a href="https://doi.org/10.1145/2976749.2978399">The Honey Badger of BFT Protocols.</a></h4>
+<h4 id="differential-privacy-as-a-mutual-information-constraint"><a href="https://doi.org/10.1145/2976749.2978308">Differential Privacy as a Mutual Information Constraint.</a></h4>
+<h4 id="advanced-probabilistic-couplings-for-differential-privacy"><a href="https://doi.org/10.1145/2976749.2978391">Advanced Probabilistic Couplings for Differential Privacy.</a></h4>
+<h4 id="differentially-private-bayesian-programming"><a href="https://doi.org/10.1145/2976749.2978371">Differentially Private Bayesian Programming.</a></h4>
+<h4 id="the-misuse-of-android-unix-domain-sockets-and-security-implications"><a href="https://doi.org/10.1145/2976749.2978297">The Misuse of Android Unix Domain Sockets and Security Implications.</a></h4>
+<h4 id="call-me-back-attacks-on-system-server-and-system-apps-in-android-through-synchronous-callback"><a href="https://doi.org/10.1145/2976749.2978342">Call Me Back!: Attacks on System Server and System Apps in Android through Synchronous Callback.</a></h4>
+<h4 id="draco-a-system-for-uniform-and-fine-grained-access-control-for-web-code-on-android"><a href="https://doi.org/10.1145/2976749.2978322">Draco: A System for Uniform and Fine-grained Access Control for Web Code on Android.</a></h4>
+<h4 id="strong-non-interference-and-type-directed-higher-order-masking"><a href="https://doi.org/10.1145/2976749.2978427">Strong Non-Interference and Type-Directed Higher-Order Masking.</a></h4>
+<h4 id="mers-statistical-test-generation-for-side-channel-analysis-based-trojan-detection"><a href="https://doi.org/10.1145/2976749.2978396">MERS: Statistical Test Generation for Side-Channel Analysis based Trojan Detection.</a></h4>
+<h4 id="private-circuits-iii-hardware-trojan-resilience-via-testing-amplification"><a href="https://doi.org/10.1145/2976749.2978419">Private Circuits III: Hardware Trojan-Resilience via Testing Amplification.</a></h4>
+<h4 id="on-the-instability-of-bitcoin-without-the-block-reward"><a href="https://doi.org/10.1145/2976749.2978408">On the Instability of Bitcoin Without the Block Reward.</a></h4>
+<h4 id="transparency-overlays-and-applications"><a href="https://doi.org/10.1145/2976749.2978404">Transparency Overlays and Applications.</a></h4>
+<h4 id="epicrec-towards-practical-differentially-private-framework-for-personalized-recommendation"><a href="https://doi.org/10.1145/2976749.2978316">EpicRec: Towards Practical Differentially Private Framework for Personalized Recommendation.</a></h4>
+<h4 id="heavy-hitter-estimation-over-set-valued-data-with-local-differential-privacy"><a href="https://doi.org/10.1145/2976749.2978409">Heavy Hitter Estimation over Set-Valued Data with Local Differential Privacy.</a></h4>
+<h4 id="audacious-user-driven-access-control-with-unmodified-operating-systems"><a href="https://doi.org/10.1145/2976749.2978344">AUDACIOUS: User-Driven Access Control with Unmodified Operating Systems.</a></h4>
+<h4 id="mixslice-efficient-access-revocation-in-the-cloud"><a href="https://doi.org/10.1145/2976749.2978377">Mix&amp;Slice: Efficient Access Revocation in the Cloud.</a></h4>
+<h4 id="safe-serializable-secure-scheduling-transactions-and-the-trade-off-between-security-and-consistency"><a href="https://doi.org/10.1145/2976749.2978415">Safe Serializable Secure Scheduling: Transactions and the Trade-Off Between Security and Consistency.</a></h4>
+<h4 id="provusb-block-level-provenance-based-data-protection-for-usb-storage-devices"><a href="https://doi.org/10.1145/2976749.2978398">ProvUSB: Block-level Provenance-Based Data Protection for USB Storage Devices.</a></h4>
+<h4 id="making-smart-contracts-smarter"><a href="https://doi.org/10.1145/2976749.2978309">Making Smart Contracts Smarter.</a></h4>
+<h4 id="town-crier-an-authenticated-data-feed-for-smart-contracts"><a href="https://doi.org/10.1145/2976749.2978326">Town Crier: An Authenticated Data Feed for Smart Contracts.</a></h4>
+<h4 id="the-ring-of-gyges-investigating-the-future-of-criminal-smart-contracts"><a href="https://doi.org/10.1145/2976749.2978362">The Ring of Gyges: Investigating the Future of Criminal Smart Contracts.</a></h4>
+<h4 id="dpsense-differentially-private-crowdsourced-spectrum-sensing"><a href="https://doi.org/10.1145/2976749.2978426">DPSense: Differentially Private Crowdsourced Spectrum Sensing.</a></h4>
+<h4 id="deep-learning-with-differential-privacy"><a href="https://doi.org/10.1145/2976749.2978318">Deep Learning with Differential Privacy.</a></h4>
+<h4 id="membership-privacy-in-microrna-based-studies"><a href="https://doi.org/10.1145/2976749.2978355">Membership Privacy in MicroRNA-based Studies.</a></h4>
+<h4 id="taintart-a-practical-multi-level-information-flow-tracking-system-for-android-runtime"><a href="https://doi.org/10.1145/2976749.2978343">TaintART: A Practical Multi-level Information-Flow Tracking System for Android RunTime.</a></h4>
+<h4 id="statistical-deobfuscation-of-android-applications"><a href="https://doi.org/10.1145/2976749.2978422">Statistical Deobfuscation of Android Applications.</a></h4>
+<h4 id="reliable-third-party-library-detection-in-android-and-its-security-applications"><a href="https://doi.org/10.1145/2976749.2978333">Reliable Third-Party Library Detection in Android and its Security Applications.</a></h4>
+<h4 id="prefetch-side-channel-attacks-bypassing-smap-and-kernel-aslr"><a href="https://doi.org/10.1145/2976749.2978356">Prefetch Side-Channel Attacks: Bypassing SMAP and Kernel ASLR.</a></h4>
+<h4 id="breaking-kernel-address-space-layout-randomization-with-intel-tsx"><a href="https://doi.org/10.1145/2976749.2978321">Breaking Kernel Address Space Layout Randomization with Intel TSX.</a></h4>
+<h4 id="enforcing-least-privilege-memory-views-for-multithreaded-applications"><a href="https://doi.org/10.1145/2976749.2978327">Enforcing Least Privilege Memory Views for Multithreaded Applications.</a></h4>
+<h4 id="improvements-to-secure-computation-with-penalties"><a href="https://doi.org/10.1145/2976749.2978421">Improvements to Secure Computation with Penalties.</a></h4>
+<h4 id="amortizing-secure-computation-with-penalties"><a href="https://doi.org/10.1145/2976749.2978424">Amortizing Secure Computation with Penalties.</a></h4>
+<h4 id="mpc-friendly-symmetric-key-primitives"><a href="https://doi.org/10.1145/2976749.2978332">MPC-Friendly Symmetric Key Primitives.</a></h4>
+<h4 id="message-recovery-attacks-on-feistel-based-format-preserving-encryption"><a href="https://doi.org/10.1145/2976749.2978390">Message-Recovery Attacks on Feistel-Based Format Preserving Encryption.</a></h4>
+<h4 id="on-the-practical-in-security-of-64-bit-block-ciphers-collision-attacks-on-http-over-tls-and-openvpn"><a href="https://doi.org/10.1145/2976749.2978423">On the Practical (In-)Security of 64-bit Block Ciphers: Collision Attacks on HTTP over TLS and OpenVPN.</a></h4>
+<h4 id="a-systematic-analysis-of-the-juniper-dual-ec-incident"><a href="https://doi.org/10.1145/2976749.2978395">A Systematic Analysis of the Juniper Dual EC Incident.</a></h4>
+<h4 id="scalable-graph-based-bug-search-for-firmware-images"><a href="https://doi.org/10.1145/2976749.2978370">Scalable Graph-based Bug Search for Firmware Images.</a></h4>
+<h4 id="smartwalk-enhancing-social-network-security-via-adaptive-random-walks"><a href="https://doi.org/10.1145/2976749.2978319">SmartWalk: Enhancing Social Network Security via Adaptive Random Walks.</a></h4>
+<h4 id="high-fidelity-data-reduction-for-big-data-security-dependency-analyses"><a href="https://doi.org/10.1145/2976749.2978378">High Fidelity Data Reduction for Big Data Security Dependency Analyses.</a></h4>
+<h4 id="typesan-practical-type-confusion-detection"><a href="https://doi.org/10.1145/2976749.2978405">TypeSan: Practical Type Confusion Detection.</a></h4>
+<h4 id="credal-towards-locating-a-memory-corruption-vulnerability-with-your-core-dump"><a href="https://doi.org/10.1145/2976749.2978340">CREDAL: Towards Locating a Memory Corruption Vulnerability with Your Core Dump.</a></h4>
+<h4 id="twice-the-bits-twice-the-trouble-vulnerabilities-induced-by-migrating-to-64-bit-platforms"><a href="https://doi.org/10.1145/2976749.2978403">Twice the Bits, Twice the Trouble: Vulnerabilities Induced by Migrating to 64-Bit Platforms.</a></h4>
+<h4 id="alternative-implementations-of-secure-real-numbers"><a href="https://doi.org/10.1145/2976749.2978348">Alternative Implementations of Secure Real Numbers.</a></h4>
+<h4 id="garbling-gadgets-for-boolean-and-arithmetic-circuits"><a href="https://doi.org/10.1145/2976749.2978410">Garbling Gadgets for Boolean and Arithmetic Circuits.</a></h4>
+<h4 id="optimizing-semi-honest-secure-multiparty-computation-for-the-internet"><a href="https://doi.org/10.1145/2976749.2978347">Optimizing Semi-Honest Secure Multiparty Computation for the Internet.</a></h4>
+<h4 id="mems-gyroscopes-as-physical-unclonable-functions"><a href="https://doi.org/10.1145/2976749.2978295">MEMS Gyroscopes as Physical Unclonable Functions.</a></h4>
+<h4 id="on-the-security-and-usability-of-segment-based-visual-cryptographic-authentication-protocols"><a href="https://doi.org/10.1145/2976749.2978417">On the Security and Usability of Segment-based Visual Cryptographic Authentication Protocols.</a></h4>
+<h4 id="instant-and-robust-authentication-and-key-agreement-among-mobile-devices"><a href="https://doi.org/10.1145/2976749.2978298">Instant and Robust Authentication and Key Agreement among Mobile Devices.</a></h4>
+<h4 id="measurement-and-analysis-of-private-key-sharing-in-the-https-ecosystem"><a href="https://doi.org/10.1145/2976749.2978301">Measurement and Analysis of Private Key Sharing in the HTTPS Ecosystem.</a></h4>
+<h4 id="chainsaw-chained-automated-workflow-based-exploit-generation"><a href="https://doi.org/10.1145/2976749.2978380">Chainsaw: Chained Automated Workflow-based Exploit Generation.</a></h4>
+<h4 id="cspautogen-black-box-enforcement-of-content-security-policy-upon-real-world-websites"><a href="https://doi.org/10.1145/2976749.2978384">CSPAutoGen: Black-box Enforcement of Content Security Policy upon Real-world Websites.</a></h4>
+<h4 id="how-i-learned-to-be-secure-a-census-representative-survey-of-security-advice-sources-and-behavior"><a href="https://doi.org/10.1145/2976749.2978307">How I Learned to be Secure: a Census-Representative Survey of Security Advice Sources and Behavior.</a></h4>
+<h4 id="practical-detection-of-entropy-loss-in-pseudo-random-number-generators"><a href="https://doi.org/10.1145/2976749.2978369">Practical Detection of Entropy Loss in Pseudo-Random Number Generators.</a></h4>
+<h4 id="build-it-break-it-fix-it-contesting-secure-development"><a href="https://doi.org/10.1145/2976749.2978382">Build It, Break It, Fix It: Contesting Secure Development.</a></h4>
+<h4 id="sandscout-automatic-detection-of-flaws-in-ios-sandbox-profiles"><a href="https://doi.org/10.1145/2976749.2978336">SandScout: Automatic Detection of Flaws in iOS Sandbox Profiles.</a></h4>
+<h4 id="computational-soundness-for-dalvik-bytecode"><a href="https://doi.org/10.1145/2976749.2978418">Computational Soundness for Dalvik Bytecode.</a></h4>
+<h4 id="sana-secure-and-scalable-aggregate-network-attestation"><a href="https://doi.org/10.1145/2976749.2978335">SANA: Secure and Scalable Aggregate Network Attestation.</a></h4>
+<h4 id="c-flat-control-flow-attestation-for-embedded-systems-software"><a href="https://doi.org/10.1145/2976749.2978358">C-FLAT: Control-Flow Attestation for Embedded Systems Software.</a></h4>
+<h4 id="acing-the-ioc-game-toward-automatic-discovery-and-analysis-of-open-source-cyber-threat-intelligence"><a href="https://doi.org/10.1145/2976749.2978315">Acing the IOC Game: Toward Automatic Discovery and Analysis of Open-Source Cyber Threat Intelligence.</a></h4>
+<h4 id="featuresmith-automatically-engineering-features-for-malware-detection-by-mining-the-security-literature"><a href="https://doi.org/10.1145/2976749.2978304">FeatureSmith: Automatically Engineering Features for Malware Detection by Mining the Security Literature.</a></h4>
+<h4 id="an-in-depth-study-of-more-than-ten-years-of-java-exploitation"><a href="https://doi.org/10.1145/2976749.2978361">An In-Depth Study of More Than Ten Years of Java Exploitation.</a></h4>
+<h4 id="the-weblocal-boundary-is-fuzzy-a-security-study-of-chromes-process-based-sandboxing"><a href="https://doi.org/10.1145/2976749.2978414">"The Web/Local" Boundary Is Fuzzy: A Security Study of Chrome's Process-based Sandboxing.</a></h4>
+<h4 id="high-throughput-semi-honest-secure-three-party-computation-with-an-honest-majority"><a href="https://doi.org/10.1145/2976749.2978331">High-Throughput Semi-Honest Secure Three-Party Computation with an Honest Majority.</a></h4>
+<h4 id="efficient-batched-oblivious-prf-with-applications-to-private-set-intersection"><a href="https://doi.org/10.1145/2976749.2978381">Efficient Batched Oblivious PRF with Applications to Private Set Intersection.</a></h4>
+<h4 id="mascot-faster-malicious-arithmetic-secure-computation-with-oblivious-transfer"><a href="https://doi.org/10.1145/2976749.2978357">MASCOT: Faster Malicious Arithmetic Secure Computation with Oblivious Transfer.</a></h4>
+<h4 id="covert-channels-through-random-number-generator-mechanisms-capacity-estimation-and-mitigations"><a href="https://doi.org/10.1145/2976749.2978374">Covert Channels through Random Number Generator: Mechanisms, Capacity Estimation and Mitigations.</a></h4>
+<h4 id="return-oriented-flush-reload-side-channels-on-arm-and-their-implications-for-android-devices"><a href="https://doi.org/10.1145/2976749.2978360">Return-Oriented Flush-Reload Side Channels on ARM and Their Implications for Android Devices.</a></h4>
+<h4 id="a-software-approach-to-defeating-side-channels-in-last-level-caches"><a href="https://doi.org/10.1145/2976749.2978324">A Software Approach to Defeating Side Channels in Last-Level Caches.</a></h4>
+<h4 id="leave-your-phone-at-the-door-side-channels-that-reveal-factory-floor-secrets"><a href="https://doi.org/10.1145/2976749.2978323">Leave Your Phone at the Door: Side Channels that Reveal Factory Floor Secrets.</a></h4>
+<h4 id="my-smartphone-knows-what-you-print-exploring-smartphone-based-side-channel-attacks-against-3d-printers"><a href="https://doi.org/10.1145/2976749.2978300">My Smartphone Knows What You Print: Exploring Smartphone-based Side-channel Attacks Against 3D Printers.</a></h4>
+<h4 id="the-sounds-of-the-phones-dangers-of-zero-effort-second-factor-login-based-on-ambient-audio"><a href="https://doi.org/10.1145/2976749.2978328">The Sounds of the Phones: Dangers of Zero-Effort Second Factor Login based on Ambient Audio.</a></h4>
+<h4 id="unisan-proactive-kernel-memory-initialization-to-eliminate-data-leakages"><a href="https://doi.org/10.1145/2976749.2978366">UniSan: Proactive Kernel Memory Initialization to Eliminate Data Leakages.</a></h4>
+<h4 id="ilock-immediate-and-automatic-locking-of-mobile-devices-against-data-theft"><a href="https://doi.org/10.1145/2976749.2978294">iLock: Immediate and Automatic Locking of Mobile Devices against Data Theft.</a></h4>
+<h4 id="hypnoguard-protecting-secrets-across-sleep-wake-cycles"><a href="https://doi.org/10.1145/2976749.2978372">Hypnoguard: Protecting Secrets across Sleep-wake Cycles.</a></h4>
+<h4 id="5gen-a-framework-for-prototyping-applications-using-multilinear-maps-and-matrix-branching-programs"><a href="https://doi.org/10.1145/2976749.2978314">5Gen: A Framework for Prototyping Applications Using Multilinear Maps and Matrix Branching Programs.</a></h4>
+<h4 id="functional-lattice-cryptography"><a href="https://doi.org/10.1145/2976749.2978402">Λολ: Functional Lattice Cryptography.</a></h4>
+<h4 id="frodo-take-off-the-ring-practical-quantum-secure-key-exchange-from-lwe"><a href="https://doi.org/10.1145/2976749.2978425">Frodo: Take off the Ring! Practical, Quantum-Secure Key Exchange from LWE.</a></h4>
+<h4 id="on-code-execution-tracking-via-power-side-channel"><a href="https://doi.org/10.1145/2976749.2978299">On Code Execution Tracking via Power Side-Channel.</a></h4>
+<h4 id="coverage-based-greybox-fuzzing-as-markov-chain"><a href="https://doi.org/10.1145/2976749.2978428">Coverage-based Greybox Fuzzing as Markov Chain.</a></h4>
+<h4 id="error-handling-of-in-vehicle-networks-makes-them-vulnerable"><a href="https://doi.org/10.1145/2976749.2978302">Error Handling of In-vehicle Networks Makes Them Vulnerable.</a></h4>
+<h4 id="using-reflexive-eye-movements-for-fast-challenge-response-authentication"><a href="https://doi.org/10.1145/2976749.2978311">Using Reflexive Eye Movements for Fast Challenge-Response Authentication.</a></h4>
+<h4 id="when-csi-meets-public-wifi-inferring-your-mobile-phone-password-via-wifi-signals"><a href="https://doi.org/10.1145/2976749.2978397">When CSI Meets Public WiFi: Inferring Your Mobile Phone Password via WiFi Signals.</a></h4>
+<h4 id="voicelive-a-phoneme-localization-based-liveness-detection-for-voice-authentication-on-smartphones"><a href="https://doi.org/10.1145/2976749.2978296">VoiceLive: A Phoneme Localization based Liveness Detection for Voice Authentication on Smartphones.</a></h4>
+<h4 id="limiting-the-impact-of-stealthy-attacks-on-industrial-control-systems"><a href="https://doi.org/10.1145/2976749.2978388">Limiting the Impact of Stealthy Attacks on Industrial Control Systems.</a></h4>
+<h4 id="over-the-top-bypass-study-of-a-recent-telephony-fraud"><a href="https://doi.org/10.1145/2976749.2978334">Over-The-Top Bypass: Study of a Recent Telephony Fraud.</a></h4>
+<h4 id="new-security-threats-caused-by-ims-based-sms-service-in-4g-lte-networks"><a href="https://doi.org/10.1145/2976749.2978393">New Security Threats Caused by IMS-based SMS Service in 4G LTE Networks.</a></h4>
+<h4 id="pope-partial-order-preserving-encoding"><a href="https://doi.org/10.1145/2976749.2978345">POPE: Partial Order Preserving Encoding.</a></h4>
+<h4 id="oo-forward-secure-searchable-encryption"><a href="https://doi.org/10.1145/2976749.2978303">∑oφoς: Forward Secure Searchable Encryption.</a></h4>
+<h4 id="what-else-is-revealed-by-order-revealing-encryption"><a href="https://doi.org/10.1145/2976749.2978379">What Else is Revealed by Order-Revealing Encryption?</a></h4>
+<h4 id="order-revealing-encryption-new-constructions-applications-and-lower-bounds"><a href="https://doi.org/10.1145/2976749.2978376">Order-Revealing Encryption: New Constructions, Applications, and Lower Bounds.</a></h4>
+<h4 id="practical-anonymous-password-authentication-and-tls-with-anonymous-client-authentication"><a href="https://doi.org/10.1145/2976749.2978354">Practical Anonymous Password Authentication and TLS with Anonymous Client Authentication.</a></h4>
+<h4 id="efficient-cryptographic-password-hardening-services-from-partially-oblivious-commitments"><a href="https://doi.org/10.1145/2976749.2978375">Efficient Cryptographic Password Hardening Services from Partially Oblivious Commitments.</a></h4>
+<h4 id="a-comprehensive-formal-security-analysis-of-oauth-20"><a href="https://doi.org/10.1145/2976749.2978385">A Comprehensive Formal Security Analysis of OAuth 2.0.</a></h4>
+<h4 id="an-empirical-study-of-mnemonic-sentence-based-password-generation-strategies"><a href="https://doi.org/10.1145/2976749.2978346">An Empirical Study of Mnemonic Sentence-based Password Generation Strategies.</a></h4>
+<h4 id="on-the-security-of-cracking-resistant-password-vaults"><a href="https://doi.org/10.1145/2976749.2978416">On the Security of Cracking-Resistant Password Vaults.</a></h4>
+<h4 id="targeted-online-password-guessing-an-underestimated-threat"><a href="https://doi.org/10.1145/2976749.2978339">Targeted Online Password Guessing: An Underestimated Threat.</a></h4>
+<h4 id="pipsea-a-practical-ipsec-gateway-on-embedded-apus"><a href="https://doi.org/10.1145/2976749.2978329">PIPSEA: A Practical IPsec Gateway on Embedded APUs.</a></h4>
+<h4 id="middlepolice-toward-enforcing-destination-defined-policies-in-the-middle-of-the-internet"><a href="https://doi.org/10.1145/2976749.2978306">MiddlePolice: Toward Enforcing Destination-Defined Policies in the Middle of the Internet.</a></h4>
+<h4 id="protecting-insecure-communications-with-topology-aware-network-tunnels"><a href="https://doi.org/10.1145/2976749.2978305">Protecting Insecure Communications with Topology-aware Network Tunnels.</a></h4>
+<h4 id="function-secret-sharing-improvements-and-extensions"><a href="https://doi.org/10.1145/2976749.2978429">Function Secret Sharing: Improvements and Extensions.</a></h4>
+<h4 id="hash-first-argue-later-adaptive-verifiable-computations-on-outsourced-data"><a href="https://doi.org/10.1145/2976749.2978368">Hash First, Argue Later: Adaptive Verifiable Computations on Outsourced Data.</a></h4>
+<h4 id="practical-non-malleable-codes-from-l-more-extractable-hash-functions"><a href="https://doi.org/10.1145/2976749.2978352">Practical Non-Malleable Codes from l-more Extractable Hash Functions.</a></h4>
+<h4 id="generic-attacks-on-secure-outsourced-databases"><a href="https://doi.org/10.1145/2976749.2978386">Generic Attacks on Secure Outsourced Databases.</a></h4>
+<h4 id="the-shadow-nemesis-inference-attacks-on-efficiently-deployable-efficiently-searchable-encryption"><a href="https://doi.org/10.1145/2976749.2978401">The Shadow Nemesis: Inference Attacks on Efficiently Deployable, Efficiently Searchable Encryption.</a></h4>
+<h4 id="breaking-web-applications-built-on-top-of-encrypted-data"><a href="https://doi.org/10.1145/2976749.2978351">Breaking Web Applications Built On Top of Encrypted Data.</a></h4>
+<h4 id="content-security-problems-evaluating-the-effectiveness-of-content-security-policy-in-the-wild"><a href="https://doi.org/10.1145/2976749.2978338">Content Security Problems?: Evaluating the Effectiveness of Content Security Policy in the Wild.</a></h4>
+<h4 id="csp-is-dead-long-live-csp-on-the-insecurity-of-whitelists-and-the-future-of-content-security-policy"><a href="https://doi.org/10.1145/2976749.2978363">CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy.</a></h4>
+<h4 id="online-tracking-a-1-million-site-measurement-and-analysis"><a href="https://doi.org/10.1145/2976749.2978313">Online Tracking: A 1-million-site Measurement and Analysis.</a></h4>
+<h4 id="phisheye-live-monitoring-of-sandboxed-phishing-kits"><a href="https://doi.org/10.1145/2976749.2978330">PhishEye: Live Monitoring of Sandboxed Phishing Kits.</a></h4>
+<h4 id="all-your-dns-records-point-to-us-understanding-the-security-threats-of-dangling-dns-records"><a href="https://doi.org/10.1145/2976749.2978387">All Your DNS Records Point to Us: Understanding the Security Threats of Dangling DNS Records.</a></h4>
+<h4 id="identifying-the-scan-and-attack-infrastructures-behind-amplification-ddos-attacks"><a href="https://doi.org/10.1145/2976749.2978293">Identifying the Scan and Attack Infrastructures Behind Amplification DDoS Attacks.</a></h4>
+<h4 id="a-unilateral-to-mutual-authentication-compiler-for-key-exchange-with-applications-to-client-authentication-in-tls-13"><a href="https://doi.org/10.1145/2976749.2978325">A Unilateral-to-Mutual Authentication Compiler for Key Exchange (with Applications to Client Authentication in TLS 1.3).</a></h4>
+<h4 id="attribute-based-key-exchange-with-general-policies"><a href="https://doi.org/10.1145/2976749.2978359">Attribute-based Key Exchange with General Policies.</a></h4>
+<h4 id="identity-concealed-authenticated-encryption-and-key-exchange"><a href="https://doi.org/10.1145/2976749.2978350">Identity-Concealed Authenticated Encryption and Key Exchange.</a></h4>
+<h4 id="a-surfeit-of-ssh-cipher-suites"><a href="https://doi.org/10.1145/2976749.2978364">A Surfeit of SSH Cipher Suites.</a></h4>
+<h4 id="systematic-fuzzing-and-testing-of-tls-libraries"><a href="https://doi.org/10.1145/2976749.2978411">Systematic Fuzzing and Testing of TLS Libraries.</a></h4>
+<h4 id="attacking-openssl-implementation-of-ecdsa-with-a-few-signatures"><a href="https://doi.org/10.1145/2976749.2978400">Attacking OpenSSL Implementation of ECDSA with a Few Signatures.</a></h4>
+<h4 id="host-of-troubles-multiple-host-ambiguities-in-http-implementations"><a href="https://doi.org/10.1145/2976749.2978394">Host of Troubles: Multiple Host Ambiguities in HTTP Implementations.</a></h4>
+<h4 id="accessorize-to-a-crime-real-and-stealthy-attacks-on-state-of-the-art-face-recognition"><a href="https://doi.org/10.1145/2976749.2978392">Accessorize to a Crime: Real and Stealthy Attacks on State-of-the-Art Face Recognition.</a></h4>
+<h4 id="lurking-malice-in-the-cloud-understanding-and-detecting-cloud-repository-as-a-malicious-service"><a href="https://doi.org/10.1145/2976749.2978349">Lurking Malice in the Cloud: Understanding and Detecting Cloud Repository as a Malicious Service.</a></h4>
+<h4 id="safely-measuring-tor"><a href="https://doi.org/10.1145/2976749.2978310">Safely Measuring Tor.</a></h4>
+<h4 id="predator-proactive-recognition-and-elimination-of-domain-abuse-at-time-of-registration"><a href="https://doi.org/10.1145/2976749.2978317">PREDATOR: Proactive Recognition and Elimination of Domain Abuse at Time-Of-Registration.</a></h4>
+<h4 id="stemming-downlink-leakage-from-training-sequences-in-multi-user-mimo-networks"><a href="https://doi.org/10.1145/2976749.2978412">Stemming Downlink Leakage from Training Sequences in Multi-User MIMO Networks.</a></h4>
+<h4 id="a-protocol-for-privately-reporting-ad-impressions-at-scale"><a href="https://doi.org/10.1145/2976749.2978407">A Protocol for Privately Reporting Ad Impressions at Scale.</a></h4>
+<h4 id="secure-stable-matching-at-scale"><a href="https://doi.org/10.1145/2976749.2978373">Secure Stable Matching at Scale.</a></h4>
+<h4 id="beleniosrf-a-non-interactive-receipt-free-electronic-voting-scheme"><a href="https://doi.org/10.1145/2976749.2978337">BeleniosRF: A Non-interactive Receipt-Free Electronic Voting Scheme.</a></h4>
+<h4 id="ecdsa-key-extraction-from-mobile-devices-via-nonintrusive-physical-side-channels"><a href="https://doi.org/10.1145/2976749.2978353">ECDSA Key Extraction from Mobile Devices via Nonintrusive Physical Side Channels.</a></h4>
+<h4 id="make-sure-dsa-signing-exponentiations-really-are-constant-time"><a href="https://doi.org/10.1145/2976749.2978420">"Make Sure DSA Signing Exponentiations Really are Constant-Time".</a></h4>
+<h4 id="on-the-provable-security-of-ecdsa-signatures"><a href="https://doi.org/10.1145/2976749.2978413">On the Provable Security of (EC)DSA Signatures.</a></h4>
+<h4 id="android-ion-hazard-the-curse-of-customizable-memory-management-system"><a href="https://doi.org/10.1145/2976749.2978320">Android ION Hazard: the Curse of Customizable Memory Management System.</a></h4>
+<h4 id="drammer-deterministic-rowhammer-attacks-on-mobile-platforms"><a href="https://doi.org/10.1145/2976749.2978406">Drammer: Deterministic Rowhammer Attacks on Mobile Platforms.</a></h4>
+<h4 id="sfadiff-automated-evasion-attacks-and-fingerprinting-using-black-box-differential-automata-learning"><a href="https://doi.org/10.1145/2976749.2978383">SFADiff: Automated Evasion Attacks and Fingerprinting Using Black-box Differential Automata Learning.</a></h4>
+<h4 id="slitheen-perfectly-imitated-decoy-routing-through-traffic-replacement"><a href="https://doi.org/10.1145/2976749.2978312">Slitheen: Perfectly Imitated Decoy Routing through Traffic Replacement.</a></h4>
+<h4 id="practical-censorship-evasion-leveraging-content-delivery-networks"><a href="https://doi.org/10.1145/2976749.2978365">Practical Censorship Evasion Leveraging Content Delivery Networks.</a></h4>
+<h4 id="game-of-decoys-optimal-decoy-routing-through-game-theory"><a href="https://doi.org/10.1145/2976749.2978367">GAME OF DECOYS: Optimal Decoy Routing Through Game Theory.</a></h4>
+<h4 id="poster-an-educational-network-protocol-for-covert-channel-analysis-using-patterns"><a href="https://doi.org/10.1145/2976749.2989037">POSTER: An Educational Network Protocol for Covert Channel Analysis Using Patterns.</a></h4>
+<h4 id="poster-a-behavioural-authentication-system-for-mobile-users"><a href="https://doi.org/10.1145/2976749.2989065">POSTER: A Behavioural Authentication System for Mobile Users.</a></h4>
+<h4 id="poster-a-keyless-efficient-algorithm-for-data-protection-by-means-of-fragmentation"><a href="https://doi.org/10.1145/2976749.2989043">POSTER: A Keyless Efficient Algorithm for Data Protection by Means of Fragmentation.</a></h4>
+<h4 id="poster-accuracy-vs-time-cost-detecting-android-malware-through-pareto-ensemble-pruning"><a href="https://doi.org/10.1145/2976749.2989055">POSTER: Accuracy vs. Time Cost: Detecting Android Malware through Pareto Ensemble Pruning.</a></h4>
+<h4 id="poster-attack-on-non-linear-physical-unclonable-function"><a href="https://doi.org/10.1145/2976749.2989039">POSTER: Attack on Non-Linear Physical Unclonable Function.</a></h4>
+<h4 id="poster-concuroram-high-throughput-parallel-multi-client-oram"><a href="https://doi.org/10.1145/2976749.2989062">POSTER: ConcurORAM: High-Throughput Parallel Multi-Client ORAM.</a></h4>
+<h4 id="poster-datalair-a-storage-block-device-with-plausible-deniability"><a href="https://doi.org/10.1145/2976749.2989061">POSTER: DataLair: A Storage Block Device with Plausible Deniability.</a></h4>
+<h4 id="poster-droidshield-protecting-user-applications-from-normal-world-access"><a href="https://doi.org/10.1145/2976749.2989052">POSTER: DroidShield: Protecting User Applications from Normal World Access.</a></h4>
+<h4 id="poster-efficient-cross-user-chunk-level-client-side-data-deduplication-with-symmetrically-encrypted-two-party-interactions"><a href="https://doi.org/10.1145/2976749.2989047">POSTER: Efficient Cross-User Chunk-Level Client-Side Data Deduplication with Symmetrically Encrypted Two-Party Interactions.</a></h4>
+<h4 id="poster-fingerprinting-tor-hidden-services"><a href="https://doi.org/10.1145/2976749.2989054">POSTER: Fingerprinting Tor Hidden Services.</a></h4>
+<h4 id="poster-i-dont-want-that-content-on-the-risks-of-exploiting-bitcoins-blockchain-as-a-content-store"><a href="https://doi.org/10.1145/2976749.2989059">POSTER: I Don't Want That Content! On the Risks of Exploiting Bitcoin's Blockchain as a Content Store.</a></h4>
+<h4 id="poster-identifying-dynamic-data-structures-in-malware"><a href="https://doi.org/10.1145/2976749.2989041">POSTER: Identifying Dynamic Data Structures in Malware.</a></h4>
+<h4 id="poster-improved-markov-strength-meters-for-passwords"><a href="https://doi.org/10.1145/2976749.2989058">POSTER: Improved Markov Strength Meters for Passwords.</a></h4>
+<h4 id="poster-insights-of-antivirus-relationships-when-detecting-android-malware-a-data-analytics-approach"><a href="https://doi.org/10.1145/2976749.2989038">POSTER: Insights of Antivirus Relationships when Detecting Android Malware: A Data Analytics Approach.</a></h4>
+<h4 id="poster-kxray-introspecting-the-kernel-for-rootkit-timing-footprints"><a href="https://doi.org/10.1145/2976749.2989053">POSTER: KXRay: Introspecting the Kernel for Rootkit Timing Footprints.</a></h4>
+<h4 id="poster-locally-virtualized-environment-for-mitigating-ransomware-threat"><a href="https://doi.org/10.1145/2976749.2989051">POSTER: Locally Virtualized Environment for Mitigating Ransomware Threat.</a></h4>
+<h4 id="poster-mapping-the-landscape-of-large-scale-vulnerability-notifications"><a href="https://doi.org/10.1145/2976749.2989057">POSTER: Mapping the Landscape of Large-Scale Vulnerability Notifications.</a></h4>
+<h4 id="poster-phishing-website-detection-with-a-multiphase-framework-to-find-visual-similarity"><a href="https://doi.org/10.1145/2976749.2989050">POSTER: Phishing Website Detection with a Multiphase Framework to Find Visual Similarity.</a></h4>
+<h4 id="poster-privacy-enhanced-secure-location-verification"><a href="https://doi.org/10.1145/2976749.2989066">POSTER: Privacy Enhanced Secure Location Verification.</a></h4>
+<h4 id="poster-re-thinking-risks-and-rewards-for-trusted-third-parties"><a href="https://doi.org/10.1145/2976749.2989060">POSTER: Re-Thinking Risks and Rewards for Trusted Third Parties.</a></h4>
+<h4 id="poster-ria-an-audition-based-method-to-protect-the-runtime-integrity-of-mapreduce-applications"><a href="https://doi.org/10.1145/2976749.2989042">POSTER: RIA: an Audition-based Method to Protect the Runtime Integrity of MapReduce Applications.</a></h4>
+<h4 id="poster-security-enhanced-administrative-role-based-access-control-models"><a href="https://doi.org/10.1145/2976749.2989068">POSTER: Security Enhanced Administrative Role Based Access Control Models.</a></h4>
+<h4 id="poster-semi-supervised-machine-learning-approaches-for-network-security-in-high-dimensional-network-data"><a href="https://doi.org/10.1145/2976749.2989069">POSTER: (Semi)-Supervised Machine Learning Approaches for Network Security in High-Dimensional Network Data.</a></h4>
+<h4 id="poster-static-rop-chain-detection-based-on-hidden-markov-model-considering-rop-chain-integrity"><a href="https://doi.org/10.1145/2976749.2989040">POSTER: Static ROP Chain Detection Based on Hidden Markov Model Considering ROP Chain Integrity.</a></h4>
+<h4 id="poster-the-art-of-app-compartmentalization"><a href="https://doi.org/10.1145/2976749.2989056">POSTER: The ART of App Compartmentalization.</a></h4>
+<h4 id="poster-toward-automating-the-generation-of-malware-analysis-reports-using-the-sandbox-logs"><a href="https://doi.org/10.1145/2976749.2989064">POSTER: Toward Automating the Generation of Malware Analysis Reports Using the Sandbox Logs.</a></h4>
+<h4 id="poster-towards-collaboratively-supporting-decision-makers-in-choosing-suitable-authentication-schemes"><a href="https://doi.org/10.1145/2976749.2989045">POSTER: Towards Collaboratively Supporting Decision Makers in Choosing Suitable Authentication Schemes.</a></h4>
+<h4 id="poster-towards-exposing-internet-of-things-a-roadmap"><a href="https://doi.org/10.1145/2976749.2989046">POSTER: Towards Exposing Internet of Things: A Roadmap.</a></h4>
+<h4 id="poster-towards-highly-interactive-honeypots-for-industrial-control-systems"><a href="https://doi.org/10.1145/2976749.2989063">POSTER: Towards Highly Interactive Honeypots for Industrial Control Systems.</a></h4>
+<h4 id="poster-towards-privacy-preserving-biometric-identification-in-cloud-computing"><a href="https://doi.org/10.1145/2976749.2989048">POSTER: Towards Privacy-Preserving Biometric Identification in Cloud Computing.</a></h4>
+<h4 id="poster-vudec-a-framework-for-vulnerability-management-in-decentralized-communication-networks"><a href="https://doi.org/10.1145/2976749.2989049">POSTER: VUDEC: A Framework for Vulnerability Management in Decentralized Communication Networks.</a></h4>
+<h4 id="poster-weighing-in-ehealth-security"><a href="https://doi.org/10.1145/2976749.2989044">POSTER: Weighing in eHealth Security.</a></h4>
+<h4 id="poster-wiping-wi-fi-signal-based-pin-guessing-attack"><a href="https://doi.org/10.1145/2976749.2989067">POSTER: WiPING: Wi-Fi signal-based PIN Guessing attack.</a></h4>
+<h4 id="demo-easy-deployment-of-a-secure-internet-architecture-for-the-21st-century-how-hard-can-it-be-to-build-a-secure-internet"><a href="https://doi.org/10.1145/2976749.2989036">DEMO: Easy Deployment of a Secure Internet Architecture for the 21st Century: How hard can it be to build a secure Internet?</a></h4>
+<h4 id="demo-high-throughput-secure-three-party-computation-of-kerberos-ticket-generation"><a href="https://doi.org/10.1145/2976749.2989035">DEMO: High-Throughput Secure Three-Party Computation of Kerberos Ticket Generation.</a></h4>
+<h4 id="demo-integrating-mpc-in-big-data-workflows"><a href="https://doi.org/10.1145/2976749.2989034">DEMO: Integrating MPC in Big Data Workflows.</a></h4>
+<h4 id="demo-offpad-offline-personal-authenticating-device-with-applications-in-hospitals-and-e-banking"><a href="https://doi.org/10.1145/2976749.2989033">DEMO: OffPAD - Offline Personal Authenticating Device with Applications in Hospitals and e-Banking.</a></h4>
+<h4 id="demo-starving-permission-hungry-android-apps-using-securank"><a href="https://doi.org/10.1145/2976749.2989032">DEMO: Starving Permission-Hungry Android Apps Using SecuRank.</a></h4>
+<h4 id="program-anomaly-detection-methodology-and-practices"><a href="https://doi.org/10.1145/2976749.2976750">Program Anomaly Detection: Methodology and Practices.</a></h4>
+<h4 id="security-on-wheels-security-and-privacy-for-vehicular-communication-systems"><a href="https://doi.org/10.1145/2976749.2976752">Security on Wheels: Security and Privacy for Vehicular Communication Systems.</a></h4>
+<h4 id="condensed-cryptographic-currencies-crash-course-c5"><a href="https://doi.org/10.1145/2976749.2976754">Condensed Cryptographic Currencies Crash Course (C5).</a></h4>
+<h4 id="introduction-to-credit-networks-security-privacy-and-applications"><a href="https://doi.org/10.1145/2976749.2976755">Introduction to Credit Networks: Security, Privacy, and Applications.</a></h4>
+<h4 id="on-the-security-and-scalability-of-bitcoins-blockchain"><a href="https://doi.org/10.1145/2976749.2976756">On the Security and Scalability of Bitcoin's Blockchain.</a></h4>
+<h4 id="privacy-and-security-in-the-genomic-era"><a href="https://doi.org/10.1145/2976749.2976751">Privacy and Security in the Genomic Era.</a></h4>
+<h4 id="adversarial-data-mining-big-data-meets-cyber-security"><a href="https://doi.org/10.1145/2976749.2976753">Adversarial Data Mining: Big Data Meets Cyber Security.</a></h4>
+<h4 id="mtd-2016-third-acm-workshop-on-moving-target-defense"><a href="https://doi.org/10.1145/2976749.2990483">MTD 2016: Third ACM Workshop on Moving Target Defense.</a></h4>
+<h4 id="plas16-acm-sigplan-11th-workshop-on-programming-languages-and-analysis-for-security"><a href="https://doi.org/10.1145/2976749.2990484">PLAS'16: ACM SIGPLAN 11th Workshop on Programming Languages and Analysis for Security.</a></h4>
+<h4 id="safeconfig16-testing-and-evaluation-for-active-and-resilient-cyber-systems"><a href="https://doi.org/10.1145/2976749.2990485">SafeConfig'16: Testing and Evaluation for Active and Resilient Cyber Systems.</a></h4>
+<h4 id="sixth-annual-acm-ccs-workshop-on-security-and-privacy-in-smartphones-and-mobile-devices-spsm-2016"><a href="https://doi.org/10.1145/2976749.2990487">Sixth Annual ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices (SPSM 2016).</a></h4>
+<h4 id="theory-of-implementation-security-workshop-tis-2016"><a href="https://doi.org/10.1145/2976749.2990488">Theory of Implementation Security Workshop (TIs 2016).</a></h4>
+<h4 id="wiscs16-the-3rd-acm-workshop-on-information-sharing-and-collaborative-security"><a href="https://doi.org/10.1145/2976749.2990490">WISCS'16: The 3rd ACM Workshop on Information Sharing and Collaborative Security.</a></h4>
+<h4 id="15th-workshop-on-privacy-in-the-electronic-society-wpes-2016"><a href="https://doi.org/10.1145/2976749.2990491">15th Workshop on Privacy in the Electronic Society (WPES 2016).</a></h4>
+<h4 id="9th-international-workshop-on-artificial-intelligence-and-security-aisec-2016"><a href="https://doi.org/10.1145/2976749.2990479">9th International Workshop on Artificial Intelligence and Security: AISec 2016.</a></h4>
+<h4 id="ccsw16-8th-acm-cloud-computing-security-workshop"><a href="https://doi.org/10.1145/2976749.2990480">CCSW'16: 8th ACM Cloud Computing Security Workshop.</a></h4>
+<h4 id="second-workshop-on-cyber-physical-systems-security-and-privacy-cps-spc16"><a href="https://doi.org/10.1145/2976749.2990481">Second Workshop on Cyber-Physical Systems Security and PrivaCy (CPS-SPC'16).</a></h4>
+<h4 id="2nd-international-workshop-on-software-protection-spro-2016"><a href="https://doi.org/10.1145/2976749.2990486">2nd International Workshop on Software Protection: SPRO 2016.</a></h4>
+<h4 id="sixth-international-workshop-on-trustworthy-embedded-devices-trusted-2016"><a href="https://doi.org/10.1145/2976749.2990489">Sixth International Workshop on Trustworthy Embedded Devices (TrustED 2016).</a></h4>
+<h4 id="mist-2016-8th-international-workshop-on-managing-insider-security-threats"><a href="https://doi.org/10.1145/2976749.2990482">MIST 2016: 8th International Workshop on Managing Insider Security Threats.</a></h4>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2023 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
