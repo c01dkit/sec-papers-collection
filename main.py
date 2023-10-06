@@ -13,7 +13,6 @@ def get_config(filename):
         config = yaml.load(f, Loader=yaml.FullLoader)
         return config
 
-
 def hash_url(url):
     hash = hashlib.sha256()
     hash.update(url.encode('utf-8'))
@@ -85,7 +84,7 @@ def generate_md(data):
         f.write(f'title: {filetitle}\n')
         f.write('---\n\n')
         f.write(f'# {filetitle}\n\n')
-        f.write(f'{len(titles)} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
+        f.write(f'{len(set(titles))} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
         for i in range(len(titles)):
             t = titles[i].strip().replace('`',"'").replace('\n','')
             if links is not None:
@@ -107,28 +106,6 @@ def update_mkdocs_yml(config):
     with open('mkdocs.yml', 'w', encoding='utf-8') as f:
         yaml.dump(mkdocs, f)
 
-def guess_titles_from_links(links):
-    titles = []
-    for link in links:
-        title = link.strip('/').split('/')[-1].replace('-', ' ')
-        titles.append(title.title())
-    return titles
-
-def guess_links_from_titles(titles):
-    links = []
-    for title in titles:
-        title = title.strip()
-        for c in r'[@!?#$%^&*()_+=`~–,|:“”’<>\';…\\]':
-            title = title.replace(c, '')
-        for c in r'.':
-            title = title.replace(c, "-")
-        link = title.lower().replace(' ', '-').replace('/', '-')
-        while '--' in link:
-            link = link.replace('--', '-')
-        links.append(link)
-    return links
-
-
 def generate_readme(config):
     banner = """# A Collection of Security Papers on Top-Tier Conferences
 
@@ -140,7 +117,7 @@ def generate_readme(config):
     
 The following publications are included:
 
-- IEEE S&P (oakland)
+- IEEE S&P (Oakland)
 - USENIX Security Symposium (USENIX Sec)
 - ACM CCS
 - NDSS
@@ -150,11 +127,11 @@ Since some topics on software testing are related to security, the following pub
 - ICSE
 - ISSTA
 
-PRs and issues are warmly welcomed.
+**PRs and issues are warmly welcomed.**
 
 To update, simply update `data.yml` and run `main.py` to crawl the latest information.
 
-Here is a glance at all papers:
+Here is a glance at all papers/posters:
 
 | Publication | Date | Accepted Paper Number | Link |
 | :---: | :---: | :---: | :---: |

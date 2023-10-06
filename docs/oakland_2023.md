@@ -4,7 +4,7 @@ title: IEEE S&P 2023
 
 # IEEE S&P 2023
 
-195 papers accepted. Updated on **2023-09-08**.
+191 papers accepted. Updated on **2023-09-08**.
 
 
 
