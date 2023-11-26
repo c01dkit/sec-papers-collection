@@ -113,7 +113,7 @@ def generate_readme(config):
 
 ![search](./img/Snipaste_2023-05-19_16-32-44.png)
     
-**These papers are sorted by conference and year, and are deployed on the website. Please [click here to visit the website](https://sec.c01dkit.com).**
+**These papers are sorted by conference and date, and are deployed via github pages. Please [click here to visit the website](https://sec.c01dkit.com).**
     
 The following publications are included:
 
@@ -129,7 +129,7 @@ Since some topics on software testing are related to security, the following pub
 
 **PRs and issues are warmly welcomed.**
 
-To update, simply update `data.yml` and run `main.py` to crawl the latest information.
+To update, simply update `data.yml` and run `main.py` to crawl the latest information, then `mkdocs gh-deploy --clean` to deploy the website.
 
 Here is a glance at all papers/posters:
 
