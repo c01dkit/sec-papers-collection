@@ -62,6 +62,7 @@ Here is a glance at all papers/posters:
 | NDSS | 2017 | 68 | [link](https://dblp.org/db/conf/ndss/ndss2017.html) |
 | NDSS | 2016 | 61 | [link](https://dblp.org/db/conf/ndss/ndss2016.html) |
 | NDSS | 2015 | 50 | [link](https://dblp.org/db/conf/ndss/ndss2015.html) |
+| ICSE | 2024 | 68 | [link](https://dblp.org/db/conf/icse/icse2024.html) |
 | ICSE | 2023 | 211 | [link](https://dblp.org/db/conf/icse/icse2023.html) |
 | ICSE | 2022 | 199 | [link](https://dblp.org/db/conf/icse/icse2022.html) |
 | ICSE | 2021 | 138 | [link](https://dblp.org/db/conf/icse/icse2021.html) |
