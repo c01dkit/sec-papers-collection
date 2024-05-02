@@ -26,6 +26,7 @@ Here is a glance at all papers/posters:
 
 | Publication | Date | Accepted Paper Number | Link |
 | :---: | :---: | :---: | :---: |
+| IEEE S&P | 2024 | 261 | [link](https://sp2024.ieee-security.org/accepted-papers.html) |
 | IEEE S&P | 2023 | 191 | [link](https://dblp.org/db/conf/sp/sp2023.html) |
 | IEEE S&P | 2022 | 148 | [link](https://dblp.org/db/conf/sp/sp2022.html) |
 | IEEE S&P | 2021 | 114 | [link](https://dblp.org/db/conf/sp/sp2021.html) |
@@ -44,6 +45,7 @@ Here is a glance at all papers/posters:
 | ACM CCS | 2017 | 205 | [link](https://dblp.org/db/conf/ccs/ccs2017.html) |
 | ACM CCS | 2016 | 195 | [link](https://dblp.org/db/conf/ccs/ccs2016.html) |
 | ACM CCS | 2015 | 167 | [link](https://dblp.org/db/conf/ccs/ccs2015.html) |
+| USENIX Sec | 2024 | 82 | [link](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers) |
 | USENIX Sec | 2023 | 422 | [link](https://dblp.org/db/conf/uss/uss2023.html) |
 | USENIX Sec | 2022 | 256 | [link](https://dblp.org/db/conf/uss/uss2022.html) |
 | USENIX Sec | 2021 | 247 | [link](https://dblp.org/db/conf/uss/uss2021.html) |
@@ -53,6 +55,7 @@ Here is a glance at all papers/posters:
 | USENIX Sec | 2017 | 85 | [link](https://dblp.org/db/conf/uss/uss2017.html) |
 | USENIX Sec | 2016 | 72 | [link](https://dblp.org/db/conf/uss/uss2016.html) |
 | USENIX Sec | 2015 | 67 | [link](https://dblp.org/db/conf/uss/uss2015.html) |
+| NDSS | 2024 | 140 | [link](https://www.ndss-symposium.org/ndss-program/symposium-2024) |
 | NDSS | 2023 | 94 | [link](https://dblp.org/db/conf/ndss/ndss2023.html) |
 | NDSS | 2022 | 83 | [link](https://dblp.org/db/conf/ndss/ndss2022.html) |
 | NDSS | 2021 | 87 | [link](https://dblp.org/db/conf/ndss/ndss2021.html) |
@@ -62,7 +65,7 @@ Here is a glance at all papers/posters:
 | NDSS | 2017 | 68 | [link](https://dblp.org/db/conf/ndss/ndss2017.html) |
 | NDSS | 2016 | 61 | [link](https://dblp.org/db/conf/ndss/ndss2016.html) |
 | NDSS | 2015 | 50 | [link](https://dblp.org/db/conf/ndss/ndss2015.html) |
-| ICSE | 2024 | 68 | [link](https://dblp.org/db/conf/icse/icse2024.html) |
+| ICSE | 2024 | 234 | [link](https://conf.researchr.org/track/icse-2024/icse-2024-research-track?#event-overview) |
 | ICSE | 2023 | 211 | [link](https://dblp.org/db/conf/icse/icse2023.html) |
 | ICSE | 2022 | 199 | [link](https://dblp.org/db/conf/icse/icse2022.html) |
 | ICSE | 2021 | 138 | [link](https://dblp.org/db/conf/icse/icse2021.html) |

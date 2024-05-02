@@ -29,6 +29,7 @@ def get_cache(url):
 def save_cache(url, data, time):
     h = hash_url(url)
     with open('cache/'+h, 'wb') as f:
+        print(f'Save {url} in cache/{h}')
         pickle.dump({'data':data,'time':time}, f)
 
 def get_html(url, use_cache=True):
@@ -36,11 +37,12 @@ def get_html(url, use_cache=True):
         res = get_cache(url)
         if res is not None:
             return etree.HTML(res['data']),res['time']
-    proxies = {
-        'http': 'http://127.0.0.1:10809',
-        'https': 'http://127.0.0.1:10809',
-    }
-    res = requests.get(url,proxies=proxies)
+    # proxies = {
+    #     'http': 'http://127.0.0.1:10809',
+    #     'https': 'http://127.0.0.1:10809',
+    # }
+    # res = requests.get(url,proxies=proxies)
+    res = requests.get(url)
     d = f'{datetime.datetime.now()}'
     if res.status_code == 200:
         res.encoding = 'utf-8'
@@ -168,7 +170,8 @@ if __name__ == '__main__':
             if html is not None:
                 titles = get_titles(html, site)
                 links = get_links(html, site)
-                assert(len(links)==len(titles))
+                if links is not None:
+                    assert(len(links)==len(titles))
                 note = ''
                 data = {
                     'filetitle': f'{config[top_site]["name"]} {site["name"]}',
@@ -180,7 +183,7 @@ if __name__ == '__main__':
                     'time': time,
                 }
                 generate_md(data)
-                print(f'{config[top_site]["name"]}_{site["name"]} Success')
+                print(f'{config[top_site]["name"]}_{site["name"]} Success. Cached id: {hash_url(site["url"])}')
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
     generate_readme(config)
