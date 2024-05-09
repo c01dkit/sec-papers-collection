@@ -4,7 +4,9 @@ title: USENIX Sec 2015
 
 # USENIX Sec 2015
 
-67 papers accepted. Updated on **2023-10-06**.
+67 papers accepted.
+
+Updated on **2023-10-06**.
 
 
 

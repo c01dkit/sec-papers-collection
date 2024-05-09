@@ -4,7 +4,9 @@ title: ISSTA 2020
 
 # ISSTA 2020
 
-55 papers accepted. Updated on **2023-09-08**.
+55 papers accepted.
+
+Updated on **2023-09-08**.
 
 
 

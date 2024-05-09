@@ -4,7 +4,9 @@ title: IEEE S&P 2016
 
 # IEEE S&P 2016
 
-55 papers accepted. Updated on **2023-10-06**.
+55 papers accepted.
+
+Updated on **2023-10-06**.
 
 
 

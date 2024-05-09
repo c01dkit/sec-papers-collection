@@ -4,7 +4,9 @@ title: USENIX Sec 2022
 
 # USENIX Sec 2022
 
-256 papers accepted. Updated on **2023-09-08**.
+256 papers accepted.
+
+Updated on **2023-09-08**.
 
 
 

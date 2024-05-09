@@ -11,11 +11,15 @@ A collection of security papers on top publications. You can search the titles (
 
 This site is still under construction. PRs and issues are welcomed!
 
-Last update on May 2, 2024
 
-* Add NDSS-2024, S&P-2024, USENIX Sec-2024
-* Update ICSE-2024
+* May 9, 2024 updates
+    * Add ISSTA-2024, USENIX Sec-2024-Fall cycle
+    * Support multiple urls with the same xpath now
+* May 2, 2024 updates
+    * Add NDSS-2024, S&P-2024, USENIX Sec-2024-Summer cycle
+    * Update ICSE-2024
 
 TODO:
 
 1. Support more years
+2. Add authors (Really need this??)

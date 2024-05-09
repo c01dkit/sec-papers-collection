@@ -4,7 +4,9 @@ title: IEEE S&P 2022
 
 # IEEE S&P 2022
 
-148 papers accepted. Updated on **2023-09-08**.
+148 papers accepted.
+
+Updated on **2023-09-08**.
 
 
 

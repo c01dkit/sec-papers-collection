@@ -4,7 +4,9 @@ title: ISSTA 2015
 
 # ISSTA 2015
 
-44 papers accepted. Updated on **2023-10-06**.
+44 papers accepted.
+
+Updated on **2023-10-06**.
 
 
 

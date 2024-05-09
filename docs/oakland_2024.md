@@ -4,7 +4,9 @@ title: IEEE S&P 2024
 
 # IEEE S&P 2024
 
-261 papers accepted. Updated on **2024-05-02**.
+261 papers accepted.
+
+Updated on **2024-05-02**.
 
 
 

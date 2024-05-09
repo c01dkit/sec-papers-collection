@@ -33,24 +33,34 @@ def save_cache(url, data, time):
         pickle.dump({'data':data,'time':time}, f)
 
 def get_html(url, use_cache=True):
-    if use_cache:
-        res = get_cache(url)
-        if res is not None:
-            return etree.HTML(res['data']),res['time']
-    # proxies = {
-    #     'http': 'http://127.0.0.1:10809',
-    #     'https': 'http://127.0.0.1:10809',
-    # }
-    # res = requests.get(url,proxies=proxies)
-    res = requests.get(url)
-    d = f'{datetime.datetime.now()}'
-    if res.status_code == 200:
-        res.encoding = 'utf-8'
-        html = etree.HTML(res.text)
-        save_cache(url, res.text, d)
-        return html,d
-    else:
-        return None,None
+    if type(url) is str:
+        if use_cache:
+            res = get_cache(url)
+            if res is not None:
+                return etree.HTML(res['data']),res['time']
+        # proxies = {
+        #     'http': 'http://127.0.0.1:10809',
+        #     'https': 'http://127.0.0.1:10809',
+        # }
+        # res = requests.get(url,proxies=proxies)
+        res = requests.get(url)
+        d = f'{datetime.datetime.now()}'
+        if res.status_code == 200:
+            res.encoding = 'utf-8'
+            html = etree.HTML(res.text)
+            save_cache(url, res.text, d)
+            return html,d
+        else:
+            print(f'Failed to get {url}')
+            return None,None
+    elif type(url) is list:
+        htmls = []
+        times = []
+        for u in url:
+            html,time = get_html(u, use_cache)
+            htmls.append(html)
+            times.append(time)
+        return htmls,times
 
 def get_titles(html, config):
     if config['title_xpath'] == '':
@@ -86,7 +96,13 @@ def generate_md(data):
         f.write(f'title: {filetitle}\n')
         f.write('---\n\n')
         f.write(f'# {filetitle}\n\n')
-        f.write(f'{len(set(titles))} papers accepted. Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n---\n\n')
+        f.write(f'{len(set(titles))} papers accepted.\n\n')
+        if type(origin_url) is list:
+            for i in range(len(origin_url)):
+                f.write(f'Updated on **{d[i][:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url[i]}).\n\n')
+        else:
+            f.write(f'Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n')
+        f.write('---\n\n')
         for i in range(len(titles)):
             t = titles[i].strip().replace('`',"'").replace('\n','')
             if links is not None:
@@ -149,8 +165,11 @@ Here is a glance at all papers/posters:
                 with open(md_file, 'r', encoding='utf-8') as f:
                     md = f.read()
                     paper_num = re_paper_num.findall(md)[0]
-                    paper_url = re_paper_url.findall(md)[0]
-                    statistics.append((config[top_site]['name'],site['name'], paper_num,  f'[link]({paper_url})'))
+                    paper_url = re_paper_url.findall(md)
+                    link_url = ''
+                    for url in paper_url:
+                        link_url += f'[link]({url}) '
+                    statistics.append((config[top_site]['name'],site['name'], paper_num,  link_url))
                 
     for paper in statistics:
         banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
@@ -168,10 +187,19 @@ if __name__ == '__main__':
             use_cache = site.get('use_cache', True)
             html,time = get_html(site['url'],use_cache)
             if html is not None:
-                titles = get_titles(html, site)
-                links = get_links(html, site)
-                if links is not None:
-                    assert(len(links)==len(titles))
+                if type(html) is list:
+                    titles = []
+                    links = []
+                    for h in html:
+                        titles += get_titles(h, site)
+                        links += get_links(h, site)
+                    if links is not None:
+                        assert(len(links)==len(titles))
+                else:
+                    titles = get_titles(html, site)
+                    links = get_links(html, site)
+                    if links is not None:
+                        assert(len(links)==len(titles))
                 note = ''
                 data = {
                     'filetitle': f'{config[top_site]["name"]} {site["name"]}',
@@ -183,7 +211,7 @@ if __name__ == '__main__':
                     'time': time,
                 }
                 generate_md(data)
-                print(f'{config[top_site]["name"]}_{site["name"]} Success. Cached id: {hash_url(site["url"])}')
+                print(f'{config[top_site]["name"]}_{site["name"]} Success.')
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
     generate_readme(config)

@@ -4,7 +4,9 @@ title: IEEE S&P 2019
 
 # IEEE S&P 2019
 
-84 papers accepted. Updated on **2023-09-08**.
+84 papers accepted.
+
+Updated on **2023-09-08**.
 
 
 

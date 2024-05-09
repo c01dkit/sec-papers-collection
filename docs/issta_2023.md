@@ -4,7 +4,9 @@ title: ISSTA 2023
 
 # ISSTA 2023
 
-138 papers accepted. Updated on **2023-09-08**.
+138 papers accepted.
+
+Updated on **2023-09-08**.
 
 
 
