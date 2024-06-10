@@ -6,7 +6,7 @@ title: IEEE S&P 2024
 
 261 papers accepted.
 
-Updated on **2024-05-02**.
+Updated on **2024-05-22**.
 
 
 
@@ -244,7 +244,7 @@ You can find [the lastest information here](https://sp2024.ieee-security.org/acc
 
 #### Private Analytics via Streaming, Sketching, and Silently Verifiable Proofs
 
-#### Surveilling the Masses with Wi-Fi Geolocation Services
+#### Surveilling the Masses with Wi-Fi-Based Positioning Systems
 
 #### SOPHON: Non-Fine-Tunable Learning to Restrain Task Transferability For Pre-trained Models
 
@@ -462,7 +462,7 @@ You can find [the lastest information here](https://sp2024.ieee-security.org/acc
 
 #### Secure Messaging with Strong Compromise Resilience, Temporal Privacy, and Immediate Decryption
 
-#### Automated Synthesis of Effect Graph Policies for Microservice-Aware Stateful System Call Specialization
+#### Automated     Synthesis of Effect Graph Policies for Microservice-Aware Stateful System Call Specialization
 
 #### PolySphinx: Extending the Sphinx Mix Format With Better Multicast Support
 

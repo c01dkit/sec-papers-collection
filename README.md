@@ -18,6 +18,9 @@ Since some topics on software testing are related to security, the following pub
 - ICSE
 - ISSTA
 
+![Top-Tier-4-Security-Conferences](./img/Top-Tier-4-Security-Conferences.png)
+![Top-SE-Conferences](./img/Top-SE-Conferences.png)
+
 **PRs and issues are warmly welcomed.**
 
 To update, simply update `data.yml` and run `main.py` to crawl the latest information, then `mkdocs gh-deploy --clean` to deploy the website.
@@ -27,7 +30,7 @@ Here is a glance at all papers/posters:
 | Publication | Date | Accepted Paper Number | Link |
 | :---: | :---: | :---: | :---: |
 | IEEE S&P | 2024 | 261 | [link](https://sp2024.ieee-security.org/accepted-papers.html)  |
-| IEEE S&P | 2023 | 191 | [link](https://dblp.org/db/conf/sp/sp2023.html)  |
+| IEEE S&P | 2023 | 193 | [link](https://dblp.org/db/conf/sp/sp2023.html)  |
 | IEEE S&P | 2022 | 148 | [link](https://dblp.org/db/conf/sp/sp2022.html)  |
 | IEEE S&P | 2021 | 114 | [link](https://dblp.org/db/conf/sp/sp2021.html)  |
 | IEEE S&P | 2020 | 104 | [link](https://dblp.org/db/conf/sp/sp2020.html)  |
@@ -45,7 +48,7 @@ Here is a glance at all papers/posters:
 | ACM CCS | 2017 | 205 | [link](https://dblp.org/db/conf/ccs/ccs2017.html)  |
 | ACM CCS | 2016 | 195 | [link](https://dblp.org/db/conf/ccs/ccs2016.html)  |
 | ACM CCS | 2015 | 167 | [link](https://dblp.org/db/conf/ccs/ccs2015.html)  |
-| USENIX Sec | 2024 | 226 | [link](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers) [link](https://www.usenix.org/conference/usenixsecurity24/fall-accepted-papers)  |
+| USENIX Sec | 2024 | 227 | [link](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers) [link](https://www.usenix.org/conference/usenixsecurity24/fall-accepted-papers)  |
 | USENIX Sec | 2023 | 422 | [link](https://dblp.org/db/conf/uss/uss2023.html)  |
 | USENIX Sec | 2022 | 256 | [link](https://dblp.org/db/conf/uss/uss2022.html)  |
 | USENIX Sec | 2021 | 247 | [link](https://dblp.org/db/conf/uss/uss2021.html)  |
@@ -74,8 +77,7 @@ Here is a glance at all papers/posters:
 | ICSE | 2018 | 153 | [link](https://dblp.org/db/conf/icse/icse2018.html)  |
 | ICSE | 2017 | 68 | [link](https://dblp.org/db/conf/icse/icse2017.html)  |
 | ICSE | 2016 | 101 | [link](https://dblp.org/db/conf/icse/icse2016.html)  |
-| ICSE | 2015-1 | 84 | [link](https://dblp.org/db/conf/icse/icse2015-1.html)  |
-| ICSE | 2015-2 | 214 | [link](https://dblp.org/db/conf/icse/icse2015-2.html)  |
+| ICSE | 2015 | 298 | [link](https://dblp.org/db/conf/icse/icse2015-1.html) [link](https://dblp.org/db/conf/icse/icse2015-2.html)  |
 | ISSTA | 2024 | 42 | [link](https://2024.issta.org/track/issta-2024-papers#event-overview)  |
 | ISSTA | 2023 | 138 | [link](https://dblp.org/db/conf/issta/issta2023.html)  |
 | ISSTA | 2022 | 72 | [link](https://dblp.org/db/conf/issta/issta2022.html)  |

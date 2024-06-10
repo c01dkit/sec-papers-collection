@@ -1,3 +1,6 @@
+
+# run.sh will execute this script.
+# No need to run this script manually.
 import requests
 import pickle
 import yaml
@@ -5,6 +8,9 @@ import hashlib
 import os
 import datetime
 import re
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
 from pathlib import Path
 from lxml import etree
 
@@ -124,7 +130,26 @@ def update_mkdocs_yml(config):
     with open('mkdocs.yml', 'w', encoding='utf-8') as f:
         yaml.dump(mkdocs, f)
 
-def generate_readme(config):
+def get_statistics(config):
+    # traverse docs directory
+    statistics = []
+    re_paper_num = re.compile(r'(\d+) papers accepted')
+    re_paper_url = re.compile(r'\[the lastest information here\]\((.+)\)')
+    for top_site in config:
+        for site in config[top_site]['sites']:
+            md_file = Path('docs/'+top_site+'_'+site['name']+'.md')
+            if md_file.exists():
+                with open(md_file, 'r', encoding='utf-8') as f:
+                    md = f.read()
+                    paper_num = re_paper_num.findall(md)[0]
+                    paper_url = re_paper_url.findall(md)
+                    link_url = ''
+                    for url in paper_url:
+                        link_url += f'[link]({url}) '
+                    statistics.append((config[top_site]['name'],site['name'], paper_num,  link_url))
+    return statistics
+
+def generate_readme(config, statistics=None, graphs=''):
     banner = """# A Collection of Security Papers on Top-Tier Conferences
 
 ![overview](./img/Snipaste_2023-05-19_16-31-36.png)
@@ -145,6 +170,8 @@ Since some topics on software testing are related to security, the following pub
 - ICSE
 - ISSTA
 
+<<GRAPHS>>
+
 **PRs and issues are warmly welcomed.**
 
 To update, simply update `data.yml` and run `main.py` to crawl the latest information, then `mkdocs gh-deploy --clean` to deploy the website.
@@ -154,28 +181,49 @@ Here is a glance at all papers/posters:
 | Publication | Date | Accepted Paper Number | Link |
 | :---: | :---: | :---: | :---: |
 """
-    # traverse docs directory
-    statistics = []
-    re_paper_num = re.compile(r'(\d+) papers accepted')
-    re_paper_url = re.compile(r'\[the lastest information here\]\((.+)\)')
-    for top_site in config:
-        for site in config[top_site]['sites']:
-            md_file = Path('docs/'+top_site+'_'+site['name']+'.md')
-            if md_file.exists():
-                with open(md_file, 'r', encoding='utf-8') as f:
-                    md = f.read()
-                    paper_num = re_paper_num.findall(md)[0]
-                    paper_url = re_paper_url.findall(md)
-                    link_url = ''
-                    for url in paper_url:
-                        link_url += f'[link]({url}) '
-                    statistics.append((config[top_site]['name'],site['name'], paper_num,  link_url))
-                
+    if statistics is None:
+        statistics = get_statistics(config)
     for paper in statistics:
         banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
     with open('README.md', 'w', encoding='utf-8') as f:
+        if graphs == '':
+            banner = banner.replace('<<GRAPHS>>', graphs)
+        else:
+            banner = banner.replace('<<GRAPHS>>', '\n'.join(['!['+i.replace('./img/','').replace('.png','')+f']({i})' for i in graphs]))
         f.write(banner)
+
     print('README.md generated')
+
+def generate_graph(config, statistics=None, group_rules=None):
+    def draw_one_graph(data, title):
+        filename = f'./img/{title}.png'
+        plt.figure(figsize=(12, 6))
+        plt.grid()
+        sns.lineplot(data=data, x='Year', y='Accepted', hue='Conference', markers=True, style='Conference', dashes=False)
+        plt.xticks(rotation=45)
+        plt.xlabel('Year')
+        plt.ylabel('Accepted Papers')
+        plt.legend(title='Conferences')
+        plt.savefig(filename)
+        return filename
+    
+    results = []
+    if statistics is None:
+        statistics = get_statistics(config)
+
+    if group_rules is None:
+        data = pd.DataFrame(statistics, columns=['Conference', 'Year', 'Accepted', 'Link'])
+        data['Accepted'] = data['Accepted'].astype(int)
+        data = data.sort_values(by='Year')
+        results.append(draw_one_graph(data, 'Statistics'))
+    else:
+        for title in group_rules:
+            data = pd.DataFrame(statistics, columns=['Conference', 'Year', 'Accepted', 'Link'])
+            data['Accepted'] = data['Accepted'].astype(int)
+            data = data[data['Conference'].isin(group_rules[title])]
+            data = data.sort_values(by='Year')
+            results.append(draw_one_graph(data, title))
+    return results
 
 if __name__ == '__main__':
     config = get_config('data.yml')
@@ -214,4 +262,10 @@ if __name__ == '__main__':
                 print(f'{config[top_site]["name"]}_{site["name"]} Success.')
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
-    generate_readme(config)
+    statistics = get_statistics(config)
+    graphs = generate_graph(config, statistics, group_rules = {
+        'Top-Tier-4-Security-Conferences' : ['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'],
+        'Top-SE-Conferences' : ['ICSE', 'ISSTA'],
+    })
+    generate_readme(config, statistics, graphs)
+    print('All done.')

@@ -4,15 +4,17 @@ title: IEEE S&P 2023
 
 # IEEE S&P 2023
 
-191 papers accepted.
+193 papers accepted.
 
-Updated on **2023-09-08**.
+Updated on **2024-05-22**.
 
 
 
 You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2023.html).
 
 ---
+
+#### [Space Odyssey: An Experimental Software Security Analysis of Satellites.](https://doi.ieeecomputersociety.org/10.1109/SP46215.2023.00131)
 
 #### [Scaphy: Detecting Modern ICS Attacks by Correlating Behaviors in SCADA and PHYsical.](https://doi.org/10.1109/SP46215.2023.10179411)
 
@@ -403,4 +405,6 @@ You can find [the lastest information here](https://dblp.org/db/conf/sp/sp2023.h
 #### [Private Eye: On the Limits of Textual Screen Peeking via Eyeglass Reflections in Video Conferencing.](https://doi.org/10.1109/SP46215.2023.10179423)
 
 #### [Low-effort VR Headset User Authentication Using Head-reverberated Sounds with Replay Resistance.](https://doi.org/10.1109/SP46215.2023.10179367)
+
+#### [Perceptions of Distributed Ledger Technology Key Management - An Interview Study with Finance Professionals.](https://doi.org/10.1109/SP46215.2023.10335652)
 

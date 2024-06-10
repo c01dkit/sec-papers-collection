@@ -4,15 +4,15 @@ title: USENIX Sec 2024
 
 # USENIX Sec 2024
 
-226 papers accepted.
+227 papers accepted.
 
-Updated on **2024-05-02**.
+Updated on **2024-05-22**.
 
 
 
 You can find [the lastest information here](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers).
 
-Updated on **2024-05-09**.
+Updated on **2024-05-22**.
 
 
 
@@ -188,7 +188,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Speculative Denial-of-Service Attacks In Ethereum](/conference/usenixsecurity24/presentation/yaish)
 
-#### ['I feel physically safe but not politically safe": Understanding the Digital Threats and Safety Practices of OnlyFans Creators](/conference/usenixsecurity24/presentation/soneji)
+#### ["I feel physically safe but not politically safe": Understanding the Digital Threats and Safety Practices of OnlyFans Creators](/conference/usenixsecurity24/presentation/soneji)
 
 #### [PINE: Efficient Verification of a Euclidean Norm Bound of a Secret-Shared Vector](/conference/usenixsecurity24/presentation/rothblum)
 
@@ -449,6 +449,8 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 #### [Enabling Contextual Soft Moderation on Social Media through Contrastive Textual Deviation](/conference/usenixsecurity24/presentation/paudel-enabling)
 
 #### [HECKLER: Breaking Confidential VMs with Malicious Interrupts](/conference/usenixsecurity24/presentation/schl%C3%BCter)
+
+#### [Inf2Guard: An Information-Theoretic Framework for Learning Privacy-Preserving Representations against Inference Attacks](/conference/usenixsecurity24/presentation/noorbakhsh)
 
 #### [Snowflake, a censorship circumvention system using temporary WebRTC proxies](/conference/usenixsecurity24/presentation/bocovich)
 
