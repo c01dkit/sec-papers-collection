@@ -13,11 +13,10 @@ A collection of security papers on top publications. You can search the titles (
 
 **This site is still under construction. PRs and issues are welcomed!**
 
-![Top-Tier-4-Security-Conferences](https://github.com/c01dkit/sec-papers-collection/blob/main/img/Top-Tier-4-Security-Conferences.png)
-![Top-SE-Conferences](https://github.com/c01dkit/sec-papers-collection/blob/main/img/Top-SE-Conferences.png)
-
 ## Change Logs
 
+* Jun 17, 2024
+    * Better search: now the page will scroll to the paper under search and highlight the url link
 * Jun 10, 2024
     * Add accepted-paper growth figures
     * Add page view support in footer
