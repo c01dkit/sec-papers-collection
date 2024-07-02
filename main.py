@@ -45,8 +45,8 @@ def get_html(url, use_cache=True):
             if res is not None:
                 return etree.HTML(res['data']),res['time']
         # proxies = {
-        #     'http': 'http://127.0.0.1:10809',
-        #     'https': 'http://127.0.0.1:10809',
+        #     'http': 'http://172.24.64.1:10809',
+        #     'https': 'http://172.24.64.1:10809',
         # }
         # res = requests.get(url,proxies=proxies)
         res = requests.get(url)

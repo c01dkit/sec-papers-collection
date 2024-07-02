@@ -6,13 +6,13 @@ title: USENIX Sec 2024
 
 227 papers accepted.
 
-Updated on **2024-05-22**.
+Updated on **2024-06-30**.
 
 
 
 You can find [the lastest information here](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers).
 
-Updated on **2024-05-22**.
+Updated on **2024-06-30**.
 
 
 
@@ -34,7 +34,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Can Virtual Reality Protect Users from Keystroke Inference Attacks?](/conference/usenixsecurity24/presentation/yang-zhuolin)
 
-#### [Neural Network Semantic Backdoor Detection and Mitigation: A Causality-Based Approach](/conference/usenixsecurity24/presentation/sun)
+#### [Neural Network Semantic Backdoor Detection and Mitigation: A Causality-Based Approach](/conference/usenixsecurity24/presentation/sun-bing)
 
 #### [Finding Traceability Attacks in the Bluetooth Low Energy Specification and Its Implementations](/conference/usenixsecurity24/presentation/wu-jianliang)
 
@@ -56,7 +56,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [WEBRR: A Forensic System for Replaying and Investigating Web-Based Attacks in The Modern Web](/conference/usenixsecurity24/presentation/allen)
 
-#### [Unleashing the Power of Type-Based Call Graph Construction by Using Regional Pointer Information](/conference/usenixsecurity24/presentation/cai)
+#### [Unleashing the Power of Type-Based Call Graph Construction by Using Regional Pointer Information](/conference/usenixsecurity24/presentation/cai-yuandao)
 
 #### [The Effect of Design Patterns on (Present and Future) Cookie Consent Decisions](/conference/usenixsecurity24/presentation/bielova)
 
@@ -76,7 +76,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Opportunistic Data Flow Integrity for Real-time Cyber-physical Systems Using Worst Case Execution Time Reservation](/conference/usenixsecurity24/presentation/wang-yujie)
 
-#### [MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning](/conference/usenixsecurity24/presentation/jia)
+#### [MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning](/conference/usenixsecurity24/presentation/jia-zian)
 
 #### [Security and Privacy Analysis of Samsung's Crowd-Sourced Bluetooth Location Tracking System](/conference/usenixsecurity24/presentation/yu-tingfeng)
 
@@ -108,7 +108,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Quantifying Privacy Risks of Prompts in Visual Prompt Learning](/conference/usenixsecurity24/presentation/wu-yixin)
 
-#### [Understanding How to Inform Blind and Low-Vision Users about Data Privacy through Privacy Question Answering Assistants](/conference/usenixsecurity24/presentation/feng)
+#### [Understanding How to Inform Blind and Low-Vision Users about Data Privacy through Privacy Question Answering Assistants](/conference/usenixsecurity24/presentation/feng-yuanyuan)
 
 #### [Two Shuffles Make a RAM: Improved Constant Overhead Zero Knowledge RAM](/conference/usenixsecurity24/presentation/yang-yibin)
 
@@ -126,7 +126,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [DaCapo: Automatic Bootstrapping Management for Efficient Fully Homomorphic Encryption](/conference/usenixsecurity24/presentation/cheon)
 
-#### [Code is not Natural Language: Unlock the Power of Semantics-Oriented Graph Representation for Binary Code Similarity Detection](/conference/usenixsecurity24/presentation/he)
+#### [Code is not Natural Language: Unlock the Power of Semantics-Oriented Graph Representation for Binary Code Similarity Detection](/conference/usenixsecurity24/presentation/he-haojie)
 
 #### [Is It a Trap? A Large-scale Empirical Study And Comprehensive Assessment of Online Automated Privacy Policy Generators for Mobile Apps](/conference/usenixsecurity24/presentation/pan-shidong-trap)
 
@@ -136,7 +136,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Exploring Covert Third-party Identifiers through External Storage in the Android New Era](/conference/usenixsecurity24/presentation/dong-zikan)
 
-#### [Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes](/conference/usenixsecurity24/presentation/xue)
+#### [Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes](/conference/usenixsecurity24/presentation/xue-fingerprinting)
 
 #### [VeriSimplePIR: Verifiability in SimplePIR at No Online Cost for Honest Servers](/conference/usenixsecurity24/presentation/de-castro)
 
@@ -156,7 +156,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [K-Waay: Fast and Deniable Post-Quantum X3DH without Ring Signatures](/conference/usenixsecurity24/presentation/collins)
 
-#### [What IF Is Not Enough? Fixing Null Pointer Dereference With Contextual Check](/conference/usenixsecurity24/presentation/xing)
+#### [What IF Is Not Enough? Fixing Null Pointer Dereference With Contextual Check](/conference/usenixsecurity24/presentation/xing-yunlong)
 
 #### [Unveiling the Secrets without Data: Can Graph Neural Networks Be Exploited through Data-Free Model Extraction Attacks?](/conference/usenixsecurity24/presentation/zhuang)
 
@@ -164,7 +164,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Yes, One-Bit-Flip Matters! Universal DNN Model Inference Depletion with Runtime Code Fault Injection](/conference/usenixsecurity24/presentation/li-shaofeng)
 
-#### [Key Recovery Attacks on Approximate Homomorphic Encryption with Non-Worst-Case Noise Flooding Countermeasures](/conference/usenixsecurity24/presentation/guo)
+#### [Key Recovery Attacks on Approximate Homomorphic Encryption with Non-Worst-Case Noise Flooding Countermeasures](/conference/usenixsecurity24/presentation/guo-qian)
 
 #### [Mudjacking: Patching Backdoor Vulnerabilities in Foundation Models](/conference/usenixsecurity24/presentation/liu-hongbin)
 
@@ -212,15 +212,15 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Critical Code Guided Directed Greybox Fuzzing for Commits](/conference/usenixsecurity24/presentation/xiang-yi)
 
-#### [Page-Oriented Programming: Subverting Control-Flow Integrity of Commodity Operating System Kernels with Non-Writable Code Pages](/conference/usenixsecurity24/presentation/han)
+#### [Page-Oriented Programming: Subverting Control-Flow Integrity of Commodity Operating System Kernels with Non-Writable Code Pages](/conference/usenixsecurity24/presentation/han-seunghun)
 
-#### [A Linear Reconstruction Approach for Attribute Inference Attacks against Synthetic Data](/conference/usenixsecurity24/presentation/annamalai)
+#### [A Linear Reconstruction Approach for Attribute Inference Attacks against Synthetic Data](/conference/usenixsecurity24/presentation/annamalai-linear)
 
-#### [SoK (or SoLK?): On the Quantitative Study of Sociodemographic Factors and Computer Security Behaviors](/conference/usenixsecurity24/presentation/wei-miranda)
+#### [SoK (or SoLK?): On the Quantitative Study of Sociodemographic Factors and Computer Security Behaviors](/conference/usenixsecurity24/presentation/wei-miranda-solk)
 
 #### [On the Difficulty of Defending Contrastive Learning against Backdoor Attacks](/conference/usenixsecurity24/presentation/li-changjiang)
 
-#### ["I chose to fight, be brave, and to deal with it": Threat Experiences and Security Practices of Pakistani Content Creators](/conference/usenixsecurity24/presentation/gr%C3%B6ber)
+#### ["I chose to fight, be brave, and to deal with it": Threat Experiences and Security Practices of Pakistani Content Creators](/conference/usenixsecurity24/presentation/gr%C3%B6ber-content-creators)
 
 #### [More Simplicity for Trainers, More Opportunity for Attackers: Black-Box Attacks on Speaker Recognition Systems by Inferring Feature Extractor](/conference/usenixsecurity24/presentation/ge-attacks)
 
@@ -248,7 +248,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [False Claims against Model Ownership Resolution](/conference/usenixsecurity24/presentation/liu-jian)
 
-#### [AE-Morpher: Improve Physical Robustness of Adversarial Objects against LiDAR-based Detectors via Object Reconstruction](/conference/usenixsecurity24/presentation/zhu)
+#### [AE-Morpher: Improve Physical Robustness of Adversarial Objects against LiDAR-based Detectors via Object Reconstruction](/conference/usenixsecurity24/presentation/zhu-shenchen)
 
 #### [Learning with Semantics: Towards a Semantics-Aware Routing Anomaly Detection System](/conference/usenixsecurity24/presentation/chen-yihao)
 
@@ -326,7 +326,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Relation Mining Under Local Differential Privacy](/conference/usenixsecurity24/presentation/dong-kai)
 
-#### [Rethinking the Security Threats of Stale DNS Glue Records](/conference/usenixsecurity24/presentation/zhang-yunyi)
+#### [Rethinking the Security Threats of Stale DNS Glue Records](/conference/usenixsecurity24/presentation/zhang-yunyi-rethinking)
 
 #### [GhostRace: Exploiting and Mitigating Speculative Race Conditions](/conference/usenixsecurity24/presentation/ragab)
 
@@ -358,7 +358,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [I/O-Efficient Dynamic Searchable Encryption meets Forward & Backward Privacy](/conference/usenixsecurity24/presentation/mondal)
 
-#### [FaceObfuscator: Defending Deep Learning-based Privacy Attacks with Gradient Descent-resistant Features in Face Recognition](/conference/usenixsecurity24/presentation/jin)
+#### [FaceObfuscator: Defending Deep Learning-based Privacy Attacks with Gradient Descent-resistant Features in Face Recognition](/conference/usenixsecurity24/presentation/jin-shuaifan)
 
 #### [Assessing Suspicious Emails with Banner Warnings Among Blind and Low-Vision Users in Realistic Settings](/conference/usenixsecurity24/presentation/sharevski)
 
@@ -384,7 +384,7 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Racing for TLS Certificate Validation: A Hijacker's Guide to the Android TLS Galaxy](/conference/usenixsecurity24/presentation/pourali)
 
-#### [Spill the TeA: An Empirical Study of Trusted Application Rollback Prevention on Android Smartphones](/conference/usenixsecurity24/presentation/busch)
+#### [Spill the TeA: An Empirical Study of Trusted Application Rollback Prevention on Android Smartphones](/conference/usenixsecurity24/presentation/busch-tea)
 
 #### [D-Helix: A Generic Decompiler Testing Framework Using Symbolic Differentiation](/conference/usenixsecurity24/presentation/zou)
 
@@ -472,5 +472,5 @@ You can find [the lastest information here](https://www.usenix.org/conference/us
 
 #### [Property Existence Inference against Generative Models](/conference/usenixsecurity24/presentation/wang-lijin)
 
-#### [ClearStamp: A Human-Visible and Robust Model-Ownership Proof based on Transposed Model Training](/conference/usenixsecurity24/presentation/kraub)
+#### [ClearStamp: A Human-Visible and Robust Model-Ownership Proof based on Transposed Model Training](/conference/usenixsecurity24/presentation/kraub-clearstamp)
 
