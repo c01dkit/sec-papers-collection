@@ -1,0 +1,3666 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/ccs_2017/">
+      
+      
+        <link rel="prev" href="../ccs_2018/">
+      
+      
+        <link rel="next" href="../ccs_2016/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>ACM CCS 2017 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Custom admonition icons -->
+
+
+<!-- Custom annotation icon -->
+
+
+<!-- Custom tag icons -->
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../helper.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href=".."
+      title="Collection of Security Papers"
+      class="md-header__button md-logo"
+      aria-label="Collection of Security Papers"
+      data-md-component="logo"
+    >
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Logo -->
+
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ACM CCS 2017
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Search interface -->
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+
+      <!-- Search input -->
+      <input
+        type="text"
+        class="md-search__input"
+        name="query"
+        aria-label="Search"
+        placeholder="Search"
+        autocapitalize="off"
+        autocorrect="off"
+        autocomplete="off"
+        spellcheck="false"
+        data-md-component="search-query"
+        required
+      />
+
+      <!-- Button to open search -->
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+
+      <!-- Search options -->
+      <nav
+        class="md-search__options"
+        aria-label="Search"
+      >
+
+        <!-- Button to share search -->
+        
+
+        <!-- Button to reset search -->
+        <button
+          type="reset"
+          class="md-search__icon md-icon"
+          title="Clear"
+          aria-label="Clear"
+          tabindex="-1"
+        >
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+
+      <!-- Search suggestions -->
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+
+        <!-- Search results -->
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Repository information -->
+<a
+  href="https://github.com/c01dkit/sec-papers-collection"
+  title="Go to repository"
+  class="md-source"
+  data-md-component="source"
+>
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
+
+<!-- Determine classes -->
+
+
+
+
+<!-- Navigation -->
+<nav
+  class="md-nav md-nav--primary"
+  aria-label="Navigation"
+  data-md-level="0"
+>
+
+  <!-- Site title -->
+  <label class="md-nav__title" for="__drawer">
+    <a
+      href=".."
+      title="Collection of Security Papers"
+      class="md-nav__button md-logo"
+      aria-label="Collection of Security Papers"
+      data-md-component="logo"
+    >
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Logo -->
+
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+
+  <!-- Repository information -->
+  
+    <div class="md-nav__source">
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Repository information -->
+<a
+  href="https://github.com/c01dkit/sec-papers-collection"
+  title="Go to repository"
+  class="md-source"
+  data-md-component="source"
+>
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+
+  <!-- Navigation list -->
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    All
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_2"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_2"
+            id="__nav_2_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    IEEE S&P
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_2_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IEEE S&P
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+    
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_3"
+          checked
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_3"
+            id="__nav_3_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ACM CCS
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_3_label"
+          aria-expanded="true"
+        >
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ACM CCS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+    
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+
+      <!-- State toggle -->
+      <input
+        class="md-nav__toggle md-toggle"
+        type="checkbox"
+        id="__toc"
+      />
+
+      <!-- Hack: see partials/toc.html for more information -->
+      
+      
+
+      <!-- Navigation link to table of contents -->
+      
+      <a
+        href="./"
+        class="md-nav__link md-nav__link--active"
+      >
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+
+      <!-- Table of contents -->
+      
+    </li>
+
+  <!-- Navigation item -->
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_4"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_4"
+            id="__nav_4_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    USENIX Sec
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_4_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            USENIX Sec
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_5"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_5"
+            id="__nav_5_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    NDSS
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_5_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            NDSS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_6"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_6"
+            id="__nav_6_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ICSE
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_6_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            ICSE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_7"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_7"
+            id="__nav_7_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ISSTA
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_7_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            ISSTA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine title -->
+
+
+
+<!-- Table of contents -->
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+  <!--
+    Check whether the content starts with a level 1 headline. If it does, the
+    top-level anchor must be skipped, since it would be redundant to the link
+    to the current page that is located just above the anchor. Therefore we
+    directly continue with the children of the anchor.
+  -->
+  
+  
+
+  <!-- Table of contents title and list -->
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Actions -->
+
+
+  <!-- Edit button -->
+  
+
+  <!-- View button -->
+  
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<!-- Page content -->
+<h1 id="acm-ccs-2017">ACM CCS 2017</h1>
+<p>205 papers accepted.</p>
+<p>Updated on <strong>2024-06-30</strong>.</p>
+<p>You can find <a href="https://dblp.org/db/conf/ccs/ccs2017.html">the lastest information here</a>.</p>
+<hr />
+<h4 id="duplo-unifying-cut-and-choose-for-garbled-circuits"><a href="https://doi.org/10.1145/3133956.3133991">DUPLO: Unifying Cut-and-Choose for Garbled Circuits.</a></h4>
+<h4 id="authenticated-garbling-and-efficient-maliciously-secure-two-party-computation"><a href="https://doi.org/10.1145/3133956.3134053">Authenticated Garbling and Efficient Maliciously Secure Two-Party Computation.</a></h4>
+<h4 id="global-scale-secure-multiparty-computation"><a href="https://doi.org/10.1145/3133956.3133979">Global-Scale Secure Multiparty Computation.</a></h4>
+<h4 id="hearing-your-voice-is-not-enough-an-articulatory-gesture-based-liveness-detection-for-voice-authentication"><a href="https://doi.org/10.1145/3133956.3133962">Hearing Your Voice is Not Enough: An Articulatory Gesture Based Liveness Detection for Voice Authentication.</a></h4>
+<h4 id="vibwrite-towards-finger-input-authentication-on-ubiquitous-surfaces-via-physical-vibration"><a href="https://doi.org/10.1145/3133956.3133964">VibWrite: Towards Finger-input Authentication on Ubiquitous Surfaces via Physical Vibration.</a></h4>
+<h4 id="presence-attestation-the-missing-link-in-dynamic-trust-bootstrapping"><a href="https://doi.org/10.1145/3133956.3134094">Presence Attestation: The Missing Link in Dynamic Trust Bootstrapping.</a></h4>
+<h4 id="dolphinattack-inaudible-voice-commands"><a href="https://doi.org/10.1145/3133956.3134052">DolphinAttack: Inaudible Voice Commands.</a></h4>
+<h4 id="evading-classifiers-by-morphing-in-the-dark"><a href="https://doi.org/10.1145/3133956.3133978">Evading Classifiers by Morphing in the Dark.</a></h4>
+<h4 id="magnet-a-two-pronged-defense-against-adversarial-examples"><a href="https://doi.org/10.1145/3133956.3134057">MagNet: A Two-Pronged Defense against Adversarial Examples.</a></h4>
+<h4 id="hindsight-understanding-the-evolution-of-ui-vulnerabilities-in-mobile-browsers"><a href="https://doi.org/10.1145/3133956.3133987">Hindsight: Understanding the Evolution of UI Vulnerabilities in Mobile Browsers.</a></h4>
+<h4 id="deterministic-browser"><a href="https://doi.org/10.1145/3133956.3133996">Deterministic Browser.</a></h4>
+<h4 id="most-websites-dont-need-to-vibrate-a-cost-benefit-approach-to-improving-browser-security"><a href="https://doi.org/10.1145/3133956.3133966">Most Websites Don't Need to Vibrate: A Cost-Benefit Approach to Improving Browser Security.</a></h4>
+<h4 id="be-selfish-and-avoid-dilemmas-fork-after-withholding-faw-attacks-on-bitcoin"><a href="https://doi.org/10.1145/3133956.3134019">Be Selfish and Avoid Dilemmas: Fork After Withholding (FAW) Attacks on Bitcoin.</a></h4>
+<h4 id="betrayal-distrust-and-rationality-smart-counter-collusion-contracts-for-verifiable-cloud-computing"><a href="https://doi.org/10.1145/3133956.3134032">Betrayal, Distrust, and Rationality: Smart Counter-Collusion Contracts for Verifiable Cloud Computing.</a></h4>
+<h4 id="zero-knowledge-contingent-payments-revisited-attacks-and-payments-for-services"><a href="https://doi.org/10.1145/3133956.3134060">Zero-Knowledge Contingent Payments Revisited: Attacks and Payments for Services.</a></h4>
+<h4 id="pool-scalable-on-demand-secure-computation-service-against-malicious-adversaries"><a href="https://doi.org/10.1145/3133956.3134070">Pool: Scalable On-Demand Secure Computation Service Against Malicious Adversaries.</a></h4>
+<h4 id="a-framework-for-constructing-fast-mpc-over-arithmetic-circuits-with-malicious-adversaries-and-an-honest-majority"><a href="https://doi.org/10.1145/3133956.3133999">A Framework for Constructing Fast MPC over Arithmetic Circuits with Malicious Adversaries and an Honest-Majority.</a></h4>
+<h4 id="efficient-constant-round-and-actively-secure-mpc-beyond-the-three-party-case"><a href="https://doi.org/10.1145/3133956.3134100">Efficient, Constant-Round and Actively Secure MPC: Beyond the Three-Party Case.</a></h4>
+<h4 id="lets-go-in-for-a-closer-look-observing-passwords-in-their-natural-habitat"><a href="https://doi.org/10.1145/3133956.3133973">Let's Go in for a Closer Look: Observing Passwords in Their Natural Habitat.</a></h4>
+<h4 id="why-do-developers-get-password-storage-wrong-a-qualitative-usability-study"><a href="https://doi.org/10.1145/3133956.3134082">Why Do Developers Get Password Storage Wrong?: A Qualitative Usability Study.</a></h4>
+<h4 id="the-typtop-system-personalized-typo-tolerant-password-checking"><a href="https://doi.org/10.1145/3133956.3134000">The TypTop System: Personalized Typo-Tolerant Password Checking.</a></h4>
+<h4 id="rise-of-the-hacrs-augmenting-autonomous-cyber-reasoning-systems-with-human-assistance"><a href="https://doi.org/10.1145/3133956.3134105">Rise of the HaCRS: Augmenting Autonomous Cyber Reasoning Systems with Human Assistance.</a></h4>
+<h4 id="neural-network-based-graph-embedding-for-cross-platform-binary-code-similarity-detection"><a href="https://doi.org/10.1145/3133956.3134018">Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection.</a></h4>
+<h4 id="rain-refinable-attack-investigation-with-on-demand-inter-process-information-flow-tracking"><a href="https://doi.org/10.1145/3133956.3134045">RAIN: Refinable Attack Investigation with On-demand Inter-Process Information Flow Tracking.</a></h4>
+<h4 id="synthesis-of-probabilistic-privacy-enforcement"><a href="https://doi.org/10.1145/3133956.3134079">Synthesis of Probabilistic Privacy Enforcement.</a></h4>
+<h4 id="a-type-system-for-privacy-properties"><a href="https://doi.org/10.1145/3133956.3133998">A Type System for Privacy Properties.</a></h4>
+<h4 id="generating-synthetic-decentralized-social-graphs-with-local-differential-privacy"><a href="https://doi.org/10.1145/3133956.3134086">Generating Synthetic Decentralized Social Graphs with Local Differential Privacy.</a></h4>
+<h4 id="revive-rebalancing-off-blockchain-payment-networks"><a href="https://doi.org/10.1145/3133956.3134033">Revive: Rebalancing Off-Blockchain Payment Networks.</a></h4>
+<h4 id="concurrency-and-privacy-with-payment-channel-networks"><a href="https://doi.org/10.1145/3133956.3134096">Concurrency and Privacy with Payment-Channel Networks.</a></h4>
+<h4 id="bolt-anonymous-payment-channels-for-decentralized-currencies"><a href="https://doi.org/10.1145/3133956.3134093">Bolt: Anonymous Payment Channels for Decentralized Currencies.</a></h4>
+<h4 id="s3oram-a-computation-efficient-and-constant-client-bandwidth-blowup-oram-with-shamir-secret-sharing"><a href="https://doi.org/10.1145/3133956.3134090">S3ORAM: A Computation-Efficient and Constant Client Bandwidth Blowup ORAM with Shamir Secret Sharing.</a></h4>
+<h4 id="deterministic-stash-free-write-only-oram"><a href="https://doi.org/10.1145/3133956.3134051">Deterministic, Stash-Free Write-Only ORAM.</a></h4>
+<h4 id="scaling-oram-for-secure-computation"><a href="https://doi.org/10.1145/3133956.3133967">Scaling ORAM for Secure Computation.</a></h4>
+<h4 id="dont-let-one-rotten-apple-spoil-the-whole-barrel-towards-automated-detection-of-shadowed-domains"><a href="https://doi.org/10.1145/3133956.3134049">Don't Let One Rotten Apple Spoil the Whole Barrel: Towards Automated Detection of Shadowed Domains.</a></h4>
+<h4 id="herding-vulnerable-cats-a-statistical-approach-to-disentangle-joint-responsibility-for-web-security-in-shared-hosting"><a href="https://doi.org/10.1145/3133956.3133971">Herding Vulnerable Cats: A Statistical Approach to Disentangle Joint Responsibility for Web Security in Shared Hosting.</a></h4>
+<h4 id="hiding-in-plain-sight-a-longitudinal-study-of-combosquatting-abuse"><a href="https://doi.org/10.1145/3133956.3134002">Hiding in Plain Sight: A Longitudinal Study of Combosquatting Abuse.</a></h4>
+<h4 id="machine-learning-models-that-remember-too-much"><a href="https://doi.org/10.1145/3133956.3134077">Machine Learning Models that Remember Too Much.</a></h4>
+<h4 id="deep-models-under-the-gan-information-leakage-from-collaborative-deep-learning"><a href="https://doi.org/10.1145/3133956.3134012">Deep Models Under the GAN: Information Leakage from Collaborative Deep Learning.</a></h4>
+<h4 id="oblivious-neural-network-predictions-via-minionn-transformations"><a href="https://doi.org/10.1145/3133956.3134056">Oblivious Neural Network Predictions via MiniONN Transformations.</a></h4>
+<h4 id="verifying-security-policies-in-multi-agent-workflows-with-loops"><a href="https://doi.org/10.1145/3133956.3134080">Verifying Security Policies in Multi-agent Workflows with Loops.</a></h4>
+<h4 id="attribute-based-encryption-in-the-generic-group-model-automated-proofs-and-new-constructions"><a href="https://doi.org/10.1145/3133956.3134088">Attribute-Based Encryption in the Generic Group Model: Automated Proofs and New Constructions.</a></h4>
+<h4 id="fame-fast-attribute-based-message-encryption"><a href="https://doi.org/10.1145/3133956.3134014">FAME: Fast Attribute-based Message Encryption.</a></h4>
+<h4 id="practical-uc-secure-delegatable-credentials-with-attributes-and-their-application-to-blockchain"><a href="https://doi.org/10.1145/3133956.3134025">Practical UC-Secure Delegatable Credentials with Attributes and Their Application to Blockchain.</a></h4>
+<h4 id="solidus-confidential-distributed-ledger-transactions-via-pvorm"><a href="https://doi.org/10.1145/3133956.3134010">Solidus: Confidential Distributed Ledger Transactions via PVORM.</a></h4>
+<h4 id="fairness-in-an-unfair-world-fair-multiparty-computation-from-public-bulletin-boards"><a href="https://doi.org/10.1145/3133956.3134092">Fairness in an Unfair World: Fair Multiparty Computation from Public Bulletin Boards.</a></h4>
+<h4 id="5gen-c-multi-input-functional-encryption-and-program-obfuscation-for-arithmetic-circuits"><a href="https://doi.org/10.1145/3133956.3133983">5Gen-C: Multi-input Functional Encryption and Program Obfuscation for Arithmetic Circuits.</a></h4>
+<h4 id="iron-functional-encryption-using-intel-sgx"><a href="https://doi.org/10.1145/3133956.3134106">IRON: Functional Encryption using Intel SGX.</a></h4>
+<h4 id="implementing-bp-obfuscation-using-graph-induced-encoding"><a href="https://doi.org/10.1145/3133956.3133976">Implementing BP-Obfuscation Using Graph-Induced Encoding.</a></h4>
+<h4 id="authscope-towards-automatic-discovery-of-vulnerable-authorizations-in-online-services"><a href="https://doi.org/10.1145/3133956.3134089">AUTHSCOPE: Towards Automatic Discovery of Vulnerable Authorizations in Online Services.</a></h4>
+<h4 id="mass-discovery-of-android-traffic-imprints-through-instantiated-partial-execution"><a href="https://doi.org/10.1145/3133956.3134009">Mass Discovery of Android Traffic Imprints through Instantiated Partial Execution.</a></h4>
+<h4 id="unleashing-the-walking-dead-understanding-cross-app-remote-infections-on-mobile-webviews"><a href="https://doi.org/10.1145/3133956.3134021">Unleashing the Walking Dead: Understanding Cross-App Remote Infections on Mobile WebViews.</a></h4>
+<h4 id="may-the-fourth-be-with-you-a-microarchitectural-side-channel-attack-on-several-real-world-applications-of-curve25519"><a href="https://doi.org/10.1145/3133956.3134029">May the Fourth Be With You: A Microarchitectural Side Channel Attack on Several Real-World Applications of Curve25519.</a></h4>
+<h4 id="stacco-differentially-analyzing-side-channel-traces-for-detecting-ssltls-vulnerabilities-in-secure-enclaves"><a href="https://doi.org/10.1145/3133956.3134016">STACCO: Differentially Analyzing Side-Channel Traces for Detecting SSL/TLS Vulnerabilities in Secure Enclaves.</a></h4>
+<h4 id="precise-detection-of-side-channel-vulnerabilities-using-quantitative-cartesian-hoare-logic"><a href="https://doi.org/10.1145/3133956.3134058">Precise Detection of Side-Channel Vulnerabilities using Quantitative Cartesian Hoare Logic.</a></h4>
+<h4 id="better-than-advertised-improved-collision-resistance-guarantees-for-md-based-hash-functions"><a href="https://doi.org/10.1145/3133956.3134087">Better Than Advertised: Improved Collision-Resistance Guarantees for MD-Based Hash Functions.</a></h4>
+<h4 id="generic-semantic-security-against-a-kleptographic-adversary"><a href="https://doi.org/10.1145/3133956.3133993">Generic Semantic Security against a Kleptographic Adversary.</a></h4>
+<h4 id="defending-against-key-exfiltration-efficiency-improvements-for-big-key-cryptography-via-large-alphabet-subkey-prediction"><a href="https://doi.org/10.1145/3133956.3133965">Defending Against Key Exfiltration: Efficiency Improvements for Big-Key Cryptography via Large-Alphabet Subkey Prediction.</a></h4>
+<h4 id="client-side-name-collision-vulnerability-in-the-new-gtld-era-a-systematic-study"><a href="https://doi.org/10.1145/3133956.3134084">Client-side Name Collision Vulnerability in the New gTLD Era: A Systematic Study.</a></h4>
+<h4 id="the-wolf-of-name-street-hijacking-domains-through-their-nameservers"><a href="https://doi.org/10.1145/3133956.3133988">The Wolf of Name Street: Hijacking Domains Through Their Nameservers.</a></h4>
+<h4 id="faulds-a-non-parametric-iterative-classifier-for-internet-wide-os-fingerprinting"><a href="https://doi.org/10.1145/3133956.3133963">Faulds: A Non-Parametric Iterative Classifier for Internet-Wide OS Fingerprinting.</a></h4>
+<h4 id="tkey-second-factor-authentication-from-secure-hash-chains"><a href="https://doi.org/10.1145/3133956.3133989">T/Key: Second-Factor Authentication From Secure Hash Chains.</a></h4>
+<h4 id="practical-graphs-for-optimal-side-channel-resistant-memory-hard-functions"><a href="https://doi.org/10.1145/3133956.3134031">Practical Graphs for Optimal Side-Channel Resistant Memory-Hard Functions.</a></h4>
+<h4 id="better-bounds-for-block-cipher-modes-of-operation-via-nonce-based-key-derivation"><a href="https://doi.org/10.1145/3133956.3133992">Better Bounds for Block Cipher Modes of Operation via Nonce-Based Key Derivation.</a></h4>
+<h4 id="the-art-of-app-compartmentalization-compiler-based-library-privilege-separation-on-stock-android"><a href="https://doi.org/10.1145/3133956.3134064">The ART of App Compartmentalization: Compiler-based Library Privilege Separation on Stock Android.</a></h4>
+<h4 id="vulnerable-implicit-service-a-revisit"><a href="https://doi.org/10.1145/3133956.3133975">Vulnerable Implicit Service: A Revisit.</a></h4>
+<h4 id="a-stitch-in-time-supporting-android-developers-in-writingsecure-code"><a href="https://doi.org/10.1145/3133956.3133977">A Stitch in Time: Supporting Android Developers in WritingSecure Code.</a></h4>
+<h4 id="exploiting-a-thermal-side-channel-for-power-attacks-in-multi-tenant-data-centers"><a href="https://doi.org/10.1145/3133956.3133994">Exploiting a Thermal Side Channel for Power Attacks in Multi-Tenant Data Centers.</a></h4>
+<h4 id="watch-me-but-dont-touch-me-contactless-control-flow-monitoring-via-electromagnetic-emanations"><a href="https://doi.org/10.1145/3133956.3134081">Watch Me, but Don't Touch Me! Contactless Control Flow Monitoring via Electromagnetic Emanations.</a></h4>
+<h4 id="viden-attacker-identification-on-in-vehicle-networks"><a href="https://doi.org/10.1145/3133956.3134001">Viden: Attacker Identification on In-Vehicle Networks.</a></h4>
+<h4 id="practical-attacks-against-graph-based-clustering"><a href="https://doi.org/10.1145/3133956.3134083">Practical Attacks Against Graph-based Clustering.</a></h4>
+<h4 id="automated-crowdturfing-attacks-and-defenses-in-online-review-systems"><a href="https://doi.org/10.1145/3133956.3133990">Automated Crowdturfing Attacks and Defenses in Online Review Systems.</a></h4>
+<h4 id="poised-spotting-twitter-spam-off-the-beaten-paths"><a href="https://doi.org/10.1145/3133956.3134055">POISED: Spotting Twitter Spam Off the Beaten Paths.</a></h4>
+<h4 id="practical-secure-aggregation-for-privacy-preserving-machine-learning"><a href="https://doi.org/10.1145/3133956.3133982">Practical Secure Aggregation for Privacy-Preserving Machine Learning.</a></h4>
+<h4 id="use-privacy-in-data-driven-systems-theory-and-experiments-with-machine-learnt-programs"><a href="https://doi.org/10.1145/3133956.3134097">Use Privacy in Data-Driven Systems: Theory and Experiments with Machine Learnt Programs.</a></h4>
+<h4 id="sgx-bigmatrix-a-practical-encrypted-data-analytic-framework-with-trusted-processors"><a href="https://doi.org/10.1145/3133956.3134095">SGX-BigMatrix: A Practical Encrypted Data Analytic Framework With Trusted Processors.</a></h4>
+<h4 id="malicious-secure-private-set-intersection-via-dual-execution"><a href="https://doi.org/10.1145/3133956.3134044">Malicious-Secure Private Set Intersection via Dual Execution.</a></h4>
+<h4 id="fast-private-set-intersection-from-homomorphic-encryption"><a href="https://doi.org/10.1145/3133956.3134061">Fast Private Set Intersection from Homomorphic Encryption.</a></h4>
+<h4 id="practical-multi-party-private-set-intersection-from-symmetric-key-techniques"><a href="https://doi.org/10.1145/3133956.3134065">Practical Multi-party Private Set Intersection from Symmetric-Key Techniques.</a></h4>
+<h4 id="detecting-structurally-anomalous-logins-within-enterprise-networks"><a href="https://doi.org/10.1145/3133956.3134003">Detecting Structurally Anomalous Logins Within Enterprise Networks.</a></h4>
+<h4 id="deeplog-anomaly-detection-and-diagnosis-from-system-logs-through-deep-learning"><a href="https://doi.org/10.1145/3133956.3134015">DeepLog: Anomaly Detection and Diagnosis from System Logs through Deep Learning.</a></h4>
+<h4 id="riskteller-predicting-the-risk-of-cyber-incidents"><a href="https://doi.org/10.1145/3133956.3134022">RiskTeller: Predicting the Risk of Cyber Incidents.</a></h4>
+<h4 id="key-reinstallation-attacks-forcing-nonce-reuse-in-wpa2"><a href="https://doi.org/10.1145/3133956.3134027">Key Reinstallation Attacks: Forcing Nonce Reuse in WPA2.</a></h4>
+<h4 id="cccp-closed-caption-crypto-phones-to-resist-mitm-attacks-human-errors-and-click-through"><a href="https://doi.org/10.1145/3133956.3134013">CCCP: Closed Caption Crypto Phones to Resist MITM Attacks, Human Errors and Click-Through.</a></h4>
+<h4 id="no-match-attacks-and-robust-partnering-definitions-defining-trivial-attacks-for-security-protocols-is-not-trivial"><a href="https://doi.org/10.1145/3133956.3134006">No-Match Attacks and Robust Partnering Definitions: Defining Trivial Attacks for Security Protocols is Not Trivial.</a></h4>
+<h4 id="querying-for-queries-indexes-of-queries-for-efficient-and-expressive-it-pir"><a href="https://doi.org/10.1145/3133956.3134008">Querying for Queries: Indexes of Queries for Efficient and Expressive IT-PIR.</a></h4>
+<h4 id="pegasus-data-adaptive-differentially-private-stream-processing"><a href="https://doi.org/10.1145/3133956.3134102">PeGaSus: Data-Adaptive Differentially Private Stream Processing.</a></h4>
+<h4 id="composing-differential-privacy-and-secure-computation-a-case-study-on-scaling-private-record-linkage"><a href="https://doi.org/10.1145/3133956.3134030">Composing Differential Privacy and Secure Computation: A Case Study on Scaling Private Record Linkage.</a></h4>
+<h4 id="where-the-wild-warnings-are-root-causes-of-chrome-https-certificate-errors"><a href="https://doi.org/10.1145/3133956.3134007">Where the Wild Warnings Are: Root Causes of Chrome HTTPS Certificate Errors.</a></h4>
+<h4 id="data-breaches-phishing-or-malware-understanding-the-risks-of-stolen-credentials"><a href="https://doi.org/10.1145/3133956.3134067">Data Breaches, Phishing, or Malware?: Understanding the Risks of Stolen Credentials.</a></h4>
+<h4 id="certified-malware-measuring-breaches-of-trust-in-the-windows-code-signing-pki"><a href="https://doi.org/10.1145/3133956.3133958">Certified Malware: Measuring Breaches of Trust in the Windows Code-Signing PKI.</a></h4>
+<h4 id="forward-secure-dynamic-searchable-symmetric-encryption-with-efficient-updates"><a href="https://doi.org/10.1145/3133956.3133970">Forward Secure Dynamic Searchable Symmetric Encryption with Efficient Updates.</a></h4>
+<h4 id="forward-and-backward-private-searchable-encryption-from-constrained-cryptographic-primitives"><a href="https://doi.org/10.1145/3133956.3133980">Forward and Backward Private Searchable Encryption from Constrained Cryptographic Primitives.</a></h4>
+<h4 id="economic-factors-of-vulnerability-trade-and-exploitation"><a href="https://doi.org/10.1145/3133956.3133960">Economic Factors of Vulnerability Trade and Exploitation.</a></h4>
+<h4 id="quantifying-the-pressure-of-legal-risks-on-third-party-vulnerability-research"><a href="https://doi.org/10.1145/3133956.3134047">Quantifying the Pressure of Legal Risks on Third-party Vulnerability Research.</a></h4>
+<h4 id="identity-based-format-preserving-encryption"><a href="https://doi.org/10.1145/3133956.3133995">Identity-Based Format-Preserving Encryption.</a></h4>
+<h4 id="standardizing-bad-cryptographic-practice-a-teardown-of-the-ieee-standard-for-protecting-electronic-design-intellectual-property"><a href="https://doi.org/10.1145/3133956.3134040">Standardizing Bad Cryptographic Practice: A Teardown of the IEEE Standard for Protecting Electronic-design Intellectual Property.</a></h4>
+<h4 id="new-techniques-for-structural-batch-verification-in-bilinear-groups-with-applications-to-groth-sahai-proofs"><a href="https://doi.org/10.1145/3133956.3134068">New Techniques for Structural Batch Verification in Bilinear Groups with Applications to Groth-Sahai Proofs.</a></h4>
+<h4 id="practical-quantum-safe-voting-from-lattices"><a href="https://doi.org/10.1145/3133956.3134101">Practical Quantum-Safe Voting from Lattices.</a></h4>
+<h4 id="a-touch-of-evil-high-assurance-cryptographic-hardware-from-untrusted-components"><a href="https://doi.org/10.1145/3133956.3133961">A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components.</a></h4>
+<h4 id="provably-secure-logic-locking-from-theory-to-practice"><a href="https://doi.org/10.1145/3133956.3133985">Provably-Secure Logic Locking: From Theory To Practice.</a></h4>
+<h4 id="the-return-of-coppersmiths-attack-practical-factorization-of-widely-used-rsa-moduli"><a href="https://doi.org/10.1145/3133956.3133969">The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli.</a></h4>
+<h4 id="algorithm-substitution-attacks-from-a-steganographic-perspective"><a href="https://doi.org/10.1145/3133956.3133981">Algorithm Substitution Attacks from a Steganographic Perspective.</a></h4>
+<h4 id="on-the-power-of-optical-contactless-probing-attacking-bitstream-encryption-of-fpgas"><a href="https://doi.org/10.1145/3133956.3134039">On the Power of Optical Contactless Probing: Attacking Bitstream Encryption of FPGAs.</a></h4>
+<h4 id="the-dynamics-of-innocent-flesh-on-the-bone-code-reuse-ten-years-later"><a href="https://doi.org/10.1145/3133956.3134026">The Dynamics of Innocent Flesh on the Bone: Code Reuse Ten Years Later.</a></h4>
+<h4 id="capturing-malware-propagations-with-code-injections-and-code-reuse-attacks"><a href="https://doi.org/10.1145/3133956.3134099">Capturing Malware Propagations with Code Injections and Code-Reuse Attacks.</a></h4>
+<h4 id="code-reuse-attacks-for-the-web-breaking-cross-site-scripting-mitigations-via-script-gadgets"><a href="https://doi.org/10.1145/3133956.3134091">Code-Reuse Attacks for the Web: Breaking Cross-Site Scripting Mitigations via Script Gadgets.</a></h4>
+<h4 id="tail-attacks-on-web-applications"><a href="https://doi.org/10.1145/3133956.3133968">Tail Attacks on Web Applications.</a></h4>
+<h4 id="rewriting-history-changing-the-archived-web-from-the-present"><a href="https://doi.org/10.1145/3133956.3134042">Rewriting History: Changing the Archived Web from the Present.</a></h4>
+<h4 id="deemon-detecting-csrf-with-dynamic-analysis-and-property-graphs"><a href="https://doi.org/10.1145/3133956.3133959">Deemon: Detecting CSRF with Dynamic Analysis and Property Graphs.</a></h4>
+<h4 id="a-comprehensive-symbolic-analysis-of-tls-13"><a href="https://doi.org/10.1145/3133956.3134063">A Comprehensive Symbolic Analysis of TLS 1.3.</a></h4>
+<h4 id="hacl-a-verified-modern-cryptographic-library"><a href="https://doi.org/10.1145/3133956.3134043">HACL*: A Verified Modern Cryptographic Library.</a></h4>
+<h4 id="jasmin-high-assurance-and-high-speed-cryptography"><a href="https://doi.org/10.1145/3133956.3134078">Jasmin: High-Assurance and High-Speed Cryptography.</a></h4>
+<h4 id="post-quantum-zero-knowledge-and-signatures-from-symmetric-key-primitives"><a href="https://doi.org/10.1145/3133956.3133997">Post-Quantum Zero-Knowledge and Signatures from Symmetric-Key Primitives.</a></h4>
+<h4 id="to-bliss-b-or-not-to-be-attacking-strongswans-implementation-of-post-quantum-signatures"><a href="https://doi.org/10.1145/3133956.3134023">To BLISS-B or not to be: Attacking strongSwan's Implementation of Post-Quantum Signatures.</a></h4>
+<h4 id="side-channel-attacks-on-bliss-lattice-based-signatures-exploiting-branch-tracing-against-strongswan-and-electromagnetic-emanations-in-microcontrollers"><a href="https://doi.org/10.1145/3133956.3134028">Side-Channel Attacks on BLISS Lattice-Based Signatures: Exploiting Branch Tracing against strongSwan and Electromagnetic Emanations in Microcontrollers.</a></h4>
+<h4 id="nonmalleable-information-flow-control"><a href="https://doi.org/10.1145/3133956.3134054">Nonmalleable Information Flow Control.</a></h4>
+<h4 id="cryptographically-secure-information-flow-control-on-key-value-stores"><a href="https://doi.org/10.1145/3133956.3134036">Cryptographically Secure Information Flow Control on Key-Value Stores.</a></h4>
+<h4 id="object-flow-integrity"><a href="https://doi.org/10.1145/3133956.3133986">Object Flow Integrity.</a></h4>
+<h4 id="bba-improving-the-security-and-applicability-of-privacy-preserving-point-collection"><a href="https://doi.org/10.1145/3133956.3134071">BBA+: Improving the Security and Applicability of Privacy-Preserving Point Collection.</a></h4>
+<h4 id="walk2friends-inferring-social-links-from-mobility-profiles"><a href="https://doi.org/10.1145/3133956.3133972">walk2friends: Inferring Social Links from Mobility Profiles.</a></h4>
+<h4 id="back-to-the-drawing-board-revisiting-the-design-of-optimal-location-privacy-preserving-mechanisms"><a href="https://doi.org/10.1145/3133956.3134004">Back to the Drawing Board: Revisiting the Design of Optimal Location Privacy-preserving Mechanisms.</a></h4>
+<h4 id="certified-verification-of-algebraic-properties-on-low-level-mathematical-constructs-in-cryptographic-programs"><a href="https://doi.org/10.1145/3133956.3134076">Certified Verification of Algebraic Properties on Low-Level Mathematical Constructs in Cryptographic Programs.</a></h4>
+<h4 id="a-fast-and-verified-software-stack-for-secure-function-evaluation"><a href="https://doi.org/10.1145/3133956.3134017">A Fast and Verified Software Stack for Secure Function Evaluation.</a></h4>
+<h4 id="verified-correctness-and-security-of-mbedtls-hmac-drbg"><a href="https://doi.org/10.1145/3133956.3133974">Verified Correctness and Security of mbedTLS HMAC-DRBG.</a></h4>
+<h4 id="how-unique-is-your-onion-an-analysis-of-the-fingerprintability-of-tor-onion-services"><a href="https://doi.org/10.1145/3133956.3134005">How Unique is Your .onion?: An Analysis of the Fingerprintability of Tor Onion Services.</a></h4>
+<h4 id="the-waterfall-of-liberty-decoy-routing-circumvention-that-resists-routing-attacks"><a href="https://doi.org/10.1145/3133956.3134075">The Waterfall of Liberty: Decoy Routing Circumvention that Resists Routing Attacks.</a></h4>
+<h4 id="compressive-traffic-analysis-a-new-paradigm-for-scalable-traffic-analysis"><a href="https://doi.org/10.1145/3133956.3134074">Compressive Traffic Analysis: A New Paradigm for Scalable Traffic Analysis.</a></h4>
+<h4 id="full-accounting-for-verifiable-outsourcing"><a href="https://doi.org/10.1145/3133956.3133984">Full Accounting for Verifiable Outsourcing.</a></h4>
+<h4 id="ligero-lightweight-sublinear-arguments-without-a-trusted-setup"><a href="https://doi.org/10.1145/3133956.3134104">Ligero: Lightweight Sublinear Arguments Without a Trusted Setup.</a></h4>
+<h4 id="homomorphic-secret-sharing-optimizations-and-applications"><a href="https://doi.org/10.1145/3133956.3134107">Homomorphic Secret Sharing: Optimizations and Applications.</a></h4>
+<h4 id="difuze-interface-aware-fuzzing-for-kernel-drivers"><a href="https://doi.org/10.1145/3133956.3134069">DIFUZE: Interface Aware Fuzzing for Kernel Drivers.</a></h4>
+<h4 id="semfuzz-semantics-based-automatic-generation-of-proof-of-concept-exploits"><a href="https://doi.org/10.1145/3133956.3134085">SemFuzz: Semantics-based Automatic Generation of Proof-of-Concept Exploits.</a></h4>
+<h4 id="slowfuzz-automated-domain-independent-detection-of-algorithmic-complexity-vulnerabilities"><a href="https://doi.org/10.1145/3133956.3134073">SlowFuzz: Automated Domain-Independent Detection of Algorithmic Complexity Vulnerabilities.</a></h4>
+<h4 id="identifying-open-source-license-violation-and-1-day-security-risk-at-large-scale"><a href="https://doi.org/10.1145/3133956.3134048">Identifying Open-Source License Violation and 1-day Security Risk at Large Scale.</a></h4>
+<h4 id="keep-me-updated-an-empirical-study-of-third-party-library-updatability-on-android"><a href="https://doi.org/10.1145/3133956.3134059">Keep me Updated: An Empirical Study of Third-Party Library Updatability on Android.</a></h4>
+<h4 id="a-large-scale-empirical-study-of-security-patches"><a href="https://doi.org/10.1145/3133956.3134072">A Large-Scale Empirical Study of Security Patches.</a></h4>
+<h4 id="deftl-implementing-plausibly-deniable-encryption-in-flash-translation-layer"><a href="https://doi.org/10.1145/3133956.3134011">DEFTL: Implementing Plausibly Deniable Encryption in Flash Translation Layer.</a></h4>
+<h4 id="flashguard-leveraging-intrinsic-flash-properties-to-defend-against-encryption-ransomware"><a href="https://doi.org/10.1145/3133956.3134035">FlashGuard: Leveraging Intrinsic Flash Properties to Defend Against Encryption Ransomware.</a></h4>
+<h4 id="firmusb-vetting-usb-device-firmware-using-domain-informed-symbolic-execution"><a href="https://doi.org/10.1145/3133956.3134050">FirmUSB: Vetting USB Device Firmware using Domain Informed Symbolic Execution.</a></h4>
+<h4 id="tinyole-efficient-actively-secure-two-party-computation-from-oblivious-linear-function-evaluation"><a href="https://doi.org/10.1145/3133956.3134024">TinyOLE: Efficient Actively Secure Two-Party Computation from Oblivious Linear Function Evaluation.</a></h4>
+<h4 id="efficient-public-trace-and-revoke-from-standard-assumptions-extended-abstract"><a href="https://doi.org/10.1145/3133956.3134041">Efficient Public Trace and Revoke from Standard Assumptions: Extended Abstract.</a></h4>
+<h4 id="distributed-measurement-with-private-set-union-cardinality"><a href="https://doi.org/10.1145/3133956.3134034">Distributed Measurement with Private Set-Union Cardinality.</a></h4>
+<h4 id="designing-new-operating-primitives-to-improve-fuzzing-performance"><a href="https://doi.org/10.1145/3133956.3134046">Designing New Operating Primitives to Improve Fuzzing Performance.</a></h4>
+<h4 id="directed-greybox-fuzzing"><a href="https://doi.org/10.1145/3133956.3134020">Directed Greybox Fuzzing.</a></h4>
+<h4 id="imf-inferred-model-based-fuzzer"><a href="https://doi.org/10.1145/3133956.3134103">IMF: Inferred Model-based Fuzzer.</a></h4>
+<h4 id="ptrsplit-supporting-general-pointers-in-automatic-program-partitioning"><a href="https://doi.org/10.1145/3133956.3134066">PtrSplit: Supporting General Pointers in Automatic Program Partitioning.</a></h4>
+<h4 id="hextype-efficient-detection-of-type-confusion-errors-for-c"><a href="https://doi.org/10.1145/3133956.3134062">HexType: Efficient Detection of Type Confusion Errors for C++.</a></h4>
+<h4 id="freeguard-a-faster-secure-heap-allocator"><a href="https://doi.org/10.1145/3133956.3133957">FreeGuard: A Faster Secure Heap Allocator.</a></h4>
+<h4 id="jitguard-hardening-just-in-time-compilers-with-sgx"><a href="https://doi.org/10.1145/3133956.3134037">JITGuard: Hardening Just-in-time Compilers with SGX.</a></h4>
+<h4 id="leaky-cauldron-on-the-dark-land-understanding-memory-side-channel-hazards-in-sgx"><a href="https://doi.org/10.1145/3133956.3134038">Leaky Cauldron on the Dark Land: Understanding Memory Side-Channel Hazards in SGX.</a></h4>
+<h4 id="a-formal-foundation-for-secure-remote-execution-of-enclaves"><a href="https://doi.org/10.1145/3133956.3134098">A Formal Foundation for Secure Remote Execution of Enclaves.</a></h4>
+<h4 id="demo-akatosh-automated-cyber-incident-verification-and-impact-analysis"><a href="https://doi.org/10.1145/3133956.3138854">DEMO: Akatosh: Automated Cyber Incident Verification and Impact Analysis.</a></h4>
+<h4 id="poster-adversarial-examples-for-classifiers-in-high-dimensional-network-data"><a href="https://doi.org/10.1145/3133956.3138853">Poster: Adversarial Examples for Classifiers in High-Dimensional Network Data.</a></h4>
+<h4 id="poster-an-empirical-measurement-study-on-multi-tenant-deployment-issues-of-cdns"><a href="https://doi.org/10.1145/3133956.3138852">POSTER: An Empirical Measurement Study on Multi-tenant Deployment Issues of CDNs.</a></h4>
+<h4 id="poster-actively-detecting-implicit-fraudulent-transactions"><a href="https://doi.org/10.1145/3133956.3138822">POSTER: Actively Detecting Implicit Fraudulent Transactions.</a></h4>
+<h4 id="poster-semi-supervised-classification-for-dynamic-android-malware-detection"><a href="https://doi.org/10.1145/3133956.3138838">POSTER: Semi-supervised Classification for Dynamic Android Malware Detection.</a></h4>
+<h4 id="poster-detection-of-cps-program-anomalies-by-enforcing-cyber-physical-execution-semantics"><a href="https://doi.org/10.1145/3133956.3138839">POSTER: Detection of CPS Program Anomalies by Enforcing Cyber-Physical Execution Semantics.</a></h4>
+<h4 id="poster-a-comprehensive-study-of-forged-certificates-in-the-wild"><a href="https://doi.org/10.1145/3133956.3138851">POSTER: A Comprehensive Study of Forged Certificates in the Wild.</a></h4>
+<h4 id="poster-rust-sgx-sdk-towards-memory-safety-in-intel-sgx-enclave"><a href="https://doi.org/10.1145/3133956.3138824">POSTER: Rust SGX SDK: Towards Memory Safety in Intel SGX Enclave.</a></h4>
+<h4 id="poster-finding-vulnerabilities-in-p4-programs-with-assertion-based-verification"><a href="https://doi.org/10.1145/3133956.3138837">POSTER: Finding Vulnerabilities in P4 Programs with Assertion-based Verification.</a></h4>
+<h4 id="poster-covert-channel-based-on-the-sequential-analysis-in-android-systems"><a href="https://doi.org/10.1145/3133956.3138847">POSTER: Covert Channel Based on the Sequential Analysis in Android Systems.</a></h4>
+<h4 id="poster-why-are-you-going-that-way-measuring-unnecessary-exposure-of-network-traffic-to-nation-states"><a href="https://doi.org/10.1145/3133956.3138842">POSTER: Why Are You Going That Way? Measuring Unnecessary Exposure of Network Traffic to Nation States.</a></h4>
+<h4 id="poster-priremat-a-distributed-tool-for-privacy-preserving-record-linking-in-healthcare"><a href="https://doi.org/10.1145/3133956.3138845">POSTER: PriReMat: A Distributed Tool for Privacy Preserving Record Linking in Healthcare.</a></h4>
+<h4 id="poster-afl-based-fuzzing-for-java-with-kelinci"><a href="https://doi.org/10.1145/3133956.3138820">POSTER: AFL-based Fuzzing for Java with Kelinci.</a></h4>
+<h4 id="poster-rethinking-fingerprint-identification-on-smartphones"><a href="https://doi.org/10.1145/3133956.3138832">POSTER: Rethinking Fingerprint Identification on Smartphones.</a></h4>
+<h4 id="poster-x-ray-your-dns"><a href="https://doi.org/10.1145/3133956.3138821">POSTER: X-Ray Your DNS.</a></h4>
+<h4 id="poster-hidden-in-plain-sight-a-filesystem-for-data-integrity-and-confidentiality"><a href="https://doi.org/10.1145/3133956.3138841">POSTER: Hidden in Plain Sight: A Filesystem for Data Integrity and Confidentiality.</a></h4>
+<h4 id="poster-watch-out-your-smart-watch-when-paired"><a href="https://doi.org/10.1145/3133956.3138831">POSTER: Watch Out Your Smart Watch When Paired.</a></h4>
+<h4 id="poster-intrusion-detection-system-for-in-vehicle-networks-using-sensor-correlation-and-integration"><a href="https://doi.org/10.1145/3133956.3138843">POSTER: Intrusion Detection System for In-vehicle Networks using Sensor Correlation and Integration.</a></h4>
+<h4 id="poster-practical-fraud-transaction-prediction"><a href="https://doi.org/10.1145/3133956.3138826">POSTER: Practical Fraud Transaction Prediction.</a></h4>
+<h4 id="poster-vulnerability-discovery-with-function-representation-learning-from-unlabeled-projects"><a href="https://doi.org/10.1145/3133956.3138840">POSTER: Vulnerability Discovery with Function Representation Learning from Unlabeled Projects.</a></h4>
+<h4 id="poster-neural-network-based-graph-embedding-for-malicious-accounts-detection"><a href="https://doi.org/10.1145/3133956.3138827">POSTER: Neural Network-based Graph Embedding for Malicious Accounts Detection.</a></h4>
+<h4 id="poster-a-unified-framework-of-differentially-private-synthetic-data-release-with-generative-adversarial-network"><a href="https://doi.org/10.1145/3133956.3138823">POSTER: A Unified Framework of Differentially Private Synthetic Data Release with Generative Adversarial Network.</a></h4>
+<h4 id="poster-touchflood-a-novel-class-of-attacks-against-capacitive-touchscreens"><a href="https://doi.org/10.1145/3133956.3138829">POSTER: TOUCHFLOOD: A Novel Class of Attacks against Capacitive Touchscreens.</a></h4>
+<h4 id="poster-touchtrack-how-unique-are-your-touch-gestures"><a href="https://doi.org/10.1145/3133956.3138850">POSTER: TouchTrack: How Unique are your Touch Gestures?</a></h4>
+<h4 id="poster-penj1939-an-interactive-framework-for-design-and-dissemination-of-exploits-for-commercial-vehicles"><a href="https://doi.org/10.1145/3133956.3138844">POSTER: PenJ1939: An Interactive Framework for Design and Dissemination of Exploits for Commercial Vehicles.</a></h4>
+<h4 id="poster-cyber-attack-prediction-of-threats-from-unconventional-resources-capture"><a href="https://doi.org/10.1145/3133956.3138834">POSTER: Cyber Attack Prediction of Threats from Unconventional Resources (CAPTURE).</a></h4>
+<h4 id="poster-towards-precise-and-automated-verification-of-security-protocols-in-coq"><a href="https://doi.org/10.1145/3133956.3138846">POSTER: Towards Precise and Automated Verification of Security Protocols in Coq.</a></h4>
+<h4 id="poster-probing-tor-hidden-service-with-dockers"><a href="https://doi.org/10.1145/3133956.3138849">POSTER: Probing Tor Hidden Service with Dockers.</a></h4>
+<h4 id="poster-evaluating-reflective-deception-as-a-malware-mitigation-strategy"><a href="https://doi.org/10.1145/3133956.3138833">POSTER: Evaluating Reflective Deception as a Malware Mitigation Strategy.</a></h4>
+<h4 id="poster-improving-anonymity-of-services-deployed-over-tor-by-changing-guard-selection"><a href="https://doi.org/10.1145/3133956.3138835">POSTER: Improving Anonymity of Services Deployed Over Tor by Changing Guard Selection.</a></h4>
+<h4 id="poster-inaudible-voice-commands"><a href="https://doi.org/10.1145/3133956.3138836">POSTER: Inaudible Voice Commands.</a></h4>
+<h4 id="poster-is-active-electromagnetic-side-channel-attack-practical"><a href="https://doi.org/10.1145/3133956.3138830">POSTER: Is Active Electromagnetic Side-channel Attack Practical?</a></h4>
+<h4 id="poster-bgpcoin-a-trustworthy-blockchain-based-resource-management-solution-for-bgp-security"><a href="https://doi.org/10.1145/3133956.3138828">POSTER: BGPCoin: A Trustworthy Blockchain-based Resource Management Solution for BGP Security.</a></h4>
+<h4 id="poster-who-was-behind-the-camera-towards-some-new-forensics"><a href="https://doi.org/10.1145/3133956.3138848">POSTER: Who was Behind the Camera? - Towards Some New Forensics.</a></h4>
+<h4 id="poster-a-pu-learning-based-system-for-potential-malicious-url-detection"><a href="https://doi.org/10.1145/3133956.3138825">POSTER: A PU Learning based System for Potential Malicious URL Detection.</a></h4>
+<h4 id="identity-related-threats-vulnerabilities-and-risk-mitigation-in-online-social-networks-a-tutorial"><a href="https://doi.org/10.1145/3133956.3136066">Identity Related Threats, Vulnerabilities and Risk Mitigation in Online Social Networks: A Tutorial.</a></h4>
+<h4 id="web-tracking-technologies-and-protection-mechanisms"><a href="https://doi.org/10.1145/3133956.3136067">Web Tracking Technologies and Protection Mechanisms.</a></h4>
+<h4 id="tutorial-private-information-retrieval"><a href="https://doi.org/10.1145/3133956.3136069">Tutorial: Private Information Retrieval.</a></h4>
+<h4 id="ccs17-tutorial-abstract-sgx-security-and-privacy"><a href="https://doi.org/10.1145/3133956.3136068">CCS'17 Tutorial Abstract / SGX Security and Privacy.</a></h4>
+<h4 id="cliptography-post-snowden-cryptography"><a href="https://doi.org/10.1145/3133956.3136065">Cliptography: Post-Snowden Cryptography.</a></h4>
+<h4 id="cache-side-channels-state-of-the-art-and-research-opportunities"><a href="https://doi.org/10.1145/3133956.3136064">Cache Side Channels: State of the Art and Research Opportunities.</a></h4>
+<h4 id="10th-international-workshop-on-artificial-intelligence-and-security-aisec-2017"><a href="https://doi.org/10.1145/3133956.3137048">10th International Workshop on Artificial Intelligence and Security (AISec 2017).</a></h4>
+<h4 id="ashes-2017-workshop-on-attacks-and-solutions-in-hardware-security"><a href="https://doi.org/10.1145/3133956.3137049">ASHES 2017: Workshop on Attacks and Solutions in Hardware Security.</a></h4>
+<h4 id="ccsw17-2017-acm-cloud-computing-security"><a href="https://doi.org/10.1145/3133956.3137050">CCSW'17: 2017 ACM Cloud Computing Security.</a></h4>
+<h4 id="cps-spc-2017-third-workshop-on-cyber-physical-systems-security-and-privacy"><a href="https://doi.org/10.1145/3133956.3137051">CPS-SPC 2017: Third Workshop on Cyber-Physical Systems Security and PrivaCy.</a></h4>
+<h4 id="ccs-2017-women-in-cyber-security-cyberw-workshop"><a href="https://doi.org/10.1145/3133956.3137041">CCS 2017: Women in Cyber Security (CyberW) Workshop.</a></h4>
+<h4 id="feast-2017-the-second-workshop-on-forming-an-ecosystem-around-software-transformation"><a href="https://doi.org/10.1145/3133956.3137052">FEAST 2017: The Second Workshop on Forming an Ecosystem Around Software Transformation.</a></h4>
+<h4 id="mist-2017-9th-international-workshop-on-managing-insider-security-threats"><a href="https://doi.org/10.1145/3133956.3148525">MIST 2017: 9th International Workshop on Managing Insider Security Threats.</a></h4>
+<h4 id="mtd-2017-fourth-acm-workshop-on-moving-target-defense-mtd"><a href="https://doi.org/10.1145/3133956.3137044">MTD 2017: Fourth ACM Workshop on Moving Target Defense (MTD).</a></h4>
+<h4 id="plas-2017-acm-sigsac-workshop-on-programming-languages-and-analysis-for-security"><a href="https://doi.org/10.1145/3133956.3137045">PLAS 2017: ACM SIGSAC Workshop on Programming Languages and Analysis for Security.</a></h4>
+<h4 id="safeconfig17-applying-the-scientific-method-to-active-cyber-defense-research"><a href="https://doi.org/10.1145/3133956.3137054">SafeConfig'17: Applying the Scientific Method to Active Cyber Defense Research.</a></h4>
+<h4 id="16th-workshop-on-privacy-in-the-electronic-society-wpes-2017"><a href="https://doi.org/10.1145/3133956.3137047">16th Workshop on Privacy in the Electronic Society (WPES 2017).</a></h4>
+<h4 id="workshop-on-multimedia-privacy-and-security"><a href="https://doi.org/10.1145/3133956.3137043">Workshop on Multimedia Privacy and Security.</a></h4>
+<h4 id="iot-sp-2017-first-workshop-on-internet-of-things-security-and-privacy"><a href="https://doi.org/10.1145/3133956.3137053">IoT S&amp;P 2017: First Workshop on Internet of Things Security and Privacy.</a></h4>
+
+<!-- Source file information -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Render date of last update -->
+
+
+<!-- Render date of creation -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Render authors -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Render committers from GitHub -->
+
+
+<!-- Render committers from GitLab -->
+
+
+<!-- Render committers -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Determine date of last update -->
+
+  
+
+  <!-- Determine date of creation -->
+  
+
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine feedback configuration -->
+
+
+<!-- Determine whether to show feedback -->
+
+
+<!-- Was this page helpful? -->
+
+
+<!-- Comment system -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Comment system -->
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Copyright and theme information -->
+<div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2024 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a
+      href="https://squidfunk.github.io/mkdocs-material/"
+      target="_blank" rel="noopener"
+    >
+      Material for MkDocs
+    </a>
+  
+  <div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_uv" title="Site Visitors"><span id="busuanzi_value_site_uv"></span> / </span>
+    <span id="busuanzi_container_site_pv" title="Site Visits"><span id="busuanzi_value_site_pv"></span> / </span>
+    <span id="busuanzi_container_page_pv" title="Page Visits"><span id="busuanzi_value_page_pv"></span></span>
+  </div>
+</div>
+
+      <!-- Social links -->
+      
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Social links -->
+<div class="md-social">
+  
+
+    <!-- Automatically set rel=me for Mastodon -->
+    
+    
+
+    <!-- Compute title and render link -->
+    
+    
+      
+      
+    
+    <a
+      href="https://github.com/c01dkit"
+      target="_blank" rel="noopener"
+      title="github.com"
+      class="md-social__link"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../helper.js"></script>
+      
+    
+  </body>
+</html>

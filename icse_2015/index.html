@@ -1,0 +1,3761 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="c01dkit">
+      
+      
+        <link rel="canonical" href="https://sec.c01dkit.com/icse_2015/">
+      
+      
+        <link rel="prev" href="../icse_2016/">
+      
+      
+        <link rel="next" href="../issta_2024/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>ICSE 2015 - Collection of Security Papers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Custom admonition icons -->
+
+
+<!-- Custom annotation icon -->
+
+
+<!-- Custom tag icons -->
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../helper.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href=".."
+      title="Collection of Security Papers"
+      class="md-header__button md-logo"
+      aria-label="Collection of Security Papers"
+      data-md-component="logo"
+    >
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Logo -->
+
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collection of Security Papers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ICSE 2015
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Search interface -->
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+
+      <!-- Search input -->
+      <input
+        type="text"
+        class="md-search__input"
+        name="query"
+        aria-label="Search"
+        placeholder="Search"
+        autocapitalize="off"
+        autocorrect="off"
+        autocomplete="off"
+        spellcheck="false"
+        data-md-component="search-query"
+        required
+      />
+
+      <!-- Button to open search -->
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+
+      <!-- Search options -->
+      <nav
+        class="md-search__options"
+        aria-label="Search"
+      >
+
+        <!-- Button to share search -->
+        
+
+        <!-- Button to reset search -->
+        <button
+          type="reset"
+          class="md-search__icon md-icon"
+          title="Clear"
+          aria-label="Clear"
+          tabindex="-1"
+        >
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+
+      <!-- Search suggestions -->
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+
+        <!-- Search results -->
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Repository information -->
+<a
+  href="https://github.com/c01dkit/sec-papers-collection"
+  title="Go to repository"
+  class="md-source"
+  data-md-component="source"
+>
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
+
+<!-- Determine classes -->
+
+
+
+
+<!-- Navigation -->
+<nav
+  class="md-nav md-nav--primary"
+  aria-label="Navigation"
+  data-md-level="0"
+>
+
+  <!-- Site title -->
+  <label class="md-nav__title" for="__drawer">
+    <a
+      href=".."
+      title="Collection of Security Papers"
+      class="md-nav__button md-logo"
+      aria-label="Collection of Security Papers"
+      data-md-component="logo"
+    >
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Logo -->
+
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Collection of Security Papers
+  </label>
+
+  <!-- Repository information -->
+  
+    <div class="md-nav__source">
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Repository information -->
+<a
+  href="https://github.com/c01dkit/sec-papers-collection"
+  title="Go to repository"
+  class="md-source"
+  data-md-component="source"
+>
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+
+  <!-- Navigation list -->
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    All
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_2"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_2"
+            id="__nav_2_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    IEEE S&P
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_2_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IEEE S&P
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../oakland_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_3"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_3"
+            id="__nav_3_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ACM CCS
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_3_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ACM CCS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ccs_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_4"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_4"
+            id="__nav_4_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    USENIX Sec
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_4_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            USENIX Sec
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../usenix_security_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_5"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_5"
+            id="__nav_5_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    NDSS
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_5_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            NDSS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../ndss_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+    
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_6"
+          checked
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_6"
+            id="__nav_6_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ICSE
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_6_label"
+          aria-expanded="true"
+        >
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            ICSE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../icse_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+    
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+
+      <!-- State toggle -->
+      <input
+        class="md-nav__toggle md-toggle"
+        type="checkbox"
+        id="__toc"
+      />
+
+      <!-- Hack: see partials/toc.html for more information -->
+      
+      
+
+      <!-- Navigation link to table of contents -->
+      
+      <a
+        href="./"
+        class="md-nav__link md-nav__link--active"
+      >
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+
+      <!-- Table of contents -->
+      
+    </li>
+
+  <!-- Navigation item -->
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+      
+      
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+
+    <!-- Determine all nested items that are index pages -->
+    
+    
+
+    <!-- Navigation tabs -->
+    
+
+    <!-- Navigation pruning -->
+    
+
+    <!-- Nested navigation item -->
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+
+        <!-- Determine checked and indeterminate state -->
+        
+
+        <!-- Active checkbox expands items contained within nested section -->
+        <input
+          class="md-nav__toggle md-toggle "
+          type="checkbox"
+          id="__nav_7"
+          
+        />
+
+        <!-- Toggle to expand nested items -->
+        
+          
+          <label
+            class="md-nav__link"
+            for="__nav_7"
+            id="__nav_7_label"
+            tabindex="0"
+          >
+            
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    ISSTA
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <!-- Toggle to expand nested items with link to index page -->
+        
+
+        <!-- Nested navigation -->
+        <nav
+          class="md-nav"
+          data-md-level="1"
+          aria-labelledby="__nav_7_label"
+          aria-expanded="false"
+        >
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            ISSTA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+            <!-- Nested navigation item -->
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2024/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2024
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2023/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2023
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2022/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2022
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2021/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2021
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2020/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2020
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2019/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2019
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2018/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2018
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2017/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2017
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2016/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2016
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+
+  <!-- Determine classes -->
+  
+  
+
+  <!-- Determine active page for paginated views -->
+  
+
+  <!-- Navigation item with nested items -->
+  
+    <li class="md-nav__item">
+      <a href="../issta_2015/" class="md-nav__link">
+        
+
+  <!-- Navigation link icon -->
+  
+
+  <!-- Navigation link title -->
+  <span class="md-ellipsis">
+    2015
+  </span>
+
+  <!-- Navigation link status -->
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+
+      <!-- Pruned navigation item -->
+      
+    </li>
+
+  <!-- Currently active page -->
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine title -->
+
+
+
+<!-- Table of contents -->
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+  <!--
+    Check whether the content starts with a level 1 headline. If it does, the
+    top-level anchor must be skipped, since it would be redundant to the link
+    to the current page that is located just above the anchor. Therefore we
+    directly continue with the children of the anchor.
+  -->
+  
+  
+
+  <!-- Table of contents title and list -->
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Tags -->
+
+
+<!-- Actions -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Actions -->
+
+
+  <!-- Edit button -->
+  
+
+  <!-- View button -->
+  
+
+
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+
+
+<!-- Page content -->
+<h1 id="icse-2015">ICSE 2015</h1>
+<p>298 papers accepted.</p>
+<p>Updated on <strong>2024-06-30</strong>.</p>
+<p>You can find <a href="https://dblp.org/db/conf/icse/icse2015-1.html">the lastest information here</a>.</p>
+<p>Updated on <strong>2024-06-30</strong>.</p>
+<p>You can find <a href="https://dblp.org/db/conf/icse/icse2015-2.html">the lastest information here</a>.</p>
+<hr />
+<h4 id="views-on-internal-and-external-validity-in-empirical-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.24">Views on Internal and External Validity in Empirical Software Engineering.</a></h4>
+<h4 id="developing-and-evaluating-software-engineering-process-theories"><a href="https://doi.org/10.1109/ICSE.2015.25">Developing and Evaluating Software Engineering Process Theories.</a></h4>
+<h4 id="automated-data-structure-generation-refuting-common-wisdom"><a href="https://doi.org/10.1109/ICSE.2015.26">Automated Data Structure Generation: Refuting Common Wisdom.</a></h4>
+<h4 id="automated-modularization-of-gui-test-cases"><a href="https://doi.org/10.1109/ICSE.2015.27">Automated Modularization of GUI Test Cases.</a></h4>
+<h4 id="making-system-user-interactive-tests-repeatable-when-and-what-should-we-control"><a href="https://doi.org/10.1109/ICSE.2015.28">Making System User Interactive Tests Repeatable: When and What Should We Control?</a></h4>
+<h4 id="zoomin-discovering-failures-by-detecting-wrong-assertions"><a href="https://doi.org/10.1109/ICSE.2015.29">ZoomIn: Discovering Failures by Detecting Wrong Assertions.</a></h4>
+<h4 id="composite-constant-propagation-application-to-android-inter-component-communication-analysis"><a href="https://doi.org/10.1109/ICSE.2015.30">Composite Constant Propagation: Application to Android Inter-Component Communication Analysis.</a></h4>
+<h4 id="static-control-flow-analysis-of-user-driven-callbacks-in-android-applications"><a href="https://doi.org/10.1109/ICSE.2015.31">Static Control-Flow Analysis of User-Driven Callbacks in Android Applications.</a></h4>
+<h4 id="truth-in-advertising-the-hidden-cost-of-mobile-ads-for-software-developers"><a href="https://doi.org/10.1109/ICSE.2015.32">Truth in Advertising: The Hidden Cost of Mobile Ads for Software Developers.</a></h4>
+<h4 id="interactive-code-review-for-systematic-changes"><a href="https://doi.org/10.1109/ICSE.2015.33">Interactive Code Review for Systematic Changes.</a></h4>
+<h4 id="automated-decomposition-of-build-targets"><a href="https://doi.org/10.1109/ICSE.2015.34">Automated Decomposition of Build Targets.</a></h4>
+<h4 id="helping-developers-help-themselves-automatic-decomposition-of-code-review-changesets"><a href="https://doi.org/10.1109/ICSE.2015.35">Helping Developers Help Themselves: Automatic Decomposition of Code Review Changesets.</a></h4>
+<h4 id="data-delineation-in-software-binaries-and-its-application-to-buffer-overrun-discovery"><a href="https://doi.org/10.1109/ICSE.2015.36">Data-Delineation in Software Binaries and its Application to Buffer-Overrun Discovery.</a></h4>
+<h4 id="measuring-software-redundancy"><a href="https://doi.org/10.1109/ICSE.2015.37">Measuring Software Redundancy.</a></h4>
+<h4 id="gray-computing-an-analysis-of-computing-with-background-javascript-tasks"><a href="https://doi.org/10.1109/ICSE.2015.38">Gray Computing: An Analysis of Computing with Background JavaScript Tasks.</a></h4>
+<h4 id="presence-condition-simplification-in-highly-configurable-systems"><a href="https://doi.org/10.1109/ICSE.2015.39">Presence-Condition Simplification in Highly Configurable Systems.</a></h4>
+<h4 id="symbolic-model-checking-of-product-line-requirements-using-sat-based-methods"><a href="https://doi.org/10.1109/ICSE.2015.40">Symbolic Model Checking of Product-Line Requirements Using SAT-Based Methods.</a></h4>
+<h4 id="lightweight-adaptive-filtering-for-efficient-learning-and-updating-of-probabilistic-models"><a href="https://doi.org/10.1109/ICSE.2015.41">Lightweight Adaptive Filtering for Efficient Learning and Updating of Probabilistic Models.</a></h4>
+<h4 id="tempura-temporal-dimension-for-ides"><a href="https://doi.org/10.1109/ICSE.2015.42">Tempura: Temporal Dimension for IDEs.</a></h4>
+<h4 id="supporting-selective-undo-in-a-code-editor"><a href="https://doi.org/10.1109/ICSE.2015.43">Supporting Selective Undo in a Code Editor.</a></h4>
+<h4 id="cascade-a-universal-programmer-assisted-type-qualifier-inference-tool"><a href="https://doi.org/10.1109/ICSE.2015.44">Cascade: A Universal Programmer-Assisted Type Qualifier Inference Tool.</a></h4>
+<h4 id="recontest-effective-regression-testing-of-concurrent-programs"><a href="https://doi.org/10.1109/ICSE.2015.45">RECONTEST: Effective Regression Testing of Concurrent Programs.</a></h4>
+<h4 id="a-synergistic-analysis-method-for-explaining-failed-regression-tests"><a href="https://doi.org/10.1109/ICSE.2015.46">A Synergistic Analysis Method for Explaining Failed Regression Tests.</a></h4>
+<h4 id="an-information-retrieval-approach-for-regression-test-prioritization-based-on-program-changes"><a href="https://doi.org/10.1109/ICSE.2015.47">An Information Retrieval Approach for Regression Test Prioritization Based on Program Changes.</a></h4>
+<h4 id="iccta-detecting-inter-component-privacy-leaks-in-android-apps"><a href="https://doi.org/10.1109/ICSE.2015.48">IccTA: Detecting Inter-Component Privacy Leaks in Android Apps.</a></h4>
+<h4 id="do-security-patterns-really-help-designers"><a href="https://doi.org/10.1109/ICSE.2015.49">Do Security Patterns Really Help Designers?</a></h4>
+<h4 id="appcontext-differentiating-malicious-and-benign-mobile-app-behaviors-using-context"><a href="https://doi.org/10.1109/ICSE.2015.50">AppContext: Differentiating Malicious and Benign Mobile App Behaviors Using Context.</a></h4>
+<h4 id="typedevil-dynamic-type-inconsistency-analysis-for-javascript"><a href="https://doi.org/10.1109/ICSE.2015.51">TypeDevil: Dynamic Type Inconsistency Analysis for JavaScript.</a></h4>
+<h4 id="detecting-inconsistencies-in-javascript-mvc-applications"><a href="https://doi.org/10.1109/ICSE.2015.52">Detecting Inconsistencies in JavaScript MVC Applications.</a></h4>
+<h4 id="autocsp-automatically-retrofitting-csp-to-web-applications"><a href="https://doi.org/10.1109/ICSE.2015.53">AutoCSP: Automatically Retrofitting CSP to Web Applications.</a></h4>
+<h4 id="how-much-up-front-a-grounded-theory-of-agile-architecture"><a href="https://doi.org/10.1109/ICSE.2015.54">How Much Up-Front? A Grounded theory of Agile Architecture.</a></h4>
+<h4 id="work-practices-and-challenges-in-pull-based-development-the-integrators-perspective"><a href="https://doi.org/10.1109/ICSE.2015.55">Work Practices and Challenges in Pull-Based Development: The Integrator's Perspective.</a></h4>
+<h4 id="build-it-yourself-homegrown-tools-in-a-large-software-company"><a href="https://doi.org/10.1109/ICSE.2015.56">Build It Yourself! Homegrown Tools in a Large Software Company.</a></h4>
+<h4 id="morpheus-variability-aware-refactoring-in-the-wild"><a href="https://doi.org/10.1109/ICSE.2015.57">Morpheus: Variability-Aware Refactoring in the Wild.</a></h4>
+<h4 id="does-automated-refactoring-obviate-systematic-editing"><a href="https://doi.org/10.1109/ICSE.2015.58">Does Automated Refactoring Obviate Systematic Editing?</a></h4>
+<h4 id="when-and-why-your-code-starts-to-smell-bad"><a href="https://doi.org/10.1109/ICSE.2015.59">When and Why Your Code Starts to Smell Bad.</a></h4>
+<h4 id="learning-to-log-helping-developers-make-informed-logging-decisions"><a href="https://doi.org/10.1109/ICSE.2015.60">Learning to Log: Helping Developers Make Informed Logging Decisions.</a></h4>
+<h4 id="mining-apps-for-abnormal-usage-of-sensitive-data"><a href="https://doi.org/10.1109/ICSE.2015.61">Mining Apps for Abnormal Usage of Sensitive Data.</a></h4>
+<h4 id="tracking-static-analysis-violations-over-time-to-capture-developer-characteristics"><a href="https://doi.org/10.1109/ICSE.2015.62">Tracking Static Analysis Violations over Time to Capture Developer Characteristics.</a></h4>
+<h4 id="directfix-looking-for-simple-program-repairs"><a href="https://doi.org/10.1109/ICSE.2015.63">DirectFix: Looking for Simple Program Repairs.</a></h4>
+<h4 id="safe-memory-leak-fixing-for-c-programs"><a href="https://doi.org/10.1109/ICSE.2015.64">Safe Memory-Leak Fixing for C Programs.</a></h4>
+<h4 id="relifix-automated-repair-of-software-regressions"><a href="https://doi.org/10.1109/ICSE.2015.65">relifix: Automated Repair of Software Regressions.</a></h4>
+<h4 id="the-art-of-testing-less-without-sacrificing-quality"><a href="https://doi.org/10.1109/ICSE.2015.66">The Art of Testing Less without Sacrificing Quality.</a></h4>
+<h4 id="no-pain-no-gain-the-utility-of-parallel-fault-injections"><a href="https://doi.org/10.1109/ICSE.2015.67">No PAIN, No Gain? The Utility of PArallel Fault INjections.</a></h4>
+<h4 id="a-flexible-and-non-intrusive-approach-for-computing-complex-structural-coverage-metrics"><a href="https://doi.org/10.1109/ICSE.2015.68">A Flexible and Non-intrusive Approach for Computing Complex Structural Coverage Metrics.</a></h4>
+<h4 id="combining-multi-objective-search-and-constraint-solving-for-configuring-large-software-product-lines"><a href="https://doi.org/10.1109/ICSE.2015.69">Combining Multi-Objective Search and Constraint Solving for Configuring Large Software Product Lines.</a></h4>
+<h4 id="a-genetic-algorithm-for-detecting-significant-floating-point-inaccuracies"><a href="https://doi.org/10.1109/ICSE.2015.70">A Genetic Algorithm for Detecting Significant Floating-Point Inaccuracies.</a></h4>
+<h4 id="learning-combinatorial-interaction-test-generation-strategies-using-hyperheuristic-search"><a href="https://doi.org/10.1109/ICSE.2015.71">Learning Combinatorial Interaction Test Generation Strategies Using Hyperheuristic Search.</a></h4>
+<h4 id="borrowing-from-the-crowd-a-study-of-recombination-in-software-design-competitions"><a href="https://doi.org/10.1109/ICSE.2015.72">Borrowing from the Crowd: A Study of Recombination in Software Design Competitions.</a></h4>
+<h4 id="from-developer-networks-to-verified-communities-a-fine-grained-approach"><a href="https://doi.org/10.1109/ICSE.2015.73">From Developer Networks to Verified Communities: A Fine-Grained Approach.</a></h4>
+<h4 id="open-source-style-collaborative-development-practices-in-commercial-projects-using-github"><a href="https://doi.org/10.1109/ICSE.2015.74">Open Source-Style Collaborative Development Practices in Commercial Projects Using GitHub.</a></h4>
+<h4 id="database-backed-program-analysis-for-scalable-error-propagation"><a href="https://doi.org/10.1109/ICSE.2015.75">Database-Backed Program Analysis for Scalable Error Propagation.</a></h4>
+<h4 id="tricorder-building-a-program-analysis-ecosystem"><a href="https://doi.org/10.1109/ICSE.2015.76">Tricorder: Building a Program Analysis Ecosystem.</a></h4>
+<h4 id="alloy-a-general-purpose-higher-order-relational-constraint-solver"><a href="https://doi.org/10.1109/ICSE.2015.77">Alloy*: A General-Purpose Higher-Order Relational Constraint Solver.</a></h4>
+<h4 id="dase-document-assisted-symbolic-execution-for-improving-automated-software-testing"><a href="https://doi.org/10.1109/ICSE.2015.78">DASE: Document-Assisted Symbolic Execution for Improving Automated Software Testing.</a></h4>
+<h4 id="compositional-symbolic-execution-with-memoized-replay"><a href="https://doi.org/10.1109/ICSE.2015.79">Compositional Symbolic Execution with Memoized Replay.</a></h4>
+<h4 id="regular-property-guided-dynamic-symbolic-execution"><a href="https://doi.org/10.1109/ICSE.2015.80">Regular Property Guided Dynamic Symbolic Execution.</a></h4>
+<h4 id="combining-symbolic-execution-and-model-checking-for-data-flow-testing"><a href="https://doi.org/10.1109/ICSE.2015.81">Combining Symbolic Execution and Model Checking for Data Flow Testing.</a></h4>
+<h4 id="are-students-representatives-of-professionals-in-software-engineering-experiments"><a href="https://doi.org/10.1109/ICSE.2015.82">Are Students Representatives of Professionals in Software Engineering Experiments?</a></h4>
+<h4 id="why-good-developers-write-bad-code-an-observational-case-study-of-the-impacts-of-organizational-factors-on-software-quality"><a href="https://doi.org/10.1109/ICSE.2015.83">Why Good Developers Write Bad Code: An Observational Case Study of the Impacts of Organizational Factors on Software Quality.</a></h4>
+<h4 id="stuck-and-frustrated-or-in-flow-and-happy-sensing-developers-emotions-and-progress"><a href="https://doi.org/10.1109/ICSE.2015.334">Stuck and Frustrated or in Flow and Happy: Sensing Developers' Emotions and Progress.</a></h4>
+<h4 id="what-makes-a-great-software-engineer"><a href="https://doi.org/10.1109/ICSE.2015.335">What Makes a Great Software Engineer?</a></h4>
+<h4 id="efficient-scalable-verification-of-ltl-specifications"><a href="https://doi.org/10.1109/ICSE.2015.84">Efficient Scalable Verification of LTL Specifications.</a></h4>
+<h4 id="empirical-study-towards-a-leading-indicator-for-cost-of-formal-software-verification"><a href="https://doi.org/10.1109/ICSE.2015.85">Empirical Study Towards a Leading Indicator for Cost of Formal Software Verification.</a></h4>
+<h4 id="specifying-event-based-systems-with-a-counting-fluent-temporal-logic"><a href="https://doi.org/10.1109/ICSE.2015.86">Specifying Event-Based Systems with a Counting Fluent Temporal Logic.</a></h4>
+<h4 id="coexecutability-for-efficient-verification-of-data-model-updates"><a href="https://doi.org/10.1109/ICSE.2015.87">Coexecutability for Efficient Verification of Data Model Updates.</a></h4>
+<h4 id="assert-use-in-github-projects"><a href="https://doi.org/10.1109/ICSE.2015.88">Assert Use in GitHub Projects.</a></h4>
+<h4 id="a-programming-model-for-sustainable-software"><a href="https://doi.org/10.1109/ICSE.2015.89">A Programming Model for Sustainable Software.</a></h4>
+<h4 id="a-comparative-study-of-programming-languages-in-rosetta-code"><a href="https://doi.org/10.1109/ICSE.2015.90">A Comparative Study of Programming Languages in Rosetta Code.</a></h4>
+<h4 id="revisiting-the-impact-of-classification-techniques-on-the-performance-of-defect-prediction-models"><a href="https://doi.org/10.1109/ICSE.2015.91">Revisiting the Impact of Classification Techniques on the Performance of Defect Prediction Models.</a></h4>
+<h4 id="lace2-better-privacy-preserving-data-sharing-for-cross-project-defect-prediction"><a href="https://doi.org/10.1109/ICSE.2015.92">LACE2: Better Privacy-Preserving Data Sharing for Cross Project Defect Prediction.</a></h4>
+<h4 id="the-impact-of-mislabelling-on-the-performance-and-interpretation-of-defect-prediction-models"><a href="https://doi.org/10.1109/ICSE.2015.93">The Impact of Mislabelling on the Performance and Interpretation of Defect Prediction Models.</a></h4>
+<h4 id="recbulc-reproducing-concurrency-bugs-using-local-clocks"><a href="https://doi.org/10.1109/ICSE.2015.94">ReCBuLC: Reproducing Concurrency Bugs Using Local Clocks.</a></h4>
+<h4 id="dynamic-generation-of-likely-invariants-for-multithreaded-programs"><a href="https://doi.org/10.1109/ICSE.2015.95">Dynamic Generation of Likely Invariants for Multithreaded Programs.</a></h4>
+<h4 id="gpredict-generic-predictive-concurrency-analysis"><a href="https://doi.org/10.1109/ICSE.2015.96">GPredict: Generic Predictive Concurrency Analysis.</a></h4>
+<h4 id="graph-based-statistical-language-model-for-code"><a href="https://doi.org/10.1109/ICSE.2015.336">Graph-Based Statistical Language Model for Code.</a></h4>
+<h4 id="discovering-information-explaining-api-types-using-text-classification"><a href="https://doi.org/10.1109/ICSE.2015.97">Discovering Information Explaining API Types Using Text Classification.</a></h4>
+<h4 id="how-can-i-use-this-method"><a href="https://doi.org/10.1109/ICSE.2015.98">How Can I Use This Method?</a></h4>
+<h4 id="hercules-reproducing-crashes-in-real-world-application-binaries"><a href="https://doi.org/10.1109/ICSE.2015.99">Hercules: Reproducing Crashes in Real-World Application Binaries.</a></h4>
+<h4 id="caramel-detecting-and-fixing-performance-problems-that-have-non-intrusive-fixes"><a href="https://doi.org/10.1109/ICSE.2015.100">CARAMEL: Detecting and Fixing Performance Problems That Have Non-Intrusive Fixes.</a></h4>
+<h4 id="an-empirical-study-on-real-bug-fixes"><a href="https://doi.org/10.1109/ICSE.2015.101">An Empirical Study on Real Bug Fixes.</a></h4>
+<h4 id="does-the-failing-test-execute-a-single-or-multiple-faults-an-approach-to-classifying-failing-tests"><a href="https://doi.org/10.1109/ICSE.2015.102">Does the Failing Test Execute a Single or Multiple Faults? An Approach to Classifying Failing Tests.</a></h4>
+<h4 id="trivial-compiler-equivalence-a-large-scale-empirical-study-of-a-simple-fast-and-effective-equivalent-mutant-detection-technique"><a href="https://doi.org/10.1109/ICSE.2015.103">Trivial Compiler Equivalence: A Large Scale Empirical Study of a Simple, Fast and Effective Equivalent Mutant Detection Technique.</a></h4>
+<h4 id="dynamic-data-flow-testing-of-object-oriented-systems"><a href="https://doi.org/10.1109/ICSE.2015.104">Dynamic Data Flow Testing of Object Oriented Systems.</a></h4>
+<h4 id="enrons-spreadsheets-and-related-emails-a-dataset-and-analysis"><a href="https://doi.org/10.1109/ICSE.2015.129">Enron's Spreadsheets and Related Emails: A Dataset and Analysis.</a></h4>
+<h4 id="an-empirical-study-on-quality-issues-of-production-big-data-platform"><a href="https://doi.org/10.1109/ICSE.2015.130">An Empirical Study on Quality Issues of Production Big Data Platform.</a></h4>
+<h4 id="code-reviews-do-not-find-bugs-how-the-current-code-review-best-practice-slows-us-down"><a href="https://doi.org/10.1109/ICSE.2015.131">Code Reviews Do Not Find Bugs. How the Current Code Review Best Practice Slows Us Down.</a></h4>
+<h4 id="systematic-testing-of-reactive-software-with-non-deterministic-events-a-case-study-on-lg-electric-oven"><a href="https://doi.org/10.1109/ICSE.2015.132">Systematic Testing of Reactive Software with Non-Deterministic Events: A Case Study on LG Electric Oven.</a></h4>
+<h4 id="empirically-detecting-false-test-alarms-using-association-rules"><a href="https://doi.org/10.1109/ICSE.2015.133">Empirically Detecting False Test Alarms Using Association Rules.</a></h4>
+<h4 id="striving-for-failure-an-industrial-case-study-about-test-failure-prediction"><a href="https://doi.org/10.1109/ICSE.2015.134">Striving for Failure: An Industrial Case Study about Test Failure Prediction.</a></h4>
+<h4 id="automatic-and-continuous-software-architecture-validation"><a href="https://doi.org/10.1109/ICSE.2015.135">Automatic and Continuous Software Architecture Validation.</a></h4>
+<h4 id="comparing-software-architecture-recovery-techniques-using-accurate-dependencies"><a href="https://doi.org/10.1109/ICSE.2015.136">Comparing Software Architecture Recovery Techniques Using Accurate Dependencies.</a></h4>
+<h4 id="spf-a-middleware-for-social-interaction-in-mobile-proximity-environments"><a href="https://doi.org/10.1109/ICSE.2015.137">SPF: A Middleware for Social Interaction in Mobile Proximity Environments.</a></h4>
+<h4 id="merits-of-organizational-metrics-in-defect-prediction-an-industrial-replication"><a href="https://doi.org/10.1109/ICSE.2015.138">Merits of Organizational Metrics in Defect Prediction: An Industrial Replication.</a></h4>
+<h4 id="online-defect-prediction-for-imbalanced-data"><a href="https://doi.org/10.1109/ICSE.2015.139">Online Defect Prediction for Imbalanced Data.</a></h4>
+<h4 id="measuring-dependency-freshness-in-software-systems"><a href="https://doi.org/10.1109/ICSE.2015.140">Measuring Dependency Freshness in Software Systems.</a></h4>
+<h4 id="a-large-scale-technology-evaluation-study-effects-of-model-based-analysis-and-testing"><a href="https://doi.org/10.1109/ICSE.2015.141">A Large-Scale Technology Evaluation Study: Effects of Model-based Analysis and Testing.</a></h4>
+<h4 id="metamorphic-model-based-testing-applied-on-nasa-dat-an-experience-report"><a href="https://doi.org/10.1109/ICSE.2015.348">Metamorphic Model-Based Testing Applied on NASA DAT - An Experience Report.</a></h4>
+<h4 id="improving-predictability-efficiency-and-trust-of-model-based-proof-activity"><a href="https://doi.org/10.1109/ICSE.2015.142">Improving Predictability, Efficiency and Trust of Model-Based Proof Activity.</a></h4>
+<h4 id="performance-analysis-using-subsuming-methods-an-industrial-case-study"><a href="https://doi.org/10.1109/ICSE.2015.143">Performance Analysis Using Subsuming Methods: An Industrial Case Study.</a></h4>
+<h4 id="an-industrial-case-study-on-the-automated-detection-of-performance-regressions-in-heterogeneous-environments"><a href="https://doi.org/10.1109/ICSE.2015.144">An Industrial Case Study on the Automated Detection of Performance Regressions in Heterogeneous Environments.</a></h4>
+<h4 id="industry-practices-and-event-logging-assessment-of-a-critical-software-development-process"><a href="https://doi.org/10.1109/ICSE.2015.145">Industry Practices and Event Logging: Assessment of a Critical Software Development Process.</a></h4>
+<h4 id="a-case-study-in-locating-the-architectural-roots-of-technical-debt"><a href="https://doi.org/10.1109/ICSE.2015.146">A Case Study in Locating the Architectural Roots of Technical Debt.</a></h4>
+<h4 id="design-and-evaluation-of-a-customizable-multi-domain-reference-architecture-on-top-of-product-lines-of-self-driving-heavy-vehicles-an-industrial-case-study"><a href="https://doi.org/10.1109/ICSE.2015.147">Design and Evaluation of a Customizable Multi-Domain Reference Architecture on Top of Product Lines of Self-Driving Heavy Vehicles - An Industrial Case Study.</a></h4>
+<h4 id="approximating-attack-surfaces-with-stack-traces"><a href="https://doi.org/10.1109/ICSE.2015.148">Approximating Attack Surfaces with Stack Traces.</a></h4>
+<h4 id="avoiding-security-pitfalls-with-functional-programming-a-report-on-the-development-of-a-secure-xml-validator"><a href="https://doi.org/10.1109/ICSE.2015.149">Avoiding Security Pitfalls with Functional Programming: A Report on the Development of a Secure XML Validator.</a></h4>
+<h4 id="should-we-move-to-stack-overflow-measuring-the-utility-of-social-media-for-developer-support"><a href="https://doi.org/10.1109/ICSE.2015.150">"Should We Move to Stack Overflow?" Measuring the Utility of Social Media for Developer Support.</a></h4>
+<h4 id="a-field-study-on-fostering-structural-navigation-with-prodet"><a href="https://doi.org/10.1109/ICSE.2015.151">A Field Study on Fostering Structural Navigation with Prodet.</a></h4>
+<h4 id="how-and-when-to-transfer-software-engineering-research-via-extensions"><a href="https://doi.org/10.1109/ICSE.2015.152">How and When to Transfer Software Engineering Research via Extensions.</a></h4>
+<h4 id="evolution-of-software-development-strategies"><a href="https://doi.org/10.1109/ICSE.2015.153">Evolution of Software Development Strategies.</a></h4>
+<h4 id="drawing-insight-from-student-perceptions-of-reflective-design-learning"><a href="https://doi.org/10.1109/ICSE.2015.154">Drawing Insight from Student Perceptions of Reflective Design Learning.</a></h4>
+<h4 id="effectiveness-of-persona-with-personality-traits-on-conceptual-design"><a href="https://doi.org/10.1109/ICSE.2015.155">Effectiveness of Persona with Personality Traits on Conceptual Design.</a></h4>
+<h4 id="industryuniversity-collaboration-in-software-engineering-education-refreshing-and-retuning-our-strategies"><a href="https://doi.org/10.1109/ICSE.2015.156">Industry/University Collaboration in Software Engineering Education: Refreshing and Retuning Our Strategies.</a></h4>
+<h4 id="novice-code-understanding-strategies-during-a-software-maintenance-assignment"><a href="https://doi.org/10.1109/ICSE.2015.341">Novice Code Understanding Strategies during a Software Maintenance Assignment.</a></h4>
+<h4 id="learning-global-agile-software-engineering-using-same-site-and-cross-site-teams"><a href="https://doi.org/10.1109/ICSE.2015.157">Learning Global Agile Software Engineering Using Same-Site and Cross-Site Teams.</a></h4>
+<h4 id="code-repurposing-as-an-assessment-tool"><a href="https://doi.org/10.1109/ICSE.2015.158">Code Repurposing as an Assessment Tool.</a></h4>
+<h4 id="remote-development-and-distance-delivery-of-innovative-courses-challenges-and-opportunities"><a href="https://doi.org/10.1109/ICSE.2015.159">Remote Development and Distance Delivery of Innovative Courses: Challenges and Opportunities.</a></h4>
+<h4 id="improving-student-group-work-with-collaboration-patterns-a-case-study"><a href="https://doi.org/10.1109/ICSE.2015.160">Improving Student Group Work with Collaboration Patterns: A Case Study.</a></h4>
+<h4 id="teaching-software-systems-thinking-at-the-open-university"><a href="https://doi.org/10.1109/ICSE.2015.161">Teaching Software Systems Thinking at The Open University.</a></h4>
+<h4 id="masters-level-software-engineering-education-and-the-enriched-student-context"><a href="https://doi.org/10.1109/ICSE.2015.162">Masters-Level Software Engineering Education and the Enriched Student Context.</a></h4>
+<h4 id="combining-mastery-learning-with-project-based-learning-in-a-first-programming-course-an-experience-report"><a href="https://doi.org/10.1109/ICSE.2015.163">Combining Mastery Learning with Project-Based Learning in a First Programming Course: An Experience Report.</a></h4>
+<h4 id="collaborative-and-cooperative-learning-in-software-engineering-courses"><a href="https://doi.org/10.1109/ICSE.2015.164">Collaborative and Cooperative-Learning in Software Engineering Courses.</a></h4>
+<h4 id="using-gswe2009-for-the-evaluation-of-a-master-degree-in-software-engineering-in-the-universidad-de-la-republica"><a href="https://doi.org/10.1109/ICSE.2015.165">Using GSwE2009 for the Evaluation of a Master Degree in Software Engineering in the Universidad de la República.</a></h4>
+<h4 id="system-thinking-educating-t-shaped-software-engineers"><a href="https://doi.org/10.1109/ICSE.2015.166">System Thinking: Educating T-Shaped Software Engineers.</a></h4>
+<h4 id="transparently-teaching-in-the-context-of-game-based-learning-the-case-of-simules-w"><a href="https://doi.org/10.1109/ICSE.2015.167">Transparently Teaching in the Context of Game-based Learning: the Case of SimulES-W.</a></h4>
+<h4 id="educating-software-engineering-managers-revisited-what-software-project-managers-need-to-know-today"><a href="https://doi.org/10.1109/ICSE.2015.168">Educating Software Engineering Managers - Revisited What Software Project Managers Need to Know Today.</a></h4>
+<h4 id="contest-based-learning-with-blending-software-engineering-and-business-management-for-students-high-motivation-and-high-practice-ability"><a href="https://doi.org/10.1109/ICSE.2015.340">Contest Based Learning with Blending Software Engineering and Business Management: For Students' High Motivation and High Practice Ability.</a></h4>
+<h4 id="concurrent-software-engineering-and-robotics-education"><a href="https://doi.org/10.1109/ICSE.2015.169">Concurrent Software Engineering and Robotics Education.</a></h4>
+<h4 id="the-development-of-a-dashboard-tool-for-visualising-online-teamwork-discussions"><a href="https://doi.org/10.1109/ICSE.2015.170">The Development of a Dashboard Tool for Visualising Online Teamwork Discussions.</a></h4>
+<h4 id="software-design-studio-a-practical-example"><a href="https://doi.org/10.1109/ICSE.2015.171">Software Design Studio: A Practical Example.</a></h4>
+<h4 id="code-hunt-experience-with-coding-contests-at-scale"><a href="https://doi.org/10.1109/ICSE.2015.172">Code Hunt: Experience with Coding Contests at Scale.</a></h4>
+<h4 id="does-outside-in-teaching-improve-the-learning-of-object-oriented-programming"><a href="https://doi.org/10.1109/ICSE.2015.173">Does Outside-In Teaching Improve the Learning of Object-Oriented Programming?</a></h4>
+<h4 id="active-and-inductive-learning-in-software-engineering-education"><a href="https://doi.org/10.1109/ICSE.2015.174">Active and Inductive Learning in Software Engineering Education.</a></h4>
+<h4 id="in-search-of-the-emotional-design-effect-in-programming"><a href="https://doi.org/10.1109/ICSE.2015.175">In Search of the Emotional Design Effect in Programming.</a></h4>
+<h4 id="experiences-in-developing-and-delivering-a-programme-of-part-time-education-in-software-and-systems-security"><a href="https://doi.org/10.1109/ICSE.2015.176">Experiences in Developing and Delivering a Programme of Part-Time Education in Software and Systems Security.</a></h4>
+<h4 id="teaching-software-architecture-to-undergraduate-students-an-experience-report"><a href="https://doi.org/10.1109/ICSE.2015.177">Teaching Software Architecture to Undergraduate Students: An Experience Report.</a></h4>
+<h4 id="csse-instructors-can-improve-student-writing-without-reducing-class-time-devoted-to-technical-content-experimental-results"><a href="https://doi.org/10.1109/ICSE.2015.178">CS/SE Instructors Can Improve Student Writing without Reducing Class Time Devoted to Technical Content: Experimental Results.</a></h4>
+<h4 id="sustainability-design-and-software-the-karlskrona-manifesto"><a href="https://doi.org/10.1109/ICSE.2015.179">Sustainability Design and Software: The Karlskrona Manifesto.</a></h4>
+<h4 id="interdisciplinary-design-patterns-for-socially-aware-computing"><a href="https://doi.org/10.1109/ICSE.2015.180">Interdisciplinary Design Patterns for Socially Aware Computing.</a></h4>
+<h4 id="the-role-of-design-thinking-and-physical-prototyping-in-social-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.181">The Role of Design Thinking and Physical Prototyping in Social Software Engineering.</a></h4>
+<h4 id="on-the-role-of-value-sensitive-concerns-in-software-engineering-practice"><a href="https://doi.org/10.1109/ICSE.2015.182">On the Role of Value Sensitive Concerns in Software Engineering Practice.</a></h4>
+<h4 id="engineering-sustainability-through-language"><a href="https://doi.org/10.1109/ICSE.2015.183">Engineering Sustainability Through Language.</a></h4>
+<h4 id="enabling-the-definition-and-enforcement-of-governance-rules-in-open-source-systems"><a href="https://doi.org/10.1109/ICSE.2015.184">Enabling the Definition and Enforcement of Governance Rules in Open Source Systems.</a></h4>
+<h4 id="appcivist-a-service-oriented-software-platform-for-socially-sustainable-activism"><a href="https://doi.org/10.1109/ICSE.2015.185">AppCivist - A Service-Oriented Software Platform for Socially Sustainable Activism.</a></h4>
+<h4 id="soa4dm-applying-an-soa-paradigm-to-coordination-in-humanitarian-disaster-response"><a href="https://doi.org/10.1109/ICSE.2015.186">SOA4DM: Applying an SOA Paradigm to Coordination in Humanitarian Disaster Response.</a></h4>
+<h4 id="managing-emergent-ethical-concerns-for-software-engineering-in-society"><a href="https://doi.org/10.1109/ICSE.2015.187">Managing Emergent Ethical Concerns for Software Engineering in Society.</a></h4>
+<h4 id="dementia-and-social-sustainability-challenges-for-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.188">Dementia and Social Sustainability: Challenges for Software Engineering.</a></h4>
+<h4 id="cognitively-sustainable-ict-with-ubiquitous-mobile-services-challenges-and-opportunities"><a href="https://doi.org/10.1109/ICSE.2015.189">Cognitively Sustainable ICT with Ubiquitous Mobile Services - Challenges and Opportunities.</a></h4>
+<h4 id="new-initiative-the-naturalness-of-software"><a href="https://doi.org/10.1109/ICSE.2015.190">New Initiative: The Naturalness of Software.</a></h4>
+<h4 id="virtual-reality-in-software-engineering-affordances-applications-and-challenges"><a href="https://doi.org/10.1109/ICSE.2015.191">Virtual Reality in Software Engineering: Affordances, Applications, and Challenges.</a></h4>
+<h4 id="codeaware-sensor-based-fine-grained-monitoring-and-management-of-software-artifacts"><a href="https://doi.org/10.1109/ICSE.2015.192">CodeAware: Sensor-Based Fine-Grained Monitoring and Management of Software Artifacts.</a></h4>
+<h4 id="free-hugs-praising-developers-for-their-actions"><a href="https://doi.org/10.1109/ICSE.2015.342">Free Hugs - Praising Developers for Their Actions.</a></h4>
+<h4 id="how-much-do-developers-test"><a href="https://doi.org/10.1109/ICSE.2015.193">How (Much) Do Developers Test?</a></h4>
+<h4 id="a-vision-of-crowd-development"><a href="https://doi.org/10.1109/ICSE.2015.194">A Vision of Crowd Development.</a></h4>
+<h4 id="when-app-stores-listen-to-the-crowd-to-fight-bugs-in-the-wild"><a href="https://doi.org/10.1109/ICSE.2015.195">When App Stores Listen to the Crowd to Fight Bugs in the Wild.</a></h4>
+<h4 id="incorporating-human-intention-into-self-adaptive-systems"><a href="https://doi.org/10.1109/ICSE.2015.196">Incorporating Human Intention into Self-Adaptive Systems.</a></h4>
+<h4 id="an-initiative-to-improve-reproducibility-and-empirical-evaluation-of-software-testing-techniques"><a href="https://doi.org/10.1109/ICSE.2015.197">An Initiative to Improve Reproducibility and Empirical Evaluation of Software Testing Techniques.</a></h4>
+<h4 id="inferring-behavioral-specifications-from-large-scale-repositories-by-leveraging-collective-intelligence"><a href="https://doi.org/10.1109/ICSE.2015.339">Inferring Behavioral Specifications from Large-scale Repositories by Leveraging Collective Intelligence.</a></h4>
+<h4 id="fast-feedback-cycles-in-empirical-software-engineering-research"><a href="https://doi.org/10.1109/ICSE.2015.198">Fast Feedback Cycles in Empirical Software Engineering Research.</a></h4>
+<h4 id="dynamic-safety-cases-for-through-life-safety-assurance"><a href="https://doi.org/10.1109/ICSE.2015.199">Dynamic Safety Cases for Through-Life Safety Assurance.</a></h4>
+<h4 id="correctness-and-relative-correctness"><a href="https://doi.org/10.1109/ICSE.2015.200">Correctness and Relative Correctness.</a></h4>
+<h4 id="on-architectural-diversity-of-dynamic-adaptive-systems"><a href="https://doi.org/10.1109/ICSE.2015.201">On Architectural Diversity of Dynamic Adaptive Systems.</a></h4>
+<h4 id="information-transformation-an-underpinning-theory-for-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.202">Information Transformation: An Underpinning Theory for Software Engineering.</a></h4>
+<h4 id="a-unified-framework-for-the-comprehension-of-softwares-time"><a href="https://doi.org/10.1109/ICSE.2015.203">A Unified Framework for the Comprehension of Software's Time.</a></h4>
+<h4 id="smart-programming-playgrounds"><a href="https://doi.org/10.1109/ICSE.2015.204">Smart Programming Playgrounds.</a></h4>
+<h4 id="capsule-oriented-programming"><a href="https://doi.org/10.1109/ICSE.2015.205">Capsule-Oriented Programming.</a></h4>
+<h4 id="evolution-aware-monitoring-oriented-programming"><a href="https://doi.org/10.1109/ICSE.2015.206">Evolution-Aware Monitoring-Oriented Programming.</a></h4>
+<h4 id="towards-explicitly-elastic-programming-frameworks"><a href="https://doi.org/10.1109/ICSE.2015.207">Towards Explicitly Elastic Programming Frameworks.</a></h4>
+<h4 id="optimising-energy-consumption-of-design-patterns"><a href="https://doi.org/10.1109/ICSE.2015.208">Optimising Energy Consumption of Design Patterns.</a></h4>
+<h4 id="mining-software-repositories-for-social-norms"><a href="https://doi.org/10.1109/ICSE.2015.209">Mining Software Repositories for Social Norms.</a></h4>
+<h4 id="commit-bubbles"><a href="https://doi.org/10.1109/ICSE.2015.210">Commit Bubbles.</a></h4>
+<h4 id="rapid-multi-purpose-multi-commit-code-analysis"><a href="https://doi.org/10.1109/ICSE.2015.211">Rapid Multi-Purpose, Multi-Commit Code Analysis.</a></h4>
+<h4 id="leveraging-informal-documentation-to-summarize-classes-and-methods-in-context"><a href="https://doi.org/10.1109/ICSE.2015.212">Leveraging Informal Documentation to Summarize Classes and Methods in Context.</a></h4>
+<h4 id="bixie-finding-and-understanding-inconsistent-code"><a href="https://doi.org/10.1109/ICSE.2015.213">Bixie: Finding and Understanding Inconsistent Code.</a></h4>
+<h4 id="tasknav-task-based-navigation-of-software-documentation"><a href="https://doi.org/10.1109/ICSE.2015.214">TaskNav: Task-Based Navigation of Software Documentation.</a></h4>
+<h4 id="vidi-the-visual-design-inspector"><a href="https://doi.org/10.1109/ICSE.2015.215">ViDI: The Visual Design Inspector.</a></h4>
+<h4 id="bootstrapping-mobile-app-development"><a href="https://doi.org/10.1109/ICSE.2015.216">Bootstrapping Mobile App Development.</a></h4>
+<h4 id="source-code-curation-on-stackoverflow-the-vesperin-system"><a href="https://doi.org/10.1109/ICSE.2015.217">Source Code Curation on StackOverflow: The Vesperin System.</a></h4>
+<h4 id="the-ecco-tool-extraction-and-composition-for-clone-and-own"><a href="https://doi.org/10.1109/ICSE.2015.218">The ECCO Tool: Extraction and Composition for Clone-and-Own.</a></h4>
+<h4 id="extract-package-refactoring-in-aries"><a href="https://doi.org/10.1109/ICSE.2015.219">Extract Package Refactoring in ARIES.</a></h4>
+<h4 id="scvripper-video-scraping-tool-for-modeling-developers-behavior-using-interaction-data"><a href="https://doi.org/10.1109/ICSE.2015.220">scvRipper: Video Scraping Tool for Modeling Developers' Behavior Using Interaction Data.</a></h4>
+<h4 id="chiminey-reliable-computing-and-data-management-platform-in-the-cloud"><a href="https://doi.org/10.1109/ICSE.2015.221">Chiminey: Reliable Computing and Data Management Platform in the Cloud.</a></h4>
+<h4 id="automated-program-repair-in-an-integrated-development-environment"><a href="https://doi.org/10.1109/ICSE.2015.222">Automated Program Repair in an Integrated Development Environment.</a></h4>
+<h4 id="flexisketch-team-collaborative-sketching-and-notation-creation-on-the-fly"><a href="https://doi.org/10.1109/ICSE.2015.223">FLEXISKETCH TEAM: Collaborative Sketching and Notation Creation on the Fly.</a></h4>
+<h4 id="interactive-synthesis-using-free-form-queries"><a href="https://doi.org/10.1109/ICSE.2015.224">Interactive Synthesis Using Free-Form Queries.</a></h4>
+<h4 id="varis-ide-support-for-embedded-client-code-in-php-web-applications"><a href="https://doi.org/10.1109/ICSE.2015.225">Varis: IDE Support for Embedded Client Code in PHP Web Applications.</a></h4>
+<h4 id="mu-mmint-an-ide-for-model-uncertainty"><a href="https://doi.org/10.1109/ICSE.2015.226">MU-MMINT: An IDE for Model Uncertainty.</a></h4>
+<h4 id="strisynth-synthesis-for-live-programming"><a href="https://doi.org/10.1109/ICSE.2015.227">StriSynth: Synthesis for Live Programming.</a></h4>
+<h4 id="cacheca-a-cache-language-model-based-code-suggestion-tool"><a href="https://doi.org/10.1109/ICSE.2015.228">CACHECA: A Cache Language Model Based Code Suggestion Tool.</a></h4>
+<h4 id="changescribe-a-tool-for-automatically-generating-commit-messages"><a href="https://doi.org/10.1109/ICSE.2015.229">ChangeScribe: A Tool for Automatically Generating Commit Messages.</a></h4>
+<h4 id="ekstazi-lightweight-test-selection"><a href="https://doi.org/10.1109/ICSE.2015.230">Ekstazi: Lightweight Test Selection.</a></h4>
+<h4 id="tesma-and-catg-automated-test-generation-tools-for-models-of-enterprise-applications"><a href="https://doi.org/10.1109/ICSE.2015.231">TesMa and CATG: Automated Test Generation Tools for Models of Enterprise Applications.</a></h4>
+<h4 id="stresscloud-a-tool-for-analysing-performance-and-energy-consumption-of-cloud-applications"><a href="https://doi.org/10.1109/ICSE.2015.232">StressCloud: A Tool for Analysing Performance and Energy Consumption of Cloud Applications.</a></h4>
+<h4 id="analysis-of-android-inter-app-security-vulnerabilities-using-covert"><a href="https://doi.org/10.1109/ICSE.2015.233">Analysis of Android Inter-App Security Vulnerabilities Using COVERT.</a></h4>
+<h4 id="ariadne-topology-aware-adaptive-security-for-cyber-physical-systems"><a href="https://doi.org/10.1109/ICSE.2015.234">Ariadne: Topology Aware Adaptive Security for Cyber-Physical Systems.</a></h4>
+<h4 id="security-toolbox-for-detecting-novel-and-sophisticated-android-malware"><a href="https://doi.org/10.1109/ICSE.2015.235">Security Toolbox for Detecting Novel and Sophisticated Android Malware.</a></h4>
+<h4 id="vermeer-a-tool-for-tracing-and-explaining-faulty-c-programs"><a href="https://doi.org/10.1109/ICSE.2015.236">VERMEER: A Tool for Tracing and Explaining Faulty C Programs.</a></h4>
+<h4 id="jrebelandroid-runtime-class-and-resource-reloading-for-android"><a href="https://doi.org/10.1109/ICSE.2015.337">JRebel.Android: Runtime Class- and Resource Reloading for Android.</a></h4>
+<h4 id="formtester-effective-integration-of-model-based-and-manually-specified-test-cases"><a href="https://doi.org/10.1109/ICSE.2015.237">FormTester: Effective Integration of Model-Based and Manually Specified Test Cases.</a></h4>
+<h4 id="mining-temporal-properties-of-data-invariants"><a href="https://doi.org/10.1109/ICSE.2015.238">Mining Temporal Properties of Data Invariants.</a></h4>
+<h4 id="profiling-kernels-behavior-to-improve-cpu-gpu-interactions"><a href="https://doi.org/10.1109/ICSE.2015.239">Profiling Kernels Behavior to Improve CPU / GPU Interactions.</a></h4>
+<h4 id="fast-and-precise-statistical-code-completion"><a href="https://doi.org/10.1109/ICSE.2015.240">Fast and Precise Statistical Code Completion.</a></h4>
+<h4 id="a-combined-technique-of-gui-ripping-and-input-perturbation-testing-for-android-apps"><a href="https://doi.org/10.1109/ICSE.2015.241">A Combined Technique of GUI Ripping and Input Perturbation Testing for Android Apps.</a></h4>
+<h4 id="enabling-testing-of-android-apps"><a href="https://doi.org/10.1109/ICSE.2015.242">Enabling Testing of Android Apps.</a></h4>
+<h4 id="an-approach-to-detect-android-antipatterns"><a href="https://doi.org/10.1109/ICSE.2015.243">An Approach to Detect Android Antipatterns.</a></h4>
+<h4 id="textual-analysis-for-code-smell-detection"><a href="https://doi.org/10.1109/ICSE.2015.244">Textual Analysis for Code Smell Detection.</a></h4>
+<h4 id="a-large-scale-study-of-license-usage-on-github"><a href="https://doi.org/10.1109/ICSE.2015.245">A Large Scale Study of License Usage on GitHub.</a></h4>
+<h4 id="understanding-conflicts-arising-from-collaborative-development"><a href="https://doi.org/10.1109/ICSE.2015.246">Understanding Conflicts Arising from Collaborative Development.</a></h4>
+<h4 id="deep-representations-for-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.248">Deep Representations for Software Engineering.</a></h4>
+<h4 id="automatic-categorization-of-software-libraries-using-bytecode"><a href="https://doi.org/10.1109/ICSE.2015.249">Automatic Categorization of Software Libraries Using Bytecode.</a></h4>
+<h4 id="post-dominator-analysis-for-precisely-handling-implicit-flows"><a href="https://doi.org/10.1109/ICSE.2015.250">Post-Dominator Analysis for Precisely Handling Implicit Flows.</a></h4>
+<h4 id="casper-using-ghosts-to-debug-null-deferences-with-dynamic-causality-traces"><a href="https://doi.org/10.1109/ICSE.2015.251">Casper: Using Ghosts to Debug Null Deferences with Dynamic Causality Traces.</a></h4>
+<h4 id="poster-static-detection-of-configuration-dependent-bugs-in-configurable-software"><a href="https://doi.org/10.1109/ICSE.2015.252">Poster: Static Detection of Configuration-Dependent Bugs in Configurable Software.</a></h4>
+<h4 id="poster-improving-cloud-based-continuous-integration-environments"><a href="https://doi.org/10.1109/ICSE.2015.253">Poster: Improving Cloud-Based Continuous Integration Environments.</a></h4>
+<h4 id="poster-interactive-and-collaborative-source-code-annotation"><a href="https://doi.org/10.1109/ICSE.2015.254">Poster: Interactive and Collaborative Source Code Annotation.</a></h4>
+<h4 id="poster-discovering-code-dependencies-by-harnessing-developers-activity"><a href="https://doi.org/10.1109/ICSE.2015.255">Poster: Discovering Code Dependencies by Harnessing Developer's Activity.</a></h4>
+<h4 id="poster-filtering-code-smells-detection-results"><a href="https://doi.org/10.1109/ICSE.2015.256">Poster: Filtering Code Smells Detection Results.</a></h4>
+<h4 id="poster-enhancing-partition-testing-through-output-variation"><a href="https://doi.org/10.1109/ICSE.2015.257">Poster: Enhancing Partition Testing through Output Variation.</a></h4>
+<h4 id="poster-segmentation-based-online-performance-problem-diagnosis"><a href="https://doi.org/10.1109/ICSE.2015.258">Poster: Segmentation Based Online Performance Problem Diagnosis.</a></h4>
+<h4 id="poster-symbolic-execution-of-mpi-programs"><a href="https://doi.org/10.1109/ICSE.2015.259">Poster: Symbolic Execution of MPI Programs.</a></h4>
+<h4 id="poster-automatically-fixing-real-world-javascript-performance-bugs"><a href="https://doi.org/10.1109/ICSE.2015.260">Poster: Automatically Fixing Real-World JavaScript Performance Bugs.</a></h4>
+<h4 id="poster-dynamic-analysis-using-javascript-proxies"><a href="https://doi.org/10.1109/ICSE.2015.261">Poster: Dynamic Analysis Using JavaScript Proxies.</a></h4>
+<h4 id="poster-is-carmen-better-than-george-testing-the-exploratory-tester-using-hci-techniques"><a href="https://doi.org/10.1109/ICSE.2015.262">Poster: Is Carmen Better than George? Testing the Exploratory Tester Using HCI Techniques.</a></h4>
+<h4 id="poster-vibes-transition-system-mutation-made-easy"><a href="https://doi.org/10.1109/ICSE.2015.263">Poster: VIBeS, Transition System Mutation Made Easy.</a></h4>
+<h4 id="poster-pronat-an-agent-based-system-design-for-programming-in-spoken-natural-language"><a href="https://doi.org/10.1109/ICSE.2015.264">Poster: ProNat: An Agent-Based System Design for Programming in Spoken Natural Language.</a></h4>
+<h4 id="poster-static-analysis-of-concurrent-higher-order-programs"><a href="https://doi.org/10.1109/ICSE.2015.265">Poster: Static Analysis of Concurrent Higher-Order Programs.</a></h4>
+<h4 id="poster-conquering-uncertainty-in-java-programming"><a href="https://doi.org/10.1109/ICSE.2015.266">Poster: Conquering Uncertainty in Java Programming.</a></h4>
+<h4 id="poster-mapp-the-berkeley-model-and-algorithm-prototyping-platform"><a href="https://doi.org/10.1109/ICSE.2015.267">Poster: MAPP: The Berkeley Model and Algorithm Prototyping Platform.</a></h4>
+<h4 id="poster-an-efficient-equivalence-checking-method-for-petri-net-based-models-of-programs"><a href="https://doi.org/10.1109/ICSE.2015.268">Poster: An Efficient Equivalence Checking Method for Petri Net Based Models of Programs.</a></h4>
+<h4 id="poster-model-based-run-time-variability-resolution-for-robotic-applications"><a href="https://doi.org/10.1109/ICSE.2015.269">Poster: Model-based Run-time Variability Resolution for Robotic Applications.</a></h4>
+<h4 id="poster-tierless-programming-in-javascript"><a href="https://doi.org/10.1109/ICSE.2015.270">Poster: Tierless Programming in JavaScript.</a></h4>
+<h4 id="poster-software-development-risk-management-using-machine-learning-for-generating-risk-prompts"><a href="https://doi.org/10.1109/ICSE.2015.271">Poster: Software Development Risk Management: Using Machine Learning for Generating Risk Prompts.</a></h4>
+<h4 id="poster-reasoning-based-on-imperfect-context-data-in-adaptive-security"><a href="https://doi.org/10.1109/ICSE.2015.272">Poster: Reasoning Based on Imperfect Context Data in Adaptive Security.</a></h4>
+<h4 id="automated-planning-for-self-adaptive-systems"><a href="https://doi.org/10.1109/ICSE.2015.273">Automated Planning for Self-Adaptive Systems.</a></h4>
+<h4 id="understanding-the-software-fault-introduction-process"><a href="https://doi.org/10.1109/ICSE.2015.274">Understanding the Software Fault Introduction Process.</a></h4>
+<h4 id="scalable-formal-verification-of-uml-models"><a href="https://doi.org/10.1109/ICSE.2015.275">Scalable Formal Verification of UML Models.</a></h4>
+<h4 id="scalability-studies-on-selective-mutation-testing"><a href="https://doi.org/10.1109/ICSE.2015.276">Scalability Studies on Selective Mutation Testing.</a></h4>
+<h4 id="qualitative-analysis-of-knowledge-transfer-in-pair-programming"><a href="https://doi.org/10.1109/ICSE.2015.277">Qualitative Analysis of Knowledge Transfer in Pair Programming.</a></h4>
+<h4 id="diets-recommender-systems-for-mobile-api-developers"><a href="https://doi.org/10.1109/ICSE.2015.278">DIETs: Recommender Systems for Mobile API Developers.</a></h4>
+<h4 id="statistical-learning-and-software-mining-for-agent-based-simulation-of-software-evolution"><a href="https://doi.org/10.1109/ICSE.2015.279">Statistical Learning and Software Mining for Agent Based Simulation of Software Evolution.</a></h4>
+<h4 id="towards-model-driven-architecture-and-analysis-of-system-of-systems-access-control"><a href="https://doi.org/10.1109/ICSE.2015.280">Towards Model Driven Architecture and Analysis of System of Systems Access Control.</a></h4>
+<h4 id="a-unified-approach-to-automatic-testing-of-architectural-constraints"><a href="https://doi.org/10.1109/ICSE.2015.281">A Unified Approach to Automatic Testing of Architectural Constraints.</a></h4>
+<h4 id="safe-evolution-patterns-for-software-product-lines"><a href="https://doi.org/10.1109/ICSE.2015.282">Safe Evolution Patterns for Software Product Lines.</a></h4>
+<h4 id="strategies-for-prioritizing-test-cases-generated-through-model-based-testing-approaches"><a href="https://doi.org/10.1109/ICSE.2015.338">Strategies for Prioritizing Test Cases Generated Through Model-Based Testing Approaches.</a></h4>
+<h4 id="towards-a-practical-security-analysis-methodology"><a href="https://doi.org/10.1109/ICSE.2015.283">Towards a Practical Security Analysis Methodology.</a></h4>
+<h4 id="measuring-software-developers-perceived-difficulty-with-biometric-sensors"><a href="https://doi.org/10.1109/ICSE.2015.284">Measuring Software Developers' Perceived Difficulty with Biometric Sensors.</a></h4>
+<h4 id="mining-patterns-of-sensitive-data-usage"><a href="https://doi.org/10.1109/ICSE.2015.285">Mining Patterns of Sensitive Data Usage.</a></h4>
+<h4 id="search-based-migration-of-model-variants-to-software-product-line-architectures"><a href="https://doi.org/10.1109/ICSE.2015.286">Search-Based Migration of Model Variants to Software Product Line Architectures.</a></h4>
+<h4 id="on-the-architecture-driven-development-of-software-intensive-systems-of-systems"><a href="https://doi.org/10.1109/ICSE.2015.287">On the Architecture-Driven Development of Software-Intensive Systems-of-Systems.</a></h4>
+<h4 id="automatic-documentation-generation-via-source-code-summarization"><a href="https://doi.org/10.1109/ICSE.2015.288">Automatic Documentation Generation via Source Code Summarization.</a></h4>
+<h4 id="a-declarative-foundation-for-comprehensive-history-querying"><a href="https://doi.org/10.1109/ICSE.2015.289">A Declarative Foundation for Comprehensive History Querying.</a></h4>
+<h4 id="an-integrated-multi-agent-based-simulation-approach-to-support-software-project-management"><a href="https://doi.org/10.1109/ICSE.2015.290">An Integrated Multi-Agent-Based Simulation Approach to Support Software Project Management.</a></h4>
+<h4 id="towards-generation-of-software-development-tasks"><a href="https://doi.org/10.1109/ICSE.2015.291">Towards Generation of Software Development Tasks.</a></h4>
+<h4 id="contributors-performance-participation-intentions-its-influencers-and-project-performance"><a href="https://doi.org/10.1109/ICSE.2015.292">Contributor's Performance, Participation Intentions, Its Influencers and Project Performance.</a></h4>
+<h4 id="supporting-scientific-se-process-improvement"><a href="https://doi.org/10.1109/ICSE.2015.293">Supporting Scientific SE Process Improvement.</a></h4>
+<h4 id="a-comprehensive-framework-for-the-development-of-dynamic-smart-spaces"><a href="https://doi.org/10.1109/ICSE.2015.294">A Comprehensive Framework for the Development of Dynamic Smart Spaces.</a></h4>
+<h4 id="verification-of-android-applications"><a href="https://doi.org/10.1109/ICSE.2015.295">Verification of Android Applications.</a></h4>
+<h4 id="a-security-practices-evaluation-framework"><a href="https://doi.org/10.1109/ICSE.2015.296">A Security Practices Evaluation Framework.</a></h4>
+<h4 id="the-green-lab-experimentation-in-software-energy-efficiency"><a href="https://doi.org/10.1109/ICSE.2015.297">The Green Lab: Experimentation in Software Energy Efficiency.</a></h4>
+<h4 id="software-requirements-patterns-a-state-of-the-art-and-the-practice"><a href="https://doi.org/10.1109/ICSE.2015.298">Software Requirements Patterns - A State of the Art and the Practice.</a></h4>
+<h4 id="agile-project-management-from-self-managing-teams-to-large-scale-development"><a href="https://doi.org/10.1109/ICSE.2015.299">Agile Project Management: From Self-Managing Teams to Large-Scale Development.</a></h4>
+<h4 id="software-engineering-for-privacy-in-the-large"><a href="https://doi.org/10.1109/ICSE.2015.300">Software Engineering for Privacy in-the-Large.</a></h4>
+<h4 id="the-use-of-text-retrieval-and-natural-language-processing-in-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.301">The Use of Text Retrieval and Natural Language Processing in Software Engineering.</a></h4>
+<h4 id="exploration-analysis-and-manipulation-of-source-code-using-srcml"><a href="https://doi.org/10.1109/ICSE.2015.302">Exploration, Analysis, and Manipulation of Source Code Using srcML.</a></h4>
+<h4 id="reactive-programming-a-walkthrough"><a href="https://doi.org/10.1109/ICSE.2015.303">Reactive Programming: A Walkthrough.</a></h4>
+<h4 id="load-testing-large-scale-software-systems"><a href="https://doi.org/10.1109/ICSE.2015.304">Load Testing Large-Scale Software Systems.</a></h4>
+<h4 id="bigger-data-in-software-engineering"><a href="https://doi.org/10.1109/ICSE.2015.305">Big(ger) Data in Software Engineering.</a></h4>
+<h4 id="the-art-and-science-of-analyzing-software-data-quantitative-methods"><a href="https://doi.org/10.1109/ICSE.2015.306">The Art and Science of Analyzing Software Data; Quantitative Methods.</a></h4>
+<h4 id="10th-international-workshop-on-automation-of-software-test-ast-2015"><a href="https://doi.org/10.1109/ICSE.2015.307">10th International Workshop on Automation of Software Test (AST 2015).</a></h4>
+<h4 id="1st-international-workshop-on-big-data-software-engineering-bigdse-2015"><a href="https://doi.org/10.1109/ICSE.2015.308">1st International Workshop on Big Data Software Engineering (BIGDSE 2015).</a></h4>
+<h4 id="3rd-international-workshop-on-conducting-empirical-studies-in-industry-cesi-2015"><a href="https://doi.org/10.1109/ICSE.2015.345">3rd International Workshop on Conducting Empirical Studies in Industry (CESI 2015).</a></h4>
+<h4 id="8th-international-workshop-on-cooperative-and-human-aspects-of-software-engineering-chase-2015"><a href="https://doi.org/10.1109/ICSE.2015.309">8th International Workshop on Cooperative and Human Aspects of Software Engineering (CHASE 2015).</a></h4>
+<h4 id="1st-international-workshop-on-complex-faults-and-failures-in-large-software-systems-coufless-2015"><a href="https://doi.org/10.1109/ICSE.2015.310">1st International Workshop on Complex faUlts and Failures in LargE Software Systems (COUFLESS 2015).</a></h4>
+<h4 id="2nd-international-workshop-on-context-for-software-development-csd-2015"><a href="https://doi.org/10.1109/ICSE.2015.311">2nd International Workshop on Context for Software Development (CSD 2015).</a></h4>
+<h4 id="2nd-international-workshop-on-crowd-sourcing-in-software-engineering-csi-se-2015"><a href="https://doi.org/10.1109/ICSE.2015.312">2nd International Workshop on Crowd Sourcing in Software Engineering (CSI-SE 2015).</a></h4>
+<h4 id="3rd-fme-workshop-on-formal-methods-in-software-engineering-formalise-2015"><a href="https://doi.org/10.1109/ICSE.2015.313">3rd FME Workshop on Formal Methods in Software Engineering (FormaliSE 2015).</a></h4>
+<h4 id="4th-international-workshop-on-games-and-software-engineering-gas-2015"><a href="https://doi.org/10.1109/ICSE.2015.314">4th International Workshop on Games and Software Engineering (GAS 2015).</a></h4>
+<h4 id="4th-international-workshop-on-green-and-sustainable-software-greens-2015"><a href="https://doi.org/10.1109/ICSE.2015.315">4th International Workshop on Green and Sustainable Software (GREENS 2015).</a></h4>
+<h4 id="4th-semat-workshop-on-general-theory-of-software-engineering-gtse-2015"><a href="https://doi.org/10.1109/ICSE.2015.316">4th SEMAT Workshop on General Theory of Software Engineering (GTSE 2015).</a></h4>
+<h4 id="7th-international-workshop-on-modeling-in-software-engineering-mise-2015"><a href="https://doi.org/10.1109/ICSE.2015.317">7th International Workshop on Modeling in Software Engineering (MiSE 2015).</a></h4>
+<h4 id="7th-international-workshop-on-principles-of-engineering-service-oriented-and-cloud-systems-pesos-2015"><a href="https://doi.org/10.1109/ICSE.2015.318">7th International Workshop on Principles of Engineering Service-Oriented and Cloud Systems (PESOS 2015).</a></h4>
+<h4 id="5th-international-workshop-on-product-line-approaches-in-software-engineering-ple-for-a-sustainable-society-please-2015"><a href="https://doi.org/10.1109/ICSE.2015.319">5th International Workshop on Product LinE Approaches in Software Engineering PLE for a Sustainable Society (PLEASE 2015).</a></h4>
+<h4 id="4th-international-workshop-on-realizing-ai-synergies-in-software-engineering-raise-2015"><a href="https://doi.org/10.1109/ICSE.2015.320">4th International Workshop on Realizing AI Synergies in Software Engineering (RAISE 2015).</a></h4>
+<h4 id="2nd-international-workshop-on-rapid-continuous-software-engineering-rcose-2015"><a href="https://doi.org/10.1109/ICSE.2015.343">2nd International Workshop on Rapid Continuous Software Engineering (RCoSE 2015).</a></h4>
+<h4 id="3rd-international-workshop-on-release-engineering-releng-2015"><a href="https://doi.org/10.1109/ICSE.2015.321">3rd International Workshop on Release Engineering (RELENG 2015).</a></h4>
+<h4 id="2nd-international-workshop-on-requirements-engineering-and-testing-ret-2015"><a href="https://doi.org/10.1109/ICSE.2015.351">2nd International Workshop on Requirements Engineering and Testing (RET 2015).</a></h4>
+<h4 id="second-international-workshop-on-software-architecture-and-metrics-sam-2015"><a href="https://doi.org/10.1109/ICSE.2015.346">Second International Workshop on Software Architecture and Metrics (SAM 2015).</a></h4>
+<h4 id="8th-international-workshop-on-search-based-software-testing-sbst-2015"><a href="https://doi.org/10.1109/ICSE.2015.323">8th International Workshop on Search-Based Software Testing (SBST 2015).</a></h4>
+<h4 id="se4hpcs15-the-2015-international-workshop-on-software-engineering-for-high-performance-computing-in-science"><a href="https://doi.org/10.1109/ICSE.2015.324">SE4HPCS'15: The 2015 International Workshop on Software Engineering for High Performance Computing in Science.</a></h4>
+<h4 id="2nd-international-workshop-on-software-engineering-methods-in-spreadsheets-sems-2015"><a href="https://doi.org/10.1109/ICSE.2015.325">2nd International Workshop on Software Engineering Methods in Spreadsheets (SEMS 2015).</a></h4>
+<h4 id="2nd-international-workshop-on-software-engineering-research-and-industrial-practice-serip-2015"><a href="https://doi.org/10.1109/ICSE.2015.352">2nd International Workshop on Software Engineering Research and Industrial Practice (SER&amp;IP 2015).</a></h4>
+<h4 id="1st-international-workshop-on-software-engineering-for-smart-cyber-physical-systems-sescps-2015"><a href="https://doi.org/10.1109/ICSE.2015.326">1st International Workshop on Software Engineering for Smart Cyber-Physical Systems (SEsCPS 2015).</a></h4>
+<h4 id="3rd-international-workshop-on-software-engineering-for-systems-of-systems-sesos-2015"><a href="https://doi.org/10.1109/ICSE.2015.327">3rd International Workshop on Software Engineering for Systems-of-Systems (SESoS 2015).</a></h4>
+<h4 id="1st-international-workshop-on-software-protection-spro-2015"><a href="https://doi.org/10.1109/ICSE.2015.328">1st International Workshop on Software Protection (SPRO 2015).</a></h4>
+<h4 id="1st-international-workshop-on-technical-and-legal-aspects-of-data-privacy-and-security-telerise-2015"><a href="https://doi.org/10.1109/ICSE.2015.329">1st International Workshop on TEchnical and LEgal aspects of data pRIvacy and Security (TELERISE 2015).</a></h4>
+<h4 id="5th-international-workshop-on-the-twin-peaks-of-requirements-and-architecture-twinpeaks-2015"><a href="https://doi.org/10.1109/ICSE.2015.330">5th International Workshop on the Twin Peaks of Requirements and Architecture (TwinPeaks 2015).</a></h4>
+<h4 id="workshop-on-applications-of-human-error-research-to-improve-software-engineering-wahese-2015"><a href="https://doi.org/10.1109/ICSE.2015.353">Workshop on Applications of Human Error Research to Improve Software Engineering (WAHESE 2015).</a></h4>
+<h4 id="6th-international-workshop-on-emerging-trends-in-software-metrics-wetsom-2015"><a href="https://doi.org/10.1109/ICSE.2015.347">6th International Workshop on Emerging Trends in Software Metrics (WETSoM 2015).</a></h4>
+
+<!-- Source file information -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Render date of last update -->
+
+
+<!-- Render date of creation -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Render authors -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Render committers from GitHub -->
+
+
+<!-- Render committers from GitLab -->
+
+
+<!-- Render committers -->
+
+
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- Determine date of last update -->
+
+  
+
+  <!-- Determine date of creation -->
+  
+
+
+<!-- Source file information -->
+
+
+<!-- Was this page helpful? -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine feedback configuration -->
+
+
+<!-- Determine whether to show feedback -->
+
+
+<!-- Was this page helpful? -->
+
+
+<!-- Comment system -->
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Comment system -->
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Copyright and theme information -->
+<div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2024 Content provided by c01dkit
+    </div>
+  
+  
+    Made with
+    <a
+      href="https://squidfunk.github.io/mkdocs-material/"
+      target="_blank" rel="noopener"
+    >
+      Material for MkDocs
+    </a>
+  
+  <div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_uv" title="Site Visitors"><span id="busuanzi_value_site_uv"></span> / </span>
+    <span id="busuanzi_container_site_pv" title="Site Visits"><span id="busuanzi_value_site_pv"></span> / </span>
+    <span id="busuanzi_container_page_pv" title="Page Visits"><span id="busuanzi_value_page_pv"></span></span>
+  </div>
+</div>
+
+      <!-- Social links -->
+      
+        <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Social links -->
+<div class="md-social">
+  
+
+    <!-- Automatically set rel=me for Mastodon -->
+    
+    
+
+    <!-- Compute title and render link -->
+    
+    
+      
+      
+    
+    <a
+      href="https://github.com/c01dkit"
+      target="_blank" rel="noopener"
+      title="github.com"
+      class="md-social__link"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../helper.js"></script>
+      
+    
+  </body>
+</html>
