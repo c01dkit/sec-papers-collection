@@ -11,10 +11,12 @@ A collection of security papers on top publications. You can search the titles (
 - ICSE
 - ISSTA
 
-**This site is still under construction. PRs and issues are welcomed!**
+**This collection is growing. If you find some information out-of-date or wrong, please let me know! PRs and issues are warmly welcomed. You can also send me emails: Y29udGFjdEBjMDFka2l0LmNvbQ==**
 
 ## Change Logs
 
+* Aug 21, 2024
+    * Update USENIX Sec-2024 (227->419) and ISSTA-2024 (42->143)
 * Jun 17, 2024
     * Better search: now the page will scroll to the paper under search and highlight the url link
 * Jun 10, 2024
@@ -32,3 +34,4 @@ A collection of security papers on top publications. You can search the titles (
 
 1. Support more years
 2. Add authors (Really need this??)
+3. New version is under construction (topic tags support, conference check box, persistent search result, etc.)
