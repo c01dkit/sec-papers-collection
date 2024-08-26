@@ -8,6 +8,7 @@ import hashlib
 import os
 import datetime
 import re
+import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -225,7 +226,53 @@ def generate_graph(config, statistics=None, group_rules=None):
             results.append(draw_one_graph(data, title))
     return results
 
+def export_data_json():
+    config = get_config('data.yml')
+    json_all = {}
+    for top_site in config:
+        json_all.setdefault(config[top_site]['name'],[])
+        for site in config[top_site]['sites']:
+            use_cache = site.get('use_cache', True)
+            html,time = get_html(site['url'],use_cache)
+            if html is not None:
+                if type(html) is list:
+                    titles = []
+                    links = []
+                    for h in html:
+                        titles += get_titles(h, site)
+                        links += get_links(h, site)
+                    if links is not None:
+                        assert(len(links)==len(titles))
+                else:
+                    titles = get_titles(html, site)
+                    links = get_links(html, site)
+                    if links is not None:
+                        assert(len(links)==len(titles))
+                data = {
+                    'filetitle': f'{config[top_site]["name"]} {site["name"]}',
+                    'filename': top_site+'_'+site['name'],
+                    'titles': titles,
+                    'links': links,
+                    'origin_url': site['url'],
+                    'note': site.get('note', ''),
+                    'time': time,
+                }
+                for i in range(len(titles)):
+                    t = titles[i].strip().replace('`',"'").replace('\n','')
+                    temp = {
+                        'year': site['year'],
+                        'title': t,
+                    }
+                    if links is not None:
+                        assert len(titles) == len(links)
+                        temp['url'] = links[i].strip(),
+                    json_all[top_site].append(temp)
+            else:
+                print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
+    json.dump(json_all,open('data.json','w',encoding='utf8'))
 if __name__ == '__main__':
+    export_data_json()
+    exit()
     config = get_config('data.yml')
     update_mkdocs_yml(config)
     if not os.path.exists('cache'):
