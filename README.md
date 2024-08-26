@@ -48,7 +48,7 @@ Here is a glance at all papers/posters:
 | ACM CCS | 2017 | 205 | [link](https://dblp.org/db/conf/ccs/ccs2017.html)  |
 | ACM CCS | 2016 | 195 | [link](https://dblp.org/db/conf/ccs/ccs2016.html)  |
 | ACM CCS | 2015 | 167 | [link](https://dblp.org/db/conf/ccs/ccs2015.html)  |
-| USENIX Sec | 2024 | 227 | [link](https://www.usenix.org/conference/usenixsecurity24/summer-accepted-papers) [link](https://www.usenix.org/conference/usenixsecurity24/fall-accepted-papers)  |
+| USENIX Sec | 2024 | 419 | [link](https://www.usenix.org/conference/usenixsecurity24/technical-sessions)  |
 | USENIX Sec | 2023 | 422 | [link](https://dblp.org/db/conf/uss/uss2023.html)  |
 | USENIX Sec | 2022 | 256 | [link](https://dblp.org/db/conf/uss/uss2022.html)  |
 | USENIX Sec | 2021 | 247 | [link](https://dblp.org/db/conf/uss/uss2021.html)  |
@@ -78,7 +78,7 @@ Here is a glance at all papers/posters:
 | ICSE | 2017 | 68 | [link](https://dblp.org/db/conf/icse/icse2017.html)  |
 | ICSE | 2016 | 101 | [link](https://dblp.org/db/conf/icse/icse2016.html)  |
 | ICSE | 2015 | 298 | [link](https://dblp.org/db/conf/icse/icse2015-1.html) [link](https://dblp.org/db/conf/icse/icse2015-2.html)  |
-| ISSTA | 2024 | 42 | [link](https://2024.issta.org/track/issta-2024-papers#event-overview)  |
+| ISSTA | 2024 | 143 | [link](https://2024.issta.org/track/issta-2024-papers#event-overview)  |
 | ISSTA | 2023 | 138 | [link](https://dblp.org/db/conf/issta/issta2023.html)  |
 | ISSTA | 2022 | 72 | [link](https://dblp.org/db/conf/issta/issta2022.html)  |
 | ISSTA | 2021 | 59 | [link](https://dblp.org/db/conf/issta/issta2021.html)  |
