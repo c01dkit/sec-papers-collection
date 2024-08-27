@@ -39,6 +39,7 @@ Here is a glance at all papers/posters:
 | IEEE S&P | 2017 | 60 | [link](https://dblp.org/db/conf/sp/sp2017.html)  |
 | IEEE S&P | 2016 | 55 | [link](https://dblp.org/db/conf/sp/sp2016.html)  |
 | IEEE S&P | 2015 | 55 | [link](https://dblp.org/db/conf/sp/sp2015.html)  |
+| ACM CCS | 2024 | 327 | [link](https://www.sigsac.org/ccs/CCS2024/program/accepted-papers.html)  |
 | ACM CCS | 2023 | 288 | [link](https://dblp.org/db/conf/ccs/ccs2023.html)  |
 | ACM CCS | 2022 | 284 | [link](https://dblp.org/db/conf/ccs/ccs2022.html)  |
 | ACM CCS | 2021 | 222 | [link](https://dblp.org/db/conf/ccs/ccs2021.html)  |

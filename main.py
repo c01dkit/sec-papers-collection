@@ -46,8 +46,8 @@ def get_html(url, use_cache=True):
             if res is not None:
                 return etree.HTML(res['data']),res['time']
         # proxies = {
-        #     'http': 'http://172.24.64.1:10809',
-        #     'https': 'http://172.24.64.1:10809',
+        #     'http': 'http://10.59.159.54:10811',
+        #     'https': 'http://10.59.159.54:10811',
         # }
         # res = requests.get(url,proxies=proxies)
         res = requests.get(url)
@@ -229,11 +229,14 @@ def generate_graph(config, statistics=None, group_rules=None):
 def export_data_json():
     config = get_config('data.yml')
     json_all = {}
+    json_raw = {}
+    paper_id = 0
     for top_site in config:
         json_all.setdefault(config[top_site]['name'],[])
         for site in config[top_site]['sites']:
             use_cache = site.get('use_cache', True)
             html,time = get_html(site['url'],use_cache)
+
             if html is not None:
                 if type(html) is list:
                     titles = []
@@ -260,19 +263,22 @@ def export_data_json():
                 for i in range(len(titles)):
                     t = titles[i].strip().replace('`',"'").replace('\n','')
                     temp = {
+                        'id': paper_id,
                         'year': site['year'],
                         'title': t,
+                        'paper': None,
                     }
                     if links is not None:
                         assert len(titles) == len(links)
-                        temp['url'] = links[i].strip(),
-                    json_all[top_site].append(temp)
+                        temp['paper'] = links[i].strip().replace('`',"'").replace('\n','')
+                    json_all[config[top_site]['name']].append(temp)
+                    paper_id += 1
             else:
                 print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
-    json.dump(json_all,open('data.json','w',encoding='utf8'))
+    json.dump(json_all,open('data.json','w',encoding='utf8'),indent=2,ensure_ascii=False)
 if __name__ == '__main__':
-    export_data_json()
-    exit()
+    # export_data_json()
+    # exit()
     config = get_config('data.yml')
     update_mkdocs_yml(config)
     if not os.path.exists('cache'):
