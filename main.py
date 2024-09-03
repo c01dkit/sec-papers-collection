@@ -5,13 +5,8 @@ import yaml
 import hashlib
 import os
 import datetime
-import re
-import sys
 import json
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# import pandas as pd
-from pathlib import Path
+import zipfile
 from lxml import etree
 
 def get_config(filename):
@@ -89,221 +84,107 @@ def get_links(html, config):
     else:
         return None
 
-def generate_md(data):
-    filetitle = data['filetitle']
-    filename = data['filename']
-    titles = data['titles']
-    links = data['links']
-    origin_url = data['origin_url']
-    note = data['note']
-    d = data['time']
-    with open('docs/'+filename+'.md', 'w', encoding='utf-8') as f:
-        f.write('---\n')
-        f.write(f'title: {filetitle}\n')
-        f.write('---\n\n')
-        f.write(f'# {filetitle}\n\n')
-        f.write(f'{len(set(titles))} papers accepted.\n\n')
-        if type(origin_url) is list:
-            for i in range(len(origin_url)):
-                f.write(f'Updated on **{d[i][:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url[i]}).\n\n')
-        else:
-            f.write(f'Updated on **{d[:10]}**.\n\n{note}\n\nYou can find [the lastest information here]({origin_url}).\n\n')
-        f.write('---\n\n')
-        for i in range(len(titles)):
-            t = titles[i].strip().replace('`',"'").replace('\n','')
-            if links is not None:
-                assert len(titles) == len(links)
-                f.write(f'#### [{t}]({links[i].strip()})\n\n')
-            else:
-                f.write(f'#### {t}\n\n')
+def fetch_one_paper_in_config(config):
+    """
+    This function will fetch (online or in cache) and return one paper info.
+    This function is used as an iterator, yielding all papers from top to bottom in the config.
+    :param config:
+    :return:
+    """
+    paper_id = 0
+    for publication in config:
+        publication_config = config[publication]
+        for one_site_config in publication_config['sites']:
+            use_cache = one_site_config.get('use_cache', True)
+            html, time = get_html(one_site_config['url'], use_cache)
+            if html is not None:
+                if type(html) is list:
+                    titles = []
+                    links = []
+                    for h in html:
+                        titles += get_titles(h, one_site_config)
+                        links += get_links(h, one_site_config)
+                    if links is not None:
+                        assert(len(links)==len(titles))
+                else:
+                    titles = get_titles(html, one_site_config)
+                    links = get_links(html, one_site_config)
+                    if links is not None:
+                        assert(len(links)==len(titles))
+                for i in range(len(titles)):
+                    t = titles[i].strip().replace('`',"'").replace('\n','')
+                    paper_id += 1
+                    one_paper_info = {
+                        'id': paper_id,
+                        'year': one_site_config['year'],
+                        'title': t,
+                        'publication': config[publication]['name'],
+                        'paper': '#',
+                    }
+                    yield one_paper_info
 
-def update_mkdocs_yml(config):
-    with open('mkdocs.yml', 'r', encoding='utf-8') as f:
-        mkdocs = yaml.load(f, Loader=yaml.FullLoader)
-    new_nav = [{'All':'index.md'}]
-    for top_site in config:
-        new_site = {config[top_site]['name']: []}
-        for site in config[top_site]['sites']:
-            new_site[config[top_site]['name']].append({site['name']: top_site+'_'+site['name']+'.md'})
-        new_nav.append(new_site)
-    mkdocs['nav'] = new_nav
-    with open('mkdocs.yml', 'w', encoding='utf-8') as f:
-        yaml.dump(mkdocs, f)
-
-def get_statistics(config):
-    # traverse docs directory
-    statistics = []
-    re_paper_num = re.compile(r'(\d+) papers accepted')
-    re_paper_url = re.compile(r'\[the lastest information here\]\((.+)\)')
-    for top_site in config:
-        for site in config[top_site]['sites']:
-            md_file = Path('docs/'+top_site+'_'+site['name']+'.md')
-            if md_file.exists():
-                with open(md_file, 'r', encoding='utf-8') as f:
-                    md = f.read()
-                    paper_num = re_paper_num.findall(md)[0]
-                    paper_url = re_paper_url.findall(md)
-                    link_url = ''
-                    for url in paper_url:
-                        link_url += f'[link]({url}) '
-                    statistics.append((config[top_site]['name'],site['name'], paper_num,  link_url))
-    return statistics
-
-def generate_readme(config, statistics=None, graphs=''):
-    banner = """# A Collection of Security Papers on Top-Tier Conferences
-
-
-**These papers are sorted by conference and date, and are deployed via github pages. Please [click here to visit the website](https://sec.c01dkit.com).**
-
-The following publications are included:
-
-- IEEE S&P (Oakland)
-- USENIX Security Symposium (USENIX Sec)
-- ACM CCS
-- NDSS
-
-Since some topics on software testing are related to security, the following publications are also included:
-
-- ICSE
-- ISSTA
-
-<<GRAPHS>>
-
-**PRs and issues are warmly welcomed.**
-
-To update, simply update `data.yml` and run `main.py` to crawl the latest information, then `mkdocs gh-deploy --clean` to deploy the website.
-
-Here is a glance at all papers/posters:
-
-| Publication | Date | Accepted Paper Number | Link |
-| :---: | :---: | :---: | :---: |
-"""
-    if statistics is None:
-        statistics = get_statistics(config)
-    for paper in statistics:
-        banner += f'| {paper[0]} | {paper[1]} | {paper[2]} | {paper[3]} |\n'
-    with open('README.md', 'w', encoding='utf-8') as f:
-        if graphs == '':
-            banner = banner.replace('<<GRAPHS>>', graphs)
-        else:
-            banner = banner.replace('<<GRAPHS>>', '\n'.join(['!['+i.replace('./img/','').replace('.png','')+f']({i})' for i in graphs]))
-        f.write(banner)
-
-    print('README.md generated')
-
-def export_data_json():
+def export_data_json(project_base, public_base):
     config = get_config('data.yml')
     json_all = []
-    statis = {'total':0,'overview':[]}
-    paper_id = 0
+    quick_view = []
+    statistics = {'total':0,'overview':[],'byPublication':{},'byYear':{}}
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
                  '--p-amber-400','--p-teal-400','--p-blue-400',
                  '--p-purple-400','--p-zinc-400']
-    for top_site in config:
-        statis.setdefault(config[top_site]['name'],0)
-        data_publication_year = {} # year -> pubnum
-        for site in config[top_site]['sites']:
-            use_cache = site.get('use_cache', True)
-            html,time = get_html(site['url'],use_cache)
-            statis.setdefault(site['name'],0)
-            if html is not None:
-                if type(html) is list:
-                    titles = []
-                    links = []
-                    for h in html:
-                        titles += get_titles(h, site)
-                        links += get_links(h, site)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                else:
-                    titles = get_titles(html, site)
-                    links = get_links(html, site)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                data = {
-                    'filetitle': f'{config[top_site]["name"]} {site["name"]}',
-                    'filename': top_site+'_'+site['name'],
-                    'titles': titles,
-                    'links': links,
-                    'origin_url': site['url'],
-                    'note': site.get('note', ''),
-                    'time': time,
-                }
-                for i in range(len(titles)):
-                    t = titles[i].strip().replace('`',"'").replace('\n','')
-                    temp = {
-                        'id': paper_id,
-                        'year': site['year'],
-                        'title': t,
-                        'publication': config[top_site]['name'],
-                        'paper': '#',
-                    }
-                    data_publication_year.setdefault(str(site['year']),0)
-                    data_publication_year[str(site['year'])] += 1
-                    if links is not None:
-                        assert len(titles) == len(links)
-                        temp['paper'] = links[i].strip().replace('`',"'").replace('\n','')
-                    json_all.append(temp)
-                    paper_id += 1
-                    statis[config[top_site]['name']] += 1
-                    statis[site['name']] += 1
-                    statis['total'] += 1
-            else:
-                print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
-        # sort data publication year with keys
-        data_publication_year = dict(sorted(data_publication_year.items(), key=lambda x: int(x[0])))
-        statis['overview'].append({
-            'label': config[top_site]['name'],
-            'data': list(data_publication_year.values()),
+    publication_growth = {}
+    for one_paper_info in fetch_one_paper_in_config(config):
+        publication = one_paper_info['publication']
+        year = str(one_paper_info['year'])
+
+        # Full paper info
+        json_all.append(one_paper_info)
+
+        # Statistics
+        statistics['total'] += 1
+        statistics['byPublication'].setdefault(publication,0)
+        statistics['byPublication'][publication] += 1
+        statistics['byYear'].setdefault(year,0)
+        statistics['byYear'][year] += 1
+
+        # Quick view: generate a small version of full paper info (100 latest paper from each publication)
+        if statistics['byPublication'][publication] <= 100:
+            quick_view.append(one_paper_info)
+
+        # Overview
+        publication_growth.setdefault(publication,{})
+        publication_growth[publication].setdefault(year,0)
+        publication_growth[publication][year] += 1
+
+    for publication, growth in publication_growth.items():
+        statistics['overview'].append({
+            'label': publication,
+            'data': [i for i in dict(sorted(growth.items(), key=lambda x: x[0])).values()],
             'fill': False,
             'borderColor': color_set.pop(),
-            'tension':0.4
+            'tension': 0.4,
         })
-        statis.setdefault('years',list(data_publication_year.keys()))
-    json.dump(json_all, open('src/assets/data/data.json', 'w', encoding='utf8'), indent=2, ensure_ascii=False)
-    json.dump(statis, open('src/assets/data/data-statis.json', 'w', encoding='utf8'), indent=2, ensure_ascii=False)
+    statistics['byYear'] = dict(sorted(statistics['byYear'].items(), key=lambda x: int(x[0])))
+    statistics['years'] = list(statistics['byYear'].keys())
+
+    for json_name, json_file in {
+        'data-statistics.json': statistics,
+        'data-quick-view.json': quick_view,
+    }.items():
+        json.dump(json_file, open(project_base + json_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+    for json_name, json_file in {
+        'data.json': json_all,
+    }.items():
+        json.dump(json_file, open(public_base + json_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+def generate_zip_cache():
+    cache_dir = './cache'
+    with zipfile.ZipFile('cache.zip', "w", zipfile.ZIP_DEFLATED) as zpf:
+        for path, _, filenames in os.walk(cache_dir):
+            for filename in filenames:
+                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
 
 if __name__ == '__main__':
-    if '--json' in sys.argv:
-        export_data_json()
-        print('All done.')
-        exit()
-    config = get_config('data.yml')
-    update_mkdocs_yml(config)
-    if not os.path.exists('cache'):
-        os.mkdir('cache')
-    for top_site in config:
-        for site in config[top_site]['sites']:
-            use_cache = site.get('use_cache', True)
-            html,time = get_html(site['url'],use_cache)
-            if html is not None:
-                if type(html) is list:
-                    titles = []
-                    links = []
-                    for h in html:
-                        titles += get_titles(h, site)
-                        links += get_links(h, site)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                else:
-                    titles = get_titles(html, site)
-                    links = get_links(html, site)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                note = ''
-                data = {
-                    'filetitle': f'{config[top_site]["name"]} {site["name"]}',
-                    'filename': top_site+'_'+site['name'],
-                    'titles': titles,
-                    'links': links,
-                    'origin_url': site['url'],
-                    'note': site.get('note', ''),
-                    'time': time,
-                }
-                generate_md(data)
-                print(f'{config[top_site]["name"]}_{site["name"]} Success.')
-            else:
-                print(f'Failed on {config[top_site]["name"]}_{site["name"]}')
-    statistics = get_statistics(config)
-    # generate_readme(config, statistics)
+    export_data_json('src/assets/data/', 'public/data/')
+    generate_zip_cache()
     print('All done.')

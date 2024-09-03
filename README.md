@@ -25,6 +25,11 @@ You can switch to this branch and deploy the old one in your own website!
 
 ## How to start a PR?
 
-To update, first switch to `main` branch and simply update `data.yml` and run `main.py --json` to crawl and generate the latest information!
+To speed up website crawling, you can unzip the `cache.zip` file and place the `cache` directory under the root path of the project.
+
+To update, first switch to `main` branch and simply update `data.yml` and run `main.py` to crawl and generate the latest information!
 Then I will update my branch and deploy it.
-Since the source code should be private according to Prime Block, the vue files are closed-source currently. 😢
+
+## Why there are no .vue files in the project?
+
+*Since the source code should be private according to Prime Block, the vue files are closed-source currently.*
