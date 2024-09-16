@@ -95,33 +95,52 @@ def fetch_one_paper_in_config(config):
     for publication in config:
         publication_config = config[publication]
         for one_site_config in publication_config['sites']:
-            use_cache = one_site_config.get('use_cache', True)
-            html, time = get_html(one_site_config['url'], use_cache)
-            if html is not None:
-                if type(html) is list:
-                    titles = []
-                    links = []
-                    for h in html:
-                        titles += get_titles(h, one_site_config)
-                        links += get_links(h, one_site_config)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                else:
-                    titles = get_titles(html, one_site_config)
-                    links = get_links(html, one_site_config)
-                    if links is not None:
-                        assert(len(links)==len(titles))
-                for i in range(len(titles)):
-                    t = titles[i].strip().replace('`',"'").replace('\n','')
-                    paper_id += 1
-                    one_paper_info = {
-                        'id': paper_id,
-                        'year': one_site_config['year'],
-                        'title': t,
-                        'publication': config[publication]['name'],
-                        'paper': '#',
-                    }
-                    yield one_paper_info
+            # first priority: use json file as details
+            json_details = one_site_config.get('json_file',None)
+            if json_details is not None:
+                print(f'Use official data for {publication} {one_site_config['year']}')
+                with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    for paper_detail in data:
+                        paper_id += 1
+                        one_paper_info = {
+                            'id': paper_id,
+                            'year': one_site_config['year'],
+                            'title': paper_detail['title'],
+                            'publication': paper_detail['publication'],
+                            'paper': paper_detail['paper'],
+                        }
+                        yield one_paper_info
+            else:
+                # second priority: crawl website if json file does not exist
+                use_cache = one_site_config.get('use_cache', True)
+                html, time = get_html(one_site_config['url'], use_cache)
+                print(f'Use crawled data for {publication} {one_site_config["year"]}')
+                if html is not None:
+                    if type(html) is list:
+                        titles = []
+                        links = []
+                        for h in html:
+                            titles += get_titles(h, one_site_config)
+                            links += get_links(h, one_site_config)
+                        if links is not None:
+                            assert(len(links)==len(titles))
+                    else:
+                        titles = get_titles(html, one_site_config)
+                        links = get_links(html, one_site_config)
+                        if links is not None:
+                            assert(len(links)==len(titles))
+                    for i in range(len(titles)):
+                        t = titles[i].strip().replace('\n','')
+                        paper_id += 1
+                        one_paper_info = {
+                            'id': paper_id,
+                            'year': one_site_config['year'],
+                            'title': t,
+                            'publication': config[publication]['name'],
+                            'paper': '#', # The url of the paper. If not found, return '#' by default.
+                        }
+                        yield one_paper_info
 
 def export_data_json(project_base, public_base):
     config = get_config('data.yml')
@@ -169,13 +188,10 @@ def export_data_json(project_base, public_base):
     for json_name, json_file in {
         'data-statistics.json': statistics,
         'data-quick-view.json': quick_view,
-    }.items():
-        json.dump(json_file, open(project_base + json_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
-
-    for json_name, json_file in {
         'data.json': json_all,
     }.items():
-        json.dump(json_file, open(public_base + json_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+        json.dump(json_file, open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
 
 def generate_zip_cache():
     cache_dir = './cache'
@@ -184,7 +200,31 @@ def generate_zip_cache():
             for filename in filenames:
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
 
+def prepare_official_data():
+    """Parse csv files for official data. Crawling website is not the best practice."""
+
+    def parse_xplore_csv(json_file_name:str, __publication:str):
+        from analyzers.xplore_analyzer import XPLORE
+        xplore = XPLORE(__publication)
+        csv_file_name = json_file_name.replace('.json','.csv')
+        check = xplore.analyze_csv(os.path.join('official_cache',csv_file_name))
+        if check:
+            with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
+                json.dump(xplore.dump(),f,ensure_ascii=False)
+            return len(xplore.result)
+        return 0
+
+    config = get_config('data.yml')
+    for publication in config:
+        publication_config = config[publication]
+        for one_site_config in publication_config['sites']:
+            json_details = one_site_config.get('json_file',None)
+            if json_details is not None and not os.path.exists(os.path.join('official_cache',json_details)):
+                paper_num = parse_xplore_csv(json_details, publication_config['name'])
+                print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
+
 if __name__ == '__main__':
+    prepare_official_data()
     export_data_json('src/assets/data/', 'public/data/')
     generate_zip_cache()
     print('All done.')

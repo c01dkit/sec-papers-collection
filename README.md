@@ -33,3 +33,8 @@ Then I will update my branch and deploy it.
 ## Why there are no .vue files in the project?
 
 *Since the source code should be private according to Prime Block, the vue files are closed-source currently.*
+
+## Do I have to register API keys for website crawling?
+
+To offer accurate and legitimate information, some websites are requested via API. 
+You can register your own API keys and set them in the `config.example.yml` and rename the file as `config.yml`.
