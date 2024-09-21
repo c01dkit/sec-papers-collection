@@ -22,9 +22,9 @@ class XPLORE:
                     'paper':row['PDF Link'],
                     'publication':self.publication,
                 })
-            elif len(self.result) <= 10:
+            elif len(self.result) <= 5:
                 # Assure that all papers are consistent
-                # NOTE assure at least 10 papers are accepted
+                # NOTE assure at least 5 papers are accepted
                 self.result = []
         return self.result
     def analyze_csv(self, filename):
