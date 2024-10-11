@@ -1,3 +1,4 @@
+from textwrap import indent
 
 import requests
 import pickle
@@ -7,6 +8,7 @@ import os
 import datetime
 import json
 import zipfile
+import pyzipper
 from lxml import etree
 
 def get_config(filename):
@@ -34,7 +36,16 @@ def save_cache(url, data, time):
         pickle.dump({'data':data,'time':time}, f)
 
 def get_html(url, use_cache=True):
-    if type(url) is str:
+    if type(url) is list:
+        htmls = []
+        times = []
+        for u in url:
+            html,time = get_html(u, use_cache)
+            htmls.append(html)
+            times.append(time)
+        return htmls,times
+    else:
+        url = str(url)
         if use_cache:
             res = get_cache(url)
             if res is not None:
@@ -54,18 +65,23 @@ def get_html(url, use_cache=True):
         else:
             print(f'Failed to get {url}')
             return None,None
-    elif type(url) is list:
-        htmls = []
-        times = []
-        for u in url:
-            html,time = get_html(u, use_cache)
-            htmls.append(html)
-            times.append(time)
-        return htmls,times
-
 def get_titles(html, config):
     if config['title_xpath'] == '':
         return None
+    if config.get('sub_page', False):
+        result = []
+        links = get_links(html, config)
+        if links is not None:
+            for sub_page in links:
+                html, time = get_html(sub_page, config.get('use_cache', True))
+                title = html.xpath(config['title_xpath'])
+                for elem in title:
+                    result.append(elem.xpath('string(.)').strip())
+        if len(result) > 0:
+            return result
+        else:
+            return None
+
     title = html.xpath(config['title_xpath'])
     result = []
     for elem in title:
@@ -84,6 +100,33 @@ def get_links(html, config):
     else:
         return None
 
+def get_abstract(html, config):
+    abstract_xpath = config.get('abstract_xpath', None)
+    if abstract_xpath is None or abstract_xpath == '':
+        return None
+    if config.get('sub_page', False):
+        result = []
+        links = get_links(html, config)
+        if links is not None:
+            for sub_page in links:
+                html,time = get_html(sub_page, config.get('use_cache', True))
+                abstract = html.xpath(abstract_xpath)
+                temp = ''
+                for elem in abstract:
+                    temp += elem.xpath('string(.)').strip()
+                result.append(temp)
+        if len(result) > 0:
+            return result
+        else:
+            return None
+    abstract = html.xpath(abstract_xpath)
+    result = []
+    for elem in abstract:
+        result.append(elem.xpath('string(.)').strip())
+    if len(result) > 0:
+        return result
+    else:
+        return None
 def fetch_one_paper_in_config(config):
     """
     This function will fetch (online or in cache) and return one paper info.
@@ -110,6 +153,7 @@ def fetch_one_paper_in_config(config):
                             'title': paper_detail['title'],
                             'publication': paper_detail['publication'],
                             'paper': paper_detail['paper'],
+                            'abstract': paper_detail['abstract'],
                         }
                         yield one_paper_info
             else:
@@ -121,16 +165,23 @@ def fetch_one_paper_in_config(config):
                     if type(html) is list:
                         titles = []
                         links = []
+                        abstracts = []
                         for h in html:
                             titles += get_titles(h, one_site_config)
                             links += get_links(h, one_site_config)
+                            abstracts += get_abstract(h, one_site_config)
                         if links is not None:
                             assert(len(links)==len(titles))
+                        if abstracts is not None:
+                            assert (len(titles)==len(abstracts))
                     else:
                         titles = get_titles(html, one_site_config)
                         links = get_links(html, one_site_config)
+                        abstracts = get_abstract(html, one_site_config)
                         if links is not None:
                             assert(len(links)==len(titles))
+                        if abstracts is not None:
+                            assert (len(titles)==len(abstracts))
                     for i in range(len(titles)):
                         t = titles[i].strip().replace('\n','')
                         paper_id += 1
@@ -139,15 +190,17 @@ def fetch_one_paper_in_config(config):
                             'year': one_site_config['year'],
                             'title': t,
                             'publication': config[publication]['name'],
-                            'paper': '#' if links is None else links[i], # The url of the paper. If not found, return '#' by default.
+                            'paper': '#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
+                            'abstract': '#' if abstracts is None else abstracts[i],
                         }
                         yield one_paper_info
 
-def export_data_json(project_base, public_base):
+def export_data_json(project_base):
     config = get_config('data.yml')
     json_all = []
+    meta_all = {}
     quick_view = []
-    statistics = {'total':0,'overview':[],'byPublication':{},'byYear':{}}
+    statistics = {'total':0,'overview':[],'byPublication':{},'byYear':{},'byPublicationAndYear':{}}
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
                  '--p-amber-400','--p-teal-400','--p-blue-400',
                  '--p-purple-400','--p-zinc-400']
@@ -156,8 +209,16 @@ def export_data_json(project_base, public_base):
         publication = one_paper_info['publication']
         year = str(one_paper_info['year'])
 
+        # No abstract for small file
+        no_abs_one_paper_info = {k:v for k,v in one_paper_info.items() if k!='abstract'}
+
         # Full paper info
-        json_all.append(one_paper_info)
+        json_all.append(no_abs_one_paper_info)
+
+        # Save meta data in official_cache
+        meta_all.setdefault(publication,{})
+        meta_all[publication].setdefault(year,[])
+        meta_all[publication][year].append(one_paper_info)
 
         # Statistics
         statistics['total'] += 1
@@ -165,10 +226,13 @@ def export_data_json(project_base, public_base):
         statistics['byPublication'][publication] += 1
         statistics['byYear'].setdefault(year,0)
         statistics['byYear'][year] += 1
+        statistics['byPublicationAndYear'].setdefault(publication,{})
+        statistics['byPublicationAndYear'][publication].setdefault(year,0)
+        statistics['byPublicationAndYear'][publication][year] += 1
 
         # Quick view: generate a small version of full paper info (100 latest paper from each publication)
         if statistics['byPublication'][publication] <= 100:
-            quick_view.append(one_paper_info)
+            quick_view.append(no_abs_one_paper_info)
 
         # Overview
         publication_growth.setdefault(publication,{})
@@ -193,6 +257,12 @@ def export_data_json(project_base, public_base):
     }.items():
         json.dump(json_file, open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
+    if not os.path.exists('./src/assets/data/meta_json'):
+        os.mkdir('./src/assets/data/meta_json')
+    for publication in meta_all:
+        for year in meta_all[publication]:
+            json_file_name = os.path.join('./src/assets/data/meta_json',publication+' - '+year+'.json')
+            json.dump(meta_all[publication][year],open(json_file_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 def generate_zip_cache():
     cache_dir = './cache'
@@ -200,7 +270,18 @@ def generate_zip_cache():
         for path, _, filenames in os.walk(cache_dir):
             for filename in filenames:
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
-
+    cache_dir = './official_cache'
+    source_dir = './src'
+    _config = get_config('./config.yml')
+    with pyzipper.AESZipFile('private_source.zip', 'w', compression=pyzipper.ZIP_DEFLATED, encryption=pyzipper.WZ_AES) as zpf:
+        zpf.setpassword(_config['zipassword'].encode())
+        for path, _, filenames in os.walk(cache_dir):
+            for filename in filenames:
+                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
+        for path, _, filenames in os.walk(source_dir):
+            for filename in filenames:
+                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
+        zpf.setencryption(pyzipper.WZ_AES, pwd=_config['zipassword'].encode())
 def prepare_official_data():
     """Parse csv files for official data. Crawling website is not the best practice."""
 
@@ -245,6 +326,6 @@ def prepare_official_data():
 if __name__ == '__main__':
     if os.path.exists('official_cache'):
         prepare_official_data()
-    export_data_json('src/assets/data/', 'public/data/')
+    export_data_json('src/assets/data/')
     generate_zip_cache()
     print('All done.')

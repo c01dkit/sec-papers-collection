@@ -38,3 +38,24 @@ Then I will update my branch and deploy it.
 
 To offer accurate and legitimate information, some websites are requested via API. 
 You can register your own API keys and set them in the `config.example.yml` and rename the file as `config.yml`.
+
+## For Admin
+
+To build and publish the website, run the following script:
+
+```shell
+python main.py
+npm build
+npm deploy
+git add .
+git commit -m "update $DATE"
+git push origin main
+```
+
+## For advanced support
+
+If you have a web server, you can set it up for advanced functionalities, such as search in full-text/abstract.
+
+This requires that you have already run `python main.py` and generated all needed files.
+
+
