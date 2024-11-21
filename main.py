@@ -181,7 +181,7 @@ def fetch_one_paper_in_config(config):
                         if links is not None:
                             assert(len(links)==len(titles))
                         if abstracts is not None:
-                            assert (len(titles)==len(abstracts))
+                            assert (len(abstracts)==len(titles))
                     for i in range(len(titles)):
                         t = titles[i].strip().replace('\n','')
                         paper_id += 1
@@ -285,26 +285,26 @@ def generate_zip_cache():
 def prepare_official_data():
     """Parse csv files for official data. Crawling website is not the best practice."""
 
-    def parse_xplore_csv(csv_file_name:str, __publication:str):
-        from analyzers.xplore_analyzer import XPLORE
-        xplore = XPLORE(__publication)
+    def parse_csv_file(csv_file_name:str, __publication:str):
+        from analyzers.csv_analyzer import CSV_SOURCE
+        csv = CSV_SOURCE(__publication)
         json_file_name = csv_file_name.replace('.csv', '.json')
-        check = xplore.analyze_csv(os.path.join('official_cache',csv_file_name))
+        check = csv.analyze_csv(os.path.join('official_cache',csv_file_name))
         if check:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
-                json.dump(xplore.dump(),f,ensure_ascii=False)
-            return len(xplore.result)
+                json.dump(csv.dump(),f,ensure_ascii=False)
+            return len(csv.result)
         return 0
 
-    def parse_acm_bib(bib_file_name:str, __publication:str):
-        from analyzers.acmbib_analyzer import ACMBIB
-        acmbib = ACMBIB(__publication)
+    def parse_bib_file(bib_file_name:str, __publication:str):
+        from analyzers.bib_analyzer import BIB_OBJ
+        bib = BIB_OBJ(__publication)
         json_file_name = bib_file_name.replace('.bib', '.json')
-        check = acmbib.analyze_bib(os.path.join('official_cache',bib_file_name))
+        check = bib.analyze_bib(os.path.join('official_cache',bib_file_name))
         if check:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
-                json.dump(acmbib.dump(),f,ensure_ascii=False)
-            return len(acmbib.result)
+                json.dump(bib.dump(),f,ensure_ascii=False)
+            return len(bib.result)
         return 0
 
     config = get_config('data.yml')
@@ -313,12 +313,13 @@ def prepare_official_data():
         for one_site_config in publication_config['sites']:
             official_file = one_site_config.get('official_file',None)
             if official_file is None: continue
+            # parsed data will be cached in .json file
             json_file = official_file[:official_file.index('.')] + '.json'
             if not os.path.exists(os.path.join('official_cache',json_file)):
-                if publication in ['oakland','icse']:
-                    paper_num = parse_xplore_csv(official_file, publication_config['name'])
-                elif publication in ['ccs','issta']:
-                    paper_num = parse_acm_bib(official_file, publication_config['name'])
+                if official_file.endswith('csv'):
+                    paper_num = parse_csv_file(official_file, publication_config['name'])
+                elif official_file.endswith('bib'):
+                    paper_num = parse_bib_file(official_file, publication_config['name'])
                 else:
                     paper_num = 0
                 print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
