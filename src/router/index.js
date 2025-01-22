@@ -26,6 +26,10 @@ const routes = [
                 component: () => import('@/views/paper/ViewAbstract.vue'),
             },
             {
+                path: '/paper/timeline',
+                component: () => import('@/views/paper/Timeline.vue'),
+            },
+            {
                 path: '/misc/about',
                 component: () => import('@/views/misc/About.vue'),
             },

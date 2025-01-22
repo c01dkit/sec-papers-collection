@@ -1,5 +1,3 @@
-from textwrap import indent
-
 import requests
 import pickle
 import yaml
