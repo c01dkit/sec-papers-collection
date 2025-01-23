@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AppLayout from '@/layout/AppLayout.vue';
-const baseURL = 'https://server.sabisu.tech';
 
 const routes = [
     {
@@ -26,8 +25,8 @@ const routes = [
                 component: () => import('@/views/paper/ViewAbstract.vue'),
             },
             {
-                path: '/paper/timeline',
-                component: () => import('@/views/paper/Timeline.vue'),
+                path: '/paper/submission-timeline',
+                component: () => import('@/views/paper/SubmissionTimeline.vue'),
             },
             {
                 path: '/misc/about',

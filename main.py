@@ -278,6 +278,8 @@ def generate_zip_cache():
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
         for path, _, filenames in os.walk(source_dir):
             for filename in filenames:
+                if filename.endswith('ttf'):
+                    continue
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
         zpf.setencryption(pyzipper.WZ_AES, pwd=_config['zipassword'].encode())
 def prepare_official_data():
