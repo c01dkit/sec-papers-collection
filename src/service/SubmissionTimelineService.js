@@ -4,7 +4,9 @@ export const SubmissionTimelineService = {
             {
                 publication: 'IEEE S&P 2025',
                 timezone: '23:59:59 AoE (UTC-12)',
-                url:'https://sp2025.ieee-security.org/cfpapers.html',
+                url: 'https://sp2025.ieee-security.org/cfpapers.html',
+                date: 'May 12-15, 2025',
+                place: 'The Hyatt Regency San Francisco, San Francisco, CA, USA',
                 cycles: [
                     {
                         name: 'Cycle 1',
@@ -34,6 +36,8 @@ export const SubmissionTimelineService = {
                 publication: "USENIX Security 2025",
                 timezone: "Not clearly specified",
                 url: 'https://www.usenix.org/conference/usenixsecurity25/call-for-papers',
+                date: 'August 13-15, 2025',
+                place: 'Seattle Convention Center in Seattle, WA, USA',
                 cycles: [
                     {
                         name: 'Cycle 1',
@@ -66,7 +70,9 @@ export const SubmissionTimelineService = {
             {
                 publication: 'CCS 2025',
                 timezone: '11:59 PM AoE (UTC-12)',
-                url:'https://www.sigsac.org/ccs/CCS2025/call-for-papers/',
+                url: 'https://www.sigsac.org/ccs/CCS2025/call-for-papers/',
+                date: 'October 13-17, 2025',
+                place: 'Taipei, Taiwan, China',
                 cycles: [
                     {
                         name: 'Cycle 1',
@@ -96,6 +102,8 @@ export const SubmissionTimelineService = {
                 publication: "NDSS 2025",
                 timezone: "11:59 PM AoE (UTC-12)",
                 url: "https://www.ndss-symposium.org/ndss2025/submissions/call-for-papers/",
+                date: 'February 24-28',
+                place: 'Wyndham San Diego Bayside, San Diego, California, USA',
                 cycles: [
                     {
                         name: 'Summer Cycle',

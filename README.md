@@ -27,12 +27,13 @@ You can switch to this branch and deploy the old one in your own website!
 
 To speed up website crawling, you can unzip the `cache.zip` file and place the `cache` directory under the root path of the project.
 
-To update, first switch to `main` branch and simply update `data.yml` and run `main.py` to crawl and generate the latest information!
-Then I will update my branch and deploy it.
+### Update paper details
 
-## Why there are no .vue files in the project?
+To update, first switch to `main` branch and simply update `data.yml` and run `main.py` to crawl and generate the latest information! Then I will update my branch and deploy it.
 
-*Since the source code should be private according to Prime Block, the vue files are closed-source currently.*
+### Update key information
+
+From v0.3.0, I gradually update src/service/xxxService.js files for some key information other than paper details. You can easily update them for the latest news.
 
 ## Do I have to register API keys for website crawling?
 

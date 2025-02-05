@@ -7,6 +7,7 @@ import datetime
 import json
 import zipfile
 import pyzipper
+import argparse
 from lxml import etree
 
 def get_config(filename):
@@ -140,7 +141,7 @@ def fetch_one_paper_in_config(config):
             official_file = one_site_config.get('official_file',None)
             if official_file is not None:
                 json_details = official_file[:official_file.index('.')] + '.json'
-                print(f'Use official data for {publication} {one_site_config['year']}')
+                print(f'Use official data for {publication} {one_site_config["year"]}')
                 with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     for paper_detail in data:
@@ -269,19 +270,24 @@ def generate_zip_cache():
             for filename in filenames:
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
     cache_dir = './official_cache'
-    source_dir = './src'
     _config = get_config('./config.yml')
     with pyzipper.AESZipFile('private_source.zip', 'w', compression=pyzipper.ZIP_DEFLATED, encryption=pyzipper.WZ_AES) as zpf:
         zpf.setpassword(_config['zipassword'].encode())
         for path, _, filenames in os.walk(cache_dir):
             for filename in filenames:
                 zpf.write(os.path.join(path, filename), os.path.join(path, filename))
-        for path, _, filenames in os.walk(source_dir):
-            for filename in filenames:
-                if filename.endswith('ttf'):
-                    continue
-                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
         zpf.setencryption(pyzipper.WZ_AES, pwd=_config['zipassword'].encode())
+
+def unzip_encrypted_zip():
+    zip_file = 'private_source.zip'
+    _config = get_config('./config.yml')
+    password = _config['zipassword']
+    output_dir = '.'
+    if os.path.exists(zip_file):
+        with pyzipper.AESZipFile(zip_file, 'r') as zpf:
+            zpf.pwd = password.encode() 
+            zpf.extractall(output_dir)
+
 def prepare_official_data():
     """Parse csv files for official data. Crawling website is not the best practice."""
 
@@ -325,8 +331,30 @@ def prepare_official_data():
                 print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
 
 if __name__ == '__main__':
-    if os.path.exists('official_cache'):
-        prepare_official_data()
-    export_data_json('src/assets/data/')
-    generate_zip_cache()
+    parser = argparse.ArgumentParser(description="Helper")
+    parser.add_argument(
+        '--unzip',
+        action='store_true',
+        help="Unzip source"
+    )
+    parser.add_argument(
+        '--zip',
+        action='store_true',
+        help="Zip source"
+    )
+    parser.add_argument(
+        '--analyze',
+        action='store_true',
+        help="Generate new json files"
+    )
+    args = parser.parse_args()
+
+    if args.analyze:
+        if os.path.exists('official_cache'):
+            prepare_official_data()
+        export_data_json('src/assets/data/')
+    if args.zip:
+        generate_zip_cache()
+    if args.unzip:
+        unzip_encrypted_zip()
     print('All done.')
