@@ -33,6 +33,37 @@ export const SubmissionTimelineService = {
                 ]
             },
             {
+                publication: 'IEEE S&P 2026',
+                timezone: '23:59:59 AoE (UTC-12)',
+                url: 'https://sp2026.ieee-security.org/cfpapers.html',
+                date: 'May 18-21, 2026',
+                place: 'The Hilton San Francisco Union Square, San Francisco, CA, USA',
+                cycles: [
+                    {
+                        name: 'Cycle 1',
+                        ddls: [
+                            {value:'1', stage:'Paper submission deadline', date:'2025-06-05'},
+                            {value:'2', stage:'Early-reject notification', date:'2025-07-21'},
+                            {value:'3', stage:'Rebuttal period (interactive)', date:'2025-08-18 ~ 2025-08-29'},
+                            {value:'4', stage:'Rebuttal text due', date:'2025-08-25'},
+                            {value:'5', stage:'Acceptance notification', date:'2025-09-09'},
+                            {value:'6', stage:'Camera-ready deadline', date:'2025-10-17'},
+                        ]
+                    },
+                    {
+                        name: 'Cycle 2',
+                        ddls: [
+                            {value:'1', stage:'Paper submission deadline', date:'2025-11-13'},
+                            {value:'2', stage:'Early-reject notification', date:'2026-01-19'},
+                            {value:'3', stage:'Rebuttal period (interactive)', date:'2026-02-16 ~ 2026-02-27'},
+                            {value:'4', stage:'Rebuttal text due', date:'2026-02-23'},
+                            {value:'5', stage:'Acceptance notification', date:'2026-03-19'},
+                            {value:'6', stage:'Camera-ready deadline', date:'2026-04-17'},
+                        ]
+                    }
+                ]
+            },
+            {
                 publication: "USENIX Security 2025",
                 timezone: "Not clearly specified",
                 url: 'https://www.usenix.org/conference/usenixsecurity25/call-for-papers',
