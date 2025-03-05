@@ -14,6 +14,7 @@ const model = ref([
         items: [
             { label: 'Search', icon: 'pi pi-fw pi-search', to: '/paper/search', class: 'rotated-icon' },
             { label: 'Trends', icon: 'pi pi-fw pi-chart-line', to: '/paper/trends' },
+            { label: 'Awards', icon: 'pi pi-fw pi-crown', to: '/paper/awards' },
             { label: 'View Abstract', icon: 'pi pi-fw pi-book', to: '/paper/view-abstract' },
             { label: 'Submission Timeline', icon: 'pi pi-fw pi-file-arrow-up', to: '/paper/submission-timeline' },
         ]

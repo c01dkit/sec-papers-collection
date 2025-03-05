@@ -1,6 +1,6 @@
 [
   {
-    "id": 8505,
+    "id": 8643,
     "year": 2018,
     "title": "Lightweight verification of array indexing",
     "publication": "ISSTA",
@@ -8,7 +8,7 @@
     "abstract": "In languages like C, out-of-bounds array accesses lead to security vulnerabilities and crashes. Even in managed languages like Java, which check array bounds at run time, out-of-bounds accesses cause exceptions that terminate the program. We present a lightweight type system that certifies, at compile time, that array accesses in the program are in-bounds. The type system consists of several cooperating hierarchies of dependent types, specialized to the domain of array bounds-checking. Programmers write type annotations at procedure boundaries, allowing modular verification at a cost that scales linearly with program size. We implemented our type system for Java in a tool called the Index Checker. We evaluated the Index Checker on over 100,000 lines of open-source code and discovered array access errors even in well-tested, industrial projects such as Google Guava."
   },
   {
-    "id": 8506,
+    "id": 8644,
     "year": 2018,
     "title": "Eliminating timing side-channel leaks using program repair",
     "publication": "ISSTA",
@@ -16,7 +16,7 @@
     "abstract": "We propose a method, based on program analysis and transformation, for eliminating timing side channels in software code that implements security-critical applications. Our method takes as input the original program together with a list of secret variables (e.g., cryptographic keys, security tokens, or passwords) and returns the transformed program as output. The transformed program is guaranteed to be functionally equivalent to the original program and free of both instruction- and cache-timing side channels. Specifically, we ensure that the number of CPU cycles taken to execute any path is independent of the secret data, and the cache behavior of memory accesses, in terms of hits and misses, is independent of the secret data. We have implemented our method in LLVM and validated its effectiveness on a large set of applications, which are cryptographic libraries with 19,708 lines of C/C++ code in total. Our experiments show the method is both scalable for real applications and effective in eliminating timing side channels."
   },
   {
-    "id": 8507,
+    "id": 8645,
     "year": 2018,
     "title": "Symbolic path cost analysis for side-channel detection",
     "publication": "ISSTA",
@@ -24,7 +24,7 @@
     "abstract": "Side-channels in software are an increasingly significant threat to the confidentiality of private user information, and the static detection of such vulnerabilities is a key challenge in secure software development. In this paper, we introduce a new technique for scalable detection of side- channels in software. Given a program and a cost model for a side-channel (such as time or memory usage), we decompose the control flow graph of the program into nested branch and loop components, and compositionally assign a symbolic cost expression to each component. Symbolic cost expressions provide an over-approximation of all possible observable cost values that components can generate. Queries to a satisfiability solver on the difference between possible cost values of a component allow us to detect the presence of imbalanced paths (with respect to observable cost) through the control flow graph. When combined with taint analysis that identifies conditional statements that depend on secret information, our technique answers the following question: Does there exist a pair of paths in the program's control flow graph, differing only on branch conditions influenced by the secret, that differ in observable side-channel value by more than some given threshold? Additional optimization queries allow us to identify the minimal number of loop iterations necessary for the above to hold or the maximal cost difference between paths in the graph. We perform symbolic execution based feasibility analyses to eliminate control flow paths that are infeasible. We implemented our techniques in a prototype, and we demonstrate its favourable performance against state-of-the-art tools as well as its effectiveness and scalability on a set of sizable, realistic Java server-client and peer-to-peer applications."
   },
   {
-    "id": 8508,
+    "id": 8646,
     "year": 2018,
     "title": "Safe and sound program analysis with Flix",
     "publication": "ISSTA",
@@ -32,7 +32,7 @@
     "abstract": "Program development tools such as bug finders, build automation tools, compilers, debuggers, integrated development environments, and refactoring tools increasingly rely on static analysis techniques to reason about program behavior. Implementing such static analysis tools is a complex and difficult task with concerns about safety and soundness. Safety guarantees that the fixed point computation -- inherent in most static analyses -- converges and ultimately terminates with a deterministic result. Soundness guarantees that the computed result over-approximates the concrete behavior of the program under analysis. But how do we know if we can trust the result of the static analysis itself? Who will guard the guards? In this paper, we propose the use of automatic program verification techniques based on symbolic execution and SMT solvers to verify the correctness of the abstract domains used in static analysis tools. We implement a verification toolchain for Flix, a functional and logic programming language tailored for the implementation of static analyses. We apply this toolchain to several abstract domains. The experimental results show that we are able to prove 99.5\\% and 96.3\\% of the required safety and soundness properties, respectively."
   },
   {
-    "id": 8509,
+    "id": 8647,
     "year": 2018,
     "title": "Test case prioritization for acceptance testing of cyber physical systems: a multi-objective search-based approach",
     "publication": "ISSTA",
@@ -40,7 +40,7 @@
     "abstract": "Acceptance testing validates that a system meets its requirements and determines whether it can be sufficiently trusted and put into operation. For cyber physical systems (CPS), acceptance testing is a hardware-in-the-loop process conducted in a (near-)operational environment. Acceptance testing of a CPS often necessitates that the test cases be prioritized, as there are usually too many scenarios to consider given time constraints. CPS acceptance testing is further complicated by the uncertainty in the environment and the impact of testing on hardware. We propose an automated test case prioritization approach for CPS acceptance testing, accounting for time budget constraints, uncertainty, and hardware damage risks. Our approach is based on multi-objective search, combined with a test case minimization algorithm that eliminates redundant operations from an ordered sequence of test cases. We evaluate our approach on a representative case study from the satellite domain. The results indicate that, compared to test cases that are prioritized manually by satellite engineers, our automated approach more than doubles the number of test cases that fit into a given time frame, while reducing to less than one third the number of operations that entail the risk of damage to key hardware components."
   },
   {
-    "id": 8510,
+    "id": 8648,
     "year": 2018,
     "title": "Bench4BL: reproducibility study on the performance of IR-based bug localization",
     "publication": "ISSTA",
@@ -48,7 +48,7 @@
     "abstract": "In recent years, the use of Information Retrieval (IR) techniques to automate the localization of buggy files, given a bug report, has shown promising results. The abundance of approaches in the literature, however, contrasts with the reality of IR-based bug localization (IRBL) adoption by developers (or even by the research community to complement other research approaches). Presumably, this situation is due to the lack of comprehensive evaluations for state-of-the-art approaches which offer insights into the actual performance of the techniques. We report on a comprehensive reproduction study of six state-of-the-art IRBL techniques. This study applies not only subjects used in existing studies (old subjects) but also 46 new subjects (61,431 Java files and 9,459 bug reports) to the IRBL techniques. In addition, the study compares two different version matching (between bug reports and source code files) strategies to highlight some observations related to performance deterioration. We also vary test file inclusion to investigate the effectiveness of IRBL techniques on test files, or its noise impact on performance. Finally, we assess potential performance gain if duplicate bug reports are leveraged."
   },
   {
-    "id": 8511,
+    "id": 8649,
     "year": 2018,
     "title": "Automated test mapping and coverage for network topologies",
     "publication": "ISSTA",
@@ -56,7 +56,7 @@
     "abstract": "Communication devices such as routers and switches play a critical role in the reliable functioning of embedded system networks. Dozens of such devices may be part of an embedded system network, and they need to be tested in conjunction with various computational elements on actual hardware, in many different configurations that are representative of actual operating networks. An individual physical network topology can be used as the basis for a test system that can execute many test cases, by identifying the part of the physical network topology that corresponds to the configuration required by each individual test case. Given a set of available test systems and a large number of test cases, the problem is to determine for each test case, which of the test systems are suitable for executing the test case, and to provide the mapping that associates the test case elements (the logical network topology) with the appropriate elements of the test system (the physical network topology). We studied a real industrial environment where this problem was originally handled by a simple software procedure that was very slow in many cases, and also failed to provide thorough coverage of each network's elements. In this paper, we represent both the test systems and the test cases as graphs, and develop a new prototype algorithm that a) determines whether or not a test case can be mapped to a subgraph of the test system, b) rapidly finds mappings that do exist, and c) exercises diverse sets of network nodes when multiple mappings exist for the test case. The prototype has been implemented and applied to over 10,000 combinations of test cases and test systems, and reduced the computation time by a factor of more than 80 from the original procedure. In addition, relative to a meaningful measure of network topology coverage, the mappings achieved an increased level of thoroughness in exercising the elements of each test system."
   },
   {
-    "id": 8512,
+    "id": 8650,
     "year": 2018,
     "title": "Evaluating test-suite reduction in real software evolution",
     "publication": "ISSTA",
@@ -64,7 +64,7 @@
     "abstract": "Test-suite reduction (TSR) speeds up regression testing by removing redundant tests from the test suite, thus running fewer tests in the future builds. To decide whether to use TSR or not, a developer needs some way to predict how well the reduced test suite will detect real faults in the future compared to the original test suite. Prior research evaluated the cost of TSR using only program versions with seeded faults, but such evaluations do not explicitly predict the effectiveness of the reduced test suite in future builds. We perform the first extensive study of TSR using real test failures in (failed) builds that occurred for real code changes. We analyze 1478 failed builds from 32 GitHub projects that run their tests on Travis. Each failed build can have multiple faults, so we propose a family of mappings from test failures to faults. We use these mappings to compute Failed-Build Detection Loss (FBDL), the percentage of failed builds where the reduced test suite misses to detect all the faults detected by the original test suite. We find that FBDL can be up to 52.2\\%, which is higher than suggested by traditional TSR metrics. Moreover, traditional TSR metrics are not good predictors of FBDL, making it difficult for developers to decide whether to use reduced test suites."
   },
   {
-    "id": 8513,
+    "id": 8651,
     "year": 2018,
     "title": "Compiler fuzzing through deep learning",
     "publication": "ISSTA",
@@ -72,7 +72,7 @@
     "abstract": "Random program generation — fuzzing — is an effective technique for discovering bugs in compilers but successful fuzzers require extensive development effort for every language supported by the compiler, and often leave parts of the language space untested. We introduce DeepSmith, a novel machine learning approach to accelerating compiler validation through the inference of generative models for compiler inputs. Our approach infers a learned model of the structure of real world code based on a large corpus of open source code. Then, it uses the model to automatically generate tens of thousands of realistic programs. Finally, we apply established differential testing methodologies on them to expose bugs in compilers. We apply our approach to the OpenCL programming language, automatically exposing bugs with little effort on our side. In 1,000 hours of automated testing of commercial and open source compilers, we discover bugs in all of them, submitting 67 bug reports. Our test cases are on average two orders of magnitude smaller than the state-of-the-art, require 3.03\\texttimes{} less time to generate and evaluate, and expose bugs which the state-of-the-art cannot. Our random program generator, comprising only 500 lines of code, took 12 hours to train for OpenCL versus the state-of-the-art taking 9 man months to port from a generator for C and 50,000 lines of code. With 18 lines of code we extended our program generator to a second language, uncovering crashes in Solidity compilers in 12 hours of automated testing."
   },
   {
-    "id": 8514,
+    "id": 8652,
     "year": 2018,
     "title": "Deep specification mining",
     "publication": "ISSTA",
@@ -80,7 +80,7 @@
     "abstract": "Formal specifcations are essential but usually unavailable in software systems. Furthermore, writing these specifcations is costly and requires skills from developers. Recently, many automated techniques have been proposed to mine specifcations in various formats including fnite-state automaton (FSA). However, more works in specifcation mining are needed to further improve the accuracy of the inferred specifcations. In this work, we propose Deep Specifcation Miner (DSM), a new approach that performs deep learning for mining FSA-based specifcations. Our proposed approach uses test case generation to generate a richer set of execution traces for training a Recurrent Neural Network Based Language Model (RNNLM). From these execution traces, we construct a Prefx Tree Acceptor (PTA) and use the learned RNNLM to extract many features. These features are subsequently utilized by clustering algorithms to merge similar automata states in the PTA for constructing a number of FSAs. Then, our approach performs a model selection heuristic to estimate F-measure of FSAs and returns the one with the highest estimated Fmeasure. We execute DSM to mine specifcations of 11 target library classes. Our empirical analysis shows that DSM achieves an average F-measure of 71.97\\%, outperforming the best performing baseline by 28.22\\%. We also demonstrate the value of DSM in sandboxing Android apps."
   },
   {
-    "id": 8515,
+    "id": 8653,
     "year": 2018,
     "title": "Identifying implementation bugs in machine learning based image classifiers using metamorphic testing",
     "publication": "ISSTA",
@@ -88,7 +88,7 @@
     "abstract": "We have recently witnessed tremendous success of Machine Learning (ML) in practical applications. Computer vision, speech recognition and language translation have all seen a near human level performance. We expect, in the near future, most business applications will have some form of ML. However, testing such applications is extremely challenging and would be very expensive if we follow today's methodologies. In this work, we present an articulation of the challenges in testing ML based applications. We then present our solution approach, based on the concept of Metamorphic Testing, which aims to identify implementation bugs in ML based image classifiers. We have developed metamorphic relations for an application based on Support Vector Machine and a Deep Learning based application. Empirical validation showed that our approach was able to catch 71\\% of the implementation bugs in the ML applications."
   },
   {
-    "id": 8516,
+    "id": 8654,
     "year": 2018,
     "title": "An empirical study on TensorFlow program bugs",
     "publication": "ISSTA",
@@ -96,7 +96,7 @@
     "abstract": "Deep learning applications become increasingly popular in important domains such as self-driving systems and facial identity systems. Defective deep learning applications may lead to catastrophic consequences. Although recent research efforts were made on testing and debugging deep learning applications, the characteristics of deep learning defects have never been studied. To fill this gap, we studied deep learning applications built on top of TensorFlow and collected program bugs related to TensorFlow from StackOverflow QA pages and Github projects. We extracted information from QA pages, commit messages, pull request messages, and issue discussions to examine the root causes and symptoms of these bugs. We also studied the strategies deployed by TensorFlow users for bug detection and localization. These findings help researchers and TensorFlow users to gain a better understanding of coding defects in TensorFlow programs and point out a new direction for future research."
   },
   {
-    "id": 8517,
+    "id": 8655,
     "year": 2018,
     "title": "Automatically translating bug reports into test cases for mobile apps",
     "publication": "ISSTA",
@@ -104,7 +104,7 @@
     "abstract": "When users experience a software failure, they have the option of submitting a bug report and provide information about the failure and how it happened. If the bug report contains enough information, developers can then try to recreate the issue and investigate it, so as to eliminate its causes. Unfortunately, the number of bug reports filed by users is typically large, and the tasks of analyzing bug reports and reproducing the issues described therein can be extremely time consuming. To help make this process more efficient, in this paper we propose Yakusu, a technique that uses a combination of program analysis and natural language processing techniques to generate executable test cases from bug reports. We implemented Yakusu for Android apps and performed an empirical evaluation on a set of over 60 real bug reports for different real-world apps. Overall, our technique was successful in 59.7\\% of the cases; that is, for a majority of the bug reports, developers would not have to study the report to reproduce the issue described and could simply use the test cases automatically generated by Yakusu. Furthermore, in many of the remaining cases, Yakusu was unsuccessful due to limitations that can be addressed in future work."
   },
   {
-    "id": 8518,
+    "id": 8656,
     "year": 2018,
     "title": "CiD: automating the detection of API-related compatibility issues in Android apps",
     "publication": "ISSTA",
@@ -112,7 +112,7 @@
     "abstract": "The Android Application Programming Interface provides the necessary building blocks for app developers to harness the functionalities of the Android devices, including for interacting with services and accessing hardware. This API thus evolves rapidly to meet new requirements for security, performance and advanced features, creating a race for developers to update apps. Unfortunately, given the extent of the API and the lack of automated alerts on important changes, Android apps are suffered from API-related compatibility issues. These issues can manifest themselves as runtime crashes creating a poor user experience. We propose in this paper an automated approach named CiD for systematically modelling the lifecycle of the Android APIs and analysing app bytecode to flag usages that can lead to potential compatibility issues. We demonstrate the usefulness of CiD by helping developers repair their apps, and we validate that our tool outperforms the state-of-the-art on benchmark apps that take into account several challenges for automatic detection."
   },
   {
-    "id": 8519,
+    "id": 8657,
     "year": 2018,
     "title": "Test migration for efficient large-scale assessment of mobile app coding assignments",
     "publication": "ISSTA",
@@ -120,7 +120,7 @@
     "abstract": "In recent years, there has been a growing interest in making education widely accessible using Internet technologies. Whether it is Massive Open Online Courses (MOOCs) or simply college courses offered to a large student population using an online platform, both education-focused companies and universities, often in collaboration with one another, have been investing massively in online education. The fact that hundreds, and more often thousands, of students take these online courses raises scalability challenges in assessing student assignments. In this paper, in particular, we present a technique (GUITestMigrator) that addresses the challenge of assessing mobile app coding assignments. Given a set of apps that implement the same specification, but can have completely different user interfaces, instructors normally have to manually run and check each app to make sure it behaves correctly and according to the specification. GUITestMigrator, conversely, allows for developing tests for one of these apps and automatically migrating these tests to the other apps, thus dramatically reducing the burden on the instructor. We implemented GUITestMigrator for Android apps and evaluated it on three sets of apps developed over three different semesters by students of an online graduate-level software engineering course. Our initial results show that our approach is promising and motivates further research in this direction. The paper also discusses possible applications of this approach for test evolution and test migration for real-world apps."
   },
   {
-    "id": 8520,
+    "id": 8658,
     "year": 2018,
     "title": "Analyzing the analyzers: FlowDroid/IccTA, AmanDroid, and DroidSafe",
     "publication": "ISSTA",
@@ -128,7 +128,7 @@
     "abstract": "Numerous static analysis techniques have recently been proposed for identifying information flows in mobile applications. These techniques are compared to each other, usually on a set of syntactic benchmarks. Yet, configurations used for such comparisons are rarely described. Our experience shows that tools are often compared under different setup, rendering the comparisons irreproducible and largely inaccurate. In this paper, we provide a large, controlled, and independent comparison of the three most prominent static analysis tools: FlowDroid combined with IccTA, Amandroid, and DroidSafe. We evaluate all tools using common configuration setup and the same set of benchmark applications. We compare the results of our analysis to the results reported in previous studies, identify main reasons for inaccuracy in existing tools, and provide suggestions for future research."
   },
   {
-    "id": 8521,
+    "id": 8659,
     "year": 2018,
     "title": "Repositioning of static analysis alarms",
     "publication": "ISSTA",
@@ -136,7 +136,7 @@
     "abstract": "The large number of alarms reported by static analysis tools is often recognized as one of the major obstacles to industrial adoption of such tools. We present repositioning of alarms, a novel automatic postprocessing technique intended to reduce the number of reported alarms without affecting the errors uncovered by them. The reduction in the number of alarms is achieved by moving groups of related alarms along the control flow to a program point where they can be replaced by a single alarm. In the repositioning technique, as the locations of repositioned alarms are different than locations of the errors uncovered by them, we also maintain traceability links between a repositioned alarm and its corresponding original alarm(s). The presented technique is tool-agnostic and orthogonal to many other techniques available for postprocessing alarms. To evaluate the technique, we applied it as a postprocessing step to alarms generated for 4 verification properties on 16 open source and 4 industry applications. The results indicate that the alarms repositioning technique reduces the alarms count by up to 20\\% over the state-of-the-art alarms grouping techniques with a median reduction of 7.25\\%."
   },
   {
-    "id": 8522,
+    "id": 8660,
     "year": 2018,
     "title": "Shooting from the heap: ultra-scalable static analysis with heap snapshots",
     "publication": "ISSTA",
@@ -144,7 +144,7 @@
     "abstract": "Traditional whole-program static analysis (e.g., a points-to analysis that models the heap) encounters scalability problems for realistic applications. We propose a ``featherweight'' analysis that combines a dynamic snapshot of the heap with otherwise full static analysis of program behavior. The analysis is extremely scalable, offering speedups of well over 3x, with complexity empirically evaluated to grow linearly relative to the number of reachable methods. The analysis is also an excellent tradeoff of precision and recall (relative to different dynamic executions): while it can never fully capture all program behaviors (i.e., it cannot match the near-perfect recall of a full static analysis) it often approaches it closely while achieving much higher (3.5x) precision."
   },
   {
-    "id": 8523,
+    "id": 8661,
     "year": 2018,
     "title": "Static analysis of Java dynamic proxies",
     "publication": "ISSTA",
@@ -152,7 +152,7 @@
     "abstract": "The dynamic proxy API is one of Java’s most widely-used dynamic features, permitting principled run-time code generation and link- ing. Dynamic proxies can implement any set of interfaces and for- ward method calls to a special object that handles them reflectively. The flexibility of dynamic proxies, however, comes at the cost of having a dynamically generated layer of bytecode that cannot be penetrated by current static analyses. In this paper, we observe that the dynamic proxy API is stylized enough to permit static analysis. We show how the semantics of dynamic proxies can be modeled in a straightforward manner as logical rules in the Doop static analysis framework. This concise set of rules enables Doop’s standard analyses to process code behind dynamic proxies. We evaluate our approach by analyzing XCorpus, a corpus of real-world Java programs: we fully handle 95\\% of its reported proxy creation sites. Our handling results in the analysis of significant portions of previously unreachable or incompletely- modeled code."
   },
   {
-    "id": 8524,
+    "id": 8662,
     "year": 2018,
     "title": "Practical detection of concurrency issues at coding time",
     "publication": "ISSTA",
@@ -160,7 +160,7 @@
     "abstract": "We have developed a practical static checker that is designed to interactively mark data races and deadlocks in program source code at development time. As this use case requires a checker to be both fast and precise, we engaged a simple technique of randomized bounded concrete concurrent interpretation that is experimentally effective for this purpose. Implemented as a tool for C# in Visual Studio, the checker covers the broad spectrum of concurrent language concepts, including task and data parallelism, asynchronous programming, UI dispatching, the various synchronization primitives, monitor, atomic and volatile accesses, and finalizers. Its application to popular open-source C# projects revealed several real issues with only a few false positives."
   },
   {
-    "id": 8525,
+    "id": 8663,
     "year": 2018,
     "title": "Tests from traces: automated unit test extraction for R",
     "publication": "ISSTA",
@@ -168,7 +168,7 @@
     "abstract": "Unit tests are labor-intensive to write and maintain. This paper looks into how well unit tests for a target software package can be extracted from the execution traces of client code. Our objective is to reduce the effort involved in creating test suites while minimizing the number and size of individual tests, and maximizing coverage. To evaluate the viability of our approach, we select a challenging target for automated test extraction, namely R, a programming language that is popular for data science applications. The challenges presented by R are its extreme dynamism, coerciveness, and lack of types. This combination decrease the efficacy of traditional test extraction techniques. We present Genthat, a tool developed over the last couple of years to non-invasively record execution traces of R programs and extract unit tests from those traces. We have carried out an evaluation on 1,545 packages comprising 1.7M lines of R code. The tests extracted by Genthat improved code coverage from the original rather low value of 267,496 lines to 700,918 lines. The running time of the generated tests is 1.9 times faster than the code they came from"
   },
   {
-    "id": 8526,
+    "id": 8664,
     "year": 2018,
     "title": "Translating code comments to procedure specifications",
     "publication": "ISSTA",
@@ -176,7 +176,7 @@
     "abstract": "Procedure specifications are useful in many software development tasks. As one example, in automatic test case generation they can guide testing, act as test oracles able to reveal bugs, and identify illegal inputs. Whereas formal specifications are seldom available in practice, it is standard practice for developers to document their code with semi-structured comments. These comments express the procedure specification with a mix of predefined tags and natural language. This paper presents Jdoctor, an approach that combines pattern, lexical, and semantic matching to translate Javadoc comments into executable procedure specifications written as Java expressions. In an empirical evaluation, Jdoctor achieved precision of 92\\% and recall of 83\\% in translating Javadoc into procedure specifications. We also supplied the Jdoctor-derived specifications to an automated test case generation tool, Randoop. The specifications enabled Randoop to generate test cases of higher quality."
   },
   {
-    "id": 8527,
+    "id": 8665,
     "year": 2018,
     "title": "PerfFuzz: automatically generating pathological inputs",
     "publication": "ISSTA",
@@ -184,7 +184,7 @@
     "abstract": "Performance problems in software can arise unexpectedly when programs are provided with inputs that exhibit worst-case behavior. A large body of work has focused on diagnosing such problems via statistical profiling techniques. But how does one find these inputs in the first place? We present PerfFuzz, a method to automatically generate inputs that exercise pathological behavior across program locations, without any domain knowledge. PerfFuzz generates inputs via feedback-directed mutational fuzzing. Unlike previous approaches that attempt to maximize only a scalar characteristic such as the total execution path length, PerfFuzz uses multi-dimensional feedback and independently maximizes execution counts for all program locations. This enables PerfFuzz to (1) find a variety of inputs that exercise distinct hot spots in a program and (2) generate inputs with higher total execution path length than previous approaches by escaping local maxima. PerfFuzz is also effective at generating inputs that demonstrate algorithmic complexity vulnerabilities. We implement PerfFuzz on top of AFL, a popular coverage-guided fuzzing tool, and evaluate PerfFuzz on four real-world C programs typically used in the fuzzing literature. We find that PerfFuzz outperforms prior work by generating inputs that exercise the most-hit program branch 5x to 69x times more, and result in 1.9x to 24.7x longer total execution paths."
   },
   {
-    "id": 8528,
+    "id": 8666,
     "year": 2018,
     "title": "Search-based detection of deviation failures in the migration of legacy spreadsheet applications",
     "publication": "ISSTA",
@@ -192,7 +192,7 @@
     "abstract": "Many legacy financial applications exist as a collection of formulas implemented in spreadsheets. Migration of these spreadsheets to a full-fledged system, written in a language such as Java, is an error- prone process. While small differences in the outputs of numerical calculations from the two systems are inevitable and tolerable, large discrepancies can have serious financial implications. Such discrepancies are likely due to faults in the migrated implementation, and are referred to as deviation failures. In this paper, we present a search-based technique that seeks to reveal deviation failures automatically. We evaluate different variants of this approach on two financial applications involving 40 formulas. These applications were produced by SEB Life \\&amp; Pension Holding AB, who migrated their Microsoft Excel spreadsheets to a Java application. While traditional random and branch coverage-based test generation techniques were only able to detect approximately 25\\% and 32\\% of known faults in the migrated code respectively, our search-based approach detected up to 70\\% of faults with the same test generation budget. Without restriction of the search budget, up to 90\\% of known deviation failures were detected. In addition, three previously unknown faults were detected by this method that were confirmed by SEB experts."
   },
   {
-    "id": 8529,
+    "id": 8667,
     "year": 2018,
     "title": "Making data-driven porting decisions with Tuscan",
     "publication": "ISSTA",
@@ -200,7 +200,7 @@
     "abstract": "Software typically outlives the platform that it was originally written for. To smooth the transition to new tools and platforms, programs should depend on the underlying platform as little as possible. In practice, however, software build processes are highly sensitive to their build platform, notably the implementation of the compiler and standard library. This makes it difficult to port existing, mature software to emerging platforms---web based runtimes like WebAssembly, resource-constrained environments for Internet-of-Things devices, or innovative new operating systems like Fuchsia. We present Tuscan, a framework for conducting automatic, deterministic, reproducible tests on build systems. Tuscan is the first framework to solve the problem of reproducibly testing builds cross-platform at massive scale. We also wrote a build wrapper, Red, which hijacks builds to tolerate common failures that arise from platform dependence, allowing the test harness to discover errors later in the build. Authors of innovative platforms can use Tuscan and Red to test the extent of unportability in the software ecosystem, and to quantify the effort necessary to port legacy software. We evaluated Tuscan by building an operating system distribution, consisting of 2,699 Red-wrapped programs, on four platforms, yielding a `catalog' of the most common portability errors. This catalog informs data-driven porting decisions and motivates changes to programs, build systems, and language standards; systematically quantifies problems that platform writers have hitherto discovered only on an ad-hoc basis; and forms the basis for a common substrate of portability fixes that developers can apply to their software."
   },
   {
-    "id": 8530,
+    "id": 8668,
     "year": 2018,
     "title": "Comparing developer-provided to user-provided tests for fault localization and automated program repair",
     "publication": "ISSTA",
@@ -208,7 +208,7 @@
     "abstract": "To realistically evaluate a software testing or debugging technique, it must be run on defects and tests that are characteristic of those a developer would encounter in practice. For example, to determine the utility of a fault localization or automated program repair technique, it could be run on real defects from a bug tracking system, using real tests that are committed to the version control repository along with the fixes. Although such a methodology uses real tests, it may not use tests that are characteristic of the information a developer or tool would have in practice. The tests that a developer commits after fixing a defect may encode more information than was available to the developer when initially diagnosing the defect. This paper compares, both quantitatively and qualitatively, the developer-provided tests committed along with fixes (as found in the version control repository) versus the user-provided tests extracted from bug reports (as found in the issue tracker). It provides evidence that developer-provided tests are more targeted toward the defect and encode more information than user-provided tests. For fault localization, developer-provided tests overestimate a technique’s ability to rank a defective statement in the list of the top-n most suspicious statements. For automated program repair, developer-provided tests overestimate a technique’s ability to (efficiently) generate correct patches—user-provided tests lead to fewer correct patches and increased repair time. This paper also provides suggestions for improving the design and evaluation of fault localization and automated program repair techniques."
   },
   {
-    "id": 8531,
+    "id": 8669,
     "year": 2018,
     "title": "Shaping program repair space with existing patches and similar code",
     "publication": "ISSTA",
@@ -216,7 +216,7 @@
     "abstract": "Automated program repair (APR) has great potential to reduce bug-fixing effort and many approaches have been proposed in recent years. APRs are often treated as a search problem where the search space consists of all the possible patches and the goal is to identify the correct patch in the space. Many techniques take a data-driven approach and analyze data sources such as existing patches and similar source code to help identify the correct patch. However, while existing patches and similar code provide complementary information, existing techniques analyze only a single source and cannot be easily extended to analyze both. In this paper, we propose a novel automatic program repair approach that utilizes both existing patches and similar code. Our approach mines an abstract search space from existing patches and obtains a concrete search space by differencing with similar code snippets. Then we search within the intersection of the two search spaces. We have implemented our approach as a tool called SimFix, and evaluated it on the Defects4J benchmark. Our tool successfully fixed 34 bugs. To our best knowledge, this is the largest number of bugs fixed by a single technology on the Defects4J benchmark. Furthermore, as far as we know, 13 bugs fixed by our approach have never been fixed by the current approaches."
   },
   {
-    "id": 8532,
+    "id": 8670,
     "year": 2018,
     "title": "Remove RATs from your code: automated optimization of resource inefficient database writes for mobile applications",
     "publication": "ISSTA",
@@ -224,7 +224,7 @@
     "abstract": "Developers strive to build feature-filled apps that are responsive and consume as few resources as possible. Most of these apps make use of local databases to store and access data locally. Prior work has found that local database services have become one of the major drivers of a mobile device's resource consumption. In this paper we propose an approach to reduce the energy consumption and improve runtime performance of database operations in Android apps by optimizing inefficient database writes. Our approach automatically detects database writes that happen within loops and that will trigger inefficient autocommit behaviors. Our approach then uses additional analyses to identify those that are optimizable and rewrites the code so that it is more efficient. We evaluated our approach on a set of marketplace Android apps and found it could reduce the energy and runtime of events containing the inefficient database writes by 25\\% to 90\\% and needed, on average, thirty-six seconds to analyze and transform each app."
   },
   {
-    "id": 8533,
+    "id": 8671,
     "year": 2018,
     "title": "Badger: complexity analysis with fuzzing and symbolic execution",
     "publication": "ISSTA",
@@ -232,7 +232,7 @@
     "abstract": "Hybrid testing approaches that involve fuzz testing and symbolic execution have shown promising results in achieving high code coverage, uncovering subtle errors and vulnerabilities in a variety of software applications. In this paper we describe Badger - a new hybrid approach for complexity analysis, with the goal of discovering vulnerabilities which occur when the worst-case time or space complexity of an application is significantly higher than the average case. Badger uses fuzz testing to generate a diverse set of inputs that aim to increase not only coverage but also a resource-related cost associated with each path. Since fuzzing may fail to execute deep program paths due to its limited knowledge about the conditions that influence these paths, we complement the analysis with a symbolic execution, which is also customized to search for paths that increase the resource-related cost. Symbolic execution is particularly good at generating inputs that satisfy various program conditions but by itself suffers from path explosion. Therefore, Badger uses fuzzing and symbolic execution in tandem, to leverage their benefits and overcome their weaknesses. We implemented our approach for the analysis of Java programs, based on Kelinci and Symbolic PathFinder. We evaluated Badger on Java applications, showing that our approach is significantly faster in generating worst-case executions compared to fuzzing or symbolic execution on their own."
   },
   {
-    "id": 8534,
+    "id": 8672,
     "year": 2018,
     "title": "Exploiting community structure for floating-point precision tuning",
     "publication": "ISSTA",
@@ -240,7 +240,7 @@
     "abstract": "Floating-point types are notorious for their intricate representation. The effective use of mixed precision, i.e., using various precisions in different computations, is critical to achieve a good balance between accuracy and performance. Unfortunately, reasoning about mixed precision is difficult even for numerical experts. Techniques have been proposed to systematically search over floating-point variables and/or program instructions to find a faster, mixed-precision version of a given program. These techniques, however, are characterized by their black box nature, and face scalability limitations due to the large search space. In this paper, we exploit the community structure of floating-point variables to devise a scalable hierarchical search for precision tuning. Specifically, we perform dependence analysis and edge profiling to create a weighted dependence graph that presents a network of floating-point variables. We then formulate hierarchy construction on the network as a community detection problem, and present a hierarchical search algorithm that iteratively lowers precision with regard to communities. We implement our algorithm in the tool HiFPTuner, and show that it exhibits higher search efficiency over the state of the art for 75.9\\% of the experiments taking 59.6\\% less search time on average. Moreover, HiFPTuner finds more profitable configurations for 51.7\\% of the experiments, with one known to be as good as the global optimum found through exhaustive search."
   },
   {
-    "id": 8535,
+    "id": 8673,
     "year": 2018,
     "title": "piCoq: parallel regression proving for large-scale verification projects",
     "publication": "ISSTA",
@@ -248,7 +248,7 @@
     "abstract": "Large-scale verification projects using proof assistants typically contain many proofs that must be checked at each new project revision. While proof checking can sometimes be parallelized at the coarse-grained file level to save time, recent changes in some proof assistant in the LCF family, such as Coq, enable fine-grained parallelism at the level of proofs. However, these parallel techniques are not currently integrated with regression proof selection, a technique that checks only the subset of proofs affected by a change. We present techniques that blend the power of parallel proof checking and selection to speed up regression proving in verification projects, suitable for use both on users' own machines and in workflows involving continuous integration services. We implemented the techniques in a tool, piCoq, which supports Coq projects. piCoq can track dependencies between files, definitions, and lemmas and perform parallel checking of only those files or proofs affected by changes between two project revisions. We applied piCoq to perform regression proving over many revisions of several large open source projects and measured the proof checking time. While gains from using proof-level parallelism and file selection can be considerable, our results indicate that proof-level parallelism and proof selection is consistently much faster than both sequential checking from scratch and sequential checking with proof selection. In particular, 4-way parallelization is up to 28.6 times faster than the former, and up to 2.8 times faster than the latter."
   },
   {
-    "id": 8536,
+    "id": 8674,
     "year": 2018,
     "title": "Advances in the ANaConDA framework for dynamic analysis and testing of concurrent C/C++ programs",
     "publication": "ISSTA",
@@ -256,7 +256,7 @@
     "abstract": "The paper presents advances in the ANaConDA framework for dynamic analysis and testing of concurrent C/C++ programs. ANaConDA comes with several built-in analysers, covering detection of data races, deadlocks, or contract violations, and allows for an easy creation of new analysers. To increase the variety of tested interleavings, ANaConDA offers various noise injection techniques. The framework performs the analysis on a binary level, thus not requiring the source code of the program to be available. Apart from many academic experiments, ANaConDA has also been successfully used to discover various errors in industrial code."
   },
   {
-    "id": 8537,
+    "id": 8675,
     "year": 2018,
     "title": "LAND: a user-friendly and customizable test generation tool for Android apps",
     "publication": "ISSTA",
@@ -264,7 +264,7 @@
     "abstract": "Model-based GUI exploration techniques are widely used to generate test cases for event-driven programs (such as Android apps). These techniques traverse the elements of screens during the user interaction and simultaneously construct the GUI model. Although there are a number of automatic model-based exploration tools, most of them pay more attention to the exploration procedure than the model reusing. This paper presents LAND, an effective and user-friendly test generation tool based on GUI exploration of Android apps, which constructs an elaborate window transition model ``LATTE'' that considers more Android specific characteristics and provides a customizable test generation interface by reusing the model. Experiments on 20 real-world Android apps are conducted to construct their models as well as test cases. The experimental results indicate that LAND can achieve higher code coverage and trigger exceptions in shorter sequence. It is also demonstrated that LATTE can be well reused under different requirements of test suite generation. A demo video of our tool can be found at the website https://www.youtube.com/watch?v=iqtr12eiJ_0."
   },
   {
-    "id": 8538,
+    "id": 8676,
     "year": 2018,
     "title": "Managing concurrent testing of data race with ComRaDe",
     "publication": "ISSTA",
@@ -272,7 +272,7 @@
     "abstract": "As a result of the increasing number of concurrent programs, the researchers put forward a number of tools with different implementation strategies to detect data race. However, confirming data races from the collection of true and false positives reported by race detectors is extremely the time-consuming process during the evaluation period. In this paper, we presented ComRaDe, a management platform for concurrent testing of data race with three main functions: manage and filter data races, run evaluation programs to select race detectors, generate detection report automatically. We integrated and compared three different race detectors on ComRaDe in terms of race detection capability. The results demonstrated the potential of ComRaDe on effectively identifying the advantages and limitations of different race detectors, and in further helping researchers to select and improve the capability of detectors for its convenience."
   },
   {
-    "id": 8539,
+    "id": 8677,
     "year": 2018,
     "title": "OASIs: oracle assessment and improvement tool",
     "publication": "ISSTA",
@@ -280,7 +280,7 @@
     "abstract": "The oracle problem remains one of the key challenges in software testing, for which little automated support has been developed so far. We introduce OASIs, a search-based tool for Java that assists testers in oracle assessment and improvement. It does so by combining test case generation to reveal false positives and mutation testing to reveal false negatives. In this work, we describe how OASIs works, provide details of its implementation, and explain how it can be used in an iterative oracle improvement process with a human in the loop. Finally, we present a summary of previous empirical evaluation showing that the fault detection rate of the oracles after improvement using OASIs increases, on average, by 48.6\\%."
   },
   {
-    "id": 8540,
+    "id": 8678,
     "year": 2018,
     "title": "Mutode: generic JavaScript and Node.js mutation testing tool",
     "publication": "ISSTA",
@@ -288,7 +288,7 @@
     "abstract": "Mutation testing is a technique in which faults (mutants) are injected into a program or application to assess its test suite effectiveness. It works by inserting mutants and running the application’s test suite to identify if the mutants are detected (killed) or not (survived) by the tests. Although computationally expensive, it has proven to be an effective method to assess application test suites. Several mutation testing frameworks and tools have been built for the various programing languages, however, very few tools have been built for the JavaScript language, more specifically, there is a lack of mutation testing tools for the Node.js runtime and npm based applications. The npm Registry is a public collection of modules of open-source code for Node.js, front-end web applications, mobile applications, robots, routers, and countless other needs of the JavaScript community. The over 700,000 packages hosted in npm are downloaded more than 5 billion times per week. More and more software is published in npm every day, representing a huge opportunity to share code and solutions, but also to share bugs and faulty software. In this paper, we briefly describe prior work for mutation operators in JavaScript and Node.js, and propose Mutode, an open source tool which leverages the npm package ecosystem to perform mutation testing for JavaScript and Node.js applications. We empirically evaluated Mutode effectiveness by running it on 12 of the top 20 npm modules that have automated test suites."
   },
   {
-    "id": 8541,
+    "id": 8679,
     "year": 2018,
     "title": "MalViz: an interactive visualization tool for tracing malware",
     "publication": "ISSTA",

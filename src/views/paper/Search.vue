@@ -112,7 +112,7 @@ export default {
             if (process.env.NODE_ENV === 'production') {
                 fullDataPath = 'https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/data.json'
             } else {
-                fullDataPath = '@/assets/data/data.json'
+                fullDataPath = '../src/assets/data/data.json'
             }
             await fetch(fullDataPath)
                 .then((res) => {

@@ -21,6 +21,10 @@ const routes = [
                 component: () => import('@/views/paper/Trends.vue'),
             },
             {
+                path: '/paper/awards',
+                component: () => import('@/views/paper/Awards.vue'),
+            },
+            {
                 path: '/paper/view-abstract',
                 component: () => import('@/views/paper/ViewAbstract.vue'),
             },
