@@ -45,7 +45,7 @@ def get_db():
 
 def get_full_data():
     base_json = []
-    for root, _, files in os.walk('./src/assets/data/meta_json'):
+    for root, _, files in os.walk('../src/assets/data/meta_json'):
         for file in files:
             if file.endswith('.json'):
                 update_json = json.load(open(os.path.join(root, file), 'r', encoding='utf-8'))
@@ -180,7 +180,7 @@ def get_random_data():
             result.append(row)
     return result
 if __name__ == '__main__':
-    _config = get_config('./config.yml')
+    _config = get_config('../config.yml')
     if '--llm-extract-topic' in sys.argv:
         extract_topic_with_llm('./official_cache/advanced_data/paper_topics.jl')
     if '--update-db' in sys.argv:

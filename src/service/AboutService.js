@@ -1,7 +1,7 @@
 export const AboutService = {
     updateTimelineData() {
         return [
-            { status: 'v0.3.1', date: '2025-03-04',  content: ['✨ Add paper awards', 'Fix paper/search load error in local development mode', 'Add afdian support plan in Chinese'] },
+            { status: 'v0.3.1', date: '2025-03-04',  content: ['✨ Add paper awards', 'Fix paper/search load error in local development mode', 'Fix incomplete abstract for NDSS', 'Update NDSS-2025 (Fall Cycle)', 'Add afdian support plan in Chinese'] },
             { status: 'v0.3.0', date: '2025-01-21',  content: ['✨ Add paper submission timeline', 'Received the first support!', 'Add custom primary color support', 'Add dark mode support',  'Fix left sidebar following'] },
             { status: 'v0.2.4', date: '2024-11-21',  content: ['Update NDSS-2025 (Summer Cycle)','Update ICSE-2025', 'Update Oakland-2025 (First Round)'] },
             { status: 'v0.2.3', date: '2024-10-11',  content: ['✨ Add abstract support in "View Abstract".','Remove useless websocket module.','Fix the inconsistency of total papers number count.'] },

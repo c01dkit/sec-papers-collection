@@ -40,14 +40,14 @@ From v0.3.0, I gradually update src/service/xxxService.js files for some key inf
 To offer accurate and legitimate information, some websites are requested via API. 
 You can register your own API keys and set them in the `config.example.yml` and rename the file as `config.yml`.
 
-## For Admin
+## For local deploy and publish
 
 To build and publish the website, run the following script:
 
 ```shell
-python main.py
-npm build
-npm deploy
+python main.py --analyze --zip
+npm run build
+npm run deploy # before this, you should update package.json and set correct --cname
 git add .
 git commit -m "update $DATE"
 git push origin main
@@ -57,6 +57,6 @@ git push origin main
 
 If you have a web server, you can set it up for advanced functionalities, such as search in full-text/abstract.
 
-This requires that you have already run `python main.py` and generated all needed files.
+This requires that you have already run `python main.py --anlayze` and generated all needed files.
 
 
