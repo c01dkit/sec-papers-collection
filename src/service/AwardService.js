@@ -124,7 +124,7 @@ export const AwardService = {
                             { year: 2025, title: 'DiStefano: Decentralized Infrastructure for Sharing Trusted Encrypted Facts and Nothing More'},
                             { year: 2025, title: 'ReDAN: An Empirical Study on Remote DoS Attacks against NAT Networks'},
                             { year: 2025, title: 'VoiceRadar: Voice Deepfake Detection using Micro-Frequency and Compositional Analysis'},
-                            { year: 2025, title: '<There is another paper but I missed its title>'},
+                            { year: 2025, title: 'Rethinking Trust in Forge-Based Git Security'},
                             { year: 2024, title: 'Like, Comment, Get Scammed: Characterizing Comment Scams on Media Platforms'},
                             { year: 2024, title: 'UntrustIDE: Exploiting Weaknesses in VS Code Extensions'},
                             { year: 2024, title: 'Eavesdropping on Controller Acoustic Emanation for Keystroke Inference Attack in Virtual Reality'},
@@ -169,6 +169,9 @@ export const AwardService = {
                     {
                         name: 'Artifact Evaluation Award',
                         papers: [
+                            { year: 2025, title: 'Cascading Spy Sheets: Exploiting the Complexity of Modern CSS for Email and Browser Fingerprinting'},
+                            { year: 2025, title: 'JBomAudit: Assessing the Landscape, Compliance, and Security Implications of Java SBOMs'},
+                            { year: 2025, title: 'SHAFT: Secure, Handy, Accurate and Fast Transformer Inference'},
                             { year: 2024, title: 'Efficient and Timely Revocation of V2X Credentials'},
                             { year: 2024, title: '5G-Spector: An O-RAN Compliant Layer-3 Cellular Attack Detection Service'},
                         ]
@@ -176,6 +179,7 @@ export const AwardService = {
                     {
                         name: 'Best Technical Poster Award',
                         papers: [
+                            { year: 2025, title: 'JailbreakEval: An Integrated Toolkit for Evaluating Jailbreak Attempts Against Large Language Models' },
                             { year: 2024, title: 'On the Cyber-Physical Security of Commercial Indoor Delivery Robot Systems' },
                             { year: 2023, title: 'A Monte Carlo Ensemble Approach to Automatically Identifying Keywords in Binary Message Formats' },
                             { year: 2022, title: 'Detecting Misinformation about Zoom’s Security and Privacy Threats' },
@@ -200,6 +204,7 @@ export const AwardService = {
                     {
                         name: 'Best Poster Presentation Award',
                         papers: [
+                            { year: 2025, title: 'Decoupling the Device and Identity in Cellular Networks with vSIM'},
                             { year: 2024, title: 'MORPH: Towards Automated Concept Drift Adaptation for Malware Detection'},
                             { year: 2023, title: 'VICEROY: GDPR-/CCPA-complaint Enforcement of Verifiable Accountless Consumer Requests'},
                             { year: 2022, title: 'Improving the Performance and Security of Tor’s Onion Services'},
