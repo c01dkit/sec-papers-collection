@@ -1,6 +1,6 @@
 [
   {
-    "id": 8594,
+    "id": 8609,
     "year": 2019,
     "title": "Crash-avoiding program repair",
     "publication": "ISSTA",
@@ -8,7 +8,7 @@
     "abstract": "Existing program repair systems modify a buggy program so that the modified program passes given tests. The repaired program may not satisfy even the most basic notion of correctness, namely crash-freedom. In other words, repair tools might generate patches which over-fit the test data driving the repair, and the automatically repaired programs may even introduce crashes or vulnerabilities. We propose an integrated approach for detecting and discarding crashing patches. Our approach fuses test and patch generation into a single process, in which patches are generated with the objective of passing existing tests, and new tests are generated with the objective of filtering out over-fitted patches by distinguishing candidate patches in terms of behavior. We use crash-freedom as the oracle to discard patch candidates which crash on the new tests. In its core, our approach defines a grey-box fuzzing strategy that gives higher priority to new tests that separate patches behaving equivalently on existing tests. This test generation strategy identifies semantic differences between patch candidates, and reduces over-fitting in program repair. We evaluated our approach on real-world vulnerabilities and open-source subjects from the Google OSS-Fuzz infrastructure. We found that our tool Fix2Fit (implementing patch space directed test generation), produces crash-avoiding patches. While we do not give formal guarantees about crash-freedom, cross-validation with fuzzing tools and their sanitizers provides greater confidence about the crash-freedom of our suggested patches."
   },
   {
-    "id": 8595,
+    "id": 8610,
     "year": 2019,
     "title": "Practical program repair via bytecode mutation",
     "publication": "ISSTA",
@@ -16,7 +16,7 @@
     "abstract": "Automated Program Repair (APR) is one of the most recent advances in automated debugging, and can directly fix buggy programs with minimal human intervention. Although various advanced APR techniques (including search-based or semantic-based ones) have been proposed, they mainly work at the source-code level and it is not clear how bytecode-level APR performs in practice. Also, empirical studies of the existing techniques on bugs beyond what has been reported in the original papers are rather limited. In this paper, we implement the first practical bytecode-level APR technique, PraPR, and present the first extensive study on fixing real-world bugs (e.g., Defects4J bugs) using JVM bytecode mutation. The experimental results show that surprisingly even PraPR with only the basic traditional mutators can produce genuine fixes for 17 bugs; with simple additional commonly used APR mutators, PraPR is able to produce genuine fixes for 43 bugs, significantly outperforming state-of-the-art APR, while being over 10X faster. Furthermore, we performed an extensive study of PraPR and other recent APR tools on a large number of additional real-world bugs, and demonstrated the overfitting problem of recent advanced APR tools for the first time. Lastly, PraPR has also successfully fixed bugs for other JVM languages (e.g., for the popular Kotlin language), indicating PraPR can greatly complement existing source-code-level APR."
   },
   {
-    "id": 8596,
+    "id": 8611,
     "year": 2019,
     "title": "TBar: revisiting template-based automated program repair",
     "publication": "ISSTA",
@@ -24,7 +24,7 @@
     "abstract": "We revisit the performance of template-based APR to build comprehensive knowledge about the effectiveness of fix patterns, and to highlight the importance of complementary steps such as fault localization or donor code retrieval. To that end, we first investigate the literature to collect, summarize and label recurrently-used fix patterns. Based on the investigation, we build TBar, a straightforward APR tool that systematically attempts to apply these fix patterns to program bugs. We thoroughly evaluate TBar on the Defects4J benchmark. In particular, we assess the actual qualitative and quantitative diversity of fix patterns, as well as their effectiveness in yielding plausible or correct patches. Eventually, we find that, assuming a perfect fault localization, TBar correctly/plausibly fixes 74/101 bugs. Replicating a standard and practical pipeline of APR assessment, we demonstrate that TBar correctly fixes 43 bugs from Defects4J, an unprecedented performance in the literature (including all approaches, i.e., template-based, stochastic mutation-based or synthesis-based APR)."
   },
   {
-    "id": 8597,
+    "id": 8612,
     "year": 2019,
     "title": "LibID: reliable identification of obfuscated third-party Android libraries",
     "publication": "ISSTA",
@@ -32,7 +32,7 @@
     "abstract": "Third-party libraries are vital components of Android apps, yet they can also introduce serious security threats and impede the accuracy and reliability of app analysis tasks, such as app clone detection. Several library detection approaches have been proposed to address these problems. However, we show these techniques are not robust against popular code obfuscators, such as ProGuard, which is now used in nearly half of all apps. We then present LibID, a library detection tool that is more resilient to code shrinking and package modification than state-of-the-art tools. We show that the library identification problem can be formulated using binary integer programming models. LibID is able to identify specific versions of third-party libraries in candidate apps through static analysis of app binaries coupled with a database of third-party libraries. We propose a novel approach to generate synthetic apps to tune the detection thresholds. Then, we use F-Droid apps as the ground truth to evaluate LibID under different obfuscation settings, which shows that LibID is more robust to code obfuscators than state-of-the-art tools. Finally, we demonstrate the utility of LibID by detecting the use of a vulnerable version of the OkHttp library in nearly 10\\% of 3,958 most popular apps on the Google Play Store."
   },
   {
-    "id": 8598,
+    "id": 8613,
     "year": 2019,
     "title": "QADroid: regression event selection for Android applications",
     "publication": "ISSTA",
@@ -40,7 +40,7 @@
     "abstract": "Popular Android applications undergo frequent releases. Ensuring functional testing of the new features, as well as regression testing of the previous functionality, are time-consuming and error-prone. Thus, there is a need for a tool that eases the testing efforts as well as saves the overall time of the product release cycle. In this work, we present QADroid, the first activity- and event-aware regression selection tool for Android apps. Salient features of QADroid are: (i) a richer change-set analyzer that covers code as well as non-code components for regression, (ii) it presents a pictorial representation of the app’s functioning, and (iii) it displays the regression points in the app as a mapping between activities to user-elements to events. Features (ii) and (iii) help the testers in understanding the technical findings better. We evaluated QADroid on 1105 releases of 50 open source Android projects. The results show that QADroid reduced the activity selection by 58\\% and event selection by 74\\% compared to the traditional way of exhaustive testing of all activities and events, thereby significantly reducing the manual testing efforts."
   },
   {
-    "id": 8599,
+    "id": 8614,
     "year": 2019,
     "title": "Mining Android crash fixes in the absence of issue- and change-tracking systems",
     "publication": "ISSTA",
@@ -48,7 +48,7 @@
     "abstract": "Android apps are prone to crash. This often arises from the misuse of Android framework APIs, making it harder to debug since official Android documentation does not discuss thoroughly potential exceptions.Recently, the program repair community has also started to investigate the possibility to fix crashes automatically. Current results, however, apply to limited example cases. In both scenarios of repair, the main issue is the need for more example data to drive the fix processes due to the high cost in time and effort needed to collect and identify fix examples. We propose in this work a scalable approach, CraftDroid, to mine crash fixes by leveraging a set of 28 thousand carefully reconstructed app lineages from app markets, without the need for the app source code or issue reports. We developed a replicative testing approach that locates fixes among app versions which output different runtime logs with the exact same test inputs. Overall, we have mined 104 relevant crash fixes, further abstracted 17 fine-grained fix templates that are demonstrated to be effective for patching crashed apks. Finally, we release ReCBench, a benchmark consisting of 200 crashed apks and the crash replication scripts, which the community can explore for evaluating generated crash-inducing bug patches."
   },
   {
-    "id": 8600,
+    "id": 8615,
     "year": 2019,
     "title": "Sara: self-replay augmented record and replay for Android in industrial cases",
     "publication": "ISSTA",
@@ -56,7 +56,7 @@
     "abstract": "Record-and-replay tools are indispensable for quality assurance of mobile applications. Due to its importance, an increasing number of tools are being developed to record and replay user interactions for Android. However, by conducting an empirical study of various existing tools in industrial settings, researchers have revealed a gap between the characteristics requested from industry and the performance of publicly available record-and-replay tools. The study concludes that no existing tools under evaluation are sufficient for industrial applications. In this paper, we present a record-and-replay tool called SARA towards bridging the gap and targeting a wide adoption. Specifically, a dynamic instrumentation technique is used to accommodate rich sources of inputs in the application layer satisfying various constraints requested from industry. A self-replay mechanism is proposed to record more information of user inputs for accurate replaying without degrading user experience. In addition, an adaptive replay method is designed to enable replaying events on different devices with diverse screen sizes and OS versions. Through an evaluation on 53 highly popular industrial Android applications and 265 common usage scenarios, we demonstrate the effectiveness of SARA in recording and replaying rich sources of inputs on the same or different devices."
   },
   {
-    "id": 8601,
+    "id": 8616,
     "year": 2019,
     "title": "Root causing flaky tests in a large-scale industrial setting",
     "publication": "ISSTA",
@@ -64,7 +64,7 @@
     "abstract": "In today’s agile world, developers often rely on continuous integration pipelines to help build and validate their changes by executing tests in an efficient manner. One of the significant factors that hinder developers’ productivity is flaky tests—tests that may pass and fail with the same version of code. Since flaky test failures are not deterministically reproducible, developers often have to spend hours only to discover that the occasional failures have nothing to do with their changes. However, ignoring failures of flaky tests can be dangerous, since those failures may represent real faults in the production code. Furthermore, identifying the root cause of flakiness is tedious and cumbersome, since they are often a consequence of unexpected and non-deterministic behavior due to various factors, such as concurrency and external dependencies. As developers in a large-scale industrial setting, we first describe our experience with flaky tests by conducting a study on them. Our results show that although the number of distinct flaky tests may be low, the percentage of failing builds due to flaky tests can be substantial. To reduce the burden of flaky tests on developers, we describe our end-to-end framework that helps identify flaky tests and understand their root causes. Our framework instruments flaky tests and all relevant code to log various runtime properties, and then uses a preliminary tool, called RootFinder, to find differences in the logs of passing and failing runs. Using our framework, we collect and publicize a dataset of real-world, anonymized execution logs of flaky tests. By sharing the findings from our study, our framework and tool, and a dataset of logs, we hope to encourage more research on this important problem."
   },
   {
-    "id": 8602,
+    "id": 8617,
     "year": 2019,
     "title": "Mitigating the effects of flaky tests on mutation testing",
     "publication": "ISSTA",
@@ -72,7 +72,7 @@
     "abstract": "Mutation testing is widely used in research as a metric for evaluating the quality of test suites. Mutation testing runs the test suite on generated mutants (variants of the code under test), where a test suite kills a mutant if any of the tests fail when run on the mutant. Mutation testing implicitly assumes that tests exhibit deterministic behavior, in terms of their coverage and the outcome of a test (not) killing a certain mutant. Such an assumption does not hold in the presence of flaky tests, whose outcomes can non-deterministically differ even when run on the same code under test. Without reliable test outcomes, mutation testing can result in unreliable results, e.g., in our experiments, mutation scores vary by four percentage points on average between repeated executions, and 9\\% of mutant-test pairs have an unknown status. Many modern software projects suffer from flaky tests. We propose techniques that manage flakiness throughout the mutation testing process, largely based on strategically re-running tests. We implement our techniques by modifying the open-source mutation testing tool, PIT. Our evaluation on 30 projects shows that our techniques reduce the number of \"unknown\" (flaky) mutants by 79.4\\%."
   },
   {
-    "id": 8603,
+    "id": 8618,
     "year": 2019,
     "title": "Assessing the state and improving the art of parallel testing for C",
     "publication": "ISSTA",
@@ -80,7 +80,7 @@
     "abstract": "The execution latency of a test suite strongly depends on the degree of concurrency with which test cases are executed. However, if test cases are not designed for concurrent execution, they may interfere, causing result deviations compared to sequential execution. To prevent this, each test case can be provided with an isolated execution environment, but the resulting overheads diminish the merit of parallel testing. Our large-scale analysis of the Debian Buster package repository shows that existing test suites in C projects make limited use of parallelization. We present an approach to (a) analyze the potential of C test suites for safe concurrent execution, i.e., result invariance compared to sequential execution, and (b) execute tests concurrently with different parallelization strategies using processes or threads if it is found to be safe. Applying our approach to 9 C projects, we find that most of them cannot safely execute tests in parallel due to unsafe test code or unsafe usage of shared variables or files within the program code. Parallel test execution shows a significant acceleration over sequential execution for most projects. We find that multi-threading rarely outperforms multi-processing. Finally, we observe that the lack of a common test framework for C leaves make as the standard driver for running tests, which introduces unnecessary performance overheads for test execution."
   },
   {
-    "id": 8604,
+    "id": 8619,
     "year": 2019,
     "title": "Failure clustering without coverage",
     "publication": "ISSTA",
@@ -88,7 +88,7 @@
     "abstract": "Developing and integrating software in the automotive industry is a complex task and requires extensive testing. An important cost factor in testing and debugging is the time required to analyze failing tests. In the context of regression testing, usually, large numbers of tests fail due to a few underlying faults. Clustering failing tests with respect to their underlying faults can, therefore, help in reducing the required analysis time. In this paper, we propose a clustering technique to group failing hardware-in-the-loop tests based on non-code-based features, retrieved from three different sources. To effectively reduce the analysis effort, the clustering tool selects a representative test for each cluster. Instead of analyzing all failing tests, testers only inspect the representative tests to find the underlying faults. We evaluated the effectiveness and efficiency of our solution in a major automotive company using 86 regression test runs, 8743 failing tests, and 1531 faults. The results show that utilizing our clustering tool, testers can reduce the analysis time more than 60\\% and find more than 80\\% of the faults only by inspecting the representative tests."
   },
   {
-    "id": 8605,
+    "id": 8620,
     "year": 2019,
     "title": "DeepHunter: a coverage-guided fuzz testing framework for deep neural networks",
     "publication": "ISSTA",
@@ -96,7 +96,7 @@
     "abstract": "The past decade has seen the great potential of applying deep neural network (DNN) based software to safety-critical scenarios, such as autonomous driving. Similar to traditional software, DNNs could exhibit incorrect behaviors, caused by hidden defects, leading to severe accidents and losses. In this paper, we propose DeepHunter, a coverage-guided fuzz testing framework for detecting potential defects of general-purpose DNNs. To this end, we first propose a metamorphic mutation strategy to generate new semantically preserved tests, and leverage multiple extensible coverage criteria as feedback to guide the test generation. We further propose a seed selection strategy that combines both diversity-based and recency-based seed selection. We implement and incorporate 5 existing testing criteria and 4 seed selection strategies in DeepHunter. Large-scale experiments demonstrate that (1) our metamorphic mutation strategy is useful to generate new valid tests with the same semantics as the original seed, by up to a 98\\% validity ratio; (2) the diversity-based seed selection generally weighs more than recency-based seed selection in boosting the coverage and in detecting defects; (3) DeepHunter outperforms the state of the arts by coverage as well as the quantity and diversity of defects identified; (4) guided by corner-region based criteria, DeepHunter is useful to capture defects during the DNN quantization for platform migration."
   },
   {
-    "id": 8606,
+    "id": 8621,
     "year": 2019,
     "title": "Search-based test and improvement of machine-learning-based anomaly detection systems",
     "publication": "ISSTA",
@@ -104,7 +104,7 @@
     "abstract": "Machine-learning-based anomaly detection systems can be vulnerable to new kinds of deceptions, known as training attacks, which exploit the live learning mechanism of these systems by progressively injecting small portions of abnormal data. The injected data seamlessly swift the learned states to a point where harmful data can pass unnoticed. We focus on the systematic testing of these attacks in the context of intrusion detection systems (IDS). We propose a search-based approach to test IDS by making training attacks. Going a step further, we also propose searching for countermeasures, learning from the successful attacks and thereby increasing the resilience of the tested IDS. We evaluate our approach on a denial-of-service attack detection scenario and a dataset recording the network traffic of a real-world system. Our experiments show that our search-based attack scheme generates successful attacks bypassing the current state-of-the-art defences. We also show that our approach is capable of generating attack patterns for all configuration states of the studied IDS and that it is capable of providing appropriate countermeasures. By co-evolving our attack and defence mechanisms we succeeded at improving the defence of the IDS under test by making it resilient to 49 out of 50 independently generated attacks."
   },
   {
-    "id": 8607,
+    "id": 8622,
     "year": 2019,
     "title": "DeepFL: integrating multiple fault diagnosis dimensions for deep fault localization",
     "publication": "ISSTA",
@@ -112,7 +112,7 @@
     "abstract": "Learning-based fault localization has been intensively studied recently. Prior studies have shown that traditional Learning-to-Rank techniques can help precisely diagnose fault locations using various dimensions of fault-diagnosis features, such as suspiciousness values computed by various off-the-shelf fault localization techniques. However, with the increasing dimensions of features considered by advanced fault localization techniques, it can be quite challenging for the traditional Learning-to-Rank algorithms to automatically identify effective existing/latent features. In this work, we propose DeepFL, a deep learning approach to automatically learn the most effective existing/latent features for precise fault localization. Although the approach is general, in this work, we collect various suspiciousness-value-based, fault-proneness-based and textual-similarity-based features from the fault localization, defect prediction and information retrieval areas, respectively. DeepFL has been studied on 395 real bugs from the widely used Defects4J benchmark. The experimental results show DeepFL can significantly outperform state-of-the-art TraPT/FLUCCS (e.g., localizing 50+ more faults within Top-1). We also investigate the impacts of deep model configurations (e.g., loss functions and epoch settings) and features. Furthermore, DeepFL is also surprisingly effective for cross-project prediction."
   },
   {
-    "id": 8608,
+    "id": 8623,
     "year": 2019,
     "title": "Codebase-adaptive detection of security-relevant methods",
     "publication": "ISSTA",
@@ -120,7 +120,7 @@
     "abstract": "More and more companies use static analysis to perform regular code reviews to detect security vulnerabilities in their code, configuring them to detect various types of bugs and vulnerabilities such as the SANS top 25 or the OWASP top 10. For such analyses to be as precise as possible, they must be adapted to the code base they scan. The particular challenge we address in this paper is to provide analyses with the correct security-relevant methods (Srm): sources, sinks, etc. We present SWAN, a fully-automated machine-learning approach to detect sources, sinks, validators, and authentication methods for Java programs. SWAN further classifies the Srm into specific vulnerability classes of the SANS top 25. To further adapt the lists detected by SWAN to the code base and to improve its precision, we also introduce SWANAssist, an extension to SWAN that allows analysis users to refine the classifications. On twelve popular Java frameworks, SWAN achieves an average precision of 0.826, which is better or comparable to existing approaches. Our experiments show that SWANAssist requires a relatively low effort from the developer to significantly improve its precision."
   },
   {
-    "id": 8609,
+    "id": 8624,
     "year": 2019,
     "title": "Effective and efficient API misuse detection via exception propagation and search-based testing",
     "publication": "ISSTA",
@@ -128,7 +128,7 @@
     "abstract": "Application Programming Interfaces (APIs) typically come with (implicit) usage constraints. The violations of these constraints (API misuses) can lead to software crashes. Even though there are several tools that can detect API misuses, most of them suffer from a very high rate of false positives. We introduce Catcher, a novel API misuse detection approach that combines static exception propagation analysis with automatic search-based test case generation to effectively and efficiently pinpoint crash-prone API misuses in client applications. We validate Catcher against 21 Java applications, targeting misuses of the Java platform's API. Our results indicate that Catcher is able to generate test cases that uncover 243 (unique) API misuses that result in crashes. Our empirical evaluation shows that Catcher can detect a large number of misuses (77 cases) that would remain undetected by the traditional coverage-based test case generator EvoSuite. Additionally, on average, Catcher is eight times faster than EvoSuite in generating test cases for the identified misuses. Finally, we find that the majority of the exceptions triggered by Catcher are unexpected to developers, i.e., not only unhandled in the source code but also not listed in the documentation of the client applications."
   },
   {
-    "id": 8610,
+    "id": 8625,
     "year": 2019,
     "title": "Automated API-usage update for Android apps",
     "publication": "ISSTA",
@@ -136,7 +136,7 @@
     "abstract": "Mobile apps rely heavily on the application programming interface (API) provided by their underlying operating system (OS). Because OS and API can change frequently, developers must quickly update their apps to ensure that the apps behave as intended with new API and OS versions. To help developers with this tedious, error prone, and time consuming task, we developed a technique that can automatically perform app updates for API changes based on examples of how other developers evolved their apps for the same changes. Given a target app to be updated and information about the changes in the API, our technique performs four main steps. First, it analyzes the target app to identify code affected by API changes. Second, it searches existing code bases for examples of updates to the new version of the API. Third, it analyzes, ranks, and transforms into generic patches the update examples found in the previous step. Finally, it applies the generated patches to the target app in order of ranking, while performing differential testing to validate the update. We implemented our technique and performed an empirical evaluation on 15 real-world apps with promising results. Overall, our technique was able to update 85\\% of the API changes considered and automatically validate 68\\% of the updates performed."
   },
   {
-    "id": 8611,
+    "id": 8626,
     "year": 2019,
     "title": "A large-scale study of application incompatibilities in Android",
     "publication": "ISSTA",
@@ -144,7 +144,7 @@
     "abstract": "The rapid expansion of the Android ecosystem is accompanied by continuing diversification of platforms and devices, resulting in increasing incompatibility issues which damage user experiences and impede app development productivity. In this paper, we conducted a large-scale, longitudinal study of compatibility issues in 62,894 benign apps developed in the past eight years, to understand the symptoms and causes of these issues. We further investigated the incompatibilities that are actually exercised at runtime through the system logs and execution traces of 15,045 apps. Our study revealed that, among others, (1) compatibility issues were prevalent and persistent at both installation and run time, with greater prevalence of run-time incompatibilities, (2) there were no certain Android versions that consistently saw more or less app incompatibilities than others, (3) installation-time incompatibilities were strongly correlated with the minSdkVersion specified in apps, while run-time incompatibilities were most significantly correlated with the underlying platform’s API level, and (4) installation-time incompatibilities were mostly due to apps’ use of architecture-incompatible native libraries, while run-time incompatibilities were mostly due to API changes during SDK evolution. We offered further insights into app incompatibilities, as well as recommendations on dealing with the issues for bother developers and end users of Android apps."
   },
   {
-    "id": 8612,
+    "id": 8627,
     "year": 2019,
     "title": "Deferred concretization in symbolic execution via fuzzing",
     "publication": "ISSTA",
@@ -152,7 +152,7 @@
     "abstract": "Concretization is an effective weapon in the armory of symbolic execution engines. However, concretization can lead to loss in coverage, path divergence, and generation of test-cases on which the intended bugs are not reproduced. In this paper, we propose an algorithm, Deferred Concretization, that uses a new category for values within symbolic execution (referred to as the symcrete values) to pend concretization till they are actually needed. Our tool, COLOSSUS, built around these ideas, was able to gain an average coverage improvement of 66.94\\% and reduce divergence by more than 55\\% relative to the state-of-the-art symbolic execution engine, KLEE. Moreover, we found that KLEE loses about 38.60\\% of the states in the symbolic execution tree that COLOSSUS is able to recover, showing that COLOSSUS is capable of covering a much larger coverage space."
   },
   {
-    "id": 8613,
+    "id": 8628,
     "year": 2019,
     "title": "Differentially testing soundness and precision of program analyzers",
     "publication": "ISSTA",
@@ -160,7 +160,7 @@
     "abstract": "In the last decades, numerous program analyzers have been developed both in academia and industry. Despite their abundance however, there is currently no systematic way of comparing the effectiveness of different analyzers on arbitrary code. In this paper, we present the first automated technique for differentially testing soundness and precision of program analyzers. We used our technique to compare six mature, state-of-the art analyzers on tens of thousands of automatically generated benchmarks. Our technique detected soundness and precision issues in most analyzers, and we evaluated the implications of these issues to both designers and users of program analyzers."
   },
   {
-    "id": 8614,
+    "id": 8629,
     "year": 2019,
     "title": "Judge: identifying, understanding, and evaluating sources of unsoundness in call graphs",
     "publication": "ISSTA",
@@ -168,7 +168,7 @@
     "abstract": "Call graphs are widely used; in particular for advanced control- and data-flow analyses. Even though many call graph algorithms with different precision and scalability properties have been proposed, a comprehensive understanding of sources of unsoundness, their relevance, and the capabilities of existing call graph algorithms in this respect is missing. To address this problem, we propose Judge, a toolchain that helps with understanding sources of unsoundness and improving the soundness of call graphs. In several experiments, we use Judge and an extensive test suite related to sources of unsoundness to (a) compute capability profiles for call graph implementations of Soot, WALA, DOOP, and OPAL, (b) to determine the prevalence of language features and APIs that affect soundness in modern Java Bytecode, (c) to compare the call graphs of Soot, WALA, DOOP, and OPAL – highlighting important differences in their implementations, and (d) to evaluate the necessary effort to achieve project-specific reasonable sound call graphs. We show that soundness-relevant features/APIs are frequently used and that support for them differs vastly, up to the point where comparing call graphs computed by the same base algorithms (e.g., RTA) but different frameworks is bogus. We also show that Judge can support users in establishing the soundness of call graphs with reasonable effort."
   },
   {
-    "id": 8615,
+    "id": 8630,
     "year": 2019,
     "title": "Adlib: analyzer for mobile ad platform libraries",
     "publication": "ISSTA",
@@ -176,7 +176,7 @@
     "abstract": "Mobile advertising has become a popular advertising approach by taking advantage of various information from mobile devices and rich interaction with users. Mobile advertising platforms show advertisements of nearby restaurants to users using the geographic locations of their mobile devices, and also allow users to make reservations easily using their phone numbers. However, at the same time, they may open the doors for advertisements to steal device information or to perform malicious behaviors. When application developers integrate mobile advertising platform SDKs (AdSDKs) to their applications, they are informed of only the permissions required by the AdSDKs, and they may not be aware of the rich functionalities of the SDKs that are available to advertisements. In this paper, we first report that various AdSDKs provide powerful functionalities to advertisements, which are seriously vulnerable to security threats. We present representative malicious behaviors by advertisements using APIs provided by AdSDKs. To mitigate the security vulnerability, we develop a static analyzer, Adlib, which analyzes Android Java libraries that use hybrid features to enable communication with JavaScript code and detects possible flows from the APIs that are accessible from third-party advertisements to device-specific features like geographic locations. Our evaluation shows that Adlib found genuine security vulnerabilities from real-world AdSDKs."
   },
   {
-    "id": 8616,
+    "id": 8631,
     "year": 2019,
     "title": "Interactive metamorphic testing of debuggers",
     "publication": "ISSTA",
@@ -184,7 +184,7 @@
     "abstract": "When improving their code, developers often turn to interactive debuggers. The correctness of these tools is crucial, because bugs in the debugger itself may mislead a developer, e.g., to believe that executed code is never reached or that a variable has another value than in the actual execution. Yet, debuggers are difficult to test because their input consists of both source code and a sequence of debugging actions, such as setting breakpoints or stepping through code. This paper presents the first metamorphic testing approach for debuggers. The key idea is to transform both the debugged code and the debugging actions in such a way that the behavior of the original and the transformed inputs should differ only in specific ways. For example, adding a breakpoint should not change the control flow of the debugged program. To support the interactive nature of debuggers, we introduce interactive metamorphic testing. It differs from traditional metamorphic testing by determining the input transformation and the expected behavioral change it causes while the program under test is running. Our evaluation applies the approach to the widely used debugger in the Chromium browser, where it finds eight previously unknown bugs with a true positive rate of 51\\%. All bugs have been confirmed by the developers, and one bug has even been marked as release-blocking."
   },
   {
-    "id": 8617,
+    "id": 8632,
     "year": 2019,
     "title": "TestMig: migrating GUI test cases from iOS to Android",
     "publication": "ISSTA",
@@ -192,7 +192,7 @@
     "abstract": "Nowadays, Apple iOS and Android are two most popular platforms for mobile applications. To attract more users, many software companies and organizations are migrating their applications from one platform to the other, and besides source files, they also need to migrate their GUI tests. The migration of GUI tests is tedious and difficult to be automated, since two platforms have subtle differences and there are often few or even no migrated GUI tests for learning. To address the problem, in this paper, we propose a novel approach, TestMig, that migrates GUI tests from iOS to Android, without any migrated code samples. Specifically, TestMig first executes the GUI tests of the iOS version, and records their GUI event sequences. Guided by the iOS GUI events, TestMig explores the Android version of the application to generate the corresponding Android event sequences. We conducted an evaluation on five well known mobile applications: 2048, SimpleNote, Wire, Wikipedia, and WordPress. The results show that, on average, TestMig correctly converts 80.2\\% of recorded iOS UI events to Android UI events and have them successfully executed, and our migrated Android test cases achieve similar statement coverage compared with the original iOS test cases (59.7\\% vs 60.4\\%)."
   },
   {
-    "id": 8618,
+    "id": 8633,
     "year": 2019,
     "title": "Learning user interface element interactions",
     "publication": "ISSTA",
@@ -200,7 +200,7 @@
     "abstract": "When generating tests for graphical user interfaces, one central problem is to identify how individual UI elements can be interacted with—clicking, long- or right-clicking, swiping, dragging, typing, or more. We present an approach based on reinforcement learning that automatically learns which interactions can be used for which elements, and uses this information to guide test generation. We model the problem as an instance of the multi-armed bandit problem (MAB problem) from probability theory, and show how its traditional solutions work on test generation, with and without relying on previous knowledge. The resulting guidance yields higher coverage. In our evaluation, our approach shows improvements in statement coverage between 18\\% (when not using any previous knowledge) and 20\\% (when reusing previously generated models)."
   },
   {
-    "id": 8619,
+    "id": 8634,
     "year": 2019,
     "title": "Improving random GUI testing with image-based widget detection",
     "publication": "ISSTA",
@@ -208,7 +208,7 @@
     "abstract": "Graphical User Interfaces (GUIs) are amongst the most common user interfaces, enabling interactions with applications through mouse movements and key presses. Tools for automated testing of programs through their GUI exist, however they usually rely on operating system or framework specific knowledge to interact with an application. Due to frequent operating system updates, which can remove required information, and a large variety of different GUI frameworks using unique underlying data structures, such tools rapidly become obsolete, Consequently, for an automated GUI test generation tool, supporting many frameworks and operating systems is impractical. We propose a technique for improving GUI testing by automatically identifying GUI widgets in screen shots using machine learning techniques. As training data, we generate randomized GUIs to automatically extract widget information. The resulting model provides guidance to GUI testing tools in environments not currently supported by deriving GUI widget information from screen shots only. In our experiments, we found that identifying GUI widgets in screen shots and using this information to guide random testing achieved a significantly higher branch coverage in 18 of 20 applications, with an average increase of 42.5\\% when compared to conventional random testing."
   },
   {
-    "id": 8620,
+    "id": 8635,
     "year": 2019,
     "title": "Automatically testing self-driving cars with search-based procedural content generation",
     "publication": "ISSTA",
@@ -216,7 +216,7 @@
     "abstract": "Self-driving cars rely on software which needs to be thoroughly tested. Testing self-driving car software in real traffic is not only expensive but also dangerous, and has already caused fatalities. Virtual tests, in which self-driving car software is tested in computer simulations, offer a more efficient and safer alternative compared to naturalistic field operational tests. However, creating suitable test scenarios is laborious and difficult. In this paper we combine procedural content generation, a technique commonly employed in modern video games, and search-based testing, a testing technique proven to be effective in many domains, in order to automatically create challenging virtual scenarios for testing self-driving car soft- ware. Our AsFault prototype implements this approach to generate virtual roads for testing lane keeping, one of the defining features of autonomous driving. Evaluation on two different self-driving car software systems demonstrates that AsFault can generate effective virtual road networks that succeed in revealing software failures, which manifest as cars departing their lane. Compared to random testing AsFault was not only more efficient, but also caused up to twice as many lane departures."
   },
   {
-    "id": 8621,
+    "id": 8636,
     "year": 2019,
     "title": "Semantic fuzzing with zest",
     "publication": "ISSTA",
@@ -224,7 +224,7 @@
     "abstract": "Programs expecting structured inputs often consist of both a syntactic analysis stage, which parses raw input, and a semantic analysis stage, which conducts checks on the parsed input and executes the core logic of the program. Generator-based testing tools in the lineage of QuickCheck are a promising way to generate random syntactically valid test inputs for these programs. We present Zest, a technique which automatically guides QuickCheck-like random input generators to better explore the semantic analysis stage of test programs. Zest converts random-input generators into deterministic parametric input generators. We present the key insight that mutations in the untyped parameter domain map to structural mutations in the input domain. Zest leverages program feedback in the form of code coverage and input validity to perform feedback-directed parameter search. We evaluate Zest against AFL and QuickCheck on five Java programs: Maven, Ant, BCEL, Closure, and Rhino. Zest covers 1.03x-2.81x as many branches within the benchmarks' semantic analysis stages as baseline techniques. Further, we find 10 new bugs in the semantic analysis stages of these benchmarks. Zest is the most effective technique in finding these bugs reliably and quickly, requiring at most 10 minutes on average to find each bug."
   },
   {
-    "id": 8622,
+    "id": 8637,
     "year": 2019,
     "title": "Detecting memory errors at runtime with source-level instrumentation",
     "publication": "ISSTA",
@@ -232,7 +232,7 @@
     "abstract": "The unsafe language features of C, such as low-level control of memory, often lead to memory errors, which can result in silent data corruption, security vulnerabilities, and program crashes. Dynamic analysis tools, which have been widely used for detecting memory errors at runtime, usually perform instrumentation at the IR-level or binary-level. However, their underlying non-source-level instrumentation techniques have three inherent limitations: optimization sensitivity, platform dependence and DO-178C non-compliance. Due to optimization sensitivity, these tools are used to trade either performance for effectiveness by compiling the program at -O0 or effectiveness for performance by compiling the program at a higher optimization level, say, -O3. In this paper, we overcome these three limitations by proposing a new source-level instrumentation technique and implementing it in a new dynamic analysis tool, called MOVEC, in a pointer-based instrumentation framework. Validation against a set of 86 microbenchmarks (with ground truth) and a set of 10 MiBench benchmarks shows that MOVEC outperforms state-of-the-art tools, SoftBoundCETS, Google's AddressSanitizer and Valgrind, in terms of both effectiveness and performance considered together."
   },
   {
-    "id": 8623,
+    "id": 8638,
     "year": 2019,
     "title": "Optimal context-sensitive dynamic partial order reduction with observers",
     "publication": "ISSTA",
@@ -240,7 +240,7 @@
     "abstract": "Dynamic Partial Order Reduction (DPOR) algorithms are used in stateless model checking to avoid the exploration of equivalent execution sequences. DPOR relies on the notion of independence between execution steps to detect equivalence. Recent progress in the area has introduced more accurate ways to detect independence: Context-Sensitive DPOR considers two steps p and t independent in the current state if the states obtained by executing p · t and t · p are the same; Optimal DPOR with Observers makes their dependency conditional to the existence of future events that observe their operations. We introduce a new algorithm, Optimal Context-Sensitive DPOR with Observers, that combines these two notions of conditional independence, and goes beyond them by exploiting their synergies. Experimental evaluation shows that our gains increase exponentially with the size of the considered inputs."
   },
   {
-    "id": 8624,
+    "id": 8639,
     "year": 2019,
     "title": "Exploiting the laws of order in smart contracts",
     "publication": "ISSTA",
@@ -248,7 +248,7 @@
     "abstract": "We investigate a family of bugs in blockchain-based smart contracts, which we dub event-ordering (or EO) bugs. These bugs are intimately related to the dynamic ordering of contract events, i.e. calls of its functions, and enable potential exploits of millions of USD worth of crypto-coins. Previous techniques to detect EO bugs have been restricted to those bugs that involve just one or two event orderings. Our work provides a new formulation of the general class of EO bugs arising in long permutations of such events by using techniques from concurrent program analysis. The technical challenge in detecting EO bugs in blockchain contracts is the inherent combinatorial blowup in path and state space analysis, even for simple contracts. We propose the first use of partial-order reduction techniques, using automatically extracted happens-before relations along with several dynamic symbolic execution optimizations. We build EthRacer, an automatic analysis tool that runs directly on Ethereum bytecode and requires no hints from users. It flags 8\\% of over 10, 000 contracts analyzed, providing compact event traces (witnesses) that human analysts can examine in only a few minutes per contract. More than half of the flagged contracts are likely to have unintended behaviour."
   },
   {
-    "id": 8625,
+    "id": 8640,
     "year": 2019,
     "title": "Go-clone: graph-embedding based clone detector for Golang",
     "publication": "ISSTA",
@@ -256,7 +256,7 @@
     "abstract": "Golang (short for Go programming language) is a fast and compiled language, which has been increasingly used in industry due to its excellent performance on concurrent programming. Golang redefines concurrent programming grammar, making it a challenge for traditional clone detection tools and techniques. However, there exist few tools for detecting duplicates or copy-paste related bugs in Golang. Therefore, an effective and efficient code clone detector on Golang is especially needed. In this paper, we present Go-Clone, a learning-based clone detector for Golang. Go-Clone contains two modules -- the training module and the user interaction module. In the training module, firstly we parse Golang source code into llvm IR (Intermediate Representation). Secondly, we calculate LSFG (labeled semantic flow graph) for each program function automatically. Go-Clone trains a deep neural network model to encode LSFGs for similarity classification. In the user interaction module, users can choose one or more Golang projects. Go-Clone identifies and presents a list of function pairs, which are most likely clone code for user inspection. To evaluate Go-Clone's performance, we collect 6,110 commit versions from 48 Github projects to construct a Golang clone detection data set. Go-Clone can reach the value of AUC (Area Under Curve) and ACC (Accuracy) for 89.61\\% and 83.80\\% in clone detection. By testing several groups of unfamiliar data, we also demonstrates the generility of Go-Clone. The address of the abstract demo video: https://youtu.be/o5DogtYGbeo"
   },
   {
-    "id": 8626,
+    "id": 8641,
     "year": 2019,
     "title": "VFQL: combinational static analysis as query language",
     "publication": "ISSTA",
@@ -264,7 +264,7 @@
     "abstract": "Value flow are widely used in static analysis to detect bugs. Existing techniques usually employ a pointer analysis and generate source sink summaries defined by problem domain, then a solver is invoked to determine whether the path is feasible. However, most of the tools does not provide an easy way for users to find user defined bugs within the same architecture of finding pre-defined bugs. This paper presents VFQL, an expressive query language on value flow graph and the framework to execute the query to find user defined defects. Moreover, VFQL provides a nice GUI to demonstrate the value flow graph and a modeling language to define system libraries or user libraries without code, which further enhances its usability. The experimental results on open benchmarks show that VFQL achieve a competitive performance against other state of art tools. The result of case study conducted on open source program shows that the flexible query and modeling language provide a great support in finding user specified defects."
   },
   {
-    "id": 8627,
+    "id": 8642,
     "year": 2019,
     "title": "VBSAC: a value-based static analyzer for C",
     "publication": "ISSTA",
@@ -272,7 +272,7 @@
     "abstract": "Static analysis has long prevailed as a promising approach to detect program bugs at an early development process to increase software quality. However, such tools face great challenges to balance the false-positive rate and the false-negative rate in practical use. In this paper, we present VBSAC, a value-based static analyzer for C aiming to improve the precision and recall. In our tool, we employ a pluggable value-based analysis strategy. A memory skeleton recorder is designed to maintain the memory objects as a baseline. While traversing the control flow graph, diverse value-based plug-ins analyze the specific abstract domains and share program information to strengthen the computation. Simultaneously, checkers consume the corresponding analysis results to detect bugs. We also provide a user-friendly web interface to help users audit the bug detection results. Evaluation on two widely-used benchmarks shows that we perform better to state-of-the-art bug detection tools by finding 221-339 more bugs and improving F-Score 9.88\\%-40.32\\%."
   },
   {
-    "id": 8628,
+    "id": 8643,
     "year": 2019,
     "title": "SAFEVM: a safety verifier for Ethereum smart contracts",
     "publication": "ISSTA",
@@ -280,7 +280,7 @@
     "abstract": "Ethereum smart contracts are public, immutable and distributed and, as such, they are prone to vulnerabilities sourcing from programming mistakes of developers. This paper presents SAFEVM, a verification tool for Ethereum smart contracts that makes use of state-of-the-art verification engines for C programs. SAFEVM takes as input an Ethereum smart contract (provided either in Solidity source code, or in compiled EVM bytecode), optionally with assert and require verification annotations, and produces in the output a report with the verification results. Besides general safety annotations, SAFEVM handles the verification of array accesses: it automatically generates SV-COMP verification assertions such that C verification engines can prove safety of array accesses. Our experimental evaluation has been undertaken on all contracts pulled from etherscan.io (more than 24,000) by using as back-end verifiers CPAchecker, SeaHorn and VeryMax."
   },
   {
-    "id": 8629,
+    "id": 8644,
     "year": 2019,
     "title": "CoCoTest: collaborative crowdsourced testing for Android applications",
     "publication": "ISSTA",
@@ -288,7 +288,7 @@
     "abstract": "Testing Android applications is becoming more and more challenging due to the notorious fragmentation issues and the complexity of usage scenarios in different environments. Crowdsourced testing has grown as a trend, especially in mobile application testing. However, due to the lack of professionalism and communication, the crowd workers tend to submit low-quality and duplicate bug reports, leading to a waste of test resources on inspecting and aggregating such reports. To solve these problems, we developed a platform, CoCoTest, embracing the idea of collective intelligence. With the help of CoCoTest Android SDK, workers can efficiently capture a screenshot, write a short description and create a bug report. A series of bug reports are aggregated online and then recommended to the other workers in real time. The crowdsourced workers can (1) help review, verify and enrich each others' bug reports; (2) escape duplicate bug reports; (3) be guided to conduct more professional testing with the help of collective intelligence. CoCoTest can improve the quality of the final report and reduce test costs. The demo video can be found at https://youtu.be/PuVuPbNP4tY."
   },
   {
-    "id": 8630,
+    "id": 8645,
     "year": 2019,
     "title": "Androlic: an extensible flow, context, object, field, and path-sensitive static analysis framework for Android",
     "publication": "ISSTA",
@@ -296,7 +296,7 @@
     "abstract": "Static analysis is widely used to detect potential defects in apps. Existing analysis tools focus on specific problems and vary in supported sensitivity, which make them difficult to reuse and extend for new analysis tasks. This paper presents Androlic, a precise static analysis framework for Android which is flow, context, object, field and path-sensitive. Through configuration items and APIs provided by Androlic, developers can easily extend it to perform custom analysis tasks. Evaluation on an example program and 20 real-world apps show that Androlic can analyze apps with high precision and efficiency."
   },
   {
-    "id": 8631,
+    "id": 8646,
     "year": 2019,
     "title": "JQF: coverage-guided property-based testing in Java",
     "publication": "ISSTA",
@@ -304,7 +304,7 @@
     "abstract": "We present JQF, a platform for performing coverage-guided fuzz testing in Java. JQF is designed both for practitioners, who wish to find bugs in Java programs, as well as for researchers, who wish to implement new fuzzing algorithms. Practitioners write QuickCheck-style test methods that take inputs as formal parameters. JQF instruments the test program's bytecode and continuously executes tests using inputs that are generated in a coverage-guided fuzzing loop. JQF's input-generation mechanism is extensible. Researchers can implement custom fuzzing algorithms by extending JQF's Guidance interface. A Guidance instance responds to code coverage events generated during the execution of a test case, such as function calls and conditional jumps, and provides the next input. We describe several guidances that currently ship with JQF, such as: semantic fuzzing with Zest, binary fuzzing with AFL, and complexity fuzzing with PerfFuzz. JQF is a mature tool that is open-source and publicly available. At the time of writing, JQF has been successful in discovering 42 previously unknown bugs in widely used open-source software such as OpenJDK, Apache Commons, and the Google Closure Compiler."
   },
   {
-    "id": 8632,
+    "id": 8647,
     "year": 2019,
     "title": "Ukwikora: continuous inspection for keyword-driven testing",
     "publication": "ISSTA",
@@ -312,7 +312,7 @@
     "abstract": "Automation of acceptance test suites becomes necessary in the context of agile software development practices, which require rapid feedback on the quality of code changes. To this end, companies try to automate their acceptance tests as much as possible. Unfortunately, the growth of the automated test suites, by several automation testers, gives rise to potential test smells, i.e., poorly designed test code, being introduced in the test code base, which in turn may increase the cost of maintaining the code and creating new one. In this paper, we investigate this problem in the context of our industrial partner, BGL BNP Paribas, and introduce Ukwikora, an automated tool that statically analyzes acceptance test suites, enabling the continuous inspection of the test code base. Ukwikora targets code written in the Robot Framework syntax, a popular framework for writing Keyword-Driven tests. Ukwikora has been successfully deployed at BGL BNP Paribas, detecting issues otherwise unknown to the automation testers, such as the presence of duplicated test code, dead test code and dependency issues among the tests. The success of our case study reinforces the need for additional research and tooling for acceptance test suites."
   },
   {
-    "id": 8633,
+    "id": 8648,
     "year": 2019,
     "title": "CTRAS: a tool for aggregating and summarizing crowdsourced test reports",
     "publication": "ISSTA",
@@ -320,7 +320,7 @@
     "abstract": "In this paper, we present CTRAS, a tool for automatically aggregating and summarizing duplicate crowdsourced test reports on the fly. CTRAS can automatically detect duplicates based on both textual information and the screenshots, and further aggregates and summarizes the duplicate test reports. CTRAS provides end users with a comprehensive and comprehensible understanding of all duplicates by identifying the main topics across the group of aggregated test reports and highlighting supplementary topics that are mentioned in subgroups of test reports. Also, it provides the classic tool of issue tracking systems, such as the project-report dashboard and keyword searching, and automates their classic functionalities, such as bug triaging and best fixer recommendation, to assist end users in managing and diagnosing test reports. Video: https://youtu.be/PNP10gKIPFs"
   },
   {
-    "id": 8634,
+    "id": 8649,
     "year": 2019,
     "title": "Continuous software performance assessment: detecting performance problems of software libraries on every build",
     "publication": "ISSTA",
@@ -328,7 +328,7 @@
     "abstract": "Degradation of software performance can become costly for companies and developers, yet it is hardly assessed continuously. A strategy that would allow continuous performance assessment of software libraries is software microbenchmarking, which faces problems such as excessive execution times and unreliable results that hinder wide-spread adoption in continuous integration. In my research, I want to develop techniques that allow including software microbenchmarks into continuous integration by utilizing cloud infrastructure and execution time reduction techniques. These will allow assessing performance on every build and therefore catching performance problems before they are released into the wild."
   },
   {
-    "id": 8635,
+    "id": 8650,
     "year": 2019,
     "title": "Mining constraints for grammar fuzzing",
     "publication": "ISSTA",
@@ -336,7 +336,7 @@
     "abstract": "Grammar-based fuzzing has been shown to significantly improve bug detection in programs with highly structured inputs. However, since grammars are largely handwritten, it is rarely used as a standalone technique in large-spectrum fuzzers as it requires human expertise. To fill this gap, promising techniques begin to emerge to automate the extraction of context-free grammars directly from the program under test. Unfortunately, the resulting grammars are usually not expressive enough and generate too many wrong inputs to provide results capable of competing with other fuzzing techniques. In this paper we propose a technique to automate the creation of attribute grammars from context-free grammars, thus significantly lowering the barrier of entry for efficient and effective large-scale grammar-based fuzzing."
   },
   {
-    "id": 8636,
+    "id": 8651,
     "year": 2019,
     "title": "A new dimension of test quality: assessing and generating higher quality unit test cases",
     "publication": "ISSTA",
@@ -344,7 +344,7 @@
     "abstract": "Unit tests form the first defensive line against the introduction of bugs in software systems. Therefore, their quality is of a paramount importance to produce robust and reliable software. To assess test quality, many organizations relies on metrics like code and mutation coverage. However, they are not always optimal to fulfill such a purpose. In my research, I want to make mutation testing scalable by devising a lightweight approach to estimate test effectiveness. Moreover, I plan to introduce a new metric measuring test focus—as a proxy for the effort needed by developers to understand and maintain a test— that both complements code coverage to assess test quality and can be used to drive automated test case generation of higher quality tests."
   },
   {
-    "id": 8637,
+    "id": 8652,
     "year": 2019,
     "title": "A cost-effective strategy for software vulnerability prediction based on bellwether analysis",
     "publication": "ISSTA",
@@ -352,7 +352,7 @@
     "abstract": "Vulnerability Prediction Models (VPMs) aims to identify vulnerable and non-vulnerable components in large software systems. Consequently, VPMs presents three major drawbacks (i) finding an effective method to identify a representative set of features from which to construct an effective model. (ii) the way the features are utilized in the machine learning setup (iii) making an implicit assumption that parameter optimization would not change the outcome of VPMs. To address these limitations, we investigate the significant effect of the Bellwether analysis on VPMs. Specifically, we first develop a Bellwether algorithm to identify and select an exemplary subset of data to be considered as the Bellwether to yield improved prediction accuracy against the growing portfolio benchmark. Next, we build a machine learning approach with different parameter settings to show the improvement of performance of VPMs. The prediction results of the suggested models were assessed in terms of precision, recall, F-measure, and other statistical measures. The preliminary result shows the Bellwether approach outperforms the benchmark technique across the applications studied with F-measure values ranging from 51.1\\%-98.5\\%."
   },
   {
-    "id": 8638,
+    "id": 8653,
     "year": 2019,
     "title": "Identifying error code misuses in complex system",
     "publication": "ISSTA",
@@ -360,7 +360,7 @@
     "abstract": "Many complex software systems use error codes to differentiate error states. Therefore, it is crucial to ensure those error codes are used correctly. Misuses of error codes can lead to hardly sensible but fatal system failures. These errors are especially difficult to debug, since the failure points are usually far away from the root causes. Existing static analysis approaches to detecting error handling bugs mainly focus on how an error code is propagated or used in a program. However, they do not consider whether an error code is correctly chosen for propagation or usage within different program contexts, and thus miss to detect many error code misuse bugs. In this work, we conduct an empirical study on error code misuses in a mature commercial system. We collect error code issues from the commit history and conclude three main causes of them. To further resolve this problem, we propose a static approach that can automatically detect error code misuses. Our approach takes error code definition and error domain assignment as the input, and uses a novel static analysis method to detect the occurrence of the three categories of error code misuses in the source code."
   },
   {
-    "id": 8639,
+    "id": 8654,
     "year": 2019,
     "title": "Conditional dynamic partial order reduction and optimality results",
     "publication": "ISSTA",
@@ -368,7 +368,7 @@
     "abstract": "Testing concurrent systems requires exploring all possible non-deterministic interleavings that the concurrent execution may have, as any of the interleavings may reveal an erroneous behaviour of the system. This introduces a combinatorial explosion on the number of states that must be considered, which leads often to a computationally intractable problem. In the present PhD thesis, this challenge will be addressed through the development of new Partial Order Reduction techniques (POR). The cornerstone of POR theory is the notion of independence, that is used to decided whether each pair of concurrent events p and t are in a race and thus both executions p· t and t · p must be explored. A fundamental goal of this thesis is to introduce notions of conditional independence –which ensures the commutativity of the considered events p and t under certain conditions that can be evaluated in the explored state– with a DPOR algorithm in order to alleviate the combinatorial explosion problem. The new techniques that we propose in the thesis have been implemented within the SYCO tool. We have carried out accompanying experimental evaluations to prove the effectiveness and applicability of the proposed techniques. Finally, we have successfully verified a range of properties for several case studies of Software-Defined Networks to illustrate the potential of the approach, scaling to larger networks than related techniques."
   },
   {
-    "id": 8640,
+    "id": 8655,
     "year": 2019,
     "title": "Towards scalable defense of information flow security for distributed systems",
     "publication": "ISSTA",
@@ -376,7 +376,7 @@
     "abstract": "It is particularly challenging to defend common distributed systems against security vulnerabilities because of the complexity and their large sizes. However, traditional solutions, that attack the information flow security problem, often fail for large, complex real-world distributed systems due to scalability problems. The problem would be even exacerbated for the online defense of continuously-running systems. My proposed research consists of three connected themes. First, I have developed metrics to help users understand and analyze the security characteristics of distributed systems at runtime in relation to their coupling measures. Then, I have also developed a highly scalable, cost-effective dynamic information flow analysis approach for distributed systems. It can detect implicit dependencies and find real security vulnerabilities in industrial distributed systems with practical portability and scalability. In order to thoroughly solve the scalability problem in general scenarios, I am developing a self-adaptive dynamic dependency analysis framework to monitor security issues during continuous running. In this proposal, I outline the three projects in a related manner as to how they consistently target the central objective of my thesis research."
   },
   {
-    "id": 8641,
+    "id": 8656,
     "year": 2019,
     "title": "On the correctness of GPU programs",
     "publication": "ISSTA",
@@ -384,7 +384,7 @@
     "abstract": "Testing is an important and challenging part of software development and its effectiveness depends on the quality of test cases. However, there exists no means of measuring quality of tests developed for GPU programs and as a result, no test case generation techniques for GPU programs aiming at high test effectiveness. Existing criteria for sequential and multithreaded CPU programs cannot be directly applied to GPU programs as GPU follows a completely different memory and execution model. We surveyed existing work on GPU program verification and bug fixes of open source GPU programs. Based on our findings, we define barrier, branch and loop coverage criteria and propose a set of mutation operators to measure fault finding capabilities of test cases. CLTestCheck, a framework for measuring quality of tests developed for GPU programs by code coverage analysis, fault seeding and work-group schedule amplification has been developed and evaluated using industry standard benchmarks. Experiments show that the framework is able to automatically measure test effectiveness and reveal unusual behaviours. Our planned work includes data flow coverage adopted for GPU programs to probe the underlying cause of unusual kernel behaviours and a more comprehensive work-group scheduler. We also plan to design and develop an automatic test case generator aiming at generating high quality test suites for GPU programs."
   },
   {
-    "id": 8642,
+    "id": 8657,
     "year": 2019,
     "title": "JNI program analysis with automatically extracted C semantic summary",
     "publication": "ISSTA",
