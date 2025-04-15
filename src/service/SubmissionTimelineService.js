@@ -130,6 +130,43 @@ export const SubmissionTimelineService = {
                 ]
             },
             {
+                publication: "NDSS 2026",
+                timezone: "11:59 PM AoE (UTC-12)",
+                url: "https://www.ndss-symposium.org/ndss2026/submissions/call-for-papers/",
+                date: 'February 23-27',
+                place: 'San Diego, California, USA',
+                cycles: [
+                    {
+                        name: 'Summer Cycle',
+                        ddls: [
+                            {value: '1', stage: "Title and abstract registration deadline (mandatory)", date: "2025-04-16"},
+                            {value: '2', stage: "Paper submission deadline", date: "2025-04-23"},
+                            {value: '3', stage: "Early reject/Round 2 notification and Round 1 reviews", date: "2025-05-28"},
+                            {value: '4', stage: "Author rebuttal", date: "2025-06-18 ~ 2025-06-20"},
+                            {value: '5', stage: "Interactive discussion with reviewers", date: "2025-06-18 ~ 2025-06-25"},
+                            {value: '6', stage: "Author notification", date: "2025-07-02"},
+                            {value: '7', stage: "Resubmission of Major Revision papers, Minor Revision decision", date: "2025-07-30"},
+                            {value: '8', stage: "Author notification for Major Revision", date: "2025-08-13"},
+                            {value: '9', stage: "Camera Ready deadline", date: "2025-09-10"}
+                        ]
+                    },
+                    {
+                        name: 'Fall Cycle',
+                        ddls: [
+                            {value: '1', stage: "Title and abstract registration deadline (mandatory)", date: "2025-07-30"},
+                            {value: '2', stage: "Paper submission deadline", date: "2025-08-06"},
+                            {value: '3', stage: "Early reject/Round 2 notification and Round 1 reviews", date: "2025-09-17"},
+                            {value: '4', stage: "Author rebuttal", date: "2025-10-08 ~ 2025-10-10"},
+                            {value: '5', stage: "Interactive discussion with reviewers", date: "2025-10-08 ~ 2025-10-15"},
+                            {value: '6', stage: "Author notification", date: "2025-10-22"},
+                            {value: '7', stage: "Resubmission of Major Revision papers, Minor Revision decision", date: "2025-11-19"},
+                            {value: '8', stage: "Author notification for Major Revision", date: "2025-12-03"},
+                            {value: '9', stage: "Camera Ready deadline", date: "2025-12-17"}
+                        ]
+                    }
+                ]
+            },
+            {
                 publication: "NDSS 2025",
                 timezone: "11:59 PM AoE (UTC-12)",
                 url: "https://www.ndss-symposium.org/ndss2025/submissions/call-for-papers/",
