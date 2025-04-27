@@ -15,7 +15,7 @@
             You can start your journal from "Search" button in the Side bar.
             This site is still under construction, of course.
             NOTE1: The website is tested in Chrome, and some items may not be loaded correctly in other browsers.
-            NOTE2: If buttons do not respond, please make a force fresh with Ctrl + F5 to clear cache.
+            NOTE2: If buttons do not respond, please make a force refresh ( Ctrl + F5 ) to clear the cache.
         </div>
     </div>
 </template>
