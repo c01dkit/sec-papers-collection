@@ -4,13 +4,19 @@ import { GithubService } from '@/service/GithubService.js';
 import { onMounted, ref } from 'vue';
 
 const paperStatis = ref(paperStatistics);
-const githubData = ref({stars:'loading',forks:' ...'})
+const githubData = ref({stars:'loading',forks:' ...', pushed: 'loading ...'});
 onMounted(() => {
     if (process.env.NODE_ENV === 'production') {
         GithubService.getRepoStatisticsData().then((res) => {
+            const date = new Date(res['pushed_at']);
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, "0"); // 月份是0-11，所以+1
+            const day = date.getDate().toString().padStart(2, "0");
+            const localDateStr = `${year}-${month}-${day}`;
             githubData.value = {
                 stars: res['stargazers_count'],
                 forks: ' / ' + res['forks_count'],
+                pushed: localDateStr,
             }
         })
     }
@@ -62,13 +68,13 @@ onMounted(() => {
             <div class="card mb-0">
                 <div class="flex justify-between mb-4">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Site Visitors / Visits</span>
-                        <span id="busuanzi_value_site_uv" class="text-900 font-medium text-xl">😃</span>
-                        <span class="text-900 font-medium text-xl"> / </span>
-                        <span id="busuanzi_value_site_pv" class="text-900 font-medium text-xl">😃</span>
+                        <span class="block text-muted-color font-medium mb-4">Recent Update</span>
+<!--                        <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv" class="text-900 font-medium text-xl">😃</span></span>-->
+                        <span class="text-900 font-medium text-xl"> {{ githubData.pushed }} </span>
+<!--                        <span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv" class="text-900 font-medium text-xl">😃</span></span>-->
                     </div>
                     <div class="flex items-center justify-center bg-orange-100 dark:bg-orange-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
-                        <i class="pi pi-user text-orange-500 !text-xl"></i>
+                        <i class="pi pi-sparkles text-orange-500 !text-xl"></i>
                     </div>
                 </div>
             </div>
