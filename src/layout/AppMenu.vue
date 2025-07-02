@@ -1,32 +1,39 @@
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import AppMenuItem from './AppMenuItem.vue';
 import { Divider } from 'primevue';
 
-const model = ref([
+const { t } = useI18n();
+
+const model = computed(() => [
     {
-        label: 'Main',
-        items: [{ label: 'Home', icon: 'pi pi-fw pi-home', to: '/' }]
+        label: t('menu.main'),
+        items: [{ label: t('menu.home'), icon: 'pi pi-fw pi-home', to: '/' }]
     },
     {
-        label: 'Paper',
+        label: t('menu.paper'),
         items: [
-            { label: 'Search', icon: 'pi pi-fw pi-search', to: '/paper/search', class: 'rotated-icon' },
-            { label: 'Trends', icon: 'pi pi-fw pi-chart-line', to: '/paper/trends' },
-            { label: 'Awards', icon: 'pi pi-fw pi-crown', to: '/paper/awards' },
-            { label: 'View Abstract', icon: 'pi pi-fw pi-book', to: '/paper/view-abstract' },
-            { label: 'Submission Timeline', icon: 'pi pi-fw pi-file-arrow-up', to: '/paper/submission-timeline' },
+            { label: t('menu.search'), icon: 'pi pi-fw pi-search', to: '/paper/search', class: 'rotated-icon' },
+            { label: t('menu.trends'), icon: 'pi pi-fw pi-chart-line', to: '/paper/trends' },
+            { label: t('menu.abstract'), icon: 'pi pi-fw pi-book', to: '/paper/view-abstract' },
+            { label: t('menu.submissionTimeline'), icon: 'pi pi-fw pi-file-arrow-up', to: '/paper/submission-timeline' },
         ]
     },
     {
-        label: 'Misc',
+        label: t('menu.reputation'),
         items: [
-            { label: 'About', icon: 'pi pi-fw pi-info-circle', to: '/misc/about', class: 'rotated-icon' },
+            { label: t('menu.awards'), icon: 'pi pi-fw pi-crown', to: '/reputation/awards' },
         ]
     },
-
-
+    {
+        label: t('menu.misc'),
+        items: [
+            { label: t('menu.about'), icon: 'pi pi-fw pi-info-circle', to: '/misc/about', class: 'rotated-icon' },
+            // { label: 'I18n Test', icon: 'pi pi-fw pi-globe', to: '/misc/i18n-test', class: 'hidden'},
+        ]
+    },
 ]);
 </script>
 

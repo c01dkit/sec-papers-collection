@@ -150,9 +150,9 @@ def fetch_one_paper_in_config(config):
                             'id': paper_id,
                             'year': one_site_config['year'],
                             'title': paper_detail['title'],
-                            'publication': paper_detail['publication'],
-                            'paper': paper_detail['paper'],
-                            'abstract': paper_detail['abstract'],
+                            'publication': paper_detail.get('publication', publication_config['name']),
+                            'paper': paper_detail.get('paper', '#'),
+                            'abstract': paper_detail.get('abstract', '#'),
                         }
                         yield one_paper_info
             else:
@@ -188,7 +188,7 @@ def fetch_one_paper_in_config(config):
                             'id': paper_id,
                             'year': one_site_config['year'],
                             'title': t,
-                            'publication': config[publication]['name'],
+                            'publication': publication_config['name'],
                             'paper': '#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
                             'abstract': '#' if abstracts is None else abstracts[i],
                         }
@@ -289,7 +289,11 @@ def unzip_encrypted_zip():
             zpf.extractall(output_dir)
 
 def prepare_official_data():
-    """Parse csv files for official data. Crawling website is not the best practice."""
+    """
+    Parse csv/bib files for official data.
+    Crawling website is not the best practice.
+    If the official data file ends with ".json", it will not be processed.
+    """
 
     def parse_csv_file(csv_file_name:str, __publication:str):
         from analyzers.csv_analyzer import CSV_SOURCE

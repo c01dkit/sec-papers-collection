@@ -17,93 +17,129 @@
     </div>
 </template>
 
-<script>
-import paperStatis from '@/assets/data/data-statistics.json'
-export default {
-    methods: {
-        viewBlocks(id) {
-            document.querySelector(id).scrollIntoView({
-                behavior: 'smooth'
-            });
-        },
-        async loadPaperCollection(publication, year) {
-            this.loading = true
-            let fullDataPath
-            if (process.env.NODE_ENV === 'production') {
-                fullDataPath = 'https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/meta_json/'+publication+' - '+year+'.json'
-            } else {
-                fullDataPath = '/src/assets/data/meta_json/'+publication+' - '+year+'.json'
-            }
-            await fetch(fullDataPath)
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json()
-                    }
-                })
-                .then(data=>{
-                    this.paperCollection = data
-                })
-                .catch(error=>{
-                    console.log(error)
-                })
-                .then(()=>{
-                    this.loading = false
-                })
-        },
-        constructPublicationItems() {
-            let newItems = [
-                {
-                    label: 'Top Tier',
-                    icon: 'pi pi-shield',
-                    items: [],
-                },
-                {
-                    label: 'Software Engineering',
-                    icon: 'pi pi-code',
-                    items: [],
-                }
-            ]
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { usePageTitle } from '@/composables/useI18n';
+import { languageEmitter } from '@/locales';
+import paperStatis from '@/assets/data/data-statistics.json';
 
-            for (let publication in this.paperStatis.byPublicationAndYear) {
-                let targetIndex
-                if (['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'].includes(publication)) {
-                    targetIndex = 0
-                } else if (['ISSTA', 'ICSE'].includes(publication)) {
-                    targetIndex = 1
-                }
-                const item = this.paperStatis.byPublicationAndYear[publication]
-                let tempPublicationItem = {
-                    label: publication,
-                    items: [],
-                }
-                for (let year in item) {
-                    tempPublicationItem.items.push({
-                        label: year,
-                        command: ()=> {
-                            this.paperSet = `${publication} ${year} - ${item[year]} papers`
-                            this.paperCollection = this.loadPaperCollection(publication, year)
-                        }
-                    })
-                }
-                tempPublicationItem.items = tempPublicationItem.items.reverse()
-                newItems[targetIndex].items.push([tempPublicationItem])
-            }
-            this.items = newItems
-        },
-    },
-    data() {
-        return {
-            paperStatis: paperStatis,
-            paperCollection: [],
-            loading: false,
-            paperSet: 'Please select a publication first.',
-            items: [],
+const { t } = useI18n();
+
+// 设置页面标题
+usePageTitle('menu.abstract');
+
+// 响应式数据
+const paperStatisRef = ref(paperStatis);
+const paperCollection = ref([]);
+const loading = ref(false);
+const paperSet = ref('');
+const items = ref([]);
+
+// 初始化默认文本
+const initDefaultText = () => {
+    paperSet.value = t('abstract.selectPublication');
+};
+
+// 方法
+const viewBlocks = (id) => {
+    document.querySelector(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+};
+
+const loadPaperCollection = async (publication, year) => {
+    loading.value = true;
+    let fullDataPath;
+    if (process.env.NODE_ENV === 'production') {
+        fullDataPath = 'https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/meta_json/'+publication+' - '+year+'.json';
+    } else {
+        fullDataPath = '/src/assets/data/meta_json/'+publication+' - '+year+'.json';
+    }
+    
+    try {
+        const res = await fetch(fullDataPath);
+        if (res.ok) {
+            const data = await res.json();
+            paperCollection.value = data;
         }
-    },
-    mounted() {
-        this.constructPublicationItems()
+    } catch (error) {
+        console.log(error);
+    } finally {
+        loading.value = false;
     }
 };
+
+const constructPublicationItems = () => {
+    let newItems = [
+        {
+            label: t('abstract.topTier'),
+            icon: 'pi pi-shield',
+            items: [],
+        },
+        {
+            label: t('abstract.softwareEngineering'),
+            icon: 'pi pi-code',
+            items: [],
+        }
+    ];
+
+    for (let publication in paperStatisRef.value.byPublicationAndYear) {
+        let targetIndex;
+        if (['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'].includes(publication)) {
+            targetIndex = 0;
+        } else if (['ISSTA', 'ICSE'].includes(publication)) {
+            targetIndex = 1;
+        }
+        const item = paperStatisRef.value.byPublicationAndYear[publication];
+        let tempPublicationItem = {
+            label: publication,
+            items: [],
+        };
+        for (let year in item) {
+            tempPublicationItem.items.push({
+                label: year,
+                command: () => {
+                    paperSet.value = `${publication} ${year} - ${item[year]} ${t('abstract.papers')}`;
+                    loadPaperCollection(publication, year);
+                }
+            });
+        }
+        tempPublicationItem.items = tempPublicationItem.items.reverse();
+        newItems[targetIndex].items.push([tempPublicationItem]);
+    }
+    items.value = newItems;
+};
+
+// 语言切换处理
+const handleLanguageChange = () => {
+    initDefaultText();
+    constructPublicationItems();
+};
+
+// 生命周期
+onMounted(() => {
+    initDefaultText();
+    constructPublicationItems();
+    languageEmitter.on(handleLanguageChange);
+});
+
+// 组件卸载时清理事件监听器
+onUnmounted(() => {
+    languageEmitter.off(handleLanguageChange);
+});
+
+// 暴露给模板的数据和方法
+defineExpose({
+    viewBlocks,
+    loadPaperCollection,
+    constructPublicationItems,
+    paperStatis: paperStatisRef,
+    paperCollection,
+    loading,
+    paperSet,
+    items
+});
 </script>
 
 <style>

@@ -33,7 +33,7 @@ To update, first switch to `main` branch and simply update `data.yml` and run `m
 
 ### Update key information
 
-From v0.3.0, I gradually update src/service/xxxService.js files for some key information other than paper details. You can easily update them for the latest news.
+From v0.3.0, I gradually update `src/service/xxxService.js` files for some key information other than paper details. You can easily update them for the latest news.
 
 ## Do I have to register API keys for website crawling?
 

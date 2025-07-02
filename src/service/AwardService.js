@@ -443,28 +443,28 @@ export const AwardService = {
                     }
                 ]
             },
-            {
-                publication: 'ICSE',
-                awards: [
-                    {
-                        name: '',
-                        papers: [
-                            { year: 2025, title: ''},
-                        ]
-                    }
-                ]
-            },
-            {
-                publication: 'ISSTA',
-                awards: [
-                    {
-                        name: '',
-                        papers: [
-                            { year: 2025, title: ''},
-                        ]
-                    }
-                ]
-            },
+            // {
+            //     publication: 'ICSE',
+            //     awards: [
+            //         {
+            //             name: '',
+            //             papers: [
+            //                 { year: 2025, title: ''},
+            //             ]
+            //         }
+            //     ]
+            // },
+            // {
+            //     publication: 'ISSTA',
+            //     awards: [
+            //         {
+            //             name: '',
+            //             papers: [
+            //                 { year: 2025, title: ''},
+            //             ]
+            //         }
+            //     ]
+            // },
         ]
     },
 

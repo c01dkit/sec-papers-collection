@@ -1,6 +1,6 @@
 [
   {
-    "id": 6214,
+    "id": 6316,
     "year": 2021,
     "title": "All the Numbers are US: Large-scale Abuse of Contact Discovery in Mobile Messengers",
     "publication": "NDSS",
@@ -8,7 +8,7 @@
     "abstract": "Contact discovery allows users of mobile messengers to conveniently connect with people in their address book. In this work, we demonstrate that severe privacy issues exist in currently deployed contact discovery methods.Our study of three popular mobile messengers (WhatsApp, Signal, and Telegram) shows that, contrary to expectations, large-scale crawling attacks are (still) possible. Using an accurate database of mobile phone number prefixes and very few resources, we have queried 10% of US mobile phone numbers for WhatsApp and 100% for Signal. For Telegram we find that its API exposes a wide range of sensitive information, even about numbers not registered with the service. We present interesting (cross-messenger) usage statistics, which also reveal that very few users change the default privacy settings. Regarding mitigations, we propose novel techniques to significantly limit the feasibility of our crawling attacks, especially a new incremental contact discovery scheme that strictly improves over Signal's current approach.Furthermore, we show that currently deployed hashing-based contact discovery protocols are severely broken by comparing three methods for efficient hash reversal of mobile phone numbers. For this, we also propose a significantly improved rainbow table construction for non-uniformly distributed inputs that is of independent interest."
   },
   {
-    "id": 6215,
+    "id": 6317,
     "year": 2021,
     "title": "As Strong As Its Weakest Link: How to Break Blockchain DApps at RPC Service",
     "publication": "NDSS",
@@ -16,7 +16,7 @@
     "abstract": "Modern blockchains have evolved from cryptocurrency substrates to trust-decentralization platforms, supporting a wider variety of decentralized applications known as DApps. Blockchain remote procedure call (RPC) services emerge as an intermediary connecting the DApps to a blockchain network. In this work, we identify the free contract-execution capabilities that widely exist in blockchain RPCs as a vulnerability of denial of service (DoS) and present the DoERS attack, a Denial of Ethereum RPC service that incurs zero Ether cost to the attacker.To understand the DoERS exploitability in the wild, we conduct a systematic measurement study on nine real-world RPC services which control most DApp clients' connection to the Ethereum mainnet. In particular, we propose a novel measurement technique based on orphan transactions to discover the previously unknown behaviors inside the blackbox RPC services, including load balancing and gas limiting. Further DoERS strategies are proposed to evade the protection intended by these behaviors.We evaluate the effectiveness of DoERS attacks on deployed RPC services with minimal service interruption. The result shows that all the nine services tested (as of Apr. 2020) are vulnerable to DoERS attacks that can result in the service latency increased by $2.1Xsim{}50X$. Some of these attacks require only a single request. In addition, on a local Ethereum node protected by a very restrictive limit of $0.65$ block gas, sending 150 DoERS requests per second can slow down the block synchronization of the victim node by $91%$.We propose mitigation techniques against DoERS without dropping service usability, via unpredictable load balancing, performance anomaly detection, and others. These techniques can be integrated into a RPC service transparently to its clients."
   },
   {
-    "id": 6216,
+    "id": 6318,
     "year": 2021,
     "title": "Awakening the Web's Sleeper Agents: Misusing Service Workers for Privacy Leakage",
     "publication": "NDSS",
@@ -24,7 +24,7 @@
     "abstract": "Service workers are a powerful technology supported by all major modern browsers that can improve users' browsing experience by offering capabilities similar to those of native applications. While they are gaining significant traction in the developer community, they have not received much scrutiny from security researchers. In this paper, we explore the capabilities and inner workings of service workers and conduct the first comprehensive large-scale study of their API use in the wild. Subsequently, we show how attackers can exploit the strategic placement of service workers for history-sniffing in most major browsers, including Chrome and Firefox. We demonstrate two novel history-sniffing attacks that exploit the lack of appropriate isolation in these browsers, including a non-destructive cache-based version. Next, we present a series of use cases that illustrate how our techniques enable privacy-invasive attacks that can infer sensitive application-level information, such as a user's social graph. We have disclosed our techniques to all vulnerable vendors, prompting the Chromium team to explore a redesign of their site isolation mechanisms for defending against our attacks.  We also propose a countermeasure that can be incorporated by websites to protect their users, and develop a tool that streamlines its deployment, thus facilitating adoption at a large scale.  Overall, our work presents a cautionary tale on the severe risks of browsers deploying new features without an in-depth evaluation of their security and privacy implications."
   },
   {
-    "id": 6217,
+    "id": 6319,
     "year": 2021,
     "title": "Bringing Balance to the Force: Dynamic Analysis of the Android Application Framework",
     "publication": "NDSS",
@@ -32,7 +32,7 @@
     "abstract": "Android's application framework plays a crucial part in protecting users' private data and the system integrity. Consequently, it has been the target of various prior works that analyzed its security policy and enforcement. Those works uncovered different security problems, including incomplete documentation, permission re-delegation within the framework, and inconsistencies in access control. However, all but one of those prior works were based on static code analysis. Thus, their results provide a one-sided view that inherits the limitations and drawbacks of applying static analysis to the vast, complex code base of the application framework. Even more, the performances of different security applications---including malware classification and least-privileged apps---depend on those analysis results, but those applications are currently tarnished by imprecise and incomplete results as a consequence of this imbalanced analysis methodology. To complement and refine this methodology and consequently improve the applications that are dependent on it, we add dynamic analysis of the application framework to the current research landscape and demonstrate the necessity of this move for improving the quality of prior results and advancing the field. Applying our solution, called Dynamo, to four prominent use-cases from the literature and taking a synoptical view on the results, we verify but also refute and extend the existing results of prior static analysis solutions. From the manual investigation of the root causes of discrepancies between results, we draw new insights and expert knowledge that can be valuable in improving both static and dynamic testing of the application framework."
   },
   {
-    "id": 6218,
+    "id": 6320,
     "year": 2021,
     "title": "C^2SR: Cybercrime Scene Reconstruction for Post-mortem Forensic Analysis",
     "publication": "NDSS",
@@ -40,7 +40,7 @@
     "abstract": "Cybercrime scene reconstruction that aims to reconstruct a previous execution of the cyber attack delivery process is an important capability for cyber forensics (e.g., post mortem analysis of the cyber attack executions). Unfortunately, existing techniques such as log-based forensics or record-and-replay techniques are not suitable to handle complex and long-running modern applications for cybercrime scene reconstruction and post mortem forensic analysis. Specifically, log-based cyber forensics techniques often suffer from a lack of inspection capability and do not provide details of how the attack unfolded. Record-and-replay techniques impose significant runtime overhead, often require significant modifications on end-user systems, and demand to replay the entire recorded execution from the beginning. In this paper, we propose C^2SR, a novel technique that can reconstruct an attack delivery chain (i.e., cybercrime scene) for post-mortem forensic analysis. It provides a highly desired capability: interactable partial execution reconstruction. In particular, it reproduces a partial execution of interest from a large execution trace of a long-running program. The reconstructed execution is also interactable, allowing forensic analysts to leverage debugging and analysis tools that did not exist on the recorded machine. The key intuition behind C^2SR is partitioning an execution trace by resources and reproducing resource accesses that are consistent with the original execution. It tolerates user interactions required for inspections that do not cause inconsistent resource accesses. Our evaluation results on 26 real-world programs show that C^2SR has low runtime overhead (less than 5.47%) and acceptable space overhead. We also demonstrate with four realistic attack scenarios that C^2SR successfully reconstructs partial executions of long-running applications such as web browsers, and it can remarkably reduce the user's efforts to understand the incident."
   },
   {
-    "id": 6219,
+    "id": 6321,
     "year": 2021,
     "title": "Deceptive Deletions for Protecting Withdrawn Posts on Social Media Platforms",
     "publication": "NDSS",
@@ -48,7 +48,7 @@
     "abstract": "Over-sharing poorly-worded thoughts and personal information is prevalent on online social platforms. In many of these cases, users regret posting such content. To retrospectively rectify these errors in users' sharing decisions, most platforms offer (deletion) mechanisms to withdraw the content, and social media users often utilize them. Ironically and perhaps unfortunately, these deletions make users more susceptible to privacy violations by malicious actors who specifically hunt post deletions at large scale. The reason for such hunting is simple: deleting a post acts as a powerful signal that the post might be damaging to its owner. Today, multiple archival services are already scanning social media for these deleted posts. Moreover, as we demonstrate in this work, powerful machine learning models can detect damaging deletions at scale.Towards restraining such a global adversary against users' right to be forgotten, we introduce Deceptive Deletion, a decoy mechanism that minimizes the adversarial advantage. Our mechanism injects decoy deletions, hence creating a two-player minmax game between an adversary that seeks to classify damaging content among the deleted posts and a challenger that employs decoy deletions to masquerade real damaging deletions. We formalize the Deceptive Game between the two players, determine conditions under which either the adversary or the challenger provably wins the game, and discuss the scenarios in-between these two extremes. We apply the Deceptive Deletion mechanism to a real-world task on Twitter: hiding damaging tweet deletions. We show that a powerful global adversary can be beaten by a powerful challenger, raising the bar significantly and giving a glimmer of hope in the ability to be really forgotten on social platforms."
   },
   {
-    "id": 6220,
+    "id": 6322,
     "year": 2021,
     "title": "DOVE: A Data-Oblivious Virtual Environment",
     "publication": "NDSS",
@@ -56,7 +56,7 @@
     "abstract": "Users can improve the security of remote communications by using Trusted Execution Environments (TEEs) to protect against direct introspection and tampering of sensitive data. This can even be done with applications coded in high-level languages with complex programming stacks such as R, Python, and Ruby. However, this creates a trade-off between programming convenience versus the risk of attacks using microarchitectural side channels.In this paper, we argue that it is possible to address this problem for important applications by instrumenting a complex programming environment (like R) to produce a Data-Oblivious Transcript (DOT) that is explicitly designed to support computation that excludes side channels. Such a transcript is then evaluated on a Trusted Execution Environment (TEE) containing the sensitive data using a small trusted computing base called the Data-Oblivious Virtual Environment (DOVE).To motivate the problem, we demonstrate a number of subtle side-channel vulnerabilities in the R language. We then provide an illustrative design and implementation of DOVE for R, creating the first side-channel resistant R programming stack. We demonstrate that the two-phase architecture provided by DOT generation and DOVE evaluation can provide practical support for complex programming languages with usable performance and high security assurances against side channels."
   },
   {
-    "id": 6221,
+    "id": 6323,
     "year": 2021,
     "title": "Evading Voltage-Based Intrusion Detection on Automotive CAN",
     "publication": "NDSS",
@@ -64,7 +64,7 @@
     "abstract": "The controller area network (CAN) is widely adopted in modern automobiles to enable communications among in-vehicle electronic control units (ECUs). Lacking mainstream network security capabilities due to resource constraints, the CAN is susceptible to the ECU masquerade attack in which a compromised (attacker) ECU impersonates an uncompromised (victim) ECU and spoofs the latter’s CAN messages. A cost-effective state-of-the-art defense against such attacks is the CAN bus voltage-based intrusion detection system (VIDS), which identifies the source of each message using its voltage fingerprint on the bus. Since the voltage fingerprint emanates from an ECU's hardware characteristics, an attacker ECU by itself cannot controllably modify it. As such, VIDS has been proved effective in detecting masquerade attacks that each involve a single attacker.In this paper, we discover a novel voltage corruption tactic that leverages the capabilities of two compromised ECUs (i.e., an attacker ECU working in tandem with an accomplice ECU) to corrupt the bus voltages recorded by the VIDS. By exploiting this tactic along with the fundamental deficiencies of the CAN protocol, we propose a novel masquerade attack called DUET, which evades all existing VIDS irrespective of the features and classification algorithms employed in them. DUET follows a two-stage attack strategy to first manipulate a victim ECU’s voltage fingerprint during VIDS retraining mode, and then impersonate the manipulated fingerprint during VIDS operation mode. Our evaluation of DUET on real CAN buses (including three in two real cars) demonstrates an impersonation success rate of at least 90% in evading two state-of-the-art VIDS.Finally, to mitigate ECU masquerade attacks, we advocate the development of cost-effective defenses that break away from the \"attack vs. IDS\" arms race. We propose a lightweight defense called RAID, which enables each ECU to make protocol-compatible modifications in its frame format generating a unique dialect (spoken by ECUs) during VIDS retraining mode. RAID prevents corruption of ECUs’ voltage fingerprints, and re-enables VIDS to detect all ECU masquerade attacks including DUET."
   },
   {
-    "id": 6222,
+    "id": 6324,
     "year": 2021,
     "title": "Flexsealing BGP Against Route Leaks: Peerlock Active Measurement and Analysis",
     "publication": "NDSS",
@@ -72,7 +72,7 @@
     "abstract": "BGP route leaks frequently precipitate serious disruptions to inter-domain routing. These incidents have plagued the Internet for decades while deployment and usability issues cripple efforts to mitigate the problem. Peerlock, introduced in 2016, addresses route leaks with a new approach. Peerlock enables filtering agreements between transit providers to protect their own networks without the need for broad cooperation or a trust infrastructure. We outline the Peerlock system and one variant, Peerlock-lite, and conduct live Internet experiments to measure their deployment on the control plane. Our measurements find evidence for significant Peerlock protection between Tier 1 networks in the peering clique, where 48% of potential Peerlock filters are deployed, and reveal that many other networks also deploy filters against Tier 1 leaks. To guide further deployment, we also quantify Peerlock’s impact on route leaks both at currently observed levels and under hypothetical future deployment scenarios via BGP simulation. These experiments reveal present Peerlock deployment restricts Tier 1 leak export to 10% or fewer networks for 40% of simulated leaks. Strategic additional Peerlock-lite deployment at all large ISPs (<1% of all networks), in tandem with Peerlock within the peering clique as deployed, completely mitigates about 80% of simulated Tier 1 route leaks."
   },
   {
-    "id": 6223,
+    "id": 6325,
     "year": 2021,
     "title": "Forward and Backward Private Conjunctive Searchable Symmetric Encryption",
     "publication": "NDSS",
@@ -80,7 +80,7 @@
     "abstract": "Dynamic searchable symmetric encryption (SSE) supports updates and keyword searches in tandem on outsourced symmetrically encrypted data, while aiming to minimize the information revealed to the (untrusted) host server. The literature on dynamic SSE has identified two crucial security properties in this regard - emph{forward} and emph{backward} privacy. Forward privacy makes it hard for the server to correlate an update operation with previously executed search operations. Backward privacy limits the amount of information learnt by the server about documents that have already been deleted from the database.To date, work on forward and backward private SSE has focused mainly on single keyword search. However, for any SSE scheme to be truly practical, it should at least support conjunctive keyword search. In this setting, most prior SSE constructions with sub-linear search complexity do not support dynamic databases. The only exception is the scheme of Kamara and Moataz (EUROCRYPT'17); however it only achieves forward privacy. Achieving emph{both} forward and backward privacy, which is the most desirable security notion for any dynamic SSE scheme, has remained open in the setting of conjunctive keyword search.In this work, we develop the first forward and backward private SSE scheme for conjunctive keyword searches. Our proposed scheme, called Oblivious Dynamic Cross Tags (or ODXT in short), scales to very large arbitrarily-structured databases (including both attribute-value and free-text databases). ODXT provides a realistic trade-off between performance and security by efficiently supporting fast updates and conjunctive keyword searches over very large databases, while incurring only moderate access pattern leakages to the server that conform to existing notions of forward and backward privacy. We precisely define the leakage profile of ODXT, and present a detailed formal analysis of its security. We then demonstrate the practicality of ODXT by developing a prototype implementation and evaluating its performance on real world databases containing millions of documents."
   },
   {
-    "id": 6224,
+    "id": 6326,
     "year": 2021,
     "title": "From WHOIS to WHOWAS: A Large-Scale Measurement Study of Domain Registration Privacy under the GDPR",
     "publication": "NDSS",
@@ -88,7 +88,7 @@
     "abstract": "When a domain is registered, information about the registrants and other related personnel is recorded by WHOIS databases owned by registrars or registries (called WHOIS providers jointly), which are open to public inquiries. However, due to the enforcement of the European Union’s General Data Protection Regulation (GDPR), certain WHOIS data (i.e., the records about EEA, or the European Economic Area, registrants) needs to be redacted before being released to the public. Anecdotally, it was reported that actions have been taken by some WHOIS providers. Yet, so far there is no systematic study to quantify the changes made by the WHOIS providers in response to the GDPR, their strategies for data redaction and impact on other applications relying on WHOIS data.In this study, we report the first large-scale measurement study to answer these questions, in hopes of guiding the enforcement of the GDPR and identifying pitfalls during compliance. This study is made possible by analyzing a collection of 1.2 billion WHOIS records spanning two years. To automate the analysis tasks, we build a new system GCChecker based on unsupervised learning, which assigns a compliance score to a provider. Our findings of WHOIS GDPR compliance are multi-fold. To highlight a few, we discover that the GDPR has a profound impact on WHOIS, with over 85% surveyed large WHOIS providers redacting EEA records at scale. Surprisingly, over 60% large WHOIS data providers also redact non-EEA records. A variety of compliance flaws like incomplete redaction are also identified. The impact on security applications is prominent and redesign might be needed. We believe different communities (security, domain and legal) should work together to solve the issues for better WHOIS privacy and utility."
   },
   {
-    "id": 6225,
+    "id": 6327,
     "year": 2021,
     "title": "Hey Alexa, is this Skill Safe?: Taking a Closer Look at the Alexa Skill Ecosystem",
     "publication": "NDSS",
@@ -96,7 +96,7 @@
     "abstract": "Amazon's voice-based assistant, Alexa, enables users to directly interact with various web services through natural language dialogues. It provides developers with the option to create third-party applications (known as Skills) to run on top of Alexa. While such applications ease users' interaction with smart devices and bolster a number of additional services, they also raise security and privacy concerns due to the personal setting they operate in. This paper aims to perform a systematic analysis of the Alexa skill ecosystem. We perform the first large-scale analysis of Alexa skills, obtained from seven different skill stores totaling to 90,194 unique skills. Our analysis reveals several limitations that exist in the current skill vetting process. We show that not only can a malicious user publish a skill under any arbitrary developer/company name, but she can also make backend code changes after approval to coax users into revealing unwanted information. We, next, formalize the different skill-squatting techniques and evaluate the efficacy of such techniques. We find that while certain approaches are more favorable than others, there is no substantial abuse of skill squatting in the real world. Lastly, we study the prevalence of privacy policies across different categories of skill, and more importantly the policy content of skills that use the Alexa permission model to access sensitive user data. We find that around 23.3% of such skills do not fully disclose the data types associated with the permissions requested. We conclude by providing some suggestions for strengthening the overall ecosystem, and thereby enhance transparency for end-users."
   },
   {
-    "id": 6226,
+    "id": 6328,
     "year": 2021,
     "title": "Let’s Stride Blindfolded in a Forest: Sublinear Multi-Client Decision Trees Evaluation",
     "publication": "NDSS",
@@ -104,7 +104,7 @@
     "abstract": "Decision trees are popular machine-learning classification models due to their simplicity and effectiveness. Tai et al. (ESORICS '17) propose a privacy-preserving decision-tree evaluation protocol purely based on additive homomorphic encryption, without introducing dummy nodes for hiding the tree structure, but it runs a secure comparison for each decision node, resulting in linear complexity. Later protocols (DBSEC '18, PETS '19) achieve sublinear (client-side) complexity, yet the server-side path evaluation requires oblivious transfer among $2^d$ real and dummy nodes even for a sparse tree of depth $d$ to hide the tree structure.This paper aims for the best of both worlds and hence the most lightweight protocol to date. Our complete-tree protocol can be easily extended to the sparse-tree setting and the reusable outsourcing setting: a model owner (resp. client) can outsource the decision tree (resp. attributes) to two non-colluding servers for classifications. The outsourced extension supports multi-client joint evaluation, which is the first of its kind without using multi-key fully-homomorphic encryption (TDSC '19). We also extend our protocol for achieving privacy against malicious adversaries.Our experiments compare in various network settings our offline and online communication costs and the online computation time with the prior sublinear protocol of Tueno et al. (PETS '19) and $O(1)$-round linear protocols of Kiss et al. (PETS '19), which can be seen as garbled circuit variants of Tai et al.'s. Our protocols are shown to be desirable for IoT-like scenarios with weak clients and big-data scenarios with high-dimensional feature vectors."
   },
   {
-    "id": 6227,
+    "id": 6329,
     "year": 2021,
     "title": "More than a Fair Share: Network Data Remanence Attacks against Secret Sharing-based Schemes",
     "publication": "NDSS",
@@ -112,7 +112,7 @@
     "abstract": "With progress toward a practical quantum computer has come an increasingly rapid search for quantum-safe, secure communication schemes that do not rely on discrete logarithm or factorization problems. One such encryption scheme, Multi-path Switching with Secret Sharing (MSSS), combines secret sharing with multi-path switching to achieve security as long as the adversary does not have global observability of all paths and thus cannot capture enough shares to reconstruct messages. MSSS assumes that sending a share on a path is an atomic operation and all paths have the same delay.We identify a side-channel vulnerability for MSSS, created by the fact that in real networks, sending a share is not an atomic operation as paths have multiple hops and different delays. This channel, referred to as Network Data Remanence (NDR), is present in all schemes like MSSS whose security relies on path atomicity and all paths having same delay. We demonstrate the presence of NDR in a physical testbed. We then identify two new attacks that exploit the side- channel, referred to as NDR Blind and NDR Planned, propose an analytical model to analyze the attacks, and demonstrate them using an implementation of MSSS based on the ONOS SDN controller. Finally, we present a countermeasure for the attacks and show its effectiveness in simulations and Mininet experiments."
   },
   {
-    "id": 6228,
+    "id": 6330,
     "year": 2021,
     "title": "Obfuscated Access and Search Patterns in Searchable Encryption",
     "publication": "NDSS",
@@ -120,7 +120,7 @@
     "abstract": "Searchable Symmetric Encryption (SSE) allows a data owner to securely outsource its encrypted data to a cloud server while maintaining the ability to search over it and retrieve matched documents. Most existing SSE schemes leak which documents are accessed per query, i.e., the so-called access pattern, and thus are vulnerable to attacks that can recover the database or the queried keywords. Current techniques that fully hide access patterns, such as ORAM or PIR, suffer from heavy communication or computational costs, and are not designed with search capabilities in mind. Recently, Chen et al. (INFOCOM'18) proposed an obfuscation framework for SSE that protects the access pattern in a differentially private way with a reasonable utility cost. However, this scheme always produces the same obfuscated access pattern when querying for the same keyword, and thus leaks the so-called search pattern, i.e., how many times a certain query is performed. This leakage makes the proposal vulnerable to certain database and query recovery attacks.In this paper, we propose OSSE (Obfuscated SSE), an SSE scheme that obfuscates the access pattern independently for each query performed. This in turn hides the search pattern and makes our scheme resistant against attacks that rely on this leakage. Given certain reasonable assumptions on the database and query distribution, our scheme has smaller communication overhead than ORAM-based SSE. Furthermore, our scheme works in a single communication round and requires very small constant client-side storage. Our empirical evaluation shows that OSSE is highly effective at protecting against different query recovery attacks while keeping a reasonable utility level. Our protocol provides significantly more protection than the proposal by Chen et al. against some state-of-the-art attacks, which demonstrates the importance of hiding search patterns in designing effective privacy-preserving SSE schemes."
   },
   {
-    "id": 6229,
+    "id": 6331,
     "year": 2021,
     "title": "POP and PUSH: Demystifying and Defending against (Mach) Port-oriented Programming",
     "publication": "NDSS",
@@ -128,7 +128,7 @@
     "abstract": "Apple devices (e.g., iPhone, MacBook, iPad, and Apple Watch) are high value targets for attackers. Although these devices use different operating systems (e.g., iOS, macOS, iPadOS, watchOS, and tvOS), they are all based on a hybrid kernel called XNU. Existing attacks demonstrated that vulnerabilities in XNU could be exploited to escalate privileges and jailbreak devices. To mitigate these threats, multiple security mechanisms have been deployed in latest systems.In this paper, we first perform a systematic assessment of deployed mitigations by Apple, and demonstrate that most of them can be bypassed through corrupting a special type of kernel objects, i.e., Mach port objects. We summarize this type of attack as (Mach) Port Object-Oriented Programming (POP). Accordingly, we define multiple attack primitives to launch the attack and demonstrate realistic scenarios to achieve full memory manipulation on recently released systems (i.e., iOS 13 and macOS 10.15). To defend against POP, we propose the Port Ultra-SHield (PUSH) system to reduce the number of unprotected Mach port objects. Specifically, PUSH automatically locates potential POP primitives and instruments related system calls to enforce the integrity of Mach port kernel objects. It does not require system modifications and only introduces 2% runtime overhead. The PUSH framework has been deployed on more than 40,000 macOS devices in a leading company. The evaluation of 18 public exploits and one zero-day exploit detected by our system demonstrated the effectiveness of PUSH. We believe that the proposed framework will facilitate the design and implementation of a more secure XNU kernel."
   },
   {
-    "id": 6230,
+    "id": 6332,
     "year": 2021,
     "title": "Processing Dangerous Paths – On Security and Privacy of the Portable Document Format",
     "publication": "NDSS",
@@ -136,7 +136,7 @@
     "abstract": "PDF is the de-facto standard for document exchange. It is common to open PDF files from potentially untrusted sources such as email attachments or downloaded from the Internet. In this work, we perform an in-depth analysis of the capabilities of malicious PDF documents. Instead of focusing on implementation bugs, we abuse legitimate features of the PDF standard itself by systematically identifying dangerous paths in the PDF file structure. These dangerous paths lead to attacks that we categorize into four generic classes: (1) Denial-of-Service attacks affecting the host that processes the document. (2) Information disclosure attacks leaking personal data out of the victim’s computer. (3) Data manipulation on the victim’s system. (4) Code execution on the victim’s machine. An evaluation of 28 popular PDF processing applications shows that 26 of them are vulnerable at least one attack. Finally, we propose a methodology to protect against attacks based on PDF features systematically."
   },
   {
-    "id": 6231,
+    "id": 6333,
     "year": 2021,
     "title": "Reining in the Web's Inconsistencies with Site Policy",
     "publication": "NDSS",
@@ -144,7 +144,7 @@
     "abstract": "Over the years, browsers have adopted an ever-increasing number of client-enforced security policies deployed by means of HTTP headers. Such mechanisms are fundamental for web application security, and usually deployed on a per-page basis. This, however, enables inconsistencies, as different pages within the same security boundaries (in form of origins or sites) can express conflicting security requirements. In this paper, we formalize inconsistencies for cookie security attributes, CSP, and HSTS, and then quantify the magnitude and impact of inconsistencies at scale by crawling 15,000 popular sites. We show numerous sites endanger their own security by omission or misconfiguration of the aforementioned mechanisms, which lead to unnecessary exposure to XSS, cookie theft and HSTS deactivation. We then use our data to analyse to which extent the recent *Origin Policy* proposal can fix the problem of inconsistencies. Unfortunately, we conclude that the current Origin Policy design suffers from major shortcomings which limit its practical applicability to address security inconsistencies, while catering to the need of real-world sites. Based on these insights, we propose Site Policy, an extension of Origin Policy designed to overcome the shortcomings of Origin Policy and to make any insecurity explicit."
   },
   {
-    "id": 6232,
+    "id": 6334,
     "year": 2021,
     "title": "Rosita: Towards Automatic Elimination of Power-Analysis Leakage in Ciphers",
     "publication": "NDSS",
@@ -152,7 +152,7 @@
     "abstract": "Since their introduction over two decades ago, side-channel attacks have presented a serious security threat. While many ciphers’ implementations employ masking techniques to protect against such attacks, they often leak secret information due to unintended interactions in the hardware. We present Rosita, a code rewrite engine that uses a leakage emulator which we amend to correctly emulate the micro-architecture of a target system. We use Rosita to automatically protect masked implementations of AES, ChaCha, and Xoodoo. For AES and Xoodoo, we show the absence of observable leakage at 1000000 traces with less than 21% penalty to the performance. For ChaCha, which has significantly more leakage, Rosita eliminates over 99% of the leakage, at a performance cost of 64%"
   },
   {
-    "id": 6233,
+    "id": 6335,
     "year": 2021,
     "title": "Screen Gleaning: A Screen Reading TEMPEST Attack on Mobile Devices Exploiting an Electromagnetic Side Channel",
     "publication": "NDSS",
@@ -160,7 +160,7 @@
     "abstract": "We introduce emph{screen gleaning}, a TEMPEST attack in which the screen of a mobile device is read without a visual line of sight, revealing sensitive information displayed on the phone screen. The screen gleaning attack uses an antenna and a software-defined radio (SDR) to pick up the electromagnetic signal that the device sends to the screen to display, e.g., a message with a security code. This special equipment makes it possible to recreate the signal as a gray-scale image, which we refer to as an emph{emage}. Here, we show that it can be used to read a security code. The screen gleaning attack is challenging because it is often impossible for a human viewer to interpret the emage directly. We show that this challenge can be addressed with machine learning, specifically, a deep learning classifier. Screen gleaning will become increasingly serious as SDRs and deep learning continue to rapidly advance. In this paper, we demonstrate the security code attack and we propose a testbed that provides a standard setup in which screen gleaning could be tested with different attacker models. Finally, we analyze the dimensions of screen gleaning attacker models and discuss possible countermeasures with the potential to address them."
   },
   {
-    "id": 6234,
+    "id": 6336,
     "year": 2021,
     "title": "The Abuser Inside Apps: Finding the Culprit Committing Mobile Ad Fraud",
     "publication": "NDSS",
@@ -168,7 +168,7 @@
     "abstract": "Mobile ad fraud is a significant threat that victimizes app publishers and their users, thereby undermining the ecosystem of app markets. Prior works on detecting mobile ad fraud have focused on constructing predefined test scenarios that preclude user involvement in identifying ad fraud. However, due to their dependence on contextual testing environments, these works have neglected to track which app modules and which user interactions are responsible for observed ad fraud.To address these shortcomings, this paper presents the design and implementation of FraudDetective, a dynamic testing framework that identifies ad fraud activities. FraudDetective focuses on identifying fraudulent activities that originate without any user interactions. FraudDetective computes a full stack trace from an observed ad fraud activity to a user event by connecting fragmented multiple stack traces, thus generating the causal relationships between user inputs and the observed fraudulent activity. We revised an Android Open Source Project (AOSP) to emit detected ad fraud activities along with their full stack traces, which help pinpoint the app modules responsible for the observed fraud activities. We evaluate FraudDetective on 48,172 apps from Google Play Store. FraudDetective reports that 74 apps are responsible for 34,453 ad fraud activities and find that 98.6% of the fraudulent behaviors originate from embedded third-party ad libraries. Our evaluation demonstrates that FraudDetective is capable of accurately identifying ad fraud via reasoning based on observed suspicious behaviors without user interactions. The experimental results also yield the new insight that abusive ad service providers harness their ad libraries to actively engage in committing ad fraud."
   },
   {
-    "id": 6235,
+    "id": 6337,
     "year": 2021,
     "title": "Towards Measuring Supply Chain Attacks on Package Managers for Interpreted Languages",
     "publication": "NDSS",
@@ -176,7 +176,7 @@
     "abstract": "Package managers have become a vital part of the modern software development process. They allow developers to reuse third-party code, share their own code, minimize their codebase, and simplify the build process. However, recent reports showed that package managers have been abused by attackers to distribute malware, posing significant security risks to developers and end-users. For example, eslint-scope, a package with millions of weekly downloads in Npm, was compromised to steal credentials from developers. To understand the security gaps and the misplaced trust that make recent supply chain attacks possible, we propose a comparative framework to qualitatively assess the functional and security features of package managers for interpreted languages. Based on qualitative assessment, we apply well-known program analysis techniques such as metadata, static, and dynamic analysis to study registry abuse. Our initial efforts found 339 new malicious packages that we reported to the registries for removal. The package manager maintainers confirmed 278 (82%) from the 339 reported packages where three of them had more than 100,000 downloads. For these packages we were issued official CVE numbers to help expedite the removal of these packages from infected victims. We outline the challenges of tailoring program analysis tools to interpreted languages and release our pipeline as a reference point for the community to build on and help in securing the software supply chain."
   },
   {
-    "id": 6236,
+    "id": 6338,
     "year": 2021,
     "title": "XDA: Accurate, Robust Disassembly with Transfer Learning",
     "publication": "NDSS",
@@ -184,7 +184,7 @@
     "abstract": "Accurate and robust disassembly of stripped binaries is challenging. The root of the difficulty is that high-level structures, such as instruction and function boundaries, are absent in stripped binaries and must be recovered based on incomplete information. Current disassembly approaches rely on heuristics or simple pattern matching to approximate the recovery, but these methods are often inaccurate and brittle, especially across different compiler optimizations.We present XDA, a transfer-learning-based disassembly framework that learns different contextual dependencies present in machine code and transfers this knowledge for accurate and robust disassembly. We design a self-supervised learning task motivated by masked Language Modeling to learn interactions among byte sequences in binaries. The outputs from this task are byte embeddings that encode sophisticated contextual dependencies between input binaries' byte tokens, which can then be finetuned for downstream disassembly tasks.We evaluate XDA's performance on two disassembly tasks, recovering function boundaries and assembly instructions, on a collection of 3,121 binaries taken from SPEC CPU2017, SPEC CPU2006, and the BAP corpus. The binaries are compiled by GCC, ICC, and MSVC on x86/x64 Windows and Linux platforms over 4 optimization levels. XDA achieves 99.0% and 99.7% F1 score at recovering function boundaries and instructions, respectively, surpassing the previous state-of-the-art on both tasks. It also maintains speed on par with the fastest ML-based approach and is up to 38x faster than hand-written disassemblers like IDA Pro. We release the code of XDA at https://github.com/CUMLSec/XDA."
   },
   {
-    "id": 6237,
+    "id": 6339,
     "year": 2021,
     "title": "Zoom on the Keystrokes: Exploiting Video Calls for Keystroke Inference Attacks",
     "publication": "NDSS",
@@ -192,7 +192,7 @@
     "abstract": "Due to recent world events, video calls have become the new norm for both personal and professional remote communication. However, if a participant in a video call is not careful, he/she can reveal his/her private information to others in the call. In this paper, we design and evaluate an attack framework to infer one type of such private information from the video stream of a call -- keystrokes, i.e., text typed during the call. We evaluate our video-based keystroke inference framework using different experimental settings, such as different webcams, video resolutions, keyboards, clothing, and backgrounds. Our high keystroke inference accuracies under commonly occurring experimental settings highlight the need for awareness and countermeasures against such attacks. Consequently, we also propose and evaluate effective mitigation techniques that can automatically protect users when they type during a video call."
   },
   {
-    "id": 6238,
+    "id": 6340,
     "year": 2021,
     "title": "A Devil of a Time: How Vulnerable is NTP to Malicious Timeservers?",
     "publication": "NDSS",
@@ -200,7 +200,7 @@
     "abstract": "The Network Time Protocol (NTP) synchronizes time across computer systems over the Internet and plays a crucial role in guaranteeing the correctness and security of many Internet applications. Unfortunately, NTP is vulnerable to so called time shifting attacks. This has motivated proposals and standardization efforts for authenticating NTP communications and for securing NTP textit{clients}. We observe, however, that, even with such solutions in place, NTP remains highly exposed to attacks by malicious textit{timeservers}. We explore the implications for time computation of two attack strategies: (1) compromising textit{existing} NTP timeservers, and (2) injecting textit{new} timeservers into the NTP timeserver pool. We first show that by gaining control over fairly few existing timeservers, an textit{opportunistic} attacker can shift time at state-level or even continent-level scale. We then demonstrate that injecting new timeservers with disproportionate influence into the NTP timeserver pool is alarmingly simple, and can be leveraged for launching both large-scale textit{opportunistic} attacks, and strategic, textit{targeted} attacks. We discuss a promising approach for mitigating such attacks."
   },
   {
-    "id": 6239,
+    "id": 6341,
     "year": 2021,
     "title": "A Formal Analysis of the FIDO UAF Protocol",
     "publication": "NDSS",
@@ -208,7 +208,7 @@
     "abstract": "The FIDO protocol suite aims at allowing users to log in to remote services with a local and trusted authenticator. With FIDO, relying services do not need to store user-chosen secrets or their hashes, which eliminates a major attack surface for e-business. Given its increasing popularity, it is imperative to formally analyze whether the security promises of FIDO hold. In this paper, we present a comprehensive and formal verification of the FIDO UAF protocol by formalizing its security assumptions and goals and modeling the protocol under different scenarios in ProVerif. Our analysis identifies the minimal security assumptions required for each of the security goals of FIDO UAF to hold. We confirm previously manually discovered vulnerabilities in an automated way and disclose several new attacks. Guided by the formal verification results we also discovered 2 practical attacks on 2 popular Android FIDO apps, which we responsibly disclosed to the vendors. In addition, we offer several concrete recommendations to fix the identified problems and weaknesses in the protocol."
   },
   {
-    "id": 6240,
+    "id": 6342,
     "year": 2021,
     "title": "ALchemist: Fusing Application and Audit Logs for Precise Attack Provenance without Instrumentation",
     "publication": "NDSS",
@@ -216,7 +216,7 @@
     "abstract": "Cyber-attacks are becoming more persistent and complex. Most state-of-the-art attack forensics techniques either require annotating and instrumenting software applications or rely on high quality execution profile to serve as the basis for anomaly detection. We propose a novel attack forensics technique ALchemist. It is based on  the  observations  that  built-in application logs provide critical high-level semantics and audit log provides low-level fine-grained information; and the two share a  lot  of  common  elements. ALchemist is  hence  a  log  fusion technique  that  couples  application  logs  and  audit  log  to  derive critical attack information invisible in either log. It is based on a relational reasoning engine Datalog and features the capabilities of inferring new relations such as the task structure of execution(e.g.,  tabs in firefox),  especially  in the  presence of  complex asynchronous execution models, and high-level dependencies between log  events.  Our  evaluation  on  15  popular  applications  including firefox, Chromium, and OpenOffice, and 14 APT attacks from the literature demonstrates that although ALchemist does not require instrumentation,  it  is  highly  effective  in  partitioning  execution to  autonomous  tasks(in  order  to  avoid  bogus  dependencies) and  deriving  precise  attack  provenance  graphs,  with  very  small overhead. It also outperforms NoDoze and OmegaLog, two state-of-art  techniques  that  do  not  require  instrumentation."
   },
   {
-    "id": 6241,
+    "id": 6343,
     "year": 2021,
     "title": "BaseSpec: Comparative Analysis of Baseband Software and Cellular Specifications for L3 Protocols",
     "publication": "NDSS",
@@ -224,7 +224,7 @@
     "abstract": "Cellular basebands play a crucial role in mobile communication. However, it is significantly challenging to assess their security for several reasons. Manual analysis is inevitable because of the obscurity and complexity of baseband firmware; however, such analysis requires repetitive efforts to cover diverse models or versions. Automating the analysis is also non-trivial because the firmware is significantly large and contains numerous functions associated with complex cellular protocols. Therefore, existing approaches on baseband analysis are limited to only a couple of models or versions within a single vendor. In this paper, we propose a novel approach named BaseSpec, which performs a comparative analysis of baseband software and cellular specifications. By leveraging the standardized message structures in the specification, BaseSpec inspects the message structures implemented in the baseband software systematically. It requires a manual yet one-time analysis effort to determine how the message structures are embedded in target firmware. Then, BaseSpec compares the extracted message structures with those in the specification syntactically and semantically, and finally, it reports mismatches. These mismatches indicate the developer mistakes, which break the compliance of the baseband with the specification, or they imply potential vulnerabilities. We evaluated BaseSpec with 18 baseband firmware images of 9 models from one of the top three vendors and found hundreds of mismatches. By analyzing these mismatches, we discovered 9 erroneous cases: 5 functional errors and 4 memory-related vulnerabilities. Notably, two of these are critical remote code execution 0-days. Moreover, we applied BaseSpec to 3 models from another vendor, and BaseSpec found multiple mismatches, two of which led us to discover a buffer overflow bug."
   },
   {
-    "id": 6242,
+    "id": 6344,
     "year": 2021,
     "title": "Bitcontracts: Supporting Smart Contracts in Legacy Blockchains",
     "publication": "NDSS",
@@ -232,7 +232,7 @@
     "abstract": "In this paper we propose Bitcontracts, a novel solution that enables secure and efficient execution of generic smart contracts on top of unmodified legacy cryptocurrencies like Bitcoin that do not support contracts natively. The starting point of our solution is an off-chain execution model, where the contract's issuers appoints a set of service providers to execute the contract's code. The contract's execution results are accepted if a quorum of service providers reports the same result and clients are free to choose which such contracts they trust and use. The main technical contribution of this paper is how to realize such a trust model securely and efficiently without modifying the underlying blockchain.We also identify a set of generic properties that a blockchain system must support so that expressive smart contracts can be added safely, and analyze popular existing blockchains based on these criteria."
   },
   {
-    "id": 6243,
+    "id": 6345,
     "year": 2021,
     "title": "CHANCEL: Efficient Multi-client Isolation Under Adversarial Programs",
     "publication": "NDSS",
@@ -240,7 +240,7 @@
     "abstract": "Intel SGX aims to provide the confidentiality of user data on untrusted cloud machines. However, applications that process confidential user data may contain bugs that leak information or be programmed maliciously to collect user data. Existing research that attempts to solve this problem does not consider multi-client isolation in a single enclave. We show that by not supporting such isolation, they incur considerable slowdown when concurrently processing multiple clients in different processes, due to the limitations of SGX.This paper proposes CHANCEL, a sandbox designed for multi-client isolation within a single SGX enclave. In particular, CHANCEL allows a program’s threads to access both a per-thread memory region and a shared read-only memory region while servicing requests. Each thread handles requests from a single client at a time and is isolated from other threads, using a Multi-Client Software Fault Isolation (MCSFI) scheme. Furthermore, CHANCEL supports various in-enclave services such as an in-memory file system and shielded client communication to ensure complete mediation of the program’s interactions with the outside world. We implemented CHANCEL and evaluated it on SGX hardware using both micro-benchmarks and realistic target scenarios, including private information retrieval and product recommendation services. Our results show that CHANCEL outperforms a baseline multi-process sandbox between 4.06−53.70× on micro-benchmarks and 0.02 − 21.18× on realistic workloads while providing strong security guarantees."
   },
   {
-    "id": 6244,
+    "id": 6346,
     "year": 2021,
     "title": "CV-Inspector: Towards Automating Detection of Adblock Circumvention",
     "publication": "NDSS",
@@ -248,7 +248,7 @@
     "abstract": "The adblocking arms race has escalated over the last few years. An entire new ecosystem of circumvention (CV) services has recently emerged that aims to bypass adblockers by obfuscating site content, making it difficult for adblocking filter lists to distinguish between ads and functional content. In this paper, we investigate recent anti-circumvention efforts by the adblocking community that leverage custom filter lists. In particular, we analyze the anti-circumvention filter list (ACVL), which supports advanced filter rules with enriched syntax and capabilities designed specifically to counter circumvention. We show that keeping ACVL rules up-to-date requires expert list curators to continuously monitor sites known to employ CV services and to discover new such sites in the wild — both tasks require considerable manual effort. To help automate and scale ACVL curation, we develop CV-INSPECTOR, a machine learning approach for automatically detecting adblock circumvention using differential execution analysis. We show that CV-INSPECTOR achieves 93% accuracy in detecting sites that successfully circumvent adblockers. We deploy CV-INSPECTOR on top-20K sites to discover the sites that employ circumvention in the wild.We further apply CV-INSPECTOR to a list of sites that are known to utilize circumvention and are closely monitored by ACVL authors. We demonstrate that CV-INSPECTOR reduces the human labeling effort by 98%, which removes a major bottleneck for ACVL authors. Our work is the first large-scale study of the state of the adblock circumvention arms race, and makes an important step towards automating anti-CV efforts."
   },
   {
-    "id": 6245,
+    "id": 6347,
     "year": 2021,
     "title": "Data Poisoning Attacks to Deep Learning Based Recommender Systems",
     "publication": "NDSS",
@@ -256,7 +256,7 @@
     "abstract": "Recommender systems play a crucial role in helping users to find their interested information in various web services such as Amazon, YouTube, and Google News. Various recommender systems, ranging from neighborhood-based, association-rule-based, matrix-factorization-based, to deep learning based, have been developed and deployed in industry. Among them, deep learning based recommender systems become increasingly popular due to their superior performance.In this work, we conduct the first systematic study on data poisoning attacks to deep learning based recommender systems. An attacker's goal is to manipulate a recommender system such that the attacker-chosen target items are recommended to many users. To achieve this goal, our attack injects fake users with carefully crafted ratings to a recommender system. Specifically, we formulate our attack as an optimization problem, such that the injected ratings would maximize the number of normal users to whom the target items are recommended. However, it is challenging to solve the optimization problem because it is a non-convex integer programming problem. To address the challenge, we develop multiple techniques to approximately solve the optimization problem. Our experimental results on three real-world datasets, including small and large datasets, show that our attack is effective and outperforms existing attacks. Moreover, we attempt to detect fake users via statistical analysis of the rating patterns of normal and fake users. Our results show that our attack is still effective and outperforms existing attacks even if such a detector is deployed."
   },
   {
-    "id": 6246,
+    "id": 6348,
     "year": 2021,
     "title": "Detecting Kernel Memory Leaks in Specialized Modules with Ownership Reasoning",
     "publication": "NDSS",
@@ -264,7 +264,7 @@
     "abstract": "The kernel space is shared by hardware and all processes, so its memory usage is more limited, and memory is harder to reclaim, compared to user-space memory; as a result, memory leaks in the kernel can easily lead to high-impact denial of service. The problem is particularly critical in long-running servers. Kernel code makes heavy use of dynamic (heap) allocation, and many code modules within the kernel provide their own abstractions for customized memory management. On the other hand, the kernel code involves highly complicated data flow, so it is hard to determine where an object is supposed to be released. Given the complex and critical nature of OS kernels, as well as the heavy specialization, existing methods largely fail at effectively and thoroughly detecting kernel memory leaks.In this paper, we present K-MELD, a static detection system for kernel memory leaks. K-MELD features multiple new techniques that can automatically identify specialized allocation/deallocation functions and determine the expected memory-release locations. Specifically, we first develop a usage- and structure-aware approach to effectively identify specialized allocation functions, and employ a new rule-mining approach to identify the corresponding deallocation functions. We then develop a new ownership reasoning mechanism that employs enhanced escape analysis and consumer-function analysis to infer expected release locations. By applying K-MELD to the Linux kernel, we confirm its effectiveness: it finds  218  new bugs,  with  41  CVEs assigned. Out of those  218  bugs,  115  are in specialized modules."
   },
   {
-    "id": 6247,
+    "id": 6349,
     "year": 2021,
     "title": "Differential Training: A Generic Framework to Reduce Label Noises for Android Malware Detection",
     "publication": "NDSS",
@@ -272,7 +272,7 @@
     "abstract": "A common problem in machine learning-based malware detection is that training data may contain noisy labels and it is challenging to make the training data noise-free at a large scale. To address this problem, we propose a generic framework to reduce the noise level of training data for the training of any machine learning-based Android malware detection. Our framework makes use of all intermediate states of two identical deep learning classification models during their training with a given noisy training dataset and generate a noise-detection feature vector for each input sample. Our framework then applies a set of outlier detection algorithms on all noise-detection feature vectors to reduce the noise level of the given training data before feeding it to any machine learning based Android malware detection approach. In our experiments with three different Android malware detection approaches, our framework can detect significant portions of wrong labels in different training datasets at different noise ratios, and improve the performance of Android malware detection approaches."
   },
   {
-    "id": 6248,
+    "id": 6350,
     "year": 2021,
     "title": "Does Every Second Count? Time-based Evolution of Malware Behavior in Sandboxes",
     "publication": "NDSS",
@@ -280,7 +280,7 @@
     "abstract": "The amount of time in which a sample is executed is one of the key parameters of a malware analysis sandbox. Setting the threshold too high hinders the scalability and reduces the number of samples that can be analyzed in a day; too low and the samples may not have the time to show their malicious behavior, thus reducing the amount and quality of the collected data. Therefore, an analyst needs to find the ‘sweet spot’ that allows to collect only the minimum amount of information required to properly classify each sample. Anything more is wasting resources, anything less is jeopardizing the experiments.Despite its importance, there are no clear guidelines on how to choose this parameter, nor experiments that can help companies to assess the pros and cons of a choice over another. To fill this gap, in this paper we provide the first large-scale study of the impact that the execution time has on both the amount and the quality of the collected events. We measure the evolution of system calls and code coverage, to draw a precise picture of the fraction of runtime behavior we can expect to observe in a sandbox. Finally, we implemented a machine learning based malware detection method, and applied it to the data collected in different time windows, to also report on the relevance of the events observed at different points in time.Our results show that most samples run for either less than two minutes or for more than ten. However, most of the behavior (and 98% of the executed basic blocks) are observed during the first two minutes of execution, which is also the time windows that result in a higher accuracy of our ML classifier. We believe this information can help future researchers and industrial sandboxes to better tune their analysis systems."
   },
   {
-    "id": 6249,
+    "id": 6351,
     "year": 2021,
     "title": "EarArray: Defending against DolphinAttack via Acoustic Attenuation",
     "publication": "NDSS",
@@ -288,7 +288,7 @@
     "abstract": "DolphinAttacks (i.e., inaudible voice commands) modulate audible voices over ultrasounds to inject malicious commands silently into voice assistants and manipulate controlled systems (e.g., doors or smart speakers). Eliminating DolphinAttacks is challenging if ever possible since it requires to modify the microphone hardware. In this paper, we design EarArray, a lightweight method that can not only detect such attacks but also identify the direction of attackers without requiring any extra hardware or hardware modification. Essentially, inaudible voice commands are modulated on ultrasounds that inherently attenuate faster than the one of audible sounds. By inspecting the command sound signals via the built-in multiple microphones on smart devices, EarArray is able to estimate the attenuation rate and thus detect the attacks. We propose a model of the propagation of audible sounds and ultrasounds from the sound source to a voice assistant, e.g., a smart speaker, and illustrate the underlying principle and its feasibility. We implemented EarArray using two specially-designed microphone arrays and our experiments show that EarArray can detect inaudible voice commands with an accuracy of 99% and recognize the direction of the attackers with an accuracy of 97.89%."
   },
   {
-    "id": 6250,
+    "id": 6352,
     "year": 2021,
     "title": "Emilia: Catching Iago in Legacy Code",
     "publication": "NDSS",
@@ -296,7 +296,7 @@
     "abstract": "There has been interest in mechanisms that enable the secure use of legacy code to implement trusted code in a Trusted Execution Environment (TEE), such as Intel SGX. However, because legacy code generally assumes the presence of an operating system, this naturally raises the spectre of Iago attacks on the legacy code. We observe that not all legacy code is vulnerable to Iago attacks and that legacy code must use return values from system calls in an unsafe way to have Iago vulnerabilities.Based on this observation, we develop Emilia, which automatically detects Iago vulnerabilities in legacy applications by fuzzing applications using system call return values. We use Emilia to discover 51 Iago vulnerabilities in 17 applications, and find that Iago vulnerabilities are widespread and common. We conduct an in-depth analysis of the vulnerabilities we found and conclude that while common, the majority (82.4%) can be mitigated with simple, stateless checks in the system call forwarding layer, while the rest are best fixed by finding and patching them in the legacy code. Finally, we study and evaluate different trade-offs in the design of Emilia."
   },
   {
-    "id": 6251,
+    "id": 6353,
     "year": 2021,
     "title": "FARE: Enabling Fine-grained Attack Categorization under Low-quality Labeled Data",
     "publication": "NDSS",
@@ -304,7 +304,7 @@
     "abstract": "Supervised machine learning classifiers have been widely used for attack detection, but their training requires abundant high-quality labels. Unfortunately, high-quality labels are difficult to obtain in practice due to the high cost of data labeling and the constant evolution of attackers. Without such labels, it is challenging to train and deploy targeted countermeasures.In this paper, we propose FARE, a clustering method to enable fine-grained attack categorization under low-quality labels. We focus on two common issues in data labels: 1) missing labels for certain attack classes or families; and 2) only having coarse-grained labels available for different attack types. The core idea of FARE is to take full advantage of the limited labels while using the underlying data distribution to consolidate the low-quality labels. We design an ensemble model to fuse the results of multiple unsupervised learning algorithms with the given labels to mitigate the negative impact of missing classes and coarse-grained labels. We then train an input transformation network to map the input data into a low-dimensional latent space for fine-grained clustering. Using two security datasets (Android malware and network intrusion traces), we show that FARE significantly outperforms the state-of-the-art (semi-)supervised learning methods in clustering quality/correctness. Further, we perform an initial deployment of FARE by working with a large e-commerce service to detect fraudulent accounts. With real-world A/B tests and manual investigation, we demonstrate the effectiveness of FARE to catch previously-unseen frauds."
   },
   {
-    "id": 6252,
+    "id": 6354,
     "year": 2021,
     "title": "Favocado: Fuzzing the Binding Code of JavaScript Engines Using Semantically Correct Test Cases",
     "publication": "NDSS",
@@ -312,7 +312,7 @@
     "abstract": "JavaScript runtime systems include some specialized programming interfaces, called binding layers. Binding layers translate data representations between JavaScript and unsafe low-level languages, such as C and C++, by converting data between different types. Due to the wide adoption of JavaScript (and JavaScript engines) in the entire computing ecosystem, discovering bugs in JavaScript binding layers is critical. Nonetheless, existing JavaScript fuzzers cannot adequately fuzz binding layers due to two major challenges: Generating syntactically and semantically correct test cases, and reducing the size of the input space for fuzzing.In this paper, we propose Favocado, a novel fuzzing approach that focuses on fuzzing binding layers of JavaScript runtime systems. Favocado can generate syntactically and semantically correct JavaScript test cases through the use of extracted semantic information and careful maintaining of execution states. This way, test cases that Favocado generates do not raise unintended runtime exceptions, which substantially increases the chance of triggering binding code. Additionally, exploiting a unique feature (relative isolation) of binding layers, Favocado significantly reduces the size of the fuzzing input space by splitting DOM objects into equivalence classes and focusing fuzzing within each equivalence class.We demonstrate the effectiveness of Favocado in our experiments and show that Favocado outperforms another state-of-the-art DOM fuzzer and discovers six times more bugs. Finally, during the evaluation, we find 61 previously unknown bugs in four JavaScript runtime systems (Adobe Acrobat Reader, Foxit PDF Reader, Chromium, and WebKit). 33 of these bugs are security vulnerabilities."
   },
   {
-    "id": 6253,
+    "id": 6355,
     "year": 2021,
     "title": "FlowLens: Enabling Efficient Flow Classification for ML-based Network Security Applications",
     "publication": "NDSS",
@@ -320,7 +320,7 @@
     "abstract": "An emerging trend in network security consists in the adoption of programmable switches for performing various security tasks in large-scale, high-speed networks. However, since existing solutions are tailored to specific tasks, they cannot accommodate a growing variety of ML-based security applications, i.e., security-focused tasks that perform targeted flow classification based on packet size or inter-packet frequency distributions with the help of supervised machine learning algorithms. We present FlowLens, a system that leverages programmable switches to efficiently support multi-purpose ML-based security applications. FlowLens collects features of packet distributions at line speed and classifies flows directly on the switches, enabling network operators to re-purpose this measurement primitive at run-time to serve a different flow classification task. To cope with the resource constraints of programmable switches, FlowLens computes for each flow a memory-efficient representation of relevant features, named ``flow marker''. Despite its small size, a flow marker contains enough information to perform accurate flow classification. Since flow markers are highly customizable and application-dependent, FlowLens can automatically parameterize the flow marker generation guided by a multi-objective optimization process that can balance their size and accuracy. We evaluated our system in three usage scenarios: covert channel detection, website fingerprinting, and botnet chatter detection. We find that very small markers enable FlowLens to achieve a 150 fold increase in monitoring capacity for covert channel detection with an accuracy drop of only 3% when compared to collecting full packet distributions."
   },
   {
-    "id": 6254,
+    "id": 6356,
     "year": 2021,
     "title": "FLTrust: Byzantine-robust Federated Learning via Trust Bootstrapping",
     "publication": "NDSS",
@@ -328,7 +328,7 @@
     "abstract": "Byzantine-robust federated learning aims to enable a service provider to learn an accurate global model when a bounded number of clients are malicious.  The key idea of existing Byzantine-robust federated learning methods is that the service provider performs statistical analysis among the  clients' local model updates and removes suspicious ones, before aggregating them to update the global model. However, malicious clients can still corrupt the global models in these methods via sending carefully crafted local model updates to the service provider. The fundamental reason is that there is no root of trust in existing federated learning methods, i.e., from the service provider's perspective, every client could be malicious.In this work, we bridge the gap via proposing emph{FLTrust}, a new federated learning method in which the service provider itself bootstraps trust. In particular, the service provider itself collects a clean small training dataset (called emph{root dataset}) for the learning task and the service provider maintains a model (called emph{server model}) based on it to bootstrap trust. In each iteration, the service provider first assigns a trust score to each local model update from the clients, where a local model update has a lower trust score if its direction deviates more from the direction of the server model update. Then, the service provider normalizes the magnitudes of the local model updates such that they lie in the same hyper-sphere as the server model update in the vector space. Our normalization limits the impact of malicious local model updates with large magnitudes. Finally, the service provider computes the average of the normalized local model updates weighted by their trust scores as a global model update, which is used to update the global model.  Our extensive evaluations on six datasets from different domains show that our FLTrust is secure against both existing attacks and strong adaptive attacks. For instance, using a root dataset with less than 100 examples, FLTrust under adaptive attacks with 40%-60% of malicious clients can still train global models that are as accurate as the global models trained by FedAvg under no attacks, where FedAvg is a popular method in non-adversarial settings."
   },
   {
-    "id": 6255,
+    "id": 6357,
     "year": 2021,
     "title": "From Library Portability to Para-rehosting: Natively Executing Microcontroller Software on Commodity Hardware",
     "publication": "NDSS",
@@ -336,7 +336,7 @@
     "abstract": "Finding bugs in microcontroller (MCU) firmware is challenging, even for device manufacturers who own the source code. The MCU runs different instruction sets than x86 and exposes a very different development environment. This invalidates many existing sophisticated software testing tools on x86. To maintain a unified developing and testing environment, a straightforward way is to re-compile the source code into the native executable for a commodity machine (called rehosting). However, ad-hoc re-hosting is a daunting and tedious task and subject to many issues (library-dependence, kernel-dependence and hardware-dependence). In this work, we systematically explore the portability problem of MCU software and propose para-rehosting to ease the porting process. Specifically, we abstract and implement a portable MCU (PMCU) using the POSIX interface. It models common functions of the MCU cores. For peripheral specific logic, we propose HAL-based peripheral function replacement, in which high-level hardware functions are replaced with an equivalent backend driver on the host. These backend drivers are invoked by well-designed para-APIs and can be reused across many MCU OSs. We categorize common HAL functions into four types and implement templates for quick backend development. Using the proposed approach, we have successfully rehosted nine MCU OSs including the widely deployed Amazon FreeRTOS, ARM Mbed OS, Zephyr and LiteOS. To demonstrate the superiority of our approach in terms of security testing, we used off-the-shelf dynamic analysis tools (AFL and ASAN) against the rehosted programs and discovered 28 previously-unknown bugs, among which 5 were confirmed by CVE and the other 19 were confirmed by vendors at the time of writing."
   },
   {
-    "id": 6256,
+    "id": 6358,
     "year": 2021,
     "title": "GALA: Greedy ComputAtion for Linear Algebra in Privacy-Preserved Neural Networks",
     "publication": "NDSS",
@@ -344,7 +344,7 @@
     "abstract": "Machine Learning as a Service (MLaaS) is enabling a wide range of smart applications on end devices. However, privacy still remains a fundamental challenge. The schemes that exploit Homomorphic Encryption (HE)-based linear computations and Garbled Circuit (GC)-based nonlinear computations have demonstrated superior performance to enable privacy-preserved MLaaS. Nevertheless, there is still a significant gap in the computation speed. Our investigation has found that the HE-based linear computation dominates the total computation time for state-of-the-art deep neural networks. Furthermore, the most time-consuming component of the HE-based linear computation is a series of Permutation (Perm) operations that are imperative for dot product and convolution in privacy-preserved MLaaS. This work focuses on a deep optimization of the HE-based linear computations to minimize the Perm operations, thus substantially reducing the overall computation time. To this end, we propose GALA: Greedy computAtion for Linear Algebra in privacy-preserved neural networks, which views the HE-based linear computation as a series of Homomorphic Add, Mult and Perm operations and chooses the least expensive operation in each linear computation step to reduce the overall cost. GALA makes the following contributions: (1) It introduces a row-wise weight matrix encoding and combines the share generation that is needed for the GC-based nonlinear computation, to reduce the Perm operations for the dot product; (2) It designs a firstAdd-second-Perm approach (named kernel grouping) to reduce Perm operations for convolution. As such, GALA efficiently reduces the cost for the HE-based linear computation, which is a critical building block in almost all of the recent frameworks for privacy-preserved neural networks, including GAZELLE (Usenix Security’18), DELPHI (Usenix Security’20), and CrypTFlow2 (CCS’20). With its deep optimization of the HE-based linear computation, GALA can be a plug-and-play module integrated into these systems to further boost their efficiency. Our experiments show that it achieves a significant speedup up to 700× for the dot product and 14× for the convolution computation under different data dimensions. Meanwhile, GALA demonstrates an encouraging runtime boost by 2.5×, 2.7×, 3.2×, 8.3×, 7.7×, and 7.5× over GAZELLE and 6.5×, 6×, 5.7×, 4.5×, 4.2×, and 4.1× over CrypTFlow2, on AlexNet, VGG, ResNet-18, ResNet-50, ResNet-101, and ResNet-152, respectively."
   },
   {
-    "id": 6257,
+    "id": 6359,
     "year": 2021,
     "title": "HERA: Hotpatching of Embedded Real-time Applications",
     "publication": "NDSS",
@@ -352,7 +352,7 @@
     "abstract": "Memory corruption attacks are a pre-dominant attack vector against IoT devices. Simply updating vulnerable IoT software is not always possible due to unacceptable downtime and a required reboot. These side-effects must be avoided for highly-available embedded systems such as medical devices and, generally speaking, for any embedded system with real-time constraints.\nTo avoid downtime and reboot of a system, previous research has introduced the concept of hotpatching. However, the existing approaches cannot be applied to resource-constrained IoT devices. Furthermore, possible hardware-related issues have not been addressed, i.e., the inability to directly modify the firmware image due to read-only memory.In this paper, we present the design and implementation of HERA (Hotpatching of Embedded Real-time Applications) which utilizes hardware-based built-in features of commodity Cortex-M microcontrollers to perform hotpatching of embedded systems. HERA preserves hard real-time constraints while keeping the additional resource usage to a minimum. In a case study, we apply HERA to two vulnerable medical devices. Furthermore, we leverage HERA to patch an existing vulnerability in the FreeRTOS operating system. These applications demonstrate the high practicality and efficiency of our approach."
   },
   {
-    "id": 6258,
+    "id": 6360,
     "year": 2021,
     "title": "Hunting the Haunter — Efficient Relational Symbolic Execution for Spectre with Haunted RelSE",
     "publication": "NDSS",
@@ -360,7 +360,7 @@
     "abstract": "Spectre are microarchitectural attacks which were made public in January 2018. They allow an attacker to recover secrets by exploiting speculations. Detection of Spectre is particularly important for cryptographic libraries and defenses at the software level have been proposed. Yet, defenses correctness and Spectre detection pose challenges due on one hand to the explosion of the exploration space induced by speculative paths, and on the other hand to the introduction of new Spectre vulnerabilities at different compilation stages. We propose an optimization, coined Haunted RelSE, that allows scalable detection of Spectre vulnerabilities at binary level. We prove the optimization semantically correct w.r.t. the more naive explicit speculative exploration approach used in state-of-the-art tools. We implement Haunted RelSE in a symbolic analysis tool, and extensively test it on a well-known litmus testset for Spectre-PHT, and on a new litmus testset for Spectre-STL, which we propose. Our technique finds more violations and scales better than state-of-the-art techniques and tools, analyzing real-world cryptographic libraries and finding new violations. Thanks to our tool, we discover that index-masking, a standard defense for Spectre-PHT, and well-known gcc options to compile position independent executables introduce Spectre-STL violations. We propose and verify a correction to index-masking to avoid the problem."
   },
   {
-    "id": 6259,
+    "id": 6361,
     "year": 2021,
     "title": "Improving Signal's Sealed Sender",
     "publication": "NDSS",
@@ -368,7 +368,7 @@
     "abstract": "The Signal messaging service recently deployed a emph{sealed sender} feature that provides sender anonymity by cryptographically hiding a message's sender from the service provider. We demonstrate, both theoretically and empirically, that this one-sided anonymity is broken when two parties send multiple messages back and forth; that is, the promise of sealed sender does not emph{compose} over a conversation of messages. Our attack is in the family of Statistical Disclosure Attacks (SDAs), and is made particularly effective by emph{delivery receipts} that inform the sender that a message has been successfully delivered, which are enabled by default on Signal. We show using theoretical and simulation-based models that Signal could link sealed sender users in as few as 5 messages.Our attack goes beyond tracking users via network-level identifiers by working at the application layer of Signal. This make our attacks particularly effective against users that employ Tor or VPNs as anonymity protections, who would otherwise be secure against network tracing. We present a range of practical mitigation strategies that could be employed to prevent such attacks, and we prove our protocols secure using a new simulation-based security definition for one-sided anonymity over any sequence of messages. The simplest provably-secure solution uses many of the same mechanisms already employed by the (flawed) sealed-sender protocol used by Signal, which means it could be deployed with relatively small overhead costs; we estimate that the extra cryptographic cost of running our most sophisticated solution in a system with millions of users would be less than $40 per month."
   },
   {
-    "id": 6260,
+    "id": 6362,
     "year": 2021,
     "title": "IoTSafe: Enforcing Safety and Security Policy with Real IoT Physical Interaction Discovery",
     "publication": "NDSS",
@@ -376,7 +376,7 @@
     "abstract": "The Internet of Things (IoT) platforms bring significant convenience for increased home automation. Especially, these platforms provide many new features for managing multiple IoT devices to control their physical surroundings. However, these features also bring new safety and security challenges. For example, an attacker can manipulate IoT devices to launch attacks through unexpected physical interactions. Unfortunately, very few existing research investigates the physical interactions among IoT devices and their impacts on IoT safety and security. In this paper, we propose a novel dynamic safety and security policy enforcement system called IoTSafe, which can capture and manage real physical interactions considering contextual features on smart home platforms. To identify real physical interactions of IoT devices, we present a runtime physical interaction discovery approach, which employs both static analysis and dynamic testing techniques to identify runtime physical interactions among IoT devices.  In addition, IoTSafe generates physical and non-physical interaction paths and their context in a multi-app environment. Based on paths and context data, IoTSafe constructs physical models for temporal physical interactions, which can predict incoming risky situations and block unsafe device states accordingly. We implement a prototype of IoTSafe on the SmartThings platform. Our extensive evaluations demonstrate that IoTSafe effectively identifies 39 real physical interactions among 130 potential interactions in our experimental environment.  IoTSafe also successfully predicts risky situations related to temporal physical interactions with nearly 96% accuracy and prevents highly risky conditions."
   },
   {
-    "id": 6261,
+    "id": 6363,
     "year": 2021,
     "title": "KUBO: Precise and Scalable Detection of User-triggerable Undefined Behavior Bugs in OS Kernel",
     "publication": "NDSS",
@@ -384,7 +384,7 @@
     "abstract": "Undefined Behavior bugs (UB) often refer to a wide range of programming errors that mainly reside in software implemented in relatively low-level programming languages e.g., C/C++. OS kernels are particularly plagued by UB due to their close interactions with the hardware. A triggered UB can often lead to exploitation from unprivileged userspace programs and cause critical security and reliability issues inside the OS. The previous works on detecting UB in kernels had to sacrifice precision for scalability, and in turn, suffered from extremely high false positives which severely impaired their usability.We propose a novel static UB detector for Linux kernel, called KUBO which simultaneously achieves high precision and whole-kernel scalability. KUBO is focused on detecting critical UB that can be triggered by userspace input. The high precision comes from KUBO’s verification of the satisfiability of the UB-triggering paths and conditions. The whole-kernel scalability is enabled by an efficient inter-procedural analysis, which incrementally walks backward along callchains in an on-demand manner. We evaluate KUBO on several versions of whole Linux kernels (including drivers). KUBO found 23 critical UBs that were previously unknown in the latest Linux kernel. KUBO’s false detection rate is merely 27.5%, which is significantly lower than that of the state-of-the-art kernel UB detectors (91%). Our evaluation also shows the bug reports generated by KUBO are easy to triage."
   },
   {
-    "id": 6262,
+    "id": 6364,
     "year": 2021,
     "title": "LaKSA: A Probabilistic Proof-of-Stake Protocol",
     "publication": "NDSS",
@@ -392,7 +392,7 @@
     "abstract": "We present Large-scale Known-committee Stake-based Agreement (LaKSA), a chain-based Proof-of-Stake protocol that is dedicated, but not limited, to cryptocurrencies. LaKSA minimizes interactions between nodes through lightweight committee voting, resulting in a simpler, more robust, and more scalable proposal than competing systems. It also mitigates other drawbacks of previous systems, such as high reward variance and long confirmation times. LaKSA can support large numbers of nodes by design, and provides probabilistic safety guarantees in which a client makes commit decisions by calculating the probability that a transaction is reverted based on its blockchain view. We present a thorough analysis of LaKSA and report on its implementation and evaluation. Furthermore, our new technique of proving safety can be applied more broadly to other Proof-of-Stake protocols."
   },
   {
-    "id": 6263,
+    "id": 6365,
     "year": 2021,
     "title": "Manipulating the Byzantine: Optimizing Model Poisoning Attacks and Defenses for Federated Learning",
     "publication": "NDSS",
@@ -400,7 +400,7 @@
     "abstract": "Federated learning (FL) enables many data owners (e.g., mobile devices) to train a joint ML model (e.g., a next-word prediction classifier) without the need of sharing their private training data.However, FL is known to be susceptible to  poisoning attacks by malicious participants (e.g., adversary-owned mobile devices) who aim at hampering the accuracy of the jointly trained model through sending malicious inputs during the federated training process.In this paper, we present a generic framework for model poisoning attacks on FL. We show that our framework leads to  poisoning attacks that substantially outperform state-of-the-art model poisoning attacks by large margins. For instance, our attacks result in $1.5times$ to $60times$ higher reductions in the accuracy of FL models compared to previously discovered poisoning attacks.Our work demonstrates that existing Byzantine-robust FL algorithms are significantly more susceptible  to model poisoning than previously thought. Motivated by this, we design a defense against FL poisoning, called emph{divide-and-conquer} (DnC). We demonstrate that DnC outperforms all existing Byzantine-robust FL algorithms in defeating model poisoning attacks,\nspecifically,  it is $2.5times$ to $12times$ more resilient in our experiments with different datasets and models."
   },
   {
-    "id": 6264,
+    "id": 6366,
     "year": 2021,
     "title": "MINOS: A Lightweight Real-Time Cryptojacking Detection System",
     "publication": "NDSS",
@@ -408,7 +408,7 @@
     "abstract": "Emerging WebAssembly(Wasm)-based cryptojacking malware covertly uses the computational resources of users without their consent or knowledge. Indeed, most victims of this malware are unaware of such unauthorized use of their computing power due to techniques employed by cryptojacking malware authors such as CPU throttling and obfuscation. A number of dynamic analysis-based detection mechanisms exist that aim to circumvent such techniques. However, since these mechanisms use dynamic features, the collection of such features, as well as the actual detection of the malware, require that the cryptojacking malware run for a certain amount of time, effectively mining for that period, and therefore causing significant overhead. To solve these limitations, in this paper, we propose MINOS, a novel, extremely lightweight cryptojacking detection system that uses deep learning techniques to accurately detect the presence of unwarranted Wasm-based mining activity in real-time. MINOS  uses an image-based classification technique to distinguish between benign webpages and those using Wasm to implement unauthorized mining. Specifically, the classifier implements a convolutional neural network (CNN) model trained with a comprehensive dataset of current malicious and benign Wasm binaries. MINOS achieves exceptional accuracy with a low TNR and FPR. Moreover, our extensive performance analysis of MINOS shows that the proposed detection technique can detect mining activity instantaneously from the most current in-the-wild cryptojacking malware with an accuracy of 98.97%, in an average of 25.9 milliseconds while using a maximum of 4% of the CPU and 6.5% of RAM, proving that MINOS is highly effective while lightweight, fast, and computationally inexpensive."
   },
   {
-    "id": 6265,
+    "id": 6367,
     "year": 2021,
     "title": "Mondrian: Comprehensive Inter-domain Network Zoning Architecture",
     "publication": "NDSS",
@@ -416,7 +416,7 @@
     "abstract": "A central element of designing IT security infrastructures is the logical segmentation of information assets into groups sharing the same security requirements and policies, called network zones. As more business ecosystems are migrated to the cloud, additional demands for cybersecurity emerge and make the network-zone operation and management for large corporate networks challenging. In this paper, we introduce the new concept of an inter-domain transit zone that securely bridges physically and logically non-adjacent zones in large-scale information systems, simplifying complex network-zone structures. With inter-zone translation points, we also ensure communication integrity and confidentiality while providing lightweight security-policy enforcement. A logically centralized network coordinator enables scalable and flexible network management. Our implementation demonstrates that the new architecture merely introduces a few microseconds of additional processing delay in transit."
   },
   {
-    "id": 6266,
+    "id": 6368,
     "year": 2021,
     "title": "NetPlier: Probabilistic Network Protocol Reverse Engineering from Message Traces",
     "publication": "NDSS",
@@ -424,7 +424,7 @@
     "abstract": "Network protocol reverse engineering is an important challenge with many security applications. A popular kind of method leverages network message traces. These methods rely on pair-wise sequence alignment and/or tokenization. They have various limitations such as difficulties of handling a large number of messages and dealing with inherent uncertainty. In this paper, we propose a novel probabilistic method for network trace based protocol reverse engineering. It first makes use of multiple sequence alignment to align all messages and then reduces the problem to identifying the keyword field from the set of aligned fields. The keyword field determines the type of a message. The identification is probabilistic, using random variables to indicate the likelihood of each field (being the true keyword). A joint distribution is constructed among the random variables and the observations of the messages. Probabilistic inference is then performed to determine the most likely keyword field, which allows messages to be properly clustered by their true types and enables the recovery of message format and state machine. Our evaluation on 10 protocols shows that our technique substantially outperforms the state-of-the-art and our case studies show the unique advantages of our technique in IoT protocol reverse engineering and malware analysis."
   },
   {
-    "id": 6267,
+    "id": 6369,
     "year": 2021,
     "title": "OblivSketch: Oblivious Network Measurement as a Cloud Service",
     "publication": "NDSS",
@@ -432,7 +432,7 @@
     "abstract": "Network function virtualisation enables versatile network functions as cloud services with reduced cost. Specifically, network measurement tasks such as heavy-hitter detection and flow distribution estimation serve many core network functions for improved performance and security of enterprise networks. However, deploying network measurement services in third-party multi-tenant cloud service providers raises critical privacy and security concerns. Recent studies demonstrate that leaking and abusing flow statistics can lead to severe network attacks such as DDoS, network topology manipulation and poisoning, etc.In this paper, we propose OblivSketch, an oblivious network measurement service using Intel SGX. It employs hardware enclave for secure network statistics generation and queries. The statistics are maintained in newly designed oblivious data structures inside the SGX enclave and queried by data-oblivious algorithms to prevent data leakage caused by access patterns to the memory of SGX. To demonstrate the practicality, we implement OblivSketch as a full-fledge service integrated with the off-the-shelf SDN framework. The evaluations demonstrate that OblivSketch consumes a constant and small memory space (6MB) to track a massive amount of flows (from 30k to 1.45m), and it takes no more than 15ms to respond six widely adopted measurement queries for a 5s-trace with 70k flows."
   },
   {
-    "id": 6268,
+    "id": 6370,
     "year": 2021,
     "title": "On the Insecurity of SMS One-Time Password Messages against Local Attackers in Modern Mobile Devices",
     "publication": "NDSS",
@@ -440,7 +440,7 @@
     "abstract": "SMS messages containing One-Time Passwords (OTPs) are a widely used mechanism for performing authentication in mobile applications. In fact, many popular apps use OTPs received via SMS as the only authentication factor, entirely replacing password-based authentication schemes. Although SMS OTP authentication mechanisms provide significant convenience to end-users, they also have significant security implications. In this paper, we study these mobile apps' authentication schemes based on SMS OTPs, and, in particular, we perform a systematic study on the threats posed by ``local attacks,'' a scenario in which an attacker has control over an unprivileged third-party app on the victim's device.This study was carried out using a combination of reverse engineering, formal verification, user studies, and large-scale automated analysis. Our work not only revealed vulnerabilities in third-party apps, but it also uncovered several new design and implementation flaws in core APIs implemented by the mobile operating systems themselves. For instance, we found two official Android APIs to be vulnerable by design, i.e., APIs that inevitably lead to the implementation of insecure authentication schemes, even when used according to their documentation. Moreover, we found that other APIs are prone to be used unsafely by apps' developers.Our large-scale study found 36 apps, sharing hundreds of millions of installations, that misuse these APIs, allowing a malicious local attacker to completely hijack their accounts. Such vulnerable apps include Telegram and KakaoTalk, some of the most popular messaging apps worldwide. Finally, we proposed a new and safer mechanism to perform SMS-based authentication, and we prove its safety using formal verification."
   },
   {
-    "id": 6269,
+    "id": 6371,
     "year": 2021,
     "title": "PFirewall: Semantics-Aware Customizable Data Flow Control for Smart Home Privacy Protection",
     "publication": "NDSS",
@@ -448,7 +448,7 @@
     "abstract": "Internet of Things (IoT) platforms enable users to deploy home automation applications. Meanwhile, privacy issues arise as large amounts of sensitive device data flow out to IoT platforms. Most of the data flowing out to a platform actually do not trigger automation actions, while homeowners currently have no control once devices are bound to the platform. We present PFirewall, a customizable data-flow control system to enhance the privacy of IoT platform users. PFirewall automatically generates data-minimization policies, which only disclose minimum amount of data to fulfill automation. In addition, PFirewall provides interfaces for homeowners to customize individual privacy preferences by defining user-specified policies. To enforce these policies, PFirewall transparently intervenes and mediates the communication between IoT devices and the platform, without modifying the platform, IoT devices, or hub. Evaluation results on four real-world testbeds show that PFirewall reduces IoT data sent to the platform by 97% without impairing home automation, and effectively mitigates user-activity inference/tracking attacks and other privacy risks."
   },
   {
-    "id": 6270,
+    "id": 6372,
     "year": 2021,
     "title": "PGFUZZ: Policy-Guided Fuzzing for Robotic Vehicles",
     "publication": "NDSS",
@@ -456,7 +456,7 @@
     "abstract": "Robotic vehicles (RVs) are becoming essential tools of modern systems, including autonomous delivery services, public transportation, and environment monitoring. Despite their diverse deployment, safety and security issues with RVs limit their wide adoption. Most attempts to date in RV security aim to propose defenses that harden their control program against syntactic bugs, input validation bugs, and external sensor spoofing attacks. In this paper, we introduce PGFUZZ, a policy-guided fuzzing framework, which validates whether an RV adheres to identified safety and functional policies that cover user commands, configuration parameters, and physical states. PGFUZZ expresses desired policies through temporal logic formulas with time constraints as a guide to fuzz the analyzed system. Specifically, it generates fuzzing inputs that minimize a distance metric measuring ``how close'' the RV current state is to a policy violation. In addition, it uses static and dynamic analysis to focus the fuzzing effort only on those commands, parameters, and environmental factors that influence the ``truth value'' of any of the exercised policies. The combination of these two techniques allows PGFUZZ to increase the efficiency of the fuzzing process significantly. We validate PGFUZZ on three RV control programs, ArduPilot, PX4, and Paparazzi, with 56 unique policies. PGFUZZ discovered 156 previously unknown bugs, 106 of which have been acknowledged by their developers."
   },
   {
-    "id": 6271,
+    "id": 6373,
     "year": 2021,
     "title": "PhantomCache: Obfuscating Cache Conflicts with Localized Randomization",
     "publication": "NDSS",
@@ -464,7 +464,7 @@
     "abstract": "Cache conflicts due to deterministic memory-to-cache mapping have long been exploited to leak sensitive information such as secret keys. While randomized mapping is fully investigated for L1 caches, it still remains unresolved about how to secure a much larger last-level cache (LLC). Recent solutions periodically change the mapping strategy to disrupt the crafting of conflicted addresses, which is a critical attack procedure to exploit cache conflicts. Remapping, however, increases both miss rate and access latency. We present PhantomCache for securing an LLC with remapping-free randomized mapping. We propose a localized randomization technique to bound randomized mapping of a memory address within only a limited number of cache sets. The small randomization space offers fast set search over an LLC in a memory access. The intrinsic randomness still suffices to obfuscate conflicts and disrupt efficient exploitation of conflicted addresses. We evaluate PhantomCache against an attacker exploring the state-of-the-art attack with linear-complexity. To secure an 8-bank 16~MB 16-way LLC, PhantomCache confines randomization space of an address within 8 sets and brings only 0.5% performance degradation and 0.5% storage overhead per cache line, which are 3x and 9x more efficient than the state-of-the-art solutions. Moreover, PhantomCache is solely an architectural solution and requires no software change."
   },
   {
-    "id": 6272,
+    "id": 6374,
     "year": 2021,
     "title": "PHOENIX: Device-Centric Cellular Network Protocol Monitoring using Runtime Verification",
     "publication": "NDSS",
@@ -472,7 +472,7 @@
     "abstract": "End-user-devices in the current cellular ecosystem are prone to many different vulnerabilities across different generations and protocol layers. Fixing these vulnerabilities retrospectively can be expensive, challenging, or just infeasible. A pragmatic approach for dealing with such a diverse set of vulnerabilities would be to identify attack attempts at runtime on the device side, and thwart them with mitigating and corrective actions. Towards this goal, in the paper we propose a general and extendable approach called PHOENIX for identifying n-day cellular network control-plane vulnerabilities as well as dangerous practices of network operators from the device vantage point. PHOENIX monitors the device-side cellular network traffic for performing signature-based unexpected behavior detection through lightweight runtime verification techniques. Signatures in PHOENIX can be manually-crafted by a cellular network security expert or can be automatically synthesized using an optional component of PHOENIX , which reduces the signature synthesis problem to the language learning from the informant problem. Based on the corrective actions that are available to PHOENIX when an undesired behavior is detected, different instantiations of PHOENIX are possible: a full-fledged defense when deployed inside a baseband processor; a user warning system when deployed as a mobile application; a probe for identifying attacks in the wild. One such instantiation of PHOENIX was able to identify all 15 representative n-day vulnerabilities and unsafe practices of 4G LTE networks considered in our evaluation with a high packet processing speed (∼68000 packets/second) while inducing only a moderate amount of energy overhead (∼4mW)."
   },
   {
-    "id": 6273,
+    "id": 6375,
     "year": 2021,
     "title": "POSEIDON: Privacy-Preserving Federated Neural Network Learning",
     "publication": "NDSS",
@@ -480,7 +480,7 @@
     "abstract": "In this paper, we address the problem of privacy-preserving training and evaluation of neural networks in an $N$-party, federated learning setting. We propose a novel system, POSEIDON, the first of its kind in the regime of privacy-preserving neural network training. It employs multiparty lattice-based cryptography to preserve the confidentiality of the training data, the model, and the evaluation data, under a passive-adversary model and collusions between up to $N-1$ parties. To efficiently execute the secure backpropagation algorithm for training neural networks, we provide a generic packing approach that enables Single Instruction, Multiple Data (SIMD) operations on encrypted data. We also introduce arbitrary linear transformations within the cryptographic bootstrapping operation, optimizing the costly cryptographic computations over the parties, and we define a constrained optimization problem for choosing the cryptographic parameters. Our experimental results show that POSEIDON achieves accuracy similar to centralized or decentralized non-private approaches and that its computation and communication overhead scales linearly with the number of parties. POSEIDON trains a 3-layer neural network on the MNIST dataset with 784 features and 60K samples distributed among 10 parties in less than 2 hours."
   },
   {
-    "id": 6274,
+    "id": 6376,
     "year": 2021,
     "title": "Practical Blind Membership Inference Attack via Differential Comparisons",
     "publication": "NDSS",
@@ -488,7 +488,7 @@
     "abstract": "Membership inference (MI) attacks affect user privacy by inferring whether given data samples have been used to train a target learning model, e.g., a deep neural network. There are two types of MI attacks in the literature, i.e., these with and without shadow models. The success of the former heavily depends on the quality of the shadow model, i.e., the transferability between the shadow and the target; the latter, given only blackbox probing access to the target model, cannot make an effective inference of unknowns, compared with MI attacks using shadow models, due to the insufficient number of qualified samples labeled with ground truth membership information.In this paper, we propose an MI attack, called BLINDMI, which probes the target model and extracts membership semantics via a novel approach, called differential comparison. The high-level idea is that BLINDMI first generates a dataset with nonmembers via transforming existing samples into new samples, and then differentially moves samples from a target dataset to the generated, non-member set in an iterative manner. If the differential move of a sample increases the set distance, BLINDMI considers the sample as non-member and vice versa.BLINDMI was evaluated by comparing it with state-of-the-art MI attack algorithms. Our evaluation shows that BLINDMI improves F1-score by nearly 20% when compared to state-of-the-art on some datasets, such as Purchase-50 and Birds-200, in the blind setting where the adversary does not know the target model’s architecture and the target dataset’s ground truth labels. We also show that BLINDMI can defeat state-of-the-art defenses."
   },
   {
-    "id": 6275,
+    "id": 6377,
     "year": 2021,
     "title": "Practical Non-Interactive Searchable Encryption with Forward and Backward Privacy",
     "publication": "NDSS",
@@ -496,7 +496,7 @@
     "abstract": "In Dynamic Symmetric Searchable Encryption (DSSE), forward privacy ensures that previous search queries cannot be associated with future updates, while backward privacy guarantees that subsequent search queries cannot be associated with deleted documents in the past. In this work, we propose a generic forward and backward-private DSSE scheme, which is, to the best of our knowledge, the first practical and non-interactive Type-II backward-private DSSE scheme not relying on trusted execution environments. To this end, we first introduce a new cryptographic primitive, named Symmetric Revocable Encryption (SRE), and propose a modular construction from some succinct cryptographic primitives. Then we present our DSSE scheme based on the proposed SRE, and instantiate it with lightweight symmetric primitives. At last, we implement our scheme and\ncompare it with the most efficient Type-II backward-private scheme to date (Demertzis et al., NDSS 2020). In a typical network environment, our result shows that the search in our scheme outperforms it by 2-11x under the same security notion."
   },
   {
-    "id": 6276,
+    "id": 6378,
     "year": 2021,
     "title": "Preventing and Detecting State Inference Attacks on Android",
     "publication": "NDSS",
@@ -504,7 +504,7 @@
     "abstract": "In the realm of the Android ecosystem, one relevant threat is posed by phishing attacks. Phishing attacks are particularly problematic for mobile platforms because they do not provide enough information for a user to reliably distinguish a legitimate app from a malicious app spoofing the UI of the legitimate one. A key factor that determines the success rate of a phishing attack is proper timing: The user is more prone to provide sensitive data (such as her passwords) if the malicious spoofed UI appears when the victim expects to interact with the target app. On Android, malware determines the right timing by mounting so-called state inference attacks, which can be used, for example, to infer the exact moment that the user started a target app and thus expects to interact with it. Even though Android app sandbox is designed to prevent these attacks, they are still possible by abusing vulnerable APIs that leak such sensitive information: the usual scenario is a malicious app that \"polls\" these vulnerable APIs, infers when a target app is about to be used by the user, and makes the spoofed UI appear on top of the screen at the right time. All previous bugs of this kind have been fixed in the latest version of Android.This paper presents two main research contributions related to preventing and detecting state inference attacks. First, we discuss the design and implementation of a new vulnerability detection system, which specifically aims at identifying new vulnerabilities that can be used to mount state inference attacks. Our approach relies on both static and dynamic analysis techniques and it identified 18 previously unknown bugs (leading to 6 CVE) in the latest versions of Android.Second, we present a new on-device analysis system able to detect exploitation attempts of vulnerable resources and APIs. This system is based on the key hypothesis that mere \"polling behaviors\" can be used as a strong signal of a potential attack, independently of other factors (that previous works rely on). We performed an empirical analysis over a corpus of benign and malicious apps, and we find that this hypothesis is indeed correct. This approach has the advantage of being able to detect exploitation attempts even when the abused API is not known to be vulnerable in advance. We implemented this system as an Android framework modification, and we show it incurs a negligible overhead."
   },
   {
-    "id": 6277,
+    "id": 6379,
     "year": 2021,
     "title": "PrivacyFlash Pro: Automating Privacy Policy Generation for Mobile Apps",
     "publication": "NDSS",
@@ -512,7 +512,7 @@
     "abstract": "Various privacy laws require mobile apps to have privacy policies. Questionnaire-based policy generators are intended to help developers with the task of policy creation. However, generated policies depend on the generators' designs as well as developers' abilities to correctly answer privacy questions on their apps. In this study we show that policies generated with popular policy generators are often not reflective of apps' privacy practices. We believe that policy generation can be improved by supplementing the questionnaire-based approach with code analysis. We design and implement PrivacyFlash Pro, a privacy policy generator for iOS apps that leverages static analysis. PrivacyFlash Pro identifies code signatures --- composed of Plist permission strings, framework imports, class instantiations, authorization methods, and other evidence --- that are mapped to privacy practices expressed in privacy policies. Resources from package managers are used to identify libraries.We tested PrivacyFlash Pro in a usability study with 40 iOS app developers and received promising results both in terms of reliably identifying apps' privacy practices as well as on its usability. We measured an F-1 score of 0.95 for identifying permission uses. 24 of 40 developers rated PrivacyFlash Pro with at least 9 points on a scale of 0 to 10 for a Net Promoter Score of 42.5. The mean System Usability Score of 83.4 is close to excellent. We provide PrivacyFlash Pro as an open source project to the iOS developer community. In principle, our approach is platform-agnostic and adaptable to the Android and web platforms as well. To increase privacy transparency and reduce compliance issues we make the case for privacy policies as software development artifacts. Privacy policy creation should become a native extension of the software development process and adhere to the mental model of software developers."
   },
   {
-    "id": 6278,
+    "id": 6380,
     "year": 2021,
     "title": "QPEP: An Actionable Approach to Secure and Performant Broadband From Geostationary Orbit",
     "publication": "NDSS",
@@ -520,7 +520,7 @@
     "abstract": "Satellite broadband services are critical infrastructures, bringing connectivity to the most remote regions of the globe. However, due to performance concerns, many geostationary satellite broadband services are unencrypted by default and vulnerable to long-range eavesdropping attacks. The result is that deeply sensitive internet traffic is regularly broadcast in clear-text over vast coverage areas.This paper delves into the underlying causes of this insecure network design, presenting the case that physical characteristics effecting TCP performance and the widespread use of Performance Enhancing Proxies (PEPs) have created the perception of a security/performance trade-off in these networks. A review of previous mitigation attempts finds limited real-world adoption due to a variety of factors ranging from misaligned commercial incentives to the prevalence of unverified ``black-box'' encryption products.To address these shortcomings, we design and implement a fully open-source and encrypted-by-default PEP/VPN hybrid, call QPEP. Built around the QUIC standard, QPEP enables individuals to encrypt satellite traffic without ISP involvement. Additionally, we present an open and replicable Docker-based testbed for benchmarking satellite PEPs like QPEP through simulation. These experiments show that QPEP enables satellite customers to encrypt their TCP traffic with up to 65% faster page load times (PLTs) compared to traditional VPN encryption. Even relative to unencrypted PEPs, QPEP offers up to 45% faster PLTs while adding over-the-air security. We briefly evaluate additional tweaks to QUIC which may further optimize QPEP performance. Together, these assessments suggest that QPEP represents a promising new technique for bringing both security and performance to high-latency satellite broadband without requiring alterations to status-quo network implementations."
   },
   {
-    "id": 6279,
+    "id": 6381,
     "year": 2021,
     "title": "RandRunner: Distributed Randomness from Trapdoor VDFs with Strong Uniqueness",
     "publication": "NDSS",
@@ -528,7 +528,7 @@
     "abstract": "Generating randomness collectively has been a long standing problem in distributed computing. It plays a critical role not only in the design of state-of-the-art Byzantine fault-tolerant (BFT) and blockchain protocols, but also for a range of applications far beyond this field. We present RandRunner, a random beacon protocol with a unique set of guarantees that targets a realistic system model. Our design avoids the necessity of a (BFT) consensus protocol and its accompanying high complexity and communication overhead. We achieve this by introducing a novel extension to verifiable delay functions (VDFs) in the RSA setting that does not require a trusted dealer or distributed key generation (DKG) and only relies on well studied cryptographic assumptions. This design allows RandRunner to tolerate adversarial or failed leaders while guaranteeing safety and liveness of the protocol despite possible periods of asynchrony."
   },
   {
-    "id": 6280,
+    "id": 6382,
     "year": 2021,
     "title": "Refining Indirect Call Targets at the Binary Level",
     "publication": "NDSS",
@@ -536,7 +536,7 @@
     "abstract": "Enforcing fine-grained Control-Flow Integrity (CFI) is critical for increasing software security. However, for commercial off-the-shelf (COTS) binaries, constructing high-precision Control-Flow Graphs (CFGs) is challenging, because there is no source-level information, such as symbols and types, to assist in indirect-branch target inference. The lack of source-level information brings extra challenges to inferring targets for indirect calls compared to other kinds of indirect branches. Points-to analysis could be a promising solution for this problem, but there is no practical points-to analysis framework for inferring indirect call targets at the binary level. Value set analysis (VSA) is the state-of-the-art binary-level points-to analysis but does not scale to large programs. It is also highly conservative by design and thus leads to low-precision CFG construction. In this paper, we present a binary-level points-to analysis framework called BPA to construct sound and high-precision CFGs. It is a new way of performing points-to analysis at the binary level with the focus on resolving indirect call targets. BPA employs several major techniques, including assuming a block memory model and a memory access analysis for partitioning memory into blocks, to achieve a better balance between scalability and precision. In evaluation, we demonstrate that BPA achieves a 34.5% precision improvement rate over the current state-of-the-art technique without introducing false negatives."
   },
   {
-    "id": 6281,
+    "id": 6383,
     "year": 2021,
     "title": "Reinforcement Learning-based Hierarchical Seed Scheduling for Greybox Fuzzing",
     "publication": "NDSS",
@@ -544,7 +544,7 @@
     "abstract": "Coverage metrics play an essential role in greybox fuzzing. Recent work has shown that fine-grained coverage metrics could allow a fuzzer to detect bugs that cannot be covered by traditional edge coverage. However, fine-grained coverage metrics will also select more seeds, which cannot be efficiently scheduled by existing algorithms. This work addresses this problem by introducing a new concept of multi-level coverage metric and the corresponding reinforcement-learning-based hierarchical scheduler. Evaluation of our prototype on DARPA CGC showed that our approach outperforms AFL and AFLFast significantly: it can detect 20% more bugs, achieve higher coverage on 83 out of 180 challenges, and achieve the same coverage on 60 challenges. More importantly, it can detect the same number of bugs and achieve the same coverage faster. On FuzzBench, our approach achieves higher coverage than AFL++ (Qemu) on 10 out of 20 projects."
   },
   {
-    "id": 6282,
+    "id": 6384,
     "year": 2021,
     "title": "ROV++: Improved Deployable Defense against BGP Hijacking",
     "publication": "NDSS",
@@ -552,7 +552,7 @@
     "abstract": "We study and extend Route Origin Validation (ROV), the basis for the IETF defenses of interdomain routing. We focus on two important hijack attacks: _subprefix hijacks_ and _non-routed prefix hijacks_.  For both attacks, we  show that, with partial deployment, ROV provides disappointing security benefits. We also present _superprefix hijacks_, which completely circumvent ROV's defense for non-routed prefix hijacks, and significantly circumvents it for (announced) prefix hijacks.We then present ROV++, a novel extension of ROV, with significantly improved security benefits even with partial adoption. For example, with uniform 5% adoption for edge ASes (ASes with no customers or peers), ROV prevents less than 5% of subprefix hijacks while ROV++ prevents more than 90% of subprefix hijacks.   ROV++ also defends well against non-routed prefix attacks and the novel superprefix attacks.We evaluated several ROV++ variants, all sharing the improvements in defense; this includes \"Lite\", _software-only_ variants, deployable with existing routers. Our evaluation is based on extensive simulations over the Internet topology.We also expose an obscure yet important aspect of BGP, much amplified by ROV: _inconsistencies_ between the observable BGP path (control-plane) and the actual traffic flows (data-plane). These inconsistencies are highly relevant for security, and often lead to a challenge we refer to as _hidden hijacks_."
   },
   {
-    "id": 6283,
+    "id": 6385,
     "year": 2021,
     "title": "SerialDetector: Principled and Practical Exploration of Object Injection Vulnerabilities for the Web",
     "publication": "NDSS",
@@ -560,7 +560,7 @@
     "abstract": "The last decade has seen a proliferation of code-reuse attacks in the context of web applications. These attacks stem from Object Injection Vulnerabilities (OIV) enabling attacker-controlled data to abuse legitimate code fragments within a web application's codebase to execute a code chain (gadget) that performs malicious computations, like remote code execution, on attacker's behalf. OIVs occur when untrusted data is used to instantiate an object of attacker-controlled type with attacker-chosen properties, thus triggering the execution of code available but not necessarily used by the application. In the web application domain, OIVs may arise during the process of deserialization of client-side data, e.g., HTTP requests, when reconstructing the object graph that is subsequently processed by the backend applications on the server side.This paper presents the first systematic approach for detecting and exploiting OIVs in .NET applications including the framework and libraries. Our key insight is: The root cause of OIVs is the untrusted information flow from an application's public entry points (e.g., HTTP request handlers) to sensitive methods that create objects of arbitrary types (e.g., reflection APIs) to invoke methods (e.g., native/virtual methods) that trigger the execution of a gadget. Drawing on this insight, we develop and implement SerialDetector, a taint-based dataflow analysis that discovers OIV patterns in .NET assemblies automatically. We then use these patterns to match publicly available gadgets and to automatically validate the feasibility of OIV attacks. We demonstrate the effectiveness of our approach by an in-depth evaluation of a complex production software such as the Azure DevOps Server. We describe the key threat models and report on several remote code execution vulnerabilities found by SerialDetector, including three CVEs on Azure DevOps Server. We also perform an in-breadth security analysis of recent publicly available CVEs. Our results show that SerialDetector can detect OIVs effectively and efficiently. We release our tool publicly to support open science and encourage researchers and practitioners explore the topic further."
   },
   {
-    "id": 6284,
+    "id": 6386,
     "year": 2021,
     "title": "Shadow Attacks: Hiding and Replacing Content in Signed PDFs",
     "publication": "NDSS",
@@ -568,7 +568,7 @@
     "abstract": "Digitally signed PDFs are used in contracts and invoices to guarantee the authenticity and integrity of their content. A user opening a signed PDF expects to see a warning in case of *any* modification. In 2019, Mladenov et al. revealed various parsing vulnerabilities in PDF viewer implementations. They showed attacks that could modify PDF documents without invalidating the signature. As a consequence, affected vendors of PDF viewers implemented countermeasures preventing *all* attacks.This paper introduces a novel class of attacks, which we call *shadow* attacks. The *shadow* attacks circumvent all existing countermeasures and break the integrity protection of digitally signed PDFs. Compared to previous attacks, the *shadow* attacks do not abuse implementation issues in a PDF viewer. In contrast, *shadow* attacks use the enormous flexibility provided by the PDF specification so that *shadow* documents remain standard-compliant. Since *shadow* attacks abuse only legitimate features, they are hard to mitigate.Our results reveal that 16 (including Adobe Acrobat and Foxit Reader) of the 29 PDF viewers tested were vulnerable to *shadow* attacks. We introduce our tool *PDF-Attacker* which can automatically generate *shadow* attacks. In addition, we implemented *PDF-Detector* to prevent *shadow* documents from being signed or forensically detect exploits after being applied to signed PDFs."
   },
   {
-    "id": 6285,
+    "id": 6387,
     "year": 2021,
     "title": "SODA: A Generic Online Detection Framework for Smart Contracts",
     "publication": "NDSS",
@@ -576,7 +576,7 @@
     "abstract": "Smart contracts have become lucrative and profitable targets for attackers because they can hold a great amount of money. Although there are already many studies to discover the vulnerabilities in smart contracts, they can neither guarantee discovering all vulnerabilities nor protect the deployed smart ontracts against the attacks, because they rely on offline analysis. Recently, a few online protection approaches appeared but they only focus on specific attacks and cannot be easily extended to defend against other attacks. Developing a new online protection system for smart contracts from scratch is time-consuming and requires being familiar with the internals of smart contract runtime, thus making it difficult to quickly implement and deploy mechanisms to defend against new attacks.In this paper, we propose a novel generic runtime protection framework named SPA for smart contracts on any blockchains that support Ethereum virtual machine (EVM). SPA distinguishes itself from existing online protection approaches through its capability, efficiency, and compatibility. First, SPA empowers users to easily develop and deploy protection apps for defending against various attacks by separating the information collection, attack detection and reaction with layered design. At the higher layer, SPA provides unified interfaces to develop protection apps gainst various attacks. At the lower layer, SPA instruments EVM to collect all primitive information necessary to detect various attacks and constructs 11 kinds of structural information for the ease of developing protection apps.\nBased on SPA, users can develop new rotection apps in a few lines of code without modifying EVM and easily deploy them to the blockchain. Second, SPA is efficient, because we design on-demand information retrieval to reduce the overhead of information collection and adopt dynamic linking to eliminate the overhead of inter-process communication (IPC). It allows users to develop protection apps by using any programming languages that can generate dynamic link libraries (DLLs). Third, since more and more blockchains adopt EVM as smart contract runtime, SPA can be easily migrated to such blockchains without modifying the protection apps. Based on SPA, we develop 8 protection apps to defend against the attacks exploiting major vulnerabilities in smart contracts, and integrate SPA (including all protection apps) into 3 popular blockchains: Ethereum, Expanse and Wanchain. The extensive experimental results demonstrate the effectiveness and efficiency of SPA and our protection apps."
   },
   {
-    "id": 6286,
+    "id": 6388,
     "year": 2021,
     "title": "SpecTaint: Speculative Taint Analysis for Discovering Spectre Gadgets",
     "publication": "NDSS",
@@ -584,7 +584,7 @@
     "abstract": "Software patching is a crucial mitigation approach against Spectre-type attacks. It utilizes serialization instructions to disable speculative execution of potential Spectre gadgets in a program. Unfortunately, there are no effective solutions to detect gadgets for Spectre-type attacks. In this paper, we propose a novel Spectre gadget detection technique by enabling dynamic taint analysis on speculative execution paths. To this end, we simulate and explore speculative execution at the system level (within a CPU emulator). We have implemented a prototype called SpecTaint to demonstrate the efficacy of our proposed approach. We evaluated SpecTaint on our Spectre Samples Dataset, and compared SpecTaint with existing state-of-the-art Spectre gadget detection approaches on real-world applications. Our experimental results demonstrate that SpecTaint outperforms existing methods with respect to detection precision and recall by large margins, and it also detects new Spectre gadgets in real-world applications such as Caffe and Brotli. Besides, SpecTaint significantly reduces the performance overhead after patching the detected gadgets, compared with other approaches."
   },
   {
-    "id": 6287,
+    "id": 6389,
     "year": 2021,
     "title": "SquirRL: Automating Attack Analysis on Blockchain Incentive Mechanisms with Deep Reinforcement Learning",
     "publication": "NDSS",
@@ -592,7 +592,7 @@
     "abstract": "Incentive mechanisms are central to the functionality of permissionless blockchains: they incentivize participants to run and secure the underlying consensus protocol. Designing incentive-compatible incentive mechanisms is notoriously challenging, however. As a result, most public blockchains today use incentive mechanisms whose security properties are poorly understood and largely untested. In this work, we propose SquirRL, a framework for using deep reinforcement learning to analyze attacks on blockchain incentive mechanisms. We demonstrate SquirRL’s power by ﬁrst recovering known attacks: (1) the optimal selﬁsh mining attack in Bitcoin [52], and (2) the Nash equilibrium in block withholding attacks [16]. We also use SquirRL to obtain several novel empirical results. First, we discover a counterintuitive ﬂaw in the widely used rushing adversary model when applied to multi-agent Markov games with incomplete information. Second, we demonstrate that the optimal selﬁsh mining strategy identiﬁed in [52] is actually not a Nash equilibrium in the multi-agent selﬁsh mining setting. In fact, our results suggest (but do not prove) that when more than two competing agents engage in selﬁsh mining, there is no proﬁtable Nash equilibrium. This is consistent with the lack of observed selﬁsh mining in the wild. Third, we ﬁnd a novel attack on a simpliﬁed version of Ethereum’s ﬁnalization mechanism, Casper the Friendly Finality Gadget (FFG) that allows a strategic agent to amplify her rewards by up to 30%. Notably, [10] shows that honest voting is a Nash equilibrium in Casper FFG; our attack shows that when Casper FFG is composed with selﬁsh mining, this is no longer the case. Altogether, our experiments demonstrate SquirRL’s ﬂexibility and promise as a framework for studying attack settings that have thus far eluded theoretical and empirical understanding."
   },
   {
-    "id": 6288,
+    "id": 6390,
     "year": 2021,
     "title": "SymQEMU: Compilation-based symbolic execution for binaries",
     "publication": "NDSS",
@@ -600,7 +600,7 @@
     "abstract": "Symbolic execution is a powerful technique for software analysis and bug detection. Compilation-based symbolic execution is a recently proposed flavor that has been shown to improve the performance of symbolic execution significantly when source code is available. We demonstrate a novel technique to enable compilation-based symbolic execution of binaries (i.e., without the need for source code). Our system, SymQEMU, builds on top of QEMU, modifying the intermediate representation of the target program before translating it to the host architecture. This enables SymQEMU to compile symbolic-execution capabilities into binaries and reap the associated performance benefits while maintaining architecture independence.We present our approach and implementation, and we show that it outperforms the state-of-the-art binary symbolic executors S2E and QSYM with statistical significance; on some benchmarks, it even achieves better performance than the source-based SymCC. Moreover, our tool has found a previously unknown vulnerability in the well-tested libarchive library, demonstrating its utility in testing real-world software."
   },
   {
-    "id": 6289,
+    "id": 6391,
     "year": 2021,
     "title": "Tales of Favicons and Caches: Persistent Tracking in Modern Browsers",
     "publication": "NDSS",
@@ -608,7 +608,7 @@
     "abstract": "The privacy threats of online tracking have garnered considerable attention in recent years from researchers and practitioners alike. This has resulted in users becoming more privacy-cautious and browser vendors gradually adopting countermeasures to mitigate certain forms of cookie-based and cookie-less tracking. Nonetheless, the complexity and feature-rich nature of modern browsers often lead to the deployment of seemingly innocuous functionality that can be readily abused by adversaries. In this paper we introduce a novel tracking mechanism that misuses a simple yet ubiquitous browser feature: favicons. In more detail, a website can track users across browsing sessions by storing a tracking identifier as a set of entries in the browser’s dedicated favicon cache, where each entry corresponds to a specific subdomain. In subsequent user visits the website can reconstruct the identifier by observing which favicons are requested by the browser while the user is automatically and rapidly redirected through a series of subdomains. More importantly, the caching of favicons in modern browsers exhibits several unique characteristics that render this tracking vector particularly powerful, as it is persistent (not affected by users clearing their browser data), non-destructive (reconstructing the identifier in subsequent visits does not alter the existing combination of cached entries), and even crosses the isolation of the incognito mode. We experimentally evaluate several aspects of our attack, and present a series of optimization techniques that render our attack practical. We find that combining our favicon- based tracking technique with immutable browser-fingerprinting attributes that do not change over time allows a website to reconstruct a 32-bit tracking identifier in 2 seconds. Furthermore, our attack works in all major browsers that use a favicon cache, including Chrome and Safari. Due to the severity of our attack we propose changes to browsers’ favicon caching behavior that can prevent this form of tracking, and have disclosed our findings to browser vendors who are currently exploring appropriate mitigation strategies."
   },
   {
-    "id": 6290,
+    "id": 6392,
     "year": 2021,
     "title": "TASE: Reducing Latency of Symbolic Execution with Transactional Memory",
     "publication": "NDSS",
@@ -616,7 +616,7 @@
     "abstract": "We present the design and implementation of a tool called TASE that uses transactional memory to reduce the latency of symbolic-execution applications with small amounts of symbolic state.\n Execution paths are executed natively while operating on concrete values, and only when execution encounters symbolic values (or modeled functions) is native execution suspended and interpretation begun.  Execution then returns to its native mode when symbolic values are no longer encountered.  The key innovations in the design of TASE are a technique for amortizing the cost of checking whether values are symbolic over few instructions, and the use of hardware-supported transactional memory (TSX) to implement native execution that rolls back with no effect when use of a symbolic value is detected (perhaps belatedly).  We show that TASE has the potential to dramatically improve some latency-sensitive applications of symbolic execution, such as methods to verify the behavior of a client in a client-server application."
   },
   {
-    "id": 6291,
+    "id": 6393,
     "year": 2021,
     "title": "The Bluetooth CYBORG: Analysis of the Full Human-Machine Passkey Entry AKE Protocol",
     "publication": "NDSS",
@@ -624,7 +624,7 @@
     "abstract": "In this paper, we  computationally analyze Passkey Entry in its entirety as a cryptographic authenticated key exchange (AKE) -- including user-protocol interactions that are typically ignored as out-of-band. To achieve this, we model the user-to-device channels, as well as the typical device-to-device channel, and adversarial control scenarios in both cases. In particular, we separately capture adversarial control of device displays on the initiating and responding devices as well as adversarial control of user input mechanisms using what we call a CYBORG model. The CYBORG model enables realistic real-world security analysis in light  of published attacks on user-mediated protocols such as Bluetooth that leverage malware and device displays. In light of this, we show that  all versions of Passkey Entry fail to provide security in our model. Finally, we demonstrate how slight modifications to the protocol would allow it to achieve stronger security guarantees for all current variants of passkey generation, as well as a newly proposed twofold mode of generation we term Dual Passkey Entry. These proof-of-concept modifications point to improved design approaches for user-mediated protocols. Finally, this work points to categories of vulnerabilities, based on compromise type,  that could be exploited in Bluetooth Passkey Entry."
   },
   {
-    "id": 6292,
+    "id": 6394,
     "year": 2021,
     "title": "To Err.Is Human: Characterizing the Threat of Unintended URLs in Social Media",
     "publication": "NDSS",
@@ -632,7 +632,7 @@
     "abstract": "To make their services more user friendly, online social-media platforms automatically identify text that corresponds to URLs and render it as clickable links.In this paper, we show that the techniques used by such services to recognize URLs are often too permissive and can result in unintended URLs being displayed in social network messages. Among others, we show that popular platforms (such as Twitter) will render text as a clickable URL if a user forgets a space after a full stop as the end of a sentence, and the first word of the next sentence happens to be a valid Top Level Domain. Attackers can take advantage of these unintended URLs by registering the corresponding domains and exposing millions of Twitter users to arbitrary malicious content. To characterize the threat that unintended URLs pose to social-media users, we perform a large-scale study of unintended URLs in tweets over a period of 7 months. By designing a classifier capable of differentiating between intended and unintended URLs posted in tweets, we find more than 26K unintended URLs posted by accounts with tens of millions of followers. As part of our study, we also register 45 unintended domains and quantify the traffic that attackers can get by merely registering the right domains at the right time. Finally, due to the severity of our findings, we propose a lightweight browser extension which can, on the fly, analyze the tweets that users compose and alert them of potentially unintended URLs and raise a warning, allowing users to fix their mistake before the tweet is posted."
   },
   {
-    "id": 6293,
+    "id": 6395,
     "year": 2021,
     "title": "Towards Understanding and Detecting Cyberbullying in Real-world Images",
     "publication": "NDSS",
@@ -640,7 +640,7 @@
     "abstract": "Cyberbullying has become widely recognized as a critical social problem plaguing today's Internet users. This problem involves perpetrators using Internet-based technologies to bully their victims by sharing cyberbullying-related content. To combat this problem, researchers have studied the factors associated with such content and proposed automatic detection techniques based on those factors. However, most of these studies have mainly focused on understanding the factors of textual content, such as comments and text messages, while largely overlooking the misuse of visual content in perpetrating cyberbullying. Recent technological advancements in the way users access the Internet have led to a new cyberbullying paradigm. Perpetrators can use visual media to bully their victims through sending and distributing images with cyberbullying content. As a first step to understand the threat of cyberbullying in images, we report in this paper a comprehensive study on the nature of images used in cyberbullying. We first collect a real-world cyberbullying images dataset with 19,300 valid images. We then analyze the images in our dataset and identify the factors related to cyberbullying images that can be used to build systems to detect cyberbullying in images. Our analysis of factors in cyberbullying images reveals that unlike traditional offensive image content (e.g., violence and nudity), the factors in cyberbullying images tend to be highly contextual. We further demonstrate the effectiveness of the factors by measuring several classifier models based on the identified factors. With respect to the cyberbullying factors identified in our work, the best classifier model based on multimodal classification achieves a mean detection accuracy of 93.36% on our cyberbullying images dataset."
   },
   {
-    "id": 6294,
+    "id": 6396,
     "year": 2021,
     "title": "Trust the Crowd: Wireless Witnessing to Detect Attacks on ADS-B-Based Air-Traffic Surveillance",
     "publication": "NDSS",
@@ -648,7 +648,7 @@
     "abstract": "Automatic Dependent Surveillance-Broadcast (ADS-B) has been widely adopted as the de facto standard for air-traffic surveillance. Aviation regulations require all aircraft to actively broadcast status reports containing identity, position, and movement information. However, the lack of security measures exposes ADS-B to cyberattacks by technically capable adversaries with the purpose of interfering with air safety. In this paper, we develop a non-invasive trust evaluation system to detect attacks on ADS-B-based air-traffic surveillance using real-world flight data as collected by an infrastructure of ground-based sensors. Taking advantage of the redundancy of geographically distributed sensors in a crowdsourcing manner, we implement verification tests to pursue security by wireless witnessing. At the core of our proposal is the combination of verification checks and Machine Learning (ML)-aided classification of reception patterns—such that user-collected data cross-validates the data provided by other users. Our system is non-invasive in the sense that it neither requires modifications on the deployed hardware nor the software protocols and only utilizes already available data. We demonstrate that our system can successfully detect GPS spoofing, ADS-B spoofing, and even Sybil attacks for airspaces observed by at least three benign sensors. We are further able to distinguish the type of attack, identify affected sensors, and tune our system to dynamically adapt to changing air-traffic conditions."
   },
   {
-    "id": 6295,
+    "id": 6397,
     "year": 2021,
     "title": "UIScope: Accurate, Instrumentation-free, and Visible Attack Investigation for GUI Applications",
     "publication": "NDSS",
@@ -656,7 +656,7 @@
     "abstract": "Existing attack investigation solutions for GUI applications suffer from a few limitations such as inaccuracy (because of the dependence explosion problem), requiring instrumentation, and providing very low visibility. Such limitations have hindered their widespread and practical deployment. In this paper, we present UIScope, a novel accurate, instrumentation-free, and visible attack investigation system for GUI applications. The core idea of UIScope is to perform causality analysis on both UI elements/events which represent users' perspective and low-level system events which provide detailed information of what happens under the hood, and then correlate system events with UI events to provide high accuracy and visibility. Long running processes are partitioned to individual UI transitions, to which low-level system events are attributed, making the results accurate. The produced graphs contain (causally related) UI elements with which users are very familiar, making them easily accessible. We deployed UIScope on 7 machines for a week, and also utilized UIScope to conduct an investigation of 6 real-world attacks. Our evaluation shows that compared to existing works, UIScope introduces negligible overhead (less than 1% runtime overhead and 3.05 MB event logs per hour on average) while UIScope can precisely identify attack provenance while offering users thorough visibility into the attack context."
   },
   {
-    "id": 6296,
+    "id": 6398,
     "year": 2021,
     "title": "Understanding and Detecting International Revenue Share Fraud",
     "publication": "NDSS",
@@ -664,7 +664,7 @@
     "abstract": "Premium rate phone numbers are often abused by malicious parties (e.g., via various phone scams, mobile malware) as a way to obtain monetary benefit. This benefit comes from the ‘revenue share’ mechanism that enables the owner of the premium rate number to receive some part of the call revenue for each minute of the call traffic generated towards this number. This work focuses on International Revenue Share Fraud (IRSF), which abuses regular international phone numbers as the so-called International Premium Rate Numbers (IPRN). IRSF often involves multiple parties (e.g., a fraudulent telecom operator in collaboration with a premium rate service provider) who collect and share the call revenue, and is usually combined with other fraud schemes to generate call traffic without payment. Although this fraud scheme has been around for several years, it remains to be one of the most common fraud schemes, reportedly leading to billions of dollars of losses every year. In this paper we explore the IRSF ecosystem from multiple angles, via: (i) A telephony honeypot that observes IRSF attempts towards an unused phone number range (i.e., a phone number gray space), (ii) A dataset of more than 3 Million test IPRNs and more than 206K test call logs we collected from several online IPRN service providers during 4 years, and finally, (iii) A real- world call data set from a small European operator, involving 689K call records, that we analyze to find IRSF cases. By leveraging our observations from (ii), we propose several Machine Learning features that can be used in IRSF detection. We validate our approach on the dataset in (iii), achieving 98% accuracy with a 0.28% false positive rate in detecting the fraudulent calls."
   },
   {
-    "id": 6297,
+    "id": 6399,
     "year": 2021,
     "title": "Understanding the Growth and Security Considerations of ECS",
     "publication": "NDSS",
@@ -672,7 +672,7 @@
     "abstract": "The Domain Name System (DNS) is fundamental to communication on the Internet. Therefore, any proposed changes or extensions to DNS can have profound consequences on network communications. In this paper, we explore the implications of a recent extension to DNS called EDNS Client Subnet (ECS). This extension extends the visibility of client information to more domain operators by providing a prefix of a client’s IP address to DNS nameservers above the recursive nameserver. This raises numerous questions about the impact of such changes on network communications that rely on DNS.In this paper, we present the results of a longitudinal study that measures the deployment of ECS using several DNS vantage points. We show that, despite being an optional extension, ECS has seen steady adoption over time—even for sites that do not benefit from its use. Additionally, we observe that the client subnet provided by ECS may provide less privacy than originally thought, with most subnets corresponding to a /24 CIDR or smaller. Lastly, we observe several positive and negative consequences resulting from the introduction of DNS. For example, DNS can help aid security efforts when analyzing DNS data above the recursive due to the addition of client network information. However, that same client information has the potential to exacerbate existing security issues like DNS leakage. Ultimately, this paper discusses how small changes to fundamental protocols can result in unintended consequences that can be both positive and negative."
   },
   {
-    "id": 6298,
+    "id": 6400,
     "year": 2021,
     "title": "Understanding Worldwide Private Information Collection on Android",
     "publication": "NDSS",
@@ -680,7 +680,7 @@
     "abstract": "Mobile phones enable the collection of a wealth of private information, from unique identifiers (e.g., email addresses), to a user’s location, to their text messages. This information can be harvested by apps and sent to third parties, which can use it for a variety of purposes. In this paper we perform the largest study of private information collection (PIC) on Android to date. Leveraging an anonymized dataset collected from the customers of a popular mobile security product, we analyze the flows of sensitive information generated by 2.1M unique apps installed by 17.3M users over a period of 21 months between 2018 and 2019. We find that 87.2% of all devices send private information to at least five different domains, and that actors active in different regions (e.g., Asia compared to Europe) are interested in collecting different types of information. The United States (62% of the total) and China (7% of total flows) are the countries that collect most private information. Our findings raise issues regarding data regulation, and would encourage policymakers to further regulate how private information is used by and shared among the companies and how accountability can be truly guaranteed."
   },
   {
-    "id": 6299,
+    "id": 6401,
     "year": 2021,
     "title": "WATSON: Abstracting Behaviors from Audit Logs via Aggregation of Contextual Semantics",
     "publication": "NDSS",
@@ -688,7 +688,7 @@
     "abstract": "Endpoint monitoring solutions are widely deployed in today’s enterprise environments to support advanced attack detection and investigation. These monitors continuously record system-level activities as audit logs and provide deep visibility into security incidents. Unfortunately, to recognize behaviors of interest and detect potential threats, cyber analysts face a semantic gap between low-level audit events and high-level system behaviors. To bridge this gap, existing work largely matches streams of audit logs against a knowledge base of rules that describe behaviors. However, specifying such rules heavily relies on expert knowledge. In this paper, we present Watson, an automated approach to abstracting behaviors by inferring and aggregating the semantics of audit events. Watson uncovers the semantics of events through their usage context in audit logs. By extracting behaviors as connected system operations, Watson then combines event semantics as the representation of behaviors. To reduce analysis workload, Watson further clusters semantically similar behaviors and distinguishes the representatives for analyst investigation. In our evaluation against both benign and malicious behaviors, Watson exhibits high accuracy for behavior abstraction. Moreover, Watson can reduce analysis workload by two orders of magnitude for attack investigation."
   },
   {
-    "id": 6300,
+    "id": 6402,
     "year": 2021,
     "title": "Who's Hosting the Block Party? Studying Third-Party Blockage of CSP and SRI",
     "publication": "NDSS",
@@ -696,7 +696,7 @@
     "abstract": "The Web has grown into the most widely used application platform for our daily lives.  First-party Web applications thrive due to many different third parties they rely on to provide auxiliary functionality, like maps or ads, to their sites. In this paper, we set out to understand to what extent this outsourcing has adverse effects on two key security mechanisms, namely Content Security Policy (CSP; to mitigate XSS) and Subresource Integrity (SRI; to mitigate third-party compromises) by conducting a longitudinal study over 12 weeks on 10,000 top sites.Under the assumption that a first party wants to deploy CSP and SRI and is able to make their code base compliant with these mechanisms, we assess how many sites could fully deploy the mechanisms without cooperation from their third parties. For those unable to do so without cooperation, we also measure how many third parties would jointly have to make their code compliant to enable first-party usage of CSP and SRI.To more accurately depict trust relations, we rely on holistic views into inclusion chains within all pages of the investigated sites. In addition, based on a combination of heuristics and manual validation, we identify different eTLD+1s belonging to the same business entity, allowing us to more accurately discerning parties from each other. Doing so, we show that the vast majority of sites includes third-party code which necessitates the use of unsafe-inline (75%) or unsafe-eval (61%), or makes deployment of strict-dynamic impossible (76%) without breakage of functionality. For SRI, based on the analysis of a single snapshot (within less than 12 hours), we also show that more than half of all sites cannot fully rely on SRI to protect them from third-party compromise due to randomized third-party content."
   },
   {
-    "id": 6301,
+    "id": 6403,
     "year": 2021,
     "title": "WINNIE : Fuzzing Windows Applications with Harness Synthesis and Fast Cloning",
     "publication": "NDSS",
@@ -704,7 +704,7 @@
     "abstract": "Fuzzing is an emerging technique to automatically validate programs and uncover bugs. It has been widely used to test many programs and has found thousands of security vulnerabilities. However, existing fuzzing efforts are mainly centered around Unix-like systems, as Windows imposes unique challenges for fuzzing: a closed-source ecosystem, the heavy use of graphical interfaces and the lack of fast process cloning machinery.In this paper, we propose two solutions to address the challenges Windows fuzzing faces. Our system, WINNIE, first tries to synthesize a harness for the application, a simple program that directly invokes target functions, based on sample executions. It then tests the harness, instead of the original complicated program, using an efficient implementation of fork on Windows. Using these techniques, WINNIE can bypass irrelevant GUI code to test logic deep within the application. We used WINNIE to fuzz 59 closed-source Windows binaries, and it successfully generated valid fuzzing harnesses for all of them. In our evaluation, WINNIE can support 2.2x more programs than existing Windows fuzzers could, and identified 3.9x more program states and achieved 26.6x faster execution. In total, WINNIE found 61 unique bugs in 32 Windows binaries."
   },
   {
-    "id": 6302,
+    "id": 6404,
     "year": 2021,
     "title": "Your Phone is My Proxy: Detecting and Understanding Mobile Proxy Networks",
     "publication": "NDSS",
@@ -712,7 +712,7 @@
     "abstract": "Residential proxy has emerged as a service gaining popularity recently, in which proxy providers relay their customers’ network traffic through millions of proxy peers under their control. We find that many of these proxy peers are mobile devices, whose role in the proxy network can have significant security implications since mobile devices tend to be privacy- and resource-sensitive. However, little effort has been made so far to understand the extent of their involvement, not to mention how these devices are recruited by the proxy network and what security and privacy risks they may pose.In this paper, we report the first measurement study on the mobile proxy ecosystem. Our study was made possible by a novel measurement infrastructure, which enabled us to identify proxy providers, to discover proxy SDKs (software development kits), to detect Android proxy apps built upon the proxy SDKs, to harvest proxy IP addresses, and to understand proxy traffic. The information collected through this infrastructure has brought to us new understandings of this ecosystem and important security discoveries. More specifically, 4 proxy providers were found to offer app developers mobile proxy SDKs as a competitive app monetization channel, with $50K per month per 1M MAU (monthly active users). 1,701 Android APKs (belonging to 963 Android apps) turn out to have integrated those proxy SDKs, with most of them available on Google Play with at least 300M installations in total. Furthermore, 48.43% of these APKs are flagged by at least 5 anti-virus engines as malicious, which could explain why 86.60% of the 963 Android apps have been removed from Google Play by Oct 2019. Besides, while these apps display user consent dialogs on traffic relay, our user study indicates that the user consent texts are quite confusing. We even discover a proxy SDK that stealthily relays traffic without showing any notifications. We also captured 625K cellular proxy IPs, along with a set of suspicious activities observed in proxy traffic such as ads fraud. We have reported our findings to affected parties, offered suggestions, and proposed the methodologies to detect proxy apps and proxy traffic."
   },
   {
-    "id": 6303,
+    "id": 6405,
     "year": 2021,
     "title": "Доверя́й, но проверя́й: SFI safety for native-compiled Wasm",
     "publication": "NDSS",

@@ -21,8 +21,8 @@ const routes = [
                 component: () => import('@/views/paper/Trends.vue'),
             },
             {
-                path: '/paper/awards',
-                component: () => import('@/views/paper/Awards.vue'),
+                path: '/reputation/awards',
+                component: () => import('@/views/reputation/Awards.vue'),
             },
             {
                 path: '/paper/view-abstract',
@@ -35,6 +35,10 @@ const routes = [
             {
                 path: '/misc/about',
                 component: () => import('@/views/misc/About.vue'),
+            },
+            {
+                path: '/misc/i18n-test',
+                component: () => import('@/views/misc/I18nTest.vue'),
             },
         ]
     }

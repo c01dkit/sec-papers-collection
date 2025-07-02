@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-9 card">
-            <h1>Timeline</h1>
+            <h1>{{ t('about.timeline') }}</h1>
             <Divider/>
             <div class="mb-5 " >
                 <ScrollPanel
@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-span-3 card "  style="height: calc(100vh - 11rem);">
-            <h1>Sponsors <i class="pi pi-heart"></i></h1>
+            <h1>{{ t('about.sponsors') }} <i class="pi pi-heart"></i></h1>
             <Divider/>
             <div class="flex flex-col gap-3">
             <div v-for="item in sponsors" :key="item.date" class="flex flex-row justify-between">
@@ -45,19 +45,43 @@
 
 <script setup>
 import { AboutService } from '@/service/AboutService.js';
-import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { usePageTitle } from '@/composables/useI18n';
+import { languageEmitter } from '@/locales';
+import { onMounted, ref, onUnmounted } from 'vue';
 
+const { t, locale } = useI18n();
 const events = ref([])
 const sponsors = ref([])
 
-onMounted(()=> {
-    AboutService.getUpdateTimelineData().then((res) => {
+// 设置页面标题
+usePageTitle('menu.about');
+
+// 加载数据的函数
+const loadData = () => {
+    AboutService.getUpdateTimelineData(locale.value).then((res) => {
         events.value = res;
     });
     AboutService.getSponsorData().then((res) => {
         sponsors.value = res;
     });
-})
+};
+
+// 语言切换处理
+const handleLanguageChange = (newLocale) => {
+    AboutService.getUpdateTimelineData(newLocale).then((res) => {
+        events.value = res;
+    });
+};
+
+onMounted(() => {
+    loadData();
+    languageEmitter.on(handleLanguageChange);
+});
+
+onUnmounted(() => {
+    languageEmitter.off(handleLanguageChange);
+});
 
 </script>
 
