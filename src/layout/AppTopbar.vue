@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 import { languageEmitter } from '@/locales';
 import { ref, onMounted, onUnmounted } from 'vue';
 import AppConfigurator from './AppConfigurator.vue';
-import '@/assets/demo/flags/flags.css';
 
 const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout();
 const { locale, t } = useI18n();
@@ -118,7 +117,7 @@ onUnmounted(() => {
                         <i class="pi pi-github"></i>
                         <span>Github</span>
                     </button>
-                    <button title="Feedback" type="button" @click="openURL('https://docs.google.com/forms/d/e/1FAIpQLSdCJoJiUNJmRN7AXvdh6TbP3sZE6Srgj5hMRlQBqTkq2NiG4Q/viewform?usp=sf_link')" class="layout-topbar-action">
+                    <button :title="t('common.feedback')" type="button" @click="openURL('https://docs.google.com/forms/d/e/1FAIpQLSdCJoJiUNJmRN7AXvdh6TbP3sZE6Srgj5hMRlQBqTkq2NiG4Q/viewform?usp=sf_link')" class="layout-topbar-action">
                             <i class="pi pi-inbox"></i>
                             <span>Feedback</span>
                     </button>

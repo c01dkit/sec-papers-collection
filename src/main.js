@@ -11,6 +11,7 @@ import AnimateOnScroll from 'primevue/animateonscroll';
 import Ripple from 'primevue/ripple';
 import '@/assets/styles.scss';
 import '@/assets/tailwind.css';
+// import '@/assets/demo/flags/flags.css'; // 国旗样式
 import 'quill/dist/quill.snow.css'; // Quill样式
 import 'quill/dist/quill.core.css'; // Quill核心样式
 import { definePreset } from '@primevue/themes';

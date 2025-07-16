@@ -15,34 +15,34 @@
             :globalFilterFields="['title']"
             :page-link-size="5"
             paginator-template="RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport JumpToPageDropdown"
-            current-page-report-template="Showing {first} to {last} of {totalRecords} papers. Jump to page"
+            :current-page-report-template="currentPageReportTemplate"
             :rows-per-page-options="[15,30,50,100]"
         >
 
             <template #header>
                 <div class="flex justify-between">
                     <div>
-                        <Button type="button" icon="pi pi-filter-slash" label="Clear Filters" outlined @click="initFilters()" />
+                        <Button type="button" icon="pi pi-filter-slash" :label="$t('search.clearFilters')" outlined @click="initFilters()" />
                     </div>
                     <IconField>
                         <InputIcon>
                             <i class="pi pi-search" />
                         </InputIcon>
-                        <InputText v-model="filters['global'].value" placeholder="Search" />
+                        <InputText v-model="filters['global'].value" :placeholder="$t('search.searchPlaceholder')" />
                     </IconField>
                 </div>
             </template>
 
-            <template #empty>No paper found.</template>
+            <template #empty>{{ $t('search.noResults') }}</template>
 
             <Column header="ID" field="id"/>
 
-            <Column header="Publication" filter-field="publication" :show-filter-match-modes="false" :filter-menu-style="{'min-width': '20rem'}">
+            <Column :header="$t('search.publication')" filter-field="publication" :show-filter-match-modes="false" :filter-menu-style="{'min-width': '20rem'}">
                 <template #body="{ data }">
                     {{ data.publication }}
                 </template>
                 <template #filter="{ filterModel }">
-                    <MultiSelect display="chip" v-model="filterModel.value" :options="publicationList" option-label="name" option-value="name" placeholder="any">
+                    <MultiSelect display="chip" v-model="filterModel.value" :options="publicationList" option-label="name" option-value="name" :placeholder="$t('search.anyPublication')">
                         <template #option="slotProps">
                             <div class="flex items-center gap-2">
                                 <span>{{ slotProps.option.name }}</span>
@@ -50,14 +50,18 @@
                         </template>
                         <template #footer>
                             <div class="py-2 px-4">
-                                <b>{{ filterModel.value ? filterModel.value.length : 0 }}</b> publication{{ (filterModel.value ? filterModel.value.length : 0) > 1 ? 's' : '' }} selected.
+                                <b>{{ filterModel.value ? filterModel.value.length : 0 }}</b> 
+                                {{ $i18n.locale === 'zh' 
+                                    ? '已选择 ' + (filterModel.value ? filterModel.value.length : 0) + ' 个会议/期刊。'
+                                    : (filterModel.value ? filterModel.value.length : 0) + ' publication' + ((filterModel.value ? filterModel.value.length : 0) > 1 ? 's' : '') + ' selected.'
+                                }}
                             </div>
                         </template>
                     </MultiSelect>
                 </template>
             </Column>
 
-            <Column header="Title">
+            <Column :header="$t('search.title')">
                 <template #body="{ data }">
                     <span >{{ highlightSearchPatterns(data.title,1,filters.global)}}</span>
                     <span class="text-primary font-bold">{{ highlightSearchPatterns(data.title,2,filters.global)}}</span>
@@ -65,12 +69,12 @@
                 </template>
             </Column>
 
-            <Column header="Year" filter-field="year" :show-filter-match-modes="false">
+            <Column :header="$t('search.year')" filter-field="year" :show-filter-match-modes="false">
                 <template #body="{ data }">
                     {{ data.year }}
                 </template>
                 <template #filter="{ filterModel }">
-                    <MultiSelect v-model="filterModel.value" :options="publicationYears" option-label="name" option-value="name" placeholder="any">
+                    <MultiSelect v-model="filterModel.value" :options="publicationYears" option-label="name" option-value="name" :placeholder="$t('search.anyYear')">
                         <template #option="slotProps">
                             <div class="flex items-center gap-2">
                                 <span>{{ slotProps.option.name }}</span>
@@ -80,7 +84,7 @@
                 </template>
             </Column>
 
-            <Column header="Paper">
+            <Column :header="$t('search.paper')">
                 <template #body="slotProps">
                     <div class="flex items-center ">
                         <Button v-if="slotProps.data.paper!=='#'" type="button" icon="pi pi-paperclip text-primary-300 " text size="small" :disabled="slotProps.data.paper==='#'" @click="openNewWebsite(slotProps.data.paper)"></Button>
@@ -123,11 +127,11 @@ export default {
                 .then(data=>{
                     this.paperData = data
                     this.loaded = true
-                    this.footerHint = this.paperData.length + ' papers in total.'
+                    this.footerHint = this.$t('search.totalPapers', { count: this.paperData.length })
                 })
                 .catch(error=>{
                     console.log(error)
-                    this.footerHint = this.paperData.length + ' papers in preview version. Something went wrong in your network, maybe.'
+                    this.footerHint = this.$t('search.previewMessage', { count: this.paperData.length })
                 })
                 .finally(()=>{
                     this.loading = false
@@ -154,7 +158,12 @@ export default {
         },
         onRowSelect(event) {
             navigator.clipboard.writeText(event.data.title).then(()=>{
-                this.$toast.add({ severity: 'info', summary: 'Notice', detail: 'Paper title copied!', life: 3000 });
+                this.$toast.add({ 
+                    severity: 'info', 
+                    summary: this.$t('common.notice'), 
+                    detail: this.$t('search.copied'), 
+                    life: 3000 
+                });
             })
         },
         highlightSearchPatterns(data,step,filterModel) {
@@ -206,6 +215,16 @@ export default {
             for (let year in this.paperStatics.byYear) {
                 this.publicationYears.push({name:parseInt(year)})
             }
+        },
+        updateFooterHint() {
+            if (this.loaded) {
+                this.footerHint = this.$t('search.totalPapers', { count: this.paperData.length });
+            } else {
+                this.footerHint = this.$t('search.previewMessage', { count: this.paperData.length });
+            }
+        },
+        updatePageTitle() {
+            document.title = this.$t('menu.search') + ' - ' + this.$t('common.title');
         }
     },
     data(){
@@ -216,7 +235,7 @@ export default {
             paperData: paperData,
             paperStatics:paperStatics,
             paperNum: paperData.length,
-            footerHint: paperData.length + ' papers in total. This is a preview version for fast loading. The full dataset is loading now...',
+            footerHint: this.$t ? this.$t('search.previewMessage', { count: paperData.length }) : paperData.length + ' papers in total. This is a preview version for fast loading. The full dataset is loading now...',
             selectedPaper: null,
             publicationList: [],
             publicationYears: [],
@@ -227,10 +246,26 @@ export default {
     },
     mounted() {
         this.initTableMeta()
+        this.updateFooterHint()
+        this.updatePageTitle()
         this.loadFullData()
     },
+    beforeUnmount() {
+        // 恢复默认标题
+        document.title = this.$t('common.title');
+    },
+    watch: {
+        '$i18n.locale'() {
+            this.updateFooterHint();
+            this.updatePageTitle();
+        }
+    },
     computed: {
-
+        currentPageReportTemplate() {
+            return this.$i18n.locale === 'zh' 
+                ? '显示第 {first} 到 {last} 条，共 {totalRecords} 篇论文。跳转到页面'
+                : 'Showing {first} to {last} of {totalRecords} papers. Jump to page';
+        }
     },
 
 };
