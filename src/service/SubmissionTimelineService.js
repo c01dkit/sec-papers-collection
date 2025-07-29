@@ -39,34 +39,32 @@ export const SubmissionTimelineService = {
                 publication: "USENIX Security 2026",
                 timezone: "Not clearly specified",
                 url: 'https://www.usenix.org/conference/usenixsecurity26',
-                update: '2025-07-02',
+                update: '2025-07-29',
                 date: 'August 12–14, 2026',
                 place: 'Baltimore Marriott Waterfront in Baltimore, MD, USA',
                 cycles: [
                     {
                         name: 'Cycle 1',
                         ddls: [
-                            {value: "1", stage: "Paper registrations", date: "2025-08-19"},
+                            {value: "1", stage: "Mandatory registration", date: "2025-08-19"},
                             {value: "2", stage: "Paper submissions", date: "2025-08-26"},
-                            // {value: "3", stage: "Rebuttal period", date: "2024-11-18 ~ 2024-11-25"},
-                            // {value: "4", stage: "Notification to authors", date: "2024-12-11"},
-                            // {value: "5", stage: "Shepherding/revision period", date: "2024-12-12 ~ 2025-01-16"},
-                            // {value: "6", stage: "Artifacts due for availability verification", date: "2025-01-16"},
-                            // {value: "7", stage: "Shepherding/revision author notification", date: "2025-01-23"},
-                            // {value: "8", stage: "Final papers due", date: "2025-01-30"}
+                            {value: "3", stage: "Early reject notification", date: "2025-10-07"},
+                            {value: "4", stage: "Rebuttal period", date: "2025-11-06 ~ 2025-11-13"},
+                            {value: "5", stage: "Notification to authors", date: "2025-12-04"},
+                            {value: "6", stage: "Shepherded approval due", date: "2025-12-18"},
+                            {value: "7", stage: "Final papers due", date: "2026-01-15"}
                         ]
                     },
                     {
                         name: 'Cycle 2',
                         ddls: [
-                            {value: "1", stage: "Paper registrations", date: "2026-01-29"},
+                            {value: "1", stage: "Mandatory registration", date: "2026-01-29"},
                             {value: "2", stage: "Paper submissions", date: "2026-02-05"},
-                            // {value: "3", stage: "Rebuttal period", date: "2025-04-07 ~ 2025-04-14"},
-                            // {value: "4", stage: "Notification to authors", date: "2025-04-30"},
-                            // {value: "5", stage: "Shepherding/revision period", date: "2025-05-01 ~ 2025-05-29"},
-                            // {value: "6", stage: "Artifacts due for availability verification", date: "2025-05-29"},
-                            // {value: "7", stage: "Shepherding/revision author notification", date: "2025-06-05"},
-                            // {value: "8", stage: "Final papers due", date: "2025-06-12" }
+                            {value: "3", stage: "Early reject notification", date: "2026-03-17"},
+                            {value: "4", stage: "Rebuttal period", date: "2026-04-16 ~ 2026-04-23"},
+                            {value: "5", stage: "Notification to authors", date: "2026-05-14"},
+                            {value: "6", stage: "Shepherded approval due", date: "2026-05-28"},
+                            {value: "7", stage: "Final papers due", date: "2026-06-11"}
                         ]
                     }
                 ]
