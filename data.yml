@@ -162,11 +162,16 @@ usenix_security:
   sites:
     - year: 2025
       name: '2025'
-      url: https://www.usenix.org/conference/usenixsecurity25/cycle1-accepted-papers
-      title_xpath: //article/h2/a
-      link_xpath: //article/h2/a/@href
+      #      url: https://www.usenix.org/conference/usenixsecurity25/cycle1-accepted-papers
+      #      title_xpath: //article/h2/a
+      #      link_xpath: //article/h2/a/@href
+      #      link_prefix: https://www.usenix.org
+      #      abstract_xpath: //article/h2/a/../../div/div/div[last()]
+      url: https://www.usenix.org/conf%C3%A9rence/usenixsecurity25/technical-sessions
+      title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
+      link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
+      abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
       link_prefix: https://www.usenix.org
-      abstract_xpath: //article/h2/a/../../div/div/div[last()]
     -
       year: 2024
       name: '2024'

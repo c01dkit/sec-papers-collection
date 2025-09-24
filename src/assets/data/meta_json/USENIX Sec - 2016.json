@@ -1,6 +1,6 @@
 [
   {
-    "id": 5627,
+    "id": 5820,
     "year": 2016,
     "title": "Crashing Drones and Hijacked Cameras: CyberTrust Meets CyberPhysical",
     "publication": "USENIX Sec",
@@ -8,7 +8,7 @@
     "abstract": "Cyber-physical systems are engineered systems that require tight conjoining of and coordination between the computational (discrete) and the physical (continuous). Cyber-physical systems are rapidly penetrating every aspect of our lives, with potential impact on sectors critical to national security and competitiveness, including aerospace, automotive, chemical production, civil infrastructure, energy, finance, healthcare, manufacturing, materials, and transportation. As these systems fulfill the promise of the Internet of Things, smart cities, household robots, and personalized medicine, we need to ensure they are trustworthy: reliable, secure, and privacy-preserving. This talk will look at cyber-physical systems from the lens of trustworthy computing. Throughout my talk, I will raise research challenges for how to make cyber-physical systems trustworthy."
   },
   {
-    "id": 5628,
+    "id": 5821,
     "year": 2016,
     "title": "Flip Feng Shui: Hammering a Needle in the Software Stack",
     "publication": "USENIX Sec",
@@ -16,7 +16,7 @@
     "abstract": "We introduce Flip Feng Shui (FFS), a new exploitation vector which allows an attacker to induce bit flips over arbitrary physical memory in a fully controlled way. FFS relies on hardware bugs to induce bit flips over memory and on the ability to surgically control the physical memory layout to corrupt attacker-targeted data anywhere in the software stack. We show FFS is possible today with very few constraints on the target data, by implementing an instance using the Rowhammer bug and memory deduplication (an OS feature widely deployed in production). Memory deduplication allows an attacker to reverse-map any physical page into a virtual page she owns as long as the page’s contents are known. Rowhammer, in turn, allows an attacker to flip bits in controlled (initially unknown) locations in the target page.\nWe show FFS is extremely powerful: a malicious VM in a practical cloud setting can gain unauthorized access to a co-hosted victim VM running OpenSSH. Using FFS, we exemplify end-to-end attacks breaking OpenSSH public-key authentication, and forging GPG signatures from trusted keys, thereby compromising the Ubuntu/Debian update mechanism. We conclude by discussing mitigations and future directions for FFS attacks."
   },
   {
-    "id": 5629,
+    "id": 5822,
     "year": 2016,
     "title": "One Bit Flips, One Cloud Flops: Cross-VM Row Hammer Attacks and Privilege Escalation",
     "publication": "USENIX Sec",
@@ -24,7 +24,7 @@
     "abstract": "Row hammer attacks exploit electrical interactions between neighboring memory cells in high-density dynamic random-access memory (DRAM) to induce memory errors. By rapidly and repeatedly accessing DRAMs with specific patterns, an adversary with limited privilege on the target machine may trigger bit flips in memory regions that he has no permission to access directly. In this paper, we explore row hammer attacks in cross-VM settings, in which a malicious VM exploits bit flips induced by row hammer attacks to crack memory isolation enforced by virtualization. To do so with high fidelity, we develop novel techniques to determine the physical address mapping in DRAM modules at runtime (to improve the effectiveness of double-sided row hammer attacks), methods to exhaustively hammer a large fraction of physical memory from a guest VM (to collect exploitable vulnerable bits), and innovative approaches to break Xen paravirtualized memory isolation (to access arbitrary physical memory of the shared machine). Our study also suggests that the demonstrated row hammer attacks are applicable in modern public clouds where Xen paravirtualization technology is adopted. This shows that the presented cross-VM row hammer attacks are of practical importance."
   },
   {
-    "id": 5630,
+    "id": 5823,
     "year": 2016,
     "title": "PIkit: A New Kernel-Independent Processor-Interconnect Rootkit",
     "publication": "USENIX Sec",
@@ -32,7 +32,7 @@
     "abstract": "The goal of rootkit is often to hide malicious software running on a compromised machine. While there has been significant amount of research done on different rootkits, we describe a new type of rootkit that is kernel-independent – i.e., no aspect of the kernel is modified and no code is added to the kernel address space to install the rootkit. In this work, we present PIkit – Processor-Interconnect rootkit that exploits the vulnerable hardware features within multi-socket servers that are commonly used in datacenters and high-performance computing. In particular, PIkit exploits the DRAM address mapping table structure that determines the destination node of a memory request packet in the processorinterconnect. By modifying this mapping table appropriately, PIkit enables access to victim’s memory address region without proper permission. Once PIkit is installed, only user-level code or payload is needed to carry out malicious activities. The malicious payload mostly consists of memory read and/or write instructions that appear like “normal” user-space memory accesses and it becomes very difficult to detect such malicious payload. We describe the design and implementation of PIkit on both an AMD and an Intel x86 multi-socket servers that are commonly used. We discuss different malicious activities possible with PIkit and limitations of PIkit, as well as possible software and hardware solutions to PIkit."
   },
   {
-    "id": 5631,
+    "id": 5824,
     "year": 2016,
     "title": "Verifying Constant-Time Implementations",
     "publication": "USENIX Sec",
@@ -40,7 +40,7 @@
     "abstract": "The constant-time programming discipline is an effective countermeasure against timing attacks, which can lead to complete breaks of otherwise secure systems. However, adhering to constant-time programming is hard on its own, and extremely hard under additional efficiency and legacy constraints. This makes automated verification of constant-time code an essential component for building secure software.\n\nWe propose a novel approach for verifying constanttime security of real-world code. Our approach is able to validate implementations that locally and intentionally violate the constant-time policy, when such violations are benign and leak no more information than the public outputs of the computation. Such implementations, which are used in cryptographic libraries to obtain important speedups or to comply with legacy APIs, would be declared insecure by all prior solutions.\n\nWe implement our approach in a publicly available, cross-platform, and fully automated prototype, ct-verif, that leverages the SMACK and Boogie tools and verifies optimized LLVM implementations. We present verification results obtained over a wide range of constant-time components from the NaCl, OpenSSL, FourQ and other off-the-shelf libraries. The diversity and scale of our examples, as well as the fact that we deal with top-level APIs rather than being limited to low-level leaf functions, distinguishes ct-verif from prior tools.\n\nOur approach is based on a simple reduction of constant-time security of a program P to safety of a product program Q that simulates two executions of P. We formalize and verify the reduction for a core high-level language using the Coq proof assistant."
   },
   {
-    "id": 5632,
+    "id": 5825,
     "year": 2016,
     "title": "Secure, Precise, and Fast Floating-Point Operations on x86 Processors",
     "publication": "USENIX Sec",
@@ -48,7 +48,7 @@
     "abstract": "Floating-point computations introduce several side channels. This paper describes the first solution that closes these side channels while preserving the precision of non-secure executions. Our solution exploits microarchitectural features of the x86 architecture along with novel compilation techniques to provide low overhead.\n\nBecause of the details of x86 execution, the evaluation of floating-point side channel defenses is quite involved, but we show that our solution is secure, precise, and fast. Our solution closes more side channels than any prior solution. Despite the added security, our solution does not compromise on the precision of the floating-point operations. Finally, for a set of microkernels, our solution is an order of magnitude more efficient than the previous solution."
   },
   {
-    "id": 5633,
+    "id": 5826,
     "year": 2016,
     "title": "überSpark: Enforcing Verifiable Object Abstractions for Automated Compositional Security Analysis of a Hypervisor",
     "publication": "USENIX Sec",
@@ -56,7 +56,7 @@
     "abstract": "We present überSpark (üSpark), an innovative architecture for compositional verification of security properties of extensible hypervisors written in C and Assembly. üSpark comprises two key ideas: (i) endowing low-level system software with abstractions found in higher-level languages (e.g., objects, interfaces, function-call semantics for implementations of interfaces, access control on interfaces, concurrency and serialization), enforced using a combination of commodity hardware mechanisms and lightweight static analysis; and (ii) interfacing with platform hardware by programming in Assembly using an idiomatic style (called CASM) that is verifiable via tools aimed at C, while retaining its performance and low-level access to hardware. After verification, the C code is compiled using a certified compiler while the CASM code is translated into its corresponding Assembly instructions. Collectively, these innovations enable compositional verification of security invariants without sacrificing performance. We validate üSpark by building and verifying security invariants of an existing open-source commodity x86 micro-hypervisor and several of its extensions, and demonstrating only minor performance overhead with low verification costs."
   },
   {
-    "id": 5634,
+    "id": 5827,
     "year": 2016,
     "title": "Undermining Information Hiding (and What to Do about It)",
     "publication": "USENIX Sec",
@@ -64,7 +64,7 @@
     "abstract": "In the absence of hardware-supported segmentation, many state-of-the-art defenses resort to “hiding” sensitive information at a random location in a very large address space. This paper argues that information hiding is a weak isolation model and shows that attackers can find hidden information, such as CPI’s SafeStacks, in seconds—by means of thread spraying. Thread spraying is a novel attack technique which forces the victim program to allocate many hidden areas. As a result, the attacker has a much better chance to locate these areas and compromise the defense. We demonstrate the technique by means of attacks on Firefox, Chrome, and MySQL. In addition, we found that it is hard to remove all sensitive information (such as pointers to the hidden region) from a program and show how residual sensitive information allows attackers to bypass defenses completely.\n\nWe also show how we can harden information hiding techniques by means of an Authenticating Page Mapper (APM) which builds on a user-level page-fault handler to authenticate arbitrary memory reads/writes in the virtual address space. APM bootstraps protected applications with a minimum-sized safe area. Every time the program accesses this area, APM authenticates the access operation, and, if legitimate, expands the area on demand. We demonstrate that APM hardens information hiding significantly while increasing the overhead, on average, 0.3% on baseline SPEC CPU 2006, 0.0% on SPEC with SafeStack and 1.4% on SPEC with CPI."
   },
   {
-    "id": 5635,
+    "id": 5828,
     "year": 2016,
     "title": "Poking Holes in Information Hiding",
     "publication": "USENIX Sec",
@@ -72,7 +72,7 @@
     "abstract": "ASLR is no longer a strong defense in itself, but it still serves as a foundation for sophisticated defenses that use randomization for pseudo-isolation. Crucially, these defenses hide sensitive information (such as shadow stacks and safe regions) at a random position in a very large address space. Previous attacks on randomization-based information hiding rely on complicated side channels and/or probing of the mapped memory regions. Assuming no weaknesses exist in the implementation of hidden regions, the attacks typically lead to many crashes or other visible side-effects. For this reason, many researchers still consider the pseudo-isolation offered by ASLR sufficiently strong in practice.\n\nWe introduce powerful new primitives to show that this faith in ASLR-based information hiding is misplaced, and that attackers can break ASLR and find hidden regions on 32 bit and 64 bit Linux systems quickly with very few malicious inputs. Rather than building on memory accesses that probe the allocated memory areas, we determine the sizes of the unallocated holes in the address space by repeatedly allocating large chunks of memory. Given the sizes, an attacker can infer the location of the hidden region with few or no side-effects. We show that allocation oracles are pervasive and evaluate our primitives on real-world server applications."
   },
   {
-    "id": 5636,
+    "id": 5829,
     "year": 2016,
     "title": "What Cannot Be Read, Cannot Be Leveraged? Revisiting Assumptions of JIT-ROP Defenses",
     "publication": "USENIX Sec",
@@ -80,7 +80,7 @@
     "abstract": "Despite numerous attempts to mitigate code-reuse attacks, Return-Oriented Programming (ROP) is still at the core of exploiting memory corruption vulnerabilities. Most notably, in JIT-ROP, an attacker dynamically searches for suitable gadgets in executable code pages, even if they have been randomized. JIT-ROP seemingly requires that (i) code is readable (to find gadgets at run time) and (ii) executable (to mount the overall attack). As a response, Execute-no-Read (XnR) schemes have been proposed to revoke the read privilege of code, such that an adversary can no longer inspect the code after finegrained code randomizations have been applied.\n\nWe revisit these “inherent” requirements for mounting JIT-ROP attacks. We show that JIT-ROP attacks can be mounted without ever reading any code fragments, but instead by injecting predictable gadgets via a JIT compiler by carefully triggering useful displacement values in control flow instructions. We show that defenses deployed in all major browsers (Chrome, MS IE, Firefox) do not protect against such gadgets, nor do the current XnR implementations protect against code injection attacks. To extend XnR’s guarantees against JIT-compiled gadgets, we propose a defense that replaces potentially dangerous direct control flow instructions with indirect ones at an overall performance overhead of less than 2% and a code-size overhead of 26% on average."
   },
   {
-    "id": 5637,
+    "id": 5830,
     "year": 2016,
     "title": "zxcvbn: Low-Budget Password Strength Estimation",
     "publication": "USENIX Sec",
@@ -88,7 +88,7 @@
     "abstract": "For over 30 years, password requirements and feedback have largely remained a product of LUDS: counts of lower- and uppercase letters, digits and symbols. LUDS remains ubiquitous despite being a conclusively burdensome and ineffective security practice.\nzxcvbn is an alternative password strength estimator that is small, fast, and crucially no harder than LUDS to adopt. Using leaked passwords, we compare its estimations to the best of four modern guessing attacks and show it to be accurate and conservative at low magnitudes, suitable for mitigating online attacks. We find 1.5 MB of compressed storage is sufficient to accurately estimate the best-known guessing attacks up to 105 guesses, or 104 and 103 guesses, respectively, given 245 kB and 29 kB. zxcvbn can be adopted with 4 lines of code and downloaded in seconds. It runs in milliseconds and works as-is on web, iOS and Android."
   },
   {
-    "id": 5638,
+    "id": 5831,
     "year": 2016,
     "title": "Fast, Lean, and Accurate: Modeling Password Guessability Using Neural Networks",
     "publication": "USENIX Sec",
@@ -96,7 +96,7 @@
     "abstract": "Human-chosen text passwords, today’s dominant form of authentication, are vulnerable to guessing attacks. Unfortunately, existing approaches for evaluating password strength by modeling adversarial password guessing are either inaccurate or orders of magnitude too large and too slow for real-time, client-side password checking. We propose using artificial neural networks to model text passwords’ resistance to guessing attacks and explore how different architectures and training methods impact neural networks’ guessing effectiveness. We show that neural networks can often guess passwords more effectively than state-of-the-art approaches, such as probabilistic context-free grammars and Markov models. We also show that our neural networks can be highly compressed—to as little as hundreds of kilobytes— without substantially worsening guessing effectiveness. Building on these results, we implement in JavaScript the first principled client-side model of password guessing, which analyzes a password’s resistance to a guessing attack of arbitrary duration with sub-second latency. Together, our contributions enable more accurate and practical password checking than was previously possible."
   },
   {
-    "id": 5639,
+    "id": 5832,
     "year": 2016,
     "title": "An Empirical Study of Textual Key-Fingerprint Representations",
     "publication": "USENIX Sec",
@@ -104,7 +104,7 @@
     "abstract": "Many security protocols still rely on manual fingerprint comparisons for authentication. The most well-known and widely used key-fingerprint representation are hexadecimal strings as used in various security tools. With the introduction of end-to-end security in WhatsApp and other messengers, the discussion on how to best represent key-fingerprints for users is receiving a lot of interest.\n\nWe conduct a 1047 participant study evaluating six different textual key-fingerprint representations with regards to their performance and usability. We focus on textual fingerprints as the most robust and deployable representation.\n\nOur findings show that the currently used hexadecimal representation is more prone to partial preimage attacks in comparison to others. Based on our findings, we make the recommendation that two alternative representations should be adopted. The highest attack detection rate and best usability perception is achieved with a sentence-based encoding. If language-based representations are not acceptable, a simple numeric approach still outperforms the hexadecimal representation."
   },
   {
-    "id": 5640,
+    "id": 5833,
     "year": 2016,
     "title": "Making HTTPS the Default in the World's Largest Bureaucracy",
     "publication": "USENIX Sec",
@@ -112,7 +112,7 @@
     "abstract": "The US government is in the process of requiring secure connections to its public web services through HTTPS and HSTS. It is a lot of hard work by a lot of good people working in an enterprise of enterprises of enterprises, and it is not strongly centrally coordinated. This talk will discuss the technical and political challenges that have come up during the process, offer a glimpse into the US government's evolving relationship with technology, and share some lessons that may be useful to those pushing for change in their own bureaucracies.\nEric Mill is an engineer at 18F, an office of the U.S. General Services Administration that provides in-house technology services for the federal government. Eric's work at 18F focuses on privacy, security, and open government. Previously, Eric was an engineer at the Sunlight Foundation, a non-profit dedicated to government transparency, where he worked on open data infrastructure and policy."
   },
   {
-    "id": 5641,
+    "id": 5834,
     "year": 2016,
     "title": "Off-Path TCP Exploits: Global Rate Limit Considered Dangerous",
     "publication": "USENIX Sec",
@@ -120,7 +120,7 @@
     "abstract": "In this paper, we report a subtle yet serious side channel vulnerability (CVE-2016-5696) introduced in a recent TCP specification. The specification is faithfully implemented in Linux kernel version 3.6 (from 2012) and beyond, and affects a wide range of devices and hosts. In a nutshell, the vulnerability allows a blind off-path attacker to infer if any two arbitrary hosts on the Internet are communicating using a TCP connection. Further, if the connection is present, such an off-path attacker can also infer the TCP sequence numbers in use, from both sides of the connection; this in turn allows the attacker to cause connection termination and perform data injection attacks. We illustrate how the attack can be leveraged to disrupt or degrade the privacy guarantees of an anonymity network such as Tor, and perform web connection hijacking. Through extensive experiments, we show that the attack is fast and reliable. On average, it takes about 40 to 60 seconds to finish and the success rate is 88% to 97%. Finally, we propose changes to both the TCP specification and implementation to eliminate the root cause of the problem."
   },
   {
-    "id": 5642,
+    "id": 5835,
     "year": 2016,
     "title": "Website-Targeted False Content Injection by Network Operators",
     "publication": "USENIX Sec",
@@ -128,7 +128,7 @@
     "abstract": "It is known that some network operators inject false content into users’ network traffic. Yet all previous works that investigate this practice focus on edge ISPs (Internet Service Providers), namely, those that provide Internet access to end users. Edge ISPs that inject false content affect their customers only. However, in this work we show that not only edge ISPs may inject false content, but also non-edge network operators. These operators can potentially alter the traffic of all Internet users who visit predetermined websites. We expose this practice by inspecting a large amount of traffic originating from several networks. Our study is based on the observation that the forged traffic is injected in an out-of-band manner: the network operators do not update the network packets in-path, but rather send the forged packets without dropping the legitimate ones. This creates a race between the forged and the legitimate packets as they arrive to the end user. This race can be identified and analyzed. Our analysis shows that the main purpose of content injection is to increase the network operators’ revenue by inserting advertisements to websites. Nonetheless, surprisingly, we have also observed numerous cases of injected malicious content. We publish representative samples of the injections to facilitate continued analysis of this practice by the security community."
   },
   {
-    "id": 5643,
+    "id": 5836,
     "year": 2016,
     "title": "The Ever-Changing Labyrinth: A Large-Scale Analysis of Wildcard DNS Powered Blackhat SEO",
     "publication": "USENIX Sec",
@@ -136,7 +136,7 @@
     "abstract": "Blackhat Search Engine Optimization (SEO) has been widely used to promote spam or malicious web sites. Traditional blackhat SEO campaigns often target hot keywords and establish link networks by spamming popular forums or compromising vulnerable sites. However, such SEO campaigns are actively disrupted by search engines providers, making the operational cost much higher in recent years. In this paper, we reveal a new type of blackhat SEO infrastructure (called “spider pool”) which seeks a different operational model. The owners of spider pools use cheap domains with low PR (PageRank) values to construct link networks and poison longtail keywords. To get better rankings of their promoted content, the owners have to reduce the indexing latencies by search engines. To this end, they abuse wildcard DNS to create virtually infinite sites and construct complicated loop structure to force search-engine crawlers to visit them relentlessly.\n\nWe carried out a comprehensive study to understand this emerging threat. As a starting point, we infiltrated a spider pool service and built a detection system to explore all the recruited SEO domains to learn how they were orchestrated. Exploiting the unique features of the spider pool, we developed a scanner which examined over 13 million domains under 22 TLDs/SLDs and discovered over 458K SEO domains. Finally, we measured the spider-pool ecosystem on top of these domains and analyzed the crawling results from 21 spider pools. The measurement result reveals their infrastructure features, customer categories and impact on search engines. We hope our study could inspire new mitigation methods and improve the ranking or indexing metrics from search engines."
   },
   {
-    "id": 5644,
+    "id": 5837,
     "year": 2016,
     "title": "A Comprehensive Measurement Study of Domain Generating Malware",
     "publication": "USENIX Sec",
@@ -144,7 +144,7 @@
     "abstract": "Recent years have seen extensive adoption of domain generation algorithms (DGA) by modern botnets. The main goal is to generate a large number of domain names and then use a small subset for actual C&C communication. This makes DGAs very compelling for botmasters to harden the infrastructure of their botnets and make it resilient to blacklisting and attacks such as takedown efforts. While early DGAs were used as a backup communication mechanism, several new botnets use them as their primary communication method, making it extremely important to study DGAs in detail.\n\nIn this paper, we perform a comprehensive measurement study of the DGA landscape by analyzing 43 DGAbased malware families and variants. We also present a taxonomy for DGAs and use it to characterize and compare the properties of the studied families. By reimplementing the algorithms, we pre-compute all possible domains they generate, covering the majority of known and active DGAs. Then, we study the registration status of over 18 million DGA domains and show that corresponding malware families and related campaigns can be reliably identified by pre-computing future DGA domains. We also give insights into botmasters’ strategies regarding domain registration and identify several pitfalls in previous takedown efforts of DGA-based botnets. We will share the dataset for future research and will also provide a web service to check domains for potential DGA identity."
   },
   {
-    "id": 5645,
+    "id": 5838,
     "year": 2016,
     "title": "Enhancing Bitcoin Security and Performance with Strong Consistency via Collective Signing",
     "publication": "USENIX Sec",
@@ -152,7 +152,7 @@
     "abstract": "While showing great promise, Bitcoin requires users to wait tens of minutes for transactions to commit, and even then, offering only probabilistic guarantees. This paper introduces ByzCoin, a novel Byzantine consensus protocol that leverages scalable collective signing to commit Bitcoin transactions irreversibly within seconds. ByzCoin achieves Byzantine consensus while preserving Bitcoin’s open membership by dynamically forming hash power-proportionate consensus groups that represent recently-successful block miners. ByzCoin employs communication trees to optimize transaction commitment and verification under normal operation while guaranteeing safety and liveness under Byzantine faults, up to a near-optimal tolerance of f faulty group members among 3f +2 total. ByzCoin mitigates double spending and selfish mining attacks by producing collectively signed transaction blocks within one minute of transaction submission. Tree-structured communication further reduces this latency to less than 30 seconds. Due to these optimizations, ByzCoin achieves a throughput higher than Paypal currently handles, with a confirmation latency of 15-20 seconds."
   },
   {
-    "id": 5646,
+    "id": 5839,
     "year": 2016,
     "title": "Faster Malicious 2-Party Secure Computation with Online/Offline Dual Execution",
     "publication": "USENIX Sec",
@@ -160,7 +160,7 @@
     "abstract": "We describe a highly optimized protocol for general purpose secure two-party computation (2PC) in the presence of malicious adversaries. Our starting point is a protocol of Kolesnikov et al. (TCC 2015). We adapt that protocol to the online/offline setting, where two parties repeatedly evaluate the same function (on possibly different inputs each time) and perform as much of the computation as possible in an offline preprocessing phase before their inputs are known. Along the way we develop several significant simplifications and optimizations to the protocol.\n\nWe have implemented a prototype of our protocol and report on its performance. When two parties on Amazon servers in the same region use our implementation to securely evaluate the AES circuit 1024 times, the amortized cost per evaluation is 5.1ms offline + 1.3ms online. The total offline+online cost of our protocol is in fact less than the online cost of any reported protocol with malicious security. For comparison, our protocol’s closest competitor (Lindell & Riva, CCS 2015) uses 74ms offline + 7ms online in an identical setup.\n\nOur protocol can be further tuned to trade performance for leakage. As an example, the performance in the above scenario improves to 2.4ms offline + 1.0ms online if we allow an adversary to learn a single bit about the honest party’s input with probability 2−20 (but not violate any other security property, e.g. correctness)."
   },
   {
-    "id": 5647,
+    "id": 5840,
     "year": 2016,
     "title": "Egalitarian Computing",
     "publication": "USENIX Sec",
@@ -168,7 +168,7 @@
     "abstract": "In this paper we explore several contexts where an adversary has an upper hand over the defender by using special hardware in an attack. These include password processing, hard-drive protection, cryptocurrency mining, resource sharing, code obfuscation, etc.\nWe suggest memory-hard computing as a generic paradigm, where every task is amalgamated with a certain procedure requiring intensive access to RAM both in terms of size and (very importantly) bandwidth, so that transferring the computation to GPU, FPGA, and even ASIC brings little or no cost reduction. Cryptographic schemes that run in this framework become egalitarian in the sense that both users and attackers are equal in the price-performance ratio conditions.\nBased on existing schemes like Argon2 and the recent generalized-birthday proof-of-work, we suggest a generic framework and two new schemes:\n\nMTP, a memory-hard Proof-of-Work based on the memory-hard function with fast verification and short proofs. It can be also used for memory-hard time-lock puzzles. \nMHE, the concept of memory-hard encryption, which utilizes available RAM to strengthen the encryption for the low-entropy keys (allowing to bring back 6 letter passwords). \n\nKeywords: MTP, MHE, Argon2, memory-hard, asymmetric, proof-of-work, botnets, encryption, timelock puzzles."
   },
   {
-    "id": 5648,
+    "id": 5841,
     "year": 2016,
     "title": "Post-quantum Key Exchange—A New Hope",
     "publication": "USENIX Sec",
@@ -176,7 +176,7 @@
     "abstract": "At IEEE Security & Privacy 2015, Bos, Costello, Naehrig, and Stebila proposed an instantiation of Peikert’s ring-learning-with-errors–based (Ring-LWE) key exchange protocol (PQCrypto 2014), together with an implementation integrated into OpenSSL, with the affirmed goal of providing post-quantum security for TLS. In this work we revisit their instantiation and stand-alone implementation. Specifically, we propose new parameters and a better suited error distribution, analyze the scheme’s hardness against attacks by quantum computers in a conservative way, introduce a new and more efficient error-reconciliation mechanism, and propose a defense against backdoors and all-for-the-price-of-one attacks. By these measures and for the same lattice dimension, we more than double the security parameter, halve the communication overhead, and speed up computation by more than a factor of 8 in a portable C implementation and by more than a factor of 27 in an optimized implementation targeting current Intel CPUs. These speedups are achieved with comprehensive protection against timing attacks."
   },
   {
-    "id": 5649,
+    "id": 5842,
     "year": 2016,
     "title": "When Governments Attack: Malware Targeting Activists, Lawyers, and Journalists",
     "publication": "USENIX Sec",
@@ -184,7 +184,7 @@
     "abstract": "Targeted malware campaigns against activists, lawyers, and journalists are becoming extremely commonplace. These attacks range in sophistication from simple spear-phishing campaigns using off the shelf malware, to APT-level attacks employing exploits, large budgets, and increasingly sophisticated techniques. Activists, lawyers and journalists are, for the most part, completely unprepared to deal with cyber-attacks; most of them don't even have a single security professional on staff. In this session, Eva Galperin of the Electronic Frontier Foundation will discuss the technical and operational details of malware campaigns against activists, journalists, and lawyers around the world, including EFF employees and clients, as well as what the security community can do to protect these highly vulnerable populations.\nEva Galperin is a Global Policy Analyst at the Electronic Frontier Foundation. Her work is primarily focused on privacy and security for vulnerable populations around the world. To that end, she has applied the combination of her political science and technical background to everything from organizing EFF's Tor Relay Challenge to writing privacy and security training materials to publishing research on malware in Syria and Vietnam."
   },
   {
-    "id": 5650,
+    "id": 5843,
     "year": 2016,
     "title": "Automatically Detecting Error Handling Bugs Using Error Specifications",
     "publication": "USENIX Sec",
@@ -192,7 +192,7 @@
     "abstract": "Incorrect error handling in security-sensitive code often leads to severe security vulnerabilities. Implementing correct error handling is repetitive and tedious especially in languages like C that do not support any exception handling primitives. This makes it very easy for the developers to unwittingly introduce error handling bugs. Moreover, error handling bugs are hard to detect and locate using existing bug-finding techniques because many of these bugs do not display any obviously erroneous behaviors (e.g., crash and assertion failure) but cause subtle inaccuracies.\n\nIn this paper, we design, implement, and evaluate EPEX, a tool that uses error specifications to identify and symbolically explore different error paths and reports bugs when any errors are handled incorrectly along these paths. The key insights behind our approach are: (i) real-world programs often handle errors only in a limited number of ways and (ii) most functions have simple and consistent error specifications. This allows us to create a simple oracle that can detect a large class of error handling bugs across a wide range of programs. We evaluated EPEX on 867,000 lines of C Code from four different open-source SSL/TLS libraries (OpenSSL, GnuTLS, mbedTLS, and wolfSSL) and 5 different applications that use SSL/TLS API (Apache httpd, cURL, Wget, LYNX, and Mutt). EPEx discovered 102 new error handling bugs across these programs—at least 53 of which lead to security flaws that break the security guarantees of SSL/TLS. EPEX has a low false positive rate (28 out of 130 reported bugs) as well as a low false negative rate (20 out of 960 reported correct error handling cases)."
   },
   {
-    "id": 5651,
+    "id": 5844,
     "year": 2016,
     "title": "APISan: Sanitizing API Usages through Semantic Cross-Checking",
     "publication": "USENIX Sec",
@@ -200,7 +200,7 @@
     "abstract": "API misuse is a well-known source of bugs. Some of them (e.g., incorrect use of SSL API, and integer overflow of memory allocation size) can cause serious security vulnerabilities (e.g., man-in-the-middle (MITM) attack, and privilege escalation). Moreover, modern APIs, which are large, complex, and fast evolving, are error-prone. However, existing techniques to help finding bugs require manual effort by developers (e.g., providing specification or model) or are not scalable to large real-world software comprising millions of lines of code.\n\nIn this paper, we present APISAN, a tool that automatically infers correct API usages from source code without manual effort. The key idea in APISAN is to extract likely correct usage patterns in four different aspects (e.g., causal relation, and semantic relation on arguments) by considering semantic constraints. APISAN is tailored to check various properties with security implications. We applied APISAN to 92 million lines of code, including Linux Kernel, and OpenSSL, found 76 previously unknown bugs, and provided patches for all the bugs."
   },
   {
-    "id": 5652,
+    "id": 5845,
     "year": 2016,
     "title": "On Omitting Commits and Committing Omissions: Preventing Git Metadata Tampering That (Re)introduces Software Vulnerabilities",
     "publication": "USENIX Sec",
@@ -208,7 +208,7 @@
     "abstract": "Metadata manipulation attacks represent a new threat class directed against Version Control Systems, such as the popular Git. This type of attack provides inconsistent views of a repository state to different developers, and deceives them into performing unintended operations with often negative consequences. These include omitting security patches, merging untested code into a production branch, and even inadvertently installing software containing known vulnerabilities. To make matters worse, the attacks are subtle by nature and leave no trace after being executed.\nWe propose a defense scheme that mitigates these attacks by maintaining a cryptographically-signed log of relevant developer actions. By documenting the state of the repository at a particular time when an action is taken, developers are given a shared history, so irregularities are easily detected. Our prototype implementation of the scheme can be deployed immediately as it is backwards compatible and preserves current workflows and use cases for Git users. An evaluation shows that the defense adds a modest overhead while offering significantly stronger security. We performed responsible disclosure of the attacks and are working with the Git community to fix these issues in an upcoming version of Git."
   },
   {
-    "id": 5653,
+    "id": 5846,
     "year": 2016,
     "title": "Defending against Malicious Peripherals with Cinch",
     "publication": "USENIX Sec",
@@ -216,7 +216,7 @@
     "abstract": "Malicious peripherals designed to attack their host computers are a growing problem. Inexpensive and powerful peripherals that attach to plug-and-play buses have made such attacks easy to mount. Making matters worse, commodity operating systems lack coherent defenses, and users are often unaware of the scope of the problem. We present Cinch, a pragmatic response to this threat. Cinch uses virtualization to attach peripheral devices to a logically separate, untrusted machine, and includes an interposition layer between the untrusted machine and the protected one. This layer regulates interaction with devices according to user-configured policies. Cinch integrates with existing OSes, enforces policies that thwart real-world attacks, and has low overhead."
   },
   {
-    "id": 5654,
+    "id": 5847,
     "year": 2016,
     "title": "Making USB Great Again with USBFILTER",
     "publication": "USENIX Sec",
@@ -224,7 +224,7 @@
     "abstract": "USB provides ubiquitous plug-and-play connectivity for a wide range of devices. However, the complex nature of USB obscures the true functionality of devices from the user, and operating systems blindly trust any physically-attached device. This has led to a number of attacks, ranging from hidden keyboards to network adapters, that rely on the user being unable to identify all of the functions attached to the host. In this paper, we present USBFILTER, which provides the first packet-level access control for USB and can prevent unauthorized interfaces from successfully connecting to the host operating system. USBFILTER can trace individual USB packets back to their respective processes and block unauthorized access to any device. By instrumenting the host’s USB stack between the device drivers and the USB controller, our system is able to filter packets at a granularity that previous works cannot — at the lowest possible level in the operating system. USBFILTER is not only able to block or permit specific device interfaces; it can also restrict interfaces to a particular application (e.g., only Skype can access my webcam). Furthermore, our experimental analysis shows that USBFILTER introduces a negligible (3-10μs) increase in latency while providing mediation of all USB packets on the host. Our system provides a level of granularity and extensibility that reduces the uncertainty of USB connectivity and ensures unauthorized devices are unable to communicate with the host."
   },
   {
-    "id": 5655,
+    "id": 5848,
     "year": 2016,
     "title": "Micro-Virtualization Memory Tracing to Detect and Prevent Spraying Attacks",
     "publication": "USENIX Sec",
@@ -232,7 +232,7 @@
     "abstract": "Spraying is a common payload delivery technique used by attackers to execute arbitrary code in presence of Address Space Layout Randomisation (ASLR). In this paper we present Graffiti, an efficient hypervisorbased memory analysis framework for the detection and prevention of spraying attacks. Compared with previous solutions, our system is the first to offer an efficient, complete, extensible, and OS independent protection against all spraying techniques known to date. We developed a prototype open source framework based on our approach, and we thoroughly evaluated it against all known variations of spraying attacks on two operating systems: Linux and Microsoft Windows. Our tool can be applied out of the box to protect any application, and its overhead can be tuned according to the application behavior and to the desired level of protection."
   },
   {
-    "id": 5656,
+    "id": 5849,
     "year": 2016,
     "title": "The Moral Character of Cryptographic Work",
     "publication": "USENIX Sec",
@@ -240,7 +240,7 @@
     "abstract": "Cryptography rearranges power: it configures who can do what, from what. This makes cryptography an inherently political tool, and it confers on the field an intrinsically moral dimension. The Snowden revelations motivate a reassessment of the political and moral positioning of cryptography. They lead one to ask if our inability to effectively address mass surveillance constitutes a failure of our field. I believe that it does. I call for a community-wide effort to develop more effective means to resist mass surveillance. I plead for a reinvention of our disciplinary culture to attend not only to puzzles and math, but, also, to the societal implications of our work.\n\nPhil is a Computer Science professor at the University of California, Davis. He studied cryptography at MIT (1991), then worked as a security architect for IBM before joining UCD in 1994. Co-inventor of “practice-oriented provable security,” Rogaway’s work seeks to meld cryptographic theory and cryptographic practice in a mutually beneficial way."
   },
   {
-    "id": 5657,
+    "id": 5850,
     "year": 2016,
     "title": "Request and Conquer: Exposing Cross-Origin Resource Size",
     "publication": "USENIX Sec",
@@ -248,7 +248,7 @@
     "abstract": "Numerous initiatives are encouraging website owners to enable and enforce TLS encryption for the communication between the server and their users. Although this encryption, when configured properly, completely prevents adversaries from disclosing the content of the traffic, certain features are not concealed, most notably the size of messages. As modern-day web applications tend to provide users with a view that is tailored to the information they entrust these web services with, it is clear that knowing the size of specific resources, an adversary can easily uncover personal and sensitive information.\n\nIn this paper, we explore various techniques that can be employed to reveal the size of resources. As a result of this in-depth analysis, we discover several design flaws in the storage mechanisms of browsers, which allows an adversary to expose the exact size of any resource in mere seconds. Furthermore, we report on a novel size-exposing technique against Wi-Fi networks. We evaluate the severity of our attacks, and show their worrying consequences in multiple real-world attack scenarios. Furthermore, we propose an improved design for browser storage, and explore other viable solutions that can thwart size-exposing attacks."
   },
   {
-    "id": 5658,
+    "id": 5851,
     "year": 2016,
     "title": "Trusted Browsers for Uncertain Times",
     "publication": "USENIX Sec",
@@ -256,7 +256,7 @@
     "abstract": "JavaScript in one origin can use timing channels in browsers to learn sensitive information about a user’s interaction with other origins, violating the browser’s compartmentalization guarantees. Browser vendors have attempted to close timing channels by trying to rewrite sensitive code to run in constant time and by reducing the resolution of reference clocks.\n\nWe argue that these ad-hoc efforts are unlikely to succeed. We show techniques that increase the effective resolution of degraded clocks by two orders of magnitude, and we present and evaluate multiple, new implicit clocks: techniques by which JavaScript can time events without consulting an explicit clock at all.\n\nWe show how “fuzzy time” ideas in the trusted operating systems literature can be adapted to building trusted browsers, degrading all clocks and reducing the bandwidth of all timing channels. We describe the design of a next-generation browser, called Fermata, in which all timing sources are completely mediated. As a proof of feasibility, we present Fuzzyfox, a fork of the Firefox browser that implements many of the Fermata principles within the constraints of today’s browser architecture. We show that Fuzzyfox achieves sufficient compatibility and performance for deployment today by privacysensitive users.\n\nIn summary:\n\nWe show how an attacker can measure durations in web browsers without querying an explicit clock.\nWe show how the concepts of “fuzzy time” can apply to web browsers to mitigate all clocks. We present a prototype demonstrating the impact of some of these concepts."
   },
   {
-    "id": 5659,
+    "id": 5852,
     "year": 2016,
     "title": "Tracing Information Flows Between Ad Exchanges Using Retargeted Ads",
     "publication": "USENIX Sec",
@@ -264,7 +264,7 @@
     "abstract": "Numerous surveys have shown that Web users are concerned about the loss of privacy associated with online tracking. Alarmingly, these surveys also reveal that people are also unaware of the amount of data sharing that occurs between ad exchanges, and thus underestimate the privacy risks associated with online tracking.\n\nIn reality, the modern ad ecosystem is fueled by a flow of user data between trackers and ad exchanges. Although recent work has shown that ad exchanges routinely perform cookie matching with other exchanges, these studies are based on brittle heuristics that cannot detect all forms of information sharing, especially under adversarial conditions.\n\nIn this study, we develop a methodology that is able to detect client- and server-side flows of information between arbitrary ad exchanges. Our key insight is to leverage retargeted ads as a tool for identifying information flows. Intuitively, our methodology works because it relies on the semantics of how exchanges serve ads, rather than focusing on specific cookie matching mechanisms. Using crawled data on 35,448 ad impressions, we show that our methodology can successfully categorize four different kinds of information sharing behavior between ad exchanges, including cases where existing heuristic methods fail.\n\nWe conclude with a discussion of how our findings and methodologies can be leveraged to give users more control over what kind of ads they see and how their information is shared between ad exchanges."
   },
   {
-    "id": 5660,
+    "id": 5853,
     "year": 2016,
     "title": "Virtual U: Defeating Face Liveness Detection by Building Virtual Models from Your Public Photos",
     "publication": "USENIX Sec",
@@ -272,7 +272,7 @@
     "abstract": "In this paper, we introduce a novel approach to bypass modern face authentication systems. More specifically, by leveraging a handful of pictures of the target user taken from social media, we show how to create realistic, textured, 3D facial models that undermine the security of widely used face authentication solutions. Our framework makes use of virtual reality (VR) systems, incorporating along the way the ability to perform animations (e.g., raising an eyebrow or smiling) of the facial model, in order to trick liveness detectors into believing that the 3D model is a real human face. The synthetic face of the user is displayed on the screen of the VR device, and as the device rotates and translates in the real world, the 3D face moves accordingly. To an observing face authentication system, the depth and motion cues of the display match what would be expected for a human face.\n\nWe argue that such VR-based spoofing attacks constitute a fundamentally new class of attacks that point to a serious weaknesses in camera-based authentication systems: Unless they incorporate other sources of verifiable data, systems relying on color image data and camera motion are prone to attacks via virtual realism. To demonstrate the practical nature of this threat, we conduct thorough experiments using an end-to-end implementation of our approach and show how it undermines the security of several face authentication solutions that include both motion-based and liveness detectors."
   },
   {
-    "id": 5661,
+    "id": 5854,
     "year": 2016,
     "title": "Hidden Voice Commands",
     "publication": "USENIX Sec",
@@ -280,7 +280,7 @@
     "abstract": "Voice interfaces are becoming more ubiquitous and are now the primary input method for many devices. We explore in this paper how they can be attacked with hidden voice commands that are unintelligible to human listeners but which are interpreted as commands by devices.\n\nWe evaluate these attacks under two different threat models. In the black-box model, an attacker uses the speech recognition system as an opaque oracle. We show that the adversary can produce difficult to understand commands that are effective against existing systems in the black-box model. Under the white-box model, the attacker has full knowledge of the internals of the speech recognition system and uses it to create attack commands that we demonstrate through user testing are not understandable by humans.\n\nWe then evaluate several defenses, including notifying the user when a voice command is accepted; a verbal challenge-response protocol; and a machine learning approach that can detect our attacks with 99.8% accuracy."
   },
   {
-    "id": 5662,
+    "id": 5855,
     "year": 2016,
     "title": "FlowFence: Practical Data Protection for Emerging IoT Application Frameworks",
     "publication": "USENIX Sec",
@@ -288,7 +288,7 @@
     "abstract": "Emerging IoT programming frameworks enable building apps that compute on sensitive data produced by smart homes and wearables. However, these frameworks only support permission-based access control on sensitive data, which is ineffective at controlling how apps use data once they gain access. To address this limitation, we present FlowFence, a system that requires consumers of sensitive data to declare their intended data flow patterns, which it enforces with low overhead, while blocking all other undeclared flows. FlowFence achieves this by explicitly embedding data flows and the related control flows within app structure. Developers use Flow- Fence support to split their apps into two components: (1) A set of Quarantined Modules that operate on sensitive data in sandboxes, and (2) Code that does not operate on sensitive data but orchestrates execution by chaining Quarantined Modules together via taint-tracked opaque handles—references to data that can only be dereferenced inside sandboxes. We studied three existing IoT frameworks to derive key functionality goals for Flow- Fence, and we then ported three existing IoT apps. Securing these apps using FlowFence resulted in an average increase in size from 232 lines to 332 lines of source code. Performance results on ported apps indicate that FlowFence is practical: A face-recognition based doorcontroller app incurred a 4.9% latency overhead to recognize a face and unlock a door."
   },
   {
-    "id": 5663,
+    "id": 5856,
     "year": 2016,
     "title": "Privacy and Threat in Practice: Mobile Messaging by Low-Income New Yorkers",
     "publication": "USENIX Sec",
@@ -296,7 +296,7 @@
     "abstract": "Is a theoretically-secure system any good if it doesn’t address users’ real-world threat models? Is the security community today meeting the needs of a mass, global audience, or simply building tools and features for itself? Do we know how to understand what people really need?\nWe asked a group of straight-talking New Yorkers about the data-security threats they face. Their answers indicate a significant gap between their lived experience and the way our community thinks about security. To bridge this gap and get privacy-preserving systems into the hands of real people, we need more foundational research to understand user needs, not only late-stage usability studies in a lab.\nThrough in-context interviews in homes, restaurants, and libraries, our study gained insights into a world of constant surveillance experienced by a group of low-income African-Americans. They shared specific examples of how their phone is threatened at home, work, and on the street. This talk shares our participants’ threat models. From shoulder-surfing, to catfishing, to how a \"renter’s mindset\" develops around handsets controlled by adversarial telecom providers, understanding privacy and threat in practice has far-reaching implications for the future of information security.\nAme Elliott is Design Director at nonprofit Simply Secure, where she focuses on the user experience of privacy-preserving technologies that empower people. Previously she worked as design research lead for IDEO San Francisco delivering tech strategy for clients such as Acer, Ericsson, and Samsung. Prior to IDEO, she was a research scientist at Xerox PARC, and at Ricoh Innovations. She earned a Ph.D. from the University of California, Berkeley for her work creating hybrid physical-digital interactions to support the architectural design process. Ame holds eight patents and is the author of numerous publications including a chapter in the Oxford Handbook of Internet Psychology. Her design work has been included in the Cooper-Hewitt Smithsonian Design Museum and recognized with awards from the AIGA, IDSA/IDEA, the Edison Awards, and the Webby Awards."
   },
   {
-    "id": 5664,
+    "id": 5857,
     "year": 2016,
     "title": "ARMageddon: Cache Attacks on Mobile Devices",
     "publication": "USENIX Sec",
@@ -304,7 +304,7 @@
     "abstract": "In the last 10 years, cache attacks on Intel x86 CPUs have gained increasing attention among the scientific community and powerful techniques to exploit cache side channels have been developed. However, modern smartphones use one or more multi-core ARM CPUs that have a different cache organization and instruction set than Intel x86 CPUs. So far, no cross-core cache attacks have been demonstrated on non-rooted Android smartphones. In this work, we demonstrate how to solve key challenges to perform the most powerful cross-core cache attacks Prime+Probe, Flush+Reload, Evict+Reload, and Flush+Flush on non-rooted ARM-based devices without any privileges. Based on our techniques, we demonstrate covert channels that outperform state-of-the-art covert channels on Android by several orders of magnitude. Moreover, we present attacks to monitor tap and swipe events as well as keystrokes, and even derive the lengths of words entered on the touchscreen. Eventually, we are the first to attack cryptographic primitives implemented in Java. Our attacks work across CPUs and can even monitor cache activity in the ARM TrustZone from the normal world. The techniques we present can be used to attack hundreds of millions of Android devices."
   },
   {
-    "id": 5665,
+    "id": 5858,
     "year": 2016,
     "title": "DRAMA: Exploiting DRAM Addressing for Cross-CPU Attacks",
     "publication": "USENIX Sec",
@@ -312,7 +312,7 @@
     "abstract": "In cloud computing environments, multiple tenants are often co-located on the same multi-processor system. Thus, preventing information leakage between tenants is crucial. While the hypervisor enforces software isolation, shared hardware, such as the CPU cache or memory bus, can leak sensitive information. For security reasons, shared memory between tenants is typically disabled. Furthermore, tenants often do not share a physical CPU. In this setting, cache attacks do not work and only a slow cross-CPU covert channel over the memory bus is known. In contrast, we demonstrate a high-speed covert channel as well as the first side-channel attack working across processors and without any shared memory. To build these attacks, we use the undocumented DRAM address mappings.\n\nWe present two methods to reverse engineer the mapping of memory addresses to DRAM channels, ranks, and banks. One uses physical probing of the memory bus, the other runs entirely in software and is fully automated. Using this mapping, we introduce DRAMA attacks, a novel class of attacks that exploit the DRAM row buffer that is shared, even in multi-processor systems. Thus, our attacks work in the most restrictive environments. First, we build a covert channel with a capacity of up to 2 Mbps, which is three to four orders of magnitude faster than memory-bus-based channels. Second, we build a side-channel template attack that can automatically locate and monitor memory accesses. Third, we show how using the DRAM mappings improves existing attacks and in particular enables practical Rowhammer attacks on DDR4."
   },
   {
-    "id": 5666,
+    "id": 5859,
     "year": 2016,
     "title": "An In-Depth Analysis of Disassembly on Full-Scale x86/x64 Binaries",
     "publication": "USENIX Sec",
@@ -320,7 +320,7 @@
     "abstract": "It is well-known that static disassembly is an unsolved problem, but how much of a problem is it in real software— for instance, for binary protection schemes? This work studies the accuracy of nine state-of-the-art disassemblers on 981 real-world compiler-generated binaries with a wide variety of properties. In contrast, prior work focuses on isolated corner cases; we show that this has led to a widespread and overly pessimistic view on the prevalence of complex constructs like inline data and overlapping code, leading reviewers and researchers to underestimate the potential of binary-based research. On the other hand, some constructs, such as function boundaries, are much harder to recover accurately than is reflected in the literature, which rarely discusses much needed error handling for these primitives. We study 30 papers recently published in six major security venues, and reveal a mismatch between expectations in the literature, and the actual capabilities of modern disassemblers. Our findings help improve future research by eliminating this mismatch."
   },
   {
-    "id": 5667,
+    "id": 5860,
     "year": 2016,
     "title": "Stealing Machine Learning Models via Prediction APIs",
     "publication": "USENIX Sec",
@@ -328,7 +328,7 @@
     "abstract": "Machine learning (ML) models may be deemed confidential due to their sensitive training data, commercial value, or use in security applications. Increasingly often, confidential ML models are being deployed with publicly accessible query interfaces. ML-as-a-service (“predictive analytics”) systems are an example: Some allow users to train models on potentially sensitive data and charge others for access on a pay-per-query basis.\n\nThe tension between model confidentiality and public access motivates our investigation of model extraction attacks. In such attacks, an adversary with black-box access, but no prior knowledge of an ML model’s parameters or training data, aims to duplicate the functionality of (i.e., “steal”) the model. Unlike in classical learning theory settings, ML-as-a-service offerings may accept partial feature vectors as inputs and include confidence values with predictions. Given these practices, we show simple, efficient attacks that extract target ML models with near-perfect fidelity for popular model classes including logistic regression, neural networks, and decision trees. We demonstrate these attacks against the online services of BigML and Amazon Machine Learning. We further show that the natural countermeasure of omitting confidence values from model outputs still admits potentially harmful model extraction attacks. Our results highlight the need for careful ML model deployment and new model extraction countermeasures."
   },
   {
-    "id": 5668,
+    "id": 5861,
     "year": 2016,
     "title": "Oblivious Multi-Party Machine Learning on Trusted Processors",
     "publication": "USENIX Sec",
@@ -336,7 +336,7 @@
     "abstract": "Privacy-preserving multi-party machine learning allows multiple organizations to perform collaborative data analytics while guaranteeing the privacy of their individual datasets. Using trusted SGX-processors for this task yields high performance, but requires a careful selection, adaptation, and implementation of machine-learning algorithms to provably prevent the exploitation of any side channels induced by data-dependent access patterns.\nWe propose data-oblivious machine learning algorithms for support vector machines, matrix factorization, neural networks, decision trees, and k-means clustering. We show that our efficient implementation based on Intel Skylake processors scales up to large, realistic datasets, with overheads several orders of magnitude lower than with previous approaches based on advanced cryptographic multi-party computation schemes."
   },
   {
-    "id": 5669,
+    "id": 5862,
     "year": 2016,
     "title": "Thoth: Comprehensive Policy Compliance in Data Retrieval Systems",
     "publication": "USENIX Sec",
@@ -344,7 +344,7 @@
     "abstract": "Data retrieval systems process data from many sources, each subject to its own data use policy. Ensuring compliance with these policies despite bugs, misconfiguration, or operator error in a large, complex, and fast evolving system is a major challenge. Thoth provides an efficient, kernel-level compliance layer for data use policies. Declarative policies are attached to the systems’ input and output files, key-value tuples, and network connections, and specify the data’s integrity and confidentiality requirements. Thoth tracks the flow of data through the system, and enforces policy regardless of bugs, misconfigurations, compromises in application code, or actions by unprivileged operators. Thoth requires minimal changes to an existing system and has modest overhead, as we show using a prototype Thoth-enabled data retrieval system based on the popular Apache Lucene."
   },
   {
-    "id": 5670,
+    "id": 5863,
     "year": 2016,
     "title": "The Unfalsifiability of Security Claims",
     "publication": "USENIX Sec",
@@ -352,7 +352,7 @@
     "abstract": "There is an inherent asymmetry in computer security: things can be declared insecure by observation, but not the reverse. There is no test that allows us to declare an arbitrary system or technique secure. This implies that claims of necessary conditions for security are unfalsifiable. This in turn implies an asymmetry in self-correction: while the claim that countermeasures are sufficient can always be refuted, the claim that they are necessary cannot.  Thus, we ratchet upward: there are many ways to argue countermeasures in, but no possible observation argues one out. Once we go wrong we stay wrong and errors accumulate. I show that attempts to evade this difficulty lead to dead-ends and then explore implications.\n\nI argue that progress has been slow in security precisely because of a failure of self-correction. Bad ideas that are justified by contradiction-proof statements persist indefinitely and the resources they consume crowds out sensible measures to reduce harm. Examples abound. Many things that deliver no observed benefit are declared necessary for security, either because they have been defined to be so, or have been reached through logically muddled arguments.\n\nCormac’s main current interests are data analysis problems, authentication and techniques to combat fraud and abuse. He has published widely in signal and image processing, information theory, multimedia, networking and security. He is the inventor on over 70 US patents, and has shipped technologies used by hundreds of millions of users. His research has been widely covered in media outlets such as the Economist, NY Times, Washington Post, Wall St Journal, BBC, the Guardian, Wired and the Atlantic (but mostly just for writing down stuff that was incredibly obvious). He received the PhD degree from Columbia University, the MSEE from Georgia Tech, and the BE(Elect) from the National University of Ireland."
   },
   {
-    "id": 5671,
+    "id": 5864,
     "year": 2016,
     "title": "Dancing on the Lip of the Volcano: Chosen Ciphertext Attacks on Apple iMessage",
     "publication": "USENIX Sec",
@@ -360,7 +360,7 @@
     "abstract": "Apple’s iMessage is one of the most widely-deployed end-to-end encrypted messaging protocols. Despite its broad deployment, the encryption protocols used by iMessage have never been subjected to rigorous cryptanalysis. In this paper, we conduct a thorough analysis of iMessage to determine the security of the protocol against a variety of attacks. Our analysis shows that iMessage has significant vulnerabilities that can be exploited by a sophisticated attacker. In particular, we outline a novel chosen ciphertext attack on Huffman compressed data, which allows retrospective decryption of some iMessage payloads in less than 218 queries. The practical implication of these attacks is that any party who gains access to iMessage ciphertexts may potentially decrypt them remotely and after the fact. We additionally describe mitigations that will prevent these attacks on the protocol, without breaking backwards compatibility. Apple has deployed our mitigations in the latest iOS and OS X releases."
   },
   {
-    "id": 5672,
+    "id": 5865,
     "year": 2016,
     "title": "Predicting, Decrypting, and Abusing WPA2/802.11 Group Keys",
     "publication": "USENIX Sec",
@@ -368,7 +368,7 @@
     "abstract": "We analyze the generation and management of 802.11 group keys. These keys protect broadcast and multicast Wi-Fi traffic. We discovered several issues and illustrate their importance by decrypting all group (and unicast) traffic of a typical Wi-Fi network. First we argue that the 802.11 random number generator is flawed by design, and provides an insufficient amount of entropy. This is confirmed by predicting randomly generated group keys on several platforms. We then examine whether group keys are securely transmitted to clients. Here we discover a downgrade attack that forces usage of RC4 to encrypt the group key when transmitted in the 4-way handshake. The per-message RC4 key is the concatenation of a public 16-byte initialization vector with a secret 16-byte key, and the first 256 keystream bytes are dropped. We study this peculiar usage of RC4, and find that capturing 231 handshakes can be sufficient to recover (i.e., decrypt) a 128-bit group key. We also examine whether group traffic is properly isolated from unicast traffic. We find that this is not the case, and show that the group key can be used to inject and decrypt unicast traffic. Finally, we propose and study a new random number generator tailored for 802.11 platforms."
   },
   {
-    "id": 5673,
+    "id": 5866,
     "year": 2016,
     "title": "DROWN: Breaking TLS Using SSLv2",
     "publication": "USENIX Sec",
@@ -376,7 +376,7 @@
     "abstract": "We present DROWN, a novel cross-protocol attack on TLS that uses a server supporting SSLv2 as an oracle to decrypt modern TLS connections.\n\nWe introduce two versions of the attack. The more general form exploits multiple unnoticed protocol flaws in SSLv2 to develop a new and stronger variant of the Bleichenbacher RSA padding-oracle attack. To decrypt a 2048-bit RSA TLS ciphertext, an attacker must observe 1,000 TLS handshakes, initiate 40,000 SSLv2 connections, and perform 250 offline work. The victim client never initiates SSLv2 connections. We implemented the attack and can decrypt a TLS 1.2 handshake using 2048- bit RSA in under 8 hours, at a cost of $440 on Amazon EC2. Using Internet-wide scans, we find that 33% of all HTTPS servers and 22% of those with browser-trusted certificates are vulnerable to this protocol-level attack due to widespread key and certificate reuse.\n\nFor an even cheaper attack, we apply our new techniques together with a newly discovered vulnerability in OpenSSL that was present in releases from 1998 to early 2015. Given an unpatched SSLv2 server to use as an oracle, we can decrypt a TLS ciphertext in one minute on a single CPU—fast enough to enable man-in-the-middle attacks against modern browsers. We find that 26% of HTTPS servers are vulnerable to this attack.\n\nWe further observe that the QUIC protocol is vulnerable to a variant of our attack that allows an attacker to impersonate a server indefinitely after performing as few as 217 SSLv2 connections and 258 offline work.\n\nWe conclude that SSLv2 is not only weak, but actively harmful to the TLS ecosystem."
   },
   {
-    "id": 5674,
+    "id": 5867,
     "year": 2016,
     "title": "All Your Queries Are Belong to Us: The Power of File-Injection Attacks on Searchable Encryption",
     "publication": "USENIX Sec",
@@ -384,7 +384,7 @@
     "abstract": "The goal of searchable encryption (SE) is to enable a client to execute searches over encrypted files stored on an untrusted server while ensuring some measure of privacy for both the encrypted files and the search queries. Most recent research has focused on developing efficient SE schemes at the expense of allowing some small, wellcharacterized “(information) leakage” to the server about the files and/or the queries. The practical impact of this leakage, however, remains unclear.\n\nWe thoroughly study file-injection attacks—in which the server sends files to the client that the client then encrypts and stores—on the query privacy of singlekeyword and conjunctive SE schemes. We show such attacks can reveal the client’s queries in their entirety using very few injected files, even for SE schemes having low leakage. We also demonstrate that natural countermeasures for preventing file-injection attacks can be easily circumvented. Our attacks outperform prior work significantly in terms of their effectiveness as well as in terms of their assumptions about the attacker’s prior knowledge."
   },
   {
-    "id": 5675,
+    "id": 5868,
     "year": 2016,
     "title": "Investigating Commercial Pay-Per-Install and the Distribution of Unwanted Software",
     "publication": "USENIX Sec",
@@ -392,7 +392,7 @@
     "abstract": "In this work, we explore the ecosystem of commercial pay-per-install (PPI) and the role it plays in the proliferation of unwanted software. Commercial PPI enables companies to bundle their applications with more popular software in return for a fee, effectively commoditizing access to user devices. We develop an analysis pipeline to track the business relationships underpinning four of the largest commercial PPI networks and classify the software families bundled. In turn, we measure their impact on end users and enumerate the distribution techniques involved. We find that unwanted ad injectors, browser settings hijackers, and “cleanup” utilities dominate the software families buying installs. Developers of these families pay $0.10–$1.50 per install—upfront costs that they recuperate by monetizing users without their consent or by charging exorbitant subscription fees. Based on Google Safe Browsing telemetry, we estimate that PPI networks drive over 60 million download attempts every week—nearly three times that of malware. While anti-virus and browsers have rolled out defenses to protect users from unwanted software, we find evidence that PPI networks actively interfere with or evade detection. Our results illustrate the deceptive practices of some commercial PPI operators that persist today."
   },
   {
-    "id": 5676,
+    "id": 5869,
     "year": 2016,
     "title": "Measuring PUP Prevalence and PUP Distribution through Pay-Per-Install Services",
     "publication": "USENIX Sec",
@@ -400,7 +400,7 @@
     "abstract": "Potentially unwanted programs (PUP) such as adware and rogueware, while not outright malicious, exhibit intrusive behavior that generates user complaints and makes security vendors flag them as undesirable. PUP has been little studied in the research literature despite recent indications that its prevalence may have surpassed that of malware.\n\nIn this work we perform the first systematic study of PUP prevalence and its distribution through pay-perinstall (PPI) services, which link advertisers that want to promote their programs with affiliate publishers willing to bundle their programs with offers for other software. Using AV telemetry information comprising of 8 billion events on 3.9 million real hosts during a 19 month period, we discover that over half (54%) of the examined hosts have PUP installed. PUP publishers are highly popular, e.g., the top two PUP publishers rank 15 and 24 amongst all software publishers (benign and PUP). Furthermore, we analyze the who-installs-who relationships, finding that 65% of PUP downloads are performed by other PUP and that 24 PPI services distribute over a quarter of all PUP. We also examine the top advertiser programs distributed by the PPI services, observing that they are dominated by adware running in the browser (e.g., toolbars, extensions) and rogueware. Finally, we investigate the PUP-malware relationships in the form of malware installations by PUP and PUP installations by malware. We conclude that while such events exist, PUP distribution is largely disjoint from malware distribution."
   },
   {
-    "id": 5677,
+    "id": 5870,
     "year": 2016,
     "title": "UNVEIL: A Large-Scale, Automated Approach to Detecting Ransomware",
     "publication": "USENIX Sec",
@@ -408,7 +408,7 @@
     "abstract": "Although the concept of ransomware is not new (i.e., such attacks date back at least as far as the 1980s), this type of malware has recently experienced a resurgence in popularity. In fact, in the last few years, a number of high-profile ransomware attacks were reported, such as the large-scale attack against Sony that prompted the company to delay the release of the film “The Interview.” Ransomware typically operates by locking the desktop of the victim to render the system inaccessible to the user, or by encrypting, overwriting, or deleting the user’s files. However, while many generic malware detection systems have been proposed, none of these systems have attempted to specifically address the ransomware detection problem.\n\nIn this paper, we present a novel dynamic analysis system called UNVEIL that is specifically designed to detect ransomware. The key insight of the analysis is that in order to mount a successful attack, ransomware must tamper with a user’s files or desktop. UNVEIL automatically generates an artificial user environment, and detects when ransomware interacts with user data. In parallel, the approach tracks changes to the system’s desktop that indicate ransomware-like behavior. Our evaluation shows that UNVEIL significantly improves the state of the art, and is able to identify previously unknown evasive ransomware that was not detected by the antimalware industry."
   },
   {
-    "id": 5678,
+    "id": 5871,
     "year": 2016,
     "title": "Towards Measuring and Mitigating Social Engineering Software Download Attacks",
     "publication": "USENIX Sec",
@@ -416,7 +416,7 @@
     "abstract": "Most modern malware infections happen through the browser, typically as the result of a drive-by or social engineering attack. While there have been numerous studies on measuring and defending against drive-by downloads, little attention has been dedicated to studying social engineering attacks.\n\nIn this paper, we present the first systematic study of web-based social engineering (SE) attacks that successfully lure users into downloading malicious and unwanted software. To conduct this study, we collect and reconstruct more than two thousand examples of in-thewild SE download attacks from live network traffic. Via a detailed analysis of these attacks, we attain the following results: (i) we develop a categorization system to identify and organize the tactics typically employed by attackers to gain the user’s attention and deceive or persuade them into downloading malicious and unwanted applications; (ii) we reconstruct the web path followed by the victims and observe that a large fraction of SE download attacks are delivered via online advertisement, typically served from “low tier” ad networks; (iii) we measure the characteristics of the network infrastructure used to deliver such attacks and uncover a number of features that can be leveraged to distinguish between SE and benign (or non-SE) software downloads."
   },
   {
-    "id": 5679,
+    "id": 5872,
     "year": 2016,
     "title": "Teaching Computer Security: Thoughts from the Field",
     "publication": "USENIX Sec",
@@ -424,7 +424,7 @@
     "abstract": "Many researchers and engineers first learn about computer security in a classroom. In this interactive workshop, four professors will share lessons and opinions about how and when to teach security. What are the “right” security topics to teach? What is the best time in a curriculum to introduce students to security? And must the entire burden of security education fall on the computing disciplines? If you teach (or plan to teach in the future), come participate in this workshop.\n\nDavid Evans is a Professor of Computer Science at the University of Virginia, where he leads the Security Research Group and teaches courses on just about everything in computing other than computer security. He is the author of an open computer science textbook, a children's book on combinatorics and computability, and teacher of popular MOOC courses on introductory computer science and applied cryptography. He won the Outstanding Faculty Award from the State Council of Higher Education for Virginia, an All-University Teaching Award, and was Program Co-Chair for the 31st and 32nd IEEE Symposia on Security and Privacy. He has S.B., S.M. and Ph.D. degrees in Computer Science from MIT and has been a faculty member at the University of Virginia since 1999.\n\nZachary Peterson is an Associate Professor of Computer Science at Cal Poly, San Luis Obispo. He has a passion for creating new ways of engaging students of all ages in computer security, especially through the use of games and play. He has co-created numerous security games, including [d0x3d!], a network security board game, and is the co-founder of ASE, a new USENIX workshop dedicated to making advances in security education. He is the recent recipient of a Fulbright Scholarship which he will use to travel to University College, London, continuing some of his research in the use of digital and non-digital games for teaching computer security concepts to new, young, and non-technical audiences.\n\nColleen Lewis is a Professor of Computer Science at Harvey Mudd College who specializes in computer science education. Lewis has a Ph.D. in education and a M.S. and B.S. in computer science from the University of California, Berkeley. Her research seeks to identify effective teaching practices for creating equitable learning spaces where all students have the opportunity to learn. Lewis curates CSTeachingTips.org, an NSF-sponsored project for disseminating effective computer science teaching practices.\n\nTadayoshi Kohno is the Short-Dooley Professor of Computer Science & Engineering at the University of Washington, an Adjunct Associate Professor in the UW Electrical Engineering Department, and an Adjunct Associate Professor in the UW Information School. His research focuses on helping protect the security, privacy, and safety of users of current and future generation technologies. Kohno is the recipient of an Alfred P. Sloan Research Fellowship, a U.S. National Science Foundation CAREER Award, and a Technology Review TR-35 Young Innovator Award. Kohno has presented his research to the U.S. House of Representatives, has had his research profiled in the NOVA ScienceNOW \"Can Science Stop Crime?\" documentary and the NOVA \"CyberWar Threat\" documentary, and is a past chair of the USENIX Security Symposium. Kohno is also an alumnus of the U.S. Government’s Defense Science Study Group and a member of the National Academies Forum on Cyber Resilience, the IEEE Center for Secure Design, and the USENIX Security Steering Committee. Kohno received his Ph.D. from the University of California at San Diego."
   },
   {
-    "id": 5680,
+    "id": 5873,
     "year": 2016,
     "title": "Specification Mining for Intrusion Detection in Networked Control Systems",
     "publication": "USENIX Sec",
@@ -432,7 +432,7 @@
     "abstract": "This paper discusses a novel approach to specification-based intrusion detection in the field of networked control systems. Our approach reduces the substantial human effort required to deploy a specification-based intrusion detection system by automating the development of its specification rules. We observe that networked control systems often include comprehensive documentation used by operators to manage their infrastructures. Our approach leverages the same documentation to automatically derive the specification rules and continuously monitor network traffic. In this paper, we implement this approach for BACnet-based building automation systems and test its effectiveness against two real infrastructures deployed at the University of Twente and the Lawrence Berkeley National Laboratory (LBNL). Our implementation successfully identifies process control mistakes and potentially dangerous misconfigurations. This confirms the need for an improved monitoring of networked control system infrastructures."
   },
   {
-    "id": 5681,
+    "id": 5874,
     "year": 2016,
     "title": "Optimized Invariant Representation of Network Traffic for Detecting Unseen Malware Variants",
     "publication": "USENIX Sec",
@@ -440,7 +440,7 @@
     "abstract": "New and unseen polymorphic malware, zero-day attacks, or other types of advanced persistent threats are usually not detected by signature-based security devices, firewalls, or anti-viruses. This represents a challenge to the network security industry as the amount and variability of incidents has been increasing. Consequently, this complicates the design of learning-based detection systems relying on features extracted from network data. The problem is caused by different joint distribution of observation (features) and labels in the training and testing data sets. This paper proposes a classification system designed to detect both known as well as previouslyunseen security threats. The classifiers use statistical feature representation computed from the network traffic and learn to recognize malicious behavior. The representation is designed and optimized to be invariant to the most common changes of malware behaviors. This is achieved in part by a feature histogram constructed for each group of HTTP flows (proxy log records) of a user visiting a particular hostname and in part by a feature self-similarity matrix computed for each group. The parameters of the representation (histogram bins) are optimized and learned based on the training samples along with the classifiers. The proposed classification system was deployed on large corporate networks, where it detected 2,090 new and unseen variants of malware samples with 90% precision (9 of 10 alerts were malicious), which is a considerable improvement when compared to the current flow-based approaches or existing signaturebased web security devices."
   },
   {
-    "id": 5682,
+    "id": 5875,
     "year": 2016,
     "title": "Authenticated Network Time Synchronization",
     "publication": "USENIX Sec",
@@ -448,7 +448,7 @@
     "abstract": "The Network Time Protocol (NTP) is used by many network-connected devices to synchronize device time with remote servers. Many security features depend on the device knowing the current time, for example in deciding whether a certificate is still valid. Currently, most services implement NTP without authentication, and the authentication mechanisms available in the standard have not been formally analyzed, require a pre-shared key, or are known to have cryptographic weaknesses. In this paper we present an authenticated version of NTP, called ANTP, to protect against desynchronization attacks. To make ANTP suitable for large-scale deployments, it is designed to minimize server-side public key operations by infrequently performing a key exchange using public key cryptography, then relying solely on symmetric cryptography for subsequent time synchronization requests; moreover, it does so without requiring server-side per-connection state. Additionally, ANTP ensures that authentication does not degrade accuracy of time synchronization. We measured the performance of ANTP by implementing it in OpenNTPD using OpenSSL. Compared to plain NTP, ANTP’s symmetric crypto reduces the server throughput (connections/second) for time synchronization requests by a factor of only 1.6. We analyzed the security of ANTP using a novel provable security framework that involves adversary control of time, and show that ANTP achieves secure time synchronization under standard cryptographic assumptions; our framework may also be used to analyze other candidates for securing NTP.\n\nKeywords: time synchronization, Network Time Protocol (NTP), provable security, network security"
   },
   {
-    "id": 5683,
+    "id": 5876,
     "year": 2016,
     "title": "fTPM: A Software-Only Implementation of a TPM Chip",
     "publication": "USENIX Sec",
@@ -456,7 +456,7 @@
     "abstract": "Commodity CPU architectures, such as ARM and Intel CPUs, have started to offer trusted computing features in their CPUs aimed at displacing dedicated trusted hardware. Unfortunately, these CPU architectures raise serious challenges to building trusted systems because they omit providing secure resources outside the CPU perimeter.\n\nThis paper shows how to overcome these challenges to build software systems with security guarantees similar to those of dedicated trusted hardware. We present the design and implementation of a firmware-based TPM 2.0 (fTPM) leveraging ARM TrustZone. Our fTPM is the reference implementation of a TPM 2.0 used in millions of mobile devices. We also describe a set of mechanisms needed for the fTPM that can be useful for building more sophisticated trusted applications beyond just a TPM."
   },
   {
-    "id": 5684,
+    "id": 5877,
     "year": 2016,
     "title": "Sanctum: Minimal Hardware Extensions for Strong Software Isolation",
     "publication": "USENIX Sec",
@@ -464,7 +464,7 @@
     "abstract": "Sanctum offers the same promise as Intel’s Software Guard Extensions (SGX), namely strong provable isolation of software modules running concurrently and sharing resources, but protects against an important class of additional software attacks that infer private information from a program’s memory access patterns. Sanctum shuns unnecessary complexity, leading to a simpler security analysis. We follow a principled approach to eliminating entire attack surfaces through isolation, rather than plugging attack-specific privacy leaks. Most of Sanctum’s logic is implemented in trusted software, which does not perform cryptographic operations using keys, and is easier to analyze than SGX’s opaque microcode, which does.\n\nOur prototype targets a Rocket RISC-V core, an open implementation that allows any researcher to reason about its security properties. Sanctum’s extensions can be adapted to other processor cores, because we do not change any major CPU building block. Instead, we add hardware at the interfaces between generic building blocks, without impacting cycle time.\n\nSanctum demonstrates that strong software isolation is achievable with a surprisingly small set of minimally invasive hardware changes, and a very reasonable overhead."
   },
   {
-    "id": 5685,
+    "id": 5878,
     "year": 2016,
     "title": "Ariadne: A Minimal Approach to State Continuity",
     "publication": "USENIX Sec",
@@ -472,7 +472,7 @@
     "abstract": "Protected-module architectures such as Intel SGX provide strong isolation guarantees to sensitive parts of applications while the system is up and running. Unfortunately systems in practice crash, go down for reboots or lose power at unexpected moments in time. To deal with such events, additional security measures need to be taken to guarantee that stateful modules will either recover their state from the last stored state, or fail-stop on detection of tampering with that state. More specifically, protected-module architectures need to provide a security primitive that guarantees that (1) attackers cannot present a stale state as being fresh (i.e. rollback protection), (2) once a module accepted a specific input, it will continue execution on that input or never advance, and (3) an unexpected loss of power must never leave the system in a state from which it can never resume execution (i.e. liveness guarantee).\n\nWe propose Ariadne, a solution to the state-continuity problem that achieves the theoretical lower limit of requiring only a single bit flip of non-volatile memory per state update. Ariadne can be easily adapted to the platform at hand. In low-end devices where non-volatile memory may wear out quickly and the bill of materials (BOM) needs to be minimized, Ariadne can take optimal use of non-volatile memory. On SGX-enabled processors, Ariadne can be readily deployed to protect stateful modules (e.g., as used by Haven and VC3)."
   },
   {
-    "id": 5686,
+    "id": 5879,
     "year": 2016,
     "title": "Finding and Fixing Security Bugs in Flash",
     "publication": "USENIX Sec",
@@ -480,7 +480,7 @@
     "abstract": "Over the past couple of years, Adobe Flash has been repeatedly targeted by attackers in the wild. Despite an increasing number of bug fixes and mitigations implemented in the software, previously unknown 0-day vulnerabilities continue to be uncovered and used by malicious attackers. This presentation describes my team's work to reduce the number and impact of 0-day vulnerabilities in Adobe Flash.\n\nIt will start with an overview of how attackers have targeted Flash in the past, and then explain how some of the most common types of bugs work. It will then discuss how we find similar vulnerabilities. It will go through some examples of typical, and less typical bugs, showing how they violate the assumptions made by Flash Player, and how they can be exploited. This talk will also discuss recent Flash and platform mitigations, and how they impact the severity and discoverability of security bugs.\n\nNatalie Silvanovich is a security researcher on Google Project Zero. She has spent the last seven years working in mobile security, both finding security issues in mobile software and improving the security of mobile platforms. Outside of work, Natalie enjoys applying her hacking and reverse engineering skills to unusual targets, and has spoken at several conferences on the subject of Tamagotchi hacking. She is actively involved in hackerspaces and is a founding member of Kwartzlab Makerspace in Kitchener, Ontario, Canada."
   },
   {
-    "id": 5687,
+    "id": 5880,
     "year": 2016,
     "title": "The Million-Key Question—Investigating the Origins of RSA Public Keys",
     "publication": "USENIX Sec",
@@ -488,7 +488,7 @@
     "abstract": "Can bits of an RSA public key leak information about design and implementation choices such as the prime generation algorithm? We analysed over 60 million freshly generated key pairs from 22 open- and closedsource libraries and from 16 different smartcards, revealing significant leakage. The bias introduced by different choices is sufficiently large to classify a probable library or smartcard with high accuracy based only on the values of public keys. Such a classification can be used to decrease the anonymity set of users of anonymous mailers or operators of linked Tor hidden services, to quickly detect keys from the same vulnerable library or to verify a claim of use of secure hardware by a remote party. The classification of the key origins of more than 10 million RSA-based IPv4 TLS keys and 1.4 million PGP keys also provides an independent estimation of the libraries that are most commonly used to generate the keys found on the Internet.\nOur broad inspection provides a sanity check and deep insight regarding which of the recommendations for RSA key pair generation are followed in practice, including closed-source libraries and smartcards."
   },
   {
-    "id": 5688,
+    "id": 5881,
     "year": 2016,
     "title": "Fingerprinting Electronic Control Units for Vehicle Intrusion Detection",
     "publication": "USENIX Sec",
@@ -496,7 +496,7 @@
     "abstract": "As more software modules and external interfaces are getting added on vehicles, new attacks and vulnerabilities are emerging. Researchers have demonstrated how to compromise in-vehicle Electronic Control Units (ECUs) and control the vehicle maneuver. To counter these vulnerabilities, various types of defense mechanisms have been proposed, but they have not been able to meet the need of strong protection for safety-critical ECUs against in-vehicle network attacks. To mitigate this deficiency, we propose an anomaly-based intrusion detection system (IDS), called Clock-based IDS (CIDS). It measures and then exploits the intervals of periodic in-vehicle messages for fingerprinting ECUs. The thusderived fingerprints are then used for constructing a baseline of ECUs’ clock behaviors with the Recursive Least Squares (RLS) algorithm. Based on this baseline, CIDS uses Cumulative Sum (CUSUM) to detect any abnormal shifts in the identification errors — a clear sign of intrusion. This allows quick identification of in-vehicle network intrusions with a low false-positive rate of 0.055%. Unlike state-of-the-art IDSs, if an attack is detected, CIDS’s fingerprinting of ECUs also facilitates a rootcause analysis; identifying which ECU mounted the attack. Our experiments on a CAN bus prototype and on real vehicles have shown CIDS to be able to detect a wide range of in-vehicle network attacks."
   },
   {
-    "id": 5689,
+    "id": 5882,
     "year": 2016,
     "title": "Lock It and Still Lose It —on the (In)Security of Automotive Remote Keyless Entry Systems",
     "publication": "USENIX Sec",
@@ -504,7 +504,7 @@
     "abstract": "While most automotive immobilizer systems have been shown to be insecure in the last few years, the security of remote keyless entry systems (to lock and unlock a car) based on rolling codes has received less attention. In this paper, we close this gap and present vulnerabilities in keyless entry schemes used by major manufacturers. In our first case study, we show that the security of the keyless entry systems of most VW Group vehicles manufactured between 1995 and today relies on a few, global master keys. We show that by recovering the cryptographic algorithms and keys from electronic control units, an adversary is able to clone a VW Group remote control and gain unauthorized access to a vehicle by eavesdropping a single signal sent by the original remote. Secondly, we describe the Hitag2 rolling code scheme (used in vehicles made by Alfa Romeo, Chevrolet, Peugeot, Lancia, Opel, Renault, and Ford among others) in full detail. We present a novel correlation-based attack on Hitag2, which allows recovery of the cryptographic key and thus cloning of the remote control with four to eight rolling codes and a few minutes of computation on a laptop. Our findings affect millions of vehicles worldwide and could explain unsolved insurance cases of theft from allegedly locked vehicles."
   },
   {
-    "id": 5690,
+    "id": 5883,
     "year": 2016,
     "title": "OblivP2P: An Oblivious Peer-to-Peer Content Sharing System",
     "publication": "USENIX Sec",
@@ -512,7 +512,7 @@
     "abstract": "Peer-to-peer (P2P) systems are predominantly used to distribute trust, increase availability and improve performance. A number of content-sharing P2P systems, for file-sharing applications (e.g., BitTorrent and Storj) and more recent peer-assisted CDNs (e.g., Akamai Netsession), are finding wide deployment. A major security concern with content-sharing P2P systems is the risk of long-term traffic analysis—a widely accepted challenge with few known solutions.\n\nIn this paper, we propose a new approach to protecting against persistent, global traffic analysis in P2P contentsharing systems. Our approach advocates for hiding data access patterns, making P2P systems oblivious. We propose OBLIVP2P— a construction for a scalable distributed ORAM protocol, usable in a real P2P setting. Our protocol achieves the following results. First, we show that our construction retains the (linear) scalability of the original P2P network w.r.t the number of peers. Second, our experiments simulating about 16,384 peers on 15 Deterlab nodes can process up to 7 requests of 512KB each per second, suggesting usability in moderately latency-sensitive applications as-is. The bottlenecks remaining are purely computational (not bandwidth). Third, our experiments confirm that in our construction, no centralized infrastructure is a bottleneck — essentially, ensuring that the network and computational overheads can be completely offloaded to the P2P network. Finally, our construction is highly parallelizable, which implies that remaining computational bottlenecks can be drastically reduced if OBLIVP2P is deployed on a network with many real machines."
   },
   {
-    "id": 5691,
+    "id": 5884,
     "year": 2016,
     "title": "AuthLoop: End-to-End Cryptographic Authentication for Telephony over Voice Channels",
     "publication": "USENIX Sec",
@@ -520,7 +520,7 @@
     "abstract": "Telephones remain a trusted platform for conducting some of our most sensitive exchanges. From banking to taxes, wide swathes of industry and government rely on telephony as a secure fall-back when attempting to confirm the veracity of a transaction. In spite of this, authentication is poorly managed between these systems, and in the general case it is impossible to be certain of the identity (i.e., Caller ID) of the entity at the other end of a call. We address this problem with AuthLoop, the first system to provide cryptographic authentication solely within the voice channel. We design, implement and characterize the performance of an in-band modem for executing a TLS-inspired authentication protocol, and demonstrate its abilities to ensure that the explicit single-sided authentication procedures pervading the web are also possible on all phones. We show experimentally that this protocol can be executed with minimal computational overhead and only a few seconds of user time (≈9 instead of ≈97 seconds for a naïve implementation of TLS 1.2) over heterogeneous networks. In so doing, we demonstrate that strong end-to-end validation of Caller ID is indeed practical for all telephony networks."
   },
   {
-    "id": 5692,
+    "id": 5885,
     "year": 2016,
     "title": "You Are Who You Know and How You Behave: Attribute Inference Attacks via Users' Social Friends and Behaviors",
     "publication": "USENIX Sec",
@@ -528,7 +528,7 @@
     "abstract": "We propose new privacy attacks to infer attributes (e.g., locations, occupations, and interests) of online social network users. Our attacks leverage seemingly innocent user information that is publicly available in online social networks to infer missing attributes of targeted users. Given the increasing availability of (seemingly innocent) user information online, our results have serious implications for Internet privacy – private attributes can be inferred from users’ publicly available data unless we take steps to protect users from such inference attacks.\n\nTo infer attributes of a targeted user, existing inference attacks leverage either the user’s publicly available social friends or the user’s behavioral records (e.g., the webpages that the user has liked on Facebook, the apps that the user has reviewed on Google Play), but not both. As we will show, such inference attacks achieve limited success rates. However, the problem becomes qualitatively different if we consider both social friends and behavioral records. To address this challenge, we develop a novel model to integrate social friends and behavioral records and design new attacks based on our model. We theoretically and experimentally demonstrate the effectiveness of our attacks. For instance, we observe that, in a real-world large-scale dataset with 1.1 million users, our attack can correctly infer the cities a user lived in for 57% of the users; via confidence estimation, we are able to increase the attack success rate to over 90% if the attacker selectively attacks a half of the users. Moreover, we show that our attack can correctly infer attributes for significantly more users than previous attacks."
   },
   {
-    "id": 5693,
+    "id": 5886,
     "year": 2016,
     "title": "Report from the Field: A CDN's Role in Repelling Attacks against Banking Industry Web Sites",
     "publication": "USENIX Sec",
@@ -536,7 +536,7 @@
     "abstract": "This talk describes several types of attacks aimed at content delivery networks (CDNs) and their customers, along with strategies for mitigating these attacks. The attacks range from simple but large-scale denial-of-service attacks, to efforts to deface web sites, to click fraud. The talk presents examples of real attack campaigns, and analyzes the effectiveness of the CDN operated by Akamai Technologies in protecting its customers from them.\t\n\nBruce Maggs received the S.B., S.M., and Ph.D. degrees in computer science from the Massachusetts Institute of Technology in 1985, 1986, and 1989, respectively. His advisor was Charles Leiserson. After spending one year as a Postdoctoral Associate at MIT, he worked as a Research Scientist at NEC Research Institute in Princeton from 1990 to 1993. In 1994, he moved to Carnegie Mellon, where he stayed until joining Duke University in 2009 as a Professor in the Department of Computer Science. While on a two-year leave-of-absence from Carnegie Mellon, Maggs helped to launch Akamai Technologies, serving as its first Vice President for Research and Development. He retains a part-time role at Akamai as Vice President for Research."
   },
   {
-    "id": 5694,
+    "id": 5887,
     "year": 2016,
     "title": "Internet Jones and the Raiders of the Lost Trackers: An Archaeological Study of Web Tracking from 1996 to 2016",
     "publication": "USENIX Sec",
@@ -544,7 +544,7 @@
     "abstract": "Though web tracking and its privacy implications have received much attention in recent years, that attention has come relatively recently in the history of the web and lacks full historical context. In this paper, we present longitudinal measurements of third-party web tracking behaviors from 1996 to present (2016). Our tool, TrackingExcavator, leverages a key insight: that the Internet Archive’s Wayback Machine opens the possibility for a retrospective analysis of tracking over time. We contribute an evaluation of the Wayback Machine’s view of past third-party requests, which we find is imperfect—we evaluate its limitations and unearth lessons and strategies for overcoming them. Applying these strategies in our measurements, we discover (among other findings) that third-party tracking on the web has increased in prevalence and complexity since the first third-party tracker that we observe in 1996, and we see the spread of the most popular trackers to an increasing percentage of the most popular sites on the web. We argue that an understanding of the ecosystem’s historical trends—which we provide for the first time at this scale in our work—is important to any technical and policy discussions surrounding tracking."
   },
   {
-    "id": 5695,
+    "id": 5888,
     "year": 2016,
     "title": "Hey, You Have a Problem: On the Feasibility of Large-Scale Web Vulnerability Notification",
     "publication": "USENIX Sec",
@@ -552,7 +552,7 @@
     "abstract": "Large-scale discovery of thousands of vulnerableWeb sites has become a frequent event, thanks to recent advances in security research and the rise in maturity of Internet-wide scanning tools. The issues related to disclosing the vulnerability information to the affected parties, however, have only been treated as a side note in prior research.\n\nIn this paper, we systematically examine the feasibility and efficacy of large-scale notification campaigns. For this, we comprehensively survey existing communication channels and evaluate their usability in an automated notification process. Using a data set of over 44,000 vulnerable Web sites, we measure success rates, both with respect to the total number of fixed vulnerabilities and to reaching responsible parties, with the following highlevel results: Although our campaign had a statistically significant impact compared to a control group, the increase in the fix rate of notified domains is marginal.\n\nIf a notification report is read by the owner of the vulnerable application, the likelihood of a subsequent resolution of the issues is sufficiently high: about 40%. But, out of 35,832 transmitted vulnerability reports, only 2,064 (5.8%) were actually received successfully, resulting in an unsatisfactory overall fix rate, leaving 74.5% ofWeb applications exploitable after our month-long experiment. Thus, we conclude that currently no reliable notification channels exist, which significantly inhibits the success and impact of large-scale notification."
   },
   {
-    "id": 5696,
+    "id": 5889,
     "year": 2016,
     "title": "You've Got Vulnerability: Exploring Effective Vulnerability Notifications",
     "publication": "USENIX Sec",
@@ -560,7 +560,7 @@
     "abstract": "Security researchers can send vulnerability notifications to take proactive measures in securing systems at scale. However, the factors affecting a notification’s efficacy have not been deeply explored. In this paper, we report on an extensive study of notifying thousands of parties of security issues present within their networks, with an aim of illuminating which fundamental aspects of notifications have the greatest impact on efficacy. The vulnerabilities used to drive our study span a range of protocols and considerations: exposure of industrial control systems; apparent firewall omissions for IPv6-based services; and exploitation of local systems in DDoS amplification attacks. We monitored vulnerable systems for several weeks to determine their rate of remediation. By comparing with experimental controls, we analyze the impact of a number of variables: choice of party to contact (WHOIS abuse contacts versus national CERTs versus US-CERT), message verbosity, hosting an information website linked to in the message, and translating the message into the notified party’s local language. We also assess the outcome of the emailing process itself (bounces, automated replies, human replies, silence) and characterize the sentiments and perspectives expressed in both the human replies and an optional anonymous survey that accompanied our notifications.\n\nWe find that various notification regimens do result in different outcomes. The best observed process was directly notifying WHOIS contacts with detailed information in the message itself. These notifications had a statistically significant impact on improving remediation, and human replies were largely positive. However, the majority of notified contacts did not take action, and even when they did, remediation was often only partial. Repeat notifications did not further patching. These results are promising but ultimately modest, behooving the security community to more deeply investigate ways to improve the effectiveness of vulnerability notifications."
   },
   {
-    "id": 5697,
+    "id": 5890,
     "year": 2016,
     "title": "Mirror: Enabling Proofs of Data Replication and Retrievability in the Cloud",
     "publication": "USENIX Sec",
@@ -568,7 +568,7 @@
     "abstract": "Proofs of Retrievability (POR) and Data Possession (PDP) are cryptographic protocols that enable a cloud provider to prove that data is correctly stored in the cloud. PDP have been recently extended to enable users to check in a single protocol that additional file replicas are stored as well. To conduct multi-replica PDP, users are however required to process, construct, and upload their data replicas by themselves. This incurs additional bandwidth overhead on both the service provider and the user and also poses new security risks for the provider. Namely, since uploaded files are typically encrypted, the provider cannot recognize if the uploaded content are indeed replicas. This limits the business models available to the provider, since e.g., reduced costs for storing replicas can be abused by users who upload different files—while claiming that they are replicas.\n\nIn this paper, we address this problem and propose a novel solution for proving data replication and retrievability in the cloud, Mirror, which allows to shift the burden of constructing replicas to the cloud provider itself—thus conforming with the current cloud model. We show that Mirror is secure against malicious users and a rational cloud provider. Finally, we implement a prototype based on Mirror, and evaluate its performance in a realistic cloud setting. Our evaluation results show that our proposal incurs tolerable overhead on the users and the cloud provider."
   },
   {
-    "id": 5698,
+    "id": 5891,
     "year": 2016,
     "title": "ZKBoo: Faster Zero-Knowledge for Boolean Circuits",
     "publication": "USENIX Sec",
@@ -576,7 +576,7 @@
     "abstract": "In this paper we describe ZKBoo, a proposal for practically efficient zero-knowledge arguments especially tailored for Boolean circuits and report on a proof-ofconcept implementation. As an highlight, we can generate (resp. verify) a non-interactive proof for the SHA-1 circuit in approximately 13ms (resp. 5ms), with a proof size of 444KB.\nOur techniques are based on the “MPC-in-the-head” approach to zero-knowledge of Ishai et al. (IKOS), which has been successfully used to achieve significant asymptotic improvements. Our contributions include:\n\nA thorough analysis of the different variants of IKOS, which highlights their pros and cons for practically relevant soundness parameters;\n\nA generalization and simplification of their approach, which leads to faster ∑-protocols (that can be made non-interactive using the Fiat-Shamir heuristic) for statements of the form “I know x such that y = Ø(x)” (where Ø is a circuit and y a public value);\n\n A case study, where we provide explicit protocols, implementations and benchmarking of zero-knowledge protocols for the SHA-1 and SHA-256 circuits."
   },
   {
-    "id": 5699,
+    "id": 5892,
     "year": 2016,
     "title": "The Cut-and-Choose Game and Its Application to Cryptographic Protocols",
     "publication": "USENIX Sec",
@@ -584,7 +584,7 @@
     "abstract": "The cut-and-choose technique plays a fundamental role in cryptographic-protocol design, especially for secure two-party computation in the malicious model. The basic idea is that one party constructs n versions of a message in a protocol (e.g., garbled circuits); the other party randomly checks some of them and uses the rest of them in the protocol. Most existing uses of cut-and-choose fix in advance the number of objects to be checked and in optimizing this parameter they fail to recognize the fact that checking and evaluating may have dramatically different costs.\n\nIn this paper, we consider a refined cost model and formalize the cut-and-choose parameter selection problem as a constrained optimization problem. We analyze “cut-and-choose games” and show equilibrium strategies for the parties in these games. We then show how our methodology can be applied to improve the efficiency of three representative categories of secure-computation protocols based on cut-and-choose. We show improvements of up to an-order-of-magnitude in terms of bandwidth, and 12–106% in terms of total time. Source code of our game solvers is available to download at https://github.com/cut-n-choose."
   },
   {
-    "id": 5700,
+    "id": 5893,
     "year": 2016,
     "title": "AMD x86 Memory Encryption Technologies",
     "publication": "USENIX Sec",
@@ -592,7 +592,7 @@
     "abstract": "This talk will introduce the audience to two new x86 ISA features developed by AMD which will provide new security enhancements by leveraging integrated memory encryption hardware.  These features provide the ability to selectively encrypt some or all of system memory as well as the ability to run encrypted virtual machines, isolated from the hypervisor.  The talk will cover technical details related to these features, including the ISA changes, security benefits, key management framework, and practical enablement.\nThe main objective of the talk is to educate the audience on the design and use of these features which are the first general-purpose memory encryption features to be integrated into the x86 architecture.\n\nDavid Kaplan is a PMTS Security Architect at AMD who focuses on developing new security technologies across the AMD product line as part of the Security Architecture Research and Development center. He is the lead architect for the AMD memory encryption features and has worked on both CPU and SOC level security features for the last 4 years. David has over 9 years of experience at AMD with a background in x86 CPU development and has filed over 30 patents in his career so far."
   },
   {
-    "id": 5701,
+    "id": 5894,
     "year": 2016,
     "title": "On Demystifying the Android Application Framework: Re-Visiting Android Permission Specification Analysis",
     "publication": "USENIX Sec",
@@ -600,7 +600,7 @@
     "abstract": "In contrast to the Android application layer, Android’s application framework’s internals and their influence on the platform security and user privacy are still largely a black box for us. In this paper, we establish a static runtime model of the application framework in order to study its internals and provide the first high-level classification of the framework’s protected resources. We thereby uncover design patterns that differ highly from the runtime model at the application layer. We demonstrate the benefits of our insights for security-focused analysis of the framework by re-visiting the important use-case of mapping Android permissions to framework/SDK API methods. We, in particular, present a novel mapping based on our findings that significantly improves on prior results in this area that were established based on insufficient knowledge about the framework’s internals. Moreover, we introduce the concept of permission locality to show that although framework services follow the principle of separation of duty, the accompanying permission checks to guard sensitive operations violate it."
   },
   {
-    "id": 5702,
+    "id": 5895,
     "year": 2016,
     "title": "Practical DIFC Enforcement on Android",
     "publication": "USENIX Sec",
@@ -608,7 +608,7 @@
     "abstract": "Smartphone users often use private and enterprise data with untrusted third party applications. The fundamental lack of secrecy guarantees in smartphone OSes, such as Android, exposes this data to the risk of unauthorized exfiltration. A natural solution is the integration of secrecy guarantees into the OS. In this paper, we describe the challenges for decentralized information flow control (DIFC) enforcement on Android. We propose contextsensitive DIFC enforcement via lazy polyinstantiation and practical and secure network export through domain declassification. Our DIFC system, Weir, is backwards compatible by design, and incurs less than 4 ms overhead for component startup. With Weir, we demonstrate practical and secure DIFC enforcement on Android."
   },
   {
-    "id": 5703,
+    "id": 5896,
     "year": 2016,
     "title": "Screen after Previous Screens: Spatial-Temporal Recreation of Android App Displays from Memory Images",
     "publication": "USENIX Sec",
@@ -616,7 +616,7 @@
     "abstract": "Smartphones are increasingly involved in cyber and real world crime investigations. In this paper, we demonstrate a powerful smartphone memory forensics technique, called RetroScope, which recovers multiple previous screens of an Android app — in the order they were displayed — from the phone’s memory image. Different from traditional memory forensics, RetroScope enables spatial-temporal forensics, revealing the progression of the phone user’s interactions with the app (e.g., a banking transaction, online chat, or document editing session). RetroScope achieves near perfect accuracy in both the recreation and ordering of reconstructed screens. Further, RetroScope is app-agnostic, requiring no knowledge about an app’s internal data definitions or rendering logic. RetroScope is inspired by the observations that (1) app-internal data on previous screens exists much longer in memory than the GUI data structures that “package” them and (2) each app is able to perform context-free redrawing of its screens upon command from the Android framework. Based on these, RetroScope employs a novel interleaved re-execution engine to selectively reanimate an app’s screen redrawing functionality from within a memory image. Our evaluation shows that RetroScope is able to recover full temporally-ordered sets of screens (each with 3 to 11 screens) for a variety of popular apps on a number of different Android devices."
   },
   {
-    "id": 5704,
+    "id": 5897,
     "year": 2016,
     "title": "Harvesting Inconsistent Security Configurations in Custom Android ROMs via Differential Analysis",
     "publication": "USENIX Sec",
@@ -624,7 +624,7 @@
     "abstract": "Android customization offers substantially different experiences and rich functionalities to users. Every party in the customization chain, such as vendors and carriers, modify the OS and the pre-installed apps to tailor their devices for a variety of models, regions, and custom services. However, these modifications do not come at no cost. Several existing studies demonstrate that modifying security configurations during the customization brings in critical security vulnerabilities. Albeit these serious consequences, little has been done to systematically study how Android customization can lead to security problems, and how severe the situation is. In this work, we systematically identified security features that, if altered during the customization, can introduce potential risks. We conducted a large scale differential analysis on 591 custom images to detect inconsistent security features. Our results show that these discrepancies are indeed prevalent among our collected images. We have further identified several risky patterns that warrant further investigation. We have designed attacks on real devices and confirmed that these inconsistencies can indeed lead to actual security breaches."
   },
   {
-    "id": 5705,
+    "id": 5898,
     "year": 2016,
     "title": "Identifying and Characterizing Sybils in the Tor Network",
     "publication": "USENIX Sec",
@@ -632,7 +632,7 @@
     "abstract": "Being a volunteer-run, distributed anonymity network, Tor is vulnerable to Sybil attacks. Little is known about real-world Sybils in the Tor network, and we lack practical tools and methods to expose Sybil attacks. In this work, we develop sybilhunter, a system for detecting Sybil relays based on their appearance, such as configuration; and behavior, such as uptime sequences. We used sybilhunter’s diverse analysis techniques to analyze nine years of archived Tor network data, providing us with new insights into the operation of real-world attackers. Our findings include diverse Sybils, ranging from botnets, to academic research, and relays that hijacked Bitcoin transactions. Our work shows that existing Sybil defenses do not apply to Tor, it delivers insights into realworld attacks, and provides practical tools to uncover and characterize Sybils, making the network safer for its users."
   },
   {
-    "id": 5706,
+    "id": 5899,
     "year": 2016,
     "title": "k-fingerprinting: A Robust Scalable Website Fingerprinting Technique",
     "publication": "USENIX Sec",
@@ -640,7 +640,7 @@
     "abstract": "Website fingerprinting enables an attacker to infer which web page a client is browsing through encrypted or anonymized network connections. We present a new website fingerprinting technique based on random decision forests and evaluate performance over standard web pages as well as Tor hidden services, on a larger scale than previous works. Our technique, k-fingerprinting, performs better than current state-of-the-art attacks even against website fingerprinting defenses, and we show that it is possible to launch a website fingerprinting attack in the face of a large amount of noisy data. We can correctly determine which of 30 monitored hidden services a client is visiting with 85% true positive rate (TPR), a false positive rate (FPR) as low as 0.02%, from a world size of 100,000 unmonitored web pages. We further show that error rates vary widely between web resources, and thus some patterns of use will be predictably more vulnerable to attack than others."
   },
   {
-    "id": 5707,
+    "id": 5900,
     "year": 2016,
     "title": "Protecting Privacy of BLE Device Users",
     "publication": "USENIX Sec",
@@ -648,7 +648,7 @@
     "abstract": "Bluetooth Low Energy (BLE) has emerged as an attractive technology to enable Internet of Things (IoTs) to interact with others in their vicinity. Our study of the behavior of more than 200 types of BLE-equipped devices has led to a surprising discovery: the BLE protocol, despite its privacy provisions, fails to address the most basic threat of all—hiding the device’s presence from curious adversaries. Revealing the device’s existence is the stepping stone toward more serious threats that include user profiling/fingerprinting, behavior tracking, inference of sensitive information, and exploitation of known vulnerabilities on the device. With thousands of manufacturers and developers around the world, it is very challenging, if not impossible, to envision the viability of any privacy or security solution that requires changes to the devices or the BLE protocol.\n\nIn this paper, we propose a new device-agnostic system, called BLE-Guardian, that protects the privacy of the users/environments equipped with BLE devices/IoTs. It enables the users and administrators to control those who discover, scan and connect to their devices. We have implemented BLE-Guardian using Ubertooth One, an off-the-shelf open Bluetooth development platform, facilitating its broad deployment. Our evaluation with real devices shows that BLE-Guardian effectively protects the users’ privacy while incurring little overhead on the communicating BLE-devices."
   },
   {
-    "id": 5708,
+    "id": 5901,
     "year": 2016,
     "title": "Privacy in Epigenetics: Temporal Linkability of MicroRNA Expression Profiles",
     "publication": "USENIX Sec",
@@ -656,7 +656,7 @@
     "abstract": "The decreasing cost of molecular profiling tests, such as DNA sequencing, and the consequent increasing availability of biological data are revolutionizing medicine, but at the same time create novel privacy risks. The research community has already proposed a plethora of methods for protecting genomic data against these risks. However, the privacy risks stemming from epigenetics, which bridges the gap between the genome and our health characteristics, have been largely overlooked so far, even though epigenetic data such as microRNAs (miRNAs) are no less privacy sensitive. This lack of investigation is attributed to the common belief that the inherent temporal variability of miRNAs shields them from being tracked and linked over time.\n\nIn this paper, we show that, contrary to this belief, miRNA expression profiles can be successfully tracked over time, despite their variability. Specifically, we show that two blood-based miRNA expression profiles taken with a time difference of one week from the same person can be matched with a success rate of 90%. We furthermore observe that this success rate stays almost constant when the time difference is increased from one week to one year. In order to mitigate the linkability threat, we propose and thoroughly evaluate two countermeasures: (i) hiding a subset of disease-irrelevant miRNA expressions, and (ii) probabilistically sanitizing the miRNA expression profiles. Our experiments show that the second mechanism provides a better trade-off between privacy and disease-prediction accuracy."
   },
   {
-    "id": 5709,
+    "id": 5902,
     "year": 2016,
     "title": "Security Competitions",
     "publication": "USENIX Sec",
