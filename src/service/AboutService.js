@@ -2,7 +2,7 @@ export const AboutService = {
     updateTimelineData(locale = 'en') {
         const data = {
             en: [
-                { status: 'v0.3.5', date: '2025-09-24',  content: ['Update USENIX Sec 25 (Cycle 2)'] },
+                { status: 'v0.3.5', date: '2025-09-24',  content: ['Update USENIX Sec 25 (Cycle 2) and ACM CCS 25 (Cycle 2)'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['Beautify `Awards` page', 'Adjust the position of cyber begging', 'Fix several translation error'] },
                 { status: 'v0.3.3', date: '2025-07-02',  content: ['✨ Add multiple languages support', 'Add new category `Reputation`', 'Update submission timeline and add last sync remark', 'Other normal fixes'] },
                 { status: 'v0.3.2', date: '2025-04-27',  content: ['Update abstract for CCS 24', 'Update cycle 2 for ICSE 2025', 'Update ISSTA 2025', 'Update cycle 2 for oakland 2025 (only titles currently)'] },
@@ -23,7 +23,7 @@ export const AboutService = {
                 { status: 'v0.1.0', date: '2023-05-15',  content: ['First time to publish sec.c01dkit.com.','Use mkdocs as website generator.'] },
             ],
             zh: [
-                { status: 'v0.3.5', date: '2025-09-24',  content: ['更新 USENIX Sec 25 第二轮'] },
+                { status: 'v0.3.5', date: '2025-09-24',  content: ['更新 USENIX Sec 25 第二轮和ACM CCS 25第二轮'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['美化`获奖论文`页面展示形式', '调整赛博乞讨位置，从`首页`移至`关于`页', '修复少量文本翻译错误'] },
                 { status: 'v0.3.3', date: '2025-07-02',  content: ['✨ 添加多语种支持','增加新分类`名望`', '更新提交时间线并添加最后同步备注', '其他常规修复'] },
                 { status: 'v0.3.2', date: '2025-04-27',  content: ['更新 CCS 24 摘要', '更新 ICSE 2025 第二轮', '更新 ISSTA 2025', '更新 Oakland 2025 第二轮（目前仅标题）'] },
