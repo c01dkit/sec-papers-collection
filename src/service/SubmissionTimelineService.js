@@ -70,33 +70,37 @@ export const SubmissionTimelineService = {
                 ]
             },
             {
-                publication: 'CCS 2025',
+                publication: 'CCS 2026',
                 timezone: '11:59 PM AoE (UTC-12)',
-                url: 'https://www.sigsac.org/ccs/CCS2025/call-for-papers/',
-                update: '2025-07-02',
-                date: 'October 13-17, 2025',
-                place: 'Taipei, Taiwan, China',
+                url: 'https://www.sigsac.org/ccs/CCS2026/call-for/call-for-papers.html',
+                update: '2025-12-07',
+                date: 'November 15-19, 2026',
+                place: 'The World Forum, The Hague, The Netherlands.',
                 cycles: [
                     {
                         name: 'Cycle 1',
                         ddls: [
-                            {value:'1', stage:'Abstract submission deadline', date:'2025-01-02'},
-                            {value:'2', stage:'Full paper submission deadline', date:'2025-01-09'},
-                            {value:'3', stage:'Notification of early-rejection papers', date:'2025-02-10'},
-                            {value:'4', stage:'Author rebuttal period', date:'2025-03-03'},
-                            {value:'5', stage:'Rebuttal deadline', date:'2025-03-06'},
-                            {value:'6', stage:'Author notification', date:'2025-03-28'},
+                            {value:'1', stage:'Abstract submission deadline', date:'2026-01-07'},
+                            {value:'2', stage:'Full paper submission deadline', date:'2026-01-14'},
+                            {value:'3', stage:'Notification of early-rejection papers', date:'2026-02-20'},
+                            {value:'4', stage:'Author rebuttal period', date:'2026-03-17 ~ 2026-03-20'},
+                            {value:'5', stage:'Rebuttal deadline', date:'2026-03-20'},
+                            {value:'6', stage:'Author notification', date:'2026-04-09'},
+                            {value:'7', stage:'Minor revision approval deadline', date:'2026-06-05'},
+                            {value:'8', stage:'Camera ready deadline', date:'2026-08-21'},
                         ]
                     },
                     {
                         name: 'Cycle 2',
                         ddls: [
-                            {value:'1', stage:'Abstract submission deadline', date:'2025-04-07'},
-                            {value:'2', stage:'Full paper submission deadline', date:'2025-04-14'},
-                            {value:'3', stage:'Notification of early-rejection papers', date:'2025-05-16'},
-                            {value:'4', stage:'Author rebuttal period', date:'2025-06-05'},
-                            {value:'5', stage:'Rebuttal deadline', date:'2025-06-08'},
-                            {value:'6', stage:'Author notification', date:'2025-07-01'},
+                            {value:'1', stage:'Abstract submission deadline', date:'2026-04-22'},
+                            {value:'2', stage:'Full paper submission deadline', date:'2026-04-29'},
+                            {value:'3', stage:'Notification of early-rejection papers', date:'2026-06-03'},
+                            {value:'4', stage:'Author rebuttal period', date:'2026-06-29 ~ 2026-07-01'},
+                            {value:'5', stage:'Rebuttal deadline', date:'2026-07-01'},
+                            {value:'6', stage:'Author notification', date:'2026-07-17'},
+                            {value:'7', stage:'Minor revision approval deadline', date:'2026-09-06'},
+                            {value:'8', stage:'Camera ready deadline', date:'2026-09-17'},
                         ]
                     }
                 ]
