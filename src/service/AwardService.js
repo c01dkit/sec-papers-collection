@@ -248,6 +248,36 @@ export const AwardService = {
                     {
                         name: 'Distinguished Paper Award',
                         papers: [
+                            { year: 2025, title: 'Split Unlearning'},
+                            { year: 2025, title: 'SyzSpec: Specification Generation for Linux Kernel Fuzzing via Under-Constrained Symbolic Execution'},
+                            { year: 2025, title: 'Jazzline: Composable CryptoLine functional correctness proofs for Jasmin programs'},
+                            { year: 2025, title: 'BACScan: Automatic Black-Box Detection of Broken-Access-Control Vulnerabilities in Web Applications'},
+                            { year: 2025, title: 'Forking the RANDAO: Manipulating Ethereum\'s Distributed Randomness Beacon'},
+                            { year: 2025, title: 'DivTrackee versus DynTracker: Promoting Diversity in Anti-Facial Recognition against Dynamic FR Strategy'},
+                            { year: 2025, title: 'RingSG: Optimal Secure Vertex-Centric Computation for Collaborative Graph Processing'},
+                            { year: 2025, title: 'High-Throughput Universally Composable Threshold FHE Decryption'},
+                            { year: 2025, title: 'Rethinking Tamper-Evident Logging: A High-Performance, Co-Designed Auditing System'},
+                            { year: 2025, title: 'Empirical Security Analysis of Software-based Fault Isolation through Controlled Fault Injection'},
+                            { year: 2025, title: 'Leaky Apps: Large-scale Analysis of Secrets Distributed in Android and iOS Apps'},
+                            { year: 2025, title: 'PAnDA: Rethinking Metric Differential Privacy Optimization at Scale with Anchor-Based Approximation'},
+                            { year: 2025, title: 'Harnessing Sparsification in Federated Learning: A Secure, Efficient, and Differentially Private Realization'},
+                            { year: 2025, title: 'Harnessing Vital Sign Vibration Harmonics for Effortless and Inbuilt XR User Authentication'},
+                            { year: 2025, title: 'The Odyssey of robots.txt Governance: Measuring Convention Implications of Web Bots in Large Language Model Services'},
+                            { year: 2025, title: 'Layered, Overlapping, and Inconsistent: A Large-Scale Analysis of the Multiple Privacy Policies and Controls of U.S. Banks' },
+                            { year: 2025, title: 'Adversarial Observations in Weather Forecasting'},
+                            { year: 2025, title: 'On the Security of SSH Client Signatures'},
+                            { year: 2025, title: 'A Decade-long Landscape of Advanced Persistent Threats: Longitudinal Analysis and Global Trends'},
+                            { year: 2025, title: 'BadAML: Exploiting Legacy Firmware Interfaces to Compromise Confidential Virtual Machines'},
+                            { year: 2025, title: 'Looping for Good: Cyclic Proofs for Security Protocols'},
+                            { year: 2025, title: 'Exact Robustness Certification of k-Nearest Neighbors'},
+                            { year: 2025, title: 'Sliced PIR: Offloading Heavyweight Work with NTT'},
+                            { year: 2025, title: 'Automatically Detecting Online Deceptive Patterns'},
+                            { year: 2025, title: 'Don\'t Look Up: There Are Sensitive Internal Links in the Clear on GEO Satellites'},
+                            { year: 2025, title: 'WireTap: Breaking Server SGX via DRAM Bus Interposition'},
+                            { year: 2025, title: 'Optimistic, Signature-Free Reliable Broadcast and Its Applications'},
+                            { year: 2025, title: 'CITesting: Systematic Testing of Context Integrity Violations in Cellular Core Networks'},
+                            { year: 2025, title: 'From OT to OLE with Subquadratic Communication'},
+                            { year: 2025, title: 'The OCH Authenticated Encryption Scheme'},
                             { year: 2024, title: '"Better Be Computer or I\'m Dumb": A Large-Scale Evaluation of Humans as Audio Deepfake Detectors'},
                             { year: 2024, title: 'Organic or Diffused: Can We Distinguish Human Art from AI-generated Images?'},
                             { year: 2024, title: 'Unmasking the Security and Usability of Password Masking'},
@@ -331,8 +361,28 @@ export const AwardService = {
                         ]
                     },
                     {
+                        name: 'Test of Time Award',
+                        papers: [
+                            { year: 2025, title: 'Model Inversion Attacks that Exploit Confidence Information and Basic Countermeasures'},
+                            { year: 2025, title: 'Privacy-Preserving Deep Learning'},
+                            { year: 2025, title: 'Demystifying Incentives in the Consensus Computer'},
+                        ]
+                    },
+                    {
+                        name: 'Best Poster Award',
+                        papers: [
+                            { year: 2025, title: 'Computer Security Researchers’ Experiences with Vulnerability Disclosures'},
+                            { year: 2025, title: 'Scalable Privacy-Preserving Linear Regression Training via Homomorphic Encryption'},
+                        ]
+                    },
+                    {
                         name: 'Distinguished Artifact Award',
                         papers: [
+                            { year: 2025, title: 'On the Security of SSH Client Signatures'},
+                            { year: 2025, title: 'Protocols to Code: Formal Verification of a Secure Next-Generation Internet Router'},
+                            { year: 2025, title: 'PickleBall: Secure Deserialization of Pickle-based Machine Learning Models'},
+                            { year: 2025, title: 'ExfilState: Automated Discovery of Timer-Free Cache Side Channels on ARM CPUs'},
+                            { year: 2025, title: 'Secure Parsing and Serializing with Separation Logic Applied to CBOR, CDDL, and COSE'},
                             { year: 2024, title: 'Helium: Scalable MPC among Lightweight Participants and under Churn'},
                             { year: 2024, title: 'Rules Refine the Riddle: Global Explanation for Deep Learning-Based Anomaly Detection in Security Applications'},
                             { year: 2024, title: 'Ents: An Efficient Three-party Training Framework for Decision Trees by Communication Optimization'},
@@ -353,6 +403,14 @@ export const AwardService = {
                     {
                         name: 'Best Paper Award',
                         papers: [
+                            { year: 2025, title: 'Confusing Value with Enumeration: Studying the Use of CVEs in Academia'},
+                            { year: 2025, title: 'Characterizing and Detecting Propaganda-Spreading Accounts on Telegram'},
+                            { year: 2025, title: 'My ZIP isn\'t your ZIP: Identifying and Exploiting Semantic Gaps Between ZIP Parsers'},
+                            { year: 2025, title: 'How Transparent is Usable Privacy and Security Research? A Meta-Study on Current Research Transparency Practices'},
+                            { year: 2025, title: 'Catch-22: Uncovering Compromised Hosts using SSH Public Keys'},
+                            { year: 2025, title: 'We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs'},
+                            { year: 2025, title: 'Branch Privilege Injection: Compromising Spectre v2 Hardware Mitigations by Exploiting Branch Predictor Race Conditions'},
+                            { year: 2025, title: 'Fuzzing the PHP Interpreter via Dataflow Fusion'},
                             { year: 2024, title: 'Indirector: High-Precision Branch Target Injection Attacks Exploiting the Indirect Branch Predictor'},
                             { year: 2024, title: 'ENG25519: Faster TLS 1.3 handshake using optimized X25519 and Ed25519'},
                             { year: 2024, title: 'Digital Discrimination of Users in Sanctioned States: The Case of the Cuba Embargo'},

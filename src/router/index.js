@@ -37,6 +37,10 @@ const routes = [
                 component: () => import('@/views/misc/About.vue'),
             },
             {
+                path: '/misc/settings',
+                component: () => import('@/views/misc/Settings.vue'),
+            },
+            {
                 path: '/misc/i18n-test',
                 component: () => import('@/views/misc/I18nTest.vue'),
             },

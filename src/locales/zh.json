@@ -16,7 +16,8 @@
     "reputation": "名望",
     "awards": "获奖论文",
     "misc": "其他",
-    "about": "关于"
+    "about": "关于",
+    "settings": "设置"
   },
   "trends": {
     "acceptedPapers": "录用论文趋势",
@@ -50,7 +51,20 @@
     "totalPapers": "论文总数",
     "totalPublications": "会议/期刊总数",
     "projectStars": "项目星标 / 分支",
-    "recentUpdate": "最近更新日期"
+    "recentUpdate": "最近更新日期",
+    "paperStats": {
+      "title": "论文统计",
+      "subtitle": "会议年度统计",
+      "year": "{year} 年",
+      "papers": "篇",
+      "totalPapers": "合计：{count} 篇",
+      "status": {
+        "pending": "待校对",
+        "processed": "已校对",
+        "processing": "待补充",
+        "advanced": "已分析"
+      }
+    }
   },
   "papers": {
     "title": "安全论文集",
@@ -80,6 +94,55 @@
   "about": {
     "timeline": "更新日志",
     "sponsors": "赞助者"
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "偏好将保存在本机浏览器的 IndexedDB 中",
+    "unsupported": {
+      "title": "当前浏览器不支持 IndexedDB",
+      "desc": "将使用默认配置，无法在本地持久化保存偏好。"
+    },
+    "consent": {
+      "title": "允许在本地存储配置吗？",
+      "desc": "我们会使用浏览器的 IndexedDB 在本机保存主题色、语言和明暗模式，仅用于本地，不会上传到服务器。",
+      "accept": "允许",
+      "reject": "拒绝",
+      "declinedNote": "若需要，可在此页面随时重新开启本地存储。"
+    },
+    "form": {
+      "showStatusDots": {
+        "label": "显示状态圆点",
+        "desc": "控制首页论文统计中的彩色指示灯。默认关闭以避免密集恐惧不适。"
+      },
+      "llmUrl": {
+        "label": "大模型接口地址",
+        "desc": "大模型服务的接口 URL（例如 https://api.example.com/v1/chat）。",
+        "placeholder": "请输入接口地址"
+      },
+      "llmKey": {
+        "label": "大模型 API Key",
+        "desc": "密钥仅保存在本机浏览器，不会上传服务器。",
+        "placeholder": "请输入 API Key"
+      },
+      "keywords": {
+        "label": "偏好关键词",
+        "desc": "在标题/摘要中高亮这些词语。可添加多个，会使用主题色高亮。",
+        "placeholder": "输入关键词回车添加",
+        "add": "添加"
+      }
+    },
+    "actions": {
+      "save": "保存",
+      "reset": "恢复默认"
+    },
+    "toast": {
+      "saved": "设置已保存",
+      "saveFailed": "保存失败",
+      "loadFailed": "加载失败",
+      "consentAccepted": "已启用本地存储",
+      "consentFailed": "启用本地存储失败",
+      "consentRejected": "已拒绝使用本地存储"
+    }
   },
   "search": {
     "clearFilters": "清除筛选",

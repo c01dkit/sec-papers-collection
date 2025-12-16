@@ -41,7 +41,7 @@
                         <div class="mb-3">
                             It's great to meet you after a long journey, and welcome to the third version of the website! Compared to the previous two versions, the current one adopts their advantages.</div>
                         <div class="mb-3">
-                            Of course, the website is still quite simple at the moment. I plan to make more updates in the future! Since the entire website is under construction by myself, I can easily implement many ideas! I also look forward to your feedback and issues.</div>
+                            Of course, the website is still quite simple at the moment. Since the entire website is under construction by myself, I can easily implement many ideas! I also look forward to your feedback and issues.</div>
                         <div class="mb-3">
                             If you find this website helpful, you can support me with a cup of coffee ☕ 😃 ... or, <a class="text-primary cursor-pointer" target="_blank" href="https://afdian.com/a/c01dkit"> a cup of Chinese tea 🍵</a> 😆</div>
 
@@ -87,10 +87,10 @@
                 <h1>{{ t('about.sponsors') }} <i class="pi pi-heart"></i></h1>
                 <Divider/>
                 <div class="flex flex-col gap-3">
-                    <div v-for="item in sponsors" :key="item.date" class="flex flex-row justify-between">
-                        <div>{{ item.name }}</div>
-                        <div>{{ item.amount}} </div>
-                        <div>{{ item.date}} </div>
+                    <div v-for="item in sponsors" :key="item.date" class="grid grid-cols-[2fr_1fr_1fr] gap-4 items-center" :title="item.comment">
+                        <div class="text-left truncate">{{ item.name }}</div>
+                        <div class="text-left">{{ item.amount}} </div>
+                        <div class="text-right">{{ item.date}} </div>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ export const AboutService = {
     updateTimelineData(locale = 'en') {
         const data = {
             en: [
+                { status: 'v0.3.6', date: '2025-12-16',  content: ['Update CCS 25 and USENIX 25 Awards', 'Add paper count and status in `Home`'] },
                 { status: 'v0.3.5', date: '2025-09-24',  content: ['Update USENIX Sec 25 (Cycle 2) and ACM CCS 25 (Cycle 2)'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['Beautify `Awards` page', 'Adjust the position of cyber begging', 'Fix several translation error'] },
                 { status: 'v0.3.3', date: '2025-07-02',  content: ['✨ Add multiple languages support', 'Add new category `Reputation`', 'Update submission timeline and add last sync remark', 'Other normal fixes'] },
@@ -23,6 +24,7 @@ export const AboutService = {
                 { status: 'v0.1.0', date: '2023-05-15',  content: ['First time to publish sec.c01dkit.com.','Use mkdocs as website generator.'] },
             ],
             zh: [
+                { status: 'v0.3.6', date: '2025-12-16',  content: ['更新CCS 25与USENIX 25获奖论文', '在`首页`增加了会议论文数量统计及统计状态汇总'] },
                 { status: 'v0.3.5', date: '2025-09-24',  content: ['更新 USENIX Sec 25 第二轮和ACM CCS 25第二轮'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['美化`获奖论文`页面展示形式', '调整赛博乞讨位置，从`首页`移至`关于`页', '修复少量文本翻译错误'] },
                 { status: 'v0.3.3', date: '2025-07-02',  content: ['✨ 添加多语种支持','增加新分类`名望`', '更新提交时间线并添加最后同步备注', '其他常规修复'] },
@@ -49,6 +51,7 @@ export const AboutService = {
 
     sponsorData() {
         return[
+            { name: '爱发电用户_a3458', amount: '20 RMB', date: '2025-12-02', comment: '很有帮助的网站！（如果可以的话，希望之后可以再多加一些软工那边的会议）'},
             { name: 'cy', amount: '66 RMB', date: '2025-01-21', comment: ''},
             { name: 'k*j', amount: '20 RMB', date: '2025-01-21', comment: '感谢开发的secpaper网站，省了不少时间'},
         ]

@@ -8,7 +8,31 @@ import json
 import zipfile
 import pyzipper
 import argparse
+from dotenv import load_dotenv
+from dataclasses import dataclass, field, asdict
 from lxml import etree
+
+load_dotenv()
+
+@dataclass
+class Statistics:
+    total: int = 0
+    overview: list = field(default_factory=list)
+    byPublication: dict = field(default_factory=dict)
+    byYear: dict = field(default_factory=dict)
+    byPublicationAndYear: dict = field(default_factory=dict)
+    byPublicationAndYearAndStatus: dict = field(default_factory=dict)
+    years: list = field(default_factory=list)
+
+@dataclass
+class PaperInfo:
+    id: int = -1
+    year: int = -1
+    title: str = '#'
+    publication: str = '#'
+    paper: str = '#'
+    abstract: str = '#'
+    status: str = 'notchecked'
 
 def get_config(filename):
     with open(filename, 'r', encoding='utf-8') as f:
@@ -146,14 +170,15 @@ def fetch_one_paper_in_config(config):
                     data = json.load(f)
                     for paper_detail in data:
                         paper_id += 1
-                        one_paper_info = {
-                            'id': paper_id,
-                            'year': one_site_config['year'],
-                            'title': paper_detail['title'],
-                            'publication': paper_detail.get('publication', publication_config['name']),
-                            'paper': paper_detail.get('paper', '#'),
-                            'abstract': paper_detail.get('abstract', '#'),
-                        }
+                        one_paper_info = PaperInfo(
+                            id=paper_id,
+                            year=one_site_config['year'],
+                            title=paper_detail['title'],
+                            publication=paper_detail.get('publication', publication_config['name']),
+                            paper=paper_detail.get('paper', '#'),
+                            abstract=paper_detail.get('abstract', '#'),
+                            status=one_site_config.get('status', 'notchecked')
+                        )
                         yield one_paper_info
             else:
                 # second priority: crawl website if json file does not exist
@@ -184,32 +209,37 @@ def fetch_one_paper_in_config(config):
                     for i in range(len(titles)):
                         t = titles[i].strip().replace('\n','')
                         paper_id += 1
-                        one_paper_info = {
-                            'id': paper_id,
-                            'year': one_site_config['year'],
-                            'title': t,
-                            'publication': publication_config['name'],
-                            'paper': '#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
-                            'abstract': '#' if abstracts is None else abstracts[i],
-                        }
+                        
+                        one_paper_info = PaperInfo(
+                            id=paper_id,
+                            year=one_site_config['year'],
+                            title=t,
+                            publication=publication_config['name'],
+                            paper='#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
+                            abstract='#' if abstracts is None else abstracts[i],
+                            status=one_site_config.get('status','notchecked')
+                        )
                         yield one_paper_info
+
+
 
 def export_data_json(project_base):
     config = get_config('data.yml')
     json_all = []
     meta_all = {}
     quick_view = []
-    statistics = {'total':0,'overview':[],'byPublication':{},'byYear':{},'byPublicationAndYear':{}}
+    statistics = Statistics()
+
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
                  '--p-amber-400','--p-teal-400','--p-blue-400',
                  '--p-purple-400','--p-zinc-400']
     publication_growth = {}
-    for one_paper_info in fetch_one_paper_in_config(config):
-        publication = one_paper_info['publication']
-        year = str(one_paper_info['year'])
+    for paper_info in fetch_one_paper_in_config(config):
+        publication = paper_info.publication
+        year = str(paper_info.year)
 
         # No abstract for small file
-        no_abs_one_paper_info = {k:v for k,v in one_paper_info.items() if k!='abstract'}
+        no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k!='abstract'}
 
         # Full paper info
         json_all.append(no_abs_one_paper_info)
@@ -217,20 +247,19 @@ def export_data_json(project_base):
         # Save meta data in official_cache
         meta_all.setdefault(publication,{})
         meta_all[publication].setdefault(year,[])
-        meta_all[publication][year].append(one_paper_info)
+        meta_all[publication][year].append(asdict(paper_info))
 
         # Statistics
-        statistics['total'] += 1
-        statistics['byPublication'].setdefault(publication,0)
-        statistics['byPublication'][publication] += 1
-        statistics['byYear'].setdefault(year,0)
-        statistics['byYear'][year] += 1
-        statistics['byPublicationAndYear'].setdefault(publication,{})
-        statistics['byPublicationAndYear'][publication].setdefault(year,0)
-        statistics['byPublicationAndYear'][publication][year] += 1
+        statistics.total += 1
+        statistics.byPublication.setdefault(publication,0)
+        statistics.byPublication[publication] += 1
+        statistics.byYear.setdefault(year,0)
+        statistics.byYear[year] += 1
+        statistics.byPublicationAndYearAndStatus.setdefault(publication,{})
+        statistics.byPublicationAndYearAndStatus[publication].setdefault(year, paper_info.status)
 
         # Quick view: generate a small version of full paper info (100 latest paper from each publication)
-        if statistics['byPublication'][publication] <= 100:
+        if statistics.byPublication[publication] <= 100:
             quick_view.append(no_abs_one_paper_info)
 
         # Overview
@@ -239,22 +268,25 @@ def export_data_json(project_base):
         publication_growth[publication][year] += 1
 
     for publication, growth in publication_growth.items():
-        statistics['overview'].append({
+        statistics.overview.append({
             'label': publication,
             'data': [i for i in dict(sorted(growth.items(), key=lambda x: x[0])).values()],
             'fill': False,
             'borderColor': color_set.pop(),
             'tension': 0.4,
         })
-    statistics['byYear'] = dict(sorted(statistics['byYear'].items(), key=lambda x: int(x[0])))
-    statistics['years'] = list(statistics['byYear'].keys())
+    statistics.byYear = dict(sorted(statistics.byYear.items(), key=lambda x: int(x[0])))
+    statistics.years = list(statistics.byYear.keys())
 
     for json_name, json_file in {
         'data-statistics.json': statistics,
         'data-quick-view.json': quick_view,
         'data.json': json_all,
     }.items():
-        json.dump(json_file, open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+        if hasattr(json_file, '__dataclass_fields__'):
+            json.dump(asdict(json_file), open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+        else:
+            json.dump(json_file, open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
     if not os.path.exists('./src/assets/data/meta_json'):
         os.mkdir('./src/assets/data/meta_json')

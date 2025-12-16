@@ -31,6 +31,7 @@ const model = computed(() => [
         label: t('menu.misc'),
         items: [
             { label: t('menu.about'), icon: 'pi pi-fw pi-info-circle', to: '/misc/about', class: 'rotated-icon' },
+            // { label: t('menu.settings'), icon: 'pi pi-fw pi-cog', to: '/misc/settings' },
             // { label: 'I18n Test', icon: 'pi pi-fw pi-globe', to: '/misc/i18n-test', class: 'hidden'},
         ]
     },

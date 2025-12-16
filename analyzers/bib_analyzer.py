@@ -15,7 +15,7 @@ class BIB_OBJ:
                 short_abstract = entry['abstract'].replace('\n', ' ')
                 short_abstract = re.sub(r'\s+', ' ', short_abstract)
                 self.result.append({
-                    'title': entry['title'],
+                    'title': entry['title'].strip(),
                     'authors': entry['author'],
                     'abstract': short_abstract,
                     'paper': entry['url'],
