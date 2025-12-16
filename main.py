@@ -255,6 +255,10 @@ def export_data_json(project_base):
         statistics.byPublication[publication] += 1
         statistics.byYear.setdefault(year,0)
         statistics.byYear[year] += 1
+        statistics.byPublicationAndYear.setdefault(publication,{})
+        statistics.byPublicationAndYear[publication].setdefault(year,0)
+        statistics.byPublicationAndYear[publication][year] += 1
+        
         statistics.byPublicationAndYearAndStatus.setdefault(publication,{})
         statistics.byPublicationAndYearAndStatus[publication].setdefault(year, paper_info.status)
 

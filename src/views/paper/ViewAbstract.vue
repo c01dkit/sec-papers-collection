@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <MegaMenu :model="items" ></MegaMenu>
+        <MegaMenu :model="items" />
         <div class="p-4">
             <div class="text-xl text-900 font-medium my-2">{{ paperSet }}</div>
             <ScrollTop  v-animateonscroll="{ enterClass: 'animate-fadeinleft', leaveClass: 'animate-fadeout'}" class="animate-duration-1000 animate-ease-in-out"/>
@@ -109,6 +109,7 @@ const constructPublicationItems = () => {
         newItems[targetIndex].items.push([tempPublicationItem]);
     }
     items.value = newItems;
+    console.log(items.value)
 };
 
 // 语言切换处理
