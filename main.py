@@ -220,8 +220,6 @@ def fetch_one_paper_in_config(config):
                         )
                         yield one_paper_info
 
-
-
 def export_data_json(project_base):
     config = get_config('data.yml')
     json_all = []
