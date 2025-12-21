@@ -109,7 +109,6 @@ const constructPublicationItems = () => {
         newItems[targetIndex].items.push([tempPublicationItem]);
     }
     items.value = newItems;
-    console.log(items.value)
 };
 
 // 语言切换处理

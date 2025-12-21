@@ -5,8 +5,7 @@ import hashlib
 import os
 import datetime
 import json
-import zipfile
-import pyzipper
+import script.zip_manager as zip_manager
 import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
@@ -299,31 +298,6 @@ def export_data_json(project_base):
             json_file_name = os.path.join('./src/assets/data/meta_json',publication+' - '+year+'.json')
             json.dump(meta_all[publication][year],open(json_file_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
-def generate_zip_cache():
-    cache_dir = './cache'
-    with zipfile.ZipFile('cache.zip', "w", zipfile.ZIP_DEFLATED) as zpf:
-        for path, _, filenames in os.walk(cache_dir):
-            for filename in filenames:
-                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
-    cache_dir = './official_cache'
-    _config = get_config('./config.yml')
-    with pyzipper.AESZipFile('private_source.zip', 'w', compression=pyzipper.ZIP_DEFLATED, encryption=pyzipper.WZ_AES) as zpf:
-        zpf.setpassword(_config['zipassword'].encode())
-        for path, _, filenames in os.walk(cache_dir):
-            for filename in filenames:
-                zpf.write(os.path.join(path, filename), os.path.join(path, filename))
-        zpf.setencryption(pyzipper.WZ_AES, pwd=_config['zipassword'].encode())
-
-def unzip_encrypted_zip():
-    zip_file = 'private_source.zip'
-    _config = get_config('./config.yml')
-    password = _config['zipassword']
-    output_dir = '.'
-    if os.path.exists(zip_file):
-        with pyzipper.AESZipFile(zip_file, 'r') as zpf:
-            zpf.pwd = password.encode() 
-            zpf.extractall(output_dir)
-
 def prepare_official_data():
     """
     Parse csv/bib files for official data.
@@ -370,6 +344,69 @@ def prepare_official_data():
                     paper_num = 0
                 print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
 
+
+
+
+def title_exists_in_file(file_path: str, title: str) -> bool:
+    """
+    Return True if `title` already appears under the "title" key
+    in any JSON line inside `file_path`.
+    """
+    if not os.path.exists(file_path):
+        return False
+
+    with open(file_path, 'r', encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if record.get('title') == title:
+                return True
+    return False
+
+def titles_in_file(file_path: str) -> set:
+    """
+    Return True if `title` already appears under the "title" key
+    in any JSON line inside `file_path`.
+    """
+    title_set = set()
+    if not os.path.exists(file_path):
+        return set()
+
+    with open(file_path, 'r', encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            title_set.add(record.get('title_en'))
+    return title_set
+def analyze_abstracts_and_titles():
+    from analyzers.llm_analyzer import analyze_title_and_abs
+    config = get_config('data.yml')
+    os.makedirs('official_cache/advanced_data', exist_ok=True)
+    title_cache = {}
+    for paper_info in fetch_one_paper_in_config(config):
+        log_file_path = os.path.join('official_cache/advanced_data', f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
+        if log_file_path not in title_cache:
+            title_cache[log_file_path] = titles_in_file(log_file_path)
+        if paper_info.title in title_cache[log_file_path]:
+            continue  # Already analyzed
+        if len(paper_info.abstract) > 50 and paper_info.status != 'advanced':
+            result = analyze_title_and_abs(paper_info.title, paper_info.abstract)
+            print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}")
+            if result.get('topics_en', 'unknown') != 'unknown':
+                with open(log_file_path, 'a', encoding='utf-8') as log_file:
+                    log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
+                    log_file.flush()
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Helper")
     parser.add_argument(
@@ -387,6 +424,11 @@ if __name__ == '__main__':
         action='store_true',
         help="Generate new json files"
     )
+    parser.add_argument(
+        '--llm-analyze',
+        action='store_true',
+        help="Analyze papers' abstract with LLM"
+    )
     args = parser.parse_args()
 
     if args.analyze:
@@ -394,7 +436,9 @@ if __name__ == '__main__':
             prepare_official_data()
         export_data_json('src/assets/data/')
     if args.zip:
-        generate_zip_cache()
+        zip_manager.generate_zip_cache()
     if args.unzip:
-        unzip_encrypted_zip()
+        zip_manager.unzip_encrypted_zip()
+    if args.llm_analyze:
+        analyze_abstracts_and_titles()
     print('All done.')
