@@ -5,7 +5,7 @@ import hashlib
 import os
 import datetime
 import json
-import script.zip_manager as zip_manager
+import analyzers.zip_manager as zip_manager
 import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict

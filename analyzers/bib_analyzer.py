@@ -1,7 +1,8 @@
 import os
 import re
 import bibtexparser
-
+import uuid
+import sys
 
 class BIB_OBJ:
     def __init__(self, publication):
@@ -30,3 +31,25 @@ class BIB_OBJ:
         else:
             print(f'{filename} not found')
             return False
+        
+    def fix_bib_name(self, filename):
+        origin_file = open(filename, 'r', encoding='utf8')
+        result = []
+        for line in origin_file:
+            fixed_line = line
+            if line.startswith('@INPROCEEDINGS {,'):
+                new_id = str(uuid.uuid4()).replace('-', '')
+                fixed_line = f'@INPROCEEDINGS {{{new_id},\n'
+            elif line.startswith('title = {{'):
+                fixed_line = line.replace('{{', '{').replace('}}', '}')
+            result.append(fixed_line)
+        origin_file.close()
+        fixed_file = open(filename, 'w', encoding='utf8')
+        fixed_file.writelines(result)
+        fixed_file.close()
+
+if __name__ == '__main__':
+    bib_analyzer = BIB_OBJ(publication='Sample Conference')
+    bib_file = sys.argv[1]
+    bib_analyzer.fix_bib_name(bib_file)
+    # uv run analyzers/bib_analyzer.py official_cache/oakland26.bib
