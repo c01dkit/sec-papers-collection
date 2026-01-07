@@ -88,7 +88,7 @@ const constructPublicationItems = () => {
         let targetIndex;
         if (['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'].includes(publication)) {
             targetIndex = 0;
-        } else if (['ISSTA', 'ICSE'].includes(publication)) {
+        } else if (['ISSTA', 'ICSE', 'FSE', 'ASE', 'TSE'].includes(publication)) {
             targetIndex = 1;
         }
         const item = paperStatisRef.value.byPublicationAndYear[publication];

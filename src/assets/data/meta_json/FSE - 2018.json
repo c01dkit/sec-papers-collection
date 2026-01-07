@@ -1,0 +1,1118 @@
+[
+  {
+    "id": 10992,
+    "year": 2018,
+    "title": "Behind every great deep learning framework is an even greater programming languages concept (keynote)",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3280855",
+    "abstract": "In many areas, such as image recognition, natural language processing, search, recommendation, autonomous cars, systems software and infrastructure, and even Software Engineering tools themselves, Software 2.0 (= programming using learned models) is quickly swallowing Software 1.0 (= programming using handcrafted algorithms). Where the Software 1.0 Engineer formally specifies their problem, carefully designs algorithms, composes systems out of subsystems or decomposes complex systems into smaller components, the Software 2.0 Engineer amasses training data and simply feeds it into an ML algorithm that will synthesize an approximation of the function whose partial extensional definition is that training data. Instead of code as the artifact of interest, in Software 2.0 it is all about the data where compilation of source code is replaced by training models with data. This new style of programming has far-reaching consequences for traditional software engineering practices. Everything we have learned about life cycle models, project planning and estimation, requirements analysis, program design, construction, debugging, testing, maintenance and implementation, … runs the danger of becoming obsolete. One way to try to prepare for the new realities of software engineering is not to zero in on the differences between Software 1.0 and Software 2.0 but instead focus on their similarities. If you carefully look at what a neural net actually represents, you realize that in essence it is a pure function, from multi-dimensional arrays of floating point numbers to multi-dimensional arrays of floating point numbers (tensors). What is special about these functions is that they are differentiable (yes, exactly as you remember from middle school calculus), which allows them to be trained using back propagation. The programming language community has also discovered that there is a deep connection between back propagation and continuations. Moreover, when you look closely at how Software 2.0 Engineers construct complex neural nets like CNNs, RNNs, LSTMs, … you recognize they are (implicitly) using high-order combinators like map, fold, zip, scan, recursion, conditionals, function composition, … to compose complex neural network architectures out of simple building blocks. Constructing neural networks using pure and higher-order differentiable functions and training them using reverse-mode automatic differentiation is unsurprisingly called Differentiable Programming. This talk will illustrate the deep programming language principles behind Differentiable Programming, which will hopefully inspire the working Software 1.0 engineer to pay serious attention to the threats and opportunities of Software 2.0.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10993,
+    "year": 2018,
+    "title": "Ten years of hunting for similar code for fun and profit (keynote)",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3280856",
+    "abstract": "In 2007, the Deckard paper was published at ICSE. Since its publication, it has led to much follow-up research and applications. The paper made two core contributions: a novel vector embedding of structured code for fast similarity detection, and an application of the embedding for clone detection, resulting in the Deckard tool. The vector embedding is simple and easy to adapt. Similar code detection is also fundamental for a range of classical and emerging problems in software engineering, security, and computer science education (e.g., code reuse, refactoring, porting, translation, synthesis, program repair, malware detection, and feedback generation). Both have buttressed the paper’s influence. In 2018, the Deckard paper received the ACM SIGSOFT Impact Paper award. In this keynote, we take the opportunity to review the work’s inception, evolution and impact on its subsequent work and applications, and to share our thoughts on exciting ongoing and future developments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10994,
+    "year": 2018,
+    "title": "CloudRaid: hunting concurrency bugs in the cloud via log-mining",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236071",
+    "abstract": "Cloud systems suffer from distributed concurrency bugs, which are notoriously difficult to detect and often lead to data loss and service outage. This paper presents CloudRaid, a new effective tool to battle distributed concurrency bugs. CloudRaid automatically detects concurrency bugs in cloud systems, by analyzing and testing those message orderings that are likely to expose errors. We observe that large-scale online cloud applications process millions of user requests per second, exercising many permutations of message orderings extensively. Those already sufficiently-tested message orderings are unlikely to expose errors. Hence, CloudRaid mines logs from previous executions to uncover those message orderings which are feasible, but not sufficiently tested. Specifically, CloudRaid tries to flip the order of a pair of messages &lt;S,P&gt; if they may happen in parallel, but S always arrives before P from existing logs, i.e., excercising the order P ↣ S. The log-based approach makes it suitable to live systems. We have applied CloudRaid to automatically test four representative distributed systems: Apache Hadoop2/Yarn, HBase, HDFS and Cassandra. CloudRaid can automatically test 40 different versions of the 4 systems (10 versions per system) in 35 hours, and can successfully trigger 28 concurrency bugs, including 8 new bugs that have never been found before. The 8 new bugs have all been confirmed by their original developers, and 3 of them are considered as critical bugs that have already been fixed.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10995,
+    "year": 2018,
+    "title": "Testing multithreaded programs via thread speed control",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236077",
+    "abstract": "A multithreaded program's interleaving space is discrete and astronomically large, making effectively sampling thread schedules for manifesting concurrency bugs a challenging task. Observing that concurrency bugs can be manifested by adjusting thread relative speeds, this paper presents the new concept of speed space in which each vector denotes a family of thread schedules. A multithreaded program's speed space is approximately continuous, easy-to-sample, and preserves certain categories of concurrency bugs. We discuss the design, implementation, and evaluation of our speed-controlled scheduler for exploring adversarial/abnormal schedules. The experimental results confirm that our technique is effective in sampling diverse schedules. Our implementation also found previously unknown concurrency bugs in real-world multithreaded programs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10996,
+    "year": 2018,
+    "title": "Data race detection on compressed traces",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236025",
+    "abstract": "We consider the problem of detecting data races in program traces that have been compressed using straight line programs (SLP), which are special context-free grammars that generate exactly one string, namely the trace that they represent. We consider two classical approaches to race detection --- using the happens-before relation and the lockset discipline. We present algorithms for both these methods that run in time that is linear in the size of the compressed, SLP representation. Typical program executions almost always exhibit patterns that lead to significant compression. Thus, our algorithms are expected to result in large speedups when compared with analyzing the uncompressed trace. Our experimental evaluation of these new algorithms on standard benchmarks confirms this observation.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10997,
+    "year": 2018,
+    "title": "Practical AJAX race detection for JavaScript web applications",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236038",
+    "abstract": "Asynchronous client-server communication is a common source of errors in JavaScript web applications. Such errors are difficult to detect using ordinary testing because of the nondeterministic scheduling of AJAX events. Existing automated event race detectors are generally too imprecise or too inefficient to be practically useful. To address this problem, we present a new approach based on a lightweight combination of dynamic analysis and controlled execution that directly targets identification of harmful AJAX event races. We experimentally demonstrate using our implementation, AjaxRacer, that this approach is capable of automatically detecting harmful AJAX event races in many websites, and producing informative error messages that support diagnosis and debugging. Among 20 widely used web pages that use AJAX, AjaxRacer discovers harmful AJAX races in 12 of them, with a total of 72 error reports, and with very few false positives.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10998,
+    "year": 2018,
+    "title": "Using finite-state models for log differencing",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236069",
+    "abstract": "Much work has been published on extracting various kinds of models from logs that document the execution of running systems. In many cases, however, for example in the context of evolution, testing, or malware analysis, engineers are interested not only in a single log but in a set of several logs, each of which originated from a different set of runs of the system at hand. Then, the difference between the logs is the main target of interest. In this work we investigate the use of finite-state models for log differencing. Rather than comparing the logs directly, we generate concise models to describe and highlight their differences. Specifically, we present two algorithms based on the classic k-Tails algorithm: 2KDiff, which computes and highlights simple traces containing sequences of k events that belong to one log but not the other, and nKDiff, which extends k-Tails from one to many logs, and distinguishes the sequences of length k that are common to all logs from the ones found in only some of them, all on top of a single, rich model. Both algorithms are sound and complete modulo the abstraction defined by the use of k-Tails. We implemented both algorithms and evaluated their performance on mutated logs that we generated based on models from the literature. We conducted a user study including 60 participants demonstrating the effectiveness of the approach in log differencing tasks. We have further performed a case study to examine the use of our approach in malware analysis. Finally, we have made our work available in a prototype web-application, for experiments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 10999,
+    "year": 2018,
+    "title": "Identifying impactful service system problems via log analysis",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236083",
+    "abstract": "Logs are often used for troubleshooting in large-scale software systems. For a cloud-based online system that provides 24/7 service, a huge number of logs could be generated every day. However, these logs are highly imbalanced in general, because most logs indicate normal system operations, and only a small percentage of logs reveal impactful problems. Problems that lead to the decline of system KPIs (Key Performance Indicators) are impactful and should be fixed by engineers with a high priority. Furthermore, there are various types of system problems, which are hard to be distinguished manually. In this paper, we propose Log3C, a novel clustering-based approach to promptly and precisely identify impactful system problems, by utilizing both log sequences (a sequence of log events) and system KPIs. More specifically, we design a novel cascading clustering algorithm, which can greatly save the clustering time while keeping high accuracy by iteratively sampling, clustering, and matching log sequences. We then identify the impactful problems by correlating the clusters of log sequences with system KPIs. Log3C is evaluated on real-world log data collected from an online service system at Microsoft, and the results confirm its effectiveness and efficiency. Furthermore, our approach has been successfully applied in industrial practice.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11000,
+    "year": 2018,
+    "title": "Learning to sample: exploiting similarities across environments to learn performance models for configurable systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236074",
+    "abstract": "Most software systems provide options that allow users to tailor the system in terms of functionality and qualities. The increased flexibility raises challenges for understanding the configuration space and the effects of options and their interactions on performance and other non-functional properties. To identify how options and interactions affect the performance of a system, several sampling and learning strategies have been recently proposed. However, existing approaches usually assume a fixed environment (hardware, workload, software release) such that learning has to be repeated once the environment changes. Repeating learning and measurement for each environment is expensive and often practically infeasible. Instead, we pursue a strategy that transfers knowledge across environments but sidesteps heavyweight and expensive transfer-learning strategies. Based on empirical insights about common relationships regarding (i) influential options, (ii) their interactions, and (iii) their performance distributions, our approach, L2S (Learning to Sample), selects better samples in the target environment based on information from the source environment. It progressively shrinks and adaptively concentrates on interesting regions of the configuration space. With both synthetic benchmarks and several real systems, we demonstrate that L2S outperforms state of the art performance learning and transfer-learning approaches in terms of measurement effort and learning accuracy.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11001,
+    "year": 2018,
+    "title": "Performance comprehension at WiredTiger",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236081",
+    "abstract": "Software debugging is a time-consuming and challenging process. Supporting debugging has been a focus of the software engineering field since its inception with numerous empirical studies, theories, and tools to support developers in this task. Performance bugs and performance debugging is a sub-genre of debugging that has received less attention. In this paper we contribute an empirical case study of performance bug diagnosis in the WiredTiger project, the default database engine behind MongoDB. We perform an in-depth analysis of 44 Jira tickets documenting WiredTiger performance-related issues. We investigate how developers diagnose performance bugs: what information they collect, what tools they use, and what processes they follow. Our findings show that developers spend the majority of their performance debugging time chasing outlier events, such as latency spikes and throughput drops. Yet, they are not properly supported by existing performance debugging tools in this task. We also observe that developers often use tools without knowing in advance whether the obtained information will be relevant to debugging the problem. Therefore, we believe developers can benefit from tools that can be used for unstructured exploration of performance data, rather than for answering specific questions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11002,
+    "year": 2018,
+    "title": "MemFix: static analysis-based repair of memory deallocation errors for C",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236079",
+    "abstract": "We present MemFix, an automated technique for fixing memory deallocation errors in C programs. MemFix aims to fix memory-leak, double-free, and use-after-free errors, which occur when developers fail to properly deallocate memory objects. MemFix attempts to fix these errors by finding a set of free-statements that correctly deallocate all allocated objects without causing double-frees and use-after-frees. The key insight behind MemFix is that finding such a set of deallocation statements corresponds to solving an exact cover problem derived from a variant of typestate static analysis. We formally present the technique and experimentally show that MemFix is able to fix real errors found in open-source programs. Because MemFix is based on a sound static analysis, the generated patches guarantee to fix the original errors without introducing new errors.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11003,
+    "year": 2018,
+    "title": "RefiNym: using names to refine types",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236042",
+    "abstract": "Source code is bimodal: it combines a formal, algorithmic channel and a natural language channel of identifiers and comments. In this work, we model the bimodality of code with name flows, an assignment flow graph augmented to track identifier names. Conceptual types are logically distinct types that do not always coincide with program types. Passwords and URLs are example conceptual types that can share the program type string. Our tool, RefiNym, is an unsupervised method that mines a lattice of conceptual types from name flows and reifies them into distinct nominal types. For string, RefiNym finds and splits conceptual types originally merged into a single type, reducing the number of same-type variables per scope from 8.7 to 2.2 while eliminating 21.9\\% of scopes that have more than one same-type variable in scope. This makes the code more self-documenting and frees the type system to prevent a developer from inadvertently assigning data across conceptual types.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11004,
+    "year": 2018,
+    "title": "Darwinian data structure selection",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236043",
+    "abstract": "Data structure selection and tuning is laborious but can vastly improve an application’s performance and memory footprint. Some data structures share a common interface and enjoy multiple implementations. We call them Darwinian Data Structures (DDS), since we can subject their implementations to survival of the fittest. We introduce ARTEMIS a multi-objective, cloud-based search-based optimisation framework that automatically finds optimal, tuned DDS modulo a test suite, then changes an application to use that DDS. ARTEMIS achieves substantial performance improvements for every project in 5 Java projects from DaCapo benchmark, 8 popular projects and 30 uniformly sampled projects from GitHub. For execution time, CPU usage, and memory consumption, ARTEMIS finds at least one solution that improves all measures for 86\\% (37/43) of the projects. The median improvement across the best solutions is 4.8\\%, 10.1\\%, 5.1\\% for runtime, memory and CPU usage. These aggregate results understate ARTEMIS’s potential impact. Some of the benchmarks it improves are libraries or utility functions. Two examples are gson, a ubiquitous Java serialization framework, and xalan, Apache’s XML transformation tool. ARTEMIS improves gson by 16.5\\%, 1\\% and 2.2\\% for memory, runtime, and CPU; ARTEMIS improves xalan’s memory consumption by 23.5\\%. Every client of these projects will benefit from these performance improvements.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11005,
+    "year": 2018,
+    "title": "Scalability-first pointer analysis with self-tuning context-sensitivity",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236041",
+    "abstract": "Context-sensitivity is important in pointer analysis to ensure high precision, but existing techniques suffer from unpredictable scalability. Many variants of context-sensitivity exist, and it is difficult to choose one that leads to reasonable analysis time and obtains high precision, without running the analysis multiple times. We present the Scaler framework that addresses this problem. Scaler efficiently estimates the amount of points-to information that would be needed to analyze each method with different variants of context-sensitivity. It then selects an appropriate variant for each method so that the total amount of points-to information is bounded, while utilizing the available space to maximize precision. Our experimental results demonstrate that Scaler achieves predictable scalability for all the evaluated programs (e.g., speedups can reach 10x for 2-object-sensitivity), while providing a precision that matches or even exceeds that of the best alternative techniques.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11006,
+    "year": 2018,
+    "title": "DeepSim: deep learning code functional similarity",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236068",
+    "abstract": "Measuring code similarity is fundamental for many software engineering tasks, e.g., code search, refactoring and reuse. However, most existing techniques focus on code syntactical similarity only, while measuring code functional similarity remains a challenging problem. In this paper, we propose a novel approach that encodes code control flow and data flow into a semantic matrix in which each element is a high dimensional sparse binary feature vector, and we design a new deep learning model that measures code functional similarity based on this representation. By concatenating hidden representations learned from a code pair, this new model transforms the problem of detecting functionally similar code to binary classification, which can effectively learn patterns between functionally similar code with very different syntactics. We have implemented our approach, DeepSim, for Java programs and evaluated its recall, precision and time performance on two large datasets of functionally similar code. The experimental results show that DeepSim significantly outperforms existing state-of-the-art techniques, such as DECKARD, RtvNN, CDLH, and two baseline deep neural networks models.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11007,
+    "year": 2018,
+    "title": "Deep learning type inference",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236051",
+    "abstract": "Dynamically typed languages such as JavaScript and Python are increasingly popular, yet static typing has not been totally eclipsed: Python now supports type annotations and languages like TypeScript offer a middle-ground for JavaScript: a strict superset of JavaScript, to which it transpiles, coupled with a type system that permits partially typed programs. However, static typing has a cost: adding annotations, reading the added syntax, and wrestling with the type system to fix type errors. Type inference can ease the transition to more statically typed code and unlock the benefits of richer compile-time information, but is limited in languages like JavaScript as it cannot soundly handle duck-typing or runtime evaluation via eval. We propose DeepTyper, a deep learning model that understands which types naturally occur in certain contexts and relations and can provide type suggestions, which can often be verified by the type checker, even if it could not infer the type initially. DeepTyper, leverages an automatically aligned corpus of tokens and types to accurately predict thousands of variable and function type annotations. Furthermore, we demonstrate that context is key in accurately assigning these types and introduce a technique to reduce overfitting on local cues while highlighting the need for further improvements. Finally, we show that our model can interact with a compiler to provide more than 4,000 additional type annotations with over 95\\% precision that could not be inferred without the aid of DeepTyper.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11008,
+    "year": 2018,
+    "title": "Code vectors: understanding programs through embedded abstracted symbolic traces",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236085",
+    "abstract": "With the rise of machine learning, there is a great deal of interest in treating programs as data to be fed to learning algorithms. However, programs do not start off in a form that is immediately amenable to most off-the-shelf learning techniques. Instead, it is necessary to transform the program to a suitable representation before a learning technique can be applied. In this paper, we use abstractions of traces obtained from symbolic execution of a program as a representation for learning word embeddings. We trained a variety of word embeddings under hundreds of parameterizations, and evaluated each learned embedding on a suite of different tasks. In our evaluation, we obtain 93\\% top-1 accuracy on a benchmark consisting of over 19,000 API-usage analogies extracted from the Linux kernel. In addition, we show that embeddings learned from (mainly) semantic abstractions provide nearly triple the accuracy of those learned from (mainly) syntactic abstractions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11009,
+    "year": 2018,
+    "title": "MODE: automated neural network model debugging via state differential analysis and input selection",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236082",
+    "abstract": "Artificial intelligence models are becoming an integral part of modern computing systems. Just like software inevitably has bugs, models have bugs too, leading to poor classification/prediction accuracy. Unlike software bugs, model bugs cannot be easily fixed by directly modifying models. Existing solutions work by providing additional training inputs. However, they have limited effectiveness due to the lack of understanding of model misbehaviors and hence the incapability of selecting proper inputs. Inspired by software debugging, we propose a novel model debugging technique that works by first conducting model state differential analysis to identify the internal features of the model that are responsible for model bugs and then performing training input selection that is similar to program input selection in regression testing. Our evaluation results on 29 different models for 6 different applications show that our technique can fix model bugs effectively and efficiently without introducing new bugs. For simple applications (e.g., digit recognition), MODE improves the test accuracy from 75\\% to 93\\% on average whereas the state-of-the-art can only improve to 85\\% with 11 times more training time. For complex applications and models (e.g., object recognition), MODE is able to improve the accuracy from 75\\% to over 91\\% in minutes to a few hours, whereas state-of-the-art fails to fix the bug or even degrades the test accuracy.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11010,
+    "year": 2018,
+    "title": "Towards a theory of software development expertise",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236061",
+    "abstract": "Software development includes diverse tasks such as implementing new features, analyzing requirements, and fixing bugs. Being an expert in those tasks requires a certain set of skills, knowledge, and experience. Several studies investigated individual aspects of software development expertise, but what is missing is a comprehensive theory. We present a first conceptual theory of software development expertise that is grounded in data from a mixed-methods survey with 335 software developers and in literature on expertise and expert performance. Our theory currently focuses on programming, but already provides valuable insights for researchers, developers, and employers. The theory describes important properties of software development expertise and which factors foster or hinder its formation, including how developers' performance may decline over time. Moreover, our quantitative results show that developers' expertise self-assessments are context-dependent and that experience is not necessarily related to expertise.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11011,
+    "year": 2018,
+    "title": "What makes a code change easier to review: an empirical investigation on code change reviewability",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236080",
+    "abstract": "Peer code review is a practice widely adopted in software projects to improve the quality of code. In current code review practices, code changes are manually inspected by developers other than the author before these changes are integrated into a project or put into production. We conducted a study to obtain an empirical understanding of what makes a code change easier to review. To this end, we surveyed published academic literature and sources from gray literature (blogs and white papers), we interviewed ten professional developers, and we designed and deployed a reviewability evaluation tool that professional developers used to rate the reviewability of 98 changes. We find that reviewability is defined through several factors, such as the change description, size, and coherent commit history. We provide recommendations for practitioners and researchers. Public preprint [https://doi.org/10.5281/zenodo.1323659]; data and materials [https://doi.org/10.5281/zenodo.1323659].",
+    "status": "notchecked"
+  },
+  {
+    "id": 11012,
+    "year": 2018,
+    "title": "Singularity: pattern fuzzing for worst case complexity",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236039",
+    "abstract": "We describe a new blackbox complexity testing technique for determining the worst-case asymptotic complexity of a given application. The key idea is to look for an input pattern —rather than a concrete input— that maximizes the asymptotic resource usage of the target program. Because input patterns can be described concisely as programs in a restricted language, our method transforms the complexity testing problem to optimal program synthesis. In particular, we express these input patterns using a new model of computation called Recurrent Computation Graph (RCG) and solve the optimal synthesis problem by developing a genetic programming algorithm that operates on RCGs. We have implemented the proposed ideas in a tool called Singularityand evaluate it on a diverse set of benchmarks. Our evaluation shows that Singularitycan effectively discover the worst-case complexity of various algorithms and that it is more scalable compared to existing state-of-the-art techniques. Furthermore, our experiments also corroborate that Singularitycan discover previously unknown performance bugs and availability vulnerabilities in real-world applications such as Google Guava and JGraphT.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11013,
+    "year": 2018,
+    "title": "Bug synthesis: challenging bug-finding tools with deep faults",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236084",
+    "abstract": "In spite of decades of research in bug detection tools, there is a surprising dearth of ground-truth corpora that can be used to evaluate the efficacy of such tools. Recently, systems such as LAVA and EvilCoder have been proposed to automatically inject bugs into software to quickly generate large bug corpora, but the bugs created so far differ from naturally occurring bugs in a number of ways. In this work, we propose a new automated bug injection system, Apocalypse, that uses formal techniques—symbolic execution, constraint-based program synthesis and model counting—to automatically inject fair (can potentially be discovered by current bug-detection tools), deep (requiring a long sequence of dependencies to be satisfied to fire), uncorrelated (each bug behaving independent of others), reproducible (a trigger input being available) and rare (can be triggered by only a few program inputs) bugs in large software code bases. In our evaluation, we inject bugs into thirty Coreutils programs as well as the TCAS test suite. We find that bugs synthesized by Apocalypse are highly realistic under a variety of metrics, that they do not favor a particular bug-finding strategy (unlike bugs produced by LAVA), and that they are more difficult to find than manually injected bugs, requiring up around 240\\texttimes{} more tests to discover with a state-of-the-art symbolic execution tool.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11014,
+    "year": 2018,
+    "title": "Modify, enhance, select: co-evolution of combinatorial models and test plans",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236067",
+    "abstract": "The evolution of software introduces many challenges to its testing. Considerable test maintenance efforts are dedicated to the adaptation of the tests to the changing software. As a result, over time, the test repository may inflate and drift away from an optimal test plan for the software version at hand. Combinatorial Testing (CT) is a well-known test design technique to achieve a small and effective test plan. It requires a manual definition of the test space in the form of a combinatorial model, and then automatically generates a test plan design, which maximizes the added value of each of the tests. CT is considered a best practice, however its applicability to evolving software is hardly explored. In this work, we introduce a first co-evolution approach for combinatorial models and test plans. By combining three building blocks, to minimally modify existing tests, to enhance them, and to select from them, we provide five alternatives for co-evolving the test plan with the combinatorial model, considering tradeoffs between maximizing fine-grained reuse and minimizing total test plan size, all while meeting the required combinatorial coverage. We use our solution to co-evolve test plans of 48 real-world industrial models with 68 version commits. The results demonstrate the need for co-evolution as well as the efficiency and effectiveness of our approach and its implementation. We further report on an industrial project that found our co-evolution solution necessary to enable adoption of CT with an agile development process.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11015,
+    "year": 2018,
+    "title": "The impact of regular expression denial of service (ReDoS) in practice: an empirical study at the ecosystem scale",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236027",
+    "abstract": "Regular expressions (regexes) are a popular and powerful means of automatically manipulating text. Regexes are also an understudied denial of service vector (ReDoS). If a regex has super-linear worst-case complexity, an attacker may be able to trigger this complexity, exhausting the victim’s CPU resources and causing denial of service. Existing research has shown how to detect these superlinear regexes, and practitioners have identified super-linear regex anti-pattern heuristics that may lead to such complexity. In this paper, we empirically study three major aspects of ReDoS that have hitherto been unexplored: the incidence of super-linear regexes in practice, how they can be prevented, and how they can be repaired. In the ecosystems of two of the most popular programming languages — JavaScript and Python – we detected thousands of super-linear regexes affecting over 10,000 modules across diverse application domains. We also found that the conventional wisdom for super-linear regex anti-patterns has few false negatives but many false positives; these anti-patterns appear to be necessary, but not sufficient, signals of super-linear behavior. Finally, we found that when faced with a super-linear regex, developers favor revising it over truncating input or developing a custom parser, regardless of whether they had been shown examples of all three fix strategies. These findings motivate further research into ReDoS, since many modules are vulnerable to it and existing mechanisms to avoid it are insufficient. We believe that ReDoS vulnerabilities are a larger threat in practice than might have been guessed.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11016,
+    "year": 2018,
+    "title": "FraudDroid: automated ad fraud detection for Android apps",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236045",
+    "abstract": "Although mobile ad frauds have been widespread, state-of-the-art approaches in the literature have mainly focused on detecting the so-called static placement frauds, where only a single UI state is involved and can be identified based on static information such as the size or location of ad views. Other types of fraud exist that involve multiple UI states and are performed dynamically while users interact with the app. Such dynamic interaction frauds, although now widely spread in apps, have not yet been explored nor addressed in the literature. In this work, we investigate a wide range of mobile ad frauds to provide a comprehensive taxonomy to the research community. We then propose, FraudDroid, a novel hybrid approach to detect ad frauds in mobile Android apps. FraudDroid analyses apps dynamically to build UI state transition graphs and collects their associated runtime network traffics, which are then leveraged to check against a set of heuristic-based rules for identifying ad fraudulent behaviours. We show empirically that FraudDroid detects ad frauds with a high precision (∼ 93\\%) and recall (∼ 92\\%). Experimental results further show that FraudDroid is capable of detecting ad frauds across the spectrum of fraud types. By analysing 12,000 ad-supported Android apps, FraudDroid identified 335 cases of fraud associated with 20 ad networks that are further confirmed to be true positive results and are shared with our fellow researchers to promote advanced ad fraud detection.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11017,
+    "year": 2018,
+    "title": "AppFlow: using machine learning to synthesize robust, reusable UI tests",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236055",
+    "abstract": "UI testing is known to be difficult, especially as today’s development cycles become faster. Manual UI testing is tedious, costly and error- prone. Automated UI tests are costly to write and maintain. This paper presents AppFlow, a system for synthesizing highly robust, highly reusable UI tests. It leverages machine learning to automatically recognize common screens and widgets, relieving developers from writing ad hoc, fragile logic to use them in tests. It enables developers to write a library of modular tests for the main functionality of an app category (e.g., an “add to cart” test for shopping apps). It can then quickly test a new app in the same category by synthesizing full tests from the modular ones in the library. By focusing on the main functionality, AppFlow provides “smoke testing” requiring little manual work. Optionally, developers can customize AppFlow by adding app-specific tests for completeness. We evaluated AppFlow on 60 popular apps in the shopping and the news category, two case studies on the BBC news app and the JackThreads shopping app, and a user-study of 15 subjects on the Wish shopping app. Results show that AppFlow accurately recognizes screens and widgets, synthesizes highly robust and reusable tests, covers 46.6\\% of all automatable tests for Jackthreads with the tests it synthesizes, and reduces the effort to test a new app by up to 90\\%. Interestingly, it found eight bugs in the evaluated apps, including seven functionality bugs, despite that they were publicly released and supposedly went through thorough testing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11018,
+    "year": 2018,
+    "title": "Winning the app production rally",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236044",
+    "abstract": "When a user looks for an Android app in Google Play Store, a number of apps appear in a specific rank. Mobile apps with higher ranks are more likely to be noticed and downloaded by users. The goal of this work is to understand the evolution of ranks and identify the variables that share a strong relationship with ranks. We explore 900 apps with a total of 4,878,011 user-reviews in 30 app development areas. We discover 13 clusters of rank trends. We observe that the majority of the subject apps (i.e., 61\\%) dropped in the rankings over the two years of our study. By applying a regression model, we find the variables that statistically significantly explain the rank trends, such as the number of releases. Moreover, we build a mixed effects model to study the changes in ranks across apps and various versions of each app. We find that not all the variables that common-wisdom would deem important have a significant relationship with ranks. Furthermore, app developers should not be afraid of a late entry into the market as new apps can achieve higher ranks than existing apps. Finally, we present the findings to 51 developers. According to the feedback, the findings can help app developers to achieve better ranks in Google Play Store.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11019,
+    "year": 2018,
+    "title": "One size does not fit all: an empirical study of containerized continuous deployment workflows",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236033",
+    "abstract": "Continuous deployment (CD) is a software development practice aimed at automating delivery and deployment of a software product, following any changes to its code. If properly implemented, CD together with other automation in the development process can bring numerous benefits, including higher control and flexibility over release schedules, lower risks, fewer defects, and easier on-boarding of new developers. Here we focus on the (r)evolution in CD workflows caused by containerization, the virtualization technology that enables packaging an application together with all its dependencies and execution environment in a light-weight, self-contained unit, of which Docker has become the de-facto industry standard. There are many available choices for containerized CD workflows, some more appropriate than others for a given project. Owing to cross-listing of GitHub projects on Docker Hub, in this paper we report on a mixed-methods study to shed light on developers' experiences and expectations with containerized CD workflows. Starting from a survey, we explore the motivations, specific workflows, needs, and barriers with containerized CD. We find two prominent workflows, based on the automated builds feature on Docker Hub or continuous integration services, with different trade-offs. We then propose hypotheses and test them in a large-scale quantitative study.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11020,
+    "year": 2018,
+    "title": "Be careful of when: an empirical study on time-related misuse of issue tracking data",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236054",
+    "abstract": "Issue tracking data have been used extensively to aid in predicting or recommending software development practices. Issue attributes typically change over time, but users may use data from a separate time of data collection rather than the time of their application scenarios. We, therefore, investigate data leakage, which results from ignoring the chronological order in which the data were produced. Information leaked from the \"future\" makes prediction models misleadingly optimistic. We examine existing literature to confirm the existence of data leakage and reproduce three typical studies (detecting duplicate issues, localizing issues, and predicting issue-fix time) adjusted for appropriate data to quantify the impact of the data leakage. We confirm that 11 out of 58 studies have leakage problem, while 44 are suspected. We observe biased results caused by data leakage while the extent is not striking. Attributes of summary, component, and assignee have the largest impact on the results. Our findings suggest that data users are often unaware of the context of the data being produced. We recommend researchers and practitioners who attempt to utilize issue tracking data to address software development problems to have a full understanding of their application scenarios, the origin and change of the data, and the influential issue attributes to manage data leakage risks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11021,
+    "year": 2018,
+    "title": "Do the dependency conflicts in my project matter?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236056",
+    "abstract": "Intensive dependencies of a Java project on third-party libraries can easily lead to the presence of multiple library or class versions on its classpath. When this happens, JVM will load one version and shadows the others. Dependency conflict (DC) issues occur when the loaded version fails to cover a required feature (e.g., method) referenced by the project, thus causing runtime exceptions. However, the warnings of duplicate classes or libraries detected by existing build tools such as Maven can be benign since not all instances of duplication will induce runtime exceptions, and hence are often ignored by developers. In this paper, we conducted an empirical study on real-world DC issues collected from large open source projects. We studied the manifestation and fixing patterns of DC issues. Based on our findings, we designed Decca, an automated detection tool that assesses DC issues' severity and filters out the benign ones. Our evaluation results on 30 projects show that Decca achieves a precision of 0.923 and recall of 0.766 in detecting high-severity DC issues. Decca also detected new DC issues in these projects. Subsequently, 20 DC bug reports were filed, and 11 of them were confirmed by developers. Issues in 6 reports were fixed with our suggested patches.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11022,
+    "year": 2018,
+    "title": "Do Android taint analysis tools keep their promises?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236029",
+    "abstract": "In recent years, researchers have developed a number of tools to conduct taint analysis of Android applications. While all the respective papers aim at providing a thorough empirical evaluation, comparability is hindered by varying or unclear evaluation targets. Sometimes, the apps used for evaluation are not precisely described. In other cases, authors use an established benchmark but cover it only partially. In yet other cases, the evaluations differ in terms of the data leaks searched for, or lack a ground truth to compare against. All those limitations make it impossible to truly compare the tools based on those published evaluations. We thus present ReproDroid, a framework allowing the accurate comparison of Android taint analysis tools. ReproDroid supports researchers in inferring the ground truth for data leaks in apps, in automatically applying tools to benchmarks, and in evaluating the obtained results. We use ReproDroid to comparatively evaluate on equal grounds the six prominent taint analysis tools Amandroid, DIALDroid, DidFail, DroidSafe, FlowDroid and IccTA. The results are largely positive although four tools violate some promises concerning features and accuracy. Finally, we contribute to the area of unbiased benchmarking with a new and improved version of the open test suite DroidBench.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11023,
+    "year": 2018,
+    "title": "Neural-augmented static analysis of Android communication",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236066",
+    "abstract": "We address the problem of discovering communication links between applications in the popular Android mobile operating system, an important problem for security and privacy in Android. Any scalable static analysis in this complex setting is bound to produce an excessive amount of false-positives, rendering it impractical. To improve precision, we propose to augment static analysis with a trained neural-network model that estimates the probability that a communication link truly exists. We describe a neural-network architecture that encodes abstractions of communicating objects in two applications and estimates the probability with which a link indeed exists. At the heart of our architecture are type-directed encoders (TDE), a general framework for elegantly constructing encoders of a compound data type by recursively composing encoders for its constituent types. We evaluate our approach on a large corpus of Android applications, and demonstrate that it achieves very high accuracy. Further, we conduct thorough interpretability studies to understand the internals of the learned neural networks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11024,
+    "year": 2018,
+    "title": "Oreo: detection of clones in the twilight zone",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236026",
+    "abstract": "Source code clones are categorized into four types of increasing difficulty of detection, ranging from purely textual (Type-1) to purely semantic (Type-4). Most clone detectors reported in the literature work well up to Type-3, which accounts for syntactic differences. In between Type-3 and Type-4, however, there lies a spectrum of clones that, although still exhibiting some syntactic similarities, are extremely hard to detect – the Twilight Zone. Most clone detectors reported in the literature fail to operate in this zone. We present Oreo, a novel approach to source code clone detection that not only detects Type-1 to Type-3 clones accurately, but is also capable of detecting harder-to-detect clones in the Twilight Zone. Oreo is built using a combination of machine learning, information retrieval, and software metrics. We evaluate the recall of Oreo on BigCloneBench, and perform manual evaluation for precision. Oreo has both high recall and precision. More importantly, it pushes the boundary in detection of clones with moderate to weak syntactic similarity in a scalable manner",
+    "status": "notchecked"
+  },
+  {
+    "id": 11025,
+    "year": 2018,
+    "title": "Concurrency verification with maximal path causality",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236048",
+    "abstract": "We present a technique that systematically explores the state spaces of concurrent programs across both the schedule space and the input space. The cornerstone is a new model called Maximal Path Causality (MPC), which captures all combinations of thread schedules and program inputs that reach the same path as one equivalency class, and generates a unique schedule+input combination to explore each path. Moreover, the exploration for different paths can be easily parallelized. Our extensive evaluation on both popular concurrency benchmarks and real-world C/C++ applications shows that MPC significantly improves the performance of existing techniques.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11026,
+    "year": 2018,
+    "title": "Adversarial symbolic execution for detecting concurrency-related cache timing leaks",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236028",
+    "abstract": "The timing characteristics of cache, a high-speed storage between the fast CPU and the slow memory, may reveal sensitive information of a program, thus allowing an adversary to conduct side-channel attacks. Existing methods for detecting timing leaks either ignore cache all together or focus only on passive leaks generated by the program itself, without considering leaks that are made possible by concurrently running some other threads. In this work, we show that timing-leak-freedom is not a compositional property: a program that is not leaky when running alone may become leaky when interleaved with other threads. Thus, we develop a new method, named adversarial symbolic execution, to detect such leaks. It systematically explores both the feasible program paths and their interleavings while modeling the cache, and leverages an SMT solver to decide if there are timing leaks. We have implemented our method in LLVM and evaluated it on a set of real-world ciphers with 14,455 lines of C code in total. Our experiments demonstrate both the efficiency of our method and its effectiveness in detecting side-channel leaks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11027,
+    "year": 2018,
+    "title": "Symbolic execution with existential second-order constraints",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236049",
+    "abstract": "Symbolic execution systematically explores program paths by solving path conditions --- formulas over symbolic variables. Typically, the symbolic variables range over numbers, arrays and strings. We introduce symbolic execution with existential second-order constraints --- an extension of traditional symbolic execution that allows symbolic variables to range over functions whose interpretations are restricted by a user-defined language. The aims of this new technique are twofold. First, it offers a general analysis framework that can be applied in multiple domains such as program repair and library modelling. Secondly, it addresses the path explosion problem of traditional first-order symbolic execution in certain applications. To realize this technique, we integrate symbolic execution with program synthesis. Specifically, we propose a method of second-order constraint solving that provides efficient proofs of unsatisfiability, which is critical for the performance of symbolic execution. Our evaluation shows that the proposed technique (1) helps to repair programs with loops by mitigating the path explosion, (2) can enable analysis of applications written against unavailable libraries by modelling these libraries from the usage context.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11028,
+    "year": 2018,
+    "title": "Parameterized model counting for string and numeric constraints",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236064",
+    "abstract": "Recently, symbolic program analysis techniques have been extended to quantitative analyses using model counting constraint solvers. Given a constraint and a bound, a model counting constraint solver computes the number of solutions for the constraint within the bound. We present a parameterized model counting constraint solver for string and numeric constraints. We first construct a multi-track deterministic finite state automaton that accepts all solutions to the given constraint. We limit the numeric constraints to linear integer arithmetic, and for non-regular string constraints we over-approximate the solution set. Counting the number of accepting paths in the generated automaton solves the model counting problem. Our approach is parameterized in the sense that, we do not assume a finite domain size during automata construction, resulting in a potentially infinite set of solutions, and our model counting approach works for arbitrarily large bounds. We experimentally demonstrate the effectiveness of our approach on a large set of string and numeric constraints extracted from software applications. We experimentally compare our tool to five existing model counting constraint solvers for string and numeric constraints and demonstrate that our tool is as efficient and as or more precise than other solvers. Moreover, our tool can handle mixed constraints with string and integer variables that no other tool can.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11029,
+    "year": 2018,
+    "title": "NAR-miner: discovering negative association rules from code for bug detection",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236032",
+    "abstract": "Inferring programming rules from source code based on data mining techniques has been proven to be effective to detect software bugs. Existing studies focus on discovering positive rules in the form of A ⇒ B, indicating that when operation A appears, operation B should also be here. Unfortunately, the negative rules (A ⇒ ¬ B), indicating the mutual suppression or conflict relationships among program elements, have not gotten the attention they deserve. In fact, violating such negative rules can also result in serious bugs. In this paper, we propose a novel method called NAR-Miner to automatically extract negative association programming rules from large-scale systems, and detect their violations to find bugs. However, mining negative rules faces a more serious rule explosion problem than mining positive ones. Most of the obtained negative rules are uninteresting and can lead to unacceptable false alarms. To address the issue, we design a semantics-constrained mining algorithm to focus rule mining on the elements with strong semantic relationships. Furthermore, we introduce information entropy to rank candidate negative rules and highlight the interesting ones. Consequently, we effectively mitigate the rule explosion problem. We implement NAR-Miner and apply it to a Linux kernel (v4.12-rc6). The experiments show that the uninteresting rules are dramatically reduced and 17 detected violations have been confirmed as real bugs and patched by kernel community. We also apply NAR-Miner to PostgreSQL, OpenSSL and FFmpeg and discover six real bugs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11030,
+    "year": 2018,
+    "title": "Path-based function embedding and its application to error-handling specification mining",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236059",
+    "abstract": "Identifying relationships among program elements is useful for program understanding, debugging, and analysis. One such kind of relationship is synonymy. Function synonyms are functions that play a similar role in code; examples include functions that perform initialization for different device drivers, and functions that implement different symmetric-key encryption schemes. Function synonyms are not necessarily semantically equivalent and can be syntactically dissimilar; consequently, approaches for identifying code clones or functional equivalence cannot be used to identify them. This paper presents Func2&lt;pre&gt;vec&lt;/pre&gt;, a technique that learns an embedding mapping each function to a vector in a continuous vector space such that vectors for function synonyms are in close proximity. We compute the function embedding by training a neural network on sentences generated using random walks over the interprocedural control-flow graph. We show the effectiveness of Func2&lt;pre&gt;vec&lt;/pre&gt; at identifying function synonyms in the Linux kernel. Finally, we apply Func2&lt;pre&gt;vec&lt;/pre&gt; to the problem of mining error-handling specifications in Linux file systems and drivers. We show that the function synonyms identified by Func2&lt;pre&gt;vec&lt;/pre&gt; result in error-handling specifications with high support.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11031,
+    "year": 2018,
+    "title": "Putback-based bidirectional model transformations",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236070",
+    "abstract": "Bidirectional model transformation (BX) plays a vital role in Model-Driven Engineering. A major challenge in conventional relational and bidirectionalization-based BX approaches is the ambiguity issue, i.e., the backward transformation may not be uniquely determined by the consistency relation or the forward transformation. A promising solution to the ambiguity issue is to adopt putback-based bidirectional programming, which realizes a BX by specifying the backward transformation. However, existing putback-based approaches do not support multiple conversions of the same node (namely a shared node). Since a model is a graph, shared nodes are very common and inevitable. Consequently, existing putback-based approaches cannot be directly applied to bidirectional model transformation. This paper proposes a novel approach to BX. We define a new model-merging-based BX combinator, which can combine two BXs owning shared nodes into a well behaved composite BX. Afterwards, we propose a putback-based BX language XMU to address the ambiguity issue, which is built on the model-merging-based BX combinator. We present the formal semantics of XMU which can be proven well behaved. Finally, a tool support is also introduced to illustrate the usefulness of our approach.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11032,
+    "year": 2018,
+    "title": "Model transformation languages under a magnifying glass: a controlled experiment with Xtend, ATL, and QVT",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236046",
+    "abstract": "In Model-Driven Software Development, models are automatically processed to support the creation, build, and execution of systems. A large variety of dedicated model-transformation languages exists, promising to efficiently realize the automated processing of models. To investigate the actual benefit of using such specialized languages, we performed a large-scale controlled experiment in which over 78 subjects solve 231 individual tasks using three languages. The experiment sheds light on commonalities and differences between model transformation languages (ATL, QVT-O) and on benefits of using them in common development tasks (comprehension, change, and creation) against a modern general-purpose language (Xtend). Our results show no statistically significant benefit of using a dedicated transformation language over a modern general-purpose language. However, we were able to identify several aspects of transformation programming where domain-specific transformation languages do appear to help, including copying objects, context identification, and conditioning the computation on types.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11033,
+    "year": 2018,
+    "title": "Applications of psychological science for actionable analytics",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236050",
+    "abstract": "According to psychological scientists, humans understand models that most match their own internal models, which they characterize as lists of \"heuristic\"s (i.e. lists of very succinct rules). One such heuristic rule generator is the Fast-and-Frugal Trees (FFT) preferred by psychological scientists. Despite their successful use in many applied domains, FFTs have not been applied in software analytics. Accordingly, this paper assesses FFTs for software analytics. We find that FFTs are remarkably effective in that their models are very succinct (5 lines or less describing a binary decision tree) while also outperforming result from very recent, top-level, conference papers. Also, when we restrict training data to operational attributes (i.e., those attributes that are frequently changed by developers), the performance of FFTs are not effected (while the performance of other learners can vary wildly). Our conclusions are two-fold. Firstly, there is much that software analytics community could learn from psychological science. Secondly, proponents of complex methods should always baseline those methods against simpler alternatives. For example, FFTs could be used as a standard baseline learner against which other software analytics tools are compared.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11034,
+    "year": 2018,
+    "title": "A novel automated approach for software effort estimation based on data augmentation",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236052",
+    "abstract": "Software effort estimation (SEE) usually suffers from data scarcity problem due to the expensive or long process of data collection. As a result, companies usually have limited projects for effort estimation, causing unsatisfactory prediction performance. Few studies have investigated strategies to generate additional SEE data to aid such learning. We aim to propose a synthetic data generator to address the data scarcity problem of SEE. Our synthetic generator enlarges the SEE data set size by slightly displacing some randomly chosen training examples. It can be used with any SEE method as a data preprocessor. Its effectiveness is justified with 6 state-of-the-art SEE models across 14 SEE data sets. We also compare our data generator against the only existing approach in the SEE literature. Experimental results show that our synthetic projects can significantly improve the performance of some SEE methods especially when the training data is insufficient. When they cannot significantly improve the prediction performance, they are not detrimental either. Besides, our synthetic data generator is significantly superior or perform similarly to its competitor in the SEE literature. Therefore, our data generator plays a non-harmful if not significantly beneficial effect on the SEE methods investigated in this paper. Therefore, it is helpful in addressing the data scarcity problem of SEE.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11035,
+    "year": 2018,
+    "title": "Predicting Node failure in cloud service systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236060",
+    "abstract": "In recent years, many traditional software systems have migrated to cloud computing platforms and are provided as online services. The service quality matters because system failures could seriously affect business and user experience. A cloud service system typically contains a large number of computing nodes. In reality, nodes may fail and affect service availability. In this paper, we propose a failure prediction technique, which can predict the failure-proneness of a node in a cloud service system based on historical data, before node failure actually happens. The ability to predict faulty nodes enables the allocation and migration of virtual machines to the healthy nodes, therefore improving service availability. Predicting node failure in cloud service systems is challenging, because a node failure could be caused by a variety of reasons and reflected by many temporal and spatial signals. Furthermore, the failure data is highly imbalanced. To tackle these challenges, we propose MING, a novel technique that combines: 1) a LSTM model to incorporate the temporal data, 2) a Random Forest model to incorporate spatial data; 3) a ranking model that embeds the intermediate results of the two models as feature inputs and ranks the nodes by their failure-proneness, 4) a cost-sensitive function to identify the optimal threshold for selecting the faulty nodes. We evaluate our approach using real-world data collected from a cloud service system. The results confirm the effectiveness of the proposed approach. We have also successfully applied the proposed approach in real industrial practice.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11036,
+    "year": 2018,
+    "title": "Detecting speech act types in developer question/answer conversations during bug repair",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236031",
+    "abstract": "This paper targets the problem of speech act detection in conversations about bug repair. We conduct a ``Wizard of Oz'' experiment with 30 professional programmers, in which the programmers fix bugs for two hours, and use a simulated virtual assistant for help. Then, we use an open coding manual annotation procedure to identify the speech act types in the conversations. Finally, we train and evaluate a supervised learning algorithm to automatically detect the speech act types in the conversations. In 30 two-hour conversations, we made 2459 annotations and uncovered 26 speech act types. Our automated detection achieved 69\\% precision and 50\\% recall. The key application of this work is to advance the state of the art for virtual assistants in software engineering. Virtual assistant technology is growing rapidly, though applications in software engineering are behind those in other areas, largely due to a lack of relevant data and experiments. This paper targets this problem in the area of developer Q/A conversations about bug repair.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11037,
+    "year": 2018,
+    "title": "Visual web test repair",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236063",
+    "abstract": "Web tests are prone to break frequently as the application under test evolves, causing much maintenance effort in practice. To detect the root causes of a test breakage, developers typically inspect the test's interactions with the application through the GUI. Existing automated test repair techniques focus instead on the code and entirely ignore visual aspects of the application. We propose a test repair technique that is informed by a visual analysis of the application. Our approach captures relevant visual information from tests execution and analyzes them through a fast image processing pipeline to visually validate test cases as they re-executed for regression purposes. Then, it reports the occurrences of breakages and potential fixes to the testers. Our approach is also equipped with a local crawling mechanism to handle non-trivial breakage scenarios such as the ones that require to repair the test's workflow. We implemented our approach in a tool called Vista. Our empirical evaluation on 2,672 test cases spanning 86 releases of four web applications shows that Vista is able to repair, on average, 81\\% of the breakages, a 41\\% increment with respect to existing techniques.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11038,
+    "year": 2018,
+    "title": "Syntax-guided synthesis of Datalog programs",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236034",
+    "abstract": "Datalog has witnessed promising applications in a variety of domains. We propose a programming-by-example system, ALPS, to synthesize Datalog programs from input-output examples. Scaling synthesis to realistic programs in this manner is challenging due to the rich expressivity of Datalog. We present a syntax-guided synthesis approach that prunes the search space by exploiting the observation that in practice Datalog programs comprise rules that have similar latent syntactic structure. We evaluate ALPS on a suite of 34 benchmarks from three domains—knowledge discovery, program analysis, and database queries. The evaluation shows that ALPS can synthesize 33 of these benchmarks, and outperforms the state-of-the-art tools Metagol and Zaatar, which can synthesize only up to 10 of the benchmarks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11039,
+    "year": 2018,
+    "title": "Large-scale study of substitutability in the presence of effects",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236075",
+    "abstract": "A majority of modern software is constructed using languages that compute by producing side-effects such as reading/writing from/to files, throwing exceptions, acquiring locks, etc. To understand a piece of software, e.g. a class, it is important for a developer to understand its side-effects. Similarly, to replace a class with another, it is important to understand whether the replacement is a safe substitution for the former in terms of its behavior, a property known as substitutability, because mismatch may lead to bugs. The problem is especially severe for superclass-subclass pairs since at runtime an instance of the subclass may be used in the client code where a superclass is mentioned. Despite the importance of this property, we do not yet know whether substitutability w.r.t. effects between subclass and superclass is preserved in the wild, and if not what sorts of substitutability violations are common and what is the impact of such violations. This paper conducts a large scale study on over 20 million Java classes, in order to compare the effects of the methods of subclasses and superclasses in practice. Our comprehensive study considers the exception, synchronization, I/O, and method call effects. It reveals that in pairs with effects, only 8-24\\% have the same effects, and 31-56\\% of submethods have more effects, and the effects of a large percentage of submethods cannot be inferred from the supermethod.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11040,
+    "year": 2018,
+    "title": "An empirical study on crash recovery bugs in large-scale distributed systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236030",
+    "abstract": "In large-scale distributed systems, node crashes are inevitable, and can happen at any time. As such, distributed systems are usually designed to be resilient to these node crashes via various crash recovery mechanisms, such as write-ahead logging in HBase and hinted handoffs in Cassandra. However, faults in crash recovery mechanisms and their implementations can introduce intricate crash recovery bugs, and lead to severe consequences. In this paper, we present CREB, the most comprehensive study on 103 Crash REcovery Bugs from four popular open-source distributed systems, including ZooKeeper, Hadoop MapReduce, Cassandra and HBase. For all the studied bugs, we analyze their root causes, triggering conditions, bug impacts and fixing. Through this study, we obtain many interesting findings that can open up new research directions for combating crash recovery bugs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11041,
+    "year": 2018,
+    "title": "Complementing global and local contexts in representing API descriptions to improve API retrieval tasks",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236036",
+    "abstract": "When being trained on API documentation and tutorials, Word2vec produces vector representations to estimate the relevance between texts and API elements. However, existing Word2vec-based approaches to measure document similarities aggregate Word2vec vectors of individual words or APIs to build the representation of a document as if the words are independent. Thus, the semantics of API descriptions or code fragments are not well represented. In this work, we introduce D2Vec, a new model that fits with API documentation better than Word2vec. D2Vec is a neural network model that considers two complementary contexts to better capture the semantics of API documentation. We first connect the global context of the current API topic under description to all the text phrases within the description of that API. Second, the local orders of words and API elements in the text phrases are maintained in computing the vector representations for the APIs. We conducted an experiment to verify two intrinsic properties of D2Vec's vectors: 1) similar words and relevant API elements are projected into nearby locations; and 2) some vector operations carry semantics. We demonstrate the usefulness and good performance of D2Vec in three applications: API code search (text-to-code retrieval), API tutorial fragment search (code-to-text retrieval), and mining API mappings between software libraries (code-to-code retrieval). Finally, we provide actionable insights and implications for researchers in using our model in other applications with other types of documents.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11042,
+    "year": 2018,
+    "title": "Phys: probabilistic physical unit assignment and inconsistency detection",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236035",
+    "abstract": "Program variables used in robotic and cyber-physical systems often have implicit physical units that cannot be determined from their variable types. Inferring an abstract physical unit type for variables and checking their physical unit type consistency is of particular importance for validating the correctness of such systems. For instance, a variable with the unit of ‘meter’ should not be assigned to another variable with the unit of ‘degree-per-second’. Existing solutions have various limitations such as requiring developers to annotate variables with physical units and only handling variables that are directly or transitively used in popular robotic libraries with known physical unit information. We observe that there are a lot of physical unit hints in these softwares such as variable names and specific forms of expressions. These hints have uncertainty as developers may not respect conventions. We propose to model them with probability distributions and conduct probabilistic inference. At the end, our technique produces a unit distribution for each variable. Unit inconsistencies can then be detected using the highly probable unit assignments. Experimental results on 30 programs show that our technique can infer units for 159.3\\% more variables compared to the state-of-the-art with more than 88.7\\% true positives, and inconsistencies detection on 90 programs shows that our technique reports 103.3\\% more inconsistencies with 85.3\\% true positives.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11043,
+    "year": 2018,
+    "title": "Testing probabilistic programming systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236057",
+    "abstract": "Probabilistic programming systems (PP systems) allow developers to model stochastic phenomena and perform efficient inference on the models. The number and adoption of probabilistic programming systems is growing significantly. However, there is no prior study of bugs in these systems and no methodology for systematically testing PP systems. Yet, testing PP systems is highly non-trivial, especially when they perform approximate inference. In this paper, we characterize 118 previously reported bugs in three open-source PP systems—Edward, Pyro and Stan—and pro- pose ProbFuzz, an extensible system for testing PP systems. Prob- Fuzz allows a developer to specify templates of probabilistic models, from which it generates concrete probabilistic programs and data for testing. ProbFuzz uses language-specific translators to generate these concrete programs, which use the APIs of each PP system. ProbFuzz finds potential bugs by checking the output from running the generated programs against several oracles, including an accu- racy checker. Using ProbFuzz, we found 67 previously unknown bugs in recent versions of these PP systems. Developers already accepted 51 bug fixes that we submitted to the three PP systems, and their underlying systems, PyTorch and TensorFlow.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11044,
+    "year": 2018,
+    "title": "Verifying the long-run behavior of probabilistic system models in the presence of uncertainty",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236078",
+    "abstract": "Verifying that a stochastic system is in a certain state when it has reached equilibrium has important applications. For instance, the probabilistic verification of the long-run behavior of a safety-critical system enables assessors to check whether it accepts a human abort-command at any time with a probability that is sufficiently high. The stochastic system is represented as probabilistic model, a long-run property is asserted and a probabilistic verifier checks the model against the property. However, existing probabilistic verifiers do not account for the imprecision of the probabilistic parameters in the model. Due to uncertainty, the probability of any state transition may be subject to small perturbations which can have direct consequences for the veracity of the verification result. In reality, the safety-critical system may accept the abort-command with an insufficient probability. In this paper, we introduce the first probabilistic verification technique that accounts for uncertainty on the verification of long-run properties of a stochastic system. We present a mathematical framework for the asymptotic analysis of the stationary distribution of a discrete-time Markov chain, making no assumptions about the distribution of the perturbations. Concretely, our novel technique computes upper and lower bounds on the long-run probability, given a certain degree of uncertainty about the stochastic system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11045,
+    "year": 2018,
+    "title": "Automated patch extraction via syntax- and semantics-aware Delta debugging on source code changes",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236047",
+    "abstract": "Delta debugging (DD) is an approach to automating the debugging activities based on systematic testing. DD algorithms find the cause of a regression of a program by minimizing the changes applied between a working version and a faulty version of the program. However, it is still an open problem to minimize a huge set of changes while avoiding any invalid subsets that do not result in testable programs, especially in case that no software configuration management system is available. In this paper, we propose a rule-based approach to syntactic and semantic decomposition of changes into independent components to facilitate DD on source code changes, and hence to extract patches automatically. For analyzing changes, we make use of tree differencing on abstract syntax trees instead of common differencing on plain texts. We have developed an experimental implementation for Java programs and applied it to 194 bug fixes from Defects4J and 8 real-life regression bugs from 6 open source Java projects. Compared to a DD tool based on plain text differencing, it extracted patches whose size is reduced by 50\\% at the cost of 5\\% more test executions for the former dataset and by 73\\% at the cost of 40\\% more test executions for the latter, both on average.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11046,
+    "year": 2018,
+    "title": "Feedback-directed differential testing of interactive debuggers",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236037",
+    "abstract": "To understand, localize, and fix programming errors, developers often rely on interactive debuggers. However, as debuggers are software, they may themselves have bugs, which can make debugging unnecessarily hard or even cause developers to reason about bugs that do not actually exist in their code. This paper presents the first automated testing technique for interactive debuggers. The problem of testing debuggers is fundamentally different from the well-studied problem of testing compilers because debuggers are interactive and because they lack a specification of expected behavior. Our approach, called DBDB, generates debugger actions to exercise the debugger and records traces that summarize the debugger's behavior. By comparing traces of multiple debuggers with each other, we find diverging behavior that points to bugs and other noteworthy differences. We evaluate DBDB on the JavaScript debuggers of Firefox and Chromium, finding 19 previously unreported bugs, eight of which are already fixed by the developers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11047,
+    "year": 2018,
+    "title": "Improving IR-based bug localization with context-aware query reformulation",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236065",
+    "abstract": "Recent findings suggest that Information Retrieval (IR)-based bug localization techniques do not perform well if the bug report lacks rich structured information (e.g., relevant program entity names). Conversely, excessive structured information (e.g., stack traces) in the bug report might not always help the automated localization either. In this paper, we propose a novel technique--BLIZZARD-- that automatically localizes buggy entities from project source using appropriate query reformulation and effective information retrieval. In particular, our technique determines whether there are excessive program entities or not in a bug report (query), and then applies appropriate reformulations to the query for bug localization. Experiments using 5,139 bug reports show that our technique can localize the buggy source documents with 7\\%--56\\% higher Hit@10, 6\\%--62\\% higher MAP@10 and 6\\%--62\\% higher MRR@10 than the baseline technique. Comparison with the state-of-the-art techniques and their variants report that our technique can improve 19\\% in MAP@10 and 20\\% in MRR@10 over the state-of-the-art, and can improve 59\\% of the noisy queries and 39\\% of the poor queries.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11048,
+    "year": 2018,
+    "title": "How should compilers explain problems to developers?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236040",
+    "abstract": "Compilers primarily give feedback about problems to developers through the use of error messages. Unfortunately, developers routinely find these messages to be confusing and unhelpful. In this paper, we postulate that because error messages present poor explanations, theories of explanation---such as Toulmin's model of argument---can be applied to improve their quality. To understand how compilers should present explanations to developers, we conducted a comparative evaluation with 68 professional software developers and an empirical study of compiler error messages found in Stack Overflow questions across seven different programming languages. Our findings suggest that, given a pair of error messages, developers significantly prefer the error message that employs proper argument structure over a deficient argument structure when neither offers a resolution---but will accept a deficient argument structure if it provides a resolution to the problem. Human-authored explanations on Stack Overflow converge to one of the three argument structures: those that provide a resolution to the error, simple arguments, and extended arguments that provide additional evidence for the problem. Finally, we contribute three practical design principles to inform the design and evaluation of compiler error messages.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11049,
+    "year": 2018,
+    "title": "Ecosystem-level determinants of sustained activity in open-source projects: a case study of the PyPI ecosystem",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236062",
+    "abstract": "Open-source projects do not exist in a vacuum. They benefit from reusing other projects and themselves are being reused by others, creating complex networks of interdependencies, i.e., software ecosystems. Therefore, the sustainability of projects comprising ecosystems may no longer by determined solely by factors internal to the project, but rather by the ecosystem context as well. In this paper we report on a mixed-methods study of ecosystem-level factors affecting the sustainability of open-source Python projects. Quantitatively, using historical data from 46,547 projects in the PyPI ecosystem, we modeled the chances of project development entering a period of dormancy (limited activity) as a function of the projects' position in their dependency networks, organizational support, and other factors. Qualitatively, we triangulated the revealed effects and further expanded on our models through interviews with project maintainers. Results show that the number of project ties and the relative position in the dependency network have significant impact on sustained project activity, with nuanced effects early in a project's life cycle and later on.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11050,
+    "year": 2018,
+    "title": "Optimizing test prioritization via test distribution analysis",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236053",
+    "abstract": "Test prioritization aims to detect regression faults faster via reordering test executions, and a large number of test prioritization techniques have been proposed accordingly. However, test prioritization effectiveness is usually measured in terms of the average percentage of faults detected concerned with the number of test executions, rather than the actual regression testing time, making it unclear which technique is optimal in actual regression testing time. To answer this question, this paper first conducts an empirical study to investigate the actual regression testing time of various prioritization techniques. The results reveal a number of practical guidelines. In particular, no prioritization technique can always perform optimal in practice. To achieve the optimal prioritization effectiveness for any given project in practice, based on the findings of this study, we design learning-based Predictive Test Prioritization (PTP). PTP predicts the optimal prioritization technique for a given project based on the test distribution analysis (i.e., the distribution of test coverage, testing time, and coverage per unit time). The results show that PTP correctly predicts the optimal prioritization technique for 46 out of 50 open-source projects from GitHub, outperforming state-of-the-art techniques significantly in regression testing time, e.g., 43.16\\% to 94.92\\% improvement in detecting the first regression fault. Furthermore, PTP has been successfully integrated into the practical testing infrastructure of Baidu (a search service provider with over 600M monthly active users), and received positive feedbacks from the testing team of this company, e.g., saving beyond 2X testing costs with negligible overheads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11051,
+    "year": 2018,
+    "title": "How well are regular expressions tested in the wild?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236072",
+    "abstract": "Developers report testing their regular expressions less than the rest of their code. In this work, we explore how thoroughly tested regular expressions are by examining open source projects. Using standard metrics of coverage, such as line and branch coverage, gives an incomplete picture of the test coverage of regular expressions. We adopt graph-based coverage metrics for the DFA representation of regular expressions, providing fine-grained test coverage metrics. Using over 15,000 tested regular expressions in 1,225 Java projects on GitHub, we measure node, edge, and edge-pair coverage. Our results show that only 17\\% of the regular expressions in the repositories are tested at all. For those that are tested, the median number of test inputs is two. For nearly 42\\% of the tested regular expressions, only one test input is used. Average node and edge coverage levels on the DFAs for tested regular expressions are 59\\% and 29\\%, respectively. Due to the lack of testing of regular expressions, we explore whether a string generation tool for regular expressions, Rex, achieves high coverage levels. With some exceptions, we found that tools such as Rex can be used to write test inputs with similar coverage to the developer tests.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11052,
+    "year": 2018,
+    "title": "Which generated test failures are fault revealing? prioritizing failures based on inferred precondition violations using PAF",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236058",
+    "abstract": "Automated unit testing tools, such as Randoop, have been developed to produce failing tests as means of finding faults. However, these tools often produce false alarms, so are not widely used in practice. The main reason for a false alarm is that the generated failing test violates an implicit precondition of the method under test, such as a field should not be null at the entry of the method. This condition is not explicitly programmed or documented but implicitly assumed by developers. To address this limitation, we propose a technique called PAF to cluster generated test failures due to the same cause and reorder them based on their likelihood of violating an implicit precondition of the method under test. From various test executions, PAF observes their dataflows to the variables whose values are used when the program fails. Based on the dataflow similarity and where these values are originated, PAF clusters failures and determines their likelihood of being fault revealing. We integrated PAF into Randoop. Our empirical results on open-source projects show that PAF effectively clusters fault revealing tests arising from the same fault and successfully prioritizes the fault-revealing ones.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11053,
+    "year": 2018,
+    "title": "Detection of energy inefficiencies in Android wear watch faces",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236073",
+    "abstract": "This work considers watch faces for Android Wear devices such as smartwatches. Watch faces are a popular category of apps that display current time and relevant contextual information. Our study of watch faces in an app market indicates that energy efficiency is a key concern for users and developers. The first contribution of this work is the definition of several energy-inefficiency patterns of watch face behavior, focusing on two energy-intensive resources: sensors and displays. Based on these patterns, we propose a control-flow model and static analysis algorithms to identify instances of these patterns. The algorithms use interprocedural control-flow analysis of callback methods and the invocation sequences of these methods. Potential energy inefficiencies are then used for automated test generation and execution, where the static analysis reports are validated via run-time execution. Our experimental results and case studies demonstrate that the analysis achieves high precision and low cost, and provide insights into potential pitfalls faced by developers of watch faces.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11054,
+    "year": 2018,
+    "title": "Stochastic energy optimization for mobile GPS applications",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3236076",
+    "abstract": "Mobile applications regularly interact with their noisy and ever-changing physical environment. The fundamentally uncertain nature of such interactions leads to significant challenges in energy optimization, a crucial goal of software engineering on mobile devices. This paper presents Aeneas, a novel energy optimization framework for Android in the presence of uncertainty. Aeneas provides a minimalistic programming model where acceptable program behavioral settings are abstracted as knobs and application-specific optimization goals — such as meeting an energy budget — are crystallized as rewards, both of which are directly programmable. At its heart, Aeneas is endowed with a stochastic optimizer to adaptively and intelligently select the reward-optimal knob setting through a form of reinforcement learning. We evaluate Aeneas on mobile GPS applications built over Google LocationService API. Through an in-field case study that covers approximately 6500 miles and 150 hours of driving as well as 20 hours of biking and hiking, we find that Aeneas can effectively and resiliently meet programmer-specified energy budgets in uncertain physical environments where individual GPS readings undergo significant fluctuation. Compared with non-stochastic approaches such as profile-guided optimization, Aeneas produces significantly more stable results across runs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11055,
+    "year": 2018,
+    "title": "Gamifying static analysis",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264830",
+    "abstract": "In the past decades, static code analysis has become a prevalent means to detect bugs and security vulnerabilities in software systems. As software becomes more complex, analysis tools also report lists of increasingly complex warnings that developers need to address on a daily basis. The novel insight we present in this work is that static analysis tools and video games both require users to take on repetitive and challenging tasks. Importantly, though, while good video games manage to keep players engaged, static analysis tools are notorious for their lacking user experience, which prevents developers from using them to their full potential, frequently resulting in dissatisfaction and even tool abandonment. We show parallels between gaming and using static analysis tools, and advocate that the user-experience issues of analysis tools can be addressed by looking at the analysis tooling system as a whole, and by integrating gaming elements that keep users engaged, such as providing immediate and clear feedback, collaborative problem solving, or motivators such as points and badges.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11056,
+    "year": 2018,
+    "title": "The case for experiment-oriented computing",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264831",
+    "abstract": "Experimentation aspects (e.g., systematic observation, exploration of alternatives, formulation of hypotheses and empirical testing) can be found dispersed and intertwined in many software systems. Numerous examples are provided in this article. This suggests that experimental activity is a class of computation in its own right. By abstracting the relevant experimentation features, a general Experiment-Oriented Computing (EOC) approach, orthogonal to other Software Engineering issues, is formulated in this article. Through this separation of concerns, it is possible to clearly pursue both theoretical and applied research with respect to experimental aspects. Concrete directions for such research and development are also given to illustrate the value of the approach.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11057,
+    "year": 2018,
+    "title": "On the naturalness of proofs",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264832",
+    "abstract": "Proofs play a key role in reasoning about programs and verification of properties of systems. Mechanized proof assistants help users in developing and checking the consistency of proofs using the proof language developed by the systems; but even then writing proofs is tedious and could benefit from automated insight. In this paper, we analyze proofs in two different proof assistant systems (Coq and HOL Light) to investigate if there is evidence of \"naturalness\" in these proofs: viz., recurring linguistic patterns that are amenable to language models, in the way that programming languages are known to be. Such models could be used to find errors, rewrite proofs, help suggest dependencies, and perhaps even synthesize (steps of) proofs. We apply state-of-the-art language models to large corpora of proofs to show that this is indeed the case: proofs are remarkably predictable, much like other programming languages. Code completion tools for Coq proofs could save over 60\\% of typing effort. As proofs have become increasingly central to writing provably correct, large programs (such as the CompCert C compiler), our demonstration that they are amenable to general statistical models unlocks a range of linguistics-inspired tool support.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11058,
+    "year": 2018,
+    "title": "Does ACM’s code of ethics change ethical decision making in software development?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264833",
+    "abstract": "Ethical decisions in software development can substantially impact end-users, organizations, and our environment, as is evidenced by recent ethics scandals in the news. Organizations, like the ACM, publish codes of ethics to guide software-related ethical decisions. In fact, the ACM has recently demonstrated renewed interest in its code of ethics and made updates for the first time since 1992. To better understand how the ACM code of ethics changes software-related decisions, we replicated a prior behavioral ethics study with 63 software engineering students and 105 professional software developers, measuring their responses to 11 ethical vignettes. We found that explicitly instructing participants to consider the ACM code of ethics in their decision making had no observed effect when compared with a control group. Our findings suggest a challenge to the research community: if not a code of ethics, what techniques can improve ethical decision making in software engineering?",
+    "status": "notchecked"
+  },
+  {
+    "id": 11059,
+    "year": 2018,
+    "title": "How are spreadsheet templates used in practice: a case study on Enron",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264834",
+    "abstract": "To reduce the effort of creating similar spreadsheets, end users may create expected spreadsheets from some predesigned templates, which contain necessary table layouts (e.g., headers and styles) and formulas, other than from scratch. When there are no explicitly predesigned spreadsheet templates, end users often take an existing spreadsheet as the instance template to create a new spreadsheet. However, improper template design and usage can introduce various issues. For example, a formula error in the template can be easily propagated to all its instances without users’ noticing. Since template design and usage are rarely documented in literature and practice, practitioners and researchers lack understanding of them to achieve effective improvement. In this paper, we conduct the first empirical study on the design and the usage of spreadsheet templates based on 47 predesigned templates (490 instances in total), and 21 instance template groups (168 template and instance pairs in total), extracted from the Enron corpus. Our study reveals a number of spreadsheet template design and usage issues in practice, and also sheds lights on several interesting research directions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11060,
+    "year": 2018,
+    "title": "DLFuzz: differential fuzzing testing of deep learning systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264835",
+    "abstract": "Deep learning (DL) systems are increasingly applied to safety-critical domains such as autonomous driving cars. It is of significant importance to ensure the reliability and robustness of DL systems. Existing testing methodologies always fail to include rare inputs in the testing dataset and exhibit low neuron coverage. In this paper, we propose DLFuzz, the first differential fuzzing testing framework to guide DL systems exposing incorrect behaviors. DLFuzz keeps minutely mutating the input to maximize the neuron coverage and the prediction difference between the original input and the mutated input, without manual labeling effort or cross-referencing oracles from other DL systems with the same functionality. We present empirical evaluations on two well-known datasets to demonstrate its efficiency. Compared with DeepXplore, the state-of-the-art DL whitebox testing framework, DLFuzz does not require extra efforts to find similar functional DL systems for cross-referencing check, but could generate 338.59\\% more adversarial inputs with 89.82\\% smaller perturbations, averagely obtain 2.86\\% higher neuron coverage, and save 20.11\\% time consumption.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11061,
+    "year": 2018,
+    "title": "Towards data-driven vulnerability prediction for requirements",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264836",
+    "abstract": "Due to the abundance of security breaches we continue to see, the software development community is recently paying attention to a more proactive approach towards security. This includes predicting vulnerability before exploitation employing static code analysis and machine learning techniques. Such mechanisms, however, are designed to detect post-implementation vulnerabilities. As the root of a vulnerability can often be traced back to the requirement specification, and vulnerability discovered later in the development life cycle is more expensive to fix, we need additional preventive mechanisms capable of predicting vulnerability at a much earlier stage. In this paper, we propose a novel framework providing an automated support to predict vulnerabilities for a requirement as early as during requirement engineering. We further present a preliminary demonstration of our framework and the promising results we observe clearly indicate the value of this new research idea.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11062,
+    "year": 2018,
+    "title": "Beyond testing configurable systems: applying variational execution to automatic program repair and higher order mutation testing",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264837",
+    "abstract": "Generate-and-validate automatic program repair and higher order mutation testing often use search-based techniques to find optimal or good enough solutions in huge search spaces. As search spaces continue to grow, finding solutions that require interactions of multiple changes can become challenging. To tackle the huge search space, we propose to use variational execution. Variational execution has been shown to be effective in exhaustively exploring variations and identifying interactions in a huge but often finite configuration space. The key idea is to encode alternatives in the search space as variations and use variational execution as a black-box technique to generate useful insights so that existing search heuristics can be informed. We show that this idea is promising and identify criteria for problems in which variational execution is a promising tool, which may be useful to identify further applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11063,
+    "year": 2018,
+    "title": "Software fairness",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264838",
+    "abstract": "A goal of software engineering research is advancing software quality and the success of the software engineering process. However, while recent studies have demonstrated a new kind of defect in software related to its ability to operate in fair and unbiased manner, software engineering has not yet wholeheartedly tackled these new kinds of defects, thus leaving software vulnerable. This paper outlines a vision for how software engineering research can help reduce fairness defects and represents a call to action by the software engineering research community to reify that vision. Modern software is riddled with examples of biased behavior, from automated translation injecting gender stereotypes, to vision systems failing to see faces of certain races, to the US criminal justice sytem relying on biased computational assessments of crime recidivism. While systems may learn bias from biased data, bias can also emerge from ambiguous or incomplete requirement specification, poor design, implementation bugs, and unintended component interactions. We argue that software fairness is analogous to software quality, and that numerous software engineering challenges in the areas of requirements, specification, design, testing, and verification need to be tackled to solve this problem.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11064,
+    "year": 2018,
+    "title": "Software engineering collaboratories (SEClabs) and collaboratories as a service (CaaS)",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264839",
+    "abstract": "Novel research ideas require strong evaluations. Modern software engineering research evaluation typically requires a set of benchmark programs. Open source software repositories have provided a great opportunity for researchers to find such programs for use in their evaluations. Many tools/techniques have been developed to help automate the curation of open source software. There has also been encouragement for researchers to provide their research artifacts so that other researchers can easily reproduce the results. We argue that these two trends (i.e., curating open source software for research evaluation and the providing of research artifacts) drive the need for Software Engineer Collaboratories (SEClabs). We envision research communities coming together to create SEClab instances, where research artifacts can be made publicly available to other researchers. The community can then vet such artifacts and make them available as a service, thus turning the collaboratory into a Collaboratory as a Service (CaaS). If our vision is realized, the speed and transparency of research will drastically increase.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11065,
+    "year": 2018,
+    "title": "Towards counterexample-guided k-induction for fast bug detection",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264840",
+    "abstract": "Recently, the k-induction algorithm has proven to be a successful approach for both finding bugs and proving correctness. However, since the algorithm is an incremental approach, it might waste resources trying to prove incorrect programs. In this paper, we extend the k-induction algorithm to shorten the number of steps required to find a property violation. We convert the algorithm into a meet-in-the-middle bidirectional search algorithm, using the counterexample produced from over-approximating the program. The main advantage is in the reduction of the state explosion by reducing the maximum required steps from k to ⌊k/2 + 1⌋.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11066,
+    "year": 2018,
+    "title": "Salient-class location: help developers understand code change in code review",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264841",
+    "abstract": "Code review involves a significant amount of human effort to understand the code change, because the information required to inspect code changes may distribute across multiple files that reviewers are not familiar with. Code changes are often organized as commits for review. In this paper, we found that most of the commits contain a salient class, which is saliently modified and causes the modification of the rest classes in a commit. Our user studies confirmed that identifying the salient class in a commit can facilitate reviewers in understanding code change. We model the salient class identification as a binary classification problem and extract a number of discriminative features from commit to characterize the salience of a class. The initial experiment result shows that the proposed approach can improve the efficiency of reviewers understanding code changes in code review.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11067,
+    "year": 2018,
+    "title": "Towards quantifying the development value of code contributions",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264842",
+    "abstract": "Quantifying the value of developers’ code contributions to a software project requires more than simply counting lines of code or commits. We define the development value of code as a combination of its structural value (the effect of code reuse) and its non-structural value (the impact on development). We propose techniques to automatically calculate both components of development value and combine them using Learning to Rank. Our preliminary empirical study shows that our analysis yields richer results than those obtained by human assessment or simple counting methods and demonstrates the potential of our approach.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11068,
+    "year": 2018,
+    "title": "Operationalizing human values in software: a research roadmap",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264843",
+    "abstract": "Software influences several aspects of people's lives and therefore needs to reflect their values. However, existing software engineering methods fail to account for human values, which may result in breaching those values in software and, therefore, dissatisfaction of users and loss of profit and reputation. To avoid such negative consequences, human values need to be integrated -- in a verifiable way -- into software. We refer to this as Operationalizing Human Values in Software. But this is not easy to achieve due to three main obstacles: first, human values are hard to define in a way that can be put into practice; second, existing software design decisions are mainly ignorant of values; finally, values are hard to determine and quantify in software. This paper aims to establish a research roadmap for overcoming these obstacles. The proposed roadmap focuses on (i) establishing practical definitions for human values, (ii) integrating values into software design, and (iii) measuring values in the software development life cycle.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11069,
+    "year": 2018,
+    "title": "Modeling and testing a family of surgical robots: an experience report",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275534",
+    "abstract": "Safety-critical applications often use dependability cases to validate that specified properties are invariant, or to demonstrate a counter example showing how that property might be violated. However, most dependability cases are written with a single product in mind. At the same time, software product lines (families of related software products) have been studied with the goal of modeling variability and commonality, and building family based techniques for both analysis and testing. However, there has been little work on building an end to end dependability case for a software product line (where a property is modeled, a counter example is found and then validated as a true positive via testing), and none that we know of in an emerging safety-critical domain, that of robotic surgery. In this paper, we study a family of surgical robots, that combine hardware and software, and are highly configurable, representing over 1300 unique robots. At the same time, they are considered safety-critical and should have associated dependability cases. We perform a case study to understand how we can bring together lightweight formal analysis, feature modeling, and testing to provide an end to end pipeline to find potential violations of important safety properties. In the process, we learned that there are some interesting and open challenges for the research community, which if solved will lead towards more dependable safety-critical cyber-physical systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11070,
+    "year": 2018,
+    "title": "Efficient static checking of library updates",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275535",
+    "abstract": "Software engineering practices have evolved to the point where a developer writing a new application today doesn’t start from scratch, but reuses a number of open source libraries and components. These third-party libraries evolve independently of the applications in which they are used, and may not maintain stable interfaces as bugs and vulnerabilities in them are fixed. This in turn causes API incompatibilities in downstream applications which must be manually resolved. Oversight here may manifest in many ways, from test failures to crashes at runtime. To address this problem, we present a static analysis for automatically and efficiently checking if a library upgrade introduces an API incompatibility. Our analysis does not rely on reported version information from library developers, and instead computes the actual differences between methods in libraries across different versions. The analysis is scalable, enabling real-time diff queries involving arbitrary pairs of library versions. It supports a vulnerability remediation product which suggests library upgrades automatically and is lightweight enough to be part of a continuous integration/delivery (CI/CD) pipeline. To evaluate the effectiveness of our approach, we determine semantic versioning adherence of a corpus of open source libraries taken from Maven Central, PyPI, and RubyGems. We find that on average, 26\\% of library versions are in violation of semantic versioning. We also analyze a collection of popular open source projects from GitHub to determine if we can automatically update libraries in them without causing API incompatibilities. Our results indicate that we can suggest upgrades automatically for 10\\% of the libraries.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11071,
+    "year": 2018,
+    "title": "Are mobile banking apps secure? what can be improved?",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275523",
+    "abstract": "Mobile banking apps, as one of the most contemporary FinTechs, have been widely adopted by banking entities to provide instant financial services. However, our recent work discovered thousands of vulnerabilities in 693 banking apps, which indicates these apps are not as secure as we expected. This motivates us to conduct this study for understanding the current security status of them. First, we take 6 months to track the reporting and patching procedure of these vulnerabilities. Second, we audit 4 state-of the-art vulnerability detection tools on those patched vulnerabilities. Third, we discuss with 7 banking entities via in-person or online meetings and conduct an online survey to gain more feedback from financial app developers. Through this study, we reveal that (1) people may have inconsistent understandings of the vulnerabilities and different criteria for rating severity; (2) state-of-the-art tools are not effective in detecting vulnerabilities that the banking entities most concern; and (3) more efforts should be endeavored in different aspects to secure banking apps. We believe our study can help bridge the existing gaps, and further motivate different parties, including banking entities, researchers and policy makers, to better tackle security issues altogether.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11072,
+    "year": 2018,
+    "title": "VulSeeker-pro: enhanced semantic learning based binary vulnerability seeker with emulation",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275524",
+    "abstract": "Learning-based clone detection is widely exploited for binary vulnerability search. Although they solve the problem of high time overhead of traditional dynamic and static search approaches to some extent, their accuracy is limited, and need to manually identify the true positive cases among the top-M search results during the industrial practice. This paper presents VulSeeker-Pro, an enhanced binary vulnerability seeker that integrates function semantic emulation at the back end of semantic learning, to release the engineers from the manual identification work. It first uses the semantic learning based predictor to quickly predict the top-M candidate functions which are the most similar to the vulnerability from the target binary. Then the top-M candidates are fed to the emulation engine to resort, and more accurate top-N candidate functions are obtained. With fast filtering of semantic learning and dynamic trace generation of function semantic emulation, VulSeeker-Pro can achieve higher search accuracy with little time overhead. The experimental results on 15 known CVE vulnerabilities involving 6 industry widely used programs show that VulSeeker-Pro significantly outperforms the state-of-the-art approaches in terms of accuracy. In a total of 45 searches, VulSeeker-Pro finds 40 and 43 real vulnerabilities in the top-1 and top-5 candidate functions, which are 12.33\\texttimes{} and 2.58\\texttimes{} more than the most recent and related work Gemini. In terms of efficiency, it takes 0.22 seconds on average to determine whether the target binary function contains a known vulnerability or not.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11073,
+    "year": 2018,
+    "title": "PAFL: extend fuzzing optimizations of single mode to industrial parallel mode",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275525",
+    "abstract": "Researchers have proposed many optimizations to improve the efficiency of fuzzing, and most optimized strategies work very well on their targets when running in single mode with instantiating one fuzzer instance. However, in real industrial practice, most fuzzers run in parallel mode with instantiating multiple fuzzer instances, and those optimizations unfortunately fail to maintain the efficiency improvements. In this paper, we present PAFL, a framework that utilizes efficient guiding information synchronization and task division to extend those existing fuzzing optimizations of single mode to industrial parallel mode. With an additional data structure to store the guiding information, the synchronization ensures the information is shared and updated among different fuzzer instances timely. Then, the task division promotes the diversity of fuzzer instances by splitting the fuzzing task into several sub-tasks based on branch bitmap. We first evaluate PAFL using 12 different real-world programs from Google fuzzer-test-suite. Results show that in parallel mode, two AFL improvers–AFLFast and FairFuzz do not outperform AFL, which is different from the case in single mode. However, when augmented with PAFL, the performance of AFLFast and FairFuzz in parallel mode improves. They cover 8\\% and 17\\% more branches, trigger 79\\% and 52\\% more unique crashes. For further evaluation on more widely-used software systems from GitHub, optimized fuzzers augmented with PAFL find more real bugs, and 25 of which are security-critical vulnerabilities registered as CVEs in the US National Vulnerability Database.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11074,
+    "year": 2018,
+    "title": "Software development challenges with air-gap isolation",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275526",
+    "abstract": "While existing research has explored the trade-off between security and performance, these efforts primarily focus on software consumers and often overlook the effectiveness and productivity of software producers. In this paper, we highlight an established security practice, air-gap isolation, and some challenges it uniquely instigates. To better understand and start quantifying the impacts of air-gap isolation on software development productivity, we conducted a survey at a commercial software company: Analytical Graphics, Inc. Based on our insights of dealing with air-gap isolation daily, we suggest some possible directions for future research. Our goal is to bring attention to this neglected area of research and to start a discussion in the SE community about the struggles faced by many commercial and governmental organizations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11075,
+    "year": 2018,
+    "title": "Design and validation of precooked developer dashboards",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275530",
+    "abstract": "Despite increasing popularity of developer dashboards, the effectiveness of dashboards is still in question. In order to design a dashboard that is effective and useful for developers, it is important to know (a) what information developers need to see in a dashboard, and (b) how developers want to use a dashboard with that necessary information. To answer these questions, we conducted two series of face-to-face individual interviews with developers. In the first step we analyzed answers, build a Goal-Question-Metric model and designed a precooked developer dashboard. Then, during the second separate series of interviews, we validated the GQM and derived feedback on the designed dashboard. Given that the cost of dashboard customization prevents developers from utilizing dashboards, we believe that our findings can provide a solid starting point to build precooked developer dashboards that can be readily utilized by software companies.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11076,
+    "year": 2018,
+    "title": "Testing and validating end user programmed calculated fields",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275531",
+    "abstract": "This paper reports on an approach for systematically generating test data from production databases for end user calculated field program via a novel combination of symbolic execution and database queries. We also discuss the opportunities and challenges that this specific domain poses for symbolic execution and shows how database queries can help complement some of symbolic execution's weaknesses, namely in the treatment of loops and also of path conditions that exceed SMT solver capabilities.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11077,
+    "year": 2018,
+    "title": "Automated refactoring of nested-IF formulae in spreadsheets",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275532",
+    "abstract": "Spreadsheets are the most popular end-user programming software, where formulae act like programs and also have smells. One well recognized smell is the use of nested-IF expressions, which have low readability and high cognitive cost for users, and are error-prone during reuse or maintenance. End users usually lack essential programming language knowledge to tackle or even realize this problem, yet no automatic approaches are currently available. This paper proposes the first exploration of the nest-if usage status against two large-scale spreadsheet corpora containing over 80,000 industry-level spreadsheets. It turns out the use of nested-IF expressions are surprisingly common among end users. We then present an approach to tackling this problem through automatic formula refactoring. The general idea of the automatic approach is two-fold. First, we detect and remove logic redundancy based on the AST of a formula. Second, we identify higher-level semantics that have been represented with fragmented and scattered syntax, and reassemble the syntax using concise built-in functions. A comprehensive evaluation with over 28 million nested-IF formulae reveals that the approach is able to relieve the smell of over 90\\% of nested-IF formulae.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11078,
+    "year": 2018,
+    "title": "FACTS: automated black-box testing of FinTech systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275533",
+    "abstract": "FinTech, short for ``financial technology,'' has advanced the process of transforming financial business from a traditional manual-process-driven to an automation-driven model by providing various software platforms. However, the current FinTech-industry still heavily depends on manual testing, which becomes the bottleneck of FinTech industry development. To automate the testing process, we propose an approach of black-box testing for a FinTech system with effective tool support for both test generation and test oracles. For test generation, we first extract input categories from business-logic specifications, and then mutate real data collected from system logs with values randomly picked from each extracted input category. For test oracles, we propose a new technique of priority differential testing where we evaluate execution results of system-test inputs on the system's head (i.e., latest) version in the version repository (1) against the last legacy version in the version repository (only when the executed test inputs are on new, not-yet-deployed services) and (2) against both the currently-deployed version and the last legacy version (only when the test inputs are on existing, deployed services). When we rank the behavior-inconsistency results for developers to inspect, for the latter case, we give the currently-deployed version as a higher-priority source of behavior to check. We apply our approach to the CSTP subsystem, one of the largest data processing and forwarding modules of the China Foreign Exchange Trade System (CFETS) platform, whose annual total transaction volume reaches 150 trillion US dollars. Extensive experimental results show that our approach can substantially boost the branch coverage by approximately 40\\%, and is also efficient to identify common faults in the FinTech system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11079,
+    "year": 2018,
+    "title": "Regression test selection for TizenRT",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275527",
+    "abstract": "Regression testing - running tests after code modifications - is widely practiced in industry, including at Samsung. Regression Test Selection (RTS) optimizes regression testing by skipping tests that are not affected by recent code changes. Recent work has developed robust RTS tools, which mostly target managed languages, e.g., Java and C#, and thus are not applicable to large C projects, e.g., TizenRT, a lightweight RTOS-based platform. We present Selfection, an RTS tool for projects written in C; we discuss the key challenges to develop Selfection and our design decisions. Selfection uses the objdump and readelf tools to statically build a dependency graph of functions from binaries and detect modified code elements. We integrated Selfection in TizenRT and evaluated its benefits if tests are run in an emulator and on a supported hardware platform (ARTIK 053). We used the latest 150 revisions of TizenRT available on GitHub. We measured the benefits of Selfection as the reduction in the number of tests and reduction in test execution time over running all tests at each revision (i.e., RetestAll). Our results show that Selfection can reduce, on average, the number of tests to 4.95\\% and end-to-end execution time to 7.04\\% when tests are executed in the emulator, and to 5.74\\% and 26.82\\% when tests are executed on the actual hardware. Our results also show that the time taken to maintain the dependency graph and detect modified functions is negligible.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11080,
+    "year": 2018,
+    "title": "Building lean continuous integration and delivery pipelines by applying DevOps principles: a case study at Varidesk",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275528",
+    "abstract": "Continuous Integration (CI) and Continuous Delivery (CD) are widely considered to be best practices in software development. Studies have shown however, that adopting these practices can be challenging and there are many barriers that engineers may face, such as – overly long build times, lack of support for desired workflows, issues with configuration, etc. At Varidesk, we recently began shifting our primary web application (from a monolithic) to a micro-services-based architecture and also adapted our software development practices to aim for more effective CI/CD. In doing so, we also ran into some of the same afore-mentioned barriers. In this paper we focus on two specific challenges that we faced – long wait times for builds/releases to be queued and completed, and the lack of support for tooling, especially from a cross-cloud perspective. We then present the solutions that we came up with, which involved re-thinking DevOps as it applied to us, and re-building our own CI/CD pipelines based on DevOps-supporting approaches such as containerization, infrastructure-as-code, and orchestration. Our re-designed pipelines have led us to see speed increases, in terms of total build/release time, in the range of 330x-1110x and have enabled us to seamlessly move from a single-cloud to a multi- cloud environment, with no architectural changes to any apps.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11081,
+    "year": 2018,
+    "title": "The impact of failing, flaky, and high failure tests on the number of crash reports associated with Firefox builds",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275529",
+    "abstract": "Testing is an integral part of release engineering and continuous integration. In theory, a failed test on a build indicates a problem that should be fixed and the build should not be released. In practice, tests decay and developers often release builds, ignoring failing tests. In this paper, we studying the link between builds with failing tests and the number of crash reports on the Firefox webbrowser. Builds with all tests passing have a median of only two crash reports. In contrast, builds with one or more failing tests are associated with a median of 508 and 291 crash reports for Beta and Production builds, respectively. We further investigate the impact of ``flaky'' tests, which can both pass and fail on the same build, and find that they have a median of 514 and 234 crash reports for Beta and Production builds. Finally, building on previous research that has shown that tests that have failed frequently in the past will fail frequently in the future, we find that Builds with HighFailureTests have a median of 585 and 780 crash reports for Beta and Production builds. Unlike other types of test failures, HighFailureTests have a larger impact on Production releases than on Beta builds, and they have a median of 2.7 times more crashes than builds with normal test failures. We conclude that ignoring test failures is related to a dramatic increase in the number of crashes reported by users.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11082,
+    "year": 2018,
+    "title": "BigSift: automated debugging of big data analytics in data-intensive scalable computing",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264586",
+    "abstract": "Developing Big Data Analytics often involves trial and error debugging, due to the unclean nature of datasets or wrong assumptions made about data. When errors (e.g. program crash, outlier results, etc.) arise, developers are often interested in pinpointing the root cause of errors. To address this problem, BigSift takes an Apache Spark program, a user-defined test oracle function, and a dataset as input and outputs a minimum set of input records that reproduces the same test failure by combining the insights from delta debugging with data provenance. The technical contribution of BigSift is the design of systems optimizations that bring automated debugging closer to a reality for data intensive scalable computing. BigSift exposes an interactive web interface where a user can monitor a big data analytics job running remotely on the cloud, write a user-defined test oracle function, and then trigger the automated debugging process. BigSift also provides a set of predefined test oracle functions, which can be used for explaining common types of anomalies in big data analytics--for example, finding the origin of the output value that is more than k standard deviations away from the median. The demonstration video is available at https://youtu.be/jdBsCd61a1Q.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11083,
+    "year": 2018,
+    "title": "FOT: a versatile, configurable, extensible fuzzing framework",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264593",
+    "abstract": "Greybox fuzzing is one of the most effective approaches for detecting software vulnerabilities. Various new techniques have been continuously emerging to enhance the effectiveness and/or efficiency by incorporating novel ideas into different components of a greybox fuzzer. However, there lacks a modularized fuzzing framework that can easily plugin new techniques and hence facilitate the reuse, integration and comparison of different techniques. To address this problem, we propose a fuzzing framework, namely Fuzzing Orchestration Toolkit (FOT). FOT is designed to be versatile, configurable and extensible. With FOT and its extensions, we have found 111 new bugs from 11 projects. Among these bugs, 18 CVEs have been assigned. Video link: https://youtu.be/O6Qu7BJ8RP0.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11084,
+    "year": 2018,
+    "title": "Themis: automatically testing software for discrimination",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264590",
+    "abstract": "Bias in decisions made by modern software is becoming a common and serious problem. We present Themis, an automated test suite generator to measure two types of discrimination, including causal relationships between sensitive inputs and program behavior. We explain how Themis can measure discrimination and aid its debugging, describe a set of optimizations Themis uses to reduce test suite size, and demonstrate Themis' effectiveness on open-source software. Themis is open-source and all our evaluation data are available at http://fairness.cs.umass.edu/. See a video of Themis in action: https://youtu.be/brB8wkaUesY",
+    "status": "notchecked"
+  },
+  {
+    "id": 11085,
+    "year": 2018,
+    "title": "Vista: web test repair using computer vision",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264592",
+    "abstract": "Repairing broken web element locators represents the major main- tenance cost of web test cases. To detect possible repairs, testers typically inspect the tests’ interactions with the application under test through the GUI. Existing automated test repair techniques focus instead on the code and ignore visual aspects of the applica- tion. In this demo paper, we give an overview of Vista, a novel test repair technique that leverages computer vision and local crawling to automatically suggest and apply repairs to broken web tests. URL: https://github.com/saltlab/Vista",
+    "status": "notchecked"
+  },
+  {
+    "id": 11086,
+    "year": 2018,
+    "title": "Augmenting stack overflow with API usage patterns mined from GitHub",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264585",
+    "abstract": "Programmers often consult Q&amp;A websites such as Stack Overflow (SO) to learn new APIs. However, online code snippets are not always complete or reliable in terms of API usage. To assess online code snippets, we build a Chrome extension, ExampleCheck that detects API usage violations in SO posts using API usage patterns mined from 380K GitHub projects. It quantifies how many GitHub examples follow common API usage and illustrates how to remedy the detected violation in a given SO snippet. With ExampleCheck, programmers can easily identify the pitfalls of a given SO snippet and learn how much it deviates from common API usage patterns in GitHub. The demo video is at https://youtu.be/WOnN-wQZsH0.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11087,
+    "year": 2018,
+    "title": "PowerStation: automatically detecting and fixing inefficiencies of database-backed web applications in IDE",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264589",
+    "abstract": "Modern web applications are built using a myriad of software components, and each of them exposes different programming models (e.g., application logic expressed in an imperative language, database queries expressed using declarative SQL). To improve programmer productivity, Object Relational Mapping (ORM) frameworks have been developed to allow developers build web applications in an object-oriented manner. Despite such frameworks, prior work has found that developers still struggle in developing performant ORM-based web applications. This paper presents PowerStation, a RubyMine IDE plugin for optimizing web applications developed using the Ruby on Rails ORM. Using automated static analysis, PowerStation detects ORM-related inefficiency problems and suggests fixes to developers. Our evaluation using 12 real-world applications shows that PowerStation can automatically detects 1221 performance issues across them. A tutorial on using PowerStation can be found at https://youtu.be/rAV8CGuSj6k.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11088,
+    "year": 2018,
+    "title": "SketchFix: a tool for automated program repair approach using lazy candidate generation",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264600",
+    "abstract": "Manually locating and removing bugs in faulty program is often tedious and error-prone. A common automated program repair approach called generate-and-validate (G&amp;V) iteratively creates candidate fixes, compiles them, and runs these candidates against the given tests. This approach can be costly due to a large number of re-compilations and re-executions of the program. To tackle this limitation, recent work introduced the SketchFix approach that tightly integrates the generation and validation phases, and utilizes runtime behaviors to substantially prune a large amount of repair candidates. This tool paper describes our Java implementation of SketchFix, which is an open-source library that we released on Github. Our experimental evaluation using Defects4J benchmark shows that SketchFix can significantly reduce the number of re-compilations and re-executions compared to other approaches and work particularly well in repairing expression manipulation at the AST node-level granularity.The demo video is at: https://youtu.be/AO-YCH8vGzQ.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11089,
+    "year": 2018,
+    "title": "WarningsGuru: integrating statistical bug models with static analysis to provide timely and specific bug warnings",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264599",
+    "abstract": "The detection of bugs in software systems has been divided into two research areas: static code analysis and statistical modeling of historical data. Static analysis indicates precise problems on line numbers but has the disadvantage of suggesting many warning which are often false positives. In contrast, statistical models use the history of the system to suggest which files or commits are likely to contain bugs. These course-grained predictions do not indicate to the developer the precise reasons for the bug prediction. We combine static analysis with statistical bug models to limit the number of warnings and provide specific warnings information at the line level. Previous research was able to process only a limited number of releases, our tool, WarningsGuru, can analyze all commits in a source code repository and we currently have processed thousands of commits and warnings. Since we process every commit, we present developers with more precise information about when a warning is introduced allowing us to show recent warnings that are introduced in statistically risky commits. Results from two OSS projects show that CommitGuru's statistical model flags 25\\% and 29\\% of all commits as risky. When we combine this with static analysis in WarningsGuru the number of risky commits with warnings is 20\\% for both projects and the number commits with new warnings is only 3\\% and 6\\%. We can drastically reduce the number of commits and warnings developers have to examine. The tool, source code, and demo is available at https://github.com/louisq/warningsguru.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11090,
+    "year": 2018,
+    "title": "DSM: a specification mining tool using recurrent neural network based language model",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264597",
+    "abstract": "Formal specifications are important but often unavailable. Furthermore, writing these specifications is time-consuming and requires skills from developers. In this work, we present Deep Specification Miner (DSM), an automated tool that applies deep learning to mine finite-state automaton (FSA) based specifications. DSM accepts as input a set of execution traces to train a Recurrent Neural Network Language Model (RNNLM). From the input traces, DSM creates a Prefix Tree Acceptor (PTA) and leverages the inferred RNNLM to extract many features. These features are then forwarded to clustering algorithms for merging similar automata states in the PTA for assembling a number of FSAs. Next, our tool performs a model selection heuristic to approximate F-measure of FSAs, and outputs the one with the highest estimated F-measure. Noticeably, our implementation of DSM provides several options that allows users to optimize quality of resultant FSAs. Our video demonstration on the performance of DSM is publicly available at https://goo.gl/Ju4yFS.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11091,
+    "year": 2018,
+    "title": "EClone: detect semantic clones in Ethereum via symbolic transaction sketch",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264596",
+    "abstract": "The Ethereum ecosystem has created a prosperity of smart contract applications in public blockchains, with transparent, traceable and programmable transactions. However, the flexibility that everybody can write and deploy smart contracts on Ethereum causes a large collection of similar contracts, i.e., clones. In practice, smart contract clones may amplify severe threats like security attacks, resource waste etc. In this paper, we have developed EClone, a semantic clone detector for Ethereum. The key insight of our clone detection is Symbolic Transaction Sketch, i.e., a set of critical semantic properties generated from symbolic transaction. Sketches of two smart contracts will be normalized into numeric vectors with a same length. Then, the clone detection problem is modeled as a similarity computation process where sketches and other syntactic information are combined. We have applied EClone in identifying semantic clones of deployed Ethereum smart contracts and achieved an accuracy of 93.27\\%. A demo video of EClone is at https://youtu.be/IRasOVv6vyc.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11092,
+    "year": 2018,
+    "title": "INFAR: insight extraction from app reviews",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264595",
+    "abstract": "App reviews play an essential role for users to convey their feedback about using the app. The critical information contained in app reviews can assist app developers for maintaining and updating mobile apps. However, the noisy nature and large-quantity of daily generated app reviews make it difficult to understand essential information carried in app reviews. Several prior studies have proposed methods that can automatically classify or cluster user reviews into a few app topics (e.g., security). These methods usually act on a static collection of user reviews. However, due to the dynamic nature of user feedback (i.e., reviews keep coming as new users register or new app versions being released) and multiple analysis dimensions (e.g., review quantity and user rating), developers still need to spend substantial effort in extracting contrastive information that can only be teased out by comparing data from multiple time periods or analysis dimensions. This is needed to answer questions such as: what kind of issues users are experiencing most? is there an unexpected rise in a particular kind of issue? etc. To address this need, in this paper, we introduce INFAR, a tool that automatically extracts INsights From App Reviews across time periods and analysis dimensions, and presents them in natural language supported by an interactive chart. The insights INFAR extracts include several perspectives: (1) salient topics (i.e., issue topics with significantly lower ratings), (2) abnormal topics (i.e., issue topics that experience a rapid rise in volume during a time period), (3) correlations between two topics, and (4) causal factors to rating or review quantity changes. To evaluate our tool, we conduct an empirical evaluation by involving six popular apps and 12 industrial practitioners, and 92\\% (11/12) of them approve the practical usefulness of the insights summarized by INFAR. Demo Tool Website: https://remine-lab.github.io/paper/infar.html Demo Video: https://youtu.be/MjcoiyjA5TE",
+    "status": "notchecked"
+  },
+  {
+    "id": 11093,
+    "year": 2018,
+    "title": "PyDriller: Python framework for mining software repositories",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264598",
+    "abstract": "Software repositories contain historical and valuable information about the overall development of software systems. Mining software repositories (MSR) is nowadays considered one of the most interesting growing fields within software engineering. MSR focuses on extracting and analyzing data available in software repositories to uncover interesting, useful, and actionable information about the system. Even though MSR plays an important role in software engineering research, few tools have been created and made public to support developers in extracting information from Git repository. In this paper, we present PyDriller, a Python Framework that eases the process of mining Git. We compare our tool against the state-of-the-art Python Framework GitPython, demonstrating that PyDriller can achieve the same results with, on average, 50\\% less LOC and significantly lower complexity. URL: https://github.com/ishepard/pydriller Materials: https://doi.org/10.5281/zenodo.1327363 Pre-print: https://doi.org/10.5281/zenodo.1327411",
+    "status": "notchecked"
+  },
+  {
+    "id": 11094,
+    "year": 2018,
+    "title": "A formal verification tool for Ethereum VM bytecode",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264591",
+    "abstract": "In this paper, we present a formal verification tool for the Ethereum Virtual Machine (EVM) bytecode. To precisely reason about all possible behaviors of the EVM bytecode, we adopted KEVM, a complete formal semantics of the EVM, and instantiated the K-framework's reachability logic theorem prover to generate a correct-by-construction deductive verifier for the EVM. We further optimized the verifier by introducing EVM-specific abstractions and lemmas to improve its scalability. Our EVM verifier has been used to verify various high-profile smart contracts including the ERC20 token, Ethereum Casper, and DappHub MakerDAO contracts.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11095,
+    "year": 2018,
+    "title": "ASketch: a sketching framework for Alloy",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264594",
+    "abstract": "Alloy is a declarative modeling language that supports first-order logic with transitive closure. Alloy has been used in a variety of domains to model software systems and find design deficiencies. However, it is often challenging to make an Alloy model correct or to debug a faulty Alloy model. ASketch is a sketching/synthesis technique that can help users write correct Alloy models. ASketch allows users to provide a partial Alloy model with holes, a generator that specifies candidate fragments to be considered for each hole, and a set of tests that capture the desired model properties. Then, the tool completes the holes such that all tests for the completed model pass. ASketch uses tests written for the recently introduced AUnit framework, which provides a foundation of testing (unit tests, test execution, and model coverage) for Alloy models in the spirit of traditional unit testing. This paper describes our Java implementation of ASketch, which is a command-line tool, released as an open-source project on GitHub. Our experimental results show that ASketch can handle partial Alloy models with multiple holes and a large search space. The demo video for ASketch can be found at https://youtu.be/T5NIVsV329E.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11096,
+    "year": 2018,
+    "title": "AlloyInEcore: embedding of first-order relational logic into meta-object facility for automated model reasoning",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264588",
+    "abstract": "We present AlloyInEcore, a tool for specifying metamodels with their static semantics to facilitate automated, formal reasoning on models. Software development projects require that software systems be specified in various models (e.g., requirements models, architecture models, test models, and source code). It is crucial to reason about those models to ensure the correct and complete system specifications. AlloyInEcore~allows the user to specify metamodels with their static semantics, while, using the semantics, it automatically detects inconsistent models, and completes partial models. It has been evaluated on three industrial case studies in the automotive domain (https://modelwriter.github.io/AlloyInEcore/).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11097,
+    "year": 2018,
+    "title": "VT-revolution: interactive programming tutorials made possible",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3264587",
+    "abstract": "Programming video tutorials showcase programming tasks and associated workflows. Although video tutorials are easy to create, it is often difficult to explore the captured workflows and interact with the programs in the videos. In this work, we propose a tool named VTRevolution -- an interactive programming video tutorial authoring system. VTRevolution has two components: 1) a tutorial authoring system leverages operating system level instrumentation to log workflow history while tutorial authors are creating programming video tutorials; 2) a tutorial watching system enhances the learning experience of video tutorials by providing operation history and timeline-based browsing interactions. Our tutorial authoring system does not require any special recording tools or instrumentation of target applications. Neither does it incur any additional burden on tutorial authors to add interactions to video tutorials. Given a video tutorial enriched with synchronously-logged workflow history, our tutorial watching system allows tutorial watchers to explore the captured workflows and interact with files and code in a way that is impossible for video data alone. We conduct a user study of 90 developers to evaluate the design and effectiveness of our system in helping developers learn programming knowledge in video tutorials.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11098,
+    "year": 2018,
+    "title": "Practices and tools for better software testing",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275424",
+    "abstract": "Automated testing (hereafter referred to as just `testing') has become an essential process for improving the quality of software systems. In fact, testing can help to point out defects and to ensure that production code is robust under many usage conditions. However, writing and maintaining high-quality test code is challenging and frequently considered of secondary importance. Managers, as well as developers, do not treat test code as equally important as production code, and this behaviour could lead to poor test code quality, and in the future to defect-prone production code. The goal of my research is to bring awareness to developers on the effect of poor testing, as well as helping them in writing better test code. To this aim, I am working on 2 different perspectives: (1) studying best practices on software testing, identifying problems and challenges of current approaches, and (2) building new tools that better support the writing of test code, that tackle the issues we discovered with previous studies. Pre-print: https://doi.org/10.5281/zenodo.1411241",
+    "status": "notchecked"
+  },
+  {
+    "id": 11099,
+    "year": 2018,
+    "title": "Automated support for mobile application testing and maintenance",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275425",
+    "abstract": "Mobile applications are an essential part of our daily life. In fact, they can be used for tasks that range from reading the news to performing bank transactions. Considering the impact that mobile applications have in our lives, it is important for developers to test them and gain confidence that they behave as expected. However, testing mobile applications proves to be challenging. In fact, mobile companies report that they do not have enough time and the right methods to test. In addition, in the case of Android applications, the situation is further complicated by the \"fragmentation\" of the ecosystem. Developers not only need to ensure that an application behaves as expected but also need to make sure that the application does so on a multitude of different devices. Finally, because it is virtually impossible to release a bug free application, developers also need to quickly react to bug reports and release a fixed version of the application before customer loss. The research plan proposed in this paper, aims to provide novel techniques to automate the support for mobile application testing and maintenance. Specifically, it proposes techniques to: test apps more effectively and efficiently, tackle the problems caused by the \"fragmentation\" of the Android ecosystem, and help developers in quickly handling bug reports.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11100,
+    "year": 2018,
+    "title": "Moving towards objective measures of program comprehension",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275426",
+    "abstract": "Traditionally, program comprehension research relies heavily on indirect measures of comprehension, where subjects report on their own comprehension levels or summarize part of an artifact so that researchers can instead deduce the level of comprehension. However, there are several potential issues that can result from using these indirect measures because they are prone to participant biases and implicitly deduce comprehension based on various factors. The proposed research presents a framework to move towards more objective measures of program comprehension through the use of brain imaging and eye tracking technology. We aim to shed light on how the human brain processes comprehension tasks, specifically what aspects of the source code cause measurable increases in the cognitive load of developers in both bug localization tasks, as well as code reviews. We discuss the proposed methodology, preliminary results, and overall contributions of the work",
+    "status": "notchecked"
+  },
+  {
+    "id": 11101,
+    "year": 2018,
+    "title": "Semantic inference from natural language privacy policies and Android code",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275427",
+    "abstract": "Mobile apps collect dierent categories of personal information to provide users with various services. Companies use privacy policies containing critical requirements to inform users about their data practices. With the growing access to personal information and the scale of mobile app deployment, traceability of links between privacy policy requirements and app code is increasingly important. Automated traceability can be achieved using natural language processing and code analysis techniques. However, such techniques must address two main challenges: ambiguity in privacy policy terminology and unbounded information types provided by users through input elds in GUI. In this work, we propose approaches to interpret abstract terms in privacy policies, identify information types in Android layout code, and create a mapping between them using natural language processing techniques.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11102,
+    "year": 2018,
+    "title": "Intelligent bug fixing with software bug knowledge graph",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275428",
+    "abstract": "Software bugs continuously emerge during the process of software evolution. With the increasing size and complexity of software, bug fixing becomes increasingly more difficult. Bug and commit data of open source projects, Q&amp;A documents and other software resources contain a sea of bug knowledge which can be utilized to help developers understand and fix bugs. Existing work focuses on data mining from a certain software resource in isolation to assist in bug fixing, which may reduce the efficiency of bug fixing. How to obtain, organize and understand bug knowledge from multi-source software data is an urgent problem to be solved. In order to solve this problem, we utilize knowledge graph (KG) technology to explore the deep semantic and structural relationships in the multi-source software data, propose effective search and recommendation techniques based on the knowledge graph, and design a bug-fix knowledge question \\&amp; answering system to assist developers in intelligent software bug fixing. At present, we have designed a bug knowledge graph construction framework, proposed the identification principles and methods for bug knowledge entities and relationships, constructed a preliminary knowledge graph based on the bug repository. In the following work, we will further improve the knowledge graph, complete the knowledge graph fusion of multi-source database, comprehend bug knowledge through knowledge reasoning, utilize the collaborative search and recommendation technology for bug-fixing knowledge question and answering.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11103,
+    "year": 2018,
+    "title": "Quality assurance automation in autonomous systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275429",
+    "abstract": "Robots and autonomous systems are finding their way to interact with the public and failures in these systems could be extremely expensive, even deadly. However, low-cost software-based simulation could be a promising approach to systematically test robotics systems and prevent failures as early as possible. In our early work, we showed that the majority of bugs could actually be reproduced and discovered using low-fidelity simulation environment. We created a high-level framework for automated testing of popular ArduPilot systems. In this work, I propose novel approaches to automatically infer powerful representation of system models, and generate test suites with the purpose of enhancing automated fault localization performance and describing the root cause of failures. Finally, I propose to use those novel approaches to inform the construction of automated program repair techniques for autonomous systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11104,
+    "year": 2018,
+    "title": "How do developers resolve merge conflicts? an investigation into the processes, tools, and improvements",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275430",
+    "abstract": "Most software development is done in teams. When more than one developer is modifying the source code, there is a change that their changes will conflict. When this happens, developers have to interrupt their workflow in order to resolve the merge conflict. This interruption can lead to frustration and lost productivity. This makes collaboration, and the problems associated with it, an important aspect of software development. Merge conflicts are some of the more difficult issues that arise when working in a team. We plan to bring in more information about the strategies developers use when resolving merge conflicts. We will gather information through in-situ observations and interviews of developers resolving conflicts when working on real development tasks, combined with analytical methods. The information obtained can then be used to improve the existing tools and make it easier for developers when working in a collaborative environment.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11105,
+    "year": 2018,
+    "title": "Automated scenario-based integration testing of distributed systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275431",
+    "abstract": "In a growing number of domains, the provisioning of end-to-end services to the users depends on the proper interoperation of multiple systems, forming a new distributed system, often subject to timing constraints. To ensure interoperability and integrity, it is important to conduct integration tests that verify the interactions with the environment and between the system components in key scenarios. To tackle test automation challenges, we propose algorithms for decentralized conformance checking and test input generation, and for checking and enforcing the conditions (local observability and controllability) that allow decentralized test execution.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11106,
+    "year": 2018,
+    "title": "Towards learning-augmented languages",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275432",
+    "abstract": "Reinforcement learning (RL) has seen tremendous success at solving a variety of problems ranging from industrial automation to games. This paper describes how existing programming languages can be augmented with new features so as to allow developers to exploit the power of modern RL algorithms and implementations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11107,
+    "year": 2018,
+    "title": "On the adoption of neural networks in modeling software reliability",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275433",
+    "abstract": "This work models the reliability of software systems using recurrent neural networks with long short-term memory (LSTM) units and truncated backpropagation algorithm, and encoder-decoder LSTM architecture and proposes LSTM with software reliability functions as activation functions and LSTM with input features as the output of software reliability functions. An initial evaluation on data coming from 4 industrial projects is also provided.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11108,
+    "year": 2018,
+    "title": "Type migration in large-scale code bases",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275434",
+    "abstract": "Type migration is a frequent refactoring activity in which an existing type is replaced with another one throughout the source code. Recent studies have shown that type migration is more frequent in larger codebases. The state-of-the-art type migration tools cannot scale to large projects. Moreover, these tools do not fit into modern software development workflows, e.g., in Continuous Integration. This paper presents an IDE-independent type migration technique that scales to ultra-large-scale codebases through a MapReduce parallel and distributed process. We have implemented our approach in a tool called T2R. We evaluated it on codebases as large as 790 KLOC for specializing functional interfaces. Our results show that T2R is safe, scalable and useful. Open source developers accepted 70 migration patches spanning over 202 files.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11109,
+    "year": 2018,
+    "title": "Reshaping distributed agile and adaptive development environment",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275435",
+    "abstract": "Towards the interest of (Collaborative Networked) Organizations in the adoption of emerging technologies to support communication, collaboration and monitoring needs of their Distributed Agile and Adaptive Development Environment (DADE), a tool based on the emerging Liquid Multi-Device Software paradigm is presented.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11110,
+    "year": 2018,
+    "title": "How Dance(Sport) can help to produce better software",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275436",
+    "abstract": "Dancing and dancesport have a long tradition of instructions and development. Furthermore, there are many aspects of them that resemble the software development process. This work analyses their features with the intent to explore what of them is already applied in software development and what could be borrowed and applied in the future. Additionally, an investigation of the associated brain activities could be performed to gather a deeper understanding of analogies and differences.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11111,
+    "year": 2018,
+    "title": "Feature-interaction aware configuration prioritization",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275437",
+    "abstract": "Unexpected interactions among features induce most bugs in a configurable software system. Exhaustively analyzing all exponential number of possible configurations is prohibitively costly. Thus, various sampling methods have been proposed to systematically narrow down the exponential number of configurations to be tested. Since testing all selected configurations can require a huge amount of effort, fault-based configuration prioritization, that helps detect bugs earlier, can yield practical benefits in quality assurance. In this paper, we propose CoPo, a novel formulation of feature-interaction bugs via common program entities enabled/disabled by the features. Leveraging from that, we develop an efficient feature-interaction-aware configuration prioritization technique for configurable systems by ranking configurations according to their total number of potential bugs. We conducted several experiments to evaluate CoPo on a public benchmark. We found that CoPo outperforms the state-of-the-art configuration prioritization methods. Interestingly, it is able to detect 17 not-yet-discovered feature-interaction bugs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11112,
+    "year": 2018,
+    "title": "Dara: hybrid model checking of distributed systems",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275438",
+    "abstract": "Building correct implementations of distributed systems continues to elude us. Solutions consist of abstract modeling languages such as TLA+, PLusCal, which specify models of systems and tools like Coq, and SPIN which verify correctness of models but require considerable amount of effort, or transparent model checkers like MODIST, CMC and CHESS which suffer from state space explosion, rendering them impractical to use as they are too slow. We propose Dara, a novel hybrid technique that combines the speed of abstract model checkers with the correctness and ease-of-use of transparent model checkers. Dara utilizes tests as well as a transparent model checker to generate logs from real executions of the system. The generated logs are analyzed to infer a model of the system which is model-checked by SPIN to verify user-provided invariants. Invariant violations are reported as likely bug traces. These traces are then passed to a replay engine which tries to replay the traces as real executions of the system to remove false positives. We are currently evaluating Dara's efficiency and usability.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11113,
+    "year": 2018,
+    "title": "Bugs in the wild: examining the effectiveness of static analyzers at finding real-world bugs",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275439",
+    "abstract": "Static analysis is a powerful technique to find software bugs. In past years, a few static analysis tools have become available for developers to find certain kinds of bugs in their programs. However, there is no evidence on how effective the tools are in finding bugs in real-world software. In this paper, we present a preliminary study on the popular static analyzers ErrorProne and SpotBugs. Specifically, we consider 320 real Java bugs from the BugSwarm dataset, and determine which of these bugs can potentially be found by the analyzers, and how many are indeed detected. We find that 30.3\\% and 40.3\\% of the bugs are candidates for detection by ErrorProne and SpotBugs, respectively. Our evaluation shows that the analyzers are relatively easy to incorporate into the tool chain of diverse projects that use the Maven build system. However, the analyzers are not as effective detecting the bugs under study, with only one bug successfully detected by SpotBugs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11114,
+    "year": 2018,
+    "title": "Mining error-handling specifications for systems software",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275440",
+    "abstract": "This paper presents a technique for mining error-handling specifications from systems software. It presents a static analysis for detecting error handlers in low-level code, and it shows how function synonyms can be used to mine for error-handling specifications with only a few supporting examples.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11115,
+    "year": 2018,
+    "title": "Diversity and decorum in open source communities",
+    "publication": "FSE",
+    "paper": "https://doi.org/10.1145/3236024.3275441",
+    "abstract": "Open source software communities are increasingly aware of how social biases and discrimination negatively affect their culture. Many choose to establish policies regulating their contributors' social interactions without considering the efficacy of such measures. If these communities lack an empirical awareness of their policies' impact, they may find themselves adopting dogmatic practices that serve only to increase overhead maintenance costs. Conducting a gender diversity analysis of popular open source projects, I discovered no significant change in the proportion of women contributing to projects with or without a code of conduct. In light of this discovery, the open source community should consider supplemental strategies in order to foster diverse participation in their projects.",
+    "status": "notchecked"
+  }
+]

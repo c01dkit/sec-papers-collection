@@ -22,7 +22,7 @@ Since some topics on software testing are related to security, the following pub
 
 ## How to contribute?
 
-You can simply clone the repository, update the `data.yml` file, and create a Pull Request (PR). I will review it and update the website as soon as possible. All contributors will be listed in the repository's README and in the website's acknowledgments :)
+You can simply clone the repository, update the `data.yml` file, run `uv run main.py --analyze` locally to make sure everything works well, and create a Pull Request (PR). I will review it and update the website as soon as possible. All contributors will be listed in the repository's README and in the website's acknowledgments :)
 
 ### Update paper details
 
@@ -30,9 +30,8 @@ The paper source is processed via `uv` project manager. You should run `uv sync`
 
 ### Update key information
 
-Since v0.3.0, `src/service/xxxService.js` files are used for some key information other than paper details. You can easily update them for the latest news.
-
-Since v0.3.6, keyword `status` is introduced into `data.yml` to mark the conference status. Status can be grouped into `notchecked` (default), `inprogress`, `done`, and `advanced`, corresponding to `Not verified`, `Require updates`, `Verified`, and `Advanced processed`.
+* Since v0.3.6, keyword `status` is introduced into `data.yml` to mark the conference status. Status can be grouped into `notchecked` (default), `inprogress`, `done`, and `advanced`, corresponding to `Not verified`, `Require updates`, `Verified`, and `Advanced processed`.
+* Since v0.3.0, `src/service/xxxService.js` files are used for some key information other than paper details. You can easily update them for the latest news.
 
 ## For local deploy and publish
 

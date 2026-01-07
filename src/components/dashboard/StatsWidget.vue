@@ -58,7 +58,7 @@ onUnmounted(() => {
                 <div class="flex justify-between mb-4">
                     <div>
                         <span class="block text-muted-color font-medium mb-4">{{ t('dashboard.totalPublications') }}</span>
-                        <div class="font-medium text-xl">6</div>
+                        <div class="font-medium text-xl">{{ paperStatis.overview.length }}</div>
                     </div>
                     <div class="flex items-center justify-center bg-indigo-100 dark:bg-indigo-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
                         <i class="pi pi-book text-indigo-500 !text-xl"></i>

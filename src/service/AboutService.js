@@ -2,6 +2,7 @@ export const AboutService = {
     updateTimelineData(locale = 'en') {
         const data = {
             en: [
+                { status: 'v0.3.7', date: '2026-01-07',  content: ['Add FSE 15-25, including short papers', 'Update CCS 15-25, only includes research papers'] },
                 { status: 'v0.3.6', date: '2025-12-16',  content: ['Update CCS 25 and USENIX 25 Awards', 'Add paper count and status in `Home`'] },
                 { status: 'v0.3.5', date: '2025-09-24',  content: ['Update USENIX Sec 25 (Cycle 2) and ACM CCS 25 (Cycle 2)'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['Beautify `Awards` page', 'Adjust the position of cyber begging', 'Fix several translation error'] },
@@ -24,6 +25,7 @@ export const AboutService = {
                 { status: 'v0.1.0', date: '2023-05-15',  content: ['First time to publish sec.c01dkit.com.','Use mkdocs as website generator.'] },
             ],
             zh: [
+                { status: 'v0.3.7', date: '2026-01-07',  content: ['添加FSE 15-25论文（包括短论文）', '更新CCS 15-25状态，仅保留长论文'] },
                 { status: 'v0.3.6', date: '2025-12-16',  content: ['更新CCS 25与USENIX 25获奖论文', '在`首页`增加了会议论文数量统计及统计状态汇总'] },
                 { status: 'v0.3.5', date: '2025-09-24',  content: ['更新 USENIX Sec 25 第二轮和ACM CCS 25第二轮'] },
                 { status: 'v0.3.4', date: '2025-07-16',  content: ['美化`获奖论文`页面展示形式', '调整赛博乞讨位置，从`首页`移至`关于`页', '修复少量文本翻译错误'] },
