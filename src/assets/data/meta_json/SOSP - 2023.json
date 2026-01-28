@@ -1,0 +1,432 @@
+[
+  {
+    "id": 11480,
+    "year": 2023,
+    "title": "TreeSLS: A Whole-system Persistent Microkernel with Tree-structured State Checkpoint on NVM",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613160",
+    "abstract": "Whole-system persistence promises simplified application deployment and near-instantaneous recovery. This can be implemented using single-level store (SLS) through periodic checkpointing of ephemeral state to persistent devices. However, traditional SLSs suffer from two main issues on checkpointing efficiency and external synchrony, which are critical for low-latency services with persistence need.In this paper, we note that the decentralized state of microkernel-based systems can be exploited to simplify and optimize state checkpointing. To this end, we propose TreeSLS, a whole-system persistent microkernel that simplifies the whole-system state maintenance to a capability tree and a failure-resilient checkpoint manager. TreeSLS further exploits the emerging non-volatile memory to minimize checkpointing pause time by eliminating the distinction between ephemeral and persistent devices. With efficient state maintenance, TreeSLS further proposes delayed external visibility to provide transparent external synchrony with little overhead. Evaluation on microbenchmarks and real-world applications (e.g., Memcached, Redis and RocksDB) show that TreeSLS can complete a whole-system persistence in around 100 μs and even take a checkpoint every 1 ms with reasonable overhead to applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11481,
+    "year": 2023,
+    "title": "MEMTIS: Efficient Memory Tiering with Dynamic Page Classification and Page Size Determination",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613167",
+    "abstract": "The evergrowing memory demand fueled by datacenter workloads is the driving force behind new memory technology innovations (e.g., NVM, CXL). Tiered memory is a promising solution which harnesses such multiple memory types with varying capacity, latency, and cost characteristics in an effort to reduce server hardware costs while fulfilling memory demand. Prior works on memory tiering make suboptimal (often pathological) page placement decisions because they rely on various heuristics and static thresholds without considering overall memory access distribution. Also, deciding the appropriate page size for an application is difficult as huge pages are not always beneficial as a result of skewed accesses within them. We present Memtis, a tiered memory system that adopts informed decision-making for page placement and page size determination. Memtis leverages access distribution of allocated pages to optimally approximate the hot data set to the fast tier capacity. Moreover, Memtis dynamically determines the page size that allows applications to use huge pages while avoiding their drawbacks by detecting inefficient use of fast tier memory and splintering them if necessary. Our evaluation shows that Memtis outperforms state-of-the-art tiering systems by up to 169.0\\% and their best by up to 33.6\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11482,
+    "year": 2023,
+    "title": "Snowcat: Efficient Kernel Concurrency Testing using a Learned Coverage Predictor",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613148",
+    "abstract": "Random-based approaches and heuristics are commonly used in kernel concurrency testing due to the massive scale of modern kernels and corresponding interleaving space. The lack of accurate and scalable approaches to analyze concurrent kernel executions makes existing testing approaches heavily rely on expensive dynamic executions to measure the effectiveness of a new test. Unfortunately, the high cost incurred by dynamic executions limits the breadth of the exploration and puts latency pressure on finding effective concurrent test inputs and schedules, hindering the overall testing effectiveness.This paper proposes Snowcat, a kernel concurrency testing framework that generates effective test inputs and schedules using a learned kernel block-coverage predictor. Using a graph neural network, the coverage predictor takes a concurrent test input and scheduling hints and outputs a prediction on whether certain important code blocks will be executed. Using this predictor, Snowcat can skip concurrent tests that are likely to be fruitless and prioritize the promising ones for actual dynamic execution.After testing the Linux kernel for over a week, Snowcat finds ~17\\% more potential data races, by prioritizing tests of more fruitful schedules than existing work would have chosen. Snowcat can also find effective test inputs that expose new concurrency bugs with higher probability (1.4\\texttimes{}~2.6\\texttimes{}), or reproduce known bugs more quickly (15\\texttimes{}) than state-of-art testing tools. More importantly, Snowcat is shown to be more efficient at reaching a desirable level of race coverage in the continuous setting, as the Linux kernel evolves from version to version. In total, Snowcat discovered 17 new concurrency bugs in Linux kernel 6.1, of which 13 are confirmed and 6 are fixed.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11483,
+    "year": 2023,
+    "title": "One Simple API Can Cause Hundreds of Bugs An Analysis of Refcounting Bugs in All Modern Linux Kernels",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613162",
+    "abstract": "Reference counting (refcounting) is widely used in Linux kernel. However, it requires manual operations on the related APIs. In practice, missing or improperly invoking these APIs has introduced too many bugs, known as refcounting bugs. To evaluate the severity of these bugs in history and in future, this paper presents a comprehensive study on them.In detail, we study 1,033 refcounting bugs in Linux kernels and present a set of characters and find that most of the bugs can finally cause severe security impacts. Besides, we analyze the root causes at implementation and developer's sides (i.e., human factors), which shows that the careless usages of find-like refcounting-embedded APIs can usually introduce hundreds of bugs. Finally, we propose a set of anti-patterns to summarize and to expose them. On the latest kernel releases, we totally found 351 new bugs and 240 of them have been confirmed. We believe this study can motivate more proactive researches on refcounting problems and improve the quality of Linux kernel.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11484,
+    "year": 2023,
+    "title": "Validating JIT Compilers via Compilation Space Exploration",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613140",
+    "abstract": "This paper introduces the novel concept of compilation space, which facilitates the thorough validation of just-in-time (JIT) compilers in modern language virtual machines (LVMs). The compilation space, even for a single program, consists of an extensive array of JIT compilation choices, which can be cross-validated for the correctness of JIT compilation. To thoroughly explore the compilation space in a lightweight and LVM-agnostic manner, we strategically mutate test programs with JIT-relevant, yet semantics-preserving code structures to trigger diverse JIT compilation choices. We realize our technique in Artemis, a tool for the Java virtual machine (JVM). Our evaluation has led to 85 bug reports for three widely used production JVMs, namely HotSpot, OpenJ9, and the Android Runtime. Among them, 53 have already been confirmed or fixed with many being critical. It is also worth mentioning that all the reported bugs concern JIT compilers, demonstrating the clear effectiveness and strong practicability of our technique. We expect that the generality and practicability of our approach will make it broadly applicable for understanding and validating JIT compilers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11485,
+    "year": 2023,
+    "title": "Automated Verification of an In-Production DNS Authoritative Engine",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613153",
+    "abstract": "This paper presents DNS-V, a verification framework for our in-production DNS authoritative engine, which is the core of our DNS service. The key idea for automated verification in general is based on the layered verification principle. However, we face the challenge that our in-production DNS authoritative engine lacks modularity, more specifically, as can be seen with unclean interfaces and poor data structure encapsulation. This makes the layered verification hard to apply. To address this challenge, we propose a summarization approach that performs full-path symbolic execution to accumulate all path conditions and computation effects, and then represents a module's behavior in an abstract form as a set of input-effect pairs. In addition, for portability to future iterated versions of our DNS authoritative engine, we identify common dependency library modules that remain stable across different versions, and carefully design their abstractions to make them amenable to automated reasoning. Our framework has been successful in identifying and preventing tens of critical bugs in different versions of our DNS authoritative engine from reaching production, with a porting effort of less than one person-week.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11486,
+    "year": 2023,
+    "title": "Acto: Automatic End-to-End Testing for Operation Correctness of Cloud System Management",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613161",
+    "abstract": "Cloud systems are increasingly being managed by operation programs termed operators, which automate tedious, human-based operations. Operators of modern management platforms like Kubernetes, Twine, and ECS implement declarative interfaces based on the state-reconciliation principle. An operation declares a desired system state and the operator automatically reconciles the system to that declared state.Operator correctness is critical, given the impacts on system operations---bugs in operator code put systems in un-desired or error states, with severe consequences. However, validating operator correctness is challenging due to the enormous system-state space and complex operation interface. A correct operator must not only satisfy correctness properties of its own code, but it must also maintain managed systems in desired states. Unfortunately, end-to-end testing of operators significantly falls short.We present Acto, the first automatic end-to-end testing technique for cloud system operators. Acto uses a state-centric approach to test an operator together with a managed system. Acto continuously instructs an operator to reconcile a system to different states and checks if the system successfully reaches those desired states. Acto models operations as state transitions and systematically realizes state-transition sequences to exercise supported operations in different scenarios. Acto's oracles automatically check whether a system's state is as desired. To date, Acto has helped find 56 serious new bugs (42 were confirmed and 30 have been fixed) in eleven Kubernetes operators with few false alarms.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11487,
+    "year": 2023,
+    "title": "Grove: a Separation-Logic Library for Verifying Distributed Systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613172",
+    "abstract": "Grove is a concurrent separation logic library for verifying distributed systems. Grove is the first to handle time-based leases, including their interaction with reconfiguration, crash recovery, thread-level concurrency, and unreliable networks. This paper uses Grove to verify several distributed system components written in Go, including vKV, a realistic distributed multi-threaded key-value store. vKV supports reconfiguration, primary/backup replication, and crash recovery, and uses leases to execute read-only requests on any replica. vKV achieves high performance (67--73\\% of Redis on a single core), scales with more cores and more backup replicas (achieving about 2\\texttimes{} the throughput when going from 1 to 3 servers), and can safely execute reads while reconfiguring.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11488,
+    "year": 2023,
+    "title": "FIFO queues are all you need for cache eviction",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613147",
+    "abstract": "As a cache eviction algorithm, FIFO has a lot of attractive properties, such as simplicity, speed, scalability, and flash-friendliness. The most prominent criticism of FIFO is its low efficiency (high miss ratio).In this work, we demonstrate a simple, scalable FIFO-based algorithm with three static queues (S3-FIFO). Evaluated on 6594 cache traces from 14 datasets, we show that S3-FIFO has lower miss ratios than state-of-the-art algorithms across traces. Moreover, S3-FIFO's efficiency is robust --- it has the lowest mean miss ratio on 10 of the 14 datasets. FIFO queues enable S3-FIFO to achieve good scalability with 6\\texttimes{} higher throughput compared to optimized LRU at 16 threads.Our insight is that most objects in skewed workloads will only be accessed once in a short window, so it is critical to evict them early (also called quick demotion). The key of S3-FIFO is a small FIFO queue that filters out most objects from entering the main cache, which provides a guaranteed demotion speed and high demotion precision.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11489,
+    "year": 2023,
+    "title": "Enabling High-Performance and Secure Userspace NVM File Systems with the Trio Architecture",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613171",
+    "abstract": "Userspace library file systems (LibFSes) promise to unleash the performance potential of non-volatile memory (NVM) by directly accessing it and enabling unprivileged applications to customize their LibFSes to their workloads. Unfortunately, such benefits pose a significant challenge to ensuring metadata integrity. Existing works either underutilize NVM's performance or forgo critical file system security guarantees.We present Trio, a userspace NVM file system architecture that resolves this inherent tension with a clean decoupling among file system design, access control, and metadata integrity enforcement. Our key insight is that other state (i.e., auxiliary state) in a file system can be regenerated from its \"ground truth\" state (i.e., core state). Thus, Trio explicitly defines the data structure of a single core state and shares it as common knowledge among its LibFSes and the trusted entity. Enabled by this, a LibFS can directly access NVM without involving the trusted entity and can be customized with its private auxiliary state. The trusted entity enforces metadata integrity by verifying the core state of a file when its write access is transferred from one LibFS to another. We design a generic POSIX-like file system called ArckFS and two customized file systems based on the Trio architecture. Our evaluation shows that ArckFS outperforms existing NVM file systems by 3.1\\texttimes{} to 17\\texttimes{} on LevelDB while the customized file systems further outperform ArckFS by 1.3\\texttimes{}.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11490,
+    "year": 2023,
+    "title": "Project Silica: Towards Sustainable Cloud Archival Storage in Glass",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613208",
+    "abstract": "Sustainable and cost-effective long-term storage remains an unsolved problem. The most widely used storage technologies today are magnetic (hard disk drives and tape). They use media that degrades over time and has a limited lifetime, which leads to inefficient, wasteful, and costly solutions for long-lived data. This paper presents Silica: the first cloud storage system for archival data underpinned by quartz glass, an extremely resilient media that allows data to be left in situ indefinitely. The hardware and software of Silica have been co-designed and co-optimized from the media up to the service level with sustainability as a primary objective. The design follows a cloud-first, data-driven methodology underpinned by principles derived from analyzing the archival workload of a large public cloud service. Silica can support a wide range of archival storage workloads and ushers in a new era of sustainable, cost-effective storage.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11491,
+    "year": 2023,
+    "title": "RackBlox: A Software-Defined Rack-Scale Storage System with Network-Storage Co-Design",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613170",
+    "abstract": "Software-defined networking (SDN) and software-defined flash (SDF) have been serving as the backbone of modern data centers. They are managed separately to handle I/O requests. At first glance, this is a reasonable design by following the rack-scale hierarchical design principles. However, it suffers from suboptimal end-to-end performance, due to the lack of coordination between SDN and SDF.In this paper, we co-design the SDN and SDF stack by redefining the functions of their control plane and data plane, and splitting up them within a new architecture named RackBlox. RackBlox decouples the storage management functions of flash-based solid-state drives (SSDs), and allow the SDN to track and manage the states of SSDs in a rack. Therefore, we can enable the state sharing between SDN and SDF, and facilitate global storage resource management. RackBlox has three major components: (1) coordinated I/O scheduling, in which it dynamically adjusts the I/O scheduling in the storage stack with the measured and predicted network latency, such that it can coordinate the effort of I/O scheduling across the network and storage stack for achieving predictable end-to-end performance; (2) coordinated garbage collection (GC), in which it will coordinate the GC activities across the SSDs in a rack to minimize their impact on incoming I/O requests; (3) rack-scale wear leveling, in which it enables global wear leveling among SSDs in a rack by periodically swapping data, for achieving improved device lifetime for the entire rack. We implement RackBlox using programmable SSDs and switch. Our experiments demonstrate that RackBlox can reduce the tail latency of I/O requests by up to 5.8\\texttimes{} over state-of-the-art rack-scale storage systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11492,
+    "year": 2023,
+    "title": "Cornflakes: Zero-Copy Serialization for Microsecond-Scale Networking",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613137",
+    "abstract": "Data serialization is critical for many datacenter applications, but the memory copies required to move application data into packets are costly. Recent zero-copy APIs expose NIC scatter-gather capabilities, raising the possibility of offloading this data movement to the NIC. However, as the memory coordination required for scatter-gather adds bookkeeping overhead, scatter-gather is not always useful. We describe Cornflakes, a hybrid serialization library stack that uses scatter-gather for serialization when it improves performance and falls back to memory copies otherwise. We have implemented Cornflakes within a UDP and TCP networking stack, across Mellanox and Intel NICs. On a Twitter cache trace, Cornflakes achieves 15.4\\% higher throughput than prior software approaches on a custom key-value store and 8.8\\% higher throughput than Redis serialization within Redis.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11493,
+    "year": 2023,
+    "title": "Understanding Silent Data Corruptions in a Large Production CPU Population",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613149",
+    "abstract": "Silent Data Corruption (SDC) in processors can lead to various application-level issues, such as incorrect calculations and even data loss. Since traditional techniques are not effective in detecting processor SDCs, it is very hard to address problems caused by SDCs. For the same reason, knowledge about SDCs in the wild is limited.In this paper, we conduct an extensive study on SDCs in a large production CPU population, encompassing over one million processors. In addition to collecting overall statistics, we perform a detailed study to understand 1) whether certain processor features are particularly vulnerable and their potential impacts on applications; 2) the reproducibility of SDCs and the triggering conditions (e.g., temperature) of those less reproducible SDCs; and 3) the challenges and opportunities to mitigate SDCs.Inspired by the above observations, we design an efficient SDC mitigation approach called Farron, which relies on prioritized testing to detect highly reproducible SDCs and temperature control to mitigate less reproducible SDCs. Our experimental results indicate that Farron can achieve lower overall overhead with better coverage of SDCs, compared to the baseline used in Alibaba Cloud.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11494,
+    "year": 2023,
+    "title": "XFaaS: Hyperscale and Low Cost Serverless Functions at Meta",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613155",
+    "abstract": "Function-as-a-Service (FaaS) has become a popular programming paradigm in Serverless Computing. As the responsibility of resource provisioning shifts from users to cloud providers, the ease of use of FaaS for users may come at the expense of extra hardware costs for cloud providers. Currently, there is no report on how FaaS platforms address this challenge and the level of hardware utilization they achieve.This paper presents the FaaS platform called XFaaS in Meta's hyperscale private cloud. XFaaS currently processes trillions of function calls per day on more than 100,000 servers. We describe a set of optimizations that help XFaaS achieve a daily average CPU utilization of 66\\%. Based on our anecdotal knowledge, this level of utilization might be several times higher than that of typical FaaS platforms.Specifically, to eliminate the cold start time of functions, XFaaS strives to approximate the effect that every worker can execute every function immediately. To handle load spikes without over-provisioning resources, XFaaS defers the execution of delay-tolerant functions to off-peak hours and globally dispatches function calls across datacenter regions. To prevent functions from overloading downstream services, XFaaS uses a TCP-like congestion-control mechanism to pace the execution of functions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11495,
+    "year": 2023,
+    "title": "Pushing Performance Isolation Boundaries into Application with pBox",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613159",
+    "abstract": "Modern applications are highly concurrent with a diverse mix of activities. One activity can adversely impact the performance of other activities in an application, leading to intra-application interference. Providing fine-grained performance isolation is desirable. Unfortunately, the extensive performance isolation solutions today focus on mitigating coarse-grained interference among multiple applications. They cannot well address intra-app interference, because such issues are typically not caused by contention on hardware resources.This paper presents an abstraction called pBox for developers to systematically achieve strong performance isolation within an application. Our insight is that intra-app interference involves application-level virtual resources, which are often invisible to the OS. We define pBox APIs that allow an application to inform the OS about a few general types of state events. Leveraging this information, we design algorithms that effectively predict imminent interference and carefully apply penalties to the noisy pBoxes to achieve a specified isolation goal. We apply pBox on five large applications. We evaluate the pBox-enhanced applications with 16 real-world performance interference cases. pBox successfully mitigates 15 cases, with an average of 86.3\\% reduction of the interference.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11496,
+    "year": 2023,
+    "title": "Flexible Advancement in Asynchronous BFT Consensus",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613164",
+    "abstract": "Byzantine fault tolerant (BFT) consensus protocols are becoming an appealing solution to blockchains. As most blockchain systems are deployed on Wide Area Networks (WANs), with each node acting on behalf of its entity, partially synchronous BFT protocols that rely on network synchrony to elect a single leader can be ill-suited. In contrast, asynchronous protocols have no such timing assumptions. Existing asynchronous protocols confront challenges in terms of both flexibility and performance.Towards enabling adaptability of asynchronous BFT protocols, we propose a new paradigm for bridging ordering and agreement components. Nodes in the new paradigm can propose and commit blocks in a more flexible manner, in order to suit various workloads in our production environment. To boost performance, we propose SuperMA, an efficient multi-valued agreement protocol. SuperMA in the best case can terminate in three message delays, achieving optimal latency. We further present MyTumbler, a timestamp-based state machine replication protocol. MyTumbler is enhanced by our new paradigm and uses SuperMA as its agreement component. Large-scale experiments on WAN cloud clusters demonstrate the viability of MyTumbler for a wide range of application scenarios.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11497,
+    "year": 2023,
+    "title": "QuePaxa: Escaping the tyranny of timeouts in consensus",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613150",
+    "abstract": "Leader-based consensus algorithms are fast and efficient under normal conditions, but lack robustness to adverse conditions due to their reliance on timeouts for liveness. We present QuePaxa, the first protocol offering state-of-the-art normal-case efficiency without depending on timeouts. QuePaxa uses a novel randomized asynchronous consensus core to tolerate adverse conditions such as denial-of-service (DoS) attacks, while a one-round-trip fast path preserves the normal-case efficiency of Multi-Paxos or Raft. By allowing simultaneous proposers without destructive interference, and using short hedging delays instead of conservative timeouts to limit redundant effort, QuePaxa permits rapid recovery after leader failure without risking costly view changes due to false timeouts. By treating leader choice and hedging delay as a multi-armed-bandit optimization, QuePaxa achieves responsiveness to prevalent conditions, and can choose the best leader even if the current one has not failed. Experiments with a prototype confirm that QuePaxa achieves normal-case LAN and WAN performance of 584k and 250k cmd/sec in throughput, respectively, comparable to Multi-Paxos. Under conditions such as DoS attacks, misconfigurations, or slow leaders that severely impact existing protocols, we find that QuePaxa remains live with median latency under 380ms in WAN experiments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11498,
+    "year": 2023,
+    "title": "Antipode: Enforcing Cross-Service Causal Consistency in Distributed Applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613176",
+    "abstract": "Modern internet-scale applications suffer from cross-service inconsistencies, arising because applications combine multiple independent and mutually-oblivious datastores. The end-to-end execution flow of each user request spans many different services and datastores along the way, implicitly establishing ordering dependencies among operations at different datastores. Readers should observe this ordering and, in today's systems, they do not.In this work, we present Antipode, a bolt-on technique for preventing cross-service consistency violations in distributed applications. It enforces cross-service consistency by propagating lineages of datastore operations both alongside end-to-end requests and within datastores. Antipode enables a novel cross-service causal consistency model, which extends existing causality models, and whose enforcement requires us to bring in a series of technical contributions to address fundamental semantic, scalability, and deployment challenges. We implemented Antipode as an application-level library, which can easily be integrated into existing applications with minimal effort, is incrementally deployable, and does not require global knowledge of all datastore operations. We apply Antipode to eight open-source and public cloud datastores and two microservice benchmark applications. Our evaluation demonstrates that Antipode is able to prevent cross-service inconsistencies with limited programming effort and less than 2\\% impact on end-user latency and throughput.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11499,
+    "year": 2023,
+    "title": "Halfmoon: Log-Optimal Fault-Tolerant Stateful Serverless Computing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613154",
+    "abstract": "Serverless computing separates function execution from state management. Simple retry-based fault tolerance might corrupt the shared state with duplicate updates. Existing solutions employ log-based fault tolerance to achieve exactlyonce semantics, where every single read or write to the external state is associated with a log for deterministic replay. However, logging is not a free lunch, which introduces considerable overhead to stateful serverless applications.We present Halfmoon, a serverless runtime system for fault-tolerant stateful serverless computing. Our key insight is that it is unnecessary to symmetrically log both reads and writes. Instead, it suffices to log either reads or writes, i.e., asymmetrically. We design two logging protocols that enforce exactly-once semantics while providing log-free reads and writes, which are suitable for read- and write-intensive workloads, respectively. We theoretically prove that the two protocols are log-optimal, i.e., no other protocols can achieve lower logging overhead than our protocols. We provide a criterion for choosing the right protocol for a given workload, and a pauseless switching mechanism to switch protocols for dynamic workloads. We implement a prototype of Halfmoon. Experiments show that Halfmoon achieves 20\\%--40\\% lower latency and 1.5--4.0\\texttimes{} lower logging overhead than the state-of-the-art solution Boki.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11500,
+    "year": 2023,
+    "title": "PIT: Optimization of Dynamic Sparse Deep Learning Models via Permutation Invariant Transformation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613139",
+    "abstract": "Dynamic sparsity, where the sparsity patterns are unknown until runtime, poses a significant challenge to deep learning. The state-of-the-art sparsity-aware deep learning solutions are restricted to pre-defined, static sparsity patterns due to significant overheads associated with preprocessing. Efficient execution of dynamic sparse computation often faces the misalignment between the GPU-friendly tile configuration for efficient execution and the sparsity-aware tile shape that minimizes coverage wastes (non-zero values in tensor).In this paper, we propose PIT, a deep-learning compiler for dynamic sparsity. PIT proposes a novel tiling mechanism that leverages Permutation Invariant Transformation (PIT), a mathematically proven property, to transform multiple sparsely located micro-tiles into a GPU-efficient dense tile without changing the computation results, thus achieving both high GPU utilization and low coverage waste. Given a model, PIT first finds feasible PIT rules for all its operators and generates efficient GPU kernels accordingly. At runtime, with the novel SRead and SWrite primitives, PIT rules can be executed extremely fast to support dynamic sparsity in an online manner. Extensive evaluation on diverse models shows that PIT can accelerate dynamic sparsity computation by up to 5.9x (average 2.43x) over state-of-the-art compilers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11501,
+    "year": 2023,
+    "title": "Bagpipe: Accelerating Deep Recommendation Model Training",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613142",
+    "abstract": "Deep learning based recommendation models (DLRM) are widely used in several business critical applications. Training such recommendation models efficiently is challenging because they contain billions of embedding-based parameters, leading to significant overheads from embedding access. By profiling existing systems for DLRM training, we observe that around 75\\% of the iteration time is spent on embedding access and model synchronization. Our key insight in this paper is that embedding access has a specific structure which can be used to accelerate training. We observe that embedding accesses are heavily skewed, with around 1\\% of embeddings representing more than 92\\% of total accesses. Further, we also observe that during offline training we can lookahead at future batches to determine which embeddings will be needed at what iteration in the future. Based on these insights, we develop Bagpipe, a system for training deep recommendation models that uses caching and prefetching to overlap remote embedding accesses with the computation. We design an Oracle Cacher, a new component that uses a lookahead algorithm to generate optimal cache update decisions while providing strong consistency guarantees against staleness. We also design a logically replicated, physically partitioned cache and show that our design can reduce synchronization overheads in a distributed setting. Finally, we propose a disaggregated system architecture and show that our design can enable low-overhead fault tolerance. Our experiments using three datasets and four models show that Bagpipe provides a speed up of up to 5.6x compared to state of the art baselines, while providing the same convergence and reproducibility guarantees as synchronous training.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11502,
+    "year": 2023,
+    "title": "GEMINI: Fast Failure Recovery in Distributed Training with In-Memory Checkpoints",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613145",
+    "abstract": "Large deep learning models have recently garnered substantial attention from both academia and industry. Nonetheless, frequent failures are observed during large model training due to large-scale resources involved and extended training time. Existing solutions have significant failure recovery costs due to the severe restriction imposed by the bandwidth of remote storage in which they store checkpoints.This paper presents Gemini, a distributed training system that enables fast failure recovery for large model training by checkpointing to CPU memory of the host machines with much larger aggregated bandwidth. However, two challenges prevent na\\\"{\\i}vely checkpointing to CPU memory. First, the availability of checkpoints in CPU memory cannot be guaranteed when failures occur. Second, since the communication traffic for training and checkpointing share the same network, checkpoint traffic can interfere with training traffic and harm training throughput. To address these two challenges, this paper proposes: 1) a provably near-optimal checkpoint placement strategy to maximize the probability of failure recovery from checkpoints in CPU memory; and 2) a checkpoint traffic scheduling algorithm to minimize, if not eliminate, the interference of checkpoint traffic on model training. Our evaluation shows that overall Gemini achieves a faster failure recovery by more than 13\\texttimes{} than existing solutions. Moreover, it achieves optimal checkpoint frequency, i.e., every iteration, and incurs no overhead on training throughput for large model training.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11503,
+    "year": 2023,
+    "title": "Oobleck: Resilient Distributed Training of Large Models Using Pipeline Templates",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613152",
+    "abstract": "Oobleck enables resilient distributed training of large DNN models with guaranteed fault tolerance. It takes a planning-execution co-design approach, where it first generates a set of heterogeneous pipeline templates and instantiates at least f + 1 logically equivalent pipeline replicas to tolerate any f simultaneous failures. During execution, it relies on already-replicated model states across the replicas to provide fast recovery. Oobleck provably guarantees that some combination of the initially created pipeline templates can be used to cover all available resources after f or fewer simultaneous failures, thereby avoiding resource idling at all times. Evaluation on large DNN models with billions of parameters shows that Oobleck provides consistently high throughput, and it outperforms state-of-the-art fault tolerance solutions like Bamboo and Varuna by up to 13.9\\texttimes{}.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11504,
+    "year": 2023,
+    "title": "Private Web Search with Tiptoe",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613134",
+    "abstract": "Tiptoe is a private web search engine that allows clients to search over hundreds of millions of documents, while revealing no information about their search query to the search engine's servers. Tiptoe's privacy guarantee is based on cryptography alone; it does not require hardware enclaves or non-colluding servers. Tiptoe uses semantic embeddings to reduce the problem of private full-text search to private nearest-neighbor search. Then, Tiptoe implements private nearest-neighbor search with a new, high-throughput protocol based on linearly homomorphic encryption. Running on a 45-server cluster, Tiptoe can privately search over 360 million web pages with 145 core-seconds of server compute, 56.9 MiB of client-server communication (74\\% of which occurs before the client enters its search query), and 2.7 seconds of end-to-end latency. Tiptoe's search works best on conceptual queries (\"knee pain\") and less well on exact string matches (\"123 Main Street, New York\"). On the MS MARCO search-quality benchmark, Tiptoe ranks the best-matching result in position 7.7 on average. This is worse than a state-of-the-art, non-private neural search algorithm (average rank: 2.3), but is close to the classical tf-idf algorithm (average rank: 6.7). Finally, Tiptoe is extensible: it also supports private text-to-image search and, with minor modifications, it can search over audio, code, and more.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11505,
+    "year": 2023,
+    "title": "Siloz: Leveraging DRAM Isolation Domains to Prevent Inter-VM Rowhammer",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613143",
+    "abstract": "Today's cloud DRAM lacks strong isolation primitives, highlighted by Rowhammer bit flips. Rowhammer poses an increasing threat to cloud security/reliability, given (1) DRAM activation rates in commodity and malicious workloads already exceed Rowhammer thresholds, and (2) thresholds are decreasing in newer DRAM. Deployed hardware mitigations remain vulnerable, turning cloud providers toward software defenses. However, existing defenses incur high performance or memory overhead or contain significant protection gaps.Accordingly, we introduce Siloz, a hypervisor that uses subarray groups as DRAM isolation domains to enable efficient protection against inter-VM Rowhammer. Siloz exploits the insights that (a) Rowhammer can only flip bits in DRAM rows located in the same subarray---not across subarrays---and (b) VMs can be isolated to groups of subarrays without sacrificing bank-level parallelism, a key component of DRAM performance. Siloz thus prevents inter-VM bit flips by placing each VM's and the host's data into private subarray groups. To additionally ensure that a VM cannot escape its provisioned subarray group(s), Siloz provides integrity protection for extended page tables (EPTs). We show that Siloz's implementation has negligible effect on average performance across various cloud workloads, SPEC CPU 2017, and PARSEC 3.0 (within ±0.5\\% of baseline Linux/KVM).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11506,
+    "year": 2023,
+    "title": "Edna: Disguising and Revealing User Data in Web Applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613146",
+    "abstract": "Edna is a system that helps web applications allow users to remove their data without permanently losing their accounts, anonymize their old data, and selectively dissociate personal data from public profiles. Edna helps developers support these features while maintaining application functionality and referential integrity via disguising and revealing transformations. Disguising selectively renders user data inaccessible via encryption, and revealing enables the user to restore their data to the application. Edna's techniques allow transformations to compose in any order, e.g., deleting a previously anonymized user's account, or restoring an account back to an anonymized state.Experiments with Edna that add disguising and revealing transformations to three real-world applications show that Edna enables new privacy features in existing applications with low developer effort, is simpler than alternative approaches, and adds limited overhead to applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11507,
+    "year": 2023,
+    "title": "Arboretum: A Planner for Large-Scale Federated Analytics with Differential Privacy",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3624566",
+    "abstract": "Federated analytics is a way to answer queries over sensitive data that is spread across multiple parties, without sharing the data or collecting it in a single place. Prior work has developed solutions that can scale to large deployments with millions of devices but, due to the distributed nature of federated analytics, these solutions can support only a limited class of queries - typically various forms of numerical queries, which can be answered with lightweight cryptographic primitives. Supporting richer queries, such as categorical queries, requires heavier cryptography, whose cost can quickly exceed even the resources of a powerful data center.In this paper, we present Arboretum, a new federated analytics system that can efficiently answer a broader range of queries, including categorical queries, in deployments with millions or even billions of participants. Arboretum achieves this by 1) automatically optimizing query plans to find highly efficient ways to answer each query, and by 2) including the participant devices in the computation. Our evaluation shows that Arboretum can match the cost of earlier systems that have been hand-optimized for particular kinds of queries, and that it can additionally support a range of new queries for which no efficient solution exists today.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11508,
+    "year": 2023,
+    "title": "Achieving Microsecond-Scale Tail Latency Efficiently with Approximate Optimal Scheduling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613136",
+    "abstract": "Datacenter applications expect microsecond-scale service times and tightly bound tail latency, with future workloads expected to be even more demanding. To address this challenge, state-of-the-art runtimes employ theoretically optimal scheduling policies, namely a single request queue and strict preemption.We present Concord, a runtime that demonstrates how forgoing this design---while still closely approximating it---enables a significant improvement in application throughput while maintaining tight tail-latency SLOs. We evaluate Concord on microbenchmarks and Google's LevelDB key-value store; compared to the state of the art, Concord improves application throughput by up to 52\\% on microbenchmarks and by up to 83\\% on LevelDB, while meeting the same tail-latency SLOs. Unlike the state of the art, Concord is application agnostic and does not rely on the nonstandard use of hardware, which makes it immediately de-ployable in the public cloud. Concord is publicly available at https://dslab.epfl.ch/research/concord.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11509,
+    "year": 2023,
+    "title": "Blueprint: A Toolchain for Highly-Reconfigurable Microservice Applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613138",
+    "abstract": "Researchers and practitioners care deeply about the performance and correctness of microservice applications. To investigate problematic application behavior and prototype potential improvements, researchers and practitioners experiment with different designs, implementations, and deployment configurations. We argue that a key requirement for microservice experimentation is the ability to rapidly reconfigure applications and to iteratively Configure, Build, and Deploy (CBD) new variants of an application that alter or improve its design. We focus on three core experimentation use-cases: (1) updating the design to use different components, libraries, and mechanisms; (2) identifying and reproducing problematic behaviors caused by different designs; and (3) prototyping and evaluating potential solutions to such behaviors. We present Blueprint, a microservice development toolchain that enables rapid CBD. With a few lines of code, users can easily reconfigure an application's design; Blueprint then generates a fully-functioning variant of the application under the new design. Blueprint is open-source and extensible; it supports a wide variety of reconfigurable design dimensions. We have ported all major microservice benchmarks to it. Our evaluation demonstrates how Blueprint simplifies experimentation use-cases with orders-of-magnitude less code change.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11510,
+    "year": 2023,
+    "title": "A Cloud-Scale Characterization of Remote Procedure Calls",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613156",
+    "abstract": "The global scale and challenging requirements of modern cloud applications have led to the development of complex, widely distributed, service-oriented applications. One enabler of such applications is the remote procedure call (RPC), which provides location-independent communication and hides the myriad of cloud communication complexities and requirements within the RPC stack. Understanding RPCs is thus one key to understanding the behavior of cloud applications. While there have been numerous studies of RPCs in distributed systems, as well as attempts to optimize RPC overheads with both software and hardware, there is still a lack of knowledge about the characteristics of RPCs \"in the wild\" in the modern cloud environment.To address this gap, we present, to the best of our knowledge, the first large-scale fleet-wide study of RPCs. Our study is conducted at Google, where we measured the infrastructure supporting Google's user-facing, billion-user web services, such as Google Search, Gmail, Maps, and YouTube, and the information and data management systems that support them. To carry out the study, we examined over 10,000 different RPC methods sampled from over one billion traces, along with statistics collected every 30 minutes over a period of nearly two years. Among other things, we consider the volume, throughput and growth rate of RPCs in the datacenter, the latency of RPCs and their components (the \"RPC latency tax\"), and the structure of RPC call chains. Our analysis shows that the characteristics, scope and complexity of RPCs at hyperscale differ significantly from the assumptions made in prior research. Overall, our work provides new insights into RPC usage and characteristics at the largest scale and motivates further research on optimizing the diverse behavior of this crucial communication mechanism.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11511,
+    "year": 2023,
+    "title": "PVM: Efficient Shadow Paging for Deploying Secure Containers in Cloud-native Environment",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613158",
+    "abstract": "In cloud-native environments, containers are often deployed within lightweight virtual machines (VMs) to ensure strong security isolation and privacy protection. With the growing demand for customized cloud services, third-party vendors are turning to infrastructure-as-a-service (IaaS) cloud providers to build their own cloud-native platforms, necessitating the need to run a VM or a guest that hosts containers inside another VM instance leased from an IaaS cloud. State-of-the-art nested virtualization in the x86 architecture relies heavily on the host hypervisor to expose hardware virtualization support to the guest hypervisor, not only complicating cloud management but also raising concerns about an increased attack surface at the host hypervisor.This paper presents the design and implementation of PVM, a high-performance guest hypervisor for KVM that is transparent to the host hypervisor and assumes no hardware virtualization support. PVM leverages two key designs: 1) a minimal shared memory region between the guest and guest hypervisor to facilitate state transition between different privilege levels and 2) an efficient shadow page table design to reduce the cost of memory virtualization. PVM has been adopted by Alibaba Cloud for hosting tens of thousands of secure containers on a daily basis. Our experiments demonstrate that PVM significantly outperforms current nested virtualization in KVM for memory virtualization, particularly for concurrent workloads, while maintaining comparable performance in CPU and I/O virtualization.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11512,
+    "year": 2023,
+    "title": "Falcon: Fast OLTP Engine for Persistent Cache and Non-Volatile Memory",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613141",
+    "abstract": "Non-volatile memory(NVM) has the properties of both byte addressable and persistence, which provides new opportunities for building on-line transaction processing (OLTP) engines. Recently, a new feature called eADR puts CPU cache also in the persistence domain. Existing OLTP engines are based on volatile cache and now have the opportunity to improve performance further and reduce programming complexity with persistent cache.This paper studies the impact of persistent cache on OLTP engines and revisits the existing designs. We have observed that naively removing the flush instructions can trigger the write amplification because of the granularity mismatch between the cache line and NVM access. We propose Falcon, a new OLTP engine for eADR-enabled NVM. Falcon is based on the in-place update architecture. The small log window design in Falcon avoids the NVM writes while logging. The selective data flush design reduces the data flush and the write amplification while flushing data. Evaluations show that under TPC-C workloads, Falcon achieves 1.21\\texttimes{} ~ 1.35\\texttimes{} improvement over the state-of-the-art OLTP engine.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11513,
+    "year": 2023,
+    "title": "SPFresh: Incremental In-Place Update for Billion-Scale Vector Search",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613166",
+    "abstract": "Approximate Nearest Neighbor Search (ANNS) on high dimensional vector data is now widely used in various applications, including information retrieval, question answering, and recommendation. As the amount of vector data grows continuously, it becomes important to support updates to vector index, the enabling technique that allows for efficient and accurate ANNS on vectors.Because of the curse of high dimensionality, it is often costly to identify the right neighbors of a new vector, a necessary process for index update. To amortize update costs, existing systems maintain a secondary index to accumulate updates, which are merged with the main index by globally rebuilding the entire index periodically. However, this approach has high fluctuations of search latency and accuracy, not to mention that it requires substantial resources and is extremely time-consuming to rebuild.We introduce SPFresh, a system that supports in-place vector updates. At the heart of SPFresh is LIRE, a lightweight incremental rebalancing protocol to split vector partitions and reassign vectors in the nearby partitions to adapt to data distribution shifts. LIRE achieves low-overhead vector updates by only reassigning vectors at the boundary between partitions, where in a high-quality vector index the amount of such vectors is deemed small. With LIRE, SPFresh provides superior query latency and accuracy to solutions based on global rebuild, with only 1\\% of DRAM and less than 10\\% cores needed at the peak compared to the state-of-the-art, in a billion scale disk-based vector index with a 1\\% of daily vector update rate.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11514,
+    "year": 2023,
+    "title": "gSampler: General and Efficient GPU-based Graph Sampling for Graph Learning",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613168",
+    "abstract": "Graph sampling prepares training samples for graph learning and can dominate the training time. Due to the increasing algorithm diversity and complexity, existing sampling frameworks are insufficient in the generality of expression and the efficiency of execution. To close this gap, we conduct a comprehensive study on 15 popular graph sampling algorithms to motivate the design of gSampler, a general and efficient GPU-based graph sampling framework. gSampler models graph sampling using a general 4-step Extract-Compute-Select-Finalize (ECSF) programming model, proposes a set of matrix-centric APIs that allow to easily express complex graph sampling algorithms, and incorporates a data-flow intermediate representation (IR) that translates high-level API codes for efficient GPU execution. We demonstrate that implementing graph sampling algorithms with gSampler is easy and intuitive. We also conduct extensive experiments with 7 algorithms, 4 graph datasets, and 2 hardware configurations. The results show that gSampler introduces sampling speedups of 1.14--32.7\\texttimes{} and an average speedup of 6.54\\texttimes{}, compared to state-of-the-art GPU-based graph sampling systems such as DGL, which translates into an overall time reduction of over 40\\% for graph learning. gSampler is open-source at https://tinyurl.com/29twthd4.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11515,
+    "year": 2023,
+    "title": "Turbo: Effective Caching in Differentially-Private Databases",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613174",
+    "abstract": "Differentially-private (DP) databases allow for privacy-preserving analytics over sensitive datasets or data streams. In these systems, user privacy is a limited resource that must be conserved with each query. We propose Turbo, a novel, state-of-the-art caching layer for linear query workloads over DP databases. Turbo builds upon private multiplicative weights (PMW), a DP mechanism that is powerful in theory but ineffective in practice, and transforms it into a highly-effective caching mechanism, PMW-Bypass, that uses prior query results obtained through an external DP mechanism to train a PMW to answer arbitrary future linear queries accurately and \"for free\" from a privacy perspective. Our experiments on public Covid and CitiBike datasets show that Turbo with PMW-Bypass conserves 1.7 -- 15.9\\texttimes{} more budget compared to vanilla PMW and simpler cache designs, a significant improvement. Moreover, Turbo provides support for range query workloads, such as timeseries or streams, where opportunities exist to further conserve privacy budget through DP parallel composition and warm-starting of PMW state. Our work provides a theoretical foundation and general system design for effective caching in DP databases.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11516,
+    "year": 2023,
+    "title": "Paella: Low-latency Model Serving with Software-defined GPU Scheduling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613163",
+    "abstract": "Model serving systems play a critical role in multiplexing machine learning inference jobs across shared GPU infrastructure. These systems have traditionally sat at a high level of abstraction---receiving jobs from clients through a narrow API and relying on black-box GPU scheduling mechanisms when dispatching them. Fundamental limitations in the built-in GPU hardware scheduler, in particular, can lead to inefficiency when executing concurrent jobs. The current abstraction level also incurs system overheads that are similarly most significant when the GPU is heavily shared.In this paper, we argue for co-designing the model compiler, local clients, and the scheduler to bypass the built-in GPU scheduler and enable software control of kernel execution order. Doing so enables the use of arbitrary scheduling algorithms and reduces system overheads throughout the critical path of inference.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11517,
+    "year": 2023,
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613165",
+    "abstract": "High throughput serving of large language models (LLMs) requires batching sufficiently many requests at a time. However, existing systems struggle because the key-value cache (KV cache) memory for each request is huge and grows and shrinks dynamically. When managed inefficiently, this memory can be significantly wasted by fragmentation and redundant duplication, limiting the batch size. To address this problem, we propose PagedAttention, an attention algorithm inspired by the classical virtual memory and paging techniques in operating systems. On top of it, we build vLLM, an LLM serving system that achieves (1) near-zero waste in KV cache memory and (2) flexible sharing of KV cache within and across requests to further reduce memory usage. Our evaluations show that vLLM improves the throughput of popular LLMs by 2--4\\texttimes{} with the same level of latency compared to the state-of-the-art systems, such as FasterTransformer and Orca. The improvement is more pronounced with longer sequences, larger models, and more complex decoding algorithms. vLLM's source code is publicly available at https://github.com/vllm-project/vllm.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11518,
+    "year": 2023,
+    "title": "UGACHE: A Unified GPU Cache for Embedding-based Deep Learning",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613169",
+    "abstract": "This paper presents UGache, a unified multi-GPU cache system for embedding-based deep learning (EmbDL). UGache is primarily motivated by the unique characteristics of EmbDL applications, namely read-only, batched, skewed, and predictable embedding accesses. UGache introduces a novel factored extraction mechanism that avoids bandwidth congestion to fully exploit high-speed cross-GPU interconnects (e.g., NVLink and NVSwitch). Based on a new hotness metric, UGache also provides a near-optimal cache policy that balances local and remote access to minimize the extraction time. We have implemented UGache and integrated it into two representative frameworks, TensorFlow and PyTorch. Evaluation using two typical types of EmbDL applications, namely graph neural network training and deep learning recommendation inference, shows that UGache outperforms state-of-the-art replication and partition designs by an average of 1.93\\texttimes{} and 1.63\\texttimes{} (up to 5.25\\texttimes{} and 3.45\\texttimes{}), respectively.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11519,
+    "year": 2023,
+    "title": "Sia: Heterogeneity-aware, goodput-optimized ML-cluster scheduling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613175",
+    "abstract": "The Sia scheduler efficiently assigns heterogeneous deep learning (DL) cluster resources to elastic resource-adaptive jobs. Although some recent schedulers address one aspect or another (e.g., heterogeneity or resource-adaptivity), none addresses all and most scale poorly to large clusters and/or heavy workloads even without the full complexity of the combined scheduling problem. Sia introduces a new scheduling formulation that can scale to the search-space sizes and intentionally match jobs and their configurations to GPU types and counts, while adapting to changes in cluster load and job mix over time. Sia also introduces a low-profiling-overhead approach to bootstrapping (for each new job) throughput models used to evaluate possible resource assignments, and it is the first cluster scheduler to support elastic scaling of hybrid parallel jobs.Extensive evaluations show that Sia outperforms state-of-the-art schedulers. For example, even on relatively small 44- to 64-GPU clusters with a mix of three GPU types, Sia reduces average job completion time (JCT) by 30--93\\%, 99th percentile JCT and makespan by 28--95\\%, and GPU hours used by 12--55\\% for workloads derived from 3 real-world environments. Additional experiments demonstrate that Sia scales to at least 2000-GPU clusters, provides improved fairness, and is not over-sensitive to scheduler parameter settings.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11520,
+    "year": 2023,
+    "title": "Partial Failure Resilient Memory Management System for (CXL-based) Distributed Shared Memory",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613135",
+    "abstract": "The efficiency of distributed shared memory (DSM) has been greatly improved by recent hardware technologies. But, the difficulty of distributed memory management can still be a major obstacle to the democratization of DSM, especially when a partial failure of the participating clients (e.g., due to crashed processes or machines) should be tolerated.In this paper, we present CXL-SHM, an automatic distributed memory management system based on reference counting. The reference count maintenance in CXL-SHM is implemented with a special era-based non-blocking algorithm. Thus, there are no blocking synchronization, memory leak, double free, and wild pointer problems, even if some participating clients unexpectedly fail without freeing their possessed memory references. We evaluated our system on real CXL hardware with both micro-benchmarks and end-to-end applications, which demonstrate the efficiency of CXL-SHM and the simplicity/flexibility of using CXL-SHM to build efficient distributed applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11521,
+    "year": 2023,
+    "title": "Ditto: An Elastic and Adaptive Memory-Disaggregated Caching System",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613144",
+    "abstract": "In-memory caching systems are fundamental building blocks in cloud services. However, due to the coupled CPU and memory on monolithic servers, existing caching systems cannot elastically adjust resources in a resource-efficient and agile manner. To achieve better elasticity, we propose to port in-memory caching systems to the disaggregated memory (DM) architecture, where compute and memory resources are decoupled and can be allocated flexibly. However, constructing an elastic caching system on DM is challenging since accessing cached objects with CPU-bypass remote memory accesses hinders the execution of caching algorithms. Moreover, the elastic changes of compute and memory resources on DM affect the access patterns of cached data, compromising the hit rates of caching algorithms. We design Ditto, the first caching system on DM, to address these challenges. Ditto first proposes a client-centric caching framework to efficiently execute various caching algorithms in the compute pool of DM, relying only on remote memory accesses. Then, Ditto employs a distributed adaptive caching scheme that adaptively switches to the best-fit caching algorithm in real-time based on the performance of multiple caching algorithms to improve cache hit rates. Our experiments show that Ditto effectively adapts to the changing resources on DM and outperforms the state-of-the-art caching systems by up to 3.6\\texttimes{} in real-world workloads and 9\\texttimes{} in YCSB benchmarks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11522,
+    "year": 2023,
+    "title": "Mira: A Program-Behavior-Guided Far Memory System",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3600006.3613157",
+    "abstract": "Far memory, where memory accesses are non-local, has become more popular in recent years as a solution to expand memory size and avoid memory stranding. Prior far memory systems have taken two approaches: transparently swap memory pages between local and far memory, and utilizing new programming models to explicitly move fine-grained data between local and far memory. The former requires no program changes but comes with performance penalty. The latter has potentially better performance but requires significant program changes.We propose a new far-memory approach by automatically inferring program behavior and efficiently utilizing it to improve application performance. With this idea, we build Mira. Mira utilizes program analysis results, profiled execution information, and system environments together to guide code compilation and system configurations for far memory. Our evaluation shows that Mira outperforms prior swap-based and programming-model-based systems by up to 18 times.",
+    "status": "notchecked"
+  }
+]

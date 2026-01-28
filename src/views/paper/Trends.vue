@@ -1,7 +1,7 @@
 <template>
-    <div class="card">
-        <h1 class="mt-0">{{ t('trends.title') }}</h1>
-        <Chart type="line" :data="chartData" :options="chartOptions" class="min-h-96"/>
+    <div class="card" v-for="category in categories" :key="category">
+        <h1 class="mt-0">{{ t('trends.title') }} - {{ categoryNameMap[category.replace('-', '').replace(' ','').toLowerCase()] }}</h1>
+            <Chart type="line" :data="chartDataByCategory[category]" :options="chartOptions" class="min-h-96"/>
     </div>
 </template>
 
@@ -20,7 +20,13 @@ usePageTitle('menu.trends');
 const loading = ref(false);
 const loaded = ref(false);
 const paperStatisRef = ref(paperStatis);
-const chartData = ref(null);
+const chartDataByCategory = ref({});
+const categories = ref([]);
+const categoryNameMap = computed(()=>({
+    'toptier': t('abstract.topTier'),
+    'softwareengineering': t('abstract.softwareEngineering'),
+    'system': t('abstract.system')
+}));
 const chartOptions = ref(null);
 
 // 方法
@@ -32,14 +38,54 @@ const viewBlocks = (id) => {
 
 const setChartData = () => {
     const documentStyle = getComputedStyle(document.documentElement);
+    // 按category分组
+    const groupedData = {};
+    
     paperStatisRef.value.overview.forEach(element => {
-        element.borderColor = documentStyle.getPropertyValue(element.borderColor);
+        const category = element.category;
+        if (!groupedData[category]) {
+            groupedData[category] = {
+                datasets: [],
+                years: new Set()
+            };
+        }
+        
+        // 收集所有年份
+        Object.keys(element.map_data).forEach(year => groupedData[category].years.add(year));
+        
+        groupedData[category].datasets.push({
+            label: element.label,
+            map_data: element.map_data,
+            fill: element.fill,
+            borderColor: documentStyle.getPropertyValue(element.borderColor),
+            tension: element.tension
+        });
     });
     
-    return {
-        labels: paperStatisRef.value.years,
-        datasets: paperStatisRef.value.overview,
-    };
+    // 为每个category创建chartData
+    const chartDataObj = {};
+    
+    Object.keys(groupedData).forEach(category => {
+        const sortedYears = Array.from(groupedData[category].years).sort();
+        
+        // 为每个dataset转换map_data为data数组
+        const datasets = groupedData[category].datasets.map(dataset => {
+            const dataValues = sortedYears.map(year => dataset.map_data[year] || null);
+            return {
+                label: dataset.label,
+                data: dataValues,
+                fill: dataset.fill,
+                borderColor: dataset.borderColor,
+                tension: dataset.tension
+            };
+        });
+        chartDataObj[category] = {
+            labels: sortedYears,
+            datasets: datasets
+        };
+    });
+    
+    return { chartDataObj, categories: Object.keys(groupedData) };
 };
 
 const setChartOptions = () => {
@@ -86,8 +132,9 @@ const onFiltering = (event) => {
 
 // 生命周期
 onMounted(() => {
-    chartData.value = setChartData();
-    chartOptions.value = setChartOptions();
+    const { chartDataObj, categories: cats } = setChartData();
+    chartDataByCategory.value = chartDataObj;
+    categories.value = cats;
 });
 
 // 暴露给模板的数据和方法
@@ -97,7 +144,8 @@ defineExpose({
     loading,
     loaded,
     paperStatis: paperStatisRef,
-    chartData,
+    chartDataByCategory,
+    categories,
     chartOptions
 });
 </script>
@@ -108,5 +156,8 @@ a {
 }
 h1 {
     @apply font-semibold text-xl;
+}
+h2 {
+    @apply font-medium;
 }
 </style>

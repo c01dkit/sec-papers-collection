@@ -14,6 +14,16 @@ from lxml import etree
 load_dotenv()
 
 @dataclass
+class AcceptanceTrend:
+    category: str = '#'
+    label: str = '#'
+    # data: list = field(default_factory=list)
+    map_data: dict = field(default_factory=dict)
+    fill: bool = False
+    borderColor: str = '--p-emerald-400'
+    tension: float = 0.4
+
+@dataclass
 class Statistics:
     total: int = 0
     overview: list = field(default_factory=list)
@@ -28,6 +38,7 @@ class PaperInfo:
     id: int = -1
     year: int = -1
     title: str = '#'
+    category: str = '#'
     publication: str = '#'
     paper: str = '#'
     abstract: str = '#'
@@ -163,6 +174,8 @@ def fetch_one_paper_in_config(config):
             # first priority: use json file as details
             official_file = one_site_config.get('official_file',None)
             if official_file is not None:
+                if isinstance(official_file, list):
+                    official_file = official_file[0].split('-')[0] + '.json'
                 json_details = official_file[:official_file.index('.')] + '.json'
                 print(f'Use official data for {publication} {one_site_config["year"]}')
                 with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
@@ -173,6 +186,7 @@ def fetch_one_paper_in_config(config):
                             id=paper_id,
                             year=one_site_config['year'],
                             title=paper_detail['title'],
+                            category=publication_config.get('category', '#'),
                             publication=paper_detail.get('publication', publication_config['name']),
                             paper=paper_detail.get('paper', '#'),
                             abstract=paper_detail.get('abstract', '#'),
@@ -214,6 +228,7 @@ def fetch_one_paper_in_config(config):
                             year=one_site_config['year'],
                             title=t,
                             publication=publication_config['name'],
+                            category=publication_config.get('category','#'),
                             paper='#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
                             abstract='#' if abstracts is None else abstracts[i],
                             status=one_site_config.get('status','notchecked')
@@ -228,9 +243,8 @@ def export_data_json(project_base):
     statistics = Statistics()
 
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
-                 '--p-amber-400','--p-teal-400','--p-blue-400',
-                 '--p-purple-400','--p-zinc-400']
-    publication_growth = {}
+                 '--p-amber-400','--p-blue-400','--p-purple-400',]
+    publication_acceptance_trend = {}
     for paper_info in fetch_one_paper_in_config(config):
         publication = paper_info.publication
         year = str(paper_info.year)
@@ -264,18 +278,23 @@ def export_data_json(project_base):
             quick_view.append(no_abs_one_paper_info)
 
         # Overview
-        publication_growth.setdefault(publication,{})
-        publication_growth[publication].setdefault(year,0)
-        publication_growth[publication][year] += 1
+        publication_acceptance_trend.setdefault(paper_info.category,{})
 
-    for publication, growth in publication_growth.items():
-        statistics.overview.append({
-            'label': publication,
-            'data': [i for i in dict(sorted(growth.items(), key=lambda x: x[0])).values()],
-            'fill': False,
-            'borderColor': color_set.pop(),
-            'tension': 0.4,
-        })
+        if publication not in publication_acceptance_trend[paper_info.category]:
+            publication_acceptance_trend[paper_info.category][publication] = AcceptanceTrend(
+                category=paper_info.category,
+                label=publication,
+            )
+
+        publication_acceptance_trend[paper_info.category][publication].map_data.setdefault(year, 0)
+        publication_acceptance_trend[paper_info.category][publication].map_data[year] += 1  
+    for category, publication_names in publication_acceptance_trend.items():
+        sub_color_set = color_set.copy()
+        for publication_name, trend in publication_names.items():
+            # trend.data = [i for i in dict(sorted(trend.map_data.items(), key=lambda x: x[0])).values()]
+            trend.borderColor = sub_color_set.pop()
+            statistics.overview.append(asdict(trend))
+           
     statistics.byYear = dict(sorted(statistics.byYear.items(), key=lambda x: int(x[0])))
     statistics.years = list(statistics.byYear.keys())
 
@@ -303,28 +322,39 @@ def prepare_official_data():
     If the official data file ends with ".json", it will not be processed.
     """
 
-    def parse_csv_file(csv_file_name:str, __publication:str):
+    def parse_csv_file(csv_file_names:list[str], __publication:str):
         from analyzers.csv_analyzer import CSV_SOURCE
         csv = CSV_SOURCE(__publication)
-        json_file_name = csv_file_name.replace('.csv', '.json')
-        check = csv.analyze_csv(os.path.join('official_cache',csv_file_name))
-        if check:
+        if '-' in csv_file_names[0]:
+            json_file_name = csv_file_names[0].split('-')[0] + '.json'
+        else:
+            json_file_name = csv_file_names[0].replace('.csv', '.json')
+        all_results = []
+        for csv_file_name in csv_file_names:
+            check = csv.analyze_csv(os.path.join('official_cache',csv_file_name))
+            if check:
+                all_results += csv.dump()
+        if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
-                json.dump(csv.dump(),f,ensure_ascii=False)
-            return len(csv.result)
-        return 0
+                json.dump(all_results,f,ensure_ascii=False)
+        return len(all_results)
 
-    def parse_bib_file(bib_file_name:str, __publication:str):
+    def parse_bib_file(bib_file_names:list[str], __publication:str):
         from analyzers.bib_analyzer import BIB_OBJ
         bib = BIB_OBJ(__publication)
-        json_file_name = bib_file_name.replace('.bib', '.json')
-        check = bib.analyze_bib(os.path.join('official_cache',bib_file_name))
-        if check:
+        if '-' in bib_file_names[0]:
+            json_file_name = bib_file_names[0].split('-')[0] + '.json'
+        else:
+            json_file_name = bib_file_names[0].replace('.bib', '.json')
+        all_results = []
+        for bib_file_name in bib_file_names:
+            check = bib.analyze_bib(os.path.join('official_cache',bib_file_name))
+            if check:
+                all_results += bib.dump()
+        if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
-                json.dump(bib.dump(),f,ensure_ascii=False)
-            return len(bib.result)
-        return 0
-
+                json.dump(all_results,f,ensure_ascii=False)
+        return len(all_results)
     config = get_config('data.yml')
     for publication in config:
         publication_config = config[publication]
@@ -332,15 +362,23 @@ def prepare_official_data():
             official_file = one_site_config.get('official_file',None)
             if official_file is None: continue
             # parsed data will be cached in .json file
-            json_file = official_file[:official_file.index('.')] + '.json'
+            if isinstance(official_file, str):
+                json_file = official_file[:official_file.index('.')] + '.json'
+                official_files = [official_file]
+            elif isinstance(official_file, list):
+                json_file = official_file[0][:official_file[0].index('-')] + '.json'
+                official_files = official_file
+            else:
+                raise ValueError('official_file must be str or list of str')
             if not os.path.exists(os.path.join('official_cache',json_file)):
-                if official_file.endswith('csv'):
-                    paper_num = parse_csv_file(official_file, publication_config['name'])
-                elif official_file.endswith('bib'):
-                    paper_num = parse_bib_file(official_file, publication_config['name'])
-                else:
-                    paper_num = 0
-                print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
+                for official_file in official_files:
+                    if official_file.endswith('csv'):
+                        paper_num = parse_csv_file(official_files, publication_config['name'])
+                    elif official_file.endswith('bib'):
+                        paper_num = parse_bib_file(official_files, publication_config['name'])
+                    else:
+                        paper_num = 0
+                    print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
 
 
 
@@ -383,6 +421,8 @@ def titles_in_file(file_path: str) -> set:
             try:
                 record = json.loads(line)
             except json.JSONDecodeError:
+                continue
+            if record['model_used'] != 'gemini-3-pro': # DEBUG: only consider gemini-3-pro results
                 continue
             title_set.add(record.get('title_en'))
     return title_set

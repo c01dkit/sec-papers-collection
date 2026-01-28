@@ -1,0 +1,542 @@
+[
+  {
+    "id": 11523,
+    "year": 2021,
+    "title": "Basil: Breaking up BFT with ACID (transactions)",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483552",
+    "abstract": "This paper presents Basil, the first transactional, leaderless Byzantine Fault Tolerant key-value store. Basil leverages ACID transactions to scalably implement the abstraction of a trusted shared log in the presence of Byzantine actors. Unlike traditional BFT approaches, Basil executes non-conflicting operations in parallel and commits transactions in a single round-trip during fault-free executions. Basil improves throughput over traditional BFT systems by four to five times, and is only four times slower than TAPIR, a non-Byzantine replicated system. Basil's novel recovery mechanism further minimizes the impact of failures: with 30\\% Byzantine clients, throughput drops by less than 25\\% in the worst-case.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11524,
+    "year": 2021,
+    "title": "Bidl: A High-throughput, Low-latency Permissioned Blockchain Framework for Datacenter Networks",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483574",
+    "abstract": "A permissioned blockchain framework typically runs an efficient Byzantine consensus protocol and is attractive to deploy fast trading applications among a large number of mutually untrusted participants (e.g., companies). Unfortunately, all existing permissioned blockchain frameworks adopt sequential workflows for invoking the consensus protocol and executing applications' transactions, making the performance of these applications much lower than deploying them in traditional systems (e.g., in-datacenter stock exchange).We propose Bidl, the first permissioned blockchain framework highly optimized for datacenter networks. We leverage the network ordering in such networks to create a shepherded parallel workflow, which carries a sequencer to parallelize the consensus protocol and transaction execution speculatively. However, the presence of malicious participants (e.g., a malicious sequencer) can easily perturb the parallel workflow to greatly degrade Bidl's performance. To achieve stable high performance, Bidl efficiently shepherds all participants by detecting their misbehaviors, and performs denylist-based view changes to replace or deny malicious participants. Compared with three fast permissioned blockchain frameworks, Bidl's parallel workflow reduces applications' latency by up to 72.7\\% and improves their throughput by up to 4.3x in the presence of malicious participants. Bidl is suitable to be integrated with traditional stock exchange systems. Bidl's code is released on github.com/hku-systems/bidl.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11525,
+    "year": 2021,
+    "title": "Kauri: Scalable BFT Consensus with Pipelined Tree-Based Dissemination and Aggregation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483584",
+    "abstract": "With the growing commercial interest in blockchains, permissioned implementations have received increasing attention. Unfortunately, the BFT consensus algorithms that are the backbone of most of these blockchains scale poorly and offer limited throughput. Many state-of-the-art algorithms require a single leader process to receive and validate votes from a quorum of processes and then broadcast the result, which is inherently non-scalable. Recent approaches avoid this bottleneck by using dissemination/aggregation trees to propagate values and collect and validate votes. However, the use of trees increases the round latency, which ultimately limits the throughput for deeper trees. In this paper we propose Kauri, a BFT communication abstraction that can sustain high throughput as the system size grows, leveraging a novel pipelining technique to perform scalable dissemination and aggregation on trees. Our evaluation shows that Kauri outperforms the throughput of state-of-the-art permissioned blockchain protocols, such as HotStuff, by up to 28x. Interestingly, in many scenarios, the parallelization provided by Kauri can also decrease the latency.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11526,
+    "year": 2021,
+    "title": "iGUARD: In-GPU Advanced Race Detection",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483545",
+    "abstract": "Newer use cases of GPU (Graphics Processing Unit) computing, e.g., graph analytics, look less like traditional bulk-synchronous GPU programs. To cater to the needs of emerging applications with semantically richer and finer grain sharing patterns, GPU vendors have been introducing advanced programming features, e.g., scoped synchronization and independent thread scheduling. While these features can speed up many applications and enable newer use cases, they can also introduce subtle synchronization errors if used incorrectly.We present iGUARD, a runtime software tool to detect races in GPU programs due to incorrect use of such advanced features. A key need for a race detector to be practical is to accurately detect races at reasonable overheads. We thus perform the race detection on the GPU itself without relying on the CPU. The GPU's parallelism helps speed up race detection by 15x over a closely related prior work. Importantly, iGUARD detects newer types of races that were hitherto not possible for any known tool. It detected previously unknown subtle bugs in popular GPU programs, including three in NVIDIA supported commercial libraries. In total, iGUARD detected 57 races in 21 GPU programs, without false positives.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11527,
+    "year": 2021,
+    "title": "Snowboard: Finding Kernel Concurrency Bugs through Systematic Inter-thread Communication Analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483549",
+    "abstract": "Kernel concurrency bugs are challenging to find because they depend on very specific thread interleavings and test inputs. While separately exploring kernel thread interleavings or test inputs has been closely examined, jointly exploring interleavings and test inputs has received little attention, in part due to the resulting vast search space. Using precious, limited testing resources to explore this search space and execute just the right concurrent tests in the proper order is critical.This paper proposes Snowboard a testing framework that generates and executes concurrent tests by intelligently exploring thread interleavings and test inputs jointly. The design of Snowboard is based on a concept called potential memory communication (PMC), a guess about pairs of tests that, when executed concurrently, are likely to perform memory accesses to shared addresses, which in turn may trigger concurrency bugs. To identify PMCs, Snowboard runs tests sequentially from a fixed initial kernel state, collecting their memory accesses. It then pairs up tests that write and read the same region into candidate concurrent tests. It executes those tests using the associated PMC as a scheduling hint to focus interleaving search only on those schedules that directly affect the relevant memory accesses. By clustering candidate tests on various features of their PMCs, Snowboard avoids testing similar behaviors, which would be inefficient. Finally, by executing tests from small clusters first, it prioritizes uncommon suspicious behaviors that may have received less scrutiny.Snowboard discovered 14 new concurrency bugs in Linux kernels 5.3.10 and 5.12-rc3, of which 12 have been confirmed by developers. Six of these bugs cause kernel panics and filesystem errors, and at least two have existed in the kernel for many years, showing that this approach can uncover hard-to-find, critical bugs. Furthermore, we show that covering as many distinct pairs of uncommon read/write instructions as possible is the test-prioritization strategy with the highest bug yield for a given test-time budget.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11528,
+    "year": 2021,
+    "title": "Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483570",
+    "abstract": "Rust is a promising system programming language that guarantees memory safety at compile time. To support diverse requirements for system software such as accessing low-level hardware, Rust allows programmers to perform operations that are not protected by the Rust compiler with the unsafe keyword. However, Rust's safety guarantee relies on the soundness of all unsafe code in the program as well as the standard and external libraries, making it hard to reason about their correctness. In other words, a single bug in any unsafe code breaks the whole program's safety guarantee.In this paper, we introduce RUDRA, a program that analyzes and reports potential memory safety bugs in unsafe Rust. Since a bug in unsafe code threatens the foundation of Rust's safety guarantee, our primary focus is to scale our analysis to all the packages hosted in the Rust package registry. RUDRA can scan the entire registry (43k packages) in 6.5 hours and identified 264 previously unknown memory safety bugs---leading to 76 CVEs and 112 RustSec advisories being filed, which represent 51.6\\% of memory safety bugs reported to RustSec since 2016. The new bugs RUDRA found are non-trivial, subtle, and often made by Rust experts: two in the Rust standard library, one in the official futures library, and one in the Rust compiler. RUDRA is open-source, and part of its algorithm is integrated into the official Rust linter.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11529,
+    "year": 2021,
+    "title": "Witcher: Systematic Crash Consistency Testing for Non-Volatile Memory Key-Value Stores",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483556",
+    "abstract": "The advent of non-volatile main memory (NVM) enables the development of crash-consistent software without paying storage stack overhead. However, building a correct crash-consistent program remains very challenging in the presence of a volatile cache. This paper presents Witcher, a systematic crash consistency testing framework, which detects both correctness and performance bugs in NVM-based persistent key-value stores and underlying NVM libraries, without test space explosion and without manual annotations or crash consistency checkers. To detect correctness bugs, Witcher automatically infers likely correctness conditions by analyzing data and control dependencies between NVM accesses. Then Witcher validates if any violation of them is a true crash consistency bug by checking output equivalence between executions with and without a crash. Moreover, Witcher detects performance bugs by analyzing the execution traces. Evaluation with 20 NVM key-value stores based on Intel's PMDK library shows that Witcher discovers 47 (36 new) correctness consistency bugs and 158 (113 new) performance bugs in both applications and PMDK.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11530,
+    "year": 2021,
+    "title": "Understanding and Detecting Software Upgrade Failures in Distributed Systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483577",
+    "abstract": "Upgrade is one of the most disruptive yet unavoidable maintenance tasks that undermine the availability of distributed systems. Any failure during an upgrade is catastrophic, as it further extends the service disruption caused by the upgrade. The increasing adoption of continuous deployment further increases the frequency and burden of the upgrade task. In practice, upgrade failures have caused many of today's high-profile cloud outages. Unfortunately, there has been little understanding of their characteristics.This paper presents an in-depth study of 123 real-world upgrade failures that were previously reported by users in 8 widely used distributed systems, shedding lights on the severity, root causes, exposing conditions, and fix strategies of upgrade failures. Guided by our study, we have designed a testing framework DUPTester that revealed 20 previously unknown upgrade failures in 4 distributed systems, and applied a series of static checkers DUPChecker that discovered over 800 cross-version data-format incompatibilities that can lead to upgrade failures. DUPChecker has been requested by HBase developers to be integrated into their toolchain.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11531,
+    "year": 2021,
+    "title": "Crash Consistent Non-Volatile Memory Express",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483592",
+    "abstract": "This paper presents crash consistent Non-Volatile Memory Express (ccNVMe), a novel extension of the NVMe that defines how host software communicates with the non-volatile memory (e.g., solid-state drive) across a PCI Express bus with both crash consistency and performance efficiency. Existing storage systems pay a huge tax on crash consistency, and thus can not fully exploit the multi-queue parallelism and low latency of the NVMe interface. ccNVMe alleviates this major bottleneck by coupling the crash consistency to the data dissemination. This new idea allows the storage system to achieve crash consistency by taking the free rides of the data dissemination mechanism of NVMe, using only two lightweight memory-mapped I/Os (MMIO), unlike traditional systems that use complex update protocol and heavyweight block I/Os. ccNVMe introduces transaction-aware MMIO and doorbell to reduce the PCIe traffic as well as to provide atomicity. We present how to build a high-performance and crash-consistent file system namely MQFS atop ccNVMe. We experimentally show that MQFS increases the IOPS of RocksDB by 36\\% and 28\\% compared to a state-of-the-art file system and Ext4 without journaling, respectively.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11532,
+    "year": 2021,
+    "title": "Cuckoo Trie: Exploiting Memory-Level Parallelism for Efficient DRAM Indexing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483551",
+    "abstract": "We present the Cuckoo Trie, a fast, memory-efficient ordered index structure. The Cuckoo Trie is designed to have memory-level parallelism---which a modern out-of-order processor can exploit to execute DRAM accesses in parallel--- without sacrificing memory efficiency. The Cuckoo Trie thus breaks a fundamental performance barrier faced by current indexes, whose bottleneck is a series of dependent pointer-chasing DRAM accesses---e.g., traversing a search tree path--- which the processor cannot parallelize. Our evaluation shows that the Cuckoo Trie outperforms state-of-the-art-indexes by up to 20\\%-360\\% on a variety of datasets and workloads, typically with a smaller or comparable memory footprint.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11533,
+    "year": 2021,
+    "title": "Regular Sequential Serializability and Regular Sequential Consistency",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483566",
+    "abstract": "Strictly serializable (linearizable) services appear to execute transactions (operations) sequentially, in an order consistent with real time. This restricts a transaction's (operation's) possible return values and in turn, simplifies application programming. In exchange, strictly serializable (linearizable) services perform worse than those with weaker consistency. But switching to such services can break applications.This work introduces two new consistency models to ease this trade-off: regular sequential serializability (RSS) and regular sequential consistency (RSC). They are just as strong for applications: we prove any application invariant that holds when using a strictly serializable (linearizable) service also holds when using an RSS (RSC) service. Yet they relax the constraints on services---they allow new, better-performing designs. To demonstrate this, we design, implement, and evaluate variants of two systems, Spanner and Gryff, relaxing their consistency to RSS and RSC, respectively. The new variants achieve better read-only transaction and read tail latency than their counterparts.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11534,
+    "year": 2021,
+    "title": "Caracal: Contention Management with Deterministic Concurrency Control",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483591",
+    "abstract": "Deterministic databases offer several benefits: they ensure serializable execution while avoiding concurrency-control related aborts, and they scale well in distributed environments. Today, most deterministic database designs use partitioning to scale up and avoid contention. However, partitioning requires significant programmer effort, leads to poor performance under skewed workloads, and incurs unnecessary overheads in certain uncontended workloads.We present the design of Caracal, a novel shared-memory, deterministic database that performs well under both skew and contention. Our deterministic scheme batches transactions in epochs and executes the transactions in an epoch in a predetermined order. Our scheme enables reducing contention by batching concurrency control operations. It also allows analyzing the transactions in the epoch to determine contended keys accurately. Certain transactions can then be split into independent contended and uncontended pieces and run deterministically and in parallel, further reducing contention. Based on these ideas, we present two novel optimizations, batch append and split-on-demand, for managing contention. With these optimizations, Caracal scales well and outperforms existing deterministic schemes in most workloads by 1.9x to 9.7x.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11535,
+    "year": 2021,
+    "title": "The Demikernel Datapath OS Architecture for Microsecond-scale Datacenter Systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483569",
+    "abstract": "Datacenter systems and I/O devices now run at single-digit microsecond latencies, requiring ns-scale operating systems. Traditional kernel-based operating systems impose an unaffordable overhead, so recent kernel-bypass OSes [73] and libraries [23] eliminate the OS kernel from the I/O datapath. However, none of these systems offer a general-purpose datapath OS replacement that meet the needs of μs-scale systems.' AB@This paper proposes Demikernel, a flexible datapath OS and architecture designed for heterogenous kernel-bypass devices and μs-scale datacenter systems. We build two prototype Demikernel OSes and show that minimal effort is needed to port existing μs-scale systems. Once ported, Demikernel lets applications run across heterogenous kernel-bypass devices with ns-scale overheads and no code changes.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11536,
+    "year": 2021,
+    "title": "Birds of a Feather Flock Together: Scaling RDMA RPCs with Flock",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483576",
+    "abstract": "RDMA-capable networks are gaining traction with datacenter deployments due to their high throughput, low latency, CPU efficiency, and advanced features, such as remote memory operations. However, efficiently utilizing RDMA capability in a common setting of high fan-in, fan-out asymmetric network topology is challenging. For instance, using RDMA programming features comes at the cost of connection scalability, which does not scale with increasing cluster size. To address that, several works forgo some RDMA features by only focusing on conventional RPC APIs.In this work, we strive to exploit the full capability of RDMA, while scaling the number of connections regardless of the cluster size. We present Flock, a communication framework for RDMA networks that uses hardware provided reliable connection. Using a partially shared model, Flock departs from the conventional RDMA design by enabling connection sharing among threads, which provides significant performance improvements contrary to the widely held belief that connection sharing deteriorates performance. At its core, Flock uses a connection handle abstraction for connection multiplexing; a new coalescing-based synchronization approach for efficient network utilization; and a load-control mechanism for connections with symbiotic send-recv scheduling, which reduces the synchronization overheads associated with connection sharing along with ensuring fair utilization of network connections. We demonstrate the benefits for a distributed transaction processing system and an in-memory index, where it outperforms other RPC systems by up to 88\\% and 50\\%, respectively, with significant reductions in median and tail latency.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11537,
+    "year": 2021,
+    "title": "PRISM: Rethinking the RDMA Interface for Distributed Systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483587",
+    "abstract": "Remote Direct Memory Access (RDMA) has been used to accelerate a variety of distributed systems, by providing low-latency, CPU-bypassing access to a remote host's memory. However, most of the distributed protocols used in these systems cannot easily be expressed in terms of the simple memory READs and WRITEs provided by RDMA. As a result, designers face a choice between introducing additional protocol complexity (e.g., additional round trips) or forgoing the benefits of RDMA entirely.This paper argues that an extension to the RDMA interface can resolve this dilemma. We introduce the PRISM interface, which adds four new primitives: indirection, allocation, enhanced compare-and-swap, and operation chaining. These increase the expressivity of the RDMA interface, while still being implementable using the same underlying hardware features. We show their utility by designing three new applications using PRISM primitives, that require little to no server-side CPU involvement: (1) PRISM-KV, a key-value store; (2) PRISM-RS, a replicated block store; and (3) PRISM-TX, a distributed transaction protocol. Using a software-based implementation of the PRISM primitives, we show that these systems outperform prior RDMA-based equivalents.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11538,
+    "year": 2021,
+    "title": "Kangaroo: Caching Billions of Tiny Objects on Flash",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483568",
+    "abstract": "Many social-media and IoT services have very large working sets consisting of billions of tiny (≈100 B) objects. Large, flash-based caches are important to serving these working sets at acceptable monetary cost. However, caching tiny objects on flash is challenging for two reasons: (i) SSDs can read/write data only in multi-KB \"pages\" that are much larger than a single object, stressing the limited number of times flash can be written; and (ii) very few bits per cached object can be kept in DRAM without losing flash's cost advantage. Unfortunately, existing flash-cache designs fall short of addressing these challenges: write-optimized designs require too much DRAM, and DRAM-optimized designs require too many flash writes.We present Kangaroo, a new flash-cache design that optimizes both DRAM usage and flash writes to maximize cache performance while minimizing cost. Kangaroo combines a large, set-associative cache with a small, log-structured cache. The set-associative cache requires minimal DRAM, while the log-structured cache minimizes Kangaroo's flash writes. Experiments using traces from Facebook and Twitter show that Kangaroo achieves DRAM usage close to the best prior DRAM-optimized design, flash writes close to the best prior write-optimized design, and miss ratios better than both. Kangaroo's design is Pareto-optimal across a range of allowed write rates, DRAM sizes, and flash sizes, reducing misses by 29\\% over the state of the art. These results are corroborated with a test deployment of Kangaroo in a production flash cache at Facebook.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11539,
+    "year": 2021,
+    "title": "IODA: A Host/Device Co-Design for Strong Predictability Contract on Modern Flash Storage",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483573",
+    "abstract": "Predictable latency on flash storage is a long-pursuit goal, yet, unpredictability stays due to the unavoidable disturbance from many well-known SSD internal activities. To combat this issue, the recent NVMe IO Determinism (IOD) interface advocates host-level controls to SSD internal management tasks. While promising, challenges remain on how to exploit it for truly predictable performance.We present IODA, an I/O deterministic flash array design built on top of small but powerful extensions to the IOD interface for easy deployment. IODA exploits data redundancy in the context of IOD for a strong latency predictability contract. In IODA, SSDs are expected to quickly fail an I/O on purpose to allow predictable I/Os through proactive data reconstruction. In the case of concurrent internal operations, IODA introduces busy remaining time exposure and predictable-latency-window formulation to guarantee predictable data reconstructions. Overall, IODA only adds 5 new fields to the NVMe interface and a small modification in the flash firmware, while keeping most of the complexity in the host OS. Our evaluation shows that IODA improves the 95-99.99th latencies by up to 75x. IODA is also the nearest to the ideal, no disturbance case compared to 7 state-of-the-art preemption, suspension, GC coordination, partitioning, tiny-tail flash controller, prediction, and proactive approaches.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11540,
+    "year": 2021,
+    "title": "FragPicker: A New Defragmentation Tool for Modern Storage Devices",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483593",
+    "abstract": "File fragmentation has been widely studied for several decades because it negatively influences various I/O activities. To eliminate fragmentation, most defragmentation tools migrate the entire content of files into a new area. Unfortunately, such methods inevitably generate a large amount of I/Os in the process of data migration. For this reason, the conventional tools (i) cause defragmentation to be time-consuming, (ii) significantly degrade the performance of co-running applications, and (iii) even curtail the lifetime of modern storage devices. Consequently, the current usage of defragmentation is very limited although it is necessary.Our extensive experiments discover that, unlike HDDs, the performance degradation of modern storage devices incurred by fragmentation mainly stems from request splitting, where a single I/O request is split into multiple ones. With this insight, we propose a new defragmentation tool, FragPicker, to minimize the amount of I/Os induced by defragmentation, while significantly improving I/O performance. FragPicker analyzes the I/O activities of applications and migrates only those pieces of data that are crucial to the I/O performance, in order to mitigate the aforementioned problems of existing tools. Experimental results demonstrate that FragPicker efficiently reduces the amount of I/Os for defragmentation while achieving a similar level of performance improvement to the conventional defragmentation schemes.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11541,
+    "year": 2021,
+    "title": "dSpace: Composable Abstractions for Smart Spaces",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483559",
+    "abstract": "We present dSpace, an open and modular programming framework that aims to simplify and accelerate the development of smart space applications. To achieve this, dSpace provides two key building blocks~digivices that implement device control and actuation and digidata that process IoT data to generate events and insights. In addition, dSpace introduces novel abstractions - mount, yield, and pipe - via which digivices and digidata can be composed into higher-level abstractions. We apply dSpace to home automation systems and show how developers can easily and flexibly leverage these abstractions to support a wide range of home automation scenarios. Finally, we show how the dSpace concepts can be realized using a microservices-based architecture and implement dSpace as a Kubernetes-compatible framework.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11542,
+    "year": 2021,
+    "title": "Random Walks on Huge Graphs at Cache Efficiency",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483575",
+    "abstract": "Data-intensive applications dominated by random accesses to large working sets fail to utilize the computing power of modern processors. Graph random walk, an indispensable workhorse for many important graph processing and learning applications, is one prominent case of such applications. Existing graph random walk systems are currently unable to match the GPU-side node embedding training speed.This work reveals that existing approaches fail to effectively utilize the modern CPU memory hierarchy, due to the widely held assumption that the inherent randomness in random walks and the skewed nature of graphs render most memory accesses random. We demonstrate that there is actually plenty of spatial and temporal locality to harvest, by careful partitioning, rearranging, and batching of operations. The resulting system, FlashMob, improves both cache and memory bandwidth utilization by making memory accesses more sequential and regular. We also found that a classical combinatorial optimization problem (and its exact pseudo-polynomial solution) can be applied to complex decision making, for accurate yet efficient data/task partitioning. Our comprehensive experiments over diverse graphs show that our system achieves an order of magnitude performance improvement over the fastest existing system. It processes a 58GB real graph at higher per-step speed than the existing system on a 600KB toy graph fitting in the L2 cache.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11543,
+    "year": 2021,
+    "title": "Mycelium: Large-Scale Distributed Graph Queries with Differential Privacy",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483585",
+    "abstract": "This paper introduces Mycelium, the first system to process differentially private queries over large graphs that are distributed across millions of user devices. Such graphs occur, for instance, when tracking the spread of diseases or malware. Today, the only practical way to query such graphs is to upload them to a central aggregator, which requires a great deal of trust from users and rules out certain types of studies entirely. With Mycelium, users' private data never leaves their personal devices unencrypted, and each user receives strong privacy guarantees. Mycelium does require the help of a central aggregator with access to a data center, but the aggregator merely facilitates the computation by providing bandwidth and computation power; it never learns the topology of the graph or the underlying data. Mycelium accomplishes this with a combination of homomorphic encryption, a verifiable secret redistribution scheme, and a mix network based on telescoping circuits. Our evaluation shows that Mycelium can answer a range of different questions from the medical literature with millions of devices.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11544,
+    "year": 2021,
+    "title": "HEALER: Relation Learning Guided Kernel Fuzzing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483547",
+    "abstract": "Modern operating system kernels are too complex to be free of bugs. Fuzzing is a promising approach for vulnerability detection and has been applied to kernel testing. However, existing work does not consider the influence relations between system calls when generating and mutating inputs, resulting in difficulties when trying to reach into the kernel's deeper logic effectively.In this paper, we propose HEALER, a kernel fuzzer that improves fuzzing's effectiveness by utilizing system call relation learning. HEALER learns the influence relations between system calls by dynamically analyzing minimized test cases. Then, HEALER utilizes the learned relations to guide input generation and mutation, which improves the quality of test cases and the effectiveness of fuzzing. We implemented HEALER and evaluated its performance on recent versions of the Linux kernel. Compared to state-of-the-art kernel fuzzers such as Syzkaller and Moonshine, HEALER improves branch coverage by 28\\% and 21\\%, while achieving a speedup of 2.2x and 1.8x, respectively. In addition, HEALER detected 218 vulnerabilities, 33 of which are previously unknown and have been confirmed by the corresponding kernel maintainers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11545,
+    "year": 2021,
+    "title": "Gradient Compression Supercharged High-Performance Data Parallel DNN Training",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483553",
+    "abstract": "Gradient compression is a promising approach to alleviating the communication bottleneck in data parallel deep neural network (DNN) training by significantly reducing the data volume of gradients for synchronization. While gradient compression is being actively adopted by the industry (e.g., Facebook and AWS), our study reveals that there are two critical but often overlooked challenges: 1) inefficient coordination between compression and communication during gradient synchronization incurs substantial overheads, and 2) developing, optimizing, and integrating gradient compression algorithms into DNN systems imposes heavy burdens on DNN practitioners, and ad-hoc compression implementations often yield surprisingly poor system performance.In this paper, we first propose a compression-aware gradient synchronization architecture, CaSync, which relies on a flexible composition of basic computing and communication primitives. It is general and compatible with any gradient compression algorithms and gradient synchronization strategies, and enables high-performance computation-communication pipelining. We further introduce a gradient compression toolkit, CompLL, to enable efficient development and automated integration of on-GPU compression algorithms into DNN systems with little programming burden. Lastly, we build a compression-aware DNN training framework HiPress with CaSync and CompLL. HiPress is open-sourced and runs on mainstream DNN systems such as MXNet, TensorFlow, and PyTorch. Evaluation via a 16-node cluster with 128 NVIDIA V100 GPUs and 100Gbps network shows that HiPress improves the training speed over current compression-enabled systems (e.g., BytePS-onebit and Ring-DGC) by 17.2\\%-69.5\\% across six popular DNN models.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11546,
+    "year": 2021,
+    "title": "Generating Complex, Realistic Cloud Workloads using Recurrent Neural Networks",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483590",
+    "abstract": "Decision-making in large-scale compute clouds relies on accurate workload modeling. Unfortunately, prior models have proven insufficient in capturing the complex correlations in real cloud workloads. We introduce the first model of large-scale cloud workloads that captures long-range inter-job correlations in arrival rates, resource requirements, and lifetimes. Our approach models workload as a three-stage generative process, with separate models for: (1) the number of batch arrivals over time, (2) the sequence of requested resources, and (3) the sequence of lifetimes. Our lifetime model is a novel extension of recent work in neural survival prediction. It represents and exploits inter-job correlations using a recurrent neural network. We validate our approach by showing it is able to accurately generate the production virtual machine workload of two real-world cloud providers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11547,
+    "year": 2021,
+    "title": "HeMem: Scalable Tiered Memory Management for Big Data Applications and Real NVM",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483550",
+    "abstract": "High-capacity non-volatile memory (NVM) is a new main memory tier. Tiered DRAM+NVM servers increase total memory capacity by up to 8x, but can diminish memory bandwidth by up to 7x and inflate latency by up to 63\\% if not managed well. We study existing hardware and software tiered memory management systems on the recently available Intel Optane DC NVM with big data applications and find that no existing system maximizes application performance on real NVM.Based on our findings, we present HeMem, a tiered main memory management system designed from scratch for commercially available NVM and the big data applications that use it. HeMem manages tiered memory asynchronously, batching and amortizing memory access tracking, migration, and associated TLB synchronization overheads. HeMem monitors application memory use by sampling memory access via CPU events, rather than page tables. This allows HeMem to scale to terabytes of memory, keeping small and ephemeral data structures in fast memory, and allocating scarce, asymmetric NVM bandwidth according to access patterns. Finally, HeMem is flexible by placing per-application memory management policy at user-level. On a system with Intel Optane DC NVM, HeMem outperforms hardware, OS, and PL-based tiered memory management, providing up to 50\\% runtime reduction for the GAP graph processing benchmark, 13\\% higher throughput for TPC-C on the Silo in-memory database, 16\\% lower tail-latency under performance isolation for a key-value store, and up to 10x less NVM wear than the next best solution, without application modification.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11548,
+    "year": 2021,
+    "title": "J-NVM: Off-heap Persistent Objects in Java",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483579",
+    "abstract": "This paper presents J-NVM, a framework to access efficiently Non-Volatile Main Memory (NVMM) in Java. J-NVM offers a fully-fledged interface to persist plain Java objects using failure-atomic blocks. This interface relies internally on proxy objects that intermediate direct off-heap access to NVMM. The framework also provides a library of highly-optimized persistent data types that resist reboots and power failures. We evaluate J-NVM by implementing a persistent backend for the Infinispan data store. Our experimental results, obtained with a TPC-B like benchmark and YCSB, show that J-NVM is consistently faster than other approaches at accessing NVMM in Java.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11549,
+    "year": 2021,
+    "title": "PACTree: A High Performance Persistent Range Index Using PAC Guidelines",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483589",
+    "abstract": "Non-Volatile Memory (NVM), which provides relatively fast and byte-addressable persistence, is now commercially available. However, we cannot equate a real NVM with a slow DRAM, as it is much more complicated than we expect. In this work, we revisit and analyze both NVM and NVM-specific persistent memory indexes. We find that there is still a lot of room for improvement if we consider NVM hardware, its software stack, persistent index design, and concurrency control. Based on our analysis, we propose Packed Asynchronous Concurrency (PAC) guidelines for designing high-performance persistent index structures. The key idea behind the guidelines is to 1) access NVM hardware in a packed manner to minimize its bandwidth utilization and 2) exploit asynchronous concurrency control to decouple the long NVM latency from the critical path of the index.We develop PACTree, a high-performance persistent range index following the PAC guidelines. PACTree is a hybrid index that employs a trie index for its internal nodes and B+-tree-like leaf nodes. The trie index structure packs partial keys in internal nodes. Moreover, we decouple the trie index and B+-tree-like leaf nodes. The decoupling allows us to prevent blocking concurrent accesses by updating internal nodes asynchronously. Our evaluation shows that PACTree outperforms state-of-the-art persistent range indexes by 7x in performance and 20x in 99.99 percentile tail latency.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11550,
+    "year": 2021,
+    "title": "Exploiting Nil-Externality for Fast Replicated Storage",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483543",
+    "abstract": "Do some storage interfaces enable higher performance than others? Can one identify and exploit such interfaces to realize high performance in storage systems? This paper answers these questions in the affirmative by identifying nil-externality, a property of storage interfaces. A nil-externalizing (nilext) interface may modify state within a storage system but does not externalize its effects or system state immediately to the outside world. As a result, a storage system can apply nilext operations lazily, improving performance.In this paper, we take advantage of nilext interfaces to build high-performance replicated storage. We implement Skyros, a nilext-aware replication protocol that offers high performance by deferring ordering and executing operations until their effects are externalized. We show that exploiting nil-externality offers significant benefit: for many workloads, Skyros provides higher performance than standard consensus-based replication. For example, Skyros offers 3x lower latency while providing the same high throughput offered by throughput-optimized Paxos.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11551,
+    "year": 2021,
+    "title": "Geometric Partitioning: Explore the Boundary of Optimal Erasure Code Repair",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483558",
+    "abstract": "Erasure coding is widely used in building reliable distributed object storage systems despite its high repair cost. Regenerating codes are a special class of erasure codes, which are proposed to minimize the amount of data needed for repair. In this paper, we assess how optimal repair can help to improve object storage systems, and we find that regenerating codes present unique challenges: regenerating codes repair at the granularity of chunks instead of bytes, and the choice of chunk size leads to the tension between streamed degraded read time and repair throughput.To address this dilemma, we propose Geometric Partitioning, which partitions each object into a series of chunks with their sizes in a geometric sequence to obtain the benefits of both large and small chunk sizes. Geometric Partitioning helps regenerating codes to achieve 1.85x recovery performance of RS code while keeping degraded read time low.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11552,
+    "year": 2021,
+    "title": "Rabia: Simplifying State-Machine Replication Through Randomization",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483582",
+    "abstract": "We introduce Rabia, a simple and high performance framework for implementing state-machine replication (SMR) within a datacenter. The main innovation of Rabia is in using randomization to simplify the design. Rabia provides the following two features: (i) It does not need any fail-over protocol and supports trivial auxiliary protocols like log compaction, snapshotting, and reconfiguration, components that are often considered the most challenging when developing SMR systems; and (ii) It provides high performance, up to 1.5x higher throughput than the closest competitor (i.e., EPaxos) in a favorable setup (same availability zone with three replicas) and is comparable with a larger number of replicas or when deployed in multiple availability zones.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11553,
+    "year": 2021,
+    "title": "MIND: In-Network Memory Management for Disaggregated Data Centers",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483561",
+    "abstract": "Memory disaggregation promises transparent elasticity, high resource utilization and hardware heterogeneity in data centers by physically separating memory and compute into network-attached resource \"blades\". However, existing designs achieve performance at the cost of resource elasticity, restricting memory sharing to a single compute blade to avoid costly memory coherence traffic over the network.In this work, we show that emerging programmable network switches can enable an efficient shared memory abstraction for disaggregated architectures by placing memory management logic in the network fabric. We find that centralizing memory management in the network permits bandwidth and latency-efficient realization of in-network cache coherence protocols, while programmable switch ASICs support other memory management logic at line-rate. We realize these insights into MIND1, an in-network memory management unit for rack-scale disaggregation. MIND enables transparent resource elasticity while matching the performance of prior memory disaggregation proposals for real-world workloads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11554,
+    "year": 2021,
+    "title": "RAS: Continuously Optimized Region-Wide Datacenter Resource Allocation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483578",
+    "abstract": "Capacity reservation is a common offering in public clouds and on-premise infrastructure. However, no prior work provides capacity reservation with SLO guarantees that takes into account random and correlated hardware failures, datacenter maintenance, and heterogeneous hardware. In this paper, we describe how Facebook's region-scale Resource Allowance System (RAS) addresses these issues and provides guaranteed capacity. RAS uses a capacity abstraction called reservation to represent a set of servers dynamically assigned to a logical cluster. We take a two-level approach to scale resource allocation to all datacenters in a region, where a mixed-integer-programming solver continuously optimizes server-to-reservation assignments off the critical path, and a traditional container allocator does real-time placement of containers on servers in a reservation. As a relatively new component of Facebook's 10-year old cluster manager Twine, RAS has been running in production for almost two years, continuously optimizing the allocation of millions of servers to thousands of reservations. We describe the design of RAS and share our experience of deploying it at scale.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11555,
+    "year": 2021,
+    "title": "Solving Large-Scale Granular Resource Allocation Problems Efficiently with POP",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483588",
+    "abstract": "Resource allocation problems in many computer systems can be formulated as mathematical optimization problems. However, finding exact solutions to these problems using off-the-shelf solvers is often intractable for large problem sizes with tight SLAs, leading system designers to rely on cheap, heuristic algorithms. We observe, however, that many allocation problems are granular: they consist of a large number of clients and resources, each client requests a small fraction of the total number of resources, and clients can interchangeably use different resources. For these problems, we propose an alternative approach that reuses the original optimization problem formulation and leads to better allocations than domain-specific heuristics. Our technique, Partitioned Optimization Problems (POP), randomly splits the problem into smaller problems (with a subset of the clients and resources in the system) and coalesces the resulting sub-allocations into a global allocation for all clients. We provide theoretical and empirical evidence as to why random partitioning works well. In our experiments, POP achieves allocations within 1.5\\% of the optimal with orders-of-magnitude improvements in runtime compared to existing systems for cluster scheduling, traffic engineering, and load balancing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11556,
+    "year": 2021,
+    "title": "Log-structured Protocols in Delos",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483544",
+    "abstract": "Developers have access to a wide range of storage APIs and functionality in large-scale systems, such as relational databases, key-value stores, and namespaces. However, this diversity comes at a cost: each API is implemented by a complex distributed system that is difficult to develop and operate. Delos amortizes this cost by enabling different APIs on a shared codebase and operational platform. The primary innovation in Delos is a log-structured protocol: a fine-grained replicated state machine executing above a shared log that can be layered into reusable protocol stacks under different databases. We built and deployed two production databases using Delos at Facebook, creating nine different log-structured protocols in the process. We show via experiments and production data that log-structured protocols impose low overhead, while allowing optimizations that can improve latency by up to 100X (e.g., via leasing) and throughput by up to 2X (e.g., via batching).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11557,
+    "year": 2021,
+    "title": "Shard Manager: A Generic Shard Management Framework for Geo-distributed Applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483546",
+    "abstract": "Sharding is widely used to scale an application. Despite a decade of effort to build generic sharding frameworks that can be reused across different applications, the extent of their success remains unclear. We attempt to answer a fundamental question: what barriers prevent a sharding framework from getting adopted by the majority of sharded applications?We analyze hundreds of sharded applications at Facebook and identify two major barriers: 1) lack of support for geo-distributed applications, which account for most of Facebook's applications, and 2) inability to maintain application availability during planned events such as software upgrades, which happen ≈1000 times more frequently than unplanned failures. A sharding framework that does not help applications to address these fundamental challenges is not sufficiently attractive for most applications to adopt it. Other adoption barriers include the burden of supporting many complex applications in a one-size-fit-all sharding framework and the difficulty in supporting sophisticated shard-placement requirements. Theoretically, a constraint solver can handle complex placement requirements, but in practice it is not scalable enough to perform near-realtime shard placement at a global scale.We have overcome these adoption barriers in Facebook's sharding framework called Shard Manager. Currently, Shard Manager is used by hundreds of applications running on over one million machines, which account for about 54\\% of all sharded applications at Facebook.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11558,
+    "year": 2021,
+    "title": "Forerunner: Constraint-based Speculative Transaction Execution for Ethereum",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483564",
+    "abstract": "Ethereum is an emerging distributed computing platform that supports a decentralized replicated virtual machine at a large scale. Transactions in Ethereum are specified in smart contracts, disseminated through broadcast, accepted into the chain of blocks, and then executed on each node. In this new Dissemination-Consensus-Execution (DiCE) paradigm, the time interval between when a transaction is known (during the dissemination phase) to when the transaction is executed (after the consensus phase) offers a window of opportunity to accelerate transaction processing through speculative execution. However, the traditional speculative execution, which hinges on the ability to predict the future accurately, is inadequate because of DiCE's many-future nature.Forerunner proposes a novel constraint-based approach for speculative execution on Ethereum. In contrast to the traditional approach of predicting a single future and demanding it to be perfectly accurate, Forerunner speculates on multiple futures and can leverage speculative results based on imperfect predictions whenever certain constraints are satisfied. Under these constraints, a transaction execution is substantially accelerated through a novel multi-trace program specialization enhanced by a new form of memoization. The fully implemented Forerunner is evaluated as a node connected to the worldwide Ethereum network. When processing 13 million transactions live in real time, Forerunner achieves an effective average speedup of 8.39x on the transactions that it hears during the dissemination phase, which accounts for 95.71\\% of all the transactions. The end-to-end speedup over all the transactions is 6.06x. The code and data sets are publicly available.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11559,
+    "year": 2021,
+    "title": "ghOSt: Fast \\&amp; Flexible User-Space Delegation of Linux Scheduling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483542",
+    "abstract": "We present ghOSt, our infrastructure for delegating kernel scheduling decisions to userspace code. ghOSt is designed to support the rapidly evolving needs of our data center workloads and platforms.Improving scheduling decisions can drastically improve the throughput, tail latency, scalability, and security of important workloads. However, kernel schedulers are difficult to implement, test, and deploy efficiently across a large fleet. Recent research suggests bespoke scheduling policies, within custom data plane operating systems, can provide compelling performance results in a data center setting. However, these gains have proved difficult to realize as it is impractical to deploy a custom OS image(s) at an application granularity, particularly in a multi-tenant environment, limiting the practical applications of these new techniques.ghOSt provides general-purpose delegation of scheduling policies to userspace processes in a Linux environment. ghOSt provides state encapsulation, communication, and action mechanisms that allow complex expression of scheduling policies within a userspace agent, while assisting in synchronization. Programmers use any language to develop and optimize policies, which are modified without a host reboot. ghOSt supports a wide range of scheduling models, from per-CPU to centralized, run-to-completion to preemptive, and incurs low overheads for scheduling actions. We demonstrate ghOSt's performance on both academic and real-world workloads, including Google Snap and Google Search. We show that by using ghOSt instead of the kernel scheduler, we can quickly achieve comparable throughput and latency while enabling policy optimization, non-disruptive upgrades, and fault isolation for our data center workloads. We open-source our implementation to enable future research and development based on ghOSt.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11560,
+    "year": 2021,
+    "title": "Syrup: User-Defined Scheduling Across the Stack",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483548",
+    "abstract": "Suboptimal scheduling decisions in operating systems, networking stacks, and application runtimes are often responsible for poor application performance, including higher latency and lower throughput. These poor decisions stem from a lack of insight into the applications and requests the scheduler is handling and a lack of coherence and coordination between the various layers of the stack, including NICs, kernels, and applications.We propose Syrup, a framework for user-defined scheduling. Syrup enables untrusted application developers to express application-specific scheduling policies across these system layers without being burdened with the low-level system mechanisms that implement them. Application developers write a scheduling policy with Syrup as a set of matching functions between inputs (threads, network packets, network connections) and executors (cores, network sockets, NIC queues) and then deploy it across system layers without modifying their code. Syrup supports multi-tenancy as multiple co-located applications can each safely and securely specify a custom policy. We present several examples of uses of Syrup to define application and workload-specific scheduling policies in a few lines of code, deploy them across the stack, and improve performance up to 8x compared with default policies.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11561,
+    "year": 2021,
+    "title": "When Idling is Ideal: Optimizing Tail-Latency for Heavy-Tailed Datacenter Workloads with Pers\\'{e}phone",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483571",
+    "abstract": "This paper introduces Pers\\'{e}phone, a kernel-bypass OS scheduler designed to minimize tail latency for applications executing at microsecond-scale and exhibiting wide service time distributions. Pers\\'{e}phone integrates a new scheduling policy, Dynamic Application-aware Reserved Cores (DARC), that reserves cores for requests with short processing times. Unlike existing kernel-bypass schedulers, DARC is not work conserving. DARC profiles application requests and leaves a small number of cores idle when no short requests are in the queue, so when short requests do arrive, they are not blocked by longer-running ones. Counter-intuitively, leaving cores idle lets DARC maintain lower tail latencies at higher utilization, reducing the overall number of cores needed to serve the same workloads and consequently better utilizing the datacenter resources.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11562,
+    "year": 2021,
+    "title": "TwinVisor: Hardware-isolated Confidential Virtual Machines for ARM",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483554",
+    "abstract": "Confidential VM, which offers an isolated execution environment for cloud tenants with limited trust in the cloud provider, has recently been deployed in major clouds such as AWS and Azure. However, while ARM has become increasingly popular in cloud data centers, existing confidential VM designs mainly leverage specialized x86 hardware extensions (e.g., AMD SEV and Intel TDX) to isolate VMs upon a shared hypervisor.This paper proposes TwinVisor, the first system that enables the hardware-enforced isolation of confidential VMs on ARM platforms. TwinVisor takes advantage of the mature ARM TrustZone to run two isolated hypervisors, one in the secure world (called S-visor in this paper) and the other in the normal world (called N-visor), to support normal VMs and confidential VMs respectively. Instead of building a new S-visor from scratch, our design decouples protection from resource management, and reuses most functionalities of a full-fledged N-visor to minimize the size of S-visor. We have built two prototypes of TwinVisor: one on an official ARM simulator with S-EL2 enabled to validate functional correctness and the other on an ARM development board to evaluate performance. The S-visor comprises 5.8K LoCs while the N-visor introduces 906 LoC changes to KVM. According to our evaluation, TwinVisor can run unmodified VM images as confidential VMs while incurring less than 5\\% performance overhead for various real-world workloads on SMP VMs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11563,
+    "year": 2021,
+    "title": "Snoopy: Surpassing the Scalability Bottleneck of Oblivious Storage",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483562",
+    "abstract": "Existing oblivious storage systems provide strong security by hiding access patterns, but do not scale to sustain high throughput as they rely on a central point of coordination. To overcome this scalability bottleneck, we present Snoopy, an object store that is both oblivious and scalable such that adding more machines increases system throughput. Snoopy contributes techniques tailored to the high-throughput regime to securely distribute and efficiently parallelize every system component without prohibitive coordination costs. These techniques enable Snoopy to scale similarly to a plaintext storage system. Snoopy achieves 13.7x higher throughput than Obladi, a state-of-the-art oblivious storage system. Specifically, Obladi reaches a throughput of 6.7K requests/s for two million 160-byte objects and cannot scale beyond a proxy and server machine. For the same data size, Snoopy uses 18 machines to scale to 92K requests/s with average latency under 500ms.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11564,
+    "year": 2021,
+    "title": "Coeus: A System for Oblivious Document Ranking and Retrieval",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483586",
+    "abstract": "Given a private string q and a remote server that holds a set of public documents D, how can one of the K most relevant documents to q in D be selected and viewed without anyone (not even the server) learning anything about q or the document? This is the oblivious document ranking and retrieval problem. In this paper, we describe Coeus, a system that solves this problem. At a high level, Coeus composes two cryptographic primitives: secure matrix-vector product for scoring document relevance using the widely-used term frequency-inverse document frequency (tf-idf) method, and private information retrieval (PIR) for obliviously retrieving documents. However, Coeus reduces the time to run these protocols, thereby improving the user-perceived latency, which is a key performance metric. Coeus first reduces the PIR overhead by separating out private metadata retrieval from document retrieval, and it then scales secure matrix-vector product to tf-idf matrices with several hundred billion elements through a series of novel cryptographic refinements. For a corpus of English Wikipedia containing 5 million documents, a keyword dictionary with 64K keywords, and on a cluster of 143 machines on AWS, Coeus enables a user to obliviously rank and retrieve a document in 3.9 seconds---a 24x improvement over a baseline system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11565,
+    "year": 2021,
+    "title": "Boki: Stateful Serverless Computing with Shared Logs",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483541",
+    "abstract": "Boki is a new serverless runtime that exports a shared log API to serverless functions. Boki shared logs enable stateful serverless applications to manage their state with durability, consistency, and fault tolerance. Boki shared logs achieve high throughput and low latency. The key enabler is the metalog, a novel mechanism that allows Boki to address ordering, consistency and fault tolerance independently. The metalog orders shared log records with high throughput and it provides read consistency while allowing service providers to optimize the write and read path of the shared log in different ways. To demonstrate the value of shared logs for stateful serverless applications, we build Boki support libraries that implement fault-tolerant workflows, durable object storage, and message queues. Our evaluation shows that shared logs can speed up important serverless workloads by up to 4.7x.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11566,
+    "year": 2021,
+    "title": "Bladerunner: Stream Processing at Scale for a Live View of Backend Data Mutations at the Edge",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483572",
+    "abstract": "Consider a social media platform with hundreds of millions of online users at any time, utilizing a social graph that has many billions of nodes and edges. The problem this paper addresses is how to provide each user a continuously fresh, up-to-date view of the parts of the social graph they are currently interested in, so as to provide a positive interactive user experience. The problem is challenging because the social graph mutates at a high rate, users change their focus of interest frequently, and some mutations are of interest to many online users.We describe Bladerunner, a system we use at Facebook to deliver relevant social graph updates to user devices efficiently and quickly. The heart of Bladerunner is a set of back-end stream processors that obtain streams of social graph updates and process them on a per application and per-user basis before pushing selected updates to user devices. Separate stream processors are used for each application to enable application-specific customization, complex filtering, aggregation and other message delivery operations on a per-user basis. This strategy minimizes device processing overhead and last-mile bandwidth usage, which are critical given that users are mostly on mobile devices.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11567,
+    "year": 2021,
+    "title": "Faster and Cheaper Serverless Computing on Harvested Resources",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483580",
+    "abstract": "Serverless computing is becoming increasingly popular due to its ease of programming, fast elasticity, and fine-grained billing. However, the serverless provider still needs to provision, manage, and pay the IaaS provider for the virtual machines (VMs) hosting its platform. This ties the cost of the serverless platform to the cost of the underlying VMs. One way to significantly reduce cost is to use spare resources, which cloud providers rent at a massive discount. Harvest VMs offer such cheap resources: they grow and shrink to harvest all the unallocated CPU cores in their host servers, but may be evicted to make room for more expensive VMs. Thus, using Harvest VMs to run the serverless platform comes with two main challenges that must be carefully managed: VM evictions and dynamically varying resources in each VM.In this work, we explore the challenges and benefits of hosting serverless (Function as a Service or simply FaaS) platforms on Harvest VMs. We characterize the serverless workloads and Harvest VMs of Microsoft Azure, and design a serverless load balancer that is aware of evictions and resource variations in Harvest VMs. We modify OpenWhisk, a widely-used open-source serverless platform, to monitor harvested resources and balance the load accordingly, and evaluate it experimentally. Our results show that adopting harvested resources improves efficiency and reduces cost. Under the same cost budget, running serverless platforms on harvested resources achieves 2.2x to 9.0x higher throughput compared to using dedicated resources. When using the same amount of resources, running serverless platforms on harvested resources achieves 48\\% to 89\\% cost savings with lower latency due to better load balancing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11568,
+    "year": 2021,
+    "title": "Xenic: SmartNIC-Accelerated Distributed Transactions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483555",
+    "abstract": "High-performance distributed transactions require efficient remote operations on database memory and protocol metadata. The high communication cost of this workload calls for hardware acceleration. Recent research has applied RDMA to this end, leveraging the network controller to manipulate host memory without consuming CPU cycles on the target server. However, the basic read/write RDMA primitives demand trade-offs in data structure and protocol design, limiting their benefits. SmartNICs are a flexible alternative for fast distributed transactions, adding programmable compute cores and on-board memory to the network interface. Applying measured performance characteristics, we design Xenic, a SmartNIC-optimized transaction processing system. Xenic applies an asynchronous, aggregated execution model to maximize network and core efficiency. Xenic's co-designed data store achieves low-overhead remote object accesses. Additionally, Xenic uses flexible, point-to-point communication patterns between SmartNICs to minimize transaction commit latency. We compare Xenic against prior RDMA- and RPC-based transaction systems with the TPC-C, Retwis, and Smallbank benchmarks. Our results for the three benchmarks show 2.42x, 2.07x, and 2.21x throughput improvement, 59\\%, 42\\%, and 22\\% latency reduction, while saving 2.3, 8.1, and 10.1 threads per server.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11569,
+    "year": 2021,
+    "title": "LineFS: Efficient SmartNIC Offload of a Distributed File System with Pipeline Parallelism",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483565",
+    "abstract": "In multi-tenant systems, the CPU overhead of distributed file systems (DFSes) is increasingly a burden to application performance. CPU and memory interference cause degraded and unstable application and storage performance, in particular for operation latency. Recent client-local DFSes for persistent memory (PM) accelerate this trend. DFS offload to SmartNICs is a promising solution to these problems, but it is challenging to fit the complex demands of a DFS onto simple SmartNIC processors located across PCIe.We present LineFS, a SmartNIC-offloaded, high-performance DFS with support for client-local PM. To fully leverage the SmartNIC architecture, we decompose DFS operations into execution stages that can be offloaded to a parallel datapath execution pipeline on the SmartNIC. LineFS offloads CPU-intensive DFS tasks, like replication, compression, data publication, index and consistency management to a Smart-NIC. We implement LineFS on the Mellanox BlueField Smart-NIC and compare it to Assise, a state-of-the-art PM DFS. LineFS improves latency in LevelDB up to 80\\% and throughput in Filebench up to 79\\%, while providing extended DFS availability during host system failures.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11570,
+    "year": 2021,
+    "title": "Automated SmartNIC Offloading Insights for Network Functions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483583",
+    "abstract": "The gap between CPU and networking speeds has motivated the development of SmartNICs for NF (network functions) offloading. However, offloading performance is predicated upon intricate knowledge about SmartNIC hardware and careful hand-tuning of the ported programs. Today, developers cannot easily reason about the offloading performance or the effectiveness of different porting strategies without resorting to a trial-and-error approach.Clara is an automated tool that improves the productivity of this workflow by generating offloading insights. Our tool can a) analyze a legacy NF in its unported form, predicting its performance characteristics on a SmartNIC (e.g., compute vs. memory intensity); and b) explore and suggest porting strategies for the given NF to achieve higher performance. To achieve these goals, Clara uses program analysis techniques to extract NF features, and combines them with machine learning techniques to handle opaque SmartNIC details. Our evaluation using Click NF programs on a Netronome Smart-NIC shows that Clara achieves high accuracy in its analysis, and that its suggested porting strategies lead to significant performance improvements.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11571,
+    "year": 2021,
+    "title": "The Aurora Single Level Store Operating System",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483563",
+    "abstract": "Applications on modern operating systems manage their ephemeral state in memory and persistent state on disk. Ensuring consistency between them is a source of significant developer effort and application bugs. We present the Aurora single level store, an OS that eliminates the distinction between ephemeral and persistent application state.Aurora continuously persists entire applications with millisecond granularity to provide persistence as an OS service. Aurora revists the problem of application checkpointing through the lens of a single level store. Aurora supports transparent and customized applications. The RocksDB database using Aurora's APIs achieved a 75\\% throughput improvement while removing 40\\% of its code.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11572,
+    "year": 2021,
+    "title": "WineFS: a hugepage-aware file system for persistent memory that ages gracefully",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483567",
+    "abstract": "Modern persistent-memory (PM) file systems perform well in benchmark settings, when the file system is freshly created and empty. But after being aged by usage, as will be the normal mode in practice, their memory-mapped performance degrades significantly. This paper shows that the cause is their inability to use 2MB hugepages to map files when aged, having to use 4KB pages instead and suffering many extra page faults and TLB misses as a result.We introduce WineFS, a novel hugepage-aware PM file system that largely eliminates this effect. WineFS combines a new alignment-aware allocator with fragmentation-avoiding approaches to consistency and concurrency to preserve the ability to use hugepages. Experiments show that WineFS resists the effects of aging and outperforms state-of-the-art PM file systems in both aged and un-aged settings. For example, in an aged setup, the LMDB memory-mapped database obtains 2x higher write throughput on WineFS compared to NOVA, and 70\\% higher throughput compared to ext4-DAX. When reading a memory-mapped persistent radix tree, WineFS results in 56\\% lower median latency than NOVA.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11573,
+    "year": 2021,
+    "title": "Scale and Performance in a Filesystem Semi-Microkernel",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483581",
+    "abstract": "We present uFS, a user-level filesystem semi-microkernel. uFS takes advantage of a high-performance storage development kit to realize a fully-functional, crash-consistent, highly-scalable filesystem, with relative developer ease. uFS delivers scalable high performance with a number of novel techniques: careful partitioning of in-memory and on-disk data structures to enable concurrent access without locking, inode migration for balancing load across filesystem threads, and a dynamic scaling algorithm for determining the number of filesystem threads to serve the current workload. Through measurements, we show that uFS has good base performance and excellent scalability; for example, uFS delivers nearly twice the throughput of ext4 for LevelDB on YCSB workloads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11574,
+    "year": 2021,
+    "title": "Using Lightweight Formal Methods to Validate a Key-Value Storage Node in Amazon S3",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483540",
+    "abstract": "This paper reports our experience applying lightweight formal methods to validate the correctness of ShardStore, a new key-value storage node implementation for the Amazon S3 cloud object storage service. By \"lightweight formal methods\" we mean a pragmatic approach to verifying the correctness of a production storage node that is under ongoing feature development by a full-time engineering team. We do not aim to achieve full formal verification, but instead emphasize automation, usability, and the ability to continually ensure correctness as both software and its specification evolve over time. Our approach decomposes correctness into independent properties, each checked by the most appropriate tool, and develops executable reference models as specifications to be checked against the implementation. Our work has prevented 16 issues from reaching production, including subtle crash consistency and concurrency problems, and has been extended by non-formal-methods experts to check new features and properties as ShardStore has evolved.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11575,
+    "year": 2021,
+    "title": "CLoF: A Compositional Lock Framework for Multi-level NUMA Systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483557",
+    "abstract": "Efficient locking mechanisms are extremely important to support large-scale concurrency and exploit the performance promises of many-core servers. Implementing an efficient, generic, and correct lock is very challenging due to the differences between various NUMA architectures. The performance impact of architectural/NUMA hierarchy differences between x86 and Armv8 are not yet fully explored, leading to unexpected performance when simply porting NUMA-aware locks from x86 to Armv8. Moreover, due to the Armv8 Weak Memory Model (WMM), correctly implementing complicated NUMA-aware locks is very difficult.We propose a Compositional Lock Framework (CLoF) for multi-level NUMA systems. CLoF composes NUMA-oblivious locks in a hierarchy matching the target platform, leading to hundreds of correct by construction NUMA-aware locks. CLoF can automatically select the best lock among them. To show the correctness of CLoF on WMMs, we provide an inductive argument with base and induction steps verified with model checkers. In our evaluation, CLoF locks outperform state-of-the-art NUMA-aware locks in most scenarios, e.g., in a highly contended LevelDB benchmark, our best CLoF locks yield twice the throughput achieved with CNA lock and ShflLock on large x86 and Armv8 servers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11576,
+    "year": 2021,
+    "title": "Formal Verification of a Multiprocessor Hypervisor on Arm Relaxed Memory Hardware",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3477132.3483560",
+    "abstract": "Concurrent systems software is widely-used, complex, and error-prone, posing a significant security risk. We introduce VRM, a new framework that makes it possible for the first time to verify concurrent systems software, such as operating systems and hypervisors, on Arm relaxed memory hardware. VRM defines a set of synchronization and memory access conditions such that a program that satisfies these conditions can be mostly verified on a sequentially consistent hardware model and the proofs will automatically hold on relaxed memory hardware. VRM can be used to verify concurrent kernel code that is not data race free, including code responsible for managing shared page tables in the presence of relaxed MMU hardware. Using VRM, we verify the security guarantees of a retrofitted implementation of the Linux KVM hypervisor on Arm. For multiple versions of KVM, we prove KVM's security properties on a sequentially consistent model, then prove that KVM satisfies VRM's required program conditions such that its security proofs hold on Arm relaxed memory hardware. Our experimental results show that the retrofit and VRM conditions do not adversely affect the scalability of verified KVM, as it performs similar to unmodified KVM when concurrently running many multiprocessor virtual machines with real application workloads on Arm multiprocessor server hardware. Our work is the first machine-checked proof for concurrent systems software on Arm relaxed memory hardware.",
+    "status": "notchecked"
+  }
+]

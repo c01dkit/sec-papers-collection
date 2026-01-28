@@ -1,0 +1,282 @@
+[
+  {
+    "id": 11714,
+    "year": 2011,
+    "title": "SILT: a memory-efficient, high-performance key-value store",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043558",
+    "abstract": "SILT (Small Index Large Table) is a memory-efficient, high-performance key-value store system based on flash storage that scales to serve billions of key-value items on a single node. It requires only 0.7 bytes of DRAM per entry and retrieves key/value pairs using on average 1.01 flash reads each. SILT combines new algorithmic and systems techniques to balance the use of memory, storage, and computation. Our contributions include: (1) the design of three basic key-value stores each with a different emphasis on memory-efficiency and write-friendliness; (2) synthesis of the basic key-value stores to build a SILT key-value store system; and (3) an analytical model for tuning system parameters carefully to meet the needs of different workloads. SILT requires one to two orders of magnitude less memory to provide comparable throughput to current high-performance key-value systems on a commodity desktop system with flash storage.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11715,
+    "year": 2011,
+    "title": "Scalable consistency in Scatter",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043559",
+    "abstract": "Distributed storage systems often trade off strong semantics for improved scalability. This paper describes the design, implementation, and evaluation of Scatter, a scalable and consistent distributed key-value storage system. Scatter adopts the highly decentralized and self-organizing structure of scalable peer-to-peer systems, while preserving linearizable consistency even under adverse circumstances. Our prototype implementation demonstrates that even with very short node lifetimes, it is possible to build a scalable and consistent system with practical performance.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11716,
+    "year": 2011,
+    "title": "Fast crash recovery in RAMCloud",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043560",
+    "abstract": "RAMCloud is a DRAM-based storage system that provides inexpensive durability and availability by recovering quickly after crashes, rather than storing replicas in DRAM. RAMCloud scatters backup data across hundreds or thousands of disks, and it harnesses hundreds of servers in parallel to reconstruct lost data. The system uses a log-structured approach for all its data, in DRAM as well as on disk: this provides high performance both during normal operation and during recovery. RAMCloud employs randomized techniques to manage the system in a scalable and decentralized fashion. In a 60-node cluster, RAMCloud recovers 35 GB of data from a failed server in 1.6 seconds. Our measurements suggest that the approach will scale to recover larger memory sizes (64 GB or more) in less time with larger clusters.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11717,
+    "year": 2011,
+    "title": "Design implications for enterprise storage systems via multi-dimensional trace analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043562",
+    "abstract": "Enterprise storage systems are facing enormous challenges due to increasing growth and heterogeneity of the data stored. Designing future storage systems requires comprehensive insights that existing trace analysis methods are ill-equipped to supply. In this paper, we seek to provide such insights by using a new methodology that leverages an objective, multi-dimensional statistical technique to extract data access patterns from network storage system traces. We apply our method on two large-scale real-world production network storage system traces to obtain comprehensive access patterns and design insights at user, application, file, and directory levels. We derive simple, easily implementable, threshold-based design optimizations that enable efficient data placement and capacity optimization strategies for servers, consolidation policies for clients, and improved caching performance for both.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11718,
+    "year": 2011,
+    "title": "Differentiated storage services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043563",
+    "abstract": "We propose an I/O classification architecture to close the widening semantic gap between computer systems and storage systems. By classifying I/O, a computer system can request that different classes of data be handled with different storage system policies. Specifically, when a storage system is first initialized, we assign performance policies to predefined classes, such as the filesystem journal. Then, online, we include a classifier with each I/O command (e.g., SCSI), thereby allowing the storage system to enforce the associated policy for each I/O that it receives.Our immediate application is caching. We present filesystem prototypes and a database proof-of-concept that classify all disk I/O --- with very little modification to the filesystem, database, and operating system. We associate caching policies with various classes (e.g., large files shall be evicted before metadata and small files), and we show that end-to-end file system performance can be improved by over a factor of two, relative to conventional caches like LRU. And caching is simply one of many possible applications. As part of our ongoing work, we are exploring other classes, policies and storage system mechanisms that can be used to improve end-to-end performance, reliability and security.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11719,
+    "year": 2011,
+    "title": "A file is not a file: understanding the I/O behavior of Apple desktop applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043564",
+    "abstract": "We analyze the I/O behavior of iBench, a new collection of productivity and multimedia application workloads. Our analysis reveals a number of differences between iBench and typical file-system workload studies, including the complex organization of modern files, the lack of pure sequential access, the influence of underlying frameworks on I/O patterns, the widespread use of file synchronization and atomic operations, and the prevalence of threads. Our results have strong ramifications for the design of next generation local and cloud-based storage systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11720,
+    "year": 2011,
+    "title": "CryptDB: protecting confidentiality with encrypted query processing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043566",
+    "abstract": "Online applications are vulnerable to theft of sensitive information because adversaries can exploit software bugs to gain access to private data, and because curious or malicious administrators may capture and leak data. CryptDB is a system that provides practical and provable confidentiality in the face of these attacks for applications backed by SQL databases. It works by executing SQL queries over encrypted data using a collection of efficient SQL-aware encryption schemes. CryptDB can also chain encryption keys to user passwords, so that a data item can be decrypted only by using the password of one of the users with access to that data. As a result, a database administrator never gets access to decrypted data, and even if all servers are compromised, an adversary cannot decrypt the data of any user who is not logged in. An analysis of a trace of 126 million SQL queries from a production MySQL server shows that CryptDB can support operations over encrypted data for 99.5\\% of the 128,840 columns seen in the trace. Our evaluation shows that CryptDB has low overhead, reducing throughput by 14.5\\% for phpBB, a web forum application, and by 26\\% for queries from TPC-C, compared to unmodified MySQL. Chaining encryption keys to user passwords requires 11--13 unique schema annotations to secure more than 20 sensitive fields and 2--7 lines of source code changes for three multi-user web applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11721,
+    "year": 2011,
+    "title": "Intrusion recovery for database-backed web applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043567",
+    "abstract": "Warp is a system that helps users and administrators of web applications recover from intrusions such as SQL injection, cross-site scripting, and clickjacking attacks, while preserving legitimate user changes. Warp repairs from an intrusion by rolling back parts of the database to a version before the attack, and replaying subsequent legitimate actions. Warp allows administrators to retroactively patch security vulnerabilities---i.e., apply new security patches to past executions---to recover from intrusions without requiring the administrator to track down or even detect attacks. Warp's time-travel database allows fine-grained rollback of database rows, and enables repair to proceed concurrently with normal operation of a web application. Finally, Warp captures and replays user input at the level of a browser's DOM, to recover from attacks that involve a user's browser. For a web server running MediaWiki, Warp requires no application source code changes to recover from a range of common web application vulnerabilities with minimal user input at a cost of 24--27\\% in throughput and 2--3.2 GB/day in storage.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11722,
+    "year": 2011,
+    "title": "Software fault isolation with API integrity and multi-principal modules",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043568",
+    "abstract": "The security of many applications relies on the kernel being secure, but history suggests that kernel vulnerabilities are routinely discovered and exploited. In particular, exploitable vulnerabilities in kernel modules are common. This paper proposes LXFI, a system which isolates kernel modules from the core kernel so that vulnerabilities in kernel modules cannot lead to a privilege escalation attack. To safely give kernel modules access to complex kernel APIs, LXFI introduces the notion of API integrity, which captures the set of contracts assumed by an interface. To partition the privileges within a shared module, LXFI introduces module principals. Programmers specify principals and API integrity rules through capabilities and annotations. Using a compiler plugin, LXFI instruments the generated code to grant, check, and transfer capabilities between modules, according to the programmer's annotations. An evaluation with Linux shows that the annotations required on kernel functions to support a new module are moderate, and that LXFI is able to prevent three known privilege-escalation vulnerabilities. Stress tests of a network driver module also show that isolating this module using LXFI does not hurt TCP throughput but reduces UDP throughput by 35\\%, and increases CPU utilization by 2.2-3.7x.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11723,
+    "year": 2011,
+    "title": "Thialfi: a client notification service for internet-scale applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043570",
+    "abstract": "Ensuring the freshness of client data is a fundamental problem for applications that rely on cloud infrastructure to store data and mediate sharing. Thialfi is a notification service developed at Google to simplify this task. Thialfi supports applications written in multiple programming languages and running on multiple platforms, e.g., browsers, phones, and desktops. Applications register their interest in a set of shared objects and receive notifications when those objects change. Thialfi servers run in multiple Google data centers for availability and replicate their state asynchronously. Thialfi's approach to recovery emphasizes simplicity: all server state is soft, and clients drive recovery and assist in replication. A principal goal of our design is to provide a straightforward API and good semantics despite a variety of failures, including server crashes, communication failures, storage unavailability, and data center failures.Evaluation of live deployments confirms that Thialfi is scalable, efficient, and robust. In production use, Thialfi has scaled to millions of users and delivers notifications with an average delay of less than one second.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11724,
+    "year": 2011,
+    "title": "Windows Azure Storage: a highly available cloud storage service with strong consistency",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043571",
+    "abstract": "Windows Azure Storage (WAS) is a cloud storage system that provides customers the ability to store seemingly limitless amounts of data for any duration of time. WAS customers have access to their data from anywhere at any time and only pay for what they use and store. In WAS, data is stored durably using both local and geographic replication to facilitate disaster recovery. Currently, WAS storage comes in the form of Blobs (files), Tables (structured storage), and Queues (message delivery). In this paper, we describe the WAS architecture, global namespace, and data model, as well as its resource provisioning, load balancing, and replication systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11725,
+    "year": 2011,
+    "title": "An empirical study on configuration errors in commercial and open source systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043572",
+    "abstract": "Configuration errors (i.e., misconfigurations) are among the dominant causes of system failures. Their importance has inspired many research efforts on detecting, diagnosing, and fixing misconfigurations; such research would benefit greatly from a real-world characteristic study on misconfigurations. Unfortunately, few such studies have been conducted in the past, primarily because historical misconfigurations usually have not been recorded rigorously in databases.In this work, we undertake one of the first attempts to conduct a real-world misconfiguration characteristic study. We study a total of 546 real world misconfigurations, including 309 misconfigurations from a commercial storage system deployed at thousands of customers, and 237 from four widely used open source systems (CentOS, MySQL, Apache HTTP Server, and OpenLDAP). Some of our major findings include: (1) A majority of misconfigurations (70.0\\%~85.5\\%) are due to mistakes in setting configuration parameters; however, a significant number of misconfigurations are due to compatibility issues or component configurations (i.e., not parameter-related). (2) 38.1\\%~53.7\\% of parameter mistakes are caused by illegal parameters that clearly violate some format or rules, motivating the use of an automatic configuration checker to detect these misconfigurations. (3) A significant percentage (12.2\\%~29.7\\%) of parameter-based mistakes are due to inconsistencies between different parameter values. (4) 21.7\\%~57.3\\% of the misconfigurations involve configurations external to the examined system, some even on entirely different hosts. (5) A significant portion of misconfigurations can cause hard-to-diagnose failures, such as crashes, hangs, or severe performance degradation, indicating that systems should be better-equipped to handle misconfigurations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11726,
+    "year": 2011,
+    "title": "Cells: a virtual mobile smartphone architecture",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043574",
+    "abstract": "Smartphones are increasingly ubiquitous, and many users carry multiple phones to accommodate work, personal, and geographic mobility needs. We present Cells, a virtualization architecture for enabling multiple virtual smartphones to run simultaneously on the same physical cellphone in an isolated, secure manner. Cells introduces a usage model of having one foreground virtual phone and multiple background virtual phones. This model enables a new device namespace mechanism and novel device proxies that integrate with lightweight operating system virtualization to multiplex phone hardware across multiple virtual phones while providing native hardware device performance. Cells virtual phone features include fully accelerated 3D graphics, complete power, management features, and full telephony functionality with separately assignable telephone numbers and caller ID support. We have implemented a prototype of Cells that supports multiple Android virtual phones on the same phone. Our performance results demonstrate that Cells imposes only modest runtime and memory overhead, works seamlessly across multiple hardware devices including Google Nexus 1 and Nexus S phones, and transparently runs Android applications at native speed without any modifications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11727,
+    "year": 2011,
+    "title": "Breaking up is hard to do: security and functionality in a commodity hypervisor",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043575",
+    "abstract": "Cloud computing uses virtualization to lease small slices of large-scale datacenter facilities to individual paying customers. These multi-tenant environments, on which numerous large and popular web-based applications run today, are founded on the belief that the virtualization platform is sufficiently secure to prevent breaches of isolation between different users who are co-located on the same host. Hypervisors are believed to be trustworthy in this role because of their small size and narrow interfaces.We observe that despite the modest footprint of the hypervisor itself, these platforms have a large aggregate trusted computing base (TCB) that includes a monolithic control VM with numerous interfaces exposed to VMs. We present Xoar, a modified version of Xen that retrofits the modularity and isolation principles used in micro-kernels onto a mature virtualization platform. Xoar breaks the control VM into single-purpose components called service VMs. We show that this componentized abstraction brings a number of benefits: sharing of service components by guests is configurable and auditable, making exposure to risk explicit, and access to the hypervisor is restricted to the least privilege required for each component. Microrebooting components at configurable frequencies reduces the temporal attack surface of individual components. Our approach incurs little performance overhead, and does not require functionality to be sacrificed or components to be rewritten from scratch.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11728,
+    "year": 2011,
+    "title": "CloudVisor: retrofitting protection of virtual machines in multi-tenant cloud with nested virtualization",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043576",
+    "abstract": "Multi-tenant cloud, which usually leases resources in the form of virtual machines, has been commercially available for years. Unfortunately, with the adoption of commodity virtualized infrastructures, software stacks in typical multi-tenant clouds are non-trivially large and complex, and thus are prone to compromise or abuse from adversaries including the cloud operators, which may lead to leakage of security-sensitive data.In this paper, we propose a transparent, backward-compatible approach that protects the privacy and integrity of customers' virtual machines on commodity virtualized infrastructures, even facing a total compromise of the virtual machine monitor (VMM) and the management VM. The key of our approach is the separation of the resource management from security protection in the virtualization layer. A tiny security monitor is introduced underneath the commodity VMM using nested virtualization and provides protection to the hosted VMs. As a result, our approach allows virtualization software (e.g., VMM, management VM and tools) to handle complex tasks of managing leased VMs for the cloud, without breaking security of users' data inside the VMs.We have implemented a prototype by leveraging commercially-available hardware support for virtualization. The prototype system, called CloudVisor, comprises only 5.5K LOCs and supports the Xen VMM with multiple Linux and Windows as the guest OSes. Performance evaluation shows that CloudVisor incurs moderate slow-down for I/O intensive applications and very small slowdown for other applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11729,
+    "year": 2011,
+    "title": "Atlantis: robust, extensible execution environments for web applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043577",
+    "abstract": "Today's web applications run inside a complex browser environment that is buggy, ill-specified, and implemented in different ways by different browsers. Thus, web applications that desire robustness must use a variety of conditional code paths and ugly hacks to deal with the vagaries of their runtime. Our new exokernel browser, called Atlantis, solves this problem by providing pages with an extensible execution environment. Atlantis defines a narrow API for basic services like collecting user input, exchanging network data, and rendering images. By composing these primitives, web pages can define custom, high-level execution environments. Thus, an application which does not want a dependence on Atlantis'predefined web stack can selectively redefine components of that stack, or define markup formats and scripting languages that look nothing like the current browser runtime. Unlike prior microkernel browsers like OP, and unlike compile-to-JavaScript frameworks like GWT, Atlantis is the first browsing system to truly minimize a web page's dependence on black box browser code. This makes it much easier to develop robust, secure web applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11730,
+    "year": 2011,
+    "title": "PTask: operating system abstractions to manage GPUs as compute devices",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043579",
+    "abstract": "We propose a new set of OS abstractions to support GPUs and other accelerator devices as first class computing resources. These new abstractions, collectively called the PTask API, support a dataflow programming model. Because a PTask graph consists of OS-managed objects, the kernel has sufficient visibility and control to provide system-wide guarantees like fairness and performance isolation, and can streamline data movement in ways that are impossible under current GPU programming models.Our experience developing the PTask API, along with a gestural interface on Windows 7 and a FUSE-based encrypted file system on Linux show that the PTask API can provide important system-wide guarantees where there were previously none, and can enable significant performance improvements, for example gaining a 5\\texttimes{} improvement in maximum throughput for the gestural interface.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11731,
+    "year": 2011,
+    "title": "Logical attestation: an authorization architecture for trustworthy computing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043580",
+    "abstract": "This paper describes the design and implementation of a new operating system authorization architecture to support trustworthy computing. Called logical attestation, this architecture provides a sound framework for reasoning about run time behavior of applications. Logical attestation is based on attributable, unforgeable statements about program properties, expressed in a logic. These statements are suitable for mechanical processing, proof construction, and verification; they can serve as credentials, support authorization based on expressive authorization policies, and enable remote principals to trust software components without restricting the local user's choice of binary implementations.We have implemented logical attestation in a new operating system called the Nexus. The Nexus executes natively on x86 platforms equipped with secure coprocessors. It supports both native Linux applications and uses logical attestation to support new trustworthy-computing applications. When deployed on a trustworthy cloud-computing stack, logical attestation is efficient, achieves high-performance, and can run applications that provide qualitative guarantees not possible with existing modes of attestation.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11732,
+    "year": 2011,
+    "title": "Practical software model checking via dynamic interface reduction",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043582",
+    "abstract": "Implementation-level software model checking explores the state space of a system implementation directly to find potential software defects without requiring any specification or modeling. Despite early successes, the effectiveness of this approach remains severely constrained due to poor scalability caused by state-space explosion. DeMeter makes software model checking more practical with the following contributions: (i) proposing dynamic interface reduction, a new state-space reduction technique, (ii) introducing a framework that enables dynamic interface reduction in an existing model checker with a reasonable amount of effort, and (iii) providing the framework with a distributed runtime engine that supports parallel distributed model checking.We have integrated DeMeter into two existing model checkers, MaceMC and MoDist, each involving changes of around 1,000 lines of code. Compared to the original MaceMC and MoDist model checkers, our experiments have shown state-space reduction from a factor of five to up to five orders of magnitude in representative distributed applications such as Paxos, Berkeley DB, Chord, and Pastry. As a result, when applied to a deployed Paxos implementation, which has been running in production data centers for years to manage tens of thousands of machines, DeMeter manages to explore completely a logically meaningful state space that covers both phases of the Paxos protocol, offering higher assurance of software reliability that was not possible before.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11733,
+    "year": 2011,
+    "title": "Detecting failures in distributed systems with the Falcon spy network",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043583",
+    "abstract": "A common way for a distributed system to tolerate crashes is to explicitly detect them and then recover from them. Interestingly, detection can take much longer than recovery, as a result of many advances in recovery techniques, making failure detection the dominant factor in these systems' unavailability when a crash occurs.This paper presents the design, implementation, and evaluation of Falcon, a failure detector with several features. First, Falcon's common-case detection time is sub-second, which keeps unavailability low. Second, Falcon is reliable: it never reports a process as down when it is actually up. Third, Falcon sometimes kills to achieve reliable detection but aims to kill the smallest needed component. Falcon achieves these features by coordinating a network of spies, each monitoring a layer of the system. Falcon's main cost is a small amount of platform-specific logic. Falcon is thus the first failure detector that is fast, reliable, and viable. As such, it could change the way that a class of distributed systems is built.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11734,
+    "year": 2011,
+    "title": "Secure network provenance",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043584",
+    "abstract": "This paper introduces secure network provenance (SNP), a novel technique that enables networked systems to explain to their operators why they are in a certain state -- e.g., why a suspicious routing table entry is present on a certain router, or where a given cache entry originated. SNP provides network forensics capabilities by permitting operators to track down faulty or misbehaving nodes, and to assess the damage such nodes may have caused to the rest of the system. SNP is designed for adversarial settings and is robust to manipulation; its tamper-evident properties ensure that operators can detect when compromised nodes lie or falsely implicate correct nodes.We also present the design of SNooPy, a general-purpose SNP system. To demonstrate that SNooPy is practical, we apply it to three example applications: the Quagga BGP daemon, a declarative implementation of Chord, and Hadoop MapReduce. Our results indicate that SNooPy can efficiently explain state in an adversarial setting, that it can be applied with minimal effort, and that its costs are low enough to be practical.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11735,
+    "year": 2011,
+    "title": "Fay: extensible distributed tracing from kernels to clusters",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043585",
+    "abstract": "Fay is a flexible platform for the efficient collection, processing, and analysis of software execution traces. Fay provides dynamic tracing through use of runtime instrumentation and distributed aggregation within machines and across clusters. At the lowest level, Fay can be safely extended with new tracing primitives, including even untrusted, fully-optimized machine code, and Fay can be applied to running user-mode or kernel-mode software without compromising system stability. At the highest level, Fay provides a unified, declarative means of specifying what events to trace, as well as the aggregation, processing, and analysis of those events.We have implemented the Fay tracing platform for Windows and integrated it with two powerful, expressive systems for distributed programming. Our implementation is easy to use, can be applied to unmodified production systems, and provides primitives that allow the overhead of tracing to be greatly reduced, compared to previous dynamic tracing platforms. To show the generality of Fay tracing, we reimplement, in experiments, a range of tracing strategies and several custom mechanisms from existing tracing frameworks.Fay shows that modern techniques for high-level querying and data-parallel processing of disaggregated data streams are well suited to comprehensive monitoring of software execution in distributed systems. Revisiting a lesson from the late 1960's [15], Fay also demonstrates the efficiency and extensibility benefits of using safe, statically-verified machine code as the basis for low-level execution tracing. Finally, Fay establishes that, by automatically deriving optimized query plans and code for safe extensions, the expressiveness and performance of high-level tracing queries can equal or even surpass that of specialized monitoring tools.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11736,
+    "year": 2011,
+    "title": "Dthreads: efficient deterministic multithreading",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043587",
+    "abstract": "Multithreaded programming is notoriously difficult to get right. A key problem is non-determinism, which complicates debugging, testing, and reproducing errors. One way to simplify multithreaded programming is to enforce deterministic execution, but current deterministic systems for C/C++ are incomplete or impractical. These systems require program modification, do not ensure determinism in the presence of data races, do not work with general-purpose multithreaded programs, or run up to 8.4\\texttimes{} slower than pthreads.This paper presents Dthreads, an efficient deterministic multithreading system for unmodified C/C++ applications that replaces the pthreads library. Dthreads enforces determinism in the face of data races and deadlocks. Dthreads works by exploding multithreaded applications into multiple processes, with private, copy-on-write mappings to shared memory. It uses standard virtual memory protection to track writes, and deterministically orders updates by each thread. By separating updates from different threads, Dthreads has the additional benefit of eliminating false sharing. Experimental results show that Dthreads substantially outperforms a state-of-the-art deterministic runtime system, and for a majority of the benchmarks evaluated here, matches and occasionally exceeds the performance of pthreads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11737,
+    "year": 2011,
+    "title": "Efficient deterministic multithreading through schedule relaxation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043588",
+    "abstract": "Deterministic multithreading (DMT) eliminates many pernicious software problems caused by nondeterminism. It works by constraining a program to repeat the same thread interleavings, or schedules, when given same input. Despite much recent research, it remains an open challenge to build both deterministic and efficient DMT systems for general programs on commodity hardware. To deterministically resolve a data race, a DMT system must enforce a deterministic schedule of shared memory accesses, or mem-schedule, which can incur prohibitive overhead. By using schedules consisting only of synchronization operations, or sync-schedule, this overhead can be avoided. However, a sync-schedule is deterministic only for race-free programs, but most programs have races.Our key insight is that races tend to occur only within minor portions of an execution, and a dominant majority of the execution is still race-free. Thus, we can resort to a mem-schedule only for the \"racy\" portions and enforce a sync-schedule otherwise, combining the efficiency of sync-schedules and the determinism of mem-schedules. We call these combined schedules hybrid schedules.Based on this insight, we have built Peregrine, an efficient deterministic multithreading system. When a program first runs on an input, Peregrine records an execution trace. It then relaxes this trace into a hybrid schedule and reuses the schedule on future compatible inputs efficiently and deterministically. Peregrine further improves efficiency with two new techniques: determinism-preserving slicing to generalize a schedule to more inputs while preserving determinism, and schedule-guided simplification to precisely analyze a program according to a specific schedule. Our evaluation on a diverse set of programs shows that Peregrine is deterministic and efficient, and can frequently reuse schedules for half of the evaluated programs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11738,
+    "year": 2011,
+    "title": "Pervasive detection of process races in deployed systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043589",
+    "abstract": "Process races occur when multiple processes access shared operating system resources, such as files, without proper synchronization. We present the first study of real process races and the first system designed to detect them. Our study of hundreds of applications shows that process races are numerous, difficult to debug, and a real threat to reliability. To address this problem, we created RacePro, a system for automatically detecting these races. RacePro checks deployed systems in-vivo by recording live executions then deterministically replaying and checking them later. This approach increases checking coverage beyond the configurations or executions covered by software vendors or beta testing sites. RacePro records multiple processes, detects races in the recording among system calls that may concurrently access shared kernel objects, then tries different execution orderings of such system calls to determine which races are harmful and result in failures. To simplify race detection, RacePro models under-specified system calls based on load and store micro-operations. To reduce false positives and negatives, RacePro uses a replay and go-live mechanism to distill harmful races from benign ones. We have implemented RacePro in Linux, shown that it imposes only modest recording overhead, and used it to detect a number of previously unknown bugs in real applications caused by process races.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11739,
+    "year": 2011,
+    "title": "Detecting and surviving data races using complementary schedules",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043590",
+    "abstract": "Data races are a common source of errors in multithreaded programs. In this paper, we show how to protect a program from data race errors at runtime by executing multiple replicas of the program with complementary thread schedules. Complementary schedules are a set of replica thread schedules crafted to ensure that replicas diverge only if a data race occurs and to make it very likely that harmful data races cause divergences. Our system, called Frost, uses complementary schedules to cause at least one replica to avoid the order of racing instructions that leads to incorrect program execution for most harmful data races. Frost introduces outcome-based race detection, which detects data races by comparing the state of replicas executing complementary schedules. We show that this method is substantially faster than existing dynamic race detectors for unmanaged code. To help programs survive bugs in production, Frost also diagnoses the data race bug and selects an appropriate recovery strategy, such as choosing a replica that is likely to be correct or executing more replicas to gather additional information.Frost controls the thread schedules of replicas by running all threads of a replica non-preemptively on a single core. To scale the program to multiple cores, Frost runs a third replica in parallel to generate checkpoints of the program's likely future states --- these checkpoints let Frost divide program execution into multiple epochs, which it then runs in parallel.We evaluate Frost using 11 real data race bugs in desktop and server applications. Frost both detects and survives all of these data races. Since Frost runs three replicas, its utilization cost is 3x. However, if there are spare cores to absorb this increased utilization, Frost adds only 3--12\\% overhead to application runtime.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11740,
+    "year": 2011,
+    "title": "Transactional storage for geo-replicated systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043592",
+    "abstract": "We describe the design and implementation of Walter, a key-value store that supports transactions and replicates data across distant sites. A key feature behind Walter is a new property called Parallel Snapshot Isolation (PSI). PSI allows Walter to replicate data asynchronously, while providing strong guarantees within each site. PSI precludes write-write conflicts, so that developers need not worry about conflict-resolution logic. To prevent write-write conflicts and implement PSI, Walter uses two new and simple techniques: preferred sites and counting sets. We use Walter to build a social networking application and port a Twitter-like application.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11741,
+    "year": 2011,
+    "title": "Don't settle for eventual: scalable causal consistency for wide-area storage with COPS",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2043556.2043593",
+    "abstract": "Geo-replicated, distributed data stores that support complex online applications, such as social networks, must provide an \"always-on\" experience where operations always complete with low latency. Today's systems often sacrifice strong consistency to achieve these goals, exposing inconsistencies to their clients and necessitating complex application logic. In this paper, we identify and define a consistency model---causal consistency with convergent conflict handling, or causal+---that is the strongest achieved under these constraints.We present the design and implementation of COPS, a key-value store that delivers this consistency model across the wide-area. A key contribution of COPS is its scalability, which can enforce causal dependencies between keys stored across an entire cluster, rather than a single server like previous systems. The central approach in COPS is tracking and explicitly checking whether causal dependencies between keys are satisfied in the local cluster before exposing writes. Further, in COPS-GT, we introduce get transactions in order to obtain a consistent view of multiple keys without locking or blocking. Our evaluation shows that COPS completes operations in less than a millisecond, provides throughput similar to previous systems when using one server per cluster, and scales well as we increase the number of servers in each cluster. It also shows that COPS-GT provides similar latency, throughput, and scaling to COPS for common workloads.",
+    "status": "notchecked"
+  }
+]

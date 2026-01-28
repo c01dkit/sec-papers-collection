@@ -17,16 +17,17 @@ Since some topics on software testing are related to security, the following pub
 
 - ICSE
 - ISSTA
-
+- FSE
+  
 **PRs and issues are warmly welcomed.**
 
 ## How to contribute?
 
-You can simply clone the repository, update the `data.yml` file, run `uv run main.py --analyze` locally to make sure everything works well, and create a Pull Request (PR). I will review it and update the website as soon as possible. All contributors will be listed in the repository's README and in the website's acknowledgments :)
+The paper information is processed via `uv`. You can simply clone the repository, update the `data.yml` file, run `uv run main.py --analyze` locally to make sure everything works well, and create a Pull Request (PR). I will review it and update the website as soon as possible. All contributors will be listed in the repository's README and in the website's acknowledgments :)
 
 ### Update paper details
 
-The paper source is processed via `uv` project manager. You should run `uv sync` to setup the environment first. Then, to update, first switch to `main` branch and simply update `data.yml` and run `uv run main.py --analyze` to crawl and generate the latest information! Then I will update my branch and deploy it. To speed up website crawling, you can unzip the `cache.zip` file and place the `cache` directory under the root path of the project.
+You should run `uv sync` to setup the environment first. Then, to update, first switch to `main` branch and simply update `data.yml` and run `uv run main.py --analyze` to crawl and generate the latest information! Then I will update my branch and deploy it. To speed up website crawling, you can unzip the `cache.zip` file and place the `cache` directory under the root path of the project.
 
 ### Update key information
 

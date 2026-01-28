@@ -81,6 +81,11 @@ const constructPublicationItems = () => {
             label: t('abstract.softwareEngineering'),
             icon: 'pi pi-code',
             items: [],
+        },
+        {
+            label: t('abstract.system'),
+            icon: 'pi pi-cog',
+            items: [],
         }
     ];
 
@@ -90,6 +95,8 @@ const constructPublicationItems = () => {
             targetIndex = 0;
         } else if (['ISSTA', 'ICSE', 'FSE', 'ASE', 'TSE'].includes(publication)) {
             targetIndex = 1;
+        } else if (['SOSP', 'ASPLOS'].includes(publication)) {
+            targetIndex = 2;
         }
         const item = paperStatisRef.value.byPublicationAndYear[publication];
         let tempPublicationItem = {

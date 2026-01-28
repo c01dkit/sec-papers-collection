@@ -1,0 +1,382 @@
+[
+  {
+    "id": 11577,
+    "year": 2019,
+    "title": "PipeDream: generalized pipeline parallelism for DNN training",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359646",
+    "abstract": "DNN training is extremely time-consuming, necessitating efficient multi-accelerator parallelization. Current approaches to parallelizing training primarily use intra-batch parallelization, where a single iteration of training is split over the available workers, but suffer from diminishing returns at higher worker counts. We present PipeDream, a system that adds inter-batch pipelining to intra-batch parallelism to further improve parallel training throughput, helping to better overlap computation with communication and reduce the amount of communication when possible. Unlike traditional pipelining, DNN training is bi-directional, where a forward pass through the computation graph is followed by a backward pass that uses state and intermediate data computed during the forward pass. Na\\\"{\\i}ve pipelining can thus result in mismatches in state versions used in the forward and backward passes, or excessive pipeline flushes and lower hardware efficiency. To address these challenges, PipeDream versions model parameters for numerically correct gradient computations, and schedules forward and backward passes of different minibatches concurrently on different workers with minimal pipeline stalls. PipeDream also automatically partitions DNN layers among workers to balance work and minimize communication. Extensive experimentation with a range of DNN tasks, models, and hardware configurations shows that PipeDream trains models to high accuracy up to 5.3X faster than commonly used intra-batch parallelism techniques.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11578,
+    "year": 2019,
+    "title": "A generic communication scheduler for distributed DNN training acceleration",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359642",
+    "abstract": "We present ByteScheduler, a generic communication scheduler for distributed DNN training acceleration. ByteScheduler is based on our principled analysis that partitioning and rearranging the tensor transmissions can result in optimal results in theory and good performance in real-world even with scheduling overhead. To make ByteScheduler work generally for various DNN training frameworks, we introduce a unified abstraction and a Dependency Proxy mechanism to enable communication scheduling without breaking the original dependencies in framework engines. We further introduce a Bayesian Optimization approach to auto-tune tensor partition size and other parameters for different training models under various networking conditions. ByteScheduler now supports TensorFlow, PyTorch, and MXNet without modifying their source code, and works well with both Parameter Server (PS) and all-reduce architectures for gradient synchronization, using either TCP or RDMA. Our experiments show that ByteScheduler accelerates training with all experimented system configurations and DNN models, by up to 196\\% (or 2.96X of original speed).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11579,
+    "year": 2019,
+    "title": "Parity models: erasure-coded resilience for prediction serving systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359654",
+    "abstract": "Machine learning models are becoming the primary work-horses for many applications. Services deploy models through prediction serving systems that take in queries and return predictions by performing inference on models. Prediction serving systems are commonly run on many machines in cluster settings, and thus are prone to slowdowns and failures that inflate tail latency. Erasure coding is a popular technique for achieving resource-efficient resilience to data unavailability in storage and communication systems. However, existing approaches for imparting erasure-coded resilience to distributed computation apply only to a severely limited class of functions, precluding their use for many serving workloads, such as neural network inference.We introduce parity models, a new approach for enabling erasure-coded resilience in prediction serving systems. A parity model is a neural network trained to transform erasure-coded queries into a form that enables a decoder to reconstruct slow or failed predictions. We implement parity models in ParM, a prediction serving system that makes use of erasure-coded resilience. ParM encodes multiple queries into a \"parity query,\" performs inference over parity queries using parity models, and decodes approximations of unavailable predictions by using the output of a parity model. We showcase the applicability of parity models to image classification, speech recognition, and object localization tasks. Using parity models, ParM reduces the gap between 99.9th percentile and median latency by up to 3.5X, while maintaining the same median. These results display the potential of parity models to unlock a new avenue to imparting resource-efficient resilience to prediction serving systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11580,
+    "year": 2019,
+    "title": "TASO: optimizing deep learning computation with automatic generation of graph substitutions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359630",
+    "abstract": "Existing deep neural network (DNN) frameworks optimize the computation graph of a DNN by applying graph transformations manually designed by human experts. This approach misses possible graph optimizations and is difficult to scale, as new DNN operators are introduced on a regular basis.We propose TASO, the first DNN computation graph optimizer that automatically generates graph substitutions. TASO takes as input a list of operator specifications and generates candidate substitutions using the given operators as basic building blocks. All generated substitutions are formally verified against the operator specifications using an automated theorem prover. To optimize a given DNN computation graph, TASO performs a cost-based backtracking search, applying the substitutions to find an optimized graph, which can be directly used by existing DNN frameworks.Our evaluation on five real-world DNN architectures shows that TASO outperforms existing DNN frameworks by up to 2.8X, while requiring significantly less human effort. For example, TensorFlow currently contains approximately 53,000 lines of manual optimization rules, while the operator specifications needed by TASO are only 1,400 lines of code.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11581,
+    "year": 2019,
+    "title": "Teechain: a secure payment network with asynchronous blockchain access",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359627",
+    "abstract": "Blockchains such as Bitcoin and Ethereum execute payment transactions securely, but their performance is limited by the need for global consensus. Payment networks overcome this limitation through off-chain transactions. Instead of writing to the blockchain for each transaction, they only settle the final payment balances with the underlying blockchain. When executing off-chain transactions in current payment networks, parties must access the blockchain within bounded time to detect misbehaving parties that deviate from the protocol. This opens a window for attacks in which a malicious party can steal funds by deliberately delaying other parties' blockchain access and prevents parties from using payment networks when disconnected from the blockchain.We present Teechain, the first layer-two payment network that executes off-chain transactions asynchronously with respect to the underlying blockchain. To prevent parties from misbehaving, Teechain uses treasuries, protected by hardware trusted execution environments (TEEs), to establish off-chain payment channels between parties. Treasuries maintain collateral funds and can exchange transactions efficiently and securely, without interacting with the underlying blockchain. To mitigate against treasury failures and to avoid having to trust all TEEs, Teechain replicates the state of treasuries using committee chains, a new variant of chain replication with threshold secret sharing. Teechain achieves at least a 33X higher transaction throughput than the state-of-the-art Lightning payment network. A 30-machine Teechain deployment can handle over 1 million Bitcoin transactions per second.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11582,
+    "year": 2019,
+    "title": "Fast and secure global payments with Stellar",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359636",
+    "abstract": "International payments are slow and expensive, in part because of multi-hop payment routing through heterogeneous banking systems. Stellar is a new global payment network that can directly transfer digital money anywhere in the world in seconds. The key innovation is a secure transaction mechanism across untrusted intermediaries, using a new Byzantine agreement protocol called SCP. With SCP, each institution specifies other institutions with which to remain in agreement; through the global interconnectedness of the financial system, the whole network then agrees on atomic transactions spanning arbitrary institutions, with no solvency or exchange-rate risk from intermediary asset issuers or market makers. We present SCP's model, protocol, and formal verification; describe the Stellar payment network; and finally evaluate Stellar empirically through benchmarks and our experience with several years of production use.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11583,
+    "year": 2019,
+    "title": "Notary: a device for secure transaction approval",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359661",
+    "abstract": "Notary is a new hardware and software architecture for running isolated approval agents in the form factor of a USB stick with a small display and buttons. Approval agents allow factoring out critical security decisions, such as getting the user's approval to sign a Bitcoin transaction or to delete a backup, to a secure environment. The key challenge addressed by Notary is to securely switch between agents on the same device. Prior systems either avoid the problem by building single-function devices like a USB U2F key, or they provide weak isolation that is susceptible to kernel bugs, side channels, or Rowhammer-like attacks. Notary achieves strong isolation using reset-based switching, along with the use of physically separate systems-on-a-chip for agent code and for the kernel, and a machine-checked proof of both the hardware's register-transfer-level design and software, showing that reset-based switching leaks no state. Notary also provides a trustworthy I/O path between the agent code and the user, which prevents an adversary from tampering with the user's screen or buttons.We built a hardware/software prototype of Notary, using a combination of ARM and RISC-V processors. The prototype demonstrates that it is feasible to verify Notary's reset-based switching, and that Notary can support diverse agents, including cryptocurrencies and a transaction approval agent for traditional client-server applications such as websites. Measurements of reset-based switching show that it is fast enough for interactive use. We analyze security bugs in existing cryptocurrency hardware wallets, which aim to provide a similar form factor and feature set as Notary, and show that Notary's design avoids many bugs that affect them.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11584,
+    "year": 2019,
+    "title": "CrashTuner: detecting crash-recovery bugs in cloud systems via meta-info analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359645",
+    "abstract": "Crash-recovery bugs (bugs in crash-recovery-related mechanisms) are among the most severe bugs in cloud systems and can easily cause system failures. It is notoriously difficult to detect crash-recovery bugs since these bugs can only be exposed when nodes crash under special timing conditions. This paper presents CrashTuner, a novel fault-injection testing approach to combat crash-recovery bugs. The novelty of CrashTuner lies in how we identify fault-injection points (crash points) that are likely to expose errors. We observe that if a node crashes while accessing meta-info variables, i.e., variables referencing high-level system state information (e.g., an instance of node or task), it often triggers crash-recovery bugs. Hence, we identify crash points by automatically inferring meta-info variables via a log-based static program analysis. Our approach is automatic and no manual specification is required.We have applied CrashTuner to five representative distributed systems: Hadoop2/Yarn, HBase, HDFS, ZooKeeper, and Cassandra. CrashTuner can finish testing each system in 17.39 hours, and reports 21 new bugs that have never been found before. All new bugs are confirmed by the original developers and 16 of them have already been fixed (14 with our patches). These new bugs can cause severe damages such as cluster down or start-up failures.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11585,
+    "year": 2019,
+    "title": "The inflection point hypothesis: a principled debugging approach for locating the root cause of a failure",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359650",
+    "abstract": "The end goal of failure diagnosis is to locate the root cause. Prior root cause localization approaches almost all rely on statistical analysis. This paper proposes taking a different approach based on the observation that if we model an execution as a totally ordered sequence of instructions, then the root cause can be identified by the first instruction where the failure execution deviates from the non-failure execution that has the longest instruction sequence prefix in common with that of the failure execution. Thus, root cause analysis is transformed into a principled search problem to identify the non-failure execution with the longest common prefix. We present Kairux, a tool that does just that. It is, in most cases, capable of pinpointing the root cause of a failure in a distributed system, in a fully automated way. Kairux uses tests from the system's rich unit test suite as building blocks to construct the non-failure execution that has the longest common prefix with the failure execution in order to locate the root cause. By evaluating Kairux on some of the most complex, real-world failures from HBase, HDFS, and ZooKeeper, we show that Kairux can accurately pinpoint each failure's respective root cause.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11586,
+    "year": 2019,
+    "title": "Finding semantic bugs in file systems with an extensible fuzzing framework",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359662",
+    "abstract": "File systems are too large to be bug free. Although handwritten test suites have been widely used to stress file systems, they can hardly keep up with the rapid increase in file system size and complexity, leading to new bugs being introduced and reported regularly. These bugs come in various flavors: simple buffer overflows to sophisticated semantic bugs. Although bug-specific checkers exist, they generally lack a way to explore file system states thoroughly. More importantly, no turnkey solution exists that unifies the checking effort of various aspects of a file system under one umbrella.In this paper, we highlight the potential of applying fuzzing to find not just memory errors but, in theory, any type of file system bugs with an extensible fuzzing framework: Hydra. Hydra provides building blocks for file system fuzzing, including input mutators, feedback engines, a libOS-based executor, and a bug reproducer with test case minimization. As a result, developers only need to focus on building the core logic for finding bugs of their own interests. We showcase the effectiveness of Hydra with four checkers that hunt crash inconsistency, POSIX violations, logic assertion failures, and memory errors. So far, Hydra has discovered 91 new bugs in Linux file systems, including one in a verified file system (FSCQ), as well as four POSIX violations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11587,
+    "year": 2019,
+    "title": "Efficient scalable thread-safety-violation detection: finding thousands of concurrency bugs during testing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359638",
+    "abstract": "Concurrency bugs are hard to find, reproduce, and debug. They often escape rigorous in-house testing, but result in large-scale outages in production. Existing concurrency-bug detection techniques unfortunately cannot be part of industry's integrated build and test environment due to some open challenges: how to handle code developed by thousands of engineering teams that uses a wide variety of synchronization mechanisms, how to report little/no false positives, and how to avoid excessive testing resource consumption.This paper presents TSVD, a thread-safety violation detector that addresses these challenges through a new design point in the domain of active testing. Unlike previous techniques that inject delays randomly or employ expensive synchronization analysis, TSVD uses lightweight monitoring of the calling behaviors of thread-unsafe methods, not any synchronization operations, to dynamically identify bug suspects. It then injects corresponding delays to drive the program towards thread-unsafe behaviors, actively learns from its ability or inability to do so, and persists its learning from one test run to the next. TSVD is deployed and regularly used in Microsoft and it has already found over 1000 thread-safety violations from thousands of projects. It detects more bugs than state-of-the-art techniques, mostly with just one test run.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11588,
+    "year": 2019,
+    "title": "Privacy accounting and quality control in the sage differentially private ML platform",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359639",
+    "abstract": "Companies increasingly expose machine learning (ML) models trained over sensitive user data to untrusted domains, such as end-user devices and wide-access model stores. This creates a need to control the data's leakage through these models. We present Sage, a differentially private (DP) ML platform that bounds the cumulative leakage of training data through models. Sage builds upon the rich literature on DP ML algorithms and contributes pragmatic solutions to two of the most pressing systems challenges of global DP: running out of privacy budget and the privacy-utility tradeoff. To address the former, we develop block composition, a new privacy loss accounting method that leverages the growing database regime of ML workloads to keep training models endlessly on a sensitive data stream while enforcing a global DP guarantee for the stream. To address the latter, we develop privacy-adaptive training, a process that trains a model on growing amounts of data and/or with increasing privacy parameters until, with high probability, the model meets developer-configured quality criteria. Sage's methods are designed to integrate with TensorFlow-Extended, Google's open-source ML platform. They illustrate how a systems focus on characteristics of ML workloads enables pragmatic solutions that are not apparent when one focuses on individual algorithms, as most DP ML literature does.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11589,
+    "year": 2019,
+    "title": "Honeycrisp: large-scale differentially private aggregation without a trusted core",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359660",
+    "abstract": "Recently, a number of systems have been deployed that gather sensitive statistics from user devices while giving differential privacy guarantees. One prominent example is the component in Apple's macOS and iOS devices that collects information about emoji usage and new words. However, these systems have been criticized for making unrealistic assumptions, e.g., by creating a very high \"privacy budget\" for answering queries, and by replenishing this budget every day, which results in a high worst-case privacy loss. However, it is not obvious whether such assumptions can be avoided if one requires a strong threat model and wishes to collect data periodically, instead of just once.In this paper, we show that, essentially, it is possible to have one's cake and eat it too. We describe a system called Honeycrisp whose privacy cost depends on how often the data changes, and not on how often a query is asked. Thus, if the data is relatively stable (as is likely the case, e.g., with emoji and word usage), Honeycrisp can answer periodic queries for many years, as long as the underlying data does not change too often. Honeycrisp accomplishes this by using a) the sparse-vector technique, and b) a combination of cryptographic techniques to enable global differential privacy without a trusted party. Using a prototype implementation, we show that Honeycrisp is efficient and can scale to large deployments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11590,
+    "year": 2019,
+    "title": "Yodel: strong metadata security for voice calls",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359648",
+    "abstract": "Yodel is the first system for voice calls that hides metadata (e.g., who is communicating with whom) from a powerful adversary that controls the network and compromises servers. Voice calls require sub-second message latency, but low latency has been difficult to achieve in prior work where processing each message requires an expensive public key operation at each hop in the network. Yodel avoids this expense with the idea of self-healing circuits, reusable paths through a mix network that use only fast symmetric cryptography. Once created, these circuits are resilient to passive and active attacks from global adversaries. Creating and connecting to these circuits without leaking metadata is another challenge that Yodel addresses with the idea of guarded circuit exchange, where each user creates a backup circuit in case an attacker tampers with their traffic. We evaluate Yodel across the internet and it achieves acceptable voice quality with 990 ms of latency for 5 million simulated users.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11591,
+    "year": 2019,
+    "title": "Scaling symbolic evaluation for automated verification of systems code with Serval",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359641",
+    "abstract": "This paper presents Serval, a framework for developing automated verifiers for systems software. Serval provides an extensible infrastructure for creating verifiers by lifting interpreters under symbolic evaluation, and a systematic approach to identifying and repairing verification performance bottlenecks using symbolic profiling and optimizations.Using Serval, we build automated verifiers for the RISC-V, x86--32, LLVM, and BPF instruction sets. We report our experience of retrofitting CertiKOS and Komodo, two systems previously verified using Coq and Dafny, respectively, for automated verification using Serval, and discuss trade-offs of different verification methodologies. In addition, we apply Serval to the Keystone security monitor and the BPF compilers in the Linux kernel, and uncover 18 new bugs through verification, all confirmed and fixed by developers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11592,
+    "year": 2019,
+    "title": "Verifying concurrent, crash-safe systems with Perennial",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359632",
+    "abstract": "This paper introduces Perennial, a framework for verifying concurrent, crash-safe systems. Perennial extends the Iris concurrency framework with three techniques to enable crash-safety reasoning: recovery leases, recovery helping, and versioned memory. To ease development and deployment of applications, Perennial provides Goose, a subset of Go and a translator from that subset to a model in Perennial with support for reasoning about Go threads, data structures, and file-system primitives. We implemented and verified a crash-safe, concurrent mail server using Perennial and Goose that achieves speedup on multiple cores. Both Perennial and Iris use the Coq proof assistant, and the mail server and the framework's proofs are machine checked.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11593,
+    "year": 2019,
+    "title": "Using concurrent relational logic with helpers for verifying the AtomFS file system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359644",
+    "abstract": "Concurrent file systems are pervasive but hard to correctly implement and formally verify due to nondeterministic interleavings. This paper presents AtomFS, the first formally-verified, fine-grained, concurrent file system, which provides linearizable interfaces to applications. The standard way to prove linearizability requires modeling linearization point of each operation---the moment when its effect becomes visible atomically to other threads. We observe that path inter-dependency, where one operation (like rename) breaks the path integrity of other operations, makes the linearization point external and thus poses a significant challenge to prove linearizability.To overcome the above challenge, this paper presents &lt;u&gt;C&lt;/u&gt;oncurrent &lt;u&gt;R&lt;/u&gt;elational &lt;u&gt;L&lt;/u&gt;ogic with &lt;u&gt;H&lt;/u&gt;elpers (CRL-H), a framework for building verified concurrent file systems. CRL-H is made powerful through two key contributions: (1) extending prior approaches using fixed linearization points with a helper mechanism where one operation of the thread can logically help other threads linearize their operations; (2) combining relational specifications and rely/guarantee conditions for relational and compositional reasoning. We have successfully applied CRL-H to verify the linearizability of AtomFS directly in C code. All the proofs are mechanized in Coq. Evaluations show that AtomFS speeds up file system workloads by utilizing fine-grained, multicore concurrency.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11594,
+    "year": 2019,
+    "title": "Verifying software network functions with no verification expertise",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359647",
+    "abstract": "We present the design and implementation of Vigor, a software stack and toolchain for building and running software network middleboxes that are guaranteed to be correct, while preserving competitive performance and developer productivity. Developers write the core of the middlebox---the network function (NF)---in C, on top of a standard packet-processing framework, putting persistent state in data structures from Vigor's library; the Vigor toolchain then automatically verifies that the resulting software stack correctly implements a specification, which is written in Python.Vigor has three key features: network function developers need no verification expertise, and the verification process does not require their assistance (push-button verification); the entire software stack is verified, down to the hardware (full-stack verification); and verification can be done in a pay-as-you-go manner, i.e., instead of investing upfront a lot of time in writing and verifying a complete specification, one can specify one-off properties in a few lines of Python and verify them without concern for the rest.We developed five representative NFs---a NAT, a Maglev load balancer, a MAC-learning bridge, a firewall, and a traffic policer---and verified with Vigor that they satisfy standards-derived specifications, are memory-safe, and do not crash or hang. We show that they provide competitive performance.The Vigor framework is available at http://vigor.epfl.ch.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11595,
+    "year": 2019,
+    "title": "Optimizing data-intensive computations in existing libraries with split annotations",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359652",
+    "abstract": "Data movement between main memory and the CPU is a major bottleneck in parallel data-intensive applications. In response, researchers have proposed using compilers and intermediate representations (IRs) that apply optimizations such as loop fusion under existing high-level APIs such as NumPy and TensorFlow. Even though these techniques generally do not require changes to user applications, they require intrusive changes to the library itself: often, library developers must rewrite each function using a new IR. In this paper, we propose a new technique called split annotations (SAs) that enables key data movement optimizations over unmodified library functions. SAs only require developers to annotate functions and implement an API that specifies how to partition data in the library. The annotation and API describe how to enable cross-function data pipelining and parallelization, while respecting each function's correctness constraints. We implement a parallel runtime for SAs in a system called Mozart. We show that Mozart can accelerate workloads in libraries such as Intel MKL and Pandas by up to 15x, with no library modifications. Mozart also provides performance gains competitive with solutions that require rewriting libraries, and can sometimes outperform these systems by up to 2x by leveraging existing hand-optimized code.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11596,
+    "year": 2019,
+    "title": "Niijima: sound and automated computation consolidation for efficient multilingual data-parallel pipelines",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359649",
+    "abstract": "Multilingual data-parallel pipelines, such as Microsoft's Scope and Apache Spark, are widely used in real-world analytical tasks. While the involvement of multiple languages (often including both managed and native languages) provides much convenience in data manipulation and transformation, it comes at a performance cost --- managed languages need a managed runtime, incurring much overhead. In addition, each switch from a managed to a native runtime (and vice versa) requires marshalling or unmarshalling of an ocean of data objects, taking a large fraction of the execution time. This paper presents Niijima, an optimizing compiler for Microsoft's Scope/Cosmos, which can consolidate C#-based user-defined operators (UDOs) across SQL statements, thereby reducing the number of dataflow vertices that require the managed runtime, and thus the amount of C# computations and the data marshalling cost. We demonstrate that Niijima has reduced job latency by an average of 24\\% and up to 3.3x, on a series of production jobs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11597,
+    "year": 2019,
+    "title": "Nexus: a GPU cluster engine for accelerating DNN-based video analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359658",
+    "abstract": "We address the problem of serving Deep Neural Networks (DNNs) efficiently from a cluster of GPUs. In order to realize the promise of very low-cost processing made by accelerators such as GPUs, it is essential to run them at sustained high utilization. Doing so requires cluster-scale resource management that performs detailed scheduling of GPUs, reasoning about groups of DNN invocations that need to be co-scheduled, and moving from the conventional whole-DNN execution model to executing fragments of DNNs. Nexus is a fully implemented system that includes these innovations. In large-scale case studies on 16 GPUs, when required to stay within latency constraints at least 99\\% of the time, Nexus can process requests at rates 1.8-12.7X higher than state of the art systems can. A long-running multi-application deployment stays within 84\\% of optimal utilization and, on a 100-GPU cluster, violates latency SLOs on 0.27\\% of requests.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11598,
+    "year": 2019,
+    "title": "Lineage stash: fault tolerance off the critical path",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359653",
+    "abstract": "As cluster computing frameworks such as Spark, Dryad, Flink, and Ray are being deployed in mission critical applications and on larger and larger clusters, their ability to tolerate failures is growing in importance. These frameworks employ two broad approaches for fault tolerance: checkpointing and lineage. Checkpointing exhibits low overhead during normal operation but high overhead during recovery, while lineage-based solutions make the opposite tradeoff.We propose the lineage stash, a decentralized causal logging technique that significantly reduces the runtime overhead of lineage-based approaches without impacting recovery efficiency. With the lineage stash, instead of recording the task's information before the task is executed, we record it asynchronously and forward the lineage along with the task. This makes it possible to support large-scale, low-latency (millisecond-level) data processing applications with low runtime and recovery overheads. Experimental results for applications in distributed training and stream processing show that the lineage stash provides task execution latencies similar to checkpointing alone, while incurring a recovery overhead as low as traditional lineage-based approaches.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11599,
+    "year": 2019,
+    "title": "File systems unfit as distributed storage backends: lessons from 10 years of Ceph evolution",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359656",
+    "abstract": "For a decade, the Ceph distributed file system followed the conventional wisdom of building its storage backend on top of local file systems. This is a preferred choice for most distributed file systems today because it allows them to benefit from the convenience and maturity of battle-tested code. Ceph's experience, however, shows that this comes at a high price. First, developing a zero-overhead transaction mechanism is challenging. Second, metadata performance at the local level can significantly affect performance at the distributed level. Third, supporting emerging storage hardware is painstakingly slow.Ceph addressed these issues with BlueStore, a new back-end designed to run directly on raw storage devices. In only two years since its inception, BlueStore outperformed previous established backends and is adopted by 70\\% of users in production. By running in user space and fully controlling the I/O stack, it has enabled space-efficient metadata and data checksums, fast overwrites of erasure-coded data, inline compression, decreased performance variability, and avoided a series of performance pitfalls of local file systems. Finally, it makes the adoption of backwards-incompatible storage hardware possible, an important trait in a changing storage landscape that is learning to embrace hardware diversity.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11600,
+    "year": 2019,
+    "title": "I4: incremental inference of inductive invariants for verification of distributed protocols",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359651",
+    "abstract": "Designing and implementing distributed systems correctly is a very challenging task. Recently, formal verification has been successfully used to prove the correctness of distributed systems. At the heart of formal verification lies a computer-checked proof with an inductive invariant. Finding this inductive invariant, however, is the most difficult part of the proof. Alas, current proof techniques require inductive invariants to be found manually---and painstakingly---by the developer.In this paper, we present a new approach, Incremental Inference of Inductive Invariants (I4), to automatically generate inductive invariants for distributed protocols. The essence of our idea is simple: the inductive invariant of a finite instance of the protocol can be used to infer a general inductive invariant for the infinite distributed protocol. In I4, we create a finite instance of the protocol; use a model checking tool to automatically derive the inductive invariant for this finite instance; and generalize this invariant to an inductive invariant for the infinite protocol. Our experiments show that I4 can prove the correctness of several distributed protocols like Chord, 2PC and Transaction Chains with little to no human effort.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11601,
+    "year": 2019,
+    "title": "Aegean: replication beyond the client-server model",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359663",
+    "abstract": "This paper presents Aegean, a new approach that allows fault-tolerant replication to be implemented beyond the confines of the client-server model. In today's computing, where services are rarely standalone, traditional replication protocols such as Primary-Backup, Paxos, and PBFT are not directly applicable, as they were designed for the client-server model. When services interact, these protocols run into a number of problems, affecting both correctness and performance. In this paper, we rethink the design of replication protocols in the presence of interactions between services and introduce new techniques that accommodate such interactions safely and efficiently. Our evaluation shows that a prototype implementation of Aegean not only ensures correctness in the presence of service interactions, but can further improve throughput by an order of magnitude.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11602,
+    "year": 2019,
+    "title": "Snap: a microkernel approach to host networking",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359657",
+    "abstract": "This paper presents our design and experience with a microkernel-inspired approach to host networking called Snap. Snap is a userspace networking system that supports Google's rapidly evolving needs with flexible modules that implement a range of network functions, including edge packet switching, virtualization for our cloud platform, traffic shaping policy enforcement, and a high-performance reliable messaging and RDMA-like service. Snap has been running in production for over three years, supporting the extensible communication needs of several large and critical systems.Snap enables fast development and deployment of new networking features, leveraging the benefits of address space isolation and the productivity of userspace software development together with support for transparently upgrading networking services without migrating applications off of a machine. At the same time, Snap achieves compelling performance through a modular architecture that promotes principled synchronization with minimal state sharing, and supports real-time scheduling with dynamic scaling of CPU resources through a novel kernel/userspace CPU scheduler co-design. Our evaluation demonstrates over 3x Gbps/core improvement compared to a kernel networking stack for RPC workloads, software-based RDMA-like performance of up to 5M IOPS/core, and transparent upgrades that are largely imperceptible to user applications. Snap is deployed to over half of our fleet of machines and supports the needs of numerous teams.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11603,
+    "year": 2019,
+    "title": "Risk based planning of network changes in evolving data centers",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359664",
+    "abstract": "Data center networks evolve as they serve customer traffic. When applying network changes, operators risk impacting customer traffic because the network operates at reduced capacity and is more vulnerable to failures and traffic variations. The impact on customer traffic ultimately translates to operator cost (e.g., refunds to customers). However, planning a network change while minimizing the risks is challenging as we need to adapt to a variety of traffic dynamics and cost functions while scaling to large networks and large changes. Today, operators often use plans that maximize the residual capacity (MRC), which often incurs a high cost under different traffic dynamics. Instead, we propose Janus, which searches the large planning space by leveraging the high degree of symmetry in data center networks. Our evaluation on large Clos networks and Facebook traffic traces shows that Janus generates plans in real-time only needing 33~71\\% of the cost of MRC planners while adapting to a variety of settings.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11604,
+    "year": 2019,
+    "title": "Taiji: managing global user traffic for large-scale internet services at the edge",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359655",
+    "abstract": "We present Taiji, a new system for managing user traffic for large-scale Internet services that accomplishes two goals: 1) balancing the utilization of data centers and 2) minimizing network latency of user requests.Taiji models edge-to-datacenter traffic routing as an assignment problem---assigning traffic objects at the edge to the data centers to satisfy service-level objectives. Taiji uses a constraint optimization solver to generate an optimal routing table that specifies the fractions of traffic each edge node will distribute to different data centers. Taiji continuously adjusts the routing table to accommodate the dynamics of user traffic and failure events that reduce capacity.Taiji leverages connections among users to selectively route traffic of highly-connected users to the same data centers based on fractions in the routing table. This routing strategy, which we term connection-aware routing, allows us to reduce query load on our backend storage by 17\\%.Taiji has been used in production at Facebook for more than four years and routes global traffic in a user-aware manner for several large-scale product services across dozens of edge nodes and data centers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11605,
+    "year": 2019,
+    "title": "KVell: the design and implementation of a fast persistent key-value store",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359628",
+    "abstract": "Modern block-addressable NVMe SSDs provide much higher bandwidth and similar performance for random and sequential access. Persistent key-value stores (KVs) designed for earlier storage devices, using either Log-Structured Merge (LSM) or B trees, do not take full advantage of these new devices. Logic to avoid random accesses, expensive operations for keeping data sorted on disk, and synchronization bottlenecks make these KVs CPU-bound on NVMe SSDs.We present a new persistent KV design. Unlike earlier designs, no attempt is made at sequential access, and data is not sorted when stored on disk. A shared-nothing philosophy is adopted to avoid synchronization overhead. Together with batching of device accesses, these design decisions make for read and write performance close to device bandwidth. Finally, maintaining an inexpensive partial sort in memory produces adequate scan performance.We implement this design in KVell, the first persistent KV able to utilize modern NVMe SSDs at maximum bandwidth. We compare KVell against available state-of-the-art LSM and B tree KVs, both with synthetic benchmarks and production workloads. KVell achieves throughput at least 2x that of its closest competitor on read-dominated workloads, and 5x on write-dominated workloads. For workloads that contain mostly scans, KVell performs comparably or better than its competitors. KVell provides maximum latencies an order of magnitude lower than the best of its competitors, even on scan-based workloads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11606,
+    "year": 2019,
+    "title": "Recipe: converting concurrent DRAM indexes to persistent-memory indexes",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359635",
+    "abstract": "We present Recipe, a principled approach for converting concurrent DRAM indexes into crash-consistent indexes for persistent memory (PM). The main insight behind Recipe is that isolation provided by a certain class of concurrent in-memory indexes can be translated with small changes to crash-consistency when the same index is used in PM. We present a set of conditions that enable the identification of this class of DRAM indexes, and the actions to be taken to convert each index to be persistent. Based on these conditions and conversion actions, we modify five different DRAM indexes based on B+ trees, tries, radix trees, and hash tables to their crash-consistent PM counterparts. The effort involved in this conversion is minimal, requiring 30--200 lines of code. We evaluated the converted PM indexes on Intel DC Persistent Memory, and found that they outperform state-of-the-art, hand-crafted PM indexes in multi-threaded workloads by up-to 5.2x. For example, we built P-CLHT, our PM implementation of the CLHT hash table by modifying only 30 LOC. When running YCSB workloads, P-CLHT performs up to 2.4x better than Cacheline-Conscious Extendible Hashing (CCEH), the state-of-the-art PM hash table.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11607,
+    "year": 2019,
+    "title": "Performance and protection in the ZoFS user-space NVM file system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359637",
+    "abstract": "Non-volatile memory (NVM) can be directly accessed in user space without going through the kernel. This encourages several recent studies on building user-space NVM file systems. However, for the sake of file system protection, none of the existing file systems grant user-space file system libraries with direct control over both metadata and data of the NVM, leaving fast NVM resources underexploited.Based on the observation that applications tend to group files with similar access permissions within the same directory and permission changes are rare operations, this paper proposes a new abstraction called coffer, which is a collection of isolated NVM resources, and show its merits on building a performant and protected NVM file system in user space. The key idea is to separate NVM protection from management via coffers so that user-space libraries can take full control of NVM within a coffer while the kernel guarantees strict isolation among coffers. Based on coffers, we build an NVM file system architecture to bring the high performance of NVM to unmodified dynamically linked applications and facilitate the development of performant and flexible user-space NVM file system libraries. With an example file system called ZoFS, we show that user-space file systems built upon coffers can outperform existing NVM file systems in both benchmarks and real-world applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11608,
+    "year": 2019,
+    "title": "SplitFS: reducing software overhead in file systems for persistent memory",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359631",
+    "abstract": "We present SplitFS, a file system for persistent memory (PM) that reduces software overhead significantly compared to state-of-the-art PM file systems. SplitFS presents a novel split of responsibilities between a user-space library file system and an existing kernel PM file system. The user-space library file system handles data operations by intercepting POSIX calls, memory-mapping the underlying file, and serving the read and overwrites using processor loads and stores. Metadata operations are handled by the kernel PM file system (ext4 DAX). SplitFS introduces a new primitive termed relink to efficiently support file appends and atomic data operations. SplitFS provides three consistency modes, which different applications can choose from, without interfering with each other. SplitFS reduces software overhead by up-to 4x compared to the NOVA PM file system, and 17x compared to ext4 DAX. On a number of micro-benchmarks and applications such as the LevelDB key-value store running the YCSB benchmark, SplitFS increases application performance by up to 2x compared to ext4 DAX and NOVA while providing similar consistency guarantees.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11609,
+    "year": 2019,
+    "title": "AutoMine: harmonizing high-level abstraction and high performance for graph mining",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359633",
+    "abstract": "Graph mining algorithms that aim at identifying structural patterns of graphs are typically more complex than graph computation algorithms such as breadth first search. Researchers have implemented several systems with high-level and flexible interfaces customized for tackling graph mining problems. However, we find that for triangle counting, one of the simplest graph mining problems, such systems can be several times slower than a single-threaded implementation of a straightforward algorithm.In this paper, we reveal the root causes of the severe inefficiencies of state-of-the-art graph mining systems and the challenges to address the performance problems. We build AutoMine, a single-machine system to provide both high-level interfaces and high performance for large-scale graph mining applications. The novelty of AutoMine comes from 1) a new representation of subgraph patterns and 2) compilation techniques that automatically generate efficient mining code with minimized memory consumption from a high-level abstraction. We have extensively evaluated AutoMine against 3 graph mining systems on 8 real-world graphs of different scales. Our experimental results show that AutoMine often produces several orders of magnitude better performance and can process very large graphs existing systems cannot handle.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11610,
+    "year": 2019,
+    "title": "KnightKing: a fast distributed graph random walk engine",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359634",
+    "abstract": "Random walk on graphs has recently gained immense popularity as a tool for graph data analytics and machine learning. Currently, random walk algorithms are developed as individual implementations and suffer significant performance and scalability problems, especially with the dynamic nature of sophisticated walk strategies.We present KnightKing, the first general-purpose, distributed graph random walk engine. To address the unique interaction between a static graph and many dynamic walkers, it adopts an intuitive walker-centric computation model. The corresponding programming model allows users to easily specify existing or new random walk algorithms, facilitated by a new unified edge transition probability definition that applies across popular known algorithms. With KnightKing, these diverse algorithms benefit from its common distributed random walk execution engine, centered around an innovative rejection-based sampling mechanism that dramatically reduces the cost of higher-order random walk algorithms. Our evaluation confirms that KnightKing brings up to 4 orders of magnitude improvement in executing algorithms that currently can only be afforded with approximation solutions on large graphs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11611,
+    "year": 2019,
+    "title": "Gerenuk: thin computation over big native data using speculative program transformation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359643",
+    "abstract": "Big Data systems are typically implemented in object-oriented languages such as Java and Scala due to the quick development cycle they provide. These systems are executed on top of a managed runtime such as the Java Virtual Machine (JVM), which requires each data item to be represented as an object before it can be processed. This representation is the direct cause of many kinds of severe inefficiencies.We developed Gerenuk, a compiler and runtime that aims to enable a JVM-based data-parallel system to achieve near-native efficiency by transforming a set of statements in the system for direct execution over inlined native bytes. The key insight leading to Gerenuk's success is two-fold: (1) analytics workloads often use immutable and confined data types. If we speculatively optimize the system and user code with this assumption, the transformation can be made tractable. (2) The flow of data starts at a deserialization point where objects are created from a sequence of native bytes and ends at a serialization point where they are turned back into a byte sequence to be sent to the disk or network. This flow naturally defines a speculative execution region (SER) to be transformed. Gerenuk compiles a SER speculatively into a version that can operate directly over native bytes that come from the disk or network. The Gerenuk runtime aborts the SER execution upon violations of the immutability and confinement assumption and switches to the slow path by deserializing the bytes and re-executing the original SER. Our evaluation on Spark and Hadoop demonstrates promising results.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11612,
+    "year": 2019,
+    "title": "An analysis of performance evolution of Linux's core operations",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359640",
+    "abstract": "This paper presents an analysis of how Linux's performance has evolved over the past seven years. Unlike recent works that focus on OS performance in terms of scalability or service of a particular workload, this study goes back to basics: the latency of core kernel operations (e.g., system calls, context switching, etc.). To our surprise, the study shows that the performance of many core operations has worsened or fluctuated significantly over the years. For example, the select system call is 100\\% slower than it was just two years ago. An in-depth analysis shows that over the past seven years, core kernel subsystems have been forced to accommodate an increasing number of security enhancements and new features. These additions steadily add overhead to core kernel operations but also frequently introduce extreme slowdowns of more than 100\\%. In addition, simple misconfigurations have also severely impacted kernel performance. Overall, we find most of the slowdowns can be attributed to 11 changes.Some forms of slowdown are avoidable with more proactive engineering. We show that it is possible to patch two security enhancements (from the 11 changes) to eliminate most of their overheads. In fact, several features have been introduced to the kernel unoptimized or insufficiently tested and then improved or disabled long after their release.Our findings also highlight both the feasibility and importance for Linux users to actively configure their systems to achieve an optimal balance between performance, functionality, and security: we discover that 8 out of the 11 changes can be avoided by reconfiguring the kernel, and the other 3 can be disabled through simple patches. By disabling the 11 changes with the goal of optimizing performance, we speed up Redis, Apache, and Nginx benchmark workloads by as much as 56\\%, 33\\%, and 34\\%, respectively.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11613,
+    "year": 2019,
+    "title": "ShortCut: accelerating mostly-deterministic code regions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359659",
+    "abstract": "Applications commonly perform repeated computations that are mostly, but not exactly, similar. If a subsequent computation were identical to the original, the operating system could improve performance via memoization, i.e., capturing the differences in program state caused by the computation and applying the differences in lieu of re-executing the computation. However, opportunities for generic memoization are limited by a myriad of differences that arise during execution, e.g., timestamps differ and communication yields non-deterministic responses. Such difference cause memoization to produce incorrect state.ShortCut generically accelerates mostly-deterministic computation by partial memoization. It creates a program, called a slice, that modifies the state diff to account for variation in a subsequent computation. ShortCut learns which inputs, data flows and control flows are likely, and makes assumptions about possible values for each during slice generation. Assuming only likely values rather than allowing all possible values makes complex slice generation feasible and slice execution much faster. Slices are self-verifying; they include predicates that verify all assumptions made during a subsequent execution. When these verifications succeed, the slice is guaranteed to produce a correct modification. If a verification fails, ShortCut transparently rolls back the slice execution and runs the non-memoized computation. Users see no difference between normal, memoized, and rolled-back execution.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11614,
+    "year": 2019,
+    "title": "Scalable and practical locking with shuffling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/3341301.3359629",
+    "abstract": "Locks are an essential building block for high-performance multicore system software. To meet performance goals, lock algorithms have evolved towards specialized solutions for architectural characteristics (e.g., NUMA). However, inpractice, applications run on different server platforms and exhibit widely diverse behaviors that evolve with time (e.g., number of threads, number of locks). This creates performance and scalability problems for locks optimized for a single scenario and platform. For example, popular spinlocks suffer from excessive cache-line bouncing in NUMA systems, while scalable, NUMA-aware locks exhibit sub-par single-thread performance.In this paper, we identify four dominating factors that impact the performance of lock algorithms. We then propose a new technique, shuffling, that can dynamically accommodate all these factors, without slowing down the critical path of the lock. The key idea of shuffling is to re-order the queue of threads waiting to acquire the lock in accordance with some pre-established policy. For best performance, this work is done off the critical path, by the waiter threads. Using shuffling, we demonstrate how to achieve NUMA-awareness and implement an efficient parking/wake-up strategy, without any auxiliary data structure, mostly off the critical path. The evaluation shows that our family of locks based on shuffling improves the throughput of real-world applications up to 12.5x, with impressive memory footprint reduction compared with the recent lock algorithms.",
+    "status": "notchecked"
+  }
+]

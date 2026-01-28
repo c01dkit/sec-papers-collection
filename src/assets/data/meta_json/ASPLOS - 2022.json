@@ -1,0 +1,802 @@
+[
+  {
+    "id": 13258,
+    "year": 2022,
+    "title": "TaskStream: accelerating task-parallel workloads by recovering program structure",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507706",
+    "abstract": "Reconfigurable accelerators, like CGRAs and dataflow architectures, have come to prominence for addressing data-processing problems. However, they are largely limited to workloads with regular parallelism, precluding their applicability to prevalent task-parallel workloads. Reconfigurable architectures and task parallelism seem to be at odds, as the former requires repetitive and simple program structure, and the latter breaks program structure to create small, individually scheduled program units. Our insight is that if tasks and their potential for communication structure are first-class primitives in the hardware, it is possible to recover program structure with extremely low overhead. We propose a task execution model for accelerators called TaskStream, which annotates task dependences with information sufficient to recover inter-task structure. TaskStream enables work-aware load balancing, recovery of pipelined inter-task dependences, and recovery of inter-task read sharing through multicasting. We apply TaskStream to a reconfigurable dataflow architecture, creating a seamless hierarchical dataflow model for task-parallel workloads. We compare our accelerator, Delta, with an equivalent static-parallel design. Overall, we find that our execution model can improve performance by 2.2\\texttimes{} with only 3.6\\% area overhead, while alleviating the programming burden of managing task distribution.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13259,
+    "year": 2022,
+    "title": "DOTA: detect and omit weak attentions for scalable transformer acceleration",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507738",
+    "abstract": "Transformer Neural Networks have demonstrated leading performance in many applications spanning over language understanding, image processing, and generative modeling. Despite the impressive performance, long-sequence Transformer processing is expensive due to quadratic computation complexity and memory consumption of self-attention. In this paper, we present DOTA, an algorithm-architecture co-design that effectively addresses the challenges of scalable Transformer inference. Based on the insight that not all connections in an attention graph are equally important, we propose to jointly optimize a lightweight Detector with the Transformer model to accurately detect and omit weak connections during runtime. Furthermore, we design a specialized system architecture for end-to-end Transformer acceleration using the proposed attention detection mechanism. Experiments on a wide range of benchmarks demonstrate the superior performance of DOTA over other solutions. In summary, DOTA achieves 152.6x and 4.5x performance speedup and orders of magnitude energy-efficiency improvements over GPU and customized hardware, respectively.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13260,
+    "year": 2022,
+    "title": "A full-stack search technique for domain optimized deep learning accelerators",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507767",
+    "abstract": "The rapidly-changing deep learning landscape presents a unique opportunity for building inference accelerators optimized for specific datacenter-scale workloads. We propose Full-stack Accelerator Search Technique (FAST), a hardware accelerator search framework that defines a broad optimization environment covering key design decisions within the hardware-software stack, including hardware datapath, software scheduling, and compiler passes such as operation fusion and tensor padding. In this paper, we analyze bottlenecks in state-of-the-art vision and natural language processing (NLP) models, including EfficientNet and BERT, and use FAST to design accelerators capable of addressing these bottlenecks. FAST-generated accelerators optimized for single workloads improve Perf/TDP by 3.7\\texttimes{} on average across all benchmarks compared to TPU-v3. A FAST-generated accelerator optimized for serving a suite of workloads improves Perf/TDP by 2.4\\texttimes{} on average compared to TPU-v3. Our return on investment analysis shows that FAST-generated accelerators can potentially be practical for moderate-sized datacenter deployments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13261,
+    "year": 2022,
+    "title": "FINGERS: exploiting fine-grained parallelism in graph mining accelerators",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507730",
+    "abstract": "Graph mining is an emerging application of high importance and also with high complexity, thus requiring efficient hardware acceleration. Current accelerator designs only utilize coarse-grained parallelism, leaving large room for further optimizations. Our key insight is to fully exploit fine-grained parallelism to overcome the existing issues of hardware underutilization, inefficient resource provision, and limited single-thread performance under imbalanced loads. Targeting pattern-aware graph mining algorithms, we first comprehensively identify and analyze the abundant fine-grained parallelism at the branch, set, and segment levels during search tree exploration and set operations. We then propose a novel graph mining accelerator, FINGERS, which effectively exploits these multiple levels of fine-grained parallelism to achieve significant performance improvements. FINGERS mainly enhances the design of each single processing element with parallel compute units for set operations, and efficient techniques for task scheduling, load balancing, and data aggregation. FINGERS outperforms the state-of-the-art design by 2.8\\texttimes{} on average and up to 8.9\\texttimes{} with the same chip area. We also demonstrate that different patterns and different graphs exhibit drastically different parallelism opportunities, justifying the necessity of exploiting all levels of fine-grained parallelism in FINGERS.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13262,
+    "year": 2022,
+    "title": "BiSon-e: a lightweight and high-performance accelerator for narrow integer linear algebra computing on the edge",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507746",
+    "abstract": "Linear algebra computational kernels based on byte and sub-byte integer data formats are at the base of many classes of applications, ranging from Deep Learning to Pattern Matching. Porting the computation of these applications from cloud to edge and mobile devices would enable significant improvements in terms of security, safety, and energy efficiency. However, despite their low memory and energy demands, their intrinsically high computational intensity makes the execution of these workloads challenging on highly resource-constrained devices. In this paper, we present BiSon-e, a novel RISC-V based architecture that accelerates linear algebra kernels based on narrow integer computations on edge processors by performing Single Instruction Multiple Data (SIMD) operations on off-the-shelf scalar Functional Units (FUs). Our novel architecture is built upon the binary segmentation technique, which allows to significantly reduce the memory footprint and the arithmetic intensity of linear algebra kernels requiring narrow data sizes. We integrate BiSon-e into a complete System-on-Chip (SoC) based on RISC-V, synthesized and Place&amp;Routed in 65nm and 22nm technologies, introducing a negligible 0.07\\% area overhead with respect to the baseline architecture. Our experimental evaluation shows that, when computing the Convolution and Fully-Connected layers of the AlexNet and VGG-16 Convolutional Neural Networks (CNNs) with 8-, 4-, and 2-bit, our solution gains up to 5.6\\texttimes{}, 13.9\\texttimes{} and 24\\texttimes{} in execution time compared to the scalar implementation of a single RISC-V core, and improves the energy efficiency of string matching tasks by 5\\texttimes{} when compared to a RISC-V-based Vector Processing Unit (VPU).",
+    "status": "notchecked"
+  },
+  {
+    "id": 13263,
+    "year": 2022,
+    "title": "Software-defined address mapping: a case on 3D memory",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507774",
+    "abstract": "3D-stacking memory such as High-Bandwidth Memory (HBM) and Hybrid Memory Cube (HMC) provides orders of magnitude more bandwidth and significantly increased channel-level parallelism (CLP) due to its new parallel memory architecture. However, it is challenging to fully exploit the abundant CLP for performance as the bandwidth utilization is highly dependent on address mapping in the memory controller. Unfortunately, CLP is very sensitive to a program’s data access pattern, which is not made available to OS/hardware by existing mechanisms. In this work, we address these challenges with software-defined address mapping (SDAM) that, for the first time, enables user program to obtain a direct control of the low-level memory hardware in a more intelligent and fine-grained manner. In particular, we develop new mechanisms that can effectively communicate a program’s data access properties to the OS and hardware and to use it to control data placement in hardware. To guarantee correctness and reduce overhead in storage and performance, we extend Linux kernel and C-language memory allocators to support multiple address mappings. For advanced system optimization, we develop machine learning methods that can automatically identify access patterns of major variables in a program and cluster these with similar access patterns to reduce the overhead for SDAM. We demonstrate the benefits of our design on real system prototype, comprising (1) a RISC-V processor, near memory accelerators and HBM modules using Xilinx FPGA platform, and (2) modified Linux and glibc. Our evaluation on standard CPU benchmarks and data-intensive benchmarks (for both CPU and accelerators) demonstrates 1.41\\texttimes{}, 1.84\\texttimes{} speedup on CPU and 2.58\\texttimes{} on near memory accelerators in our system with SDAM compared to a baseline system that uses a fixed address mapping.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13264,
+    "year": 2022,
+    "title": "Parallel virtualized memory translation with nested elastic cuckoo page tables",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507720",
+    "abstract": "A major reason why nested or virtualized address translations are slow is because current systems organize page tables in a multi-level tree that is accessed in a sequential manner. A nested translation may potentially require up to twenty-four sequential memory accesses. To address this problem, this paper presents the first page table design that supports parallel nested address translation. The design is based on using hashed page tables (HPTs) for both guest and host. However, directly extending a native HPT design to a nested environment leads to minor gains. Instead, our design solves a new set of challenges that appear in nested environments. Our scheme eliminates all but three of the potentially twenty-four sequential steps of a nested translation—while judiciously limiting the number of parallel memory accesses issued to avoid over-consuming cache bandwidth. As a result, compared to conventional nested radix tables, our design speeds-up the execution of a set of applications by an average of 1.19x (for 4KB pages) and 1.24x (when huge pages are used). In addition, we also show a migration path from current nested radix page tables to our design.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13265,
+    "year": 2022,
+    "title": "CARAT CAKE: replacing paging via compiler/kernel cooperation",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507771",
+    "abstract": "Virtual memory, specifically paging, is undergoing significant innovation due to being challenged by new demands from modern workloads. Recent work has demonstrated an alternative software only design that can result in simplified hardware requirements, even supporting purely physical addressing. While we have made the case for this Compiler- And Runtime-based Address Translation (CARAT) concept, its evaluation was based on a user-level prototype. We now report on incorporating CARAT into a kernel, forming Compiler- And Runtime-based Address Translation for CollAborative Kernel Environments (CARAT CAKE). In our implementation, a Linux-compatible x64 process abstraction can be based either on CARAT CAKE, or on a sophisticated paging implementation. Implementing CARAT CAKE involves kernel changes and compiler optimizations/transformations that must work on all code in the system, including kernel code. We evaluate CARAT CAKE in comparison with paging and find that CARAT CAKE is able to achieve the functionality of paging (protection, mapping, and movement properties) with minimal overhead. In turn, CARAT CAKE allows significant new benefits for systems including energy savings, larger L1 caches, and arbitrary granularity memory management.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13266,
+    "year": 2022,
+    "title": "NVAlloc: rethinking heap metadata management in persistent memory allocators",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507743",
+    "abstract": "Persistent memory allocation is a fundamental building block for developing high-performance and in-memory applications. Existing persistent memory allocators suffer from suboptimal heap organizations that introduce repeated cache line flushes and small random accesses in persistent memory. Worse, many allocators use static slab segregation resulting in a dramatic increase in memory consumption when allocation request size is changed. In this paper, we design a novel allocator, named NVAlloc, to solve the above issues simultaneously. First, NVAlloc eliminates cache line reflushes by mapping contiguous data blocks in slabs to interleaved metadata entries stored in different cache lines. Second, it writes small metadata units to a persistent bookkeeping log in a sequential pattern to remove random heap metadata accesses in persistent memory. Third, instead of using static slab segregation, it supports slab morphing, which allows slabs to be transformed between size classes to significantly improve slab usage. NVAlloc is complementary to the existing consistency models. Results on 6 benchmarks demonstrate that NVAlloc improves the performance of state-of-the-art persistent memory allocators by up to 6.4x and 57x for small and large allocations, respectively. Using NVAlloc reduces memory usage by up to 57.8\\%. Besides, we integrate NVAlloc in a persistent FPTree. Compared to the state-of-the-art allocators, NVAlloc improves the performance of this application by up to 3.1x.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13267,
+    "year": 2022,
+    "title": "Every walk’s a hit: making page walks single-access cache hits",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507718",
+    "abstract": "As memory capacity has outstripped TLB coverage, large data applications suffer from frequent page table walks. We investigate two complementary techniques for addressing this cost: reducing the number of accesses required and reducing the latency of each access. The first approach is accomplished by opportunistically \"flattening\" the page table: merging two levels of traditional 4 KB page table nodes into a single 2 MB node, thereby reducing the table's depth and the number of indirections required to traverse it. The second is accomplished by biasing the cache replacement algorithm to keep page table entries during periods of high TLB miss rates, as these periods also see high data miss rates and are therefore more likely to benefit from having the smaller page table in the cache than to suffer from increased data cache misses. We evaluate these approaches for both native and virtualized systems and across a range of realistic memory fragmentation scenarios, describe the limited changes needed in our kernel implementation and hardware design, identify and address challenges related to self-referencing page tables and kernel memory allocation, and compare results across server and mobile systems using both academic and industrial simulators for robustness. We find that flattening does reduce the number of accesses required on a page walk (to 1.0), but its performance impact (+2.3\\%) is small due to Page Walker Caches (already 1.5 accesses). Prioritizing caching has a larger effect (+6.8\\%), and the combination improves performance by +9.2\\%. Flattening is more effective on virtualized systems (4.4 to 2.8 accesses, +7.1\\% performance), due to 2D page walks. By combining the two techniques we demonstrate a state-of-the-art +14.0\\% performance gain and -8.7\\% dynamic cache energy and -4.7\\% dynamic DRAM energy for virtualized execution with very simple hardware and software changes.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13268,
+    "year": 2022,
+    "title": "GPM: leveraging persistent memory from a GPU",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507758",
+    "abstract": "The GPU is a key computing platform for many application domains. While the new non-volatile memory technology has brought the promise of byte-addressable persistence (a.k.a., persistent memory, or PM) to CPU applications, the same, unfortunately, is beyond the reach of GPU programs. We take three key steps toward enabling GPU programs to access PM directly. First, enable direct access to PM from within a GPU kernel without needing to modify the hardware. Next, we demonstrate three classes of GPU-accelerated applications that benefit from PM. In the process, we create a workload suite with nine such applications. We then create a GPU library, written in CUDA, to support logging, checkpointing, and primitives for native persistence for programmers to easily leverage PM.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13269,
+    "year": 2022,
+    "title": "GPUReplay: a 50-KB GPU stack for client ML",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507754",
+    "abstract": "GPUReplay (GR) is a novel way for deploying GPU-accelerated computation on mobile and embedded devices. It addresses high complexity of a modern GPU stack for deployment ease and security. The idea is to record GPU executions on the full GPU stack ahead of time and replay the executions on new input at run time. We address key challenges towards making GR feasible, sound, and practical to use. The resultant replayer is a drop-in replacement of the original GPU stack. It is tiny (50 KB of executable), robust (replaying long executions without divergence), portable (running in a commodity OS, in TEE, and baremetal), and quick to launch (speeding up startup by up to two orders of magnitude). We show that GPUReplay works with a variety of integrated GPU hardware, GPU APIs, ML frameworks, and 33 neural network (NN) implementations for inference or training. The code is available at https://github.com/bakhi/GPUReplay.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13270,
+    "year": 2022,
+    "title": "ValueExpert: exploring value patterns in GPU-accelerated applications",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507708",
+    "abstract": "General-purpose GPUs have become common in modern computing systems to accelerate applications in many domains, including machine learning, high-performance computing, and autonomous driving. However, inefficiencies abound in GPU-accelerated applications, which prevent them from obtaining bare-metal performance. Performance tools play an important role in understanding performance inefficiencies in complex code bases. Many GPU performance tools pinpoint time-consuming code and provide high-level performance insights but overlook one important performance issue---value-related inefficiencies, which exist in many GPU code bases. In this paper, we present ValueExpert, a novel tool to pinpoint value-related inefficiencies in GPU applications. ValueExpert monitors application execution to capture values produced and used by each load and store operation in GPU kernels, recognizes multiple value patterns, and provides intuitive optimization guidance. We address systemic challenges in collecting, maintaining, and analyzing voluminous performance data from many GPU threads to make ValueExpert applicable to complex applications. We evaluate ValueExpert on a wide range of well-tuned benchmarks and applications, including PyTorch, Darknet, LAMMPS, Castro, and many others. ValueExpert is able to identify previously unknown performance issues and provide suggestions for nontrivial performance improvements with typically less than five lines of code changes. We verify our optimizations with application developers and upstream fixes to their repositories.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13271,
+    "year": 2022,
+    "title": "SparseCore: stream ISA and processor specialization for sparse computation",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507705",
+    "abstract": "Computation on sparse data is becoming increasingly important for many applications. Recent sparse computation accelerators are designed for specific algorithm/application, making them inflexible with software optimizations. This paper proposes SparseCore, the first general-purpose processor extension for sparse computation that can flexibly accelerate complex code patterns and fast-evolving algorithms. We extend the instruction set architecture (ISA) to make stream or sparse vector first-class citizens, and develop efficient architectural components to support the stream ISA. The novel ISA extension intrinsically operates on streams, realizing both efficient data movement and computation. The simulation results show that SparseCore achieves significant speedups for sparse tensor computation and graph pattern computation.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13272,
+    "year": 2022,
+    "title": "JSONSki: streaming semi-structured data with bit-parallel fast-forwarding",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507719",
+    "abstract": "Semi-structured data, such as JSON, are fundamental to the Web and document data stores. Streaming analytics on semi-structured data combines parsing and query evaluation into one pass to avoid generating parse trees. Though promising, its conventional design requires to parse the data stream in detail character by character, which limits the efficiency of streaming analytics. This work reveals a wide range of opportunities to fast-forward the streaming over certain data substructures irrelevant to the query evaluation. However, identifying these substructures itself may need detailed parsing. To resolve this dilemma, this work designs a highly bit-parallel solution that intensively utilizes bitwise and SIMD operations to identify the irrelevant substructures during the streaming. It includes a new streaming model—recursive-descent streaming, for an easy adoption of fast-forward optimizations, a concept—structural intervals, for partitioning the data stream, and a group of bit-parallel algorithms implementing various fast-forward cases. The solution is implemented as a JSON streaming framework, called JSONSki. It offers a set of APIs that can be invoked during the streaming to dynamically fast-forward over different cases of irrelevant substructures. Evaluation using real-world datasets and standard path queries shows that JSONSki can achieve significant speedups over the state-of-the-art JSON processing tools while taking a minimum memory footprint.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13273,
+    "year": 2022,
+    "title": "MineSweeper: a “clean sweep” for drop-in use-after-free prevention",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507712",
+    "abstract": "Low-level languages, which require manual memory management from the programmer, remain in wide use for performance-critical applications. Memory-safety bugs are common, and now a major source of exploits. In&nbsp;particular, a&nbsp;use-after-free bug occurs when an&nbsp;object is erroneously deallocated, whilst pointers to it remain active in&nbsp;memory, and those (dangling) pointers are later used to access the object. An&nbsp;attacker can reallocate the memory area backing an&nbsp;erroneously freed object, then overwrite its contents, injecting carefully chosen data into the host program, thus altering its execution and achieving privilege escalation. We present MineSweeper, a&nbsp;system to mitigate use-after-free vulnerabilities by retaining freed allocations in a&nbsp;quarantine, until no&nbsp;pointers to them remain in program&nbsp;memory, thus preventing their reallocation until it is safe. MineSweeper performs efficient linear sweeps of memory to identify quarantined items that have no dangling pointers to them, and thus can be safely reallocated. This allows MineSweeper to be significantly more efficient than previous transitive marking procedure techniques. MineSweeper, attached to JeMalloc, improves security at an acceptable overhead in memory footprint (11.1\\% on average) and an execution-time cost of only 5.4\\% (geometric mean for SPEC CPU2006), with 9.6\\% additional threaded CPU usage. These figures considerably improve on the state-of-the-art for non-probabilistic drop-in temporal-safety systems, and make MineSweeper the only such scheme suitable for deployment in real-world production environments.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13274,
+    "year": 2022,
+    "title": "Revizor: testing black-box CPUs against speculation contracts",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507729",
+    "abstract": "Speculative vulnerabilities such as Spectre and Meltdown expose speculative execution state that can be exploited to leak information across security domains via side-channels. Such vulnerabilities often stay undetected for a long time as we lack the tools for systematic testing of CPUs to find them. In this paper, we propose an approach to automatically detect microarchitectural information leakage in commercial black-box CPUs. We build on speculation contracts, which we employ to specify the permitted side effects of program execution on the CPU's microarchitectural state. We propose a Model-based Relational Testing (MRT) technique to empirically assess the CPU compliance with these specifications. We implement MRT in a testing framework called Revizor, and showcase its effectiveness on real Intel x86 CPUs. Revizor automatically detects violations of a rich set of contracts, or indicates their absence. A highlight of our findings is that Revizor managed to automatically surface Spectre, MDS, and LVI, as well as several previously unknown variants.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13275,
+    "year": 2022,
+    "title": "Protecting adaptive sampling from information leakage on low-power sensors",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507775",
+    "abstract": "Adaptive sampling is a powerful family of algorithms for managing energy consumption on low-power sensors. These algorithms use captured measurements to control the sensor's collection rate, leading to near-optimal error under energy constraints. Adaptive sampling's data-driven nature, however, comes at a cost in privacy. In this work, we demonstrate how the collection rates of general adaptive policies leak information about captured measurements. Further, individual adaptive policies display this leakage on multiple tasks. This result presents a challenge in maintaining privacy for sensors using energy-efficient batched communication. In this context, the size of measurement batches exposes the sampling policy's collection rate. Thus, an attacker who monitors the encrypted link between sensor and server can use message lengths to uncover information about the captured values. We address this side-channel by introducing a framework called Adaptive Group Encoding (AGE) that protects any periodic adaptive sampler. AGE uses quantization to encode all batches as fixed-length messages, making message sizes independent of the collection rate. AGE reduces the quantization error through a series of transformations. The proposed framework preserves the low error of adaptive sampling while preventing information leakage and incurring negligible energy overhead.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13276,
+    "year": 2022,
+    "title": "One size does not fit all: security hardening of MIPS embedded systems via static binary debloating for shared libraries",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507768",
+    "abstract": "Embedded systems have become prominent targets for cyberattacks. To exploit firmware’s memory corruption vulnerabilities, cybercriminals harvest reusable code gadgets from the large shared library codebase (e.g., uClibc). Unfortunately, unlike their desktop counterparts, embedded systems lack essential computing resources to enforce security hardening techniques. Recently, we have witnessed a surge of software debloating as a new defense mechanism against code-reuse attacks; it erases unused code to significantly diminish the possibilities of constructing reusable gadgets. Because of the single firmware image update style, static library debloating shows promise to fortify embedded systems without compromising performance and forward compatibility. However, static library debloating on stripped binaries (e.g., firmware’s shared libraries) is still an enormous challenge. In this paper, we show that this challenge is not insurmountable for MIPS firmware. We develop a novel system, named uTrimmer, to identify and wipe out unused basic blocks from shared libraries’ binary code, without causing additional runtime overhead or memory consumption. We propose a new method to identify address-taken blocks/functions, which further help us maintain an inter-procedural control flow graph to conservatively include library code that could be potentially used by firmware. By capturing address access patterns for position-independent code, we circumvent the challenge of determining code-pointer targets and safely eliminate unused code. We run uTrimmer to debloat shared libraries for SPEC CPU2017 benchmarks, popular firmware applications (e.g., Apache, BusyBox, and OpenSSL), and a real-world wireless router firmware image. Our experiments show that not only does uTrimmer deliver functional programs, but also it can cut the exposed code surface and eliminate various reusable code gadgets remarkably. uTrimmer’s debloating capability can compete with the static linking results.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13277,
+    "year": 2022,
+    "title": "ViK: practical mitigation of temporal memory safety violations through object ID inspection",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507780",
+    "abstract": "Temporal memory safety violations, such as use-after-free (UAF) vulnerabilities, are a critical security issue for software written in memory-unsafe languages such as C and C++. In this paper, we introduce ViK, a novel, lightweight, and widely applicable runtime defense that can protect both operating system (OS) kernels and user-space applications against temporal memory safety violations. ViK performs object ID inspection, where it assigns a random identifier to every allocated object and stores the identifier in the unused bits of the corresponding pointer. When the pointer is used, ViK inspects the value of a pointer before dereferencing, ensuring that the pointer still references the original object. To the best of our knowledge, this is the first mitigation against temporal memory safety violations that scales to OS kernels. We evaluated the software prototype of ViK on Android and Linux kernels and observed runtime overhead of around 20\\%. Also, we evaluated a hardware-assisted prototype of ViK on Android kernel, where the runtime overhead was as low as 2\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13278,
+    "year": 2022,
+    "title": "Eavesdropping user credentials via GPU side channels on smartphones",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507757",
+    "abstract": "Graphics Processing Unit (GPU) on smartphones is an effective target for hardware attacks. In this paper, we present a new side channel attack on mobile GPUs of Android smartphones, allowing an unprivileged attacker to eavesdrop the user's credentials, such as login usernames and passwords, from their inputs through on-screen keyboard. Our attack targets on Qualcomm Adreno GPUs and investigate the amount of GPU overdraw when rendering the popups of user's key presses of inputs. Such GPU overdraw caused by each key press corresponds to unique variations of selected GPU performance counters, from which these key presses can be accurately inferred. Experiment results from practical use on multiple models of Android smartphones show that our attack can correctly infer more than 80\\% of user's credential inputs, but incur negligible amounts of computing overhead and network traffic on the victim device. To counter this attack, this paper suggests mitigations of access control on GPU performance counters, or applying obfuscations on the values of GPU performance counters.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13279,
+    "year": 2022,
+    "title": "CRISP: critical slice prefetching",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507745",
+    "abstract": "The high access latency of DRAM continues to be a performance challenge for contemporary microprocessor systems. Prefetching is a well-established technique to address this problem, however, existing implemented designs fail to provide any performance benefits in the presence of irregular memory access patterns. The hardware complexity of prior techniques that can predict irregular memory accesses such as runahead execution has proven untenable for implementation in real hardware. We propose a lightweight mechanism to hide the high latency of irregular memory access patterns by leveraging criticality-based scheduling. In particular, our technique executes delinquent loads and their load slices as early as possible, hiding a significant fraction of their latency. Furthermore, we observe that the latency induced by branch mispredictions and other high latency instructions can be hidden with a similar approach. Our proposal only requires minimal hardware modifications by performing memory access classification, load and branch slice extraction, as well as priority analysis exclusively in software. As a result, our technique is feasible to implement, introducing only a simple new instruction prefix while requiring minimal modifications of the instruction scheduler. Our technique increases the IPC of memory-latency-bound applications by up to 38\\% and by 8.4\\% on average.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13280,
+    "year": 2022,
+    "title": "Pinned loads: taming speculative loads in secure processors",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507724",
+    "abstract": "In security frameworks for speculative execution, an instruction is said to reach its Visibility Point (VP) when it is no longer vulnerable to pipeline squashes. Before a potentially leaky instruction reaches its VP, it has to stall—unless a defense scheme such as invisible speculation provides protection. Unfortunately, either stalling or protecting the execution of pre-VP instructions typically has a performance cost. One way to attain low-overhead safe execution is to develop techniques that speed-up the advance of the VP from older to younger instructions. In this paper, we propose one such technique. We find that the progress of the VP for loads is mostly impeded by waiting until no memory consistency violations (MCVs) are possible. Hence, our technique, called , tries to make loads invulnerable to MCVs as early as possible—a process we call pinning the loads in the pipeline. The result is faster VP progress and a reduction in the execution overhead of defense schemes. In this paper, we describe the hardware needed by , and two possible designs with different tradeoffs between hardware requirements and performance. Our evaluation shows that is very effective: extending three popular defense schemes against speculative execution attacks with reduces their average execution overhead on SPEC17 and on SPLASH2/PARSEC applications by about 50\\%. For example, on SPEC17, the execution overhead of the three defense schemes decreases from to , from to , and from to .",
+    "status": "notchecked"
+  },
+  {
+    "id": 13281,
+    "year": 2022,
+    "title": "DAGguise: mitigating memory timing side channels",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507747",
+    "abstract": "This paper studies the mitigation of memory timing side channels, where attackers utilize contention within DRAM controllers to infer a victim’s secrets. Already practical, this class of channels poses an important challenge to secure computing in shared memory environments. Existing state-of-the-art memory timing side channel mitigations have several key performance and security limitations. Prior schemes require onerous static bandwidth partitioning, extensive profiling phases, or simply fail to protect against attacks which exploit fine-grained timing and bank information. We present DAGguise, a defense mechanism which fully protects against memory timing side channels while allowing for dynamic traffic contention in order to achieve good performance. DAGguise utilizes a novel abstract memory access representation, the Directed Acyclic Request Graph (rDAG for short), to model memory access patterns which experience contention. DAGguise shapes a victim’s memory access patterns according to a publicly known rDAG obtained through a lightweight profiling stage, completely eliminating information leakage. We formally verify the security of DAGguise, proving that it maintains strong security guarantees. Moreover, by allowing dynamic traffic contention, DAGguise achieves a 12\\% overall system speedup relative to Fixed Service, which is the state-of-the-art mitigation mechanism, with up to a 20\\% relative speedup for co-located applications which do not require protection. We further claim that the principles of DAGguise can be generalized to protect against other types of scheduler-based timing side channels, such as those targeting on-chip networks, or functional units in SMT cores.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13282,
+    "year": 2022,
+    "title": "RecShard: statistical feature-based memory optimization for industry-scale neural recommendation",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507777",
+    "abstract": "We propose RecShard, a fine-grained embedding table (EMB) partitioning and placement technique for deep learning recommendation models (DLRMs). RecShard is designed based on two key observations. First, not all EMBs are equal, nor all rows within an EMB are equal in terms of access patterns. EMBs exhibit distinct memory characteristics, providing performance optimization opportunities for intelligent EMB partitioning and placement across a tiered memory hierarchy. Second, in modern DLRMs, EMBs function as hash tables. As a result, EMBs display interesting phenomena, such as the birthday paradox, leaving EMBs severely under-utilized. RecShard determines an optimal EMB sharding strategy for a set of EMBs based on training data distributions and model characteristics, along with the bandwidth characteristics of the underlying tiered memory hierarchy. In doing so, RecShard achieves over 6 times higher EMB training throughput on average for capacity constrained DLRMs. The throughput increase comes from improved EMB load balance by over 12 times and from the reduced access to the slower memory by over 87 times.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13283,
+    "year": 2022,
+    "title": "AStitch: enabling a new multi-dimensional optimization space for memory-intensive ML training and inference on modern SIMT architectures",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507723",
+    "abstract": "This work reveals that memory-intensive computation is a rising performance-critical factor in recent machine learning models. Due to a unique set of new challenges, existing ML optimizing compilers cannot perform efficient fusion under complex two-level dependencies combined with just-in-time demand. They face the dilemma of either performing costly fusion due to heavy redundant computation, or skipping fusion which results in massive number of kernels. Furthermore, they often suffer from low parallelism due to the lack of support for real-world production workloads with irregular tensor shapes. To address these rising challenges, we propose AStitch, a machine learning optimizing compiler that opens a new multi-dimensional optimization space for memory-intensive ML computations. It systematically abstracts four operator-stitching schemes while considering multi-dimensional optimization objectives, tackles complex computation graph dependencies with novel hierarchical data reuse, and efficiently processes various tensor shapes via adaptive thread mapping. Finally, AStitch provides just-in-time support incorporating our proposed optimizations for both ML training and inference. Although AStitch serves as a stand-alone compiler engine that is portable to any version of TensorFlow, its basic ideas can be generally applied to other ML frameworks and optimization compilers. Experimental results show that AStitch can achieve an average of 1.84x speedup (up to 2.73x) over the state-of-the-art Google's XLA solution across five production workloads. We also deploy AStitch onto a production cluster for ML workloads with thousands of GPUs. The system has been in operation for more than 10 months and saves about 20,000 GPU hours for 70,000 tasks per week.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13284,
+    "year": 2022,
+    "title": "NASPipe: high performance and reproducible pipeline parallel supernet training via causal synchronous parallelism",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507735",
+    "abstract": "Supernet training, a prevalent and important paradigm in Neural Architecture Search, embeds the whole DNN architecture search space into one monolithic supernet, iteratively activates a subset of the supernet (i.e., a subnet) for fitting each batch of data, and searches a high-quality subnet which meets specific requirements. Although training subnets in parallel on multiple GPUs is desirable for acceleration, there inherently exists a race hazard that concurrent subnets may access the same DNN layers. Existing systems support neither efficiently parallelizing subnets’ training executions, nor resolving the race hazard deterministically, leading to unreproducible training procedures and potentiallly non-trivial accuracy loss. We present NASPipe, the first high-performance and reproducible distributed supernet training system via causal synchronous parallel (CSP) pipeline scheduling abstraction: NASPipe partitions a supernet across GPUs and concurrently executes multiple generated sub-tasks (subnets) in a pipelined manner; meanwhile, it oversees the correlations between the subnets and deterministically resolves any causal dependency caused by subnets’ layer sharing. To obtain high performance, NASPipe’s CSP scheduler exploits the fact that the larger a supernet spans, the fewer dependencies manifest between chronologically close subnets; therefore, it aggressively schedules the subnets with larger chronological orders into execution, only if they are not causally dependent on unfinished precedent subnets. Moreover, to relieve the excessive GPU memory burden for holding the whole supernet’s parameters, NASPipe uses a context switch technique that stashes the whole supernet in CPU memory, precisely predicts the subnets’ schedule, and pre-fetches/evicts a subnet before/after its execution. The evaluation shows that NASPipe is the only system that retains supernet training reproducibility, while achieving a comparable and even higher performance (up to 7.8X) compared to three recent pipeline training systems (e.g., GPipe).",
+    "status": "notchecked"
+  },
+  {
+    "id": 13285,
+    "year": 2022,
+    "title": "VELTAIR: towards high-performance multi-tenant deep learning services via adaptive compilation and scheduling",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507752",
+    "abstract": "Deep learning (DL) models have achieved great success in many application domains. As such, many industrial companies such as Google and Facebook have acknowledged the importance of multi-tenant DL services. Although the multi-tenant service has been studied in conventional workloads, it is not been deeply studied on deep learning service, especially on general-purpose hardware. In this work, we systematically analyze the opportunities and challenges of providing multi-tenant deep learning services on the general-purpose CPU architecture from the aspects of scheduling granularity and code generation. We propose an adaptive granularity scheduling scheme to both guarantee resource usage efficiency and reduce the scheduling conflict rate. We also propose an adaptive compilation strategy, by which we can dynamically and intelligently pick a program with proper exclusive and shared resource usage to reduce overall interference-induced performance loss. Compared to the existing works, our design can serve more requests under the same QoS target in various scenarios (e.g., +71\\%, +62\\%, +45\\% for light, medium, and heavy workloads, respectively), and reduce the averaged query latency by 50\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13286,
+    "year": 2022,
+    "title": "Breaking the computation and communication abstraction barrier in distributed machine learning workloads",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507778",
+    "abstract": "Recent trends towards large machine learning models require both training and inference tasks to be distributed. Considering the huge cost of training these models, it is imperative to unlock optimizations in computation and communication to obtain best performance. However, the current logical separation between computation and communication kernels in machine learning frameworks misses optimization opportunities across this barrier. Breaking this abstraction can provide many optimizations to improve the performance of distributed workloads. However, manually applying these optimizations requires modifying the underlying computation and communication libraries for each scenario, which is both time consuming and error-prone. Therefore, we present CoCoNet, which contains (i) a domain specific language to express a distributed machine learning program in the form of computation and communication operations, (ii) a set of semantics preserving transformations to optimize the program, and (iii) a compiler to generate jointly optimized communication and computation GPU kernels. Providing both computation and communication as first class constructs allows users to work on a high-level abstraction and apply powerful optimizations, such as fusion or overlapping of communication and computation. CoCoNet enabled us to optimize data-, model- and pipeline-parallel workloads in large language models with only a few lines of code. Our experiments show that CoCoNet significantly outperforms state-of-the-art distributed machine learning implementations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13287,
+    "year": 2022,
+    "title": "Clio: a hardware-software co-designed disaggregated memory system",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507762",
+    "abstract": "Memory disaggregation has attracted great attention recently because of its benefits in efficient memory utilization and ease of management. So far, memory disaggregation research has all taken one of two approaches: building/emulating memory nodes using regular servers or building them using raw memory devices with no processing power. The former incurs higher monetary cost and faces tail latency and scalability limitations, while the latter introduces performance, security, and management problems. Server-based memory nodes and memory nodes with no processing power are two extreme approaches. We seek a sweet spot in the middle by proposing a hardware-based memory disaggregation solution that has the right amount of processing power at memory nodes. Furthermore, we take a clean-slate approach by starting from the requirements of memory disaggregation and designing a memory-disaggregation-native system. We built Clio, a disaggregated memory system that virtualizes, protects, and manages disaggregated memory at hardware-based memory nodes. The Clio hardware includes a new virtual memory system, a customized network system, and a framework for computation offloading. In building Clio, we not only co-design OS functionalities, hardware architecture, and the network system, but also co-design compute nodes and memory nodes. Our FPGA prototype of Clio demonstrates that each memory node can achieve 100&nbsp;Gbps throughput and an end-to-end latency of 2.5&nbsp;µ s at median and 3.2&nbsp;µ s at the 99th percentile. Clio also scales much better and has orders of magnitude lower tail latency than RDMA. It has 1.1\\texttimes{} to 3.4\\texttimes{} energy saving compared to CPU-based and SmartNIC-based disaggregated memory systems and is 2.7\\texttimes{} faster than software-based SmartNIC solutions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13288,
+    "year": 2022,
+    "title": "Enzian: an open, general, CPU/FPGA platform for systems software research",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507742",
+    "abstract": "Hybrid computing platforms, comprising CPU cores and FPGA logic, are increasingly used for accelerating data-intensive workloads in cloud deployments, and are a growing topic of interest in systems research. However, from a research perspective, existing hardware platforms are limited: they are often optimized for concrete, narrow use-cases and, therefore lack the flexibility needed to explore other applications and configurations. We show that a research group can design and build a more general, open, and affordable hardware platform for hybrid systems research. The platform, Enzian, is capable of duplicating the functionality of existing CPU/FPGA systems with comparable performance but in an open, flexible system. It couples a large FPGA with a server-class CPU in an asymmetric cache-coherent NUMA system. Enzian also enables research not possible with existing hybrid platforms, through explicit access to coherence messages, extensive thermal and power instrumentation, and an open, programmable baseboard management processor. Enzian is already being used in multiple projects, is open source (both hardware and software), and available for remote use. We present the design principles of Enzian, the challenges in building it, and evaluate it with a range of existing research use-cases alongside other, more specialized platforms, as well as demonstrating research not possible on existing platforms.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13289,
+    "year": 2022,
+    "title": "Efficient and scalable core multiplexing with M³v",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507741",
+    "abstract": "The M³ system (ASPLOS&nbsp;’16) proposed a hardware/software co-design that simplifies integration between general-purpose cores and special-purpose accelerators, allowing users to easily utilize them in a unified manner. M³ is a tiled architecture, whose tiles (cores and accelerators) are partitioned between applications, such that each tile is dedicated to its own application. The M³x system (ATC&nbsp;’19) extended M³ by trading off some isolation to enable coarse-grained multiplexing of tiles among multiple applications. With M³x, if source tile t₁ runs code of application p and sends a message m to destination tile t₂ while t₂ is currently not associated with p, then m is forwarded to the right place through a “slow path”, via some special OS tile. In this paper, we present M³v, which extends M³x by further trading off some isolation between applications to support “fast path” communication that does not require the said OS tile’s involvement. Thus, with M³v, a tile can be efficiently multiplexed between applications provided it is a general-purpose core. M³v achieves this goal by 1)&nbsp;adding a local multiplexer to each such core, and by 2)&nbsp;virtualizing the core’s hardware component responsible for cross-tile communications. We prototype M³v using RISC-V cores on an FPGA platform and show that it significantly outperforms M³x and may achieve competitive performance to Linux.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13290,
+    "year": 2022,
+    "title": "FlexOS: towards flexible OS isolation",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507759",
+    "abstract": "At design time, modern operating systems are locked in a specific safety and isolation strategy that mixes one or more hardware/software protection mechanisms (e.g. user/kernel separation); revisiting these choices after deployment requires a major refactoring effort. This rigid approach shows its limits given the wide variety of modern applications' safety/performance requirements, when new hardware isolation mechanisms are rolled out, or when existing ones break. We present FlexOS, a novel OS allowing users to easily specialize the safety and isolation strategy of an OS at compilation/deployment time instead of design time. This modular LibOS is composed of fine-grained components that can be isolated via a range of hardware protection mechanisms with various data sharing strategies and additional software hardening. The OS ships with an exploration technique helping the user navigate the vast safety/performance design space it unlocks. We implement a prototype of the system and demonstrate, for several applications (Redis/Nginx/SQLite), FlexOS' vast configuration space as well as the efficiency of the exploration technique: we evaluate 80 FlexOS configurations for Redis and show how that space can be probabilistically subset to the 5 safest ones under a given performance budget. We also show that, under equivalent configurations, FlexOS performs similarly or better than existing solutions which use fixed safety configurations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13291,
+    "year": 2022,
+    "title": "Adelie: continuous address space layout re-randomization for Linux drivers",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507779",
+    "abstract": "While address space layout randomization (ASLR) has been extensively studied for user-space programs, the corresponding OS kernel's KASLR support remains very limited, making the kernel vulnerable to just-in-time (JIT) return-oriented programming (ROP) attacks. Furthermore, commodity OSs such as Linux restrict their KASLR range to 32 bits due to architectural constraints (e.g., x86-64 only supports 32-bit immediate operands for most instructions), which makes them vulnerable to even unsophisticated brute-force ROP attacks due to low entropy. Most in-kernel pointers remain static, exacerbating the problem when pointers are leaked. Adelie, our kernel defense mechanism, overcomes KASLR limitations, increases KASLR entropy, and makes successful ROP attacks on the Linux kernel much harder to achieve. First, Adelie enables the position-independent code (PIC) model so that the kernel and its modules can be placed anywhere in the 64-bit virtual address space, at any distance apart from each other. Second, Adelie implements stack re-randomization and address encryption on modules. Finally, Adelie enables efficient continuous KASLR for modules by using the PIC model to make it (almost) impossible to inject ROP gadgets through these modules regardless of gadget's origin. Since device drivers (typically compiled as modules) are often developed by third parties and are typically less tested than core OS parts, they are also often more vulnerable. By fully re-randomizing device drivers, the last two contributions together prevent most JIT ROP attacks since vulnerable modules are very likely to be a starting point of an attack. Furthermore, some OS instances in virtualized environments are specifically designated to run device drivers, where drivers are the primary target of JIT ROP attacks. Using a GCC plugin that we developed, we automatically modify different kinds of kernel modules. Since the prior art tackles only user-space programs, we solve many challenges unique to the kernel code. Our evaluation shows high efficiency of Adelie's approach: the overhead of the PIC model is completely negligible and re-randomization cost remains reasonable for typical use cases.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13292,
+    "year": 2022,
+    "title": "Suppressing ZZ crosstalk of Quantum computers through pulse and scheduling co-optimization",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507761",
+    "abstract": "Noise is a significant obstacle to quantum computing, and ZZ crosstalk is one of the most destructive types of noise affecting superconducting qubits. Previous approaches to suppressing ZZ crosstalk have mainly relied on specific chip design that can complicate chip fabrication and aggravate decoherence. To some extent, special chip design can be avoided by relying on pulse optimization to suppress ZZ crosstalk. However, existing approaches are non-scalable, as their required time and memory grow exponentially with the number of qubits involved. To address the above problems, we propose a scalable approach by co-optimizing pulses and scheduling. We optimize pulses to offer an ability to suppress ZZ crosstalk surrounding a gate, and then design scheduling strategies to exploit this ability and achieve suppression across the whole circuit. A main advantage of such co-optimization is that it does not require special hardware support. Besides, we implement our approach as a general framework that is compatible with different pulse optimization methods. We have conducted extensive evaluations by simulation and on a real quantum computer. Simulation results show that our proposal can improve the fidelity of quantum computing on 4∼12 qubits by up to 81\\texttimes{} (11\\texttimes{} on average). Ramsey experiments on a real quantum computer also demonstrate that our method can eliminate the effect of ZZ crosstalk to a great extent.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13293,
+    "year": 2022,
+    "title": "QUEST: systematically approximating Quantum circuits for higher output fidelity",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507739",
+    "abstract": "We present QUEST, a procedure to systematically generate approximations for quantum circuits to reduce their CNOT gate count. Our approach employs circuit partitioning for scalability with procedures to 1) reduce circuit length using approximate synthesis, 2) improve fidelity by running circuits that represent key samples in the approximation space, and 3) reason about approximation upper bound. Our evaluation results indicate that our approach of \"dissimilar\" approximations provides close fidelity to the original circuit. Overall, the results indicate that QUEST can reduce CNOT gate count by 30-80\\% on ideal systems and decrease the impact of noise on existing and near-future quantum systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13294,
+    "year": 2022,
+    "title": "HAMMER: boosting fidelity of noisy Quantum circuits by exploiting Hamming behavior of erroneous outcomes",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507703",
+    "abstract": "Quantum computers with hundreds of qubits will be available soon. Unfortunately, high device error-rates pose a significant challenge in using these near-term quantum systems to power real-world applications. Executing a program on existing quantum systems generates both correct and incorrect outcomes, but often, the output distribution is too noisy to distinguish between them. In this paper, we show that erroneous outcomes are not arbitrary but exhibit a well-defined structure when represented in the Hamming space. Our experiments on IBM and Google quantum computers show that the most frequent erroneous outcomes are more likely to be close in the Hamming space to the correct outcome. We exploit this behavior to improve the ability to infer the correct outcome. We propose Hamming Reconstruction (HAMMER), a post-processing technique that leverages the observation of Hamming behavior to reconstruct the noisy output distribution, such that the resulting distribution has higher fidelity. We evaluate HAMMER using experimental data from Google and IBM quantum computers with more than 500 unique quantum circuits and obtain an average improvement of 1.37x in the quality of solution. On Google’s publicly available QAOA datasets, we show that HAMMER sharpens the gradients on the cost function landscape.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13295,
+    "year": 2022,
+    "title": "LILLIPUT: a lightweight low-latency lookup-table decoder for near-term Quantum error correction",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507707",
+    "abstract": "The error rates of quantum devices are orders of magnitude higher than what is needed to run most quantum applications. To close this gap, Quantum Error Correction (QEC) encodes logical qubits and distributes information using several physical qubits. By periodically executing a syndrome extraction circuit on the logical qubits, information about errors (called syndrome) is extracted while running programs. A decoder uses these syndromes to identify and correct errors in real time, which is necessary to prevent accumulation of errors. Unfortunately, software decoders are slow and hardware decoders are fast but less accurate. Thus, almost all QEC studies so far have relied on offline decoding. To enable real-time decoding in near-term QEC, we propose LILLIPUT– a Lightweight Low Latency Look-Up Table decoder. LILLIPUT consists of two parts– First, it translates syndromes into error detection events that index into a Look-Up Table (LUT) whose entry provides the error information in real-time. Second, it programs the LUTs with error assignments for all possible error events by running a software decoder offline. LILLIPUT tolerates an error on any operation in the quantum hardware, including gates and measurements, and the number of tolerated errors grows with the size of the code. LILLIPUT utilizes less than 7\\% logic on off-the-shelf FPGAs enabling practical adoption, as FPGAs are already used to design the control and readout circuits in existing systems. LILLIPUT incurs a latency of a few nanoseconds and enables real-time decoding. We also propose Compressed LUTs (CLUTs) to reduce the memory required by LILLIPUT. By exploiting the fact that not all error events are equally likely and only storing data for the most probable error events, CLUTs reduce the memory needed by up-to 107x (from 148 MB to 1.38 MB) without degrading the accuracy.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13296,
+    "year": 2022,
+    "title": "Paulihedral: a generalized block-wise compiler optimization framework for Quantum simulation kernels",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507715",
+    "abstract": "The quantum simulation kernel is an important subroutine appearing as a very long gate sequence in many quantum programs. In this paper, we propose Paulihedral, a block-wise compiler framework that can deeply optimize this subroutine by exploiting high-level program structure and optimization opportunities. Paulihedral first employs a new Pauli intermediate representation that can maintain the high-level semantics and constraints in quantum simulation kernels. This naturally enables new large-scale optimizations that are hard to implement at the low gate-level. In particular, we propose two technology-independent instruction scheduling passes, and two technology-dependent code optimization passes which reconcile the circuit synthesis, gate cancellation, and qubit mapping stages of the compiler. Experimental results show that Paulihedral can outperform state-of-the-art compiler infrastructures in a wide-range of applications on both near-term superconducting quantum processors and future fault-tolerant quantum computers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13297,
+    "year": 2022,
+    "title": "Astraea: towards QoS-aware and resource-efficient multi-stage GPU services",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507721",
+    "abstract": "Multi-stage user-facing applications on GPUs are widely-used nowa- days, and are often implemented to be microservices. Prior re- search works are not applicable to ensuring QoS of GPU-based microservices due to the different communication patterns and shared resource contentions. We propose Astraea to manage GPU microservices considering the above factors. In Astraea, a microser- vice deployment policy is used to maximize the supported peak service load while ensuring the required QoS. To adaptively switch the communication methods between microservices according to different deployments, we propose an auto-scaling GPU communi- cation framework. The framework automatically scales based on the currently used hardware topology and microservice location, and adopts global memory-based techniques to reduce intra-GPU communication. Astraea increases the supported peak load by up to 82.3\\% while achieving the desired 99\\%-ile latency target compared with state-of-the-art solutions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13298,
+    "year": 2022,
+    "title": "Memory-harvesting VMs in cloud platforms",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507725",
+    "abstract": "loud platforms monetize their spare capacity by renting “Spot” virtual machines (VMs) that can be evicted in favor of higher-priority VMs. Recent work has shown that resource-harvesting VMs are more effective at exploiting spare capacity than Spot VMs, while also reducing the number of evictions. However, the prior work focused on harvesting CPU cores while keeping memory size fixed. This wastes a substantial monetization opportunity and may even limit the ability of harvesting VMs to leverage spare cores. Thus, in this paper, we explore memory harvesting and its challenges in real cloud platforms, namely its impact on VM creation time, NUMA spanning, and page fragmentation. We start by characterizing the amount and dynamics of the spare memory in Azure. We then design and implement memory-harvesting VMs (MHVMs), introducing new techniques for memory buffering, batching, and pre-reclamation. To demonstrate the use of MHVMs, we also extend a popular cluster scheduling framework (Hadoop) and a FaaS platform to adapt to them. Our main results show that (1) there is plenty of scope for memory harvesting in real platforms; (2) MHVMs are effective at mitigating the negative impacts of harvesting; and (3) our extensions of Hadoop and FaaS successfully hide the MHVMs’ varying memory size from the users’ data-processing jobs and functions. We conclude that memory harvesting has great potential for practical deployment and users can save up to 93\\% of their costs when running workloads on MHVMs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13299,
+    "year": 2022,
+    "title": "IOCost: block IO control for containers in datacenters",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507727",
+    "abstract": "Resource isolation is a fundamental requirement in datacenter environments. However, our production experience in Meta’s large-scale datacenters shows that existing IO control mechanisms for block storage are inadequate in containerized environments. IO control needs to provide proportional resources to containers while taking into account the hardware heterogeneity of storage devices and the idiosyncrasies of the workloads deployed in datacenters. The speed of modern SSDs requires IO control to execute with low-overheads. Furthermore, IO control should strive for work conservation, take into account the interactions with the memory management subsystem, and avoid priority inversions that lead to isolation failures. To address these challenges, this paper presents IOCost, an IO control solution that is designed for containerized environments and provides scalable, work-conserving, and low-overhead IO control for heterogeneous storage devices and diverse workloads in datacenters. IOCost performs offline profiling to build a device model and uses it to estimate device occupancy of each IO request. To minimize runtime overhead, it separates IO control into a fast per-IO issue path and a slower periodic planning path. A novel work-conserving budget donation algorithm enables containers to dynamically share unused budget. We have deployed IOCost across the entirety of Meta’s datacenters comprised of millions of ma- chines, upstreamed IOCost to the Linux kernel, and open-sourced our device-profiling tools. IOCost has been running in production for two years, providing IO control for Meta’s fleet. We describe the design of IOCost and share our experience deploying it at scale.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13300,
+    "year": 2022,
+    "title": "TMO: transparent memory offloading in datacenters",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507731",
+    "abstract": "The unrelenting growth of the memory needs of emerging datacenter applications, along with ever increasing cost and volatility of DRAM prices, has led to DRAM being a major infrastructure expense. Alternative technologies, such as NVMe SSDs and upcoming NVM devices, offer higher capacity than DRAM at a fraction of the cost and power. One promising approach is to transparently offload colder memory to cheaper memory technologies via kernel or hypervisor techniques. The key challenge, however, is to develop a datacenter-scale solution that is robust in dealing with diverse workloads and large performance variance of different offload devices such as compressed memory, SSD, and NVM. This paper presents TMO, Meta’s transparent memory offloading solution for heterogeneous datacenter environments. TMO introduces a new Linux kernel mechanism that directly measures in realtime the lost work due to resource shortage across CPU, memory, and I/O. Guided by this information and without any prior application knowledge, TMO automatically adjusts how much memory to offload to heterogeneous devices (e.g., compressed memory or SSD) according to the device’s performance characteristics and the application’s sensitivity to memory-access slowdown. TMO holistically identifies offloading opportunities from not only the application containers but also the sidecar containers that provide infrastructure-level functions. To maximize memory savings, TMO targets both anonymous memory and file cache, and balances the swap-in rate of anonymous memory and the reload rate of file pages that were recently evicted from the file cache. TMO has been running in production for more than a year, and has saved between 20-32\\% of the total memory across millions of servers in our large datacenter fleet. We have successfully upstreamed TMO into the Linux kernel.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13301,
+    "year": 2022,
+    "title": "SOL: safe on-node learning in cloud platforms",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507704",
+    "abstract": "Cloud platforms run many software agents on each server node. These agents manage all aspects of node operation, and in some cases frequently collect data and make decisions. Unfortunately, their behavior is typically based on pre-defined static heuristics or offline analysis; they do not leverage on-node machine learning (ML). In this paper, we first characterize the spectrum of node agents in Azure, and identify the classes of agents that are most likely to benefit from on-node ML. We then propose SOL, an extensible framework for designing ML-based agents that are safe and robust to the range of failure conditions that occur in production. SOL provides a simple API to agent developers and manages the scheduling and running of the agent-specific functions they write. We illustrate the use of SOL by implementing three ML-based agents that manage CPU cores, node power, and memory placement. Our experiments show that (1) ML substantially improves our agents, and (2) SOL ensures that agents operate safely under a variety of failure conditions. We conclude that ML-based agents show significant potential and that SOL can help build them.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13302,
+    "year": 2022,
+    "title": "GenStore: a high-performance in-storage processing system for genome sequence analysis",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507702",
+    "abstract": "Read mapping is a fundamental step in many genomics applications. It is used to identify potential matches and differences between fragments (called reads) of a sequenced genome and an already known genome (called a reference genome). Read mapping is costly because it needs to perform approximate string matching (ASM) on large amounts of data. To address the computational challenges in genome analysis, many prior works propose various approaches such as accurate filters that select the reads within a dataset of genomic reads (called a read set) that must undergo expensive computation, efficient heuristics, and hardware acceleration. While effective at reducing the amount of expensive computation, all such approaches still require the costly movement of a large amount of data from storage to the rest of the system, which can significantly lower the end-to-end performance of read mapping in conventional and emerging genomics systems. We propose GenStore, the first in-storage processing system designed for genome sequence analysis that greatly reduces both data movement and computational overheads of genome sequence analysis by exploiting low-cost and accurate in-storage filters. GenStore leverages hardware/software co-design to address the challenges of in-storage processing, supporting reads with 1)&nbsp;different properties such as read lengths and error rates, which highly depend on the sequencing technology, and 2)&nbsp;different degrees of genetic variation compared to the reference genome, which highly depends on the genomes that are being compared. Through rigorous analysis of read mapping processes of reads with different properties and degrees of genetic variation, we meticulously design low-cost hardware accelerators and data/computation flows inside a NAND flash-based solid-state drive (SSD). Our evaluation using a wide range of real genomic datasets shows that GenStore, when implemented in three modern NAND flash-based SSDs, significantly improves the read mapping performance of state-of-the-art software (hardware) baselines by 2.07-6.05\\texttimes{} (1.52-3.32\\texttimes{}) for read sets with high similarity to the reference genome and 1.45-33.63\\texttimes{} (2.70-19.2\\texttimes{}) for read sets with low similarity to the reference genome.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13303,
+    "year": 2022,
+    "title": "ProSE: the architecture and design of a protein discovery engine",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507722",
+    "abstract": "Protein language models have enabled breakthrough approaches to protein structure prediction, function annotation, and drug discovery. A primary limitation to the widespread adoption of these powerful models is the high computational cost associated with the training and inference of these models, especially at longer sequence lengths. We present the architecture, microarchitecture, and hardware implementation of a protein design and discovery accelerator, ProSE (Protein Systolic Engine). ProSE has a collection of custom heterogeneous systolic arrays and special functions that process transfer learning model inferences efficiently. The architecture marries SIMD-style computations with systolic array architectures, optimizing coarse-grained operation sequences across model layers to achieve efficiency without sacrificing generality. ProSE performs Protein BERT inference at up to 6.9\\texttimes{} speedup and 48\\texttimes{} power efficiency (performance/Watt) compared to one NVIDIA A100 GPU. ProSE achieves up to 5.5 \\texttimes{} (12.7\\texttimes{}) speedup and 173\\texttimes{} (249\\texttimes{}) power efficiency compared to TPUv3 (TPUv2).",
+    "status": "notchecked"
+  },
+  {
+    "id": 13304,
+    "year": 2022,
+    "title": "A one-for-all and o(v log(v ))-cost solution for parallel merge style operations on sorted key-value arrays",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507728",
+    "abstract": "The processing of sorted key-value arrays using a “merge style operation (MSO)” is a very basic and important problem in domains like scientific computing, deep learning, database, graph analysis, sorting, set-operation etc. MSOs dominate the execution time in some important applications like SpGEMM and graph mining. For example, sparse vector addition as an MSO takes up to 98\\% execution time in SpGEMM in our experiment. For this reason, accelerating MSOs on CPU, GPU, and accelerators using parallel execution has been extensively studied but the solutions in prior work have three major limitations. (1) They treat different MSOs as isolated problems using incompatible methods and an unified solution is still lacking. (2) They do not have the flexibility to support variable key/value sizes and value calculations in the runtime given a fixed hardware design. (3) They require a quadratic hardware cost (O(V2)) for given parallelism V in most cases. To address above three limitations, we make the following efforts. (1) We present a one-for-all solution to support all interested MSOs based on a unified abstraction model “restricted zip machine (RZM)”. (2) We propose a set of composable and parallel primitives for RZM to provide the flexibility to support variable key/value sizes and value calculations. (3) We provide the hardware design to implement the proposed primitives using only O(Vlog(V)) resource. With the above techniques, a flexible and efficient solution for MSOs has been built. Our design can be used either as a drop-in replacement of the merge unit in prior accelerators to reduce the cost from O(V2) to O(Vlog(V)), or as an extension to the SIMD ISA of CPU and GPU. In our evaluation on CPU, when V=16 (512-bit SIMD, 32-bit element), we achieve significant speedup on a range of representative kernels including set operations (8.4\\texttimes{}), database joins (7.3\\texttimes{}), sparse vector/matrix/tensor addition/multiplication on real/complex numbers (6.5\\texttimes{}), merge sort (8.0\\texttimes{} over scalar, 3.4\\texttimes{} over the state-of-the-art SIMD), and SpGEMM (4.4\\texttimes{} over the best one in the baseline collection).",
+    "status": "notchecked"
+  },
+  {
+    "id": 13305,
+    "year": 2022,
+    "title": "Client-optimized algorithms and acceleration for encrypted compute offloading",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507737",
+    "abstract": "Homomorphic Encryption (HE) enables secure cloud offload processing on encrypted data. HE schemes are limited in the complexity and type of operations they can perform, motivating client-aided implementations that distribute computation between client (unencrypted) and server (encrypted). Prior client-aided systems optimize server performance, ignoring client costs: client-aided models put encryption and decryption on the critical path and require communicating large ciphertexts. We introduce Client-aided HE for Opaque Compute Offloading (CHOCO), a client-optimized system for encrypted offload processing. CHOCO reduces ciphertext size, reducing communication and computing costs through HE parameter minimization and through “rotational redundancy”, a new HE algorithm optimization. We present Client-aided HE for Opaque Compute Offloading Through Accelerated Cryptographic Operations (CHOCO-TACO), an accelerator for HE encryption and decryption, making client-aided HE feasible for even resource-constrained clients. CHOCO supports two popular HE schemes (BFV and CKKS) and several applications, including DNNs, PageRank, KNN, and K-Means. CHOCO reduces communication by up to 2948\\texttimes{} over prior work. With CHOCO-TACO client enc-/decryption is up to 1094\\texttimes{} faster and uses up to 648\\texttimes{} less energy.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13306,
+    "year": 2022,
+    "title": "Finding missed optimizations through the lens of dead code elimination",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507764",
+    "abstract": "Compilers are foundational software development tools and incorporate increasingly sophisticated optimizations. Due to their complexity, it is difficult to systematically identify opportunities for improving them. Indeed, the automatic discovery of missed optimizations has been an important and significant challenge. The few existing approaches either cannot accurately pinpoint missed optimizations or target only specific analyses. This paper tackles this challenge by introducing a novel, effective approach that --- in a simple and general manner --- automatically identifies a wide range of missed optimizations. Our core insight is to leverage dead code elimination (DCE) to both analyze how well compilers optimize code and identify missed optimizations: (1) insert \"optimization markers\" in the basic blocks of a given program, (2) compute the program's live/dead basic blocks using the \"optimization markers\", and (3) identify missed optimizations from how well compilers eliminate dead blocks. We essentially exploit that, since DCE heavily depends on the rest of the optimization pipeline, through the lens of DCE, one can systematically quantify how well compilers optimize code. We conduct an extensive analysis of GCC and LLVM using our approach, which (1) provides quantitative and qualitative insights regarding their optimization capabilities, and (2) uncovers a diverse set of missed optimizations. Our results also lead to 84 bug reports for GCC and LLVM, of which 62 have already been confirmed or fixed, demonstrating our work's strong practical utility. We expect that the simplicity and generality of our approach will make it widely applicable for understanding compiler performance and finding missed optimizations. This work opens and initiates this promising direction.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13307,
+    "year": 2022,
+    "title": "A tree clock data structure for causal orderings in concurrent executions",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507734",
+    "abstract": "Dynamic techniques are a scalable and effective way to analyze concurrent programs. Instead of analyzing all behaviors of a program, these techniques detect errors by focusing on a single program execution. Often a crucial step in these techniques is to define a causal ordering between events in the execution, which is then computed using vector clocks, a simple data structure that stores logical times of threads. The two basic operations of vector clocks, namely join and copy, require Θ(k) time, where k is the number of threads. Thus they are a computational bottleneck when k is large. In this work, we introduce tree clocks, a new data structure that replaces vector clocks for computing causal orderings in program executions. Joining and copying tree clocks takes time that is roughly proportional to the number of entries being modified, and hence the two operations do not suffer the a-priori Θ(k) cost per application. We show that when used to compute the classic happens-before (HB) partial order, tree clocks are optimal, in the sense that no other data structure can lead to smaller asymptotic running time. Moreover, we demonstrate that tree clocks can be used to compute other partial orders, such as schedulable-happens-before (SHB) and the standard Mazurkiewicz (MAZ) partial order, and thus are a versatile data structure. Our experiments show that just by replacing vector clocks with tree clocks, the computation becomes from 2.02 \\texttimes{} faster (MAZ) to 2.66 \\texttimes{} (SHB) and 2.97 \\texttimes{} (HB) on average per benchmark. These results illustrate that tree clocks have the potential to become a standard data structure with wide applications in concurrent analyses.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13308,
+    "year": 2022,
+    "title": "RSSD: defend against ransomware with hardware-isolated network-storage codesign and post-attack analysis",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507773",
+    "abstract": "Encryption ransomware has become a notorious malware. It encrypts user data on storage devices like solid-state drives (SSDs) and demands a ransom to restore data for users. To bypass existing defenses, ransomware would keep evolving and performing new attack models. For instance, we identify and validate three new attacks, including (1) garbage-collection (GC) attack that exploits storage capacity and keeps writing data to trigger GC and force SSDs to release the retained data; (2) timing attack that intentionally slows down the pace of encrypting data and hides its I/O patterns to escape existing defense; (3) trimming attack that utilizes the trim command available in SSDs to physically erase data. To enhance the robustness of SSDs against these attacks, we propose RSSD, a ransomware-aware SSD. It redesigns the flash management of SSDs for enabling the hardware-assisted logging, which can conservatively retain older versions of user data and received storage operations in time order with low overhead. It also employs hardware-isolated NVMe over Ethernet to expand local storage capacity by transparently offloading the logs to remote cloud/servers in a secure manner. RSSD enables post-attack analysis by building a trusted evidence chain of storage operations to assist the investigation of ransomware attacks. We develop RSSD with a real-world SSD FPGA board. Our evaluation shows that RSSD can defend against new and future ransomware attacks, while introducing negligible performance overhead.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13309,
+    "year": 2022,
+    "title": "Creating concise and efficient dynamic analyses with ALDA",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507760",
+    "abstract": "Dynamic program analyses are essential to creating safe, reliable, and productive computing environments. However, these analyses are challenging and time-consuming to construct due to the low-level optimization required to achieve acceptable performance. Consequently, many analyses are often never realized, or have inefficient implementations. In this work we argue that many analyses can and should be constructed with a high-level description language, leaving the burden of low-level optimizations to the analysis instrumentation system itself. We propose a novel language for dynamic analysis called ALDA. ALDA leverages common structuring of dynamic analyses to provide a simple and high-level description for dynamic analyses. Through restricting the supported behaviors to only essential operations in dynamic analyses, an optimizing compiler for ALDA can create analysis implementations with performance on-par to hand-tuned analyses. To demonstrate ALDA’s universality and efficiency, we create an optimizing compiler for ALDA targeting the LLVM instrumentation framework named ALDAcc. We use ALDAcc to construct 8 different dynamic analysis algorithms, including the popular MemorySanitizer analysis, and show their construction is succinct and simple. By comparing two of them (Eraser and MemorySanitizer) with their hand-tuned implementations, we show that ALDAcc’s optimized analyses are comparable to hand-tuned implementations.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13310,
+    "year": 2022,
+    "title": "IceBreaker: warming serverless functions better with heterogeneity",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507750",
+    "abstract": "Serverless computing, an emerging computing model, relies on \"warming up\" functions prior to its anticipated execution for faster and cost-effective service to users. Unfortunately, warming up functions can be inaccurate and incur prohibitively expensive cost during the warmup period (i.e., keep-alive cost). In this paper, we introduce IceBreaker, a novel technique that reduces the service time and the \"keep-alive\" cost by composing a system with heterogeneous nodes (costly and cheaper). IceBreaker does so by dynamically determining the cost-effective node type to warm up a function based on the function's time-varying probability of the next invocation. By employing heterogeneity, IceBreaker allows for more number of nodes under the same cost budget and hence, keeps more number of functions warm and reduces the wait time during high load. Our real-system evaluation confirms that IceBreaker reduces the overall keep-alive cost by 45\\% and execution time by 27\\% using representative serverless applications and industry-grade workload trace. IceBreaker is the first technique to employ and leverage the idea of mixing expensive and cheaper nodes to improve both service time and keep-alive cost for serverless functions -- opening up a new research avenue of serverless computing on heterogeneous servers for researchers and practitioners.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13311,
+    "year": 2022,
+    "title": "INFless: a native serverless system for low-latency, high-throughput inference",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507709",
+    "abstract": "Modern websites increasingly rely on machine learning (ML) to improve their business efficiency. Developing and maintaining ML services incurs high costs for developers. Although serverless systems are a promising solution to reduce costs, we find that the current general purpose serverless systems cannot meet the low latency, high throughput demands of ML services. While simply ”patching” general serverless systems does not resolve the problem completely, we propose that such a system should natively combine the features of inference with a serverless paradigm. We present INFless, the first ML domain-specific serverless platform. It provides a unified, heterogeneous resource abstraction between CPU and accelerators, and achieves high throughput using built-in batching and non-uniform scaling mechanisms. It also supports low latency through coordinated management of batch queuing time, execution time and coldstart rate. We evaluate INFless using both a local cluster testbed and a large-scale simulation. Experimental results show that INFless outperforms state-of-the-art systems by 2\\texttimes{}-5\\texttimes{} on system throughput, meeting the latency goals of ML services.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13312,
+    "year": 2022,
+    "title": "FaaSFlow: enable efficient workflow execution for function-as-a-service",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507717",
+    "abstract": "Serverless computing (Function-as-a-Service) provides fine-grain resource sharing by running functions (or Lambdas) in containers. Data-dependent functions are required to be invoked following a pre-defined logic, which is known as serverless workflows. However, our investigation shows that the traditional master-worker based workflow execution architecture performs poorly in serverless context. One significant overhead results from the master-side workflow schedule pattern, with which the functions are triggered in the master node and assigned to worker nodes for execution. Besides, the data movement between workers also reduces the throughput. To this end, we present a worker-side workflow schedule pattern for serverless workflow execution. Following the design, we implement FaaSFlow to enable efficient workflow execution in the serverless context. Besides, we propose an adaptive storage library FaaStore that enables fast data transfer between functions on the same node without through the database. Experiment results show that FaaSFlow effectively mitigates the workflow scheduling overhead by 74.6\\% on average and data transmission overhead by 95\\% at most. When the network bandwidth fluctuates, FaaSFlow-FaaStore reduces the throughput degradation by 23.0\\%, and is able to multiply the utilization of network bandwidth by 1.5X-4X.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13313,
+    "year": 2022,
+    "title": "Serverless computing on heterogeneous computers",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507732",
+    "abstract": "Existing serverless computing platforms are built upon homogeneous computers, limiting the function density and restricting serverless computing to limited scenarios. We introduce Molecule, the first serverless computing system utilizing heterogeneous computers. Molecule enables both general-purpose devices (e.g., Nvidia DPU) and domain-specific accelerators (e.g., FPGA and GPU) for serverless applications that significantly improve function density (50\\% higher) and application performance (up to 34.6x). To achieve these results, we first propose XPU-Shim, a distributed shim to bridge the gap between underlying multi-OS systems (when using general-purpose devices) and our serverless runtime (i.e., Molecule). We further introduce vectorized sandbox, a sandbox abstraction to abstract hardware heterogeneity (when using domain-specific accelerators). Moreover, we also review state-of-the-art serverless optimizations on startup and communication latency and overcome the challenges to implement them on heterogeneous computers. We have implemented Molecule on real platforms with Nvidia DPUs and Xilinx FPGAs and evaluate it using benchmarks and real-world applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13314,
+    "year": 2022,
+    "title": "CoolEdge: hotspot-relievable warm water cooling for energy-efficient edge datacenters",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507713",
+    "abstract": "As the computing frontier drifts to the edge, edge datacenters play a crucial role in supporting various real-time applications. Different from cloud datacenters, the requirements of proximity to end-users, high density, and heterogeneity, present new challenges to cool the edge datacenters efficiently. Although warm water cooling has become a promising cooling technique for this infrastructure, the one-size-fits-all cooling control would lower the cooling efficiency considerably because of the severe thermal imbalance across servers, hardware, and even inside one hardware component in an edge datacenter. In this work, we propose CoolEdge, a hotspot-relievable warm water cooling system for improving the cooling efficiency and saving costs of edge datacenters. Specifically, through the elaborate design of water circulations, CoolEdge can dynamically adjust the water temperature and flow rate for each heterogeneous hardware component to eliminate the hardware-level hotspots. By redesigning cold plates, CoolEdge can quickly disperse the chip-level hotspots without manual intervention. We further quantify the power saving achieved by the warm water cooling theoretically, and propose a custom-designed cooling solution to decide an appropriate water temperature and flow rate periodically. Based on a hardware prototype and real-world traces from SURFsara, the evaluation results show that CoolEdge reduces the cooling energy by 81.81\\% and 71.92\\%, respectively, compared with conventional and state-of-the-art water cooling systems.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13315,
+    "year": 2022,
+    "title": "Yashme: detecting persistency races",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507766",
+    "abstract": "Persistent memory (PM) or Non-Volatile Random-Access Memory (NVRAM) hardware such as Intel’s Optane memory product promises to transform how programs store and manipulate information. Ensuring that persistent memory programs are crash consistent is a major challenge. We present a novel class of crash consistency bugs for persistent memory programs, which we call persistency races. Persistency races can cause non-atomic stores to be made partially persistent. Persistency races arise due to the interaction of standard compiler optimizations with persistent memory semantics. We present Yashme, the first detector for persistency races. A major challenge is that in order to detect persistency races, the execution must crash in a very narrow window between a store with a persistency race and its corresponding cache flush operation, making it challenging for na\\\"{\\i}ve techniques to be effective. Yashme overcomes this challenge with a novel technique for detecting races in executions that are prefixes of the pre-crash execution. This technique enables Yashme to effectively find persistency races even if the injected crashes do not fall into that window. We have evaluated Yashme on a range of persistent memory benchmarks and have found 26 real persistency races that have never been reported before.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13316,
+    "year": 2022,
+    "title": "EXAMINER: automatically locating inconsistent instructions between real devices and CPU emulators for ARM",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507736",
+    "abstract": "Emulators are widely used to build dynamic analysis frameworks due to its fine-grained tracing capability, full system monitoring functionality, and scalability of running on different operating systems and architectures. However, whether emulators are consistent with real devices is unknown. To understand this problem, we aim to automatically locate inconsistent instructions, which behave differently between emulators and real devices. We target the ARM architecture, which provides machine-readable specifications. Based on the specification, we propose a sufficient test case generator by designing and implementing the first symbolic execution engine for the ARM architecture specification language (ASL). We generate 2,774,649 representative instruction streams and conduct differential testing between four ARM real devices in different architecture versions (i.e., ARMv5, ARMv6, ARMv7, and ARMv8) and three state-of-the-art emulators (i.e., QEMU, Unicorn, and Angr). We locate a huge number of inconsistent instruction streams (171,858 for QEMU, 223,264 for unicorn, and 120,169 for Angr). We find that undefined implementation in ARM manual and bugs of emulators are the major causes of inconsistencies. Furthermore, we discover 12 bugs, which influence commonly used instructions (e.g., BLX). With the inconsistent instructions, we build three security applications and demonstrate the capability of these instructions on detecting emulators, anti-emulation, and anti-fuzzing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13317,
+    "year": 2022,
+    "title": "Path-sensitive and alias-aware typestate analysis for detecting OS bugs",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507770",
+    "abstract": "Operating system (OS) is the cornerstone for modern computer systems. It manages devices and provides fundamental service for user-level applications. Thus, detecting bugs in OSes is important to improve reliability and security of computer systems. Static typestate analysis is a common technique for detecting different types of bugs, but it is often inaccurate or unscalable for large-size OS code, due to imprecision of identifying alias relationships as well as high costs of typestate tracking and path-feasibility validation. In this paper, we present PATA, a novel path-sensitive and aliasaware typestate analysis framework to detect OS bugs. To improve the precision of identifying alias relationships in OS code, PATA performs a path-based alias analysis based on control-flow paths and access paths. With these alias relationships, PATA reduces the costs of typestate tracking and path-feasibility validation, to boost the efficiency of path-sensitive typestate analysis for bug detection. We have evaluated PATA on the Linux kernel and three popular IoT OSes (Zephyr, RIOT and TencentOS-tiny) to detect three common types of bugs (null-pointer dereferences, uninitialized variable accesses and memory leaks). PATA finds 574 real bugs with a false positive rate of 28\\%. 206 of these bugs have been confirmed by the developers of the four OSes.We also compare PATA to seven state-of-the-art static approaches (Cppcheck, Coccinelle, Smatch,CSA, Infer, Saber and SVF). PATA finds many real bugs missed by them, with a lower false positive rate.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13318,
+    "year": 2022,
+    "title": "Efficiently detecting concurrency bugs in persistent memory programs",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507755",
+    "abstract": "Due to the salient DRAM-comparable performance, TB-scale capacity, and non-volatility, persistent memory (PM) provides new opportunities for large-scale in-memory computing with instant crash recovery. However, programming PM systems is error-prone due to the existence of crash-consistency bugs, which are challenging to diagnose especially with concurrent programming widely adopted in PM applications to exploit hardware parallelism. Existing bug detection tools for DRAM-based concurrency issues cannot detect PM crash-consistency bugs because they are oblivious to PM operations and PM consistency. On the other hand, existing PM-specific debugging tools only focus on sequential PM programs and cannot effectively detect crash-consistency issues hidden in concurrent executions. In order to effectively detect crash-consistency bugs that only manifest in concurrent executions, we propose PMRace, the first PM-specific concurrency bug detection tool. We identify and define two new types of concurrent crash-consistency bugs: PM Inter-thread Inconsistency and PM Synchronization Inconsistency. In particular, PMRace adopts PM-aware and coverage-guided fuzz testing to explore PM program executions. For PM Inter-thread Inconsistency, which denotes the data inconsistency hidden in thread interleavings, PMRace performs PM-aware interleaving exploration and thread scheduling to drive the execution towards executions that reveal such inconsistencies. For PM Synchronization Inconsistency between persisted synchronization variables and program data, PMRace identifies the inconsistency during interleaving exploration. The post-failure validation reduces the false positives that come from custom crash recovery mechanisms. PMRace has found 14 bugs (10 new bugs) in real-world concurrent PM systems including PM-version memcached.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13319,
+    "year": 2022,
+    "title": "Who goes first? detecting go concurrency bugs via message reordering",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507753",
+    "abstract": "Go is a young programming language invented to build safe and efficient concurrent programs. It provides goroutines as lightweight threads and channels for inter-goroutine communication. Programmers are encouraged to explicitly pass messages through channels to connect goroutines, with the purpose of reducing the chance of making programming mistakes and introducing concurrency bugs. Go is one of the most beloved programming languages and has already been used to build many critical infrastructure software systems in the data-center environment. However, a recent study shows that channel-related concurrency bugs are still common in Go programs, severely hurting the reliability of the programs. This paper presents GFuzz, a dynamic detector that can effectively pinpoint channel-related concurrency bugs by mutating the processing orders of concurrent messages. We build GFuzz in three steps. We first adopt an effective approach to identify concurrent messages and transform a program to process those messages in any given order. We then take a fuzzing approach to generate new processing orders by mutating exercised ones and rely on execution feedback to prioritize orders close to triggering bugs. Finally, we design a runtime sanitizer to capture triggered bugs that are missed by the Go runtime. We evaluate GFuzz on seven popular Go software systems, including Docker, Kubernetes, and gRPC. GFuzz finds 184 previously unknown bugs and reports a negligible number of false positives. Programmers have already confirmed 124 reports as real bugs and fixed 67 of them based on our reporting. A careful inspection of the detected concurrency bugs from gRPC shows the effectiveness of each component of GFuzz and confirms the components' rationality.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13320,
+    "year": 2022,
+    "title": "CryoWire: wire-driven microarchitecture designs for cryogenic computing",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507749",
+    "abstract": "Cryogenic computing, which runs a computer device at an extremely low temperature, is promising thanks to its significant reduction of wire resistance as well as leakage current. Recent studies on cryogenic computing have focused on various architectural units including the main memory, cache, and CPU core running at 77K. However, little research has been conducted to fully exploit the fast cryogenic wires, even though the slow wires are becoming more serious performance bottleneck in modern processors. In this paper, we propose a CPU microarchitecture which extensively exploits the fast wires at 77K. For this goal, we first introduce our validated cryogenic-performance models for the CPU pipeline and network on chip (NoC), whose performance can be significantly limited by the slow wires. Next, based on the analysis with the models, we architect CryoSP and CryoBus as our pipeline and NoC designs to fully exploit the fast wires. Our evaluation shows that our cryogenic computer equipped with both microarchitectures achieves 3.82 times higher system-level performance compared to the conventional computer system thanks to the 96\\% higher clock frequency of CryoSP and five times lower NoC latency of CryoBus.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13321,
+    "year": 2022,
+    "title": "REVAMP: a systematic framework for heterogeneous CGRA realization",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507772",
+    "abstract": "Coarse-Grained Reconfigurable Architectures (CGRAs) provide an excellent balance between performance, energy efficiency, and flexibility. However, increasingly sophisticated applications, especially on the edge devices, demand even better energy efficiency for longer battery life. Most CGRAs adhere to a canonical structure where a homogeneous set of processing elements and memories communicate through a regular interconnect due to the simplicity of the design. Unfortunately, the homogeneity leads to substantial idle resources while mapping irregular applications and creates inefficiency. We plan to mitigate the inefficiency by systematically and judiciously introducing heterogeneity in CGRAs in tandem with appropriate compiler support. We propose REVAMP, an automated design space exploration framework that helps architects uncover and add pertinent heterogeneity to a diverse range of originally homogeneous CGRAs when fed with a suite of target applications. REVAMP explores a comprehensive set of optimizations encompassing compute, network, and memory heterogeneity, thereby converting a uniform CGRA into a more irregular architecture with improved energy efficiency. As CGRAs are inherently software scheduled, any micro-architectural optimizations need to be partnered with corresponding compiler support, which is challenging with heterogeneity. The REVAMP framework extends compiler support for efficient mapping of loop kernels on the derived heterogeneous CGRA architectures. We showcase REVAMP on three state-of-the-art homogeneous CGRAs, demonstrating how REVAMP derives a heterogeneous variant of each homogeneous architecture, with its corresponding compiler optimizations. Our results show that the derived heterogeneous architectures achieve up to 52.4\\% power reduction, 38.1\\% area reduction, and 36\\% average energy reduction over the corresponding homogeneous versions with minimal performance impact for the selected kernel suite.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13322,
+    "year": 2022,
+    "title": "PLD: fast FPGA compilation to make reconfigurable acceleration compatible with modern incremental refinement software development",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507740",
+    "abstract": "FPGA-based accelerators are demonstrating significant absolute performance and energy efficiency compared with general-purpose CPUs. While FPGA computations can now be described in standard, programming languages, like C, development for FPGAs accelerators remains tedious and inaccessible to modern software engineers. Slow compiles (potentially taking tens of hours) inhibit the rapid, incremental refinement of designs that is the hallmark of modern software engineering. To address this issue, we introduce separate compilation and linkage into the FPGA design flow, providing faster design turns more familiar to software development. To realize this flow, we provide abstractions, compiler options, and compiler flow that allow the same C source code to be compiled to processor cores in seconds and to FPGA regions in minutes, providing the missing -O0 and -O1 options familiar in software development. This raises the FPGA programming level and standardizes the programming experience, bringing FPGA-based accelerators into a more familiar software platform ecosystem for software engineers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13323,
+    "year": 2022,
+    "title": "Debugging in the brave new world of reconfigurable hardware",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507701",
+    "abstract": "Software and hardware development cycles have traditionally been quite distinct. Software allows post-deployment patches, which leads to a rapid development cycle. In contrast, hardware bugs that are found after fabrication are extremely costly to fix (and sometimes even unfixable), so the traditional hardware development cycle involves massive investment in extensive simulation and formal verification. Reconfigurable hardware, such as a Field Programmable Gate Array (FPGA), promises to propel hardware development towards an agile software-like development approach, since it enables a hardware developer to patch bugs that are detected during on-chip testing or in production. Unfortunately, FPGA programmers lack bug localization tools amenable to this rapid development cycle, since past tools mainly find bugs via simulation and verification. To develop hardware bug localization tools for a rapid development cycle, a thorough understanding of the symptoms, root causes, and fixes of hardware bugs is needed. In this paper, we first study bugs in existing FPGA designs and produce a testbed of reliably-reproducible bugs. We classify the bugs according to their intrinsic properties, symptoms, and root causes. We demonstrate that many hardware bugs are comparable to software bug counterparts, and would benefit from similar techniques for bug diagnosis and repair. Based upon our findings, we build a novel collection of hybrid static/dynamic program analysis and monitoring tools for debugging FPGA designs, showing that our tools enable a software-like development cycle by effectively reducing developers' manual efforts for bug localization.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13324,
+    "year": 2022,
+    "title": "Temporal and SFQ pulse-streams encoding for area-efficient superconducting accelerators",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507765",
+    "abstract": "Superconducting technology is a prime candidate for the future of computing. However, current superconducting prototypes are limited to small-scale examples due to stringent area constraints and complex architectures inspired from voltage-level encoding in CMOS; this is at odds with the ps-wide Single Quantum Flux (SFQ) pulses used in superconductors to carry information. In this work, we propose a wave-pipelined Unary SFQ (U-SFQ) architecture that leverages the advantages of two data representations: pulse-streams and Race Logic (RL). We introduce novel building blocks such as multipliers, adders, and memory cells, which leverage the natural properties of SFQ pulses to mitigate area constraints. We then design and simulate three popular hardware accelerators: i) a Processing Element (PE), typically used in spatial architectures; ii) A dot-product-unit (DPU), one of the most popular accelerators in artificial neural networks and digital signal processing (DSP); and iii) A Finite Impulse Response (FIR) filter, a popular and computationally demanding DSP accelerator. The proposed U-SFQ building blocks require up to 200\\texttimes{} fewer JJs compared to their SFQ binary counterparts, exposing an area-delay trade-off. This work mitigates the stringent area constraints of superconducting technology.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13325,
+    "year": 2022,
+    "title": "Understanding and exploiting optimal function inlining",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507744",
+    "abstract": "Inlining is a core transformation in optimizing compilers. It replaces a function call (call site) with the body of the called function (callee). It helps reduce function call overhead and binary size, and more importantly, enables other optimizations. The problem of inlining has been extensively studied, but it is far from being solved; predicting which inlining decisions are beneficial is nontrivial due to interactions with the rest of the compiler pipeline. Previous work has mainly focused on designing heuristics for better inlining decisions and has not investigated optimal inlining, i.e., exhaustively finding the optimal inlining decisions. Optimal inlining is necessary for identifying and exploiting missed opportunities and evaluating the state of the art. This paper fills this gap through an extensive empirical analysis of optimal inlining using the SPEC2017 benchmark suite. Our novel formulation drastically reduces the inlining search space size (from 2349 down to 225) and allows us to exhaustively evaluate all inlining choices on 1,135 SPEC2017 files. We show a significant gap between the state-of-the-art strategy in LLVM and optimal inlining when optimizing for binary size, an important, deterministic metric independent of workload (in contrast to performance, another important metric). Inspired by our analysis, we introduce a simple, effective autotuning strategy for inlining that outperforms the state of the art by 7\\% on average (and up to 28\\%) on SPEC2017, 15\\% on the source code of LLVM itself, and 10\\% on the source code of SQLite. This work highlights the importance of exploring optimal inlining by providing new, actionable insight and an effective autotuning strategy that is of practical utility.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13326,
+    "year": 2022,
+    "title": "CirFix: automatically repairing defects in hardware design code",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507763",
+    "abstract": "This paper presents CirFix, a framework for automatically repairing defects in hardware designs implemented in languages like Verilog. We propose a novel fault localization approach based on assignments to wires and registers, and a fitness function tailored to the hardware domain to bridge the gap between software-level automated program repair and hardware descriptions. We also present a benchmark suite of 32 defect scenarios corresponding to a variety of hardware projects. Overall, CirFix produces plausible repairs for 21/32 and correct repairs for 16/32 of the defect scenarios. This repair rate is comparable to that of successful program repair approaches for software, indicating CirFix is effective at bringing over the benefits of automated program repair to the hardware domain for the first time.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13327,
+    "year": 2022,
+    "title": "Vector instruction selection for digital signal processors using program synthesis",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507714",
+    "abstract": "Instruction selection, whereby input code represented in an intermediate representation is translated into executable instructions from the target platform, is often the most target-dependent component in optimizing compilers. Current approaches include pattern matching, which is brittle and tedious to design, or search-based methods, which are limited by scalability of the search algorithm. In this paper, we propose a new algorithm that first abstracts the target platform instructions into high-level uber-instructions, with each uber-instruction unifying multiple concrete instructions from the target platform. Program synthesis is used to lift input code sequences into semantically equivalent sequences of uber-instructions and then to lower from uber-instructions to machine code. Using 21 real-world benchmarks, we show that our synthesis-based instruction selection algorithm can generate instruction sequences for a hardware target, with the synthesized code performing up to 2.1x faster as compared to code generated by a professionally-developed optimizing compiler for the same platform.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13328,
+    "year": 2022,
+    "title": "HeteroGen: transpiling C to heterogeneous HLS code with automated test generation and program repair",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507748",
+    "abstract": "Despite the trend of incorporating heterogeneity and specialization in hardware, the development of heterogeneous applications is limited to a handful of engineers with deep hardware expertise. We propose HeteroGen that takes C/C++ code as input and automatically generates an HLS version with test behavior preservation and better performance. Key to the success of HeteroGen is adapting the idea of search-based program repair to the heterogeneous computing domain, while addressing two technical challenges. First, the turn-around time of HLS compilation and simulation is much longer than the usual C/C++ compilation and execution time; therefore, HeteroGen applies pattern-oriented program edits guided by common fix patterns and their dependences. Second, behavior and performance checking requires testing, but test cases are often unavailable. Thus, HeteroGen auto-generates test inputs suitable for checking C to HLS-C conversion errors, while providing high branch coverage for the original C code. An evaluation of HeteroGen shows that it produces an HLS-compatible version for nine out of ten real-world heterogeneous applications fully automatically, applying up to 438 lines of edits to produce an HLS version 1.63x faster than the original version.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13329,
+    "year": 2022,
+    "title": "Tree traversal synthesis using domain-specific symbolic compilation",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507751",
+    "abstract": "Efficient computation on tree data structures is important in compilers, numeric computations, and web browser layout engines. Efficiency is achieved by statically scheduling the computation into a small number of tree traversals and by performing the traversals in parallel when possible. Manual design of such traversals leads to bugs, as observed in web browsers. Automatic schedulers avoid these bugs but they currently cannot explore a space of legal traversals, which prevents exploring the trade-offs between parallelism and minimizing the number of traversals. We describe Hecate, a synthesizer of tree traversals that can produce both serial and parallel traversals. A key feature is that the synthesizer is extensible by the programmer who can define a template for new kinds of traversals. Hecate is constructed as a solver-aided domain-specific language, meaning that the synthesizer is generated automatically by translating the tree traversal DSL to an SMT solver that synthesizes the traversals. We improve on the general-purpose solver-aided architecture with a scheduling-specific symbolic evaluation that maintains the engineering advantages solver-aided design but generates efficient ILP encoding that is much more efficient to solve than SMT constraints. On the set of Grafter problems, Hecate synthesizes traversals that trade off traversal fusion to exploit parallelism. Additionally, Hecate allows defining a tree data structure with an arbitrary number of children. Together, parallelism and data structure improvements accelerate the computation 2\\texttimes{} on a tree rendering problem. Finally, Hecate’s domain-specific symbolic compilation accelerates synthesis 3\\texttimes{} compared to the general-purpose compilation to an SMT solver; when scheduling a CSS engine traversal, this ILP-based synthesis executes orders of magnitude faster.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13330,
+    "year": 2022,
+    "title": "SRAM has no chill: exploiting power domain separation to steal on-chip secrets",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507710",
+    "abstract": "The abundance of embedded systems and smart devices increases the risk of physical memory disclosure attacks. One such classic non-invasive attack exploits dynamic RAM's temperature-dependent ability to retain information across power cycles---known as a cold boot attack. When exposed to low temperatures, DRAM cells preserve their state for a short time without power, mimicking non-volatile memories in that time frame. Attackers exploit this physical phenomenon to gain access to a system's secrets, leading to data theft from encrypted storage. To prevent cold boot attacks, programmers hide secrets on-chip in Static Random-Access Memory (SRAM); by construction, on-chip SRAM is isolated from external probing and has little intrinsic capacitance, making it robust against cold boot attacks. While it is the case that SRAM protects against traditional cold boot attacks, we show that there is another way to retain information in on-chip SRAM across power cycles and software changes. This paper presents Volt Boot, an attack that demonstrates a vulnerability of on-chip volatile memories due to the physical separation common to modern system-on-chip power distribution networks. Volt Boot leverages asymmetrical power states (e.g., on vs. off) to force SRAM state retention across power cycles, eliminating the need for traditional cold boot attack enablers, such as low-temperature or intrinsic data retention time. Using several modern ARM Cortex-A devices, we demonstrate the effectiveness of the attack in caches, registers, and iRAMs. Unlike other forms of SRAM data retention attacks, Volt Boot retrieves data with 100\\% accuracy---without any complex post-processing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13331,
+    "year": 2022,
+    "title": "Randomized row-swap: mitigating Row Hammer by breaking spatial correlation between aggressor and victim rows",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507716",
+    "abstract": "Row Hammer is a fault-injection attack in which rapid activations to a single DRAM row causes bit-flips in nearby rows. Several recent defenses propose tracking aggressor-rows and applying mitigating action on neighboring victim rows by refreshing them. However, all such proposals using victim-focused mitigation preserve the spatial connection between victim and aggressor rows. Therefore, these proposals are susceptible to access patterns causing bit-flips in rows beyond the immediate neighbor. For example, the Half-Double attack causes bit-flips in the presence of victim-focused mitigation. We propose Randomized Row-Swap (RRS), a novel mitigation action that breaks the spatial connection between the aggressor and victim DRAM rows. This enables RRS to provide robust defense against even complex Row Hammer access patterns. RRS is an aggressor-focused mitigation that periodically swaps aggressor-rows with other randomly selected rows in memory. This limits the possible damage in any one locality within the DRAM memory. While RRS can be used with any tracking mechanism, we implement it with a Misra-Gries tracker and target a Row Hammer Threshold of 4.8K activations (similar to the state-of-the-art attacks). Our evaluations show that RRS has negligible slowdown (0.4\\% on average) and provides strong security guarantees for avoiding Row Hammer bit flips even under several years of continuous attack.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13332,
+    "year": 2022,
+    "title": "ShEF: shielded enclaves for cloud FPGAs",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507733",
+    "abstract": "FPGAs are now used in public clouds to accelerate a wide range of applications, including many that operate on sensitive data such as financial and medical records. We present ShEF, a trusted execution environment (TEE) for cloud-based reconfigurable accelerators. ShEF is independent from CPU-based TEEs and allows secure execution under a threat model where the adversary can control all software running on the CPU connected to the FPGA, has physical access to the FPGA, and can compromise the FPGA interface logic of the cloud provider. ShEF provides a secure boot and remote attestation process that relies solely on existing FPGA mechanisms for root of trust. It also includes a Shield component that provides secure access to data while the accelerator is in use. The Shield is highly customizable and extensible, allowing users to craft a bespoke security solution that fits their accelerator's memory access patterns, bandwidth, and security requirements at minimum performance and area overheads. We describe a prototype implementation of ShEF for existing cloud FPGAs, map ShEF to a performant and secure storage application, and measure the performance benefits of customizable security using five additional accelerators.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13333,
+    "year": 2022,
+    "title": "Invisible bits: hiding secret messages in SRAM’s analog domain",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507756",
+    "abstract": "Electronic devices are increasingly the subject of inspection by authorities. While encryption hides secret messages, it does not hide the transmission of those secret messages---in fact, it calls attention to them. Thus, an adversary, seeing encrypted data, turns to coercion to extract the credentials required to reveal the secret message. Steganographic techniques hide secret messages in plain sight, providing the user with plausible deniability, removing the threat of coercion. This paper unveils Invisible Bits a new steganographic technique that hides secret messages in the analog domain of Static Random Access Memory (SRAM) embedded within a computing device. Unlike other memory technologies, the power-on state of SRAM reveals the analog-domain properties of its individual cells. We show how to quickly and systematically change the analog-domain properties of SRAM cells to encode data in the analog domain and how to reveal those changes by capturing SRAM's power-on state. Experiments with commercial devices show that Invisible Bits provides over 90\\% capacity---two orders-of-magnitude more than previous on-chip steganographic approaches, while retaining device functionality---even when the device undergoes subsequent normal operation or is shelved for months. Experiments also show that adversaries cannot differentiate between devices with encoded messages and those without. Lastly, we show how to layer encryption and error correction on top of our message encoding scheme in an end-to-end demonstration.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13334,
+    "year": 2022,
+    "title": "Taurus: a data plane architecture for per-packet ML",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507726",
+    "abstract": "Emerging applications---cloud computing, the internet of things, and augmented/virtual reality---demand responsive, secure, and scalable datacenter networks. These networks currently implement simple, per-packet, data-plane heuristics (e.g., ECMP and sketches) under a slow, millisecond-latency control plane that runs data-driven performance and security policies. However, to meet applications' service-level objectives (SLOs) in a modern data center, networks must bridge the gap between line-rate, per-packet execution and complex decision making. In this work, we present the design and implementation of Taurus, a data plane for line-rate inference. Taurus adds custom hardware based on a flexible, parallel-patterns (MapReduce) abstraction to programmable network devices, such as switches and NICs; this new hardware uses pipelined SIMD parallelism to enable per-packet MapReduce operations (e.g., inference). Our evaluation of a Taurus switch ASIC---supporting several real-world models---shows that Taurus operates orders of magnitude faster than a server-based control plane while increasing area by 3.8\\% and latency for line-rate ML models by up to 221 ns. Furthermore, our Taurus FPGA prototype achieves full model accuracy and detects two orders of magnitude more events than a state-of-the-art control-plane anomaly-detection system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13335,
+    "year": 2022,
+    "title": "FlexDriver: a network driver for your accelerator",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507776",
+    "abstract": "We propose a new system design for connecting hardware and FPGA accelerators to the network, allowing the accelerator to directly control commodity Network Interface Cards (NICs) without using the CPU. This enables us to solve the key challenge of leveraging existing NIC hardware offloads such as virtualization, tunneling, and RDMA for accelerator networking. Our approach supports a diverse set of use cases, from direct network access for disaggregated accelerators to inline-acceleration of the network stack, all without the complex networking logic in the accelerator. To demonstrate the feasibility of this approach, we build FlexDriver (FLD), an on-accelerator hardware module that implements a NIC data-plane driver. Our main technical contribution is a mechanism that compresses the NIC control structures by two orders of magnitude, allowing FLD to achieve high networking scalability with low die area cost and no bandwidth interference with the accelerator logic. The prototype for NVIDIA Innova-2 FPGA SmartNICs showcases our design’s utility for three different accelerators: a disaggregated LTE cipher, an IP-defragmentation inline accelerator, and an IoT cryptographic-token authentication offload. These accelerators reach 25 Gbps line rate and leverage the NIC for RDMA processing, VXLAN tunneling, and traffic shaping without CPU involvement.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13336,
+    "year": 2022,
+    "title": "The benefits of general-purpose on-NIC memory",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507711",
+    "abstract": "We propose to use the small, newly available on-NIC memory (\"nicmem\") to keep pace with the rapidly increasing performance of NICs. We motivate our proposal by accelerating two types of workload classes: NFV and key-value stores. As NFV workloads frequently operate on headers---rather than data---of incoming packets, we introduce a new packet-processing architecture that splits between the two, keeping the data on nicmem when possible and thus reducing PCIe traffic, memory bandwidth, and CPU processing time. Our approach consequently shortens NFV latency by up to 23\\% and increases its throughput by up to 19\\%. Similarly, because key-value stores commonly exhibit skewed distributions, we introduce a new network stack mechanism that lets applications keep frequently accessed items on nicmem. Our design shortens memcached latency by up to 43\\% and increases its throughput by up to 80\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 13337,
+    "year": 2022,
+    "title": "Domain specific run time optimization for software data planes",
+    "category": "system",
+    "publication": "ASPLOS",
+    "paper": "https://doi.org/10.1145/3503222.3507769",
+    "abstract": "State-of-the-art approaches to design, develop and optimize software packet-processing programs are based on static compilation: the compiler's input is a description of the forwarding plane semantics and the output is a binary that can accommodate any control plane configuration or input traffic. In this paper, we demonstrate that tracking control plane actions and packet-level traffic dynamics at run time opens up new opportunities for code specialization. We present Morpheus, a system working alongside static compilers that continuously optimizes the targeted networking code. We introduce a number of new techniques, from static code analysis to adaptive code instrumentation, and we implement a toolbox of domain specific optimizations that are not restricted to a specific data plane framework or programming language. We apply Morpheus to several eBPF and DPDK programs including Katran, Facebook's production-grade load balancer. We compare Morpheus against state-of-the-art optimization frameworks and show that it can bring up to 2x throughput improvement, while halving the 99th percentile latency.",
+    "status": "notchecked"
+  }
+]

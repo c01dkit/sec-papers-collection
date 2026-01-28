@@ -1,0 +1,302 @@
+[
+  {
+    "id": 11654,
+    "year": 2015,
+    "title": "IronFleet: proving practical distributed systems correct",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815428",
+    "abstract": "Distributed systems are notorious for harboring subtle bugs. Verification can, in principle, eliminate these bugs a priori, but verification has historically been difficult to apply at full-program scale, much less distributed-system scale.We describe a methodology for building practical and provably correct distributed systems based on a unique blend of TLA-style state-machine refinement and Hoare-logic verification. We demonstrate the methodology on a complex implementation of a Paxos-based replicated state machine library and a lease-based sharded key-value store. We prove that each obeys a concise safety specification, as well as desirable liveness requirements. Each implementation achieves performance competitive with a reference system. With our methodology and lessons learned, we aim to raise the standard for distributed systems from \"tested\" to \"correct.\"",
+    "status": "notchecked"
+  },
+  {
+    "id": 11655,
+    "year": 2015,
+    "title": "Using Crash Hoare logic for certifying the FSCQ file system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815402",
+    "abstract": "FSCQ is the first file system with a machine-checkable proof (using the Coq proof assistant) that its implementation meets its specification and whose specification includes crashes. FSCQ provably avoids bugs that have plagued previous file systems, such as performing disk writes without sufficient barriers or forgetting to zero out directory blocks. If a crash happens at an inopportune time, these bugs can lead to data loss. FSCQ's theorems prove that, under any sequence of crashes followed by reboots, FSCQ will recover the file system correctly without losing data.To state FSCQ's theorems, this paper introduces the Crash Hoare logic (CHL), which extends traditional Hoare logic with a crash condition, a recovery procedure, and logical address spaces for specifying disk states at different abstraction levels. CHL also reduces the proof effort for developers through proof automation. Using CHL, we developed, specified, and proved the correctness of the FSCQ file system. Although FSCQ's design is relatively simple, experiments with FSCQ running as a user-level file system show that it is sufficient to run Unix applications with usable performance. FSCQ's specifications and proofs required significantly more work than the implementation, but the work was manageable even for a small team of a few researchers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11656,
+    "year": 2015,
+    "title": "SibylFS: formal specification and oracle-based testing for POSIX and real-world file systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815411",
+    "abstract": "Systems depend critically on the behaviour of file systems, but that behaviour differs in many details, both between implementations and between each implementation and the POSIX (and other) prose specifications. Building robust and portable software requires understanding these details and differences, but there is currently no good way to systematically describe, investigate, or test file system behaviour across this complex multi-platform interface.In this paper we show how to characterise the envelope of allowed behaviour of file systems in a form that enables practical and highly discriminating testing. We give a mathematically rigorous model of file system behaviour, SibylFS, that specifies the range of allowed behaviours of a file system for any sequence of the system calls within our scope, and that can be used as a test oracle to decide whether an observed trace is allowed by the model, both for validating the model and for testing file systems against it. SibylFS is modular enough to not only describe POSIX, but also specific Linux, OS X and FreeBSD behaviours. We complement the model with an extensive test suite of over 21 000 tests; this can be run on a target file system and checked in less than 5 minutes, making it usable in practice. Finally, we report experimental results for around 40 configurations of many file systems, identifying many differences and some serious flaws.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11657,
+    "year": 2015,
+    "title": "No compromises: distributed transactions with consistency, availability, and performance",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815425",
+    "abstract": "Transactions with strong consistency and high availability simplify building and reasoning about distributed systems. However, previous implementations performed poorly. This forced system designers to avoid transactions completely, to weaken consistency guarantees, or to provide single-machine transactions that require programmers to partition their data. In this paper, we show that there is no need to compromise in modern data centers. We show that a main memory distributed computing platform called FaRM can provide distributed transactions with strict serializability, high performance, durability, and high availability. FaRM achieves a peak throughput of 140 million TATP transactions per second on 90 machines with a 4.9 TB database, and it recovers from a failure in less than 50 ms. Key to achieving these results was the design of new transaction, replication, and recovery protocols from first principles to leverage commodity networks with RDMA and a new, inexpensive approach to providing non-volatile DRAM.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11658,
+    "year": 2015,
+    "title": "Implementing linearizability at large scale and low latency",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815416",
+    "abstract": "Linearizability is the strongest form of consistency for concurrent systems, but most large-scale storage systems settle for weaker forms of consistency. RIFL provides a general-purpose mechanism for converting at-least-once RPC semantics to exactly-once semantics, thereby making it easy to turn non-linearizable operations into linearizable ones. RIFL is designed for large-scale systems and is lightweight enough to be used in low-latency environments. RIFL handles data migration by associating linearizability metadata with objects in the underlying store and migrating metadata with the corresponding objects. It uses a lease mechanism to implement garbage collection for metadata. We have implemented RIFL in the RAMCloud storage system and used it to make basic operations such as writes and atomic increments linearizable; RIFL adds only 530 ns to the 13.5 μs base latency for durable writes. We also used RIFL to construct a new multi-object transaction mechanism in RAMCloud; RIFL's facilities significantly simplified the transaction implementation. The transaction mechanism can commit simple distributed transactions in about 20 μs and it outperforms the H-Store main-memory database system for the TPC-C benchmark.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11659,
+    "year": 2015,
+    "title": "Fast in-memory transaction processing using RDMA and HTM",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815419",
+    "abstract": "We present DrTM, a fast in-memory transaction processing system that exploits advanced hardware features (i.e., RDMA and HTM) to improve latency and throughput by over one order of magnitude compared to state-of-the-art distributed transaction systems. The high performance of DrTM are enabled by mostly offloading concurrency control within a local machine into HTM and leveraging the strong consistency between RDMA and HTM to ensure serializability among concurrent transactions across machines. We further build an efficient hash table for DrTM by leveraging HTM and RDMA to simplify the design and notably improve the performance. We describe how DrTM supports common database features like read-only transactions and logging for durability. Evaluation using typical OLTP workloads including TPC-C and SmallBank show that DrTM scales well on a 6-node cluster and achieves over 5.52 and 138 million transactions per second for TPC-C and SmallBank Respectively. This number outperforms a state-of-the-art distributed transaction system (namely Calvin) by at least 17.9X for TPC-C.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11660,
+    "year": 2015,
+    "title": "Paxos made transparent",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815427",
+    "abstract": "State machine replication (SMR) leverages distributed consensus protocols such as Paxos to keep multiple replicas of a program consistent in face of replica failures or network partitions. This fault tolerance is enticing on implementing a principled SMR system that replicates general programs, especially server programs that demand high availability. Unfortunately, SMR assumes deterministic execution, but most server programs are multithreaded and thus nondeterministic. Moreover, existing SMR systems provide narrow state machine interfaces to suit specific programs, and it can be quite strenuous and error-prone to orchestrate a general program into these interfacesThis paper presents Crane, an SMR system that transparently replicates general server programs. Crane achieves distributed consensus on the socket API, a common interface to almost all server programs. It leverages deterministic multithreading (specifically, our prior system Parrot) to make multithreaded replicas deterministic. It uses a new technique we call time bubbling to efficiently tackle a difficult challenge of nondeterministic network input timing. Evaluation on five widely used server programs (e.g., Apache, ClamAV, and MySQL) shows that Crane is easy to use, has moderate overhead, and is robust. Crane's source code is at github.com/columbia/crane.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11661,
+    "year": 2015,
+    "title": "E2: a framework for NFV applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815423",
+    "abstract": "By moving network appliance functionality from proprietary hardware to software, Network Function Virtualization promises to bring the advantages of cloud computing to network packet processing. However, the evolution of cloud computing (particularly for data analytics) has greatly benefited from application-independent methods for scaling and placement that achieve high efficiency while relieving programmers of these burdens. NFV has no such general management solutions. In this paper, we present a scalable and application-agnostic scheduling framework for packet processing, and compare its performance to current approaches.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11662,
+    "year": 2015,
+    "title": "Vuvuzela: scalable private messaging resistant to traffic analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815417",
+    "abstract": "Private messaging over the Internet has proven challenging to implement, because even if message data is encrypted, it is difficult to hide metadata about who is communicating in the face of traffic analysis. Systems that offer strong privacy guarantees, such as Dissent [36], scale to only several thousand clients, because they use techniques with superlinear cost in the number of clients (e.g., each client broadcasts their message to all other clients). On the other hand, scalable systems, such as Tor, do not protect against traffic analysis, making them ineffective in an era of pervasive network monitoring.Vuvuzela is a new scalable messaging system that offers strong privacy guarantees, hiding both message data and metadata. Vuvuzela is secure against adversaries that observe and tamper with all network traffic, and that control all nodes except for one server. Vuvuzela's key insight is to minimize the number of variables observable by an attacker, and to use differential privacy techniques to add noise to all observable variables in a way that provably hides information about which users are communicating. Vuvuzela has a linear cost in the number of clients, and experiments show that it can achieve a throughput of 68,000 messages per second for 1 million users with a 37-second end-to-end latency on commodity servers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11663,
+    "year": 2015,
+    "title": "Parallelizing user-defined aggregations using symbolic execution",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815418",
+    "abstract": "User-defined aggregations (UDAs) are integral to large-scale data-processing systems, such as MapReduce and Hadoop, because they let programmers express application-specific aggregation logic. System-supported associative aggregations, such as counting or finding the maximum, are data-parallel and thus these systems optimize their execution, leading in many cases to orders-of-magnitude performance improvements. These optimizations, however, are not possible on arbitrary UDAs.This paper presents Symple, a system for performing MapReduce-style groupby-aggregate queries that automatically parallelizes UDAs. Users specify UDAs using stylized C++ code with possible loop-carried dependences. Symple parallelizes these UDAs by breaking dependences using symbolic execution, where unresolved dependences are treated as symbolic values and the Symple runtime partially evaluates the resulting symbolic expressions on concrete input. Programmers write UDAs using Symple's symbolic data types, which look and behave like standard C++ types. These data types (i) encode specialized decision procedures for efficient symbolic execution and (ii) generate compact symbolic expressions for efficient network transfers. Evaluation on both Amazon's Elastic cloud and a private 380-node Hadoop cluster housing terabytes of data demonstrates that Symple reduces network communication up to several orders of magnitude and job latency by as much as 5.9x for a representative set of queries.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11664,
+    "year": 2015,
+    "title": "Read-log-update: a lightweight synchronization mechanism for concurrent programming",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815406",
+    "abstract": "This paper introduces read-log-update (RLU), a novel extension of the popular read-copy-update (RCU) synchronization mechanism that supports scalability of concurrent code by allowing unsynchronized sequences of reads to execute concurrently with updates. RLU overcomes the major limitations of RCU by allowing, for the first time, concurrency of reads with multiple writers, and providing automation that eliminates most of the programming difficulty associated with RCU programming. At the core of the RLU design is a logging and coordination mechanism inspired by software transactional memory algorithms. In a collection of micro-benchmarks in both the kernel and user space, we show that RLU both simplifies the code and matches or improves on the performance of RCU. As an example of its power, we show how it readily scales the performance of a real-world application, Kyoto Cabinet, a truly difficult concurrent programming feat to attempt in general, and in particular with classic RCU.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11665,
+    "year": 2015,
+    "title": "Coz: finding code that counts with causal profiling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815409",
+    "abstract": "Improving performance is a central concern for software developers. To locate optimization opportunities, developers rely on software profilers. However, these profilers only report where programs spent their time: optimizing that code may have no impact on performance. Past profilers thus both waste developer time and make it difficult for them to uncover significant optimization opportunities.This paper introduces causal profiling. Unlike past profiling approaches, causal profiling indicates exactly where programmers should focus their optimization efforts, and quantifies their potential impact. Causal profiling works by running performance experiments during program execution. Each experiment calculates the impact of any potential optimization by virtually speeding up code: inserting pauses that slow down all other code running concurrently. The key insight is that this slowdown has the same relative effect as running that line faster, thus \"virtually\" speeding it up.We present Coz, a causal profiler, which we evaluate on a range of highly-tuned applications: Memcached, SQLite, and the PARSEC benchmark suite. Coz identifies previously unknown optimization opportunities that are both significant and targeted. Guided by Coz, we improve the performance of Memcached by 9\\%, SQLite by 25\\%, and accelerate six PARSEC applications by as much as 68\\%; in most cases, these optimizations involve modifying under 10 lines of code.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11666,
+    "year": 2015,
+    "title": "JouleGuard: energy guarantees for approximate applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815403",
+    "abstract": "Energy consumption limits battery life in mobile devices and increases costs for servers and data centers. Approximate computing addresses energy concerns by allowing applications to trade accuracy for decreased energy consumption. Approximation frameworks can guarantee accuracy or performance and generally reduce energy usage; however, they provide no energy guarantees. Such guarantees would be beneficial for users who have a fixed energy budget and want to maximize application accuracy within that budget. We address this need by presenting JouleGuard: a runtime control system that coordinates approximate applications with system resource usage to provide control theoretic formal guarantees of energy consumption, while maximizing accuracy. We implement JouleGuard and test it on three different platforms (a mobile, tablet, and server) with eight different approximate applications created from two different frameworks. We find that JouleGuard respects energy budgets, provides near optimal accuracy, adapts to phases in application workload, and provides better outcomes than application approximation or system resource adaptation alone. JouleGuard is general with respect to the applications and systems it controls, making it a suitable runtime for a number of approximate computing frameworks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11667,
+    "year": 2015,
+    "title": "Software defined batteries",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815429",
+    "abstract": "Different battery chemistries perform better on different axes, such as energy density, cost, peak power, recharge time, longevity, and efficiency. Mobile system designers are constrained by existing technology, and are forced to select a single chemistry that best meets their diverse needs, thereby compromising other desirable features. In this paper, we present a new hardware-software system, called Software Defined Battery (SDB), which allows system designers to integrate batteries of different chemistries. SDB exposes APIs to the operating system which control the amount of charge flowing in and out of each battery, enabling it to dynamically trade one battery property for another depending on Application And/Or User Needs. Using microbenchmarks from our prototype SDB implementation, and through detailed simulations, we demonstrate that it is possible to combine batteries which individually excel along different axes to deliver an enhanced collective performance when compared to traditional battery packs.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11668,
+    "year": 2015,
+    "title": "Drowsy power management",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815414",
+    "abstract": "Portable computing devices have fast multi-core processors, large memories, and many on-board sensors and radio interfaces, but are often limited by their energy consumption. Traditional power management subsystems have been extended for smartphones and other portable devices, with the intention of maximizing the time that the devices are in a low-power \"sleep\" state. The approaches taken by these subsystems prove inefficient for many short-lived tasks common to portable devices, e.g., querying a sensor or polling a cloud service.We introduce Drowsy, a new power management state that replaces \"awake.\" In the Drowsy state, not all system components are woken up, only the minimal set required for a pending task(s). Drowsy constructs and maintains the minimal task set by dynamically and continuously inferring dependencies between system components at run-time. We have implemented Drowsy within Android, and our results show a significant improvement (1.5-5x) in energy efficiency for common short-lived tasks.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11669,
+    "year": 2015,
+    "title": "Yesquel: scalable sql storage for web applications",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815413",
+    "abstract": "Web applications have been shifting their storage systems from sql to nosql systems. nosql systems scale well but drop many convenient sql features, such as joins, secondary indexes, and/or transactions. We design, develop, and evaluate Yesquel, a system that provides performance and scalability comparable to nosql with all the features of a sql relational system. Yesquel has a new architecture and a new distributed data structure, called YDBT, which Yesquel uses for storage, and which performs well under contention by many concurrent clients. We evaluate Yesquel and find that Yesquel performs almost as well as Redis---a popular nosql system---and much better than mysql Cluster, while handling sql queries at scale.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11670,
+    "year": 2015,
+    "title": "Building consistent transactions with inconsistent replication",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815404",
+    "abstract": "Application programmers increasingly prefer distributed storage systems with strong consistency and distributed transactions (e.g., Google's Spanner) for their strong guarantees and ease of use. Unfortunately, existing transactional storage systems are expensive to use -- in part because they require costly replication protocols, like Paxos, for fault tolerance. In this paper, we present a new approach that makes transactional storage systems more affordable: we eliminate consistency from the replication protocol while still providing distributed transactions with strong consistency to applications.We present TAPIR -- the Transactional Application Protocol for Inconsistent Replication -- the first transaction protocol to use a novel replication protocol, called inconsistent replication, that provides fault tolerance without consistency. By enforcing strong consistency only in the transaction protocol, TAPIR can commit transactions in a single round-trip and order distributed transactions without centralized coordination. We demonstrate the use of TAPIR in a transactional key-value store, TAPIR-KV. Compared to conventional systems, TAPIR-KV provides better latency and throughput.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11671,
+    "year": 2015,
+    "title": "High-performance ACID via modular concurrency control",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815430",
+    "abstract": "This paper describes the design, implementation, and evaluation of Callas, a distributed database system that offers to unmodified, transactional ACID applications the opportunity to achieve a level of performance that can currently only be reached by rewriting all or part of the application in a BASE/NoSQL Style. The key to combining performance and ease of programming is to decouple the ACID abstraction---which Callas offers identically for all transactions---from the mechanism used to support it. MCC, the new Modular approach to Concurrency Control at the core of Callas, makes it possible to partition transactions in groups with the guarantee that, as long as the concurrency control mechanism within each group upholds a given isolation property, that property will also hold among transactions in different groups. Because of their limited and specialized scope, these group-specific mechanisms can be customized for concurrency with unprecedented aggressiveness. In our MySQL Cluster-based prototype, Callas yields an 8.2x throughput gain for TPC-C with no programming effort.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11672,
+    "year": 2015,
+    "title": "Existential consistency: measuring and understanding consistency at Facebook",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815426",
+    "abstract": "Replicated storage for large Web services faces a trade-off between stronger forms of consistency and higher performance properties. Stronger consistency prevents anomalies, i.e., unexpected behavior visible to users, and reduces programming complexity. There is much recent work on improving the performance properties of systems with stronger consistency, yet the flip-side of this trade-off remains elusively hard to quantify. To the best of our knowledge, no prior work does so for a large, production Web service.We use measurement and analysis of requests to Facebook's TAO system to quantify how often anomalies happen in practice, i.e., when results returned by eventually consistent TAO differ from what is allowed by stronger consistency models. For instance, our analysis shows that 0.0004\\% of reads to vertices would return different results in a linearizable system. This in turn gives insight into the benefits of stronger consistency; 0.0004\\% of reads are potential anomalies that a linearizable system would prevent. We directly study local consistency models---i.e., those we can analyze using requests to a sample of objects---and use the relationships between models to infer bounds on the others.We also describe a practical consistency monitoring system that tracks φ-consistency, a new consistency metric ideally suited for health monitoring. In addition, we give insight into the increased programming complexity of weaker consistency by discussing bugs our monitoring uncovered, and anti-patterns we teach developers to avoid.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11673,
+    "year": 2015,
+    "title": "Virtual CPU validation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815420",
+    "abstract": "Testing the hypervisor is important for ensuring the correct operation and security of systems, but it is a hard and challenging task. We observe, however, that the challenge is similar in many respects to that of testing real CPUs. We thus propose to apply the testing environment of CPU vendors to hypervisors. We demonstrate the advantages of our proposal by adapting Intel's testing facility to the Linux KVM hypervisor. We uncover and fix 117 bugs, six of which are security vulnerabilities. We further find four flaws in Intel virtualization technology, causing a disparity between the observable behavior of code running on virtual and bare-metal servers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11674,
+    "year": 2015,
+    "title": "Holistic configuration management at Facebook",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815401",
+    "abstract": "Facebook's web site and mobile apps are very dynamic. Every day, they undergo thousands of online configuration changes, and execute trillions of configuration checks to personalize the product features experienced by hundreds of million of daily active users. For example, configuration changes help manage the rollouts of new product features, perform A/B testing experiments on mobile devices to identify the best echo-canceling parameters for VoIP, rebalance the load across global regions, and deploy the latest machine learning models to improve News Feed ranking. This paper gives a comprehensive description of the use cases, design, implementation, and usage statistics of a suite of tools that manage Facebook's configuration end-to-end, including the frontend products, backend systems, and mobile apps.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11675,
+    "year": 2015,
+    "title": "Failure sketching: a technique for automated root cause diagnosis of in-production failures",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815412",
+    "abstract": "Developers spend a lot of time searching for the root causes of software failures. For this, they traditionally try to reproduce those failures, but unfortunately many failures are so hard to reproduce in a test environment that developers spend days or weeks as ad-hoc detectives. The shortcomings of many solutions proposed for this problem prevent their use in practice.We propose failure sketching, an automated debugging technique that provides developers with an explanation (\"failure sketch\") of the root cause of a failure that occurred in production. A failure sketch only contains program statements that lead to the failure, and it clearly shows the differences between failing and successful runs; these differences guide developers to the root cause. Our approach combines static program analysis with a cooperative and adaptive form of dynamic program analysis.We built Gist, a prototype for failure sketching that relies on hardware watchpoints and a new hardware feature for extracting control flow traces (Intel Processor Trace). We show that Gist can build failure sketches with low overhead for failures in systems like Apache, SQLite, and Memcached.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11676,
+    "year": 2015,
+    "title": "Cross-checking semantic correctness: the case of finding file system bugs",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815422",
+    "abstract": "Today, systems software is too complex to be bug-free. To find bugs in systems software, developers often rely on code checkers, like Linux's Sparse. However, the capability of existing tools used in commodity, large-scale systems is limited to finding only shallow bugs that tend to be introduced by simple programmer mistakes, and so do not require a deep understanding of code to find them. Unfortunately, the majority of bugs as well as those that are difficult to find are semantic ones, which violate high-level rules or invariants (e.g., missing a permission check). Thus, it is difficult for code checkers lacking the understanding of a programmer's true intention to reason about semantic correctness.To solve this problem, we present Juxta, a tool that automatically infers high-level semantics directly from source code. The key idea in Juxta is to compare and contrast multiple existing implementations that obey latent yet implicit high-level semantics. For example, the implementation of open() at the file system layer expects to handle an out-of-space error from the disk in all file systems. We applied Juxta to 54 file systems in the stock Linux kernel (680K LoC), found 118 previously unknown semantic bugs (one bug per 5.8K LoC), and provided corresponding patches to 39 different file systems, including mature, popular ones like ext4, btrfs, XFS, and NFS. These semantic bugs are not easy to locate, as all the ones found by Juxta have existed for over 6.2 years on average. Not only do our empirical results look promising, but the design of Juxta is generic enough to be extended easily beyond file systems to any software that has multiple implementations, like Web browsers or protocols at the same layer of a network stack.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11677,
+    "year": 2015,
+    "title": "Pivot tracing: dynamic causal monitoring for distributed systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815415",
+    "abstract": "Monitoring and troubleshooting distributed systems is notoriously difficult; potential problems are complex, varied, and unpredictable. The monitoring and diagnosis tools commonly used today -- logs, counters, and metrics -- have two important limitations: what gets recorded is defined a priori, and the information is recorded in a component- or machine-centric way, making it extremely hard to correlate events that cross these boundaries. This paper presents Pivot Tracing, a monitoring framework for distributed systems that addresses both limitations by combining dynamic instrumentation with a novel relational operator: the happened-before join. Pivot Tracing gives users, at runtime, the ability to define arbitrary metrics at one point of the system, while being able to select, filter, and group by events meaningful at other parts of the system, even when crossing component or machine boundaries. We have implemented a prototype of Pivot Tracing for Java-based systems and evaluate it on a heterogeneous Hadoop cluster comprising HDFS, HBase, MapReduce, and YARN. We show that Pivot Tracing can effectively identify a diverse range of root causes such as software bugs, misconfiguration, and limping hardware. We show that Pivot Tracing is dynamic, extensible, and enables cross-tier analysis between inter-operating applications, with low execution overhead.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11678,
+    "year": 2015,
+    "title": "Interruptible tasks: treating memory pressure as interrupts for highly scalable data-parallel programs",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815407",
+    "abstract": "Real-world data-parallel programs commonly suffer from great memory pressure, especially when they are executed to process large datasets. Memory problems lead to excessive GC effort and out-of-memory errors, significantly hurting system performance and scalability. This paper proposes a systematic approach that can help data-parallel tasks survive memory pressure, improving their performance and scalability without needing any manual effort to tune system parameters. Our approach advocates interruptible task (ITask), a new type of data-parallel tasks that can be interrupted upon memory pressure---with part or all of their used memory reclaimed---and resumed when the pressure goes away.To support ITasks, we propose a novel programming model and a runtime system, and have instantiated them on two state-of-the-art platforms Hadoop and Hyracks. A thorough evaluation demonstrates the effectiveness of ITask: it has helped real-world Hadoop programs survive 13 out-of-memory problems reported on StackOverflow; a second set of experiments with 5 already well-tuned programs in Hyracks on datasets of different sizes shows that the ITask-based versions are 1.5--3x faster and scale to 3--24x larger datasets than their regular counterparts.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11679,
+    "year": 2015,
+    "title": "Chaos: scale-out graph processing from secondary storage",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815408",
+    "abstract": "Chaos scales graph processing from secondary storage to multiple machines in a cluster. Earlier systems that process graphs from secondary storage are restricted to a single machine, and therefore limited by the bandwidth and capacity of the storage system on a single machine. Chaos is limited only by the aggregate bandwidth and capacity of all storage devices in the entire cluster.Chaos builds on the streaming partitions introduced by X-Stream in order to achieve sequential access to storage, but parallelizes the execution of streaming partitions. Chaos is novel in three ways. First, Chaos partitions for sequential storage access, rather than for locality and load balance, resulting in much lower pre-processing times. Second, Chaos distributes graph data uniformly randomly across the cluster and does not attempt to achieve locality, based on the observation that in a small cluster network bandwidth far outstrips storage bandwidth. Third, Chaos uses work stealing to allow multiple machines to work on a single partition, thereby achieving load balance at runtime.In terms of performance scaling, on 32 machines Chaos takes on average only 1.61 times longer to process a graph 32 times larger than on a single machine. In terms of capacity scaling, Chaos is capable of handling a graph with 1 trillion edges representing 16 TB of input data, a new milestone for graph processing capacity on a small commodity cluster.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11680,
+    "year": 2015,
+    "title": "Arabesque: a system for distributed graph mining",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815410",
+    "abstract": "Distributed data processing platforms such as MapReduce and Pregel have substantially simplified the design and deployment of certain classes of distributed graph analytics algorithms. However, these platforms do not represent a good match for distributed graph mining problems, as for example finding frequent subgraphs in a graph. Given an input graph, these problems require exploring a very large number of subgraphs and finding patterns that match some \"interestingness\" criteria desired by the user. These algorithms are very important for areas such as social networks, semantic web, and bioinformatics.In this paper, we present Arabesque, the first distributed data processing platform for implementing graph mining algorithms. Arabesque automates the process of exploring a very large number of subgraphs. It defines a high-level filter-process computational model that simplifies the development of scalable graph mining algorithms: Arabesque explores subgraphs and passes them to the application, which must simply compute outputs and decide whether the subgraph should be further extended. We use Arabesque's API to produce distributed solutions to three fundamental graph mining problems: frequent subgraph mining, counting motifs, and finding cliques. Our implementations require a handful of lines of code, scale to trillions of subgraphs, and represent in some cases the first available distributed solutions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11681,
+    "year": 2015,
+    "title": "How to get more value from your file system directory cache",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815405",
+    "abstract": "Applications frequently request file system operations that traverse the file system directory tree, such as opening a file or reading a file's metadata. As a result, caching file system directory structure and metadata in memory is an important performance optimization for an OS kernel.This paper identifies several design principles that can substantially improve hit rate and reduce hit cost transparently to applications and file systems. Specifically, our directory cache design can look up a directory in a constant number of hash table operations, separates finding paths from permission checking, memoizes the results of access control checks, uses signatures to accelerate lookup, and reduces miss rates through caching directory completeness. This design can meet a range of idiosyncratic requirements imposed by POSIX, Linux Security Modules, namespaces, and mount aliases. These optimizations are a significant net improvement for real-world applications, such as improving the throughput of the Dovecot IMAP server by up to 12\\% and the updatedb utility by up to 29\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11682,
+    "year": 2015,
+    "title": "Opportunistic storage maintenance",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815424",
+    "abstract": "Storage systems rely on maintenance tasks, such as backup and layout optimization, to ensure data availability and good performance. These tasks access large amounts of data and can significantly impact foreground applications. We argue that storage maintenance can be performed more efficiently by prioritizing processing of data that is currently cached in memory. Data can be cached either due to other maintenance tasks requesting it previously, or due to overlapping foreground I/O activity.We present Duet, a framework that provides notifications about page-level events to maintenance tasks, such as a page being added or modified in memory. Tasks use these events as hints to opportunistically process cached data. We show that tasks using Duet can complete maintenance work more efficiently because they perform fewer I/O operations. The I/O reduction depends on the amount of data overlap with other maintenance tasks and foreground applications. Consequently, Duet's efficiency increases with additional tasks because opportunities for synergy appear more often.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11683,
+    "year": 2015,
+    "title": "Split-level I/O scheduling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/2815400.2815421",
+    "abstract": "We introduce split-level I/O scheduling, a new framework that splits I/O scheduling logic across handlers at three layers of the storage stack: block, system call, and page cache. We demonstrate that traditional block-level I/O schedulers are unable to meet throughput, latency, and isolation goals. By utilizing the split-level framework, we build a variety of novel schedulers to readily achieve these goals: our Actually Fair Queuing scheduler reduces priority-misallocation by 28x; our Split-Deadline scheduler reduces tail latencies by 4x; our Split-Token scheduler reduces sensitivity to interference by 6x. We show that the framework is general and operates correctly with disparate file systems (ext4 and XFS). Finally, we demonstrate that split-level scheduling serves as a useful foundation for databases (SQLite and PostgreSQL), hypervisors (QEMU), and distributed file systems (HDFS), delivering improved isolation and performance in these important application scenarios.",
+    "status": "notchecked"
+  }
+]

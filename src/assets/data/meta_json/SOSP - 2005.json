@@ -1,0 +1,862 @@
+[
+  {
+    "id": 11815,
+    "year": 2005,
+    "title": "Pioneer: verifying code integrity and enforcing untampered code execution on legacy systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095812",
+    "abstract": "We propose a primitive, called Pioneer, as a first step towards verifiable code execution on untrusted legacy hosts. Pioneer does not require any hardware support such as secure co-processors or CPU-architecture extensions. We implement Pioneer on an Intel Pentium IV Xeon processor. Pioneer can be used as a basic building block to build security systems. We demonstrate this by building a kernel rootkit detector.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11816,
+    "year": 2005,
+    "title": "Pioneer: verifying code integrity and enforcing untampered code execution on legacy systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095812",
+    "abstract": "We propose a primitive, called Pioneer, as a first step towards verifiable code execution on untrusted legacy hosts. Pioneer does not require any hardware support such as secure co-processors or CPU-architecture extensions. We implement Pioneer on an Intel Pentium IV Xeon processor. Pioneer can be used as a basic building block to build security systems. We demonstrate this by building a kernel rootkit detector.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11817,
+    "year": 2005,
+    "title": "Labels and event processes in the asbestos operating system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095813",
+    "abstract": "Asbestos, a new prototype operating system, provides novel labeling and isolation mechanisms that help contain the effects of exploitable software flaws. Applications can express a wide range of policies with Asbestos's kernel-enforced label mechanism, including controls on inter-process communication and system-wide information flow. A new event process abstraction provides lightweight, isolated contexts within a single process, allowing the same process to act on behalf of multiple users while preventing it from leaking any single user's data to any other user. A Web server that uses Asbestos labels to isolate user data requires about 1.5 memory pages per user, demonstrating that additional security can come at an acceptable cost.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11818,
+    "year": 2005,
+    "title": "Labels and event processes in the asbestos operating system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095813",
+    "abstract": "Asbestos, a new prototype operating system, provides novel labeling and isolation mechanisms that help contain the effects of exploitable software flaws. Applications can express a wide range of policies with Asbestos's kernel-enforced label mechanism, including controls on inter-process communication and system-wide information flow. A new event process abstraction provides lightweight, isolated contexts within a single process, allowing the same process to act on behalf of multiple users while preventing it from leaking any single user's data to any other user. A Web server that uses Asbestos labels to isolate user data requires about 1.5 memory pages per user, demonstrating that additional security can come at an acceptable cost.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11819,
+    "year": 2005,
+    "title": "Mondrix: memory isolation for linux using mondriaan memory protection",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095814",
+    "abstract": "This paper presents the design and an evaluation of Mondrix, a version of the Linux kernel with Mondriaan Memory Protection (MMP). MMP is a combination of hardware and software that provides efficient fine-grained memory protection between multiple protection domains sharing a linear address space. Mondrix uses MMP to enforce isolation between kernel modules which helps detect bugs, limits their damage, and improves kernel robustness and maintainability. During development, MMP exposed two kernel bugs in common, heavily-tested code, and during fault injection experiments, it prevented three of five file system corruptions.The Mondrix implementation demonstrates how MMP can bring memory isolation to modules that already exist in a large software application. It shows the benefit of isolation for robustness and error detection and prevention, while validating previous claims that the protection abstractions MMP offers are a good fit for software. This paper describes the design of the memory supervisor, the kernel module which implements permissions policy.We present an evaluation of Mondrix using full-system simulation of large kernel-intensive workloads. Experiments with several benchmarks where MMP was used extensively indicate the additional space taken by the MMP data structures reduce the kernel's free memory by less than 10\\%, and the kernel's runtime increases less than 15\\% relative to an unmodified kernel.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11820,
+    "year": 2005,
+    "title": "Mondrix: memory isolation for linux using mondriaan memory protection",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095814",
+    "abstract": "This paper presents the design and an evaluation of Mondrix, a version of the Linux kernel with Mondriaan Memory Protection (MMP). MMP is a combination of hardware and software that provides efficient fine-grained memory protection between multiple protection domains sharing a linear address space. Mondrix uses MMP to enforce isolation between kernel modules which helps detect bugs, limits their damage, and improves kernel robustness and maintainability. During development, MMP exposed two kernel bugs in common, heavily-tested code, and during fault injection experiments, it prevented three of five file system corruptions.The Mondrix implementation demonstrates how MMP can bring memory isolation to modules that already exist in a large software application. It shows the benefit of isolation for robustness and error detection and prevention, while validating previous claims that the protection abstractions MMP offers are a good fit for software. This paper describes the design of the memory supervisor, the kernel module which implements permissions policy.We present an evaluation of Mondrix using full-system simulation of large kernel-intensive workloads. Experiments with several benchmarks where MMP was used extensively indicate the additional space taken by the MMP data structures reduce the kernel's free memory by less than 10\\%, and the kernel's runtime increases less than 15\\% relative to an unmodified kernel.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11821,
+    "year": 2005,
+    "title": "BAR fault tolerance for cooperative services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095816",
+    "abstract": "This paper describes a general approach to constructing cooperative services that span multiple administrative domains. In such environments, protocols must tolerate both Byzantine behaviors when broken, misconfigured, or malicious nodes arbitrarily deviate from their specification and rational behaviors when selfish nodes deviate from their specification to increase their local benefit. The paper makes three contributions: (1) It introduces the BAR (Byzantine, Altruistic, Rational) model as a foundation for reasoning about cooperative services; (2) It proposes a general three-level architecture to reduce the complexity of building services under the BAR model; and (3) It describes an implementation of BAR-B the first cooperative backup service to tolerate both Byzantine users and an unbounded number of rational users. At the core of BAR-B is an asynchronous replicated state machine that provides the customary safety and liveness guarantees despite nodes exhibiting both Byzantine and rational behaviors. Our prototype provides acceptable performance for our application: our BAR-tolerant state machine executes 15 requests per second, and our BAR-B backup service can back up 100MB of data in under 4 minutes.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11822,
+    "year": 2005,
+    "title": "BAR fault tolerance for cooperative services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095816",
+    "abstract": "This paper describes a general approach to constructing cooperative services that span multiple administrative domains. In such environments, protocols must tolerate both Byzantine behaviors when broken, misconfigured, or malicious nodes arbitrarily deviate from their specification and rational behaviors when selfish nodes deviate from their specification to increase their local benefit. The paper makes three contributions: (1) It introduces the BAR (Byzantine, Altruistic, Rational) model as a foundation for reasoning about cooperative services; (2) It proposes a general three-level architecture to reduce the complexity of building services under the BAR model; and (3) It describes an implementation of BAR-B the first cooperative backup service to tolerate both Byzantine users and an unbounded number of rational users. At the core of BAR-B is an asynchronous replicated state machine that provides the customary safety and liveness guarantees despite nodes exhibiting both Byzantine and rational behaviors. Our prototype provides acceptable performance for our application: our BAR-tolerant state machine executes 15 requests per second, and our BAR-B backup service can back up 100MB of data in under 4 minutes.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11823,
+    "year": 2005,
+    "title": "Fault-scalable Byzantine fault-tolerant services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095817",
+    "abstract": "A fault-scalable service can be configured to tolerate increasing numbers of faults without significant decreases in performance. The Query/Update (Q/U) protocol is a new tool that enables construction of fault-scalable Byzantine fault-tolerant services. The optimistic quorum-based nature of the Q/U protocol allows it to provide better throughput and fault-scalability than replicated state machines using agreement-based protocols. A prototype service built using the Q/U protocol outperforms the same service built using a popular replicated state machine implementation at all system sizes in experiments that permit an optimistic execution. Moreover, the performance of the Q/U protocol decreases by only 36\\% as the number of Byzantine faults tolerated increases from one to five, whereas the performance of the replicated state machine decreases by 83\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11824,
+    "year": 2005,
+    "title": "Fault-scalable Byzantine fault-tolerant services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095817",
+    "abstract": "A fault-scalable service can be configured to tolerate increasing numbers of faults without significant decreases in performance. The Query/Update (Q/U) protocol is a new tool that enables construction of fault-scalable Byzantine fault-tolerant services. The optimistic quorum-based nature of the Q/U protocol allows it to provide better throughput and fault-scalability than replicated state machines using agreement-based protocols. A prototype service built using the Q/U protocol outperforms the same service built using a popular replicated state machine implementation at all system sizes in experiments that permit an optimistic execution. Moreover, the performance of the Q/U protocol decreases by only 36\\% as the number of Byzantine faults tolerated increases from one to five, whereas the performance of the replicated state machine decreases by 83\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11825,
+    "year": 2005,
+    "title": "Implementing declarative overlays",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095818",
+    "abstract": "Overlay networks are used today in a variety of distributed systems ranging from file-sharing and storage systems to communication infrastructures. However, designing, building and adapting these overlays to the intended application and the target environment is a difficult and time consuming process.To ease the development and the deployment of such overlay networks we have implemented P2, a system that uses a declarative logic language to express overlay networks in a highly compact and reusable form. P2 can express a Narada-style mesh network in 16 rules, and the Chord structured overlay in only 47 rules. P2 directly parses and executes such specifications using a dataflow architecture to construct and maintain overlay networks. We describe the P2 approach, how our implementation works, and show by experiment its promising trade-off point between specification complexity and performance.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11826,
+    "year": 2005,
+    "title": "Implementing declarative overlays",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095818",
+    "abstract": "Overlay networks are used today in a variety of distributed systems ranging from file-sharing and storage systems to communication infrastructures. However, designing, building and adapting these overlays to the intended application and the target environment is a difficult and time consuming process.To ease the development and the deployment of such overlay networks we have implemented P2, a system that uses a declarative logic language to express overlay networks in a highly compact and reusable form. P2 can express a Narada-style mesh network in 16 rules, and the Chord structured overlay in only 47 rules. P2 directly parses and executes such specifications using a dataflow architecture to construct and maintain overlay networks. We describe the P2 approach, how our implementation works, and show by experiment its promising trade-off point between specification complexity and performance.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11827,
+    "year": 2005,
+    "title": "Detecting past and present intrusions through vulnerability-specific predicates",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095820",
+    "abstract": "Most systems contain software with yet-to-be-discovered security vulnerabilities. When a vulnerability is disclosed, administrators face the grim reality that they have been running software which was open to attack. Sites that value availability may be forced to continue running this vulnerable software until the accompanying patch has been tested. Our goal is to improve security by detecting intrusions that occurred before the vulnerability was disclosed and by detecting and responding to intrusions that are attempted after the vulnerability is disclosed. We detect when a vulnerability is triggered by executing vulnerability-specific predicates as the system runs or replays. This paper describes the design, implementation and evaluation of a system that supports the construction and execution of these vulnerability-specific predicates. Our system, called IntroVirt, uses virtual-machine introspection to monitor the execution of application and operating system software. IntroVirt executes predicates over past execution periods by combining virtual-machine introspection with virtual-machine replay. IntroVirt eases the construction of powerful predicates by allowing predicates to run existing target code in the context of the target system, and it uses checkpoints so that predicates can execute target code without perturbing the state of the target system. IntroVirt allows predicates to refresh themselves automatically so they work in the presence of preemptions. We show that vulnerability-specific predicates can be written easily for a wide variety of real vulnerabilities, can detect and respond to intrusions over both the past and present time intervals, and add little overhead for most vulnerabilities.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11828,
+    "year": 2005,
+    "title": "Detecting past and present intrusions through vulnerability-specific predicates",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095820",
+    "abstract": "Most systems contain software with yet-to-be-discovered security vulnerabilities. When a vulnerability is disclosed, administrators face the grim reality that they have been running software which was open to attack. Sites that value availability may be forced to continue running this vulnerable software until the accompanying patch has been tested. Our goal is to improve security by detecting intrusions that occurred before the vulnerability was disclosed and by detecting and responding to intrusions that are attempted after the vulnerability is disclosed. We detect when a vulnerability is triggered by executing vulnerability-specific predicates as the system runs or replays. This paper describes the design, implementation and evaluation of a system that supports the construction and execution of these vulnerability-specific predicates. Our system, called IntroVirt, uses virtual-machine introspection to monitor the execution of application and operating system software. IntroVirt executes predicates over past execution periods by combining virtual-machine introspection with virtual-machine replay. IntroVirt eases the construction of powerful predicates by allowing predicates to run existing target code in the context of the target system, and it uses checkpoints so that predicates can execute target code without perturbing the state of the target system. IntroVirt allows predicates to refresh themselves automatically so they work in the presence of preemptions. We show that vulnerability-specific predicates can be written easily for a wide variety of real vulnerabilities, can detect and respond to intrusions over both the past and present time intervals, and add little overhead for most vulnerabilities.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11829,
+    "year": 2005,
+    "title": "Capturing, indexing, clustering, and retrieving system history",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095821",
+    "abstract": "We present a method for automatically extracting from a running system an indexable signature that distills the essential characteristic from a system state and that can be subjected to automated clustering and similarity-based retrieval to identify when an observed system state is similar to a previously-observed state. This allows operators to identify and quantify the frequency of recurrent problems, to leverage previous diagnostic efforts, and to establish whether problems seen at different installations of the same site are similar or distinct. We show that the naive approach to constructing these signatures based on simply recording the actual ``raw'' values of collected measurements is ineffective, leading us to a more sophisticated approach based on statistical modeling and inference. Our method requires only that the system's metric of merit (such as average transaction response time) as well as a collection of lower-level operational metrics be collected, as is done by existing commercial monitoring tools. Even if the traces have no annotations of prior diagnoses of observed incidents (as is typical), our technique successfully clusters system states corresponding to similar problems, allowing diagnosticians to identify recurring problems and to characterize the ``syndrome'' of a group of problems. We validate our approach on both synthetic traces and several weeks of production traces from a customer-facing geoplexed 24 x 7 system; in the latter case, our approach identified a recurring problem that had required extensive manual diagnosis, and also aided the operators in correcting a previous misdiagnosis of a different problem.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11830,
+    "year": 2005,
+    "title": "Capturing, indexing, clustering, and retrieving system history",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095821",
+    "abstract": "We present a method for automatically extracting from a running system an indexable signature that distills the essential characteristic from a system state and that can be subjected to automated clustering and similarity-based retrieval to identify when an observed system state is similar to a previously-observed state. This allows operators to identify and quantify the frequency of recurrent problems, to leverage previous diagnostic efforts, and to establish whether problems seen at different installations of the same site are similar or distinct. We show that the naive approach to constructing these signatures based on simply recording the actual ``raw'' values of collected measurements is ineffective, leading us to a more sophisticated approach based on statistical modeling and inference. Our method requires only that the system's metric of merit (such as average transaction response time) as well as a collection of lower-level operational metrics be collected, as is done by existing commercial monitoring tools. Even if the traces have no annotations of prior diagnoses of observed incidents (as is typical), our technique successfully clusters system states corresponding to similar problems, allowing diagnosticians to identify recurring problems and to characterize the ``syndrome'' of a group of problems. We validate our approach on both synthetic traces and several weeks of production traces from a customer-facing geoplexed 24 x 7 system; in the latter case, our approach identified a recurring problem that had required extensive manual diagnosis, and also aided the operators in correcting a previous misdiagnosis of a different problem.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11831,
+    "year": 2005,
+    "title": "Connections: using context to enhance file search",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095822",
+    "abstract": "Connections is a file system search tool that combines traditional content-based search with context information gathered from user activity. By tracing file system calls, Connections can identify temporal relationships between files and use them to expand and reorder traditional content search results. Doing so improves both recall (reducing false-positives) and precision (reducing false-negatives). For example, Connections improves the average recall (from 13\\% to 22\\%) and precision (from 23\\% to 29\\%) on the first ten results. When averaged across all recall levels, Connections improves precision from 17\\% to 28\\%. Connections provides these benefits with only modest increases in average query time (2 seconds), indexing time (23 seconds daily), and index size(under 1\\% of the user's data set).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11832,
+    "year": 2005,
+    "title": "Connections: using context to enhance file search",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095822",
+    "abstract": "Connections is a file system search tool that combines traditional content-based search with context information gathered from user activity. By tracing file system calls, Connections can identify temporal relationships between files and use them to expand and reorder traditional content search results. Doing so improves both recall (reducing false-positives) and precision (reducing false-negatives). For example, Connections improves the average recall (from 13\\% to 22\\%) and precision (from 23\\% to 29\\%) on the first ten results. When averaged across all recall levels, Connections improves precision from 17\\% to 28\\%. Connections provides these benefits with only modest increases in average query time (2 seconds), indexing time (23 seconds daily), and index size(under 1\\% of the user's data set).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11833,
+    "year": 2005,
+    "title": "Vigilante: end-to-end containment of internet worms",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095824",
+    "abstract": "Worm containment must be automatic because worms can spread too fast for humans to respond. Recent work has proposed network-level techniques to automate worm containment; these techniques have limitations because there is no information about the vulnerabilities exploited by worms at the network level. We propose Vigilante, a new end-to-end approach to contain worms automatically that addresses these limitations. Vigilante relies on collaborative worm detection at end hosts, but does not require hosts to trust each other. Hosts run instrumented software to detect worms and broadcast self-certifying alerts (SCAs) upon worm detection. SCAs are proofs of vulnerability that can be inexpensively verified by any vulnerable host. When hosts receive an SCA, they generate filters that block infection by analysing the SCA-guided execution of the vulnerable software. We show that Vigilante can automatically contain fast-spreading worms that exploit unknown vulnerabilities without blocking innocuous traffic.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11834,
+    "year": 2005,
+    "title": "Vigilante: end-to-end containment of internet worms",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095824",
+    "abstract": "Worm containment must be automatic because worms can spread too fast for humans to respond. Recent work has proposed network-level techniques to automate worm containment; these techniques have limitations because there is no information about the vulnerabilities exploited by worms at the network level. We propose Vigilante, a new end-to-end approach to contain worms automatically that addresses these limitations. Vigilante relies on collaborative worm detection at end hosts, but does not require hosts to trust each other. Hosts run instrumented software to detect worms and broadcast self-certifying alerts (SCAs) upon worm detection. SCAs are proofs of vulnerability that can be inexpensively verified by any vulnerable host. When hosts receive an SCA, they generate filters that block infection by analysing the SCA-guided execution of the vulnerable software. We show that Vigilante can automatically contain fast-spreading worms that exploit unknown vulnerabilities without blocking innocuous traffic.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11835,
+    "year": 2005,
+    "title": "Scalability, fidelity, and containment in the potemkin virtual honeyfarm",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095825",
+    "abstract": "The rapid evolution of large-scale worms, viruses and bot-nets have made Internet malware a pressing concern. Such infections are at the root of modern scourges including DDoS extortion, on-line identity theft, SPAM, phishing, and piracy. However, the most widely used tools for gathering intelligence on new malware -- network honeypots -- have forced investigators to choose between monitoring activity at a large scale or capturing behavior with high fidelity. In this paper, we describe an approach to minimize this tension and improve honeypot scalability by up to six orders of magnitude while still closely emulating the execution behavior of individual Internet hosts. We have built a prototype honeyfarm system, called Potemkin, that exploits virtual machines, aggressive memory sharing, and late binding of resources to achieve this goal. While still an immature implementation, Potemkin has emulated over 64,000 Internet honeypots in live test runs, using only a handful of physical servers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11836,
+    "year": 2005,
+    "title": "Scalability, fidelity, and containment in the potemkin virtual honeyfarm",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095825",
+    "abstract": "The rapid evolution of large-scale worms, viruses and bot-nets have made Internet malware a pressing concern. Such infections are at the root of modern scourges including DDoS extortion, on-line identity theft, SPAM, phishing, and piracy. However, the most widely used tools for gathering intelligence on new malware -- network honeypots -- have forced investigators to choose between monitoring activity at a large scale or capturing behavior with high fidelity. In this paper, we describe an approach to minimize this tension and improve honeypot scalability by up to six orders of magnitude while still closely emulating the execution behavior of individual Internet hosts. We have built a prototype honeyfarm system, called Potemkin, that exploits virtual machines, aggressive memory sharing, and late binding of resources to achieve this goal. While still an immature implementation, Potemkin has emulated over 64,000 Internet honeypots in live test runs, using only a handful of physical servers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11837,
+    "year": 2005,
+    "title": "The taser intrusion recovery system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095826",
+    "abstract": "Recovery from intrusions is typically a very time-consuming operation in current systems. At a time when the cost of human resources dominates the cost of computing resources, we argue that next generation systems should be built with automated intrusion recovery as a primary goal. In this paper, we describe the design of Taser, a system that helps in selectively recovering legitimate file-system data after an attack or local damage occurs. Taser reverts tainted, i.e. attack-dependent, file-system operations but preserves legitimate operations. This process is difficult for two reasons. First, the set of tainted operations is not known precisely. Second, the recovery process can cause conflicts when legitimate operations depend on tainted operations. Taser provides several analysis policies that aid in determining the set of tainted operations. To handle conflicts, Taser uses automated resolution policies that isolate the tainted operations. Our evaluation shows that Taser is effective in recovering from a wide range of intrusions as well as damage caused by system management errors.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11838,
+    "year": 2005,
+    "title": "The taser intrusion recovery system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095826",
+    "abstract": "Recovery from intrusions is typically a very time-consuming operation in current systems. At a time when the cost of human resources dominates the cost of computing resources, we argue that next generation systems should be built with automated intrusion recovery as a primary goal. In this paper, we describe the design of Taser, a system that helps in selectively recovering legitimate file-system data after an attack or local damage occurs. Taser reverts tainted, i.e. attack-dependent, file-system operations but preserves legitimate operations. This process is difficult for two reasons. First, the set of tainted operations is not known precisely. Second, the recovery process can cause conflicts when legitimate operations depend on tainted operations. Taser provides several analysis policies that aid in determining the set of tainted operations. To handle conflicts, Taser uses automated resolution policies that isolate the tainted operations. Our evaluation shows that Taser is effective in recovering from a wide range of intrusions as well as damage caused by system management errors.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11839,
+    "year": 2005,
+    "title": "Hibernator: helping disk arrays sleep through the winter",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095828",
+    "abstract": "Energy consumption has become an important issue in high-end data centers, and disk arrays are one of the largest energy consumers within them. Although several attempts have been made to improve disk array energy management, the existing solutions either provide little energy savings or significantly degrade performance for data center workloads.Our solution, Hibernator, is a disk array energy management system that provides improved energy savings while meeting performance goals. Hibernator combines a number of techniques to achieve this: the use of disks that can spin at different speeds, a coarse-grained approach for dynamically deciding which disks should spin at which speeds, efficient ways to migrate the right data to an appropriate-speed disk automatically, and automatic performance boosts if there is a risk that performance goals might not be met due to disk energy management.In this paper, we describe the Hibernator design, and present evaluations of it using both trace-driven simulations and a hybrid system comprised of a real database server (IBM DB2) and an emulated storage server with multi-speed disks. Our file-system and on-line transaction processing (OLTP) simulation results show that Hibernator can provide up to 65\\% energy savings while continuing to satisfy performance goals (6.5--26 times better than previous solutions). Our OLTP emulated system results show that Hibernator can save more energy (29\\%) than previous solutions, while still providing an OLTP transaction rate comparable to a RAID5 array with no energy management.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11840,
+    "year": 2005,
+    "title": "Hibernator: helping disk arrays sleep through the winter",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095828",
+    "abstract": "Energy consumption has become an important issue in high-end data centers, and disk arrays are one of the largest energy consumers within them. Although several attempts have been made to improve disk array energy management, the existing solutions either provide little energy savings or significantly degrade performance for data center workloads.Our solution, Hibernator, is a disk array energy management system that provides improved energy savings while meeting performance goals. Hibernator combines a number of techniques to achieve this: the use of disks that can spin at different speeds, a coarse-grained approach for dynamically deciding which disks should spin at which speeds, efficient ways to migrate the right data to an appropriate-speed disk automatically, and automatic performance boosts if there is a risk that performance goals might not be met due to disk energy management.In this paper, we describe the Hibernator design, and present evaluations of it using both trace-driven simulations and a hybrid system comprised of a real database server (IBM DB2) and an emulated storage server with multi-speed disks. Our file-system and on-line transaction processing (OLTP) simulation results show that Hibernator can provide up to 65\\% energy savings while continuing to satisfy performance goals (6.5--26 times better than previous solutions). Our OLTP emulated system results show that Hibernator can save more energy (29\\%) than previous solutions, while still providing an OLTP transaction rate comparable to a RAID5 array with no energy management.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11841,
+    "year": 2005,
+    "title": "Speculative execution in a distributed file system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095829",
+    "abstract": "Speculator provides Linux kernel support for speculative execution. It allows multiple processes to share speculative state by tracking causal dependencies propagated through inter-process communication. It guarantees correct execution by preventing speculative processes from externalizing output, e.g., sending a network message or writing to the screen, until the speculations on which that output depends have proven to be correct. Speculator improves the performance of distributed file systems by masking I/O latency and increasing I/O throughput. Rather than block during a remote operation, a file system predicts the operation's result, then uses Speculator to checkpoint the state of the calling process and speculatively continue its execution based on the predicted result. If the prediction is correct, the checkpoint is discarded; if it is incorrect, the calling process is restored to the checkpoint, and the operation is retried. We have modified the client, server, and network protocol of two distributed file systems to use Speculator. For PostMark and Andrew-style benchmarks, speculative execution results in a factor of 2 performance improvement for NFS over local-area networks and an order of magnitude improvement over wide-area networks. For the same benchmarks, Speculator enables the Blue File System to provide the consistency of single-copy file semantics and the safety of synchronous I/O, yet still outperform current distributed file systems with weaker consistency and safety.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11842,
+    "year": 2005,
+    "title": "Speculative execution in a distributed file system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095829",
+    "abstract": "Speculator provides Linux kernel support for speculative execution. It allows multiple processes to share speculative state by tracking causal dependencies propagated through inter-process communication. It guarantees correct execution by preventing speculative processes from externalizing output, e.g., sending a network message or writing to the screen, until the speculations on which that output depends have proven to be correct. Speculator improves the performance of distributed file systems by masking I/O latency and increasing I/O throughput. Rather than block during a remote operation, a file system predicts the operation's result, then uses Speculator to checkpoint the state of the calling process and speculatively continue its execution based on the predicted result. If the prediction is correct, the checkpoint is discarded; if it is incorrect, the calling process is restored to the checkpoint, and the operation is retried. We have modified the client, server, and network protocol of two distributed file systems to use Speculator. For PostMark and Andrew-style benchmarks, speculative execution results in a factor of 2 performance improvement for NFS over local-area networks and an order of magnitude improvement over wide-area networks. For the same benchmarks, Speculator enables the Blue File System to provide the consistency of single-copy file semantics and the safety of synchronous I/O, yet still outperform current distributed file systems with weaker consistency and safety.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11843,
+    "year": 2005,
+    "title": "IRON file systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095830",
+    "abstract": "Commodity file systems trust disks to either work or fail completely, yet modern disks exhibit more complex failure modes. We suggest a new fail-partial failure model for disks, which incorporates realistic localized faults such as latent sector errors and block corruption. We then develop and apply a novel failure-policy fingerprinting framework, to investigate how commodity file systems react to a range of more realistic disk failures. We classify their failure policies in a new taxonomy that measures their Internal RObustNess (IRON), which includes both failure detection and recovery techniques. We show that commodity file system failure policies are often inconsistent, sometimes buggy, and generally inadequate in their ability to recover from partial disk failures. Finally, we design, implement, and evaluate a prototype IRON file system, Linux ixt3, showing that techniques such as in-disk checksumming, replication, and parity greatly enhance file system robustness while incurring minimal time and space overheads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11844,
+    "year": 2005,
+    "title": "IRON file systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095830",
+    "abstract": "Commodity file systems trust disks to either work or fail completely, yet modern disks exhibit more complex failure modes. We suggest a new fail-partial failure model for disks, which incorporates realistic localized faults such as latent sector errors and block corruption. We then develop and apply a novel failure-policy fingerprinting framework, to investigate how commodity file systems react to a range of more realistic disk failures. We classify their failure policies in a new taxonomy that measures their Internal RObustNess (IRON), which includes both failure detection and recovery techniques. We show that commodity file system failure policies are often inconsistent, sometimes buggy, and generally inadequate in their ability to recover from partial disk failures. Finally, we design, implement, and evaluate a prototype IRON file system, Linux ixt3, showing that techniques such as in-disk checksumming, replication, and parity greatly enhance file system robustness while incurring minimal time and space overheads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11845,
+    "year": 2005,
+    "title": "RaceTrack: efficient detection of data race conditions via adaptive tracking",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095832",
+    "abstract": "Bugs due to data races in multithreaded programs often exhibit non-deterministic symptoms and are notoriously difficult to find. This paper describes RaceTrack, a dynamic race detection tool that tracks the actions of a program and reports a warning whenever a suspicious pattern of activity has been observed. RaceTrack uses a novel hybrid detection algorithm and employs an adaptive approach that automatically directs more effort to areas that are more suspicious, thus providing more accurate warnings for much less over-head. A post-processing step correlates warnings and ranks code segments based on how strongly they are implicated in potential data races. We implemented RaceTrack inside the virtual machine of Microsoft's Common Language Runtime (product version v1.1.4322) and monitored several major, real-world applications directly out-of-the-box,without any modification. Adaptive tracking resulted in a slowdown ratio of about 3x on memory-intensive programs and typically much less than 2x on other programs,and a memory ratio of typically less than 1.2x. Several serious data race bugs were revealed, some previously unknown.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11846,
+    "year": 2005,
+    "title": "RaceTrack: efficient detection of data race conditions via adaptive tracking",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095832",
+    "abstract": "Bugs due to data races in multithreaded programs often exhibit non-deterministic symptoms and are notoriously difficult to find. This paper describes RaceTrack, a dynamic race detection tool that tracks the actions of a program and reports a warning whenever a suspicious pattern of activity has been observed. RaceTrack uses a novel hybrid detection algorithm and employs an adaptive approach that automatically directs more effort to areas that are more suspicious, thus providing more accurate warnings for much less over-head. A post-processing step correlates warnings and ranks code segments based on how strongly they are implicated in potential data races. We implemented RaceTrack inside the virtual machine of Microsoft's Common Language Runtime (product version v1.1.4322) and monitored several major, real-world applications directly out-of-the-box,without any modification. Adaptive tracking resulted in a slowdown ratio of about 3x on memory-intensive programs and typically much less than 2x on other programs,and a memory ratio of typically less than 1.2x. Several serious data race bugs were revealed, some previously unknown.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11847,
+    "year": 2005,
+    "title": "Rx: treating bugs as allergies---a safe method to survive software failures",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095833",
+    "abstract": "Many applications demand availability. Unfortunately, software failures greatly reduce system availability. Prior work on surviving software failures suffers from one or more of the following limitations: Required application restructuring, inability to address deterministic software bugs, unsafe speculation on program execution, and long recovery time.This paper proposes an innovative safe technique, called Rx, which can quickly recover programs from many types of software bugs, both deterministic and non-deterministic. Our idea, inspired from allergy treatment in real life, is to rollback the program to a recent checkpoint upon a software failure, and then to re-execute the program in a modified environment. We base this idea on the observation that many bugs are correlated with the execution environment, and therefore can be avoided by removing the \"allergen\" from the environment. Rx requires few to no modifications to applications and provides programmers with additional feedback for bug diagnosis.We have implemented RX on Linux. Our experiments with four server applications that contain six bugs of various types show that RX can survive all the six software failures and provide transparent fast recovery within 0.017-0.16 seconds, 21-53 times faster than the whole program restart approach for all but one case (CVS). In contrast, the two tested alternatives, a whole program restart approach and a simple rollback and re-execution without environmental changes, cannot successfully recover the three servers (Squid, Apache, and CVS) that contain deterministic bugs, and have only a 40\\% recovery rate for the server (MySQL) that contains a non-deterministic concurrency bug. Additionally, RX's checkpointing system is lightweight, imposing small time and space overheads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11848,
+    "year": 2005,
+    "title": "Rx: treating bugs as allergies---a safe method to survive software failures",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095833",
+    "abstract": "Many applications demand availability. Unfortunately, software failures greatly reduce system availability. Prior work on surviving software failures suffers from one or more of the following limitations: Required application restructuring, inability to address deterministic software bugs, unsafe speculation on program execution, and long recovery time.This paper proposes an innovative safe technique, called Rx, which can quickly recover programs from many types of software bugs, both deterministic and non-deterministic. Our idea, inspired from allergy treatment in real life, is to rollback the program to a recent checkpoint upon a software failure, and then to re-execute the program in a modified environment. We base this idea on the observation that many bugs are correlated with the execution environment, and therefore can be avoided by removing the \"allergen\" from the environment. Rx requires few to no modifications to applications and provides programmers with additional feedback for bug diagnosis.We have implemented RX on Linux. Our experiments with four server applications that contain six bugs of various types show that RX can survive all the six software failures and provide transparent fast recovery within 0.017-0.16 seconds, 21-53 times faster than the whole program restart approach for all but one case (CVS). In contrast, the two tested alternatives, a whole program restart approach and a simple rollback and re-execution without environmental changes, cannot successfully recover the three servers (Squid, Apache, and CVS) that contain deterministic bugs, and have only a 40\\% recovery rate for the server (MySQL) that contains a non-deterministic concurrency bug. Additionally, RX's checkpointing system is lightweight, imposing small time and space overheads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11849,
+    "year": 2005,
+    "title": "Idletime scheduling with preemption intervals",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095835",
+    "abstract": "This paper presents the idletime scheduler; a generic, kernel-level mechanism for using idle resource capacity in the background without slowing down concurrent foreground use. Many operating systems fail to support transparent background use and concurrent foreground performance can decrease by 50\\% or more. The idletime scheduler minimizes this interference by partially relaxing the work conservation principle during preemption intervals, during which it serves no background requests even if the resource is idle. The length of preemption intervals is a controlling parameter of the scheduler: short intervals aggressively utilize idle capacity; long intervals reduce the impact of background use on foreground performance. Unlike existing approaches to establish prioritized resource use, idletime scheduling requires only localized modifications to a limited number of system schedulers. In experiments, a FreeBSD implementation for idletime network scheduling maintains over 90\\% of foreground TCP throughput, while allowing concurrent, high-rate UDP background flows to consume up to 80\\% of remaining link capacity. A FreeBSD disk scheduler implementation maintains 80\\% of foreground read performance, while enabling concurrent background operations to reach 70\\% throughput.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11850,
+    "year": 2005,
+    "title": "Idletime scheduling with preemption intervals",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095835",
+    "abstract": "This paper presents the idletime scheduler; a generic, kernel-level mechanism for using idle resource capacity in the background without slowing down concurrent foreground use. Many operating systems fail to support transparent background use and concurrent foreground performance can decrease by 50\\% or more. The idletime scheduler minimizes this interference by partially relaxing the work conservation principle during preemption intervals, during which it serves no background requests even if the resource is idle. The length of preemption intervals is a controlling parameter of the scheduler: short intervals aggressively utilize idle capacity; long intervals reduce the impact of background use on foreground performance. Unlike existing approaches to establish prioritized resource use, idletime scheduling requires only localized modifications to a limited number of system schedulers. In experiments, a FreeBSD implementation for idletime network scheduling maintains over 90\\% of foreground TCP throughput, while allowing concurrent, high-rate UDP background flows to consume up to 80\\% of remaining link capacity. A FreeBSD disk scheduler implementation maintains 80\\% of foreground read performance, while enabling concurrent background operations to reach 70\\% throughput.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11851,
+    "year": 2005,
+    "title": "FS2: dynamic data replication in free disk space for improving disk performance and energy consumption",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095836",
+    "abstract": "Disk performance is increasingly limited by its head positioning latencies, i.e., seek time and rotational delay. To reduce the head positioning latencies, we propose a novel technique that dynamically places copies of data in file system's free blocks according to the disk access patterns observed at runtime. As one or more replicas can now be accessed in addition to their original data block, choosing the \"nearest\" replica that provides fastest access can significantly improve performance for disk I/O operations.We implemented and evaluated a prototype based on the popular Ext2 file system. In our prototype, since the file system layout is modified only by using the free/unused disk space (hence the name Free Space File System, or FS2), users are completely oblivious to how the file system layout is modified in the background; they will only notice performance improvements over time. For a wide range of workloads running under Linux, FS2 is shown to reduce disk access time by 41--68\\% (as a result of a 37--78\\% shorter seek time and a 31--68\\% shorter rotational delay) making a 16--34\\% overall user-perceived performance improvement. The reduced disk access time also leads to a 40--71\\% energy savings per access.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11852,
+    "year": 2005,
+    "title": "FS2: dynamic data replication in free disk space for improving disk performance and energy consumption",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095836",
+    "abstract": "Disk performance is increasingly limited by its head positioning latencies, i.e., seek time and rotational delay. To reduce the head positioning latencies, we propose a novel technique that dynamically places copies of data in file system's free blocks according to the disk access patterns observed at runtime. As one or more replicas can now be accessed in addition to their original data block, choosing the \"nearest\" replica that provides fastest access can significantly improve performance for disk I/O operations.We implemented and evaluated a prototype based on the popular Ext2 file system. In our prototype, since the file system layout is modified only by using the free/unused disk space (hence the name Free Space File System, or FS2), users are completely oblivious to how the file system layout is modified in the background; they will only notice performance improvements over time. For a wide range of workloads running under Linux, FS2 is shown to reduce disk access time by 41--68\\% (as a result of a 37--78\\% shorter seek time and a 31--68\\% shorter rotational delay) making a 16--34\\% overall user-perceived performance improvement. The reduced disk access time also leads to a 40--71\\% energy savings per access.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11853,
+    "year": 2005,
+    "title": "THINC: a virtual display architecture for thin-client computing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095809.1095837",
+    "abstract": "Rapid improvements in network bandwidth, cost, and ubiquity combined with the security hazards and high total cost of ownership of personal computers have created a growing market for thin-client computing. We introduce THINC, a virtual display architecture for high-performance thin-client computing in both LAN and WAN environments. THINC virtualizes the display at the device driver interface to transparently intercept application display commands and translate them into a few simple low-level commands that can be easily supported by widely used client hardware. THINC's translation mechanism efficiently leverages display semantic information through novel optimizations such as offscreen drawing awareness, native video support, and server-side screen scaling. This is integrated with an update delivery architecture that uses shortest command first scheduling and non-blocking operation. THINC leverages existing display system functionality and works seamlessly with unmodified applications, window systems, and operating systems.We have implemented THINC in an X/Linux environment and compared its performance against widely used commercial approaches, including Citrix MetaFrame, Microsoft RDP, GoToMyPC, X, NX, VNC, and Sun Ray. Our experimental results on web and audio/video applications demonstrate that THINC can provide up to 4.8 times faster web browsing performance and two orders of magnitude better audio/video performance. THINC is the only thin client capable of transparently playing full-screen video and audio at full frame rate in both LAN and WAN environments. Our results also show for the first time that thin clients can even provide good performance using remote clients located in other countries around the world.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11854,
+    "year": 2005,
+    "title": "THINC: a virtual display architecture for thin-client computing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1095837",
+    "abstract": "Rapid improvements in network bandwidth, cost, and ubiquity combined with the security hazards and high total cost of ownership of personal computers have created a growing market for thin-client computing. We introduce THINC, a virtual display architecture for high-performance thin-client computing in both LAN and WAN environments. THINC virtualizes the display at the device driver interface to transparently intercept application display commands and translate them into a few simple low-level commands that can be easily supported by widely used client hardware. THINC's translation mechanism efficiently leverages display semantic information through novel optimizations such as offscreen drawing awareness, native video support, and server-side screen scaling. This is integrated with an update delivery architecture that uses shortest command first scheduling and non-blocking operation. THINC leverages existing display system functionality and works seamlessly with unmodified applications, window systems, and operating systems.We have implemented THINC in an X/Linux environment and compared its performance against widely used commercial approaches, including Citrix MetaFrame, Microsoft RDP, GoToMyPC, X, NX, VNC, and Sun Ray. Our experimental results on web and audio/video applications demonstrate that THINC can provide up to 4.8 times faster web browsing performance and two orders of magnitude better audio/video performance. THINC is the only thin client capable of transparently playing full-screen video and audio at full frame rate in both LAN and WAN environments. Our results also show for the first time that thin clients can even provide good performance using remote clients located in other countries around the world.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11855,
+    "year": 2005,
+    "title": "Analysis of malicious abstract sensor faults in adaptive measurement-based overlay networks",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118578",
+    "abstract": "Adaptivity is an important mechanism used to handle the dynamic characteristics of the Internet infrastructure. It is commonly employed to allow distributed applications to monitor and subsequently respond to the ephemeral faults and variable performance that have characterized the Internet since its conception [1]. More recently, adaptation mechanisms were integrated into overlay networks, a technology proposed to improve on the perceived limitations of end-to-end communication using the existing Internet routing infrastructure.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11856,
+    "year": 2005,
+    "title": "Anemone: adaptive network memory engine",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118608",
+    "abstract": "There is a constant battle to break-even between continuing improvements in DRAM capacities and the demands for even more memory by modern memory-intensive high-performance applications. Such applications do not take long to hit the physical memory limit and start paging to disk, which in turn considerably slows down their performance. We tackle this problem in the Adaptive Network Memory Engine (Anemone) project by pooling together the distributed memory resources of multiple machines across a gigabit network based cluster. Anemone is a distributed memory virtualization system that can dramatically improve application performance by paging over the gigabit network to the unused memory of remote clients. Anemone provides clients with completely transparent access to a potentially unlimited amount of collective memory pool. Earlier research efforts in this area advocate significant modifications to client systems, either in terms of a specific programming interface for applications, or in terms of extensive changes to the operating systems and device drivers. In contrast, Anemone requires no modifications to either the client system or the memory-intensive application.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11857,
+    "year": 2005,
+    "title": "Daphne: performance debugging using model-driven anomaly characterization",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118580",
+    "abstract": "It is not uncommon for complex systems (like multi-component online services) to perform worse than expected. Configuration errors, buggy code, and tricky middleware/OS behavior induce performance anomalies under certain workloads and system configurations. It is challenging to pinpoint root causes of such performance problems in complex systems. Currently, performance problems are solved by system administrators who intimately understand the system and are willing to forgo a personal life.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11858,
+    "year": 2005,
+    "title": "Service placement in shared wide-area platforms",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118581",
+    "abstract": "Federated geographically-distributed computing platforms such as PlanetLab [1] and the Grid [2, 3] have recently become popular for evaluating and deploying network services and scientific computations. As the size, reach, and user population of such infrastructures grow, resource discovery and resource selection become increasingly important. Although a number of resource discovery and allocation services have been built, there is little data on the utilization of the distributed computing platforms they target. Yet the design and efficacy of such services depends on the characteristics of the target platform.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11859,
+    "year": 2005,
+    "title": "An infrastructure for the development of kernel network services proof of concept: fast UDP",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118582",
+    "abstract": "Scientific applications demand tremendous amounts of computational capabilities. In the last few years, the computational power provided by clusters of workstations and SMPs has become popular as a cost-effective alternative to supercomputers. Nodes in these systems are interconnected using high-speed networks via \"smart\" Network Interface Controllers (NIC). These controllers allow the overlap of computation and communication by processing communication tasks on the NIC and computational tasks on the host processor(s).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11860,
+    "year": 2005,
+    "title": "Distributed operating system for resource discovery and allocation in federated clusters",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118583",
+    "abstract": "Nowadays, numerical simulation has an important place in several scientific fields where real experimentation is expensive or impossible. Important computing resources must be used to realize these experimentations and workstations are not suitable to satisfy these requirements. After having aggregated computers in clusters or in federated clusters (or grid), a challenge for laboratories or large companies is to efficiently and easily use this large amount of resources. Several projects like PBS [Bode00] or Kerrighed [Morin04] offer solutions for cluster resources management. Other projects like Condor [Litzkow88], Globus [Foster97] or NetSolve [Agrawal03] focus on federated clusters or grid computing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11861,
+    "year": 2005,
+    "title": "Proactive operating system recovery",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118584",
+    "abstract": "Embedded computers pervade our lives. There are increasing opportunities for them to adopt embedded operating systems as they are required to have high functionality and complexity. Unfortunately, the reliability of such embedded systems is insufficient to support our lives in 24/7. Therefore, we propose the fine-grain proactive recovery (FPR) of operating system components. FPR enables an operating system to periodically restart its modules and thus to keep their states clean.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11862,
+    "year": 2005,
+    "title": "MON: management overlay networks for distributed systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118585",
+    "abstract": "The recent deployment of large distributed computing systems such as content distribution networks and the Planet-Lab has made it possible for researchers and practitioners to experiment with real world, large scale distributed applications. However, running an application in such an environment is difficult, due to the scale and frequent node failures of such systems. Thus, an important tool is needed that helps application developers/deployers to manage their applications. Our goal in this work is to develop MON, an extremely lightweight and failure resilient system for managing distributed applications. MON allows users to execute instant management commands on the distributed computing nodes, such as query the current status of the application, or start/stop a process on the distributed nodes. The commands are propagated to all the nodes and executed on each node, and the results are aggregated and returned back. We believe the ability to execute such instant commands is especially useful for the initial deployment of a distributed application, or for the monitoring and diagnoistics of (unexpected) application failures.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11863,
+    "year": 2005,
+    "title": "Towards scalable and simple software-DSM systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118586",
+    "abstract": "Large-scale PC clusters, such as ACSI Lightning with 2,816 processors and the AIST supercluster with more than 3,000 processors, have been constructed. Although software distributed shared memory (S-DSM) provides an attractive parallel programming model, almost all S-DSM systems proposed are only useful on a cluster of less than or equal to 16 nodes. They lack scalability.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11864,
+    "year": 2005,
+    "title": "Model-based validation for dealing with operator mistakes",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118587",
+    "abstract": "Online services are rapidly becoming the supporting infrastructure for numerous users' work and leisure, placing higher demands on their availability and correct functioning. Increasingly, these services are comprised of complex conglomerates of distributed hardware and software components. Added to this complexity, these services evolve quite frequently accumulating considerable heterogeneity within them, while allowing little time for their in-depth understanding by service personnel. Thus, it is not surprising that mistakes by service operators are common, and have been deemed to be the primary cause of service downtime.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11865,
+    "year": 2005,
+    "title": "t-kernel: a naturalizing OS kernel for low-power cost-effective computers",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118588",
+    "abstract": "Low-power embedded systems traditionally employ a \"thin\" OS because of resource constraints, hardware variety, and cost efficiency. This results in two problems - First, the embedded system programmers are limited to professionals with sufficient knowledge on hardware; Second, it is much slower for progress in programming languages and software engineering to find their ways to the systems with embedded microcontrollers, which is 98\\% of the microprocessors market. When low-power embedded processors are used in wireless sensor networks (WSNs), the thin OS approach, if followed, leads to another serious problem - The OS services cannot meet applications' ever-growing requirements. If these three problems are not solved, the transformation of the prosperous research on WSNs into a technology and market success has to be slow.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11866,
+    "year": 2005,
+    "title": "Operating system construction in Haskell",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118589",
+    "abstract": "Despite all the advances in programming language technology, many of today's operating systems developers and researchers are still using essentially the same languages that their predecessors were using twenty to thirty years ago. Programming language researchers have developed many new ideas during this time to increase programmer productivity and to help developers produce more reliable software. Powerful module systems and expressive type systems, for example, introduce significant software engineering benefits including more flexible construction, increased reuse, and compile-time bug detection. If these features are as good as their designers claim, why are they not attracting more interest as tools for operating systems development and prototyping?",
+    "status": "notchecked"
+  },
+  {
+    "id": 11867,
+    "year": 2005,
+    "title": "Self-stabilizing operating systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118590",
+    "abstract": "This work presents new directions for building a self stabilizing operating system kernel. A system is self-stabilizing [3, 4] if it can be started in any possible state and it converges to a desired behavior. A state of a system is an assignment of arbitrary values to the systems variables. The usefulness of such a system in critical and remote systems cannot be over estimated. Entire years of work maybe lost when the operating system of an expensive complicated device e.g., a spaceship, may reach an arbitrary state due to say, soft errors (e.g., [8]), and be lost forever. Last results of this research can be found in [5] and [6].",
+    "status": "notchecked"
+  },
+  {
+    "id": 11868,
+    "year": 2005,
+    "title": "Transaction mix performance models: methods and application to performance anomaly detection",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118591",
+    "abstract": "This poster describes a simple model of application-level performance as a function of workload. The model is intuitive, easy to apply, and requires little knowledge of the application. The model can be used for performance anomaly detection: identifying relatively rare cases where workload does not explain performance. Knowing when workload explains performance well vs. poorly can help to distinguish between true performance faults and mere overload. This in turn can inform our choice of performance analysis and debugging tools, and can also suggest remedial measures. Extensive empirical results demonstrate that the proposed method accurately models performance in three large distributed commercial production applications serving real customers. Furthermore it flags as anomalous an episode of a subtle performance bug in one of these applications.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11869,
+    "year": 2005,
+    "title": "Supporting arbitrary queries in peer-to-peer networks using hybrid routing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118592",
+    "abstract": "The Peer-to-Peer (P2P) service model is being intensely explored for creating scalable and robust designs for decentralized Internet-scale applications. A lookup service for finding resources within a P2P network is one of the key services in the model. Lookup queries in P2P applications can be precise queries based on resource identifiers or imprecise ones involving keywords or attributes associated with resources. Some recent P2P designs have tried to leverage the efficient key-based routing mechanism of structured P2P systems for efficient lookups. These systems support precise queries directly and efficiently. To support imprecise queries, they create an index that maps keywords or attributes to keys used for structured routing and is attribute-partitioned across peers, that is, the index entry for a given attribute is stored at the peer addressed by its key. This approach has certain drawbacks. First, maintaining these index partitions in the presence of network churn is expensive. Second, popular keywords/attributes may get mapped to low capacity peers that cannot cope with the load. Third, the queries that require intersection of large indices to be computed, can be quite expensive to resolve.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11870,
+    "year": 2005,
+    "title": "The case for an object-based peer-to-peer reputation system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118593",
+    "abstract": "Clients in any large peer-to-peer system must continually make trust decisions regarding the objects, services, and peers in the network, and so require robust mechanisms for making informed decisions. The lack of such reputation mechanisms for peer-to-peer filesharing has resulted in a large fraction of malicious files, spam and decoys in deployed networks, and contributes to both the spread of malware and contention for local and network resources.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11871,
+    "year": 2005,
+    "title": "Recovery oriented programming",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118594",
+    "abstract": "Computerized management of critical systems makes the issues of correctness and faultless flow of long-lived and continuously-running programs extremely important e.g., [6, 7]. Complex systems cannot be fully verified because their verification may require an unreasonable amount of time and space. The software industry tests software products extensively in order to eliminate bugs as much as possible. Normally, software is tested by executing a set of large, but length-bounded and non-exhaustive scenarios starting from a predefined initial state while each scenario is defined by a set of input/output sequences. Undesired and unplanned behavior (bug) may occur due to scenarios that were not tested prior to the software release. Software malfunctions may cause damage that can outweigh the software cost. Keeping all this in mind, a consumer of a critical system would like to have a warranty that such a system will operate properly.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11872,
+    "year": 2005,
+    "title": "CobWeb: a proactive analysis-driven approach to content distribution",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118595",
+    "abstract": "CobWeb is an open-access content distribution network (CDN) that provides low latency lookups, resilience to flash crowds, and optimal utilization of network resources. Unlike traditional Web caches and CDNs, which rely on ad hoc heuristics for replica placement and cache management, CobWeb achieves superior performance through a unique analysis driven approach. CobWeb derives the optimal replica placement strategy by posing the fundamental performance-overhead tradeoff as a resource constraint problem. Analytically modeling the costs and performance benefits of replicas enables CobWeb to convert the systems problem to an optimization problem. The optimization problem can then be solved to provide, for instance, minimal lookup latency while achieving a targeted bandwidth cost, or to achieve a targeted lookup performance while minimizing bandwidth consumption. CobWeb is currently deployed on Planet-Lab and is available for open access through an intuitive easy-to-use interface.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11873,
+    "year": 2005,
+    "title": "UIA: a user information architecture for personal devices",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118596",
+    "abstract": "We are heading for a device information disaster. Many people already store information on dozens of devices, but are unable to organize and find their scattered information effectively. A given picture might be on a digital camera, a home PC, a laptop, an iPod Photo, or a cell phone. Even knowing a file's location is often not enough, because the relevant device may be on the far side of a firewall or not currently plugged into a PC's USB port. Sharing pictures, documents, or multimedia with family, friends, and colleagues today requires one to upload the information from a portable device to a personal computer and then E-mail it, or copy files via a physical medium such as a USB key.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11874,
+    "year": 2005,
+    "title": "Efficient file storage using content-based indexing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118597",
+    "abstract": "Content-based indexing [MCM01] is a technique of proven effectiveness for efficient transference of file contents over low bandwidth network links. Departing from this context, the natural step of extending the application of this technique to local file storage has been proposed by a number of storage solutions [CN02, QD02, BF04]. To some extent, all these solutions share a core storage model. File contents are divided into disjoint chunks of data, each of which is individually stored, along with a unique hash of its contents, in a repository of chunks. The actual files are then stored as sequences of possibly shared references to chunks in the repository.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11875,
+    "year": 2005,
+    "title": "PersiFS: a versioned file system with an efficient representation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118598",
+    "abstract": "The availability of previous file versions is invaluable for recovering from file corruption or user errors such as accidental deletions. Versioned file systems address this need by retaining earlier versions of changed files. Many existing file systems, such as Plan 9, WAFL, AFS, and others, use a snap-shotting approach: they record and archive the state of the file system at periodic intervals. However, this fails to capture modifications that are made between snapshots. Our system, PersiFS, is continuously versioned, meaning that it stores every modification, and thus allows access to the file system state as it appeared at any specified time. To make this feasible, we use a number of efficient data structures to optimize both access time and disk space.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11876,
+    "year": 2005,
+    "title": "OS support for multi-gigabit networking",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118599",
+    "abstract": "Multi-gigabit speeds are reaching the periphery of the network, where both hard- and software are unprepared for these high rates. With wider pipes available, network uses are also diversifying: time-constrained streaming media, low-latency telephony and high-throughput bulk transfers have to contend for the same overloaded resources on the host. To top it off, a heightened awareness of the need for security is making host-side firewalling and intrusion detection commonplace.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11877,
+    "year": 2005,
+    "title": "Kairos: a macro-programming system for wireless sensor networks",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118600",
+    "abstract": "Wireless sensor networks research has, till date, made impressive advances in platforms and software services. Research in the area has moved on to consider an essential piece of sensor network technology---support for programming wireless sensor network applications and systems components at a suitably high level of abstraction. Two broad classes of programming models are currently being investigated by the community. One class focuses on providing higher-level abstractions for specifying a node's local behavior in a distributed computation. Examples of this approach include the recent work on node-local or region-based abstractions. By contrast, a second and less-explored class of research considers programming a sensor network in the large called macroprogramming.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11878,
+    "year": 2005,
+    "title": "Experiences with Pip: finding unexpected behavior in distributed systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118601",
+    "abstract": "Bugs in complex distributed systems are often hard to find. Many bugs reflect discrepancies between a system's behavior and the programmer's assumptions about that behavior. Differences may be in correctness, in performance characteristics, or both. Our debugging framework, Pip, compares actual behavior with expected behavior and visualizes both. Pip consists of two tools to help reconcile assumptions and actual behavior: an automatic expectations checker and an interactive behavior-explorer GUI.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11879,
+    "year": 2005,
+    "title": "Scalable querying and tracking of sensor networks from mobile platforms",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118602",
+    "abstract": "With the widespread availability of wireless technology and the deployment of an increasing variety of sensors, information generated by sensors is becoming available to applications running on mobile nodes. Retrieving this information in a reliable, efficient manner will be an important building block for many applications. However, unreliable, low bandwidth communication links and node mobility make efficient, reliable, and scalable information retrieval a challenge.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11880,
+    "year": 2005,
+    "title": "Using model checker and replay facility to debug complex distributed system",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118603",
+    "abstract": "A correct system is only derived from a correct implementation of a correct specification. Unfortunately, this imposes a heavy burden in the development process, especially for complex, distributed system ranging from machine room computing and storage services as well as large-scale P2P applications. A specification, if authored in formal language such as TLA+, Spec#, SPIN etc., is ready for model checking. The state explosion problem, however, prohibits all specification states to be thoroughly traversed. Often ad hoc heuristics are applied to drastically reduce the scale so as to make the model checking phase tractable. A correct implementation can be even more challenging, especially when we encounter non-deterministic bugs that are hard to reproduce. The gap between spec and implementation often leaves one to wonder whether the implementation or the spec is faulty, or even both. Motivated by our experiences in developing several complete large scale distributed systems, we are designing and implementing a suite of testing and debugging facility on top of our previously developed WiDS platform.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11881,
+    "year": 2005,
+    "title": "Pre-virtualization: uniting two worlds",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118604",
+    "abstract": "Virtual machines are used in an increasingly varied set of application scenarios that favor different trade-offs. The virtual machine (VM) is an attractive solution, since it enables the use of the same operating systems across the scenarios, while permitting substitution of different hypervisors appropriate for the trade-offs. One of these scenarios is server consolidation, where a number of machines are replaced by VMs running on a single physical machine, increasing resource utilization. Another attractive scenario is the use of a VM to add features to an OS that contradict the design of the OS, such as enabling secure computing platforms with strictly controlled information flow. These two scenarios have dramatically different performance versus security trade offs, easily addressed by using different hypervisors.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11882,
+    "year": 2005,
+    "title": "To infinity and beyond: time warped network emulation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118605",
+    "abstract": "This work explores the viability and benefits of time dilation - providing the illusion to an operating system and its applications that time is passing at a rate different from real time. For example, we may wish to convince a system that for every 10 seconds of wall clock time, only one second of time passes in the host's dilated time frame. This enables external stimuli to appear to take place at higher rates than would be physically possible. For example, a host dilated by a factor of 10 receiving data from a network interface at a real rate of 1-Gbps believes it is receiving data at 10-Gbps.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11883,
+    "year": 2005,
+    "title": "Making enterprise storage more search-friendly",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118606",
+    "abstract": "The focus of this work is to determine how to enhance storage systems to make search and indexing faster and better able to produce relevant answers. Enterprise search engines often run in appliances that must access the file system through standard network file system protocols (NFS, CIFS). As such, they are not able to take advantage of features that may be offered by the storage system. This work explores the types of APIs that a storage system can expose to a search engine to better enable it to do its job. We make the case that by exposing certain information we can make search faster and more relevant.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11884,
+    "year": 2005,
+    "title": "Versatile, portable, and efficient OS profiling via latency analysis",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118607",
+    "abstract": "Operating systems are complex and their behavior depends on many factors. Source code, if available, does not directly help understand the OS's behavior, as the behavior depends on actual workloads and external inputs. Runtime profiling is a key technique for understanding the behavior and mutual-influence of modern OS components. Such profiling is useful to prove new concepts, debug problems, and optimize the performance of existing OSs. Unfortunately, existing profiling methods lack in important areas: they do not provide much of the necessary information about the OS's behavior; they require OS modification and therefore are not portable; or they exact high overheads thus perturbing the profiled OS.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11885,
+    "year": 2005,
+    "title": "The case for judicious resource management",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118579",
+    "abstract": "Consider the following scenario taken from the mobile and wireless computing domain. Energy has been receiving increasing attention, resulting in a number of different energy management techniques, including Dynamic Voltage Scaling (DVS) [1]. DVS is based on the concept of reducing the speed/voltage of a CPU when it is under-utilized, thereby reducing its power consumption while increasing the task execution times. In real-time systems, DVS algorithms have to compute energy-saving speed/voltage levels while ensuring that task deadlines are met. The figure below visualizes this problem for two devices A and B, where shaded areas indicate times of power consumption caused by the CPU and arrows indicate communication between two devices. The vertical line indicates the end-to-end deadline Td, i.e., the processing and communication steps of both devices A and B have to be concluded before Td. Typical examples for such scenarios are sensor networks with in-network data aggregation or mobile multimedia. For example, device A captures an image, compresses it, and sends it to B, which decompresses and displays it. The figure shows the same scenario twice, once without DVS and once with DVS. In the latter case, both devices reduce their energy overheads, but device B also misses its deadline. As a consequence, either one or both devices have to increase their clock frequencies to ensure that the deadline is met, increasing their energy costs. However, if both devices operate in isolation, A -- unaware of the missed end-to-end deadline -- would continue to operate at its low speed, while B has to increase its speed. Now assume that B is essential to the operation of the distributed system, but at the same time it is also the more energy-constrained device (e.g., the remaining battery lifetime is lower than A's). In this case, it is desirable that A reduces its use of DVS, such that B can continue to fully exploit its DVS capability to prolong its battery life. To achieve that, it is necessary for A and B to negotiate limits to the use of DVS, e.g., by introducing a deadline on A, called virtual deadline Tv (rightmost graph in above figure). This deadline forces A to run faster (limiting the extent to which A can exploit DVS), but allowing B to fully utilize DVS.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11886,
+    "year": 2005,
+    "title": "Sensor networks for high-resolution monitoring of volcanic activity",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118610",
+    "abstract": "We developed and deployed a wireless sensor network for monitoring seismoacoustic activity at Volc\\'{a}n Reventador, Ecuador. Wireless sensor networks are a new technology and our group is among the first to apply them to monitoring volcanoes. The small size, low power, and wireless communication capabilities can greatly simplify deployments of large sensor arrays and are very attractive for this application domain. This project is a follow-on to our previous infrasonic sensor network deployed at Volc\\'{a}n Tungurahua, also in Ecuador, in July 2004 [1].",
+    "status": "notchecked"
+  },
+  {
+    "id": 11887,
+    "year": 2005,
+    "title": "LLSS: toward system support for plugging privacy leaks",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118612",
+    "abstract": "Imagine that two users, Alice and Bob, have a conversation about a sensitive subject over email. Alice is vigilant about protecting the secrecy of the discussion and encrypts all copies of her sent and received emails. Bob, on the other hand, is well-meaning but negligent, and does not bother to encrypt any of his on-disk files. Worse, he unwittingly stores his email files in the portion of his hard drive that is shared with the rest of the Internet via a peer-to-peer client. One night, unbeknownst to either Alice or Bob, someone on the peer-to-peer network peruses Bob's shared space, finds his email files, and reads their private conversation. Despite Alice's best efforts and Bob's best intentions, the privacy of their discussion has leaked.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11888,
+    "year": 2005,
+    "title": "Nexus: a new operating system for trustworthy computing",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118613",
+    "abstract": "Tamper-proof coprocessors for secure computing are poised to become a standard hardware feature on future computers. Such hardware provides the primitives necessary to support trustworthy computing applications, that is, applications that can provide strong guarantees about their run time behavior.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11889,
+    "year": 2005,
+    "title": "Architecting a secure internet",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118614",
+    "abstract": "The Internet is not secure due to its design goals being at odds with the principle of least privilege. The Internet strives to allow any host to communicate with any other host, while the principle of least privilege advocates limiting host connectivity to the smallest set necessary for performing a task. Our goal is to secure the Internet by largely turning off connectivity in the Internet, and then using explicit signaling to selectively enable only those connections that are deemed necessary for performing a task.Intrusions and worms routinely exploit application vulnerabilities, DDoS attacks exhaust a target's network bandwidth, and phishing attacks and spam trick users on a daily basis. This is in no small part due to the design goals of the Internet being at odds with the principle of least privilege. Firewalls embody this principle in spirit by restricting access between hosts. Being an ad hoc bolt-on to the original Internet architecture, however, firewalls have limited knowledge (just IP addresses and ports) on which to base their decision to block a packet. In the client/public-server Internet where a client can typically access any public service, this limited knowledge is sufficient for restricting connectivity but it is not the case in the client/client Internet popularized by VoIP, P2P filesharing, VPNs etc. As client IP addresses change (DHCP, VPN, NAT) and applications use dynamic source and destination ports, firewalls are left guessing as to the intent of a connection and whether or not to block it.Our goal is to secure the Internet by allowing firewalls to enforce the principle of least privilege in all cases. This involves incorporating multiple layers of firewalls into the Internet architecture, which corresponds to the role multiple parties (end-user, IT Department, ISP) play in allowing a connection. Our approach leverages the existing IP routing core unmodified but constrains host connectivity by configuring firewalls to disallow all connections by default. To establish a client/client connection, an application must explicitly request permission from all the firewalls between it and the remote end-point by declaring the intent of the connection over a signaling channel (like SIP, the Session Initiation Protocol used for signaling to establish VoIP calls). The request is rich enough to allow firewall administrators to target individual users and applications, and negotiate security parameters for the resulting connection. This creates the need for richer naming and connection semantics that goes beyond the 5-tuple (protocol, IP addresses and ports) used today to include user credentials of both end-points, application integrity, and even ACLs or labels for data to be transmitted over the network. The framework is robust enough to allow the firewall administrators to require hardware attestation at the end-host and negotiate the use of encryption for the data channel based on the level of security required. Finally, our approach performs late-binding between the signaling channel and the data routing path whereby applications pick transport addresses and firewalls are configured to accept data packets for those addresses (and enforce the policy negotiated) after the connection request has been granted. Effectively, our approach largely turns off connectivity in the Internet, and then selectively enables only those connections that are deemed necessary for performing a task.From the users' and administrators' perspective, our architecture secures the Internet by giving users control of connectivity to and from their applications, and network administrators control of what users and applications can use the network infrastructure and in what manner. Using the primitives provided, a network administrator can restrict user alice@cs.cornell.edu using mail-reader microsoft.outlook to be able to connect only to the department mail-server microsoft.exchange being run by admin@cs.cornell.edu, and nothing else. Meanwhile, user Alice can restrict any application on her computer that read data labeled alice.confidential to be able to contact only those other applications that are also being run by Alice herself and require that the connection be encrypted. While the first rule prevents a zombie mail-reader from abusing the network by spewing spam or worms, the second rule prevents a trojan from stealing Alice's passwords.While the idea of securely architecting the Internet by having firewalls turn it off is interesting and heretical to some extent, the key technical challenge lies in defining new abstractions and services that allow legitimate applications to use the network. To that end, there are many open questions. First, what abstractions and guarantees should the network provide to the OS? What should the OS provide to the network? For example, the network (with help from the remote OS) could attest to the local application that a particular TCP connection terminates at a particular application being run by a particular user, is encrypted and secure, and has guaranteed QoS at the gateway. Second, how rich do the naming and connection semantics need to be? Strict policy on IP addresses and ports can prevent today's worms in client-server applications but are ineffective for securing P2P applications where both end-points use dynamic IPs and ports. Using application names and restricting connectivity to a small world of trusted users does slow worm-propagation, but true containment requires hardware attestation. Third, does transferring the security problems from the Internet to the signaling domain, as we suggest, really solve them? The signaling domain is much simpler and provides a framework for negotiating trust before a connection is established, but it does require a trusted firewall. We do not have all the answers yet, but we have opened up an interesting design space for the next-generation secure-Internet architecture.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11890,
+    "year": 2005,
+    "title": "What the protocol stack missed: the transfer service",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118615",
+    "abstract": "This WIP proposes a new architecture for applications that perform bulk data transfers. This architecture, called DOT (for data-oriented transfer), cleanly separates out two functions that are comingled in today's applications. Using DOT, applications perform content negotiation to determine what content to send. They then pass that data object to the transfer service to perform the actual data transmission. This separation increases application flexibility, enables the rapid development of innovative transfer mechanisms, reduces developer effort, and allows increased efficiency through cross-application sharing.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11891,
+    "year": 2005,
+    "title": "Sending more for less bandwidth and power: a systems approach to network coding",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118616",
+    "abstract": "In this work, we apply network coding to unicast in wireless mesh networks to improve network throughput while reducing the bandwidth and power requirements. Our Opportunistic Coding protocol encodes and decodes packets based on distributed and local decisions, in order to reduce the number of transmissions required in forwarding. Unlike prior work which focuses on theorectical analysis, we take a systems approach and study the performance through both emulations and testbed experiments. Our protocol aims to balance the tradeoff between reliable and efficient packet delivery. Preliminary results show that the real benefit of network coding can exceed the theorectically predicted gain, due to cross-layer interactions.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11892,
+    "year": 2005,
+    "title": "A need for componentized transport protocols",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118617",
+    "abstract": "There has been a steady stream of research over the years into componentized network protocols: protocol implementations assembled from a variety of building blocks. A promise of such frameworks has generally been flexibility: a protocol stack tailored for a particular application can be easily assembled, usually without writing any new code, by binding protocol objects together.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11893,
+    "year": 2005,
+    "title": "A virtual machine monitor for utilizing non-dedicated clusters",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118618",
+    "abstract": "We have designed and implemented a virtual machine monitor (VMM) for utilizing non-dedicated clusters. The VMM virtualizes a shared-memory multi-processor machine on a commodity cluster. In addition, it hides dynamic changes of physical hardware configurations. The experimental result demonstrates the feasibility of our approach.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11894,
+    "year": 2005,
+    "title": "DDVS: distributed dynamic voltage scaling",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118619",
+    "abstract": "Dynamic voltage scaling (DVS [1]) is a popular technique in energy-aware systems: when a CPU is under-utilized, reduce its speed and voltage, thereby trading off increased execution times with reduced energy costs, while meeting real-time tasks' deadline constraints. However, DVS and other energy-saving techniques are 'selfish' in nature, i.e., they are only concerned with reducing their local energy consumptions, disregarding the consequences their use may have on other devices. Consider two devices A and B, where A captures and compresses video images, sends them to B, where they will be decompressed, processed, and displayed. The latest point in time an image has to be received, processed, and displayed by B denotes an end-to-end deadline (E2E) Td. Figure 1 visualizes the problem: the shaded areas show periods of CPU activity (image processing), with the height of the area indicating the power costs, the arrows denote communications between devices, and the vertical line shows Td for a given image. When both A and B use DVS, their processing times increase, introducing delays that may cause the deadline to be missed. The consequence is that A and B need to negotiate the allowable slow-down (and delay) each device can introduce. This negotiation is driven by the current battery charge levels and the overall goal of the system, e.g., if B is essential to the operation of the distributed system, but at the same time the more energy-constrained device, it should be allowed to fully utilize DVS, while A can utilize DVS only to an extent that does not cause deadlines misses.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11895,
+    "year": 2005,
+    "title": "Improving the energy efficiency of high-performance server systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118620",
+    "abstract": "Total system energy is often dominated by microprocessor power consumption. However, the need for increased memory capacity in high-performance server systems requires integrated support for additional memory devices. Moore's Law implies these devices will achieve higher densities at the expense of power and energy.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11896,
+    "year": 2005,
+    "title": "ExtraVirt: detecting and recovering from transient processor faults",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118621",
+    "abstract": "Reliability is becoming an increasingly important issue in modern processor design. Smaller feature sizes and more numerous transistors are projected to increase the frequency of transient faults [4, 5]. Our project, ExtraVirt, leverages the trend toward multi-core and multi-processor systems to survive these transient faults. Our goals are (1) to add fault tolerance without modifying existing operating systems, applications or hardware, (2) to minimize the time spent executing software that cannot tolerate faults, and (3) to minimize the time and space overhead needed to detect and recover from faults. We accomplish these goals by leveraging virtual-machine technology and by sharing memory and I/O devices across replicas. ExtraVirt extends prior work on VM-level fault tolerance[2] by detecting and recovering from non-fail-stop faults and by running multiple replicas efficiently on a single machine.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11897,
+    "year": 2005,
+    "title": "Improving dynamic update for operating systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118622",
+    "abstract": "Modern operating systems are subject to a constant stream of patches and updates: to fix bugs, improve performance, or add features. Dynamic update offers significantly increased availability for operating systems, and enables administrators to avoid a difficult choice between the cost of down time and the risk of remaining unpatched. However, an operating system kernel is a unique environment for dynamic update; it is generally event-driven, multi-threaded, and involves a high degree of concurrency and asynchrony. It also provides a very restricted runtime environment. Existing dynamic update mechanisms are generally unsuited for use with operating-system code, either because they do not support concurrency [11, 13], require the system to be implemented in a specific language [1, 7, 9], or rely on a higher level of runtime support than is feasible within a traditional OS [5, 6].",
+    "status": "notchecked"
+  },
+  {
+    "id": 11898,
+    "year": 2005,
+    "title": "Turning flash crowds into smart mobs with real-time stochastic detection and adaptive cooperative caching",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118623",
+    "abstract": "The past decade has experienced a continued increase in the popular use of Web services. Unfortunately, the growth of Web services, coupled with their their role as a vital source of news and information has lead to many well published sources of stress that tend to cripple performance at both the client and the server side [1, 4]. Our work considers one such type of stress, called a flash crowd. A flash crowd arrives as a tidal wave, where the initial (and largest) spike in traffic generally occurs within the first few minutes. This gives client and servers only a few tens of seconds to adapt to the incoming traffic! In addition, flash crowds are infrequent and unpredictable. Hence, any solution deployed to mitigate flash crowd must consist of: (1) proactive and real-time mechanisms to detect the flash crowd while (or even before) it happens, and (2) an initiation of immediate action that can mask the effects of the stress.A variety of system designs for content delivery have emerged over the past few years. Based on their underlying design methodologies, we classify these existing designs into &lt;i&gt;four&lt;/i&gt; classes. We use this taxonomy to compare the effectiveness of the existing designs to mitigate flash crowds. The four classes are: (1) Single server solutions that target core server performance, such as SEDA [6]; (2) Server cooperation solutions that distribute content through cooperation amongst multiple servers, such as Coral [2]; (3) Server-Client solutions that require changes to the behavior of both the client and server side, such as Overhaul [5]; (4) Client cooperative caching solutions that utilize peer-to-peer routing substrates, such as Squirrel [3].We follow a four-step approach in our study of flash crowds:• &lt;b&gt;Characteristics of flash crowds:&lt;/b&gt; We study the properties of six real flash crowds based on traces collected from the respective websites.• &lt;b&gt;Real-time Flash Crowd Detector:&lt;/b&gt; We present the design and implementation of a real-time stochastic detector of flash crowds, running at the server. A detector must continuously monitor visitor traffic and resource utilization, and be able to immediately and accurately flag a flash crowd in real-time. Additionally, the detector must run efficiently, without consuming significant computational and memory resources, especially during normal operations. &lt;i&gt;We find that our design enables us to detect a flash crowd while the event is happening&lt;/i&gt;.• &lt;b&gt;Comparison of existing solutions:&lt;/b&gt; We use flash crowd traces to compare the effectiveness of three of the four methodologies discussed above. We measure both network utilization of the server (a resource which directly affects the content provider's costs) and the quality of service as perceived by the clients (i.e., the turnaround latency for each request).• &lt;b&gt;Design of an Adaptive Cooperative Caching Solution:&lt;/b&gt; We combine our real-time flash crowd detector at the server, with a cooperative caching scheme among clients, to design an adaptive cooperative caching solution for flash crowds. We compare the performance of this scheme with the existing methodologies. &lt;i&gt;Our results reveal that such an approach is extremely effective in turning a flash crowd into a smart mob.&lt;/i&gt;",
+    "status": "notchecked"
+  },
+  {
+    "id": 11899,
+    "year": 2005,
+    "title": "The KudOS architecture for file systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118624",
+    "abstract": "For robustness, stability, and reboot speed, file system implementations must ensure that the file system's stored image is kept consistent or easy to return to consistency. Advanced consistency mechanisms such as soft updates [2] and journalling make this possible; unfortunately, they are generally tied to a particular file system, and can't be ported or adapted without significant engineering effort. Furthermore, interfaces like fsync () give user code only coarse control over consistency. Applications with custom consistency and performance requirements get little help from conventional file systems, which either impose high overhead (data journalling) or don't guarantee data consistency (soft updates, for example, ensures metadata consistency only).",
+    "status": "notchecked"
+  },
+  {
+    "id": 11900,
+    "year": 2005,
+    "title": "INSIGHT: a distributed monitoring system for tracking continuous queries",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1095810.1118611",
+    "abstract": "A distributed monitoring framework can serve as an important building block for constructing large-scale data aggregation and continuous event monitoring applications, such as IP traffic monitoring (DDoS attacks), network anomaly detection (Internet worms), accounting and bandwidth provisioning (hot spots, flash crowds), sensor monitoring and control, and grid resource monitoring. At the core of these applications is a distributed query engine that aggregates information and performs continuous tracking of queries over collections of physically-distributed and rapidly-updating data streams. The underlying aim is to provide a global view of information in the system at a reasonable cost and within a specified precision bound. To achieve this objective, a distributed monitoring system should (a) scale to a large number of streams and query attributes, (b) incur minimal communication overhead for aggregating query results, (c) be time responsive for quickly identifying anomalies, and (d) be able to bound the inaccuracy of the computed value for the aggregate function.",
+    "status": "notchecked"
+  }
+]

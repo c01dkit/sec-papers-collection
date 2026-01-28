@@ -1,0 +1,232 @@
+[
+  {
+    "id": 11742,
+    "year": 2009,
+    "title": "FAWN: a fast array of wimpy nodes",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629577",
+    "abstract": "This paper presents a new cluster architecture for low-power data-intensive computing. FAWN couples low-power embedded CPUs to small amounts of local flash storage, and balances computation and I/O capabilities to enable efficient, massively parallel access to data.The key contributions of this paper are the principles of the FAWN architecture and the design and implementation of FAWN-KV--a consistent, replicated, highly available, and high-performance key-value storage system built on a FAWN prototype. Our design centers around purely log-structured datastores that provide the basis for high performance on flash storage, as well as for replication and consistency obtained using chain replication on a consistent hashing ring. Our evaluation demonstrates that FAWN clusters can handle roughly 350 key-value queries per Joule of energy--two orders of magnitude more than a disk-based system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11743,
+    "year": 2009,
+    "title": "RouteBricks: exploiting parallelism to scale software routers",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629578",
+    "abstract": "We revisit the problem of scaling software routers, motivated by recent advances in server technology that enable high-speed parallel processing--a feature router workloads appear ideally suited to exploit. We propose a software router architecture that parallelizes router functionality both across multiple servers and across multiple cores within a single server. By carefully exploiting parallelism at every opportunity, we demonstrate a 35Gbps parallel router prototype; this router capacity can be linearly scaled through the use of additional servers. Our prototype router is fully programmable using the familiar Click/Linux environment and is built entirely from off-the-shelf, general-purpose server hardware.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11744,
+    "year": 2009,
+    "title": "The multikernel: a new OS architecture for scalable multicore systems",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629579",
+    "abstract": "Commodity computer systems contain more and more processor cores and exhibit increasingly diverse architectural tradeoffs, including memory hierarchies, interconnects, instruction sets and variants, and IO configurations. Previous high-performance computing systems have scaled in specific cases, but the dynamic nature of modern client and server workloads, coupled with the impossibility of statically optimizing an OS for all workloads and hardware variants pose serious challenges for operating system structures.We argue that the challenge of future multicore hardware is best met by embracing the networked nature of the machine, rethinking OS architecture using ideas from distributed systems. We investigate a new OS structure, the multikernel, that treats the machine as a network of independent cores, assumes no inter-core sharing at the lowest level, and moves traditional OS functionality to a distributed system of processes that communicate via message-passing.We have implemented a multikernel OS to show that the approach is promising, and we describe how traditional scalability problems for operating systems (such as memory management) can be effectively recast using messages and can exploit insights from distributed systems and networking. An evaluation of our prototype on multicore systems shows that, even on present-day machines, the performance of a multikernel is comparable with a conventional OS, and can scale better to support future hardware.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11745,
+    "year": 2009,
+    "title": "Fast byte-granularity software fault isolation",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629581",
+    "abstract": "Bugs in kernel extensions remain one of the main causes of poor operating system reliability despite proposed techniques that isolate extensions in separate protection domains to contain faults. We believe that previous fault isolation techniques are not widely used because they cannot isolate existing kernel extensions with low overhead on standard hardware. This is a hard problem because these extensions communicate with the kernel using a complex interface and they communicate frequently. We present BGI (Byte-Granularity Isolation), a new software fault isolation technique that addresses this problem. BGI uses efficient byte-granularity memory protection to isolate kernel extensions in separate protection domains that share the same address space. BGI ensures type safety for kernel objects and it can detect common types of errors inside domains. Our results show that BGI is practical: it can isolate Windows drivers without requiring changes to the source code and it introduces a CPU overhead between 0 and 16\\%. BGI can also find bugs during driver testing. We found 28 new bugs in widely used Windows drivers.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11746,
+    "year": 2009,
+    "title": "Tolerating hardware device failures in software",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629582",
+    "abstract": "Hardware devices can fail, but many drivers assume they do not. When confronted with real devices that misbehave, these assumptions can lead to driver or system failures. While major operating system and device vendors recommend that drivers detect and recover from hardware failures, we find that there are many drivers that will crash or hang when a device fails. Such bugs cannot easily be detected by regular stress testing because the failures are induced by the device and not the software load. This paper describes Carburizer, a code-manipulation tool and associated runtime that improves system reliability in the presence of faulty devices. Carburizer analyzes driver source code to find locations where the driver incorrectly trusts the hardware to behave. Carburizer identified almost 1000 such bugs in Linux drivers with a false positive rate of less than 8 percent. With the aid of shadow drivers for recovery, Carburizer can automatically repair 840 of these bugs with no programmer involvement. To facilitate proactive management of device failures, Carburizer can also locate existing driver code that detects device failures and inserts missing failure-reporting code. Finally, the Carburizer runtime can detect and tolerate interrupt-related bugs, such as stuck or missing interrupts.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11747,
+    "year": 2009,
+    "title": "Automatic device driver synthesis with termite",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629583",
+    "abstract": "Faulty device drivers cause significant damage through down time and data loss. The problem can be mitigated by an improved driver development process that guarantees correctness by construction. We achieve this by synthesising drivers automatically from formal specifications of device interfaces, thus reducing the impact of human error on driver reliability and potentially cutting down on development costs.We present a concrete driver synthesis approach and tool called Termite. We discuss the methodology, the technical and practical limitations of driver synthesis, and provide an evaluation of non-trivial drivers for Linux, generated using our tool. We show that the performance of the generated drivers is on par with the equivalent manually developed drivers. Furthermore, we demonstrate that device specifications can be reused across different operating systems by generating a driver for FreeBSD from the same specification as used for Linux.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11748,
+    "year": 2009,
+    "title": "Automatically patching errors in deployed software",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629585",
+    "abstract": "We present ClearView, a system for automatically patching errors in deployed software. ClearView works on stripped Windows x86 binaries without any need for source code, debugging information, or other external information, and without human intervention.ClearView (1) observes normal executions to learn invariants thatcharacterize the application's normal behavior, (2) uses error detectors to distinguish normal executions from erroneous executions, (3) identifies violations of learned invariants that occur during erroneous executions, (4) generates candidate repair patches that enforce selected invariants by changing the state or flow of control to make the invariant true, and (5) observes the continued execution of patched applications to select the most successful patch.ClearView is designed to correct errors in software with high availability requirements. Aspects of ClearView that make it particularly appropriate for this context include its ability to generate patches without human intervention, apply and remove patchesto and from running applications without requiring restarts or otherwise perturbing the execution, and identify and discard ineffective or damaging patches by evaluating the continued behavior of patched applications.ClearView was evaluated in a Red Team exercise designed to test its ability to successfully survive attacks that exploit security vulnerabilities. A hostile external Red Team developed ten code injection exploits and used these exploits to repeatedly attack an application protected by ClearView. ClearView detected and blocked all of the attacks. For seven of the ten exploits, ClearView automatically generated patches that corrected the error, enabling the application to survive the attacks and continue on to successfully process subsequent inputs. Finally, the Red Team attempted to make Clear-View apply an undesirable patch, but ClearView's patch evaluation mechanism enabled ClearView to identify and discard both ineffective patches and damaging patches.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11749,
+    "year": 2009,
+    "title": "Debugging in the (very) large: ten years of implementation and experience",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629586",
+    "abstract": "Windows Error Reporting (WER) is a distributed system that automates the processing of error reports coming from an installed base of a billion machines. WER has collected billions of error reports in ten years of operation. It collects error data automatically and classifies errors into buckets, which are used to prioritize developer effort and report fixes to users. WER uses a progressive approach to data collection, which minimizes overhead for most reports yet allows developers to collect detailed information when needed. WER takes advantage of its scale to use error statistics as a tool in debugging; this allows developers to isolate bugs that could not be found at smaller scale. WER has been designed for large scale: one pair of database servers can record all the errors that occur on all Windows computers worldwide.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11750,
+    "year": 2009,
+    "title": "Detecting large-scale system problems by mining console logs",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629587",
+    "abstract": "Surprisingly, console logs rarely help operators detect problems in large-scale datacenter services, for they often consist of the voluminous intermixing of messages from many software components written by independent developers. We propose a general methodology to mine this rich source of information to automatically detect system runtime problems. We first parse console logs by combining source code analysis with information retrieval to create composite features. We then analyze these features using machine learning to detect operational problems. We show that our method enables analyses that are impossible with previous methods because of its superior ability to create sophisticated features. We also show how to distill the results of our analysis to an operator-friendly one-page decision tree showing the critical messages associated with the detected problems. We validate our approach using the Darkstar online game server and the Hadoop File System, where we detect numerous real problems with high accuracy and few false positives. In the Hadoop case, we are able to analyze 24 million lines of console logs in 3 minutes. Our methodology works on textual console logs of any size and requires no changes to the service software, no human input, and no knowledge of the software's internals.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11751,
+    "year": 2009,
+    "title": "Better I/O through byte-addressable, persistent memory",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629589",
+    "abstract": "Modern computer systems have been built around the assumption that persistent storage is accessed via a slow, block-based interface. However, new byte-addressable, persistent memory technologies such as phase change memory (PCM) offer fast, fine-grained access to persistent storage.In this paper, we present a file system and a hardware architecture that are designed around the properties of persistent, byteaddressable memory. Our file system, BPFS, uses a new technique called short-circuit shadow paging to provide atomic, fine-grained updates to persistent storage. As a result, BPFS provides strong reliability guarantees and offers better performance than traditional file systems, even when both are run on top of byte-addressable, persistent memory. Our hardware architecture enforces atomicity and ordering guarantees required by BPFS while still providing the performance benefits of the L1 and L2 caches.Since these memory technologies are not yet widely available, we evaluate BPFS on DRAM against NTFS on both a RAM disk and a traditional disk. Then, we use microarchitectural simulations to estimate the performance of BPFS on PCM. Despite providing strong safety and consistency guarantees, BPFS on DRAM is typically twice as fast as NTFS on a RAM disk and 4-10 times faster than NTFS on disk. We also show that BPFS on PCM should be significantly faster than a traditional disk-based file system.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11752,
+    "year": 2009,
+    "title": "Modular data storage with Anvil",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629590",
+    "abstract": "Databases have achieved orders-of-magnitude performance improvements by changing the layout of stored data -- for instance, by arranging data in columns or compressing it before storage. These improvements have been implemented in monolithic new engines, however, making it difficult to experiment with feature combinations or extensions. We present Anvil, a modular and extensible toolkit for building database back ends. Anvil's storage modules, called dTables, have much finer granularity than prior work. For example, some dTables specialize in writing data, while others provide optimized read-only formats. This specialization makes both kinds of dTable simple to write and understand. Unifying dTables implement more comprehensive functionality by layering over other dTables -- for instance, building a read/write store from read-only tables and a writable journal, or building a general-purpose store from optimized special-purpose stores. The dTable design leads to a flexible system powerful enough to implement many database storage layouts. Our prototype implementation of Anvil performs up to 5.5 times faster than an existing B-tree-based database back end on conventional workloads, and can easily be customized for further gains on specific data and workloads.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11753,
+    "year": 2009,
+    "title": "Operating System Transactions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629591",
+    "abstract": "Applications must be able to synchronize accesses to operating system resources in order to ensure correctness in the face of concurrency and system failures. System transactions allow the programmer to specify updates to heterogeneous system resources with the OS guaranteeing atomicity, consistency, isolation, and durability (ACID). System transactions efficiently and cleanly solve persistent concurrency problems that are difficult to address with other techniques. For example, system transactions eliminate security vulnerabilities in the file system that are caused by time-of-check-to-time-of-use (TOCTTOU) race conditions. System transactions enable an unsuccessful software installation to roll back without disturbing concurrent, independent updates to the file system.This paper describes TxOS, a variant of Linux 2.6.22 that implements system transactions. TxOS uses new implementation techniques to provide fast, serializable transactions with strong isolation and fairness between system transactions and non-transactional activity. The prototype demonstrates that a mature OS running on commodity hardware can provide system transactions at a reasonable performance cost. For instance, a transactional installation of OpenSSH incurs only 10\\% overhead, and a non-transactional compilation of Linux incurs negligible overhead on TxOS. By making transactions a central OS abstraction, TxOS enables new transactional services. For example, one developer prototyped a transactional ext3 file system in less than one month.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11754,
+    "year": 2009,
+    "title": "PRES: probabilistic replay with execution sketching on multiprocessors",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629593",
+    "abstract": "Bug reproduction is critically important for diagnosing a production-run failure. Unfortunately, reproducing a concurrency bug on multi-processors (e.g., multi-core) is challenging. Previous techniques either incur large overhead or require new non-trivial hardware extensions.This paper proposes a novel technique called PRES (probabilistic replay via execution sketching) to help reproduce concurrency bugs on multi-processors. It relaxes the past (perhaps idealistic) objective of \"reproducing the bug on the first replay attempt\" to significantly lower production-run recording overhead. This is achieved by (1) recording only partial execution information (referred to as \"sketches\") during the production run, and (2) relying on an intelligent replayer during diagnosis time (when performance is less critical) to systematically explore the unrecorded non-deterministic space and reproduce the bug. With only partial information, our replayer may require more than one coordinated replay run to reproduce a bug. However, after a bug is reproduced once, PRES can reproduce it every time.We implemented PRES along with five different execution sketching mechanisms. We evaluated them with 11 representative applications, including 4 servers, 3 desktop/client applications, and 4 scientific/graphics applications, with 13 real-world concurrency bugs of different types, including atomicity violations, order violations and deadlocks. PRES (with synchronization or system call sketching) significantly lowered the production-run recording overhead of previous approaches (by up to 4416 times), while still reproducing most tested bugs in fewer than 10 replay attempts. Moreover, PRES scaled well with the number of processors; PRES's feedback generation from unsuccessful replays is critical in bug reproduction.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11755,
+    "year": 2009,
+    "title": "ODR: output-deterministic replay for multicore debugging",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629594",
+    "abstract": "Reproducing bugs is hard. Deterministic replay systems address this problem by providing a high-fidelity replica of an original program run that can be repeatedly executed to zero-in on bugs. Unfortunately, existing replay systems for multiprocessor programs fall short. These systems either incur high overheads, rely on non-standard multiprocessor hardware, or fail to reliably reproduce executions. Their primary stumbling block is data races -- a source of nondeterminism that must be captured if executions are to be faithfully reproduced.In this paper, we present ODR--a software-only replay system that reproduces bugs and provides low-overhead multiprocessor recording. The key observation behind ODR is that, for debugging purposes, a replay system does not need to generate a high-fidelity replica of the original execution. Instead, it suffices to produce any execution that exhibits the same outputs as the original. Guided by this observation, ODR relaxes its fidelity guarantees to avoid the problem of reproducing data-races altogether. The result is a system that replays real multiprocessor applications, such as Apache, MySQL, and the Java Virtual Machine, and provides low record-mode overhead.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11756,
+    "year": 2009,
+    "title": "seL4: formal verification of an OS kernel",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629596",
+    "abstract": "Complete formal verification is the only known way to guarantee that a system is free of programming errors.We present our experience in performing the formal, machine-checked verification of the seL4 microkernel from an abstract specification down to its C implementation. We assume correctness of compiler, assembly code, and hardware, and we used a unique design approach that fuses formal and operating systems techniques. To our knowledge, this is the first formal proof of functional correctness of a complete, general-purpose operating-system kernel. Functional correctness means here that the implementation always strictly follows our high-level abstract specification of kernel behaviour. This encompasses traditional design and implementation safety properties such as the kernel will never crash, and it will never perform an unsafe operation. It also proves much more: we can predict precisely how the kernel will behave in every possible situation.seL4, a third-generation microkernel of L4 provenance, comprises 8,700 lines of C code and 600 lines of assembler. Its performance is comparable to other high-performance L4 kernels.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11757,
+    "year": 2009,
+    "title": "Helios: heterogeneous multiprocessing with satellite kernels",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629597",
+    "abstract": "Helios is an operating system designed to simplify the task of writing, deploying, and tuning applications for heterogeneous platforms. Helios introduces satellite kernels, which export a single, uniform set of OS abstractions across CPUs of disparate architectures and performance characteristics. Access to I/O services such as file systems are made transparent via remote message passing, which extends a standard microkernel message-passing abstraction to a satellite kernel infrastructure. Helios retargets applications to available ISAs by compiling from an intermediate language. To simplify deploying and tuning application performance, Helios exposes an affinity metric to developers. Affinity provides a hint to the operating system about whether a process would benefit from executing on the same platform as a service it depends upon.We developed satellite kernels for an XScale programmable I/O card and for cache-coherent NUMA architectures. We offloaded several applications and operating system components, often by changing only a single line of metadata. We show up to a 28\\% performance improvement by offloading tasks to the XScale I/O card. On a mail-server benchmark, we show a 39\\% improvement in performance by automatically splitting the application among multiple NUMA domains.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11758,
+    "year": 2009,
+    "title": "Surviving sensor network software faults",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629598",
+    "abstract": "We describe Neutron, a version of the TinyOS operating system that efficiently recovers from memory safety bugs. Where existing schemes reboot an entire node on an error, Neutron's compiler and runtime extensions divide programs into recovery units and reboot only the faulting unit. The TinyOS kernel itself is a recovery unit: a kernel safety violation appears to applications as the processor being unavailable for 10-20 milliseconds.Neutron further minimizes safety violation cost by supporting \"precious\" state that persists across reboots. Application data, time synchronization state, and routing tables can all be declared as precious. Neutron's reboot sequence conservatively checks that precious state is not the source of a fault before preserving it. Together, recovery units and precious state allow Neutron to reduce a safety violation's cost to time synchronization by 94\\% and to a routing protocol by 99.5\\%. Neutron also protects applications from losing data. Neutron provides this recovery on the very limited resources of a tiny, low-power microcontroller.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11759,
+    "year": 2009,
+    "title": "Distributed aggregation for data-parallel computing: interfaces and implementations",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629600",
+    "abstract": "Data-intensive applications are increasingly designed to execute on large computing clusters. Grouped aggregation is a core primitive of many distributed programming models, and it is often the most efficient available mechanism for computations such as matrix multiplication and graph traversal. Such algorithms typically require non-standard aggregations that are more sophisticated than traditional built-in database functions such as Sum and Max. As a result, the ease of programming user-defined aggregations, and the efficiency of their implementation, is of great current interest.This paper evaluates the interfaces and implementations for user-defined aggregation in several state of the art distributed computing systems: Hadoop, databases such as Oracle Parallel Server, and DryadLINQ. We show that: the degree of language integration between user-defined functions and the high-level query language has an impact on code legibility and simplicity; the choice of programming interface has a material effect on the performance of computations; some execution plans perform better than others on average; and that in order to get good performance on a variety of workloads a system must be able to select between execution plans depending on the computation. The interface and execution plan described in the MapReduce paper, and implemented by Hadoop, are found to be among the worst-performing choices.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11760,
+    "year": 2009,
+    "title": "Quincy: fair scheduling for distributed computing clusters",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629601",
+    "abstract": "This paper addresses the problem of scheduling concurrent jobs on clusters where application data is stored on the computing nodes. This setting, in which scheduling computations close to their data is crucial for performance, is increasingly common and arises in systems such as MapReduce, Hadoop, and Dryad as well as many grid-computing environments. We argue that data-intensive computation benefits from a fine-grain resource sharing model that differs from the coarser semi-static resource allocations implemented by most existing cluster computing architectures. The problem of scheduling with locality and fairness constraints has not previously been extensively studied under this resource-sharing model.We introduce a powerful and flexible new framework for scheduling concurrent distributed jobs with fine-grain resource sharing. The scheduling problem is mapped to a graph datastructure, where edge weights and capacities encode the competing demands of data locality, fairness, and starvation-freedom, and a standard solver computes the optimal online schedule according to a global cost model. We evaluate our implementation of this framework, which we call Quincy, on a cluster of a few hundred computers using a varied workload of data-and CPU-intensive jobs. We evaluate Quincy against an existing queue-based algorithm and implement several policies for each scheduler, with and without fairness constraints. Quincy gets better fairness when fairness is requested, while substantially improving data locality. The volume of data transferred across the cluster is reduced by up to a factor of 3.9 in our experiments, leading to a throughput increase of up to 40\\%.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11761,
+    "year": 2009,
+    "title": "Upright cluster services",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629602",
+    "abstract": "The UpRight library seeks to make Byzantine fault tolerance (BFT) a simple and viable alternative to crash fault tolerance for a range of cluster services. We demonstrate UpRight by producing BFT versions of the Zookeeper lock service and the Hadoop Distributed File System (HDFS). Our design choices in UpRight favor simplifying adoption by existing applications; performance is a secondary concern. Despite these priorities, our BFT Zookeeper and BFT HDFS implementations have performance comparable with the originals while providing additional robustness.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11762,
+    "year": 2009,
+    "title": "Improving application security with data flow assertions",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629604",
+    "abstract": "Resin is a new language runtime that helps prevent security vulnerabilities, by allowing programmers to specify application-level data flow assertions. Resin provides policy objects, which programmers use to specify assertion code and metadata; data tracking, which allows programmers to associate assertions with application data, and to keep track of assertions as the data flow through the application; and filter objects, which programmers use to define data flow boundaries at which assertions are checked. Resin's runtime checks data flow assertions by propagating policy objects along with data, as that data moves through the application, and then invoking filter objects when data crosses a data flow boundary, such as when writing data to the network or a file.Using Resin, Web application programmers can prevent a range of problems, from SQL injection and cross-site scripting, to inadvertent password disclosure and missing access control checks. Adding a Resin assertion to an application requires few changes to the existing application code, and an assertion can reuse existing code and data structures. For instance, 23 lines of code detect and prevent three previously-unknown missing access control vulnerabilities in phpBB, a popular Web forum application. Other assertions comprising tens of lines of code prevent a range of vulnerabilities in Python and PHP applications. A prototype of Resin incurs a 33\\% CPU overhead running the HotCRP conference management application.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11763,
+    "year": 2009,
+    "title": "Heat-ray: combating identity snowball attacks using machinelearning, combinatorial optimization and attack graphs",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629605",
+    "abstract": "As computers have become ever more interconnected, the complexity of security configuration has exploded. Management tools have not kept pace, and we show that this has made identity snowball attacks into a critical danger. Identity snowball attacks leverage the users logged in to a first compromised host to launch additional attacks with those users' privileges on other hosts. To combat such attacks, we present Heat-ray, a system that combines machine learning, combinatorial optimization and attack graphs to scalably manage security configuration. Through evaluation on an organization with several hundred thousand users and machines, we show that Heat-ray allows IT administrators to reduce by 96\\% the number of machines that can be used to launch a large-scale identity snowball attack.",
+    "status": "notchecked"
+  },
+  {
+    "id": 11764,
+    "year": 2009,
+    "title": "Fabric: a platform for secure distributed computation and storage",
+    "category": "system",
+    "publication": "SOSP",
+    "paper": "https://doi.org/10.1145/1629575.1629606",
+    "abstract": "Fabric is a new system and language for building secure distributed information systems. It is a decentralized system that allows heterogeneous network nodes to securely share both information and computation resources despite mutual distrust. Its high-level programming language makes distribution and persistence largely transparent to programmers. Fabric supports data-shipping and function-shipping styles of computation: both computation and information can move between nodes to meet security requirements or to improve performance. Fabric provides a rich, Java-like object model, but data resources are labeled with confidentiality and integrity policies that are enforced through a combination of compile-time and run-time mechanisms. Optimistic, nested transactions ensure consistency across all objects and nodes. A peer-to-peer dissemination layer helps to increase availability and to balance load. Results from applications built using Fabric suggest that Fabric has a clean, concise programming model, offers good performance, and enforces security.",
+    "status": "notchecked"
+  }
+]
