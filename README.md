@@ -18,6 +18,11 @@ Since some topics on software testing are related to security, the following pub
 - ICSE
 - ISSTA
 - FSE
+
+Besides, two system conferences are also included:
+
+- OSDI
+- SOSP
   
 **PRs and issues are warmly welcomed.**
 
