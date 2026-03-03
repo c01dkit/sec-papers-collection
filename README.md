@@ -21,8 +21,9 @@ Since some topics on software testing are related to security, the following pub
 
 Besides, two system conferences are also included:
 
-- OSDI
+- ASPLOS
 - SOSP
+- OSDI (TODO)
   
 **PRs and issues are warmly welcomed.**
 
