@@ -12,11 +12,14 @@ import { useI18n } from 'vue-i18n';
 const {locale} = useI18n();
 const timeline = ref([]);
 
-onMounted(()=>{
-    SubmissionTimelineService.getSubmissionTimeline().then((res)=>{
-        timeline.value = res;
-    })
-})
+
+onMounted(async () => {
+    try {
+        timeline.value = await SubmissionTimelineService.getSubmissionTimeline();
+    } catch (err) {
+        console.error(err);
+    }
+});
 function findNextStage(cycle) {
     // 获取今天的日期，忽略时间部分
     const today = new Date();

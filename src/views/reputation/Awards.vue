@@ -180,10 +180,12 @@ const updateTabs = () => {
     }
 };
 
-onMounted(() => {
-    AwardService.getAward().then((res) => {
-        awards.value = res;
-    });
+onMounted(async () => {
+    try {
+        awards.value = await AwardService.getAward();
+    } catch (err) {
+        console.error(err);
+    }
 });
 </script>
 
