@@ -2,6 +2,7 @@ export const AboutService = {
     updateTimelineData(locale = 'en') {
         const data = {
             en: [
+                { status: 'v0.3.10', date: '2026-03-29',  content: ['Add ASE 15-25'] },
                 { status: 'v0.3.9', date: '2026-03-03',  content: ['Add NDSS 2026 (265 papers)'] },
                 { status: 'v0.3.8', date: '2026-01-28',  content: ['Add SOSP 01-25', 'Add ASPLOS 15-25', 'Update conference categories and display trends by categories'] },
                 { status: 'v0.3.7', date: '2026-01-07',  content: ['Add FSE 15-25, including short papers', 'Update CCS 15-25, only includes research papers'] },
@@ -27,6 +28,7 @@ export const AboutService = {
                 { status: 'v0.1.0', date: '2023-05-15',  content: ['First time to publish sec.c01dkit.com.','Use mkdocs as website generator.'] },
             ],
             zh: [
+                { status: 'v0.3.10', date: '2026-03-29',  content: ['添加ASE 15-25论文'] },
                 { status: 'v0.3.9', date: '2026-03-03',  content: ['添加NDSS 2026论文（265篇）'] },
                 { status: 'v0.3.8', date: '2026-01-28',  content: ['添加SOSP 01-25论文', '添加ASPLOS 15-25论文', '更新会议论文分组、录用趋势分组展示'] },
                 { status: 'v0.3.7', date: '2026-01-07',  content: ['添加FSE 15-25论文（包括短论文）', '更新CCS 15-25状态，仅保留长论文'] },
