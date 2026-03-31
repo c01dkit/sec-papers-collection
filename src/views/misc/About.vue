@@ -66,7 +66,7 @@
                             目前网站支持按标题搜索安全四大、软工与系统顶会论文，以及摘要阅读、最佳论文等奖项检索、四大投稿时间线等。未来计划进行更多更新。</div>
                         <div class="mb-3">
                             如果你觉得这个网站帮到了你，可以悄悄请我喝杯咖啡 ☕ 😃 ... </div>
-<!--                        或者, <a class="text-primary cursor-pointer" target="_blank" href="https://afdian.com/a/c01dkit"> 一杯中国茶！ 🍵</a> 😆 （爱发电跑路了）-->
+                        或者, <a class="text-primary cursor-pointer" target="_blank" href="https://afdian.com/a/c01dkit"> 一杯中国茶！ 🍵</a> 😆
                         <form v-if="showSponsor" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                             <input type="hidden" name="cmd" value="_s-xclick" />
                             <input type="hidden" name="hosted_button_id" value="Y5HS3WCERWAAQ" />
