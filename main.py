@@ -334,6 +334,16 @@ def prepare_official_data():
             check = csv.analyze_csv(os.path.join('official_cache',csv_file_name))
             if check:
                 all_results += csv.dump()
+        seen_titles = set()
+        deduped = []
+        for paper in all_results:
+            key = compact(paper.get('title', ''))
+            if key not in seen_titles:
+                seen_titles.add(key)
+                deduped.append(paper)
+        if len(deduped) != len(all_results):
+            print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}')
+        all_results = deduped
         if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
                 json.dump(all_results,f,ensure_ascii=False)
@@ -351,6 +361,16 @@ def prepare_official_data():
             check = bib.analyze_bib(os.path.join('official_cache',bib_file_name))
             if check:
                 all_results += bib.dump()
+        seen_titles = set()
+        deduped = []
+        for paper in all_results:
+            key = compact(paper.get('title', ''))
+            if key not in seen_titles:
+                seen_titles.add(key)
+                deduped.append(paper)
+        if len(deduped) != len(all_results):
+            print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}')
+        all_results = deduped
         if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
                 json.dump(all_results,f,ensure_ascii=False)
@@ -445,6 +465,41 @@ def analyze_abstracts_and_titles():
                     log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
                     log_file.flush()
     
+def compact(title: str) -> str:
+    return ''.join(c for c in title if c.isalnum()).lower()
+
+def check_duplicate_titles():
+    meta_dir = './src/assets/data/meta_json'
+    if not os.path.exists(meta_dir):
+        print(f'Directory not found: {meta_dir}')
+        return
+
+    # Map compact title -> list of (source, original_title)
+    seen: dict[str, list[tuple[str, str]]] = {}
+
+    for filename in sorted(os.listdir(meta_dir)):
+        if not filename.endswith('.json'):
+            continue
+        source = filename[:-5]  # strip .json
+        filepath = os.path.join(meta_dir, filename)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            papers = json.load(f)
+        for paper in papers:
+            title = paper.get('title', '')
+            key = compact(title)
+            seen.setdefault(key, []).append((source, title))
+
+    duplicates = {k: v for k, v in seen.items() if len(v) > 1}
+    if not duplicates:
+        print('No duplicate titles found.')
+        return
+
+    print(f'Found {len(duplicates)} duplicate title(s):')
+    for entries in duplicates.values():
+        for source, title in entries:
+            print(f'  [{source}] {title}')
+        print()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Helper")
     parser.add_argument(
@@ -467,6 +522,11 @@ if __name__ == '__main__':
         action='store_true',
         help="Analyze papers' abstract with LLM"
     )
+    parser.add_argument(
+        '--check-titles',
+        action='store_true',
+        help="Check for duplicate titles across all meta_json files"
+    )
     args = parser.parse_args()
 
     if args.analyze:
@@ -479,4 +539,6 @@ if __name__ == '__main__':
         zip_manager.unzip_encrypted_zip()
     if args.llm_analyze:
         analyze_abstracts_and_titles()
+    if args.check_titles:
+        check_duplicate_titles()
     print('All done.')
