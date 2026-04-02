@@ -19,6 +19,8 @@ npm run deploy        # Deploy dist/ to GitHub Pages
 npm run deploy:build  # Build then deploy
 ```
 
+Frontend is designed with PrimeVue UI. The usage of components is documented in primevue-document.md
+
 ### Backend (Python data processing)
 ```bash
 uv sync                             # Install Python deps

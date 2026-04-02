@@ -4,8 +4,9 @@ import { useI18n } from 'vue-i18n';
 import { languageEmitter } from '@/locales';
 import { ref, onMounted, onUnmounted } from 'vue';
 import AppConfigurator from './AppConfigurator.vue';
+import { getRuntimeSettings, autoSavePreference } from '@/service/SettingsService';
 
-const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout();
+const { toggleMenu, toggleDarkMode: rawToggleDarkMode, isDarkTheme, layoutConfig } = useLayout();
 const { locale, t } = useI18n();
 
 const availableLocales = [
@@ -24,9 +25,20 @@ function changeLanguage(newLocale) {
     locale.value = newLocale;
     localStorage.setItem('locale', newLocale);
     showLanguageMenu.value = false;
-    
+
     // 发送语言切换事件
     languageEmitter.emit(newLocale);
+
+    if (getRuntimeSettings().rememberLanguage) {
+        autoSavePreference('language', newLocale);
+    }
+}
+
+function toggleDarkMode() {
+    rawToggleDarkMode();
+    if (getRuntimeSettings().rememberDarkMode) {
+        autoSavePreference('darkTheme', layoutConfig.darkTheme);
+    }
 }
 
 function toggleLanguageMenu() {

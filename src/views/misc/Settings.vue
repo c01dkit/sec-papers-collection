@@ -18,9 +18,11 @@ import {
     loadSettings,
     saveSettings
 } from '@/service/SettingsService';
+import { useLayout } from '@/layout/composables/layout';
 
 const { t, locale } = useI18n();
 const toast = useToast();
+const { layoutConfig } = useLayout();
 
 const loading = ref(true);
 const consentNeeded = ref(false);
@@ -88,6 +90,16 @@ function handleConsentReject() {
 async function handleSave() {
     saving.value = true;
     const payload = { ...defaultSettings(), ...form.value };
+    // Capture current runtime values for remembered preferences
+    if (payload.rememberLanguage) {
+        payload.language = locale.value;
+    }
+    if (payload.rememberDarkMode) {
+        payload.darkTheme = layoutConfig.darkTheme;
+    }
+    if (payload.rememberTheme) {
+        payload.theme = layoutConfig.primary;
+    }
     try {
         await saveSettings(payload);
         applySettingsToRuntime(payload, locale);
@@ -149,6 +161,32 @@ function removeKeyword(word) {
 
         <div v-else class="card">
             <div class="flex flex-col gap-4">
+                <div class="flex items-start justify-between gap-3 flex-wrap">
+                    <div>
+                        <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberLanguage.label') }}</p>
+                        <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberLanguage.desc') }}</p>
+                    </div>
+                    <InputSwitch v-model="form.rememberLanguage" />
+                </div>
+
+                <div class="flex items-start justify-between gap-3 flex-wrap">
+                    <div>
+                        <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberDarkMode.label') }}</p>
+                        <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberDarkMode.desc') }}</p>
+                    </div>
+                    <InputSwitch v-model="form.rememberDarkMode" />
+                </div>
+
+                <div class="flex items-start justify-between gap-3 flex-wrap">
+                    <div>
+                        <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberTheme.label') }}</p>
+                        <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberTheme.desc') }}</p>
+                    </div>
+                    <InputSwitch v-model="form.rememberTheme" />
+                </div>
+
+                <Divider />
+
                 <div class="flex items-start justify-between gap-3 flex-wrap">
                     <div>
                         <p class="text-sm font-medium mb-1">{{ t('settings.form.showStatusDots.label') }}</p>

@@ -44,6 +44,10 @@ const routes = [
                 path: '/misc/i18n-test',
                 component: () => import('@/views/misc/I18nTest.vue'),
             },
+            {
+                path: '/:pathMatch(.*)*',
+                component: () => import('@/views/misc/NotFound.vue'),
+            },
         ]
     }
 ];

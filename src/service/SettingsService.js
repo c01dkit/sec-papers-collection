@@ -1,57 +1,18 @@
 import { reactive } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
+import { applyPrimaryColor } from '@/service/ThemeService';
 
 const DB_NAME = 'spc-settings';
 const STORE = 'config';
 const DB_VERSION = 1;
 
-const PRIMARY_PRESETS = {
-    indigo: {
-        '--primary-color': '#6366f1',
-        '--primary-200': '#c7d2fe',
-        '--primary-400': '#818cf8',
-        '--primary-500': '#6366f1',
-        '--primary-600': '#4f46e5',
-        '--primary-700': '#4338ca'
-    },
-    blue: {
-        '--primary-color': '#3b82f6',
-        '--primary-200': '#bfdbfe',
-        '--primary-400': '#60a5fa',
-        '--primary-500': '#3b82f6',
-        '--primary-600': '#2563eb',
-        '--primary-700': '#1d4ed8'
-    },
-    emerald: {
-        '--primary-color': '#10b981',
-        '--primary-200': '#a7f3d0',
-        '--primary-400': '#34d399',
-        '--primary-500': '#10b981',
-        '--primary-600': '#059669',
-        '--primary-700': '#047857'
-    },
-    amber: {
-        '--primary-color': '#f59e0b',
-        '--primary-200': '#fde68a',
-        '--primary-400': '#fbbf24',
-        '--primary-500': '#f59e0b',
-        '--primary-600': '#d97706',
-        '--primary-700': '#b45309'
-    },
-    violet: {
-        '--primary-color': '#8b5cf6',
-        '--primary-200': '#ddd6fe',
-        '--primary-400': '#a78bfa',
-        '--primary-500': '#8b5cf6',
-        '--primary-600': '#7c3aed',
-        '--primary-700': '#6d28d9'
-    }
-};
-
 const DEFAULT_SETTINGS = () => ({
     theme: 'indigo',
     language: 'en',
     darkTheme: false,
+    rememberLanguage: false,
+    rememberDarkMode: false,
+    rememberTheme: false,
     showStatusDots: false,
     llmEndpoint: '',
     llmApiKey: '',
@@ -70,10 +31,6 @@ function toPlainSettings(val) {
     } catch (e) {
         return JSON.parse(JSON.stringify(raw));
     }
-}
-
-export function getPrimaryPresets() {
-    return PRIMARY_PRESETS;
 }
 
 export function defaultSettings() {
@@ -154,12 +111,7 @@ export async function saveSettings(value) {
 }
 
 export function applyTheme(primary) {
-    const palette = PRIMARY_PRESETS[primary] || PRIMARY_PRESETS.indigo;
-    Object.entries(palette).forEach(([name, value]) => {
-        document.documentElement.style.setProperty(name, value);
-    });
-    const { layoutConfig } = useLayout();
-    layoutConfig.primary = primary;
+    applyPrimaryColor(primary);
 }
 
 export function applyDarkMode(enabled) {
@@ -174,12 +126,27 @@ export function applySettingsToRuntime(settings, localeRef) {
     const merged = { ...DEFAULT_SETTINGS(), ...settings };
     Object.assign(runtimeSettings, merged);
 
-    if (merged.language && localeRef) {
+    if (merged.rememberLanguage && merged.language && localeRef) {
         localeRef.value = merged.language;
         localStorage.setItem('locale', merged.language);
     }
-    applyTheme(merged.theme || 'indigo');
-    applyDarkMode(!!merged.darkTheme);
+    if (merged.rememberTheme) {
+        applyTheme(merged.theme || 'indigo');
+    }
+    if (merged.rememberDarkMode) {
+        applyDarkMode(!!merged.darkTheme);
+    }
+}
+
+export async function autoSavePreference(key, value) {
+    try {
+        const stored = await loadSettings();
+        if (!stored) return;
+        stored[key] = value;
+        await saveSettings(stored);
+    } catch (e) {
+        console.warn('[SettingsService] autoSavePreference failed', e);
+    }
 }
 
 function openDb(createIfMissing) {
@@ -209,6 +176,29 @@ function openDb(createIfMissing) {
     });
 
     return cachedDbPromise;
+}
+
+export async function loadFavorites() {
+    const db = await openDb(true);
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE, 'readonly');
+        const store = tx.objectStore(STORE);
+        const req = store.get('favorites');
+        req.onsuccess = () => resolve(req.result ? req.result.value : []);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+export async function saveFavorites(ids) {
+    const db = await ensureDbAndDefaults();
+    const plain = toPlainSettings(ids);
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE, 'readwrite');
+        const store = tx.objectStore(STORE);
+        const req = store.put({ key: 'favorites', value: plain });
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+    });
 }
 
 async function ensureDefaults(db) {
