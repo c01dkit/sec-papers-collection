@@ -195,6 +195,7 @@ function removeKeyword(word) {
                     <InputSwitch v-model="form.showStatusDots" />
                 </div>
 
+                <!-- LLM settings hidden for now
                 <Divider />
 
                 <div class="flex flex-col gap-2">
@@ -208,6 +209,7 @@ function removeKeyword(word) {
                     <p class="text-muted-color text-sm m-0">{{ t('settings.form.llmKey.desc') }}</p>
                     <InputText v-model="form.llmApiKey" class="w-full" type="password" :placeholder="t('settings.form.llmKey.placeholder')" />
                 </div>
+                -->
 
                 <Divider />
 

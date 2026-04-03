@@ -64,9 +64,9 @@
 
             <Column :header="t('search.title')">
                 <template #body="{ data }">
-                    <span>{{ highlightSearchPatterns(data.title, 1, filters.global) }}</span>
-                    <span class="text-primary font-bold">{{ highlightSearchPatterns(data.title, 2, filters.global) }}</span>
-                    <span>{{ highlightSearchPatterns(data.title, 3, filters.global) }}</span>
+                    <template v-for="(seg, idx) in titleSegments(data.title)" :key="idx">
+                        <span :class="seg.cls">{{ seg.text }}</span>
+                    </template>
                 </template>
             </Column>
 
@@ -109,6 +109,7 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode } from '@primevue/core/api';
 import { usePageTitle } from '@/composables/useI18n';
+import { highlightSegments } from '@/composables/useHighlight';
 import { loadFavorites, saveFavorites } from '@/service/SettingsService';
 import paperDataQuickView from '@/assets/data/data-quick-view.json';
 import paperStatics from '@/assets/data/data-statistics.json';
@@ -231,29 +232,10 @@ function onRowSelect(event) {
     });
 }
 
-function highlightSearchPatterns(data, step, filterModel) {
-    if (step === 1) {
-        if (filterModel.value && filterModel.value.length > 0) {
-            let i = data.toUpperCase().indexOf(filterModel.value.toUpperCase());
-            return data.slice(0, i);
-        } else {
-            return data;
-        }
-    } else if (step === 2) {
-        if (filterModel.value && filterModel.value.length > 0) {
-            let i = data.toUpperCase().indexOf(filterModel.value.toUpperCase());
-            return data.slice(i, i + filterModel.value.length);
-        } else {
-            return '';
-        }
-    } else if (step === 3) {
-        if (filterModel.value && filterModel.value.length > 0) {
-            let i = data.toUpperCase().indexOf(filterModel.value.toUpperCase());
-            return data.slice(i + filterModel.value.length);
-        } else {
-            return '';
-        }
-    }
+function titleSegments(title) {
+    const searchTerm = filters.value?.global?.value;
+    const extra = searchTerm ? [{ text: searchTerm, cls: 'text-primary font-bold' }] : [];
+    return highlightSegments(title, extra);
 }
 
 // Init

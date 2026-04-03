@@ -2,6 +2,7 @@ export const AboutService = {
     updateTimelineData(locale = 'en') {
         const data = {
             en: [
+                { status: 'v0.3.11', date: '2026-04-03',  content: ['Add paper favorites with IndexedDB persistence', 'Add keyword highlighting in Search and Abstract pages', 'Add remember-preference toggles for language, dark mode, and theme color', 'Enable Settings page in sidebar navigation', 'Add 404 page with i18n support', 'Refactor Search page to Composition API', 'Fix dev-mode data loading for Awards and Submission Timeline', 'Internationalize theme configurator panel', 'Clean up unused dashboard components'] },
                 { status: 'v0.3.10', date: '2026-03-29',  content: ['Add ASE 15-25'] },
                 { status: 'v0.3.9', date: '2026-03-03',  content: ['Add NDSS 2026 (265 papers)'] },
                 { status: 'v0.3.8', date: '2026-01-28',  content: ['Add SOSP 01-25', 'Add ASPLOS 15-25', 'Update conference categories and display trends by categories'] },
@@ -28,6 +29,7 @@ export const AboutService = {
                 { status: 'v0.1.0', date: '2023-05-15',  content: ['First time to publish sec.c01dkit.com.','Use mkdocs as website generator.'] },
             ],
             zh: [
+                { status: 'v0.3.11', date: '2026-04-03',  content: ['新增论文收藏功能，支持 IndexedDB 持久化', '新增偏好关键词高亮（搜索页与摘要页）', '新增语言、明暗模式、主题色的记忆开关', '启用设置页面入口', '新增 404 页面（支持中英文）', '搜索页重构为 Composition API', '修复开发环境下获奖论文与投稿时间线数据加载', '主题配置面板支持中文', '清理废弃的仪表盘组件'] },
                 { status: 'v0.3.10', date: '2026-03-29',  content: ['添加ASE 15-25论文'] },
                 { status: 'v0.3.9', date: '2026-03-03',  content: ['添加NDSS 2026论文（265篇）'] },
                 { status: 'v0.3.8', date: '2026-01-28',  content: ['添加SOSP 01-25论文', '添加ASPLOS 15-25论文', '更新会议论文分组、录用趋势分组展示'] },

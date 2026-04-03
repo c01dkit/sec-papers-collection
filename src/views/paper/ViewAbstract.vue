@@ -7,8 +7,8 @@
             <ul class="list-none p-0 mt-4">
                 <li  v-for="item in paperCollection" :key="item.id" >
                     <div class="font-medium text-900 mb-2 mt-2">
-                        <a class="text-primary" :href="item.paper" target="_blank">{{ item.title }}</a></div>
-                    <div class="line-height-3 text-600" >{{ item.abstract }}</div>
+                        <a :href="item.paper" target="_blank"><template v-for="(seg, idx) in highlightSegments(item.title)" :key="idx"><span :class="seg.cls || 'text-primary'">{{ seg.text }}</span></template></a></div>
+                    <div class="line-height-3 text-600"><template v-for="(seg, idx) in highlightSegments(item.abstract)" :key="idx"><span :class="seg.cls">{{ seg.text }}</span></template></div>
                     <Divider/>
                 </li>
             </ul>
@@ -21,6 +21,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePageTitle } from '@/composables/useI18n';
+import { highlightSegments } from '@/composables/useHighlight';
 import { languageEmitter } from '@/locales';
 import paperStatis from '@/assets/data/data-statistics.json';
 
