@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import Button from 'primevue/button';
-import InputSwitch from 'primevue/inputswitch';
+import ToggleSwitch from 'primevue/ToggleSwitch';
 import Divider from 'primevue/divider';
 import Skeleton from 'primevue/skeleton';
 import InputText from 'primevue/inputtext';
@@ -11,7 +11,6 @@ import Tag from 'primevue/tag';
 
 import {
     applySettingsToRuntime,
-    checkDbExists,
     defaultSettings,
     ensureDbAndDefaults,
     isIndexedDBSupported,
@@ -25,8 +24,6 @@ const toast = useToast();
 const { layoutConfig } = useLayout();
 
 const loading = ref(true);
-const consentNeeded = ref(false);
-const consentDeclined = ref(false);
 const supportsIdb = ref(true);
 const saving = ref(false);
 const form = ref(defaultSettings());
@@ -41,11 +38,8 @@ onMounted(async () => {
     }
 
     try {
-        const exists = await checkDbExists();
-        consentNeeded.value = !exists;
-        if (exists) {
-            await loadFormFromDb();
-        }
+        await ensureDbAndDefaults();
+        await loadFormFromDb();
     } catch (err) {
         console.warn('[Settings] init failed', err);
     } finally {
@@ -62,29 +56,6 @@ async function loadFormFromDb() {
         console.warn('[Settings] load failed', err);
         toast.add({ severity: 'warn', summary: t('settings.toast.loadFailed'), life: 3000 });
     }
-}
-
-async function handleConsentAccept() {
-    saving.value = true;
-    try {
-        await ensureDbAndDefaults();
-        form.value = defaultSettings();
-        consentNeeded.value = false;
-        consentDeclined.value = false;
-        await saveSettings(form.value);
-        applySettingsToRuntime(form.value, locale);
-        toast.add({ severity: 'success', summary: t('settings.toast.consentAccepted'), life: 2500 });
-    } catch (err) {
-        console.error('[Settings] consent accept failed', err);
-        toast.add({ severity: 'error', summary: t('settings.toast.consentFailed'), life: 3000 });
-    } finally {
-        saving.value = false;
-    }
-}
-
-function handleConsentReject() {
-    consentDeclined.value = true;
-    toast.add({ severity: 'info', summary: t('settings.toast.consentRejected'), life: 2500 });
 }
 
 async function handleSave() {
@@ -147,26 +118,17 @@ function removeKeyword(word) {
             <p class="text-muted-color mb-3">{{ t('settings.unsupported.desc') }}</p>
         </div>
 
-        <div v-else-if="consentNeeded" class="consent-wrapper">
-            <div class="card consent-card">
-                <h2 class="text-xl font-semibold mb-2">{{ t('settings.consent.title') }}</h2>
-                <p class="text-muted-color mb-4">{{ t('settings.consent.desc') }}</p>
-                <div class="flex gap-3 justify-center">
-                    <Button :label="t('settings.consent.reject')" class="p-button-text" @click="handleConsentReject" />
-                    <Button :label="t('settings.consent.accept')" :loading="saving" @click="handleConsentAccept" />
-                </div>
-                <p v-if="consentDeclined" class="text-muted-color text-sm mt-4">{{ t('settings.consent.declinedNote') }}</p>
-            </div>
-        </div>
-
         <div v-else class="card">
+            <div class="privacy-notice mb-4">
+                <span>{{ t('settings.privacyNotice') }}</span>
+            </div>
             <div class="flex flex-col gap-4">
                 <div class="flex items-start justify-between gap-3 flex-wrap">
                     <div>
                         <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberLanguage.label') }}</p>
                         <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberLanguage.desc') }}</p>
                     </div>
-                    <InputSwitch v-model="form.rememberLanguage" />
+                    <ToggleSwitch v-model="form.rememberLanguage" />
                 </div>
 
                 <div class="flex items-start justify-between gap-3 flex-wrap">
@@ -174,7 +136,7 @@ function removeKeyword(word) {
                         <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberDarkMode.label') }}</p>
                         <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberDarkMode.desc') }}</p>
                     </div>
-                    <InputSwitch v-model="form.rememberDarkMode" />
+                    <ToggleSwitch v-model="form.rememberDarkMode" />
                 </div>
 
                 <div class="flex items-start justify-between gap-3 flex-wrap">
@@ -182,17 +144,16 @@ function removeKeyword(word) {
                         <p class="text-sm font-medium mb-1">{{ t('settings.form.rememberTheme.label') }}</p>
                         <p class="text-muted-color text-sm m-0">{{ t('settings.form.rememberTheme.desc') }}</p>
                     </div>
-                    <InputSwitch v-model="form.rememberTheme" />
+                    <ToggleSwitch v-model="form.rememberTheme" />
                 </div>
 
-                <Divider />
 
                 <div class="flex items-start justify-between gap-3 flex-wrap">
                     <div>
                         <p class="text-sm font-medium mb-1">{{ t('settings.form.showStatusDots.label') }}</p>
                         <p class="text-muted-color text-sm m-0">{{ t('settings.form.showStatusDots.desc') }}</p>
                     </div>
-                    <InputSwitch v-model="form.showStatusDots" />
+                    <ToggleSwitch v-model="form.showStatusDots" />
                 </div>
 
                 <!-- LLM settings hidden for now
@@ -210,8 +171,6 @@ function removeKeyword(word) {
                     <InputText v-model="form.llmApiKey" class="w-full" type="password" :placeholder="t('settings.form.llmKey.placeholder')" />
                 </div>
                 -->
-
-                <Divider />
 
                 <div class="flex flex-col gap-2">
                     <p class="text-sm font-medium mb-1">{{ t('settings.form.keywords.label') }}</p>
@@ -257,16 +216,19 @@ function removeKeyword(word) {
     gap: 1rem;
 }
 
-.consent-wrapper {
-    min-height: calc(100vh - 10rem);
+.privacy-notice {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    border-radius: 0.5rem;
+    background: var(--surface-100);
+    color: var(--text-color-secondary);
+    font-size: 0.875rem;
+    line-height: 1.4;
 }
 
-.consent-card {
-    max-width: 520px;
-    width: 100%;
-    text-align: center;
+:root.app-dark .privacy-notice {
+    background: var(--surface-800);
 }
 </style>

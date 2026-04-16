@@ -2,13 +2,14 @@
     <div class="card">
         <Toast/>
         <DataTable
+            class="borderless-table"
             :value="displayedPaperData"
             selection-mode="single"
             size="small"
             v-model:selection="selectedPaper"
             v-model:filters="filters"
             data-key="id"
-            paginator show-gridlines :rows=15
+            paginator :rows=15
             filter-display="menu"
             @filter="onFiltering"
             @row-select="onRowSelect"
@@ -85,7 +86,7 @@
                 </template>
             </Column>
 
-            <Column :header="t('search.paper')">
+            <Column :header="`${t('search.paper')} / ${t('search.favorites')}`">
                 <template #body="slotProps">
                     <div class="flex items-center">
                         <Button v-if="slotProps.data.paper!=='#'" type="button" icon="pi pi-paperclip text-primary-300" text size="small" @click="openNewWebsite(slotProps.data.paper)"></Button>
@@ -261,5 +262,24 @@ watch(locale, () => {
 <style scoped>
 a {
     text-decoration: none;
+}
+
+.borderless-table :deep(.p-datatable-table-container),
+.borderless-table :deep(.p-datatable-header),
+.borderless-table :deep(.p-datatable-footer),
+.borderless-table :deep(.p-datatable-paginator-bottom),
+.borderless-table :deep(.p-datatable-paginator-top) {
+    border: none;
+    background: transparent;
+}
+
+.borderless-table :deep(.p-datatable-thead > tr > th),
+.borderless-table :deep(.p-datatable-tbody > tr > td) {
+    border-left: none;
+    border-right: none;
+}
+
+.borderless-table :deep(.p-datatable-thead > tr > th) {
+    background: transparent;
 }
 </style>
