@@ -1,53 +1,144 @@
 # A Collection of Security Papers on Top-Tier Conferences
 
+> [中文文档 / Chinese README](./README_zh.md)
+
 ## TLDR
 
-This website serves as a curated collection for academic and technical research in the field of cybersecurity.
+A curated collection of academic papers in cybersecurity (and adjacent fields), sorted by venue and year, deployed via GitHub Pages.
 
-**These papers are sorted by conference and date, and are deployed via github pages. Please [click here to visit the website](https://sec.c01dkit.com).**
+**[Visit the website at sec.c01dkit.com](https://sec.c01dkit.com)**
 
-The following publications are included:
+Pull requests and issues are warmly welcomed.
+
+## Included publications
+
+Top-tier security ("the Big Four"):
 
 - IEEE S&P (Oakland)
 - USENIX Security Symposium (USENIX Sec)
 - ACM CCS
 - NDSS
 
-Since some topics on software testing are related to security, the following publications are also included:
+Software-engineering venues with security-relevant content:
 
 - ICSE
 - ISSTA
 - FSE
+- ASE
 
-Besides, two system conferences are also included:
+System venues:
 
 - ASPLOS
 - SOSP
 - OSDI (TODO)
-  
-**PRs and issues are warmly welcomed.**
+
+## Website features
+
+The site is a Vue 3 + Vite single-page app deployed at `sec.c01dkit.com`. From the left sidebar you can reach:
+
+- **Home** — paper totals, per-conference yearly breakdown, recent updates, status badges (verified / pending / require-updates / advanced).
+- **Search** — full title search across all included papers, filter by venue and year, click a row to copy the title, click the paperclip to open the paper, click the star to favorite. A "Favorites Only" toggle filters to your starred entries.
+- **Trends** — yearly accepted-paper trend charts grouped by category (top-tier, software engineering, system).
+- **Abstract** — pick a venue and year to read accepted papers with their abstracts, with the user's preferred keywords highlighted in the theme color.
+- **Submission Timeline** — full submission/notification/camera-ready timeline for each Big-Four venue, kept in sync with the official CFPs.
+- **Awards** — best-paper / distinguished-paper awards across years, grouped by year or by award type.
+- **About** — changelog and the list of supporters.
+- **More Sites** — curated links to related resources (best-paper-awards aggregators, CCF deadlines, Connected Papers, WisPaper, CS Papers, etc.).
+- **Settings** — theming and personal preferences (see below).
+
+### Personalization (Settings page)
+
+All preferences are persisted in your browser's IndexedDB only — nothing is uploaded.
+
+- Light / dark mode toggle, primary color picker, menu mode (static / overlay).
+- Language toggle: English / 中文 (vue-i18n).
+- Remember-preference switches for language, dark mode, and theme color.
+- Show/hide the colored status dots on the home page (off by default).
+- Preferred keywords for highlighting in Search and Abstract pages.
+- LLM endpoint URL and API key (used by the in-browser features that talk to an OpenAI-compatible API).
+- Paper favorites stored locally; surfaced in the Search page.
+
+## Repository layout
+
+```
+analyzers/                Python crawl/parse/LLM analysis modules
+cache/                    pickled crawl cache (SHA-256 keyed; see cache.zip)
+official_cache/           official CSV/BIB files from venues
+src/assets/data/          generated JSON consumed by the frontend
+  data.json               full paper list (no abstracts, for size)
+  data-quick-view.json    100 latest papers per publication
+  data-statistics.json    aggregated counts by publication / year / category
+  meta_json/<Pub>-<Yr>.json   per-conference details with abstracts
+src/views/                Vue pages
+src/service/              data-loading services and IndexedDB wrapper
+src/locales/              en.json / zh.json
+data.yml                  master config (venues, years, XPaths, official files)
+main.py                   orchestrator entry point
+```
 
 ## How to contribute?
 
-The paper information is processed via `uv`. You can simply clone the repository, update the `data.yml` file, run `uv run main.py --analyze` locally to make sure everything works well, and create a Pull Request (PR). I will review it and update the website as soon as possible. All contributors will be listed in the repository's README and in the website's acknowledgments :)
+Paper data is processed via [`uv`](https://docs.astral.sh/uv/). Clone the repo, edit `data.yml`, run `uv run main.py --analyze` locally to verify, and open a pull request. All contributors will be credited in the repository and on the website's About page.
 
-### Update paper details
+### Updating paper details
 
-You should run `uv sync` to setup the environment first. Then, to update, first switch to `main` branch and simply update `data.yml` and run `uv run main.py --analyze` to crawl and generate the latest information! Then I will update my branch and deploy it. To speed up website crawling, you can unzip the `cache.zip` file and place the `cache` directory under the root path of the project.
+```bash
+uv sync                     # set up the Python environment
+# ...edit data.yml...
+uv run main.py --analyze    # crawl/parse and regenerate JSON in src/assets/data/
+```
 
-### Update key information
+To speed up local crawling, unzip `cache.zip` into the repo root so the cached HTML/JSON is reused.
 
-* Since v0.3.6, keyword `status` is introduced into `data.yml` to mark the conference status. Status can be grouped into `notchecked` (default), `inprogress`, `done`, and `advanced`, corresponding to `Not verified`, `Require updates`, `Verified`, and `Advanced processed`.
-* Since v0.3.0, `src/service/xxxService.js` files are used for some key information other than paper details. You can easily update them for the latest news.
+### Updating key information
 
-## For local deploy and publish
+- Since v0.3.6, the `status` keyword in `data.yml` marks each conference's processing state: `notchecked` (default) / `inprogress` / `done` / `advanced`, surfaced as `Not verified` / `Require updates` / `Verified` / `Advanced processed` on the home page.
+- Since v0.3.0, files under `src/service/*Service.js` hold information that is not derived from papers themselves (changelog, sponsor list, submission timeline, awards). Edit them directly to publish news.
 
-To build and publish the website, run the following script:
+### LLM-assisted topic classification
 
-```shell
+`uv run main.py --llm-analyze` reads paper abstracts and tags topics via an OpenAI-compatible API. Configure it via a local `.env`:
+
+```
+OPENAI_API_KEY=...
+MODEL=...
+BASE_URL=...
+PRIVATE_ZIP_PASSWD=...   # password for cache.zip
+```
+
+Results are cached as JSONL to avoid re-querying.
+
+### `bib` files without cite keys
+
+Some venues (e.g., recent IEEE Xplore exports for Oakland) ship `.bib` files where each entry's cite key is empty (`@INPROCEEDINGS {,`). `bibtexparser` cannot parse those, so run:
+
+```bash
+uv run analyzers/bib_analyzer.py official_cache/<file>.bib
+```
+
+This rewrites empty cite keys with random UUIDs in place. Cite keys are not used downstream — only `title`, `author`, `abstract`, and `url` are consumed.
+
+## Frontend development
+
+```bash
+npm install
+npm run dev              # Vite dev server
+npm run build            # production build → dist/
+npm run preview          # preview the build
+npm run lint             # ESLint with --fix
+npm run format           # Prettier
+npm run deploy           # publish dist/ to GitHub Pages (--cname sec.c01dkit.com)
+npm run deploy:build     # build + deploy
+```
+
+UI components are from [PrimeVue 4](https://primevue.org/) with Tailwind CSS 3; charts are Chart.js. See `primevue-document.md` for component-usage notes used while developing this site.
+
+## Full publish cycle
+
+```bash
 uv run main.py --analyze --zip
 npm run build
-npm run deploy # before this, you should update package.json and set correct --cname
+npm run deploy           # update package.json's --cname if you fork this
 git add .
 git commit -m "update $DATE"
 git push origin main
