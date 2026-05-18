@@ -31,7 +31,7 @@
 
         <div class="col-span-12 lg:col-span-5 flex flex-col gap-4" style="height: calc(100vh - 11rem);">
             <!-- 反馈内容区域 - 上半部分 -->
-            <div class="card flex-1 min-h-0 mb-0">
+            <div class="card flex flex-col flex-1 min-h-0 mb-0 overflow-hidden">
                 <h1>{{ t('dashboard.feedback') }}</h1>
                 <Divider/>
                 <div class="feedback-content">
@@ -147,7 +147,8 @@ a {
 }
 
 .feedback-content {
-    height: 100%;
+    flex: 1 1 0;
+    min-height: 0;
     overflow-y: auto;
     padding-right: 0.5rem;
 }

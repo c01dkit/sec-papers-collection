@@ -86,15 +86,15 @@ function openURL(url) {
                 <span title="Conference Location"><i class="pi pi-map-marker"></i> {{ publication.place }}</span>
                 <span title="Last sync time" class="text-gray-400"><i class="pi pi-refresh"></i> {{ publication.update }}</span>
             </div>
-            <div class="flex flex-row">
-                <div v-for="cycle in publication.cycles" :key="cycle.publication" class="w-1/2">
+            <div class="flex flex-row gap-6">
+                <div v-for="cycle in publication.cycles" :key="cycle.publication" class="w-1/2 min-w-0">
                     <span class="font-semibold">{{ cycle.name }}</span>
                 <Stepper :value="findNextStage(cycle.ddls)" linear>
                     <StepItem v-for="ddlinfo in cycle.ddls" :value="ddlinfo.value" :key="ddlinfo.value">
                         <Step>
-                            <div class="flex flex-col text-left">
+                            <div class="flex flex-col text-left min-w-0 flex-1">
                                 <span>{{ ddlinfo.date }}</span>
-                                <span>{{ ddlinfo.stage}}</span>
+                                <span class="break-words whitespace-normal">{{ ddlinfo.stage}}</span>
                             </div>
                         </Step>
                     </StepItem>
