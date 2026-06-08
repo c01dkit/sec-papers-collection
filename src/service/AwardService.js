@@ -1,7 +1,7 @@
 export const AwardService = {
     async getAward() {
         if (import.meta.env.PROD) {
-            const res = await fetch('https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/awards.json?v=20260315');
+            const res = await fetch('https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/awards.json?v=20260606');
             if (!res.ok) {
                 throw new Error(`Failed to fetch awards: ${res.status}`);
             }
