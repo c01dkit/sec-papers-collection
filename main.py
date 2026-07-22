@@ -5,7 +5,7 @@ import hashlib
 import os
 import datetime
 import json
-import analyzers.zip_manager as zip_manager
+import analyzers.oss_uploader as oss_uploader
 import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
@@ -503,16 +503,6 @@ def check_duplicate_titles():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Helper")
     parser.add_argument(
-        '--unzip',
-        action='store_true',
-        help="Unzip source"
-    )
-    parser.add_argument(
-        '--zip',
-        action='store_true',
-        help="Zip source"
-    )
-    parser.add_argument(
         '--analyze',
         action='store_true',
         help="Generate new json files"
@@ -527,18 +517,28 @@ if __name__ == '__main__':
         action='store_true',
         help="Check for duplicate titles across all meta_json files"
     )
+    parser.add_argument(
+        '--upload',
+        action='store_true',
+        help="Upload changed JSON files in src/assets/data/ to Aliyun OSS (served via CDN)"
+    )
+    parser.add_argument(
+        '--seed-upload-cache',
+        action='store_true',
+        help="Record current JSON hashes as already-uploaded without uploading (skips them next --upload)"
+    )
     args = parser.parse_args()
 
     if args.analyze:
         if os.path.exists('official_cache'):
             prepare_official_data()
         export_data_json('src/assets/data/')
-    if args.zip:
-        zip_manager.generate_zip_cache()
-    if args.unzip:
-        zip_manager.unzip_encrypted_zip()
     if args.llm_analyze:
         analyze_abstracts_and_titles()
     if args.check_titles:
         check_duplicate_titles()
+    if args.seed_upload_cache:
+        oss_uploader.seed_upload_cache()
+    if args.upload:
+        oss_uploader.upload_data_dir()
     print('All done.')

@@ -28,16 +28,22 @@ uv run main.py --analyze            # Crawl/parse papers and generate JSON data 
 uv run main.py --llm-analyze        # Analyze abstracts with LLM (requires .env)
 uv run main.py --zip                # Create encrypted zip of crawl cache
 uv run main.py --unzip              # Unzip crawl cache
+uv run main.py --upload             # Upload CHANGED src/assets/data/ JSON to Aliyun OSS (served via CDN)
+uv run main.py --seed-upload-cache  # Mark current JSON as already-uploaded (skips them on next --upload)
 ```
+
+`--upload` hashes each JSON (SHA256) against `oss_upload_cache.json` (git-ignored, local only) and only uploads files whose content changed. After a manual/first upload, run `--seed-upload-cache` once so subsequent uploads are incremental.
 
 ### Full publish cycle
 ```bash
-uv run main.py --analyze --zip && npm run build && npm run deploy
+uv run main.py --analyze --upload --zip && npm run build && npm run deploy
 ```
 
 ## Architecture
 
-**Data flow:** `data.yml` (conference config) → `main.py` (Python processing) → JSON files in `src/assets/data/` → Vue frontend
+**Data flow:** `data.yml` (conference config) → `main.py` (Python processing) → JSON files in `src/assets/data/` → uploaded to Aliyun OSS (`--upload`) → Vue frontend loads at runtime from CDN (`cdn.c01dkit.com/sec-papers/`)
+
+In DEV the frontend imports JSON locally from `src/assets/data/`; in PROD it fetches from the CDN. The CDN base URL is centralized in `src/service/cdn.js` (`CDN_DATA_BASE`). OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under the `sec-papers/` key prefix in the `premium-cdn` bucket.
 
 ### Python backend (`analyzers/`)
 - `main.py` — orchestrates scraping, parsing, and JSON generation

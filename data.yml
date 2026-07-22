@@ -400,6 +400,9 @@ ase:
     - year: 2023
       official_file: 'ase23.csv'
       # https://ieeexplore.ieee.org/xpl/conhome/10298258/proceeding
+    - year: 2022
+      official_file: 'ase22.bib'
+      # https://dl.acm.org/doi/proceedings/10.1145/3551349
     - year: 2021
       official_file: 'ase21.csv'
       # https://ieeexplore.ieee.org/xpl/conhome/9678507/proceeding
@@ -425,6 +428,14 @@ icse:
   name: ICSE
   category: software-engineering
   sites:
+    # ICSE 2026 pending: held Apr 2026 (Rio), ~321 accepted, but no structured source yet.
+    # researchr now shows only the program schedule (no #event-overview table), and DBLP
+    # has not indexed icse2026 yet (IEEE proceedings publish later). Uncomment when DBLP is up.
+    # -
+    #   year: 2026
+    #   url: https://dblp.org/db/conf/icse/icse2026.html
+    #   title_xpath: //ul[@class="publ-list"]/li[@class="entry inproceedings"]/cite/span[@class="title"]
+    #   link_xpath: //ul[@class="publ-list"]/li[@class="entry inproceedings"]/nav/ul/li[1]/div[1]/a/@href
     - year: 2025
       official_file: 'icse25.csv'
       url: https://conf.researchr.org/track/icse-2025/icse-2025-research-track#Accepted-papers-First-and-Second-Cycle
@@ -593,6 +604,8 @@ fse:
       official_file: 'fse18.bib' # https://dl.acm.org/doi/proceedings/10.1145/3236024 # all paper included
     - year: 2017
       official_file: 'fse17.bib' # https://dl.acm.org/doi/proceedings/10.1145/3106237 # all paper included
+    - year: 2016
+      official_file: 'fse16.bib' # https://dl.acm.org/doi/proceedings/10.1145/2950290 # place fse16.bib in official_cache/ (FSE'16, Seattle)
     - year: 2015
       official_file: 'fse15.bib' # https://dl.acm.org/doi/proceedings/10.1145/2786805 # all paper included
 sosp:
@@ -631,8 +644,12 @@ asplos:
   name: ASPLOS
   category: system
   sites: # https://dl.acm.org/conference/asplos/proceedings
+    - year: 2026
+      official_file: # place these in official_cache/ (held Mar 2026, Pittsburgh; verify volume count)
+        - 'asplos26-1.bib' # https://dl.acm.org/doi/proceedings/10.1145/3760250 (Vol 1)
+        - 'asplos26-2.bib' # https://dl.acm.org/doi/proceedings/10.1145/3779212 (Vol 2)
     - year: 2025
-      official_file: 
+      official_file:
         - 'asplos25-1.bib'
         - 'asplos25-2.bib'
         - 'asplos25-3.bib'

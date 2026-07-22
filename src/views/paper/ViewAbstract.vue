@@ -74,6 +74,7 @@ import Skeleton from 'primevue/skeleton';
 import { usePageTitle } from '@/composables/useI18n';
 import { highlightSegments } from '@/composables/useHighlight';
 import { languageEmitter } from '@/locales';
+import { CDN_DATA_BASE } from '@/service/cdn';
 import paperStatis from '@/assets/data/data-statistics.json';
 
 const { t } = useI18n();
@@ -91,7 +92,7 @@ const loadPaperCollection = async (publication, year) => {
     paperCollection.value = [];
     let fullDataPath;
     if (process.env.NODE_ENV === 'production') {
-        fullDataPath = 'https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/meta_json/' + publication + ' - ' + year + '.json';
+        fullDataPath = `${CDN_DATA_BASE}/meta_json/` + publication + ' - ' + year + '.json';
     } else {
         fullDataPath = '/src/assets/data/meta_json/' + publication + ' - ' + year + '.json';
     }

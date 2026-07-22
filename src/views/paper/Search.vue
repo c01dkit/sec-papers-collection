@@ -112,6 +112,7 @@ import { FilterMatchMode } from '@primevue/core/api';
 import { usePageTitle } from '@/composables/useI18n';
 import { highlightSegments } from '@/composables/useHighlight';
 import { loadFavorites, saveFavorites } from '@/service/SettingsService';
+import { CDN_DATA_BASE } from '@/service/cdn';
 import paperDataQuickView from '@/assets/data/data-quick-view.json';
 import paperStatics from '@/assets/data/data-statistics.json';
 
@@ -191,7 +192,7 @@ async function loadFullData() {
     try {
         let data;
         if (import.meta.env.PROD) {
-            const res = await fetch('https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/data.json');
+            const res = await fetch(`${CDN_DATA_BASE}/data.json`);
             if (res.ok) {
                 data = await res.json();
             }

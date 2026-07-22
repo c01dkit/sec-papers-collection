@@ -1,7 +1,9 @@
+import { CDN_DATA_BASE } from './cdn';
+
 export const AwardService = {
     async getAward() {
         if (import.meta.env.PROD) {
-            const res = await fetch('https://raw.githubusercontent.com/c01dkit/sec-papers-collection/main/src/assets/data/awards.json?v=20260606');
+            const res = await fetch(`${CDN_DATA_BASE}/awards.json?v=20260606`);
             if (!res.ok) {
                 throw new Error(`Failed to fetch awards: ${res.status}`);
             }

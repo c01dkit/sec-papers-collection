@@ -20,16 +20,6 @@ if [ $? -eq 0 ]; then
         exit 1
     fi
     
-    # 检查 assets 目录
-    if [ -d "dist/assets" ]; then
-        echo "✅ assets 目录存在"
-        echo "📁 assets 内容:"
-        ls -la dist/assets/ | head -10
-    else
-        echo "❌ assets 目录缺失"
-        exit 1
-    fi
-    
     # 部署到 GitHub Pages
     echo "🚀 开始部署到 GitHub Pages..."
     npm run deploy
