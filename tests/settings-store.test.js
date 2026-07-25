@@ -124,10 +124,15 @@ describe('并发写：读—改—写必须串行，不能丢更新', () => {
     // 老用户的库：深色关、强调色是已废弃的 green
     await s.__writeRaw('app', { theme: 'green', darkTheme: false, rememberDarkMode: true });
 
-    // 水合在飞的同时用户点了深色 —— 这个窗口几乎每次加载都存在
-    const h = s.hydrateSettings();
+    // **调用顺序很关键**：必须先发点击、后发水合。
+    // 反过来写（先水合后点击）的话，水合的写入会先落盘、点击的写入后落盘，
+    // 正确结果是靠顺序碰巧得到的 —— 即使把 serialize 拆掉这条也照样绿，
+    // 那就是一条检测不到竞态的测试（实测直通状态下 10/10 全过）。
+    // 先点击后水合才会让水合的旧快照最后落盘、盖掉用户的改动，
+    // 也正是要防的那个真实场景（实测直通状态下 5/5 全红）。
     const c = s.patchSettings({ darkTheme: true, rememberDarkMode: true });
-    await Promise.all([h, c]);
+    const h = s.hydrateSettings();
+    await Promise.all([c, h]);
 
     const got = await s.getSettings();
     expect(got.darkTheme).toBe(true);   // 用户的点击必须活下来
