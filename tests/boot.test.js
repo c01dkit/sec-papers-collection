@@ -118,11 +118,42 @@ describe('boot 分派', () => {
     expect(init).toHaveBeenCalledTimes(2);
   });
 
-  it('用例之间不残留监听器（隔离自检）', async () => {
+  // 这两条用例共同构成一条断言，必须相邻且按声明顺序执行（vitest 默认如此）。
+  // 这是有意的用例间耦合 —— 跨用例污染只能跨用例观测。
+  //
+  // 为什么不能用「数一下 pageLoadListeners 的长度」来守：pageLoadListeners
+  // 每个 beforeEach 都被清空，而每个用例只调一次 freshBoot()，所以它恒等于
+  // 1 —— 不管 afterEach 的摘除有没有生效。那种断言是同义反复，读起来像覆盖率、
+  // 实际什么都不守，比没有测试更糟。
+  //
+  // 真正能观测到跨用例污染的办法是：前一个用例留下一个探针 init，后一个用例
+  // 挂同样的 page 名再派发一次，断言探针没有被再调用。若 afterEach 的摘除被
+  // 删掉，前一个模块实例的 boot 会跟着跑、命中它自己 PAGES 里的探针，
+  // 计数变 2，测试当场红。
+  let leakProbe;
+
+  it('留下一个探针 init（与下一条共同构成隔离断言）', async () => {
+    const { registerPage } = await freshBoot();
+    leakProbe = vi.fn();
+    registerPage('leak-probe', leakProbe);
+    mountPage('leak-probe');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(leakProbe).toHaveBeenCalledTimes(1);
+  });
+
+  it('上一个用例的监听器不会在本用例里被触发（隔离断言）', async () => {
+    // 新模块实例的 PAGES 是空的，没有 leak-probe。
     await freshBoot();
-    // beforeEach 装的 spy 记录了本用例内新增的 astro:page-load 监听器；
-    // 每个用例只 freshBoot 一次，因此这里应当恰好是 1 —— 若变成 2 以上，
-    // 说明 afterEach 的摘除失效、前面用例的监听器漏了过来。
-    expect(pageLoadListeners).toHaveLength(1);
+    // 故意挂上一个用例的 page 名：若上一个模块实例的监听器还挂在 document 上，
+    // 它的 boot 会跑起来并在自己的 PAGES 里命中 leak-probe，把计数推到 2。
+    mountPage('leak-probe');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(leakProbe).toHaveBeenCalledTimes(1); // 仍是 1 —— 没有被第二次调用
   });
 });
