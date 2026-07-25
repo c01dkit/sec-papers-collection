@@ -23,13 +23,25 @@ describe('t()', () => {
     expect(() => t('zh', 'nope.not.here')).toThrow(/missing key/);
   });
 
-  it('未知语言回落到默认语言', () => {
+  it('未知语言码整体回落到默认语言的文案树', () => {
     expect(t('fr', 'menu.search')).toBe(t('zh', 'menu.search'));
+  });
+
+  it('已知语言里查不到的 key 一律抛错，不跨语言借文案', () => {
+    // 这一条守的是「en 缺 key 时不能悄悄返回中文」。
+    // 注意：因为下面的漂移守卫保证两语 key 集合恒等，单测里无法构造出
+    // 「zh 有、en 无」的真实情形，所以这里只能验证不存在的 key 会抛错。
+    // 真正兜住不对称回退的是两道防线：漂移守卫（npm test）+ astro build 本身
+    // ——每个页面都会对两种语言各调一次 t()，任一语言漏 key 都会让构建失败。
+    expect(() => t('en', 'menu.__nonexistent__')).toThrow(/missing key/);
+    expect(() => t('zh', 'menu.__nonexistent__')).toThrow(/missing key/);
   });
 });
 
 describe('文案漂移守卫', () => {
   it('zh 与 en 的 key 集合完全一致', () => {
+    // 这条一红意味着 astro build 也会红：t() 不做跨语言回退，
+    // 漏掉的那一侧会在预渲染时抛错。
     const kz = collectKeys(zh).sort();
     const ke = collectKeys(en).sort();
     expect(kz.filter((k) => !ke.includes(k))).toEqual([]);   // zh 独有
