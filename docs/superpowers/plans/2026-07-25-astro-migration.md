@@ -7853,6 +7853,42 @@ git rm -f build-and-deploy.sh
 
 `tests/changelog.test.js` 的「日期降序」与「两语逐条对齐」会自动验证插入是否正确。
 
+- [ ] **Step 4b: 清掉没人消费的孤儿文案 key**
+
+Vue 时代的文案表有 165 个 key，删掉 `src/views/` 与 `src/components/dashboard/` 之后，其中相当一部分再没有任何消费方（`configurator.*`、`nav.*`、`test.*`、`dashboard.*`、`papers.*` 等整组，以及 `menu.main`/`menu.home` 这类只在旧侧边栏分组里用过的条目）。留着它们会让文案表越读越像考古现场，也会让「漂移守卫」在两语间维护一堆死条目。
+
+已知的一处重复必须处理：`notFound.message` 与 `notFound.backHome` 是 Vue 时代遗留，Task 6 新增的 `notFound.desc` 与 `notFound.back` 是同一语义的新键（Task 6 按「只增不改」的约束没有动旧键，处理正确）。旧的两个已无消费方，在此删除。
+
+先跑这个脚本列出孤儿，**不要凭印象删**：
+
+```bash
+python3 - <<'PY'
+import json, re, subprocess, sys
+
+keys = set()
+def walk(o, p=''):
+    if isinstance(o, dict):
+        for k, v in o.items(): walk(v, f'{p}.{k}' if p else k)
+    else: keys.add(p)
+walk(json.load(open('src/i18n/zh.json')))
+
+# 收集 src/ 下所有源码文本（排除文案表自身）
+src = subprocess.run(
+    ['grep', '-rh', '-oE', r"'[a-zA-Z][a-zA-Z0-9_.]*'", 'src/',
+     '--include=*.astro', '--include=*.js', '--include=*.ts'],
+    capture_output=True, text=True).stdout
+used = set(m.strip("'") for m in src.split('\n') if m)
+
+orphans = sorted(k for k in keys if k not in used)
+print(f'共 {len(keys)} 个 key，其中 {len(orphans)} 个无消费方：')
+for k in orphans: print('  ', k)
+PY
+```
+
+判断规则：脚本报出的孤儿里，**凡是本计划任何页面都不会用到的，删掉两语对应条目**。拿不准的留着（宁可多留一条死文案，也不要删掉某个页面真在用的 key —— `t()` 缺 key 会让构建失败，所以删错了会立刻暴露，但那是在你已经提交之后）。删完必须跑 `npm test`（漂移守卫会确认两语仍然对齐）与 `npm run build`（任何被误删的 key 都会让构建当场失败）。
+
+把删掉的 key 数量与清单写进报告。
+
 - [ ] **Step 5: 更新 CLAUDE.md**
 
 替换 `### Frontend (JavaScript/Vue)` 整节与 `### Vue frontend (src/)` 整节：
@@ -8005,7 +8041,12 @@ git merge --no-ff feat/astro -m "feat: 用 Astro 重写站点（0.4.0）
 npm run deploy:build
 ```
 
-部署后立刻在真实域名上抽查：`https://sec.c01dkit.com/`（分发）、`/zh/search/`（CDN 真实拉取 `data.json`）、一个旧链接、以及 `/zh/abstract/` 选一届（CDN 真实拉取 `meta_json`）—— 这三处是 `preview` 覆盖不到的，因为本地走的是开发中间件而非 CDN。
+部署后立刻在真实域名上抽查，这几处是 `preview` 覆盖不到的：
+
+1. `https://sec.c01dkit.com/` —— 语言分发。
+2. `/zh/search/` —— 从 CDN 真实拉取 `data.json`（本地走的是开发中间件）。
+3. `/zh/abstract/` 选一届 —— 从 CDN 真实拉取 `meta_json`。
+4. **旧链接的两种形态都要试**：`/paper/view-abstract`（**不带**尾斜杠）与 `/paper/view-abstract/`（带尾斜杠）。这条单列出来是因为改版前的 URL 是**不带**尾斜杠的（旧 `vercel.json` 设了 `trailingSlash: false`），而书签和搜索引擎收录的正是那个形态；新站 `trailingSlash: 'always'` 产出的是 `dist/paper/view-abstract/index.html`。GitHub Pages 对目录索引会自动 301 到带斜杠的形态，理论上没问题，但这是**部署环境特有**的行为，`astro preview` 复现不了（Task 6 的实现者已确认本地这条验不了）。真实域名上是唯一能确认的地方 —— 如果这里不通，所有历史链接都会断，那是本次迁移最不该出的错。
 
 ---
 
