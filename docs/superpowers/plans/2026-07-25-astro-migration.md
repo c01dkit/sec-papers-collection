@@ -2240,8 +2240,8 @@ more-sites→sites。
   - `buildTotalTrend(stats, years) => Array<{year: string, count: number}>`
   - `toSparkline(points, opts?) => { max, coords, line, area }`
   - `parseDeadlineDate(raw) => Date | null`
-  - `flattenDeadlines(timeline) => Array<{publication, cycle, stage, iso, date}>`
-  - `pickUpcomingDeadlines(timeline, today, want?) => { items: Item[], placeholder: boolean }`，`Item = { publication, cycle, stage, iso, daysLeft, past }`
+  - `flattenDeadlines(timeline) => Array<{publication, cycle, stage, dateText, date}>`
+  - `pickUpcomingDeadlines(timeline, today, want?) => { items: Item[], placeholder: boolean }`，`Item = { publication, cycle, stage, dateText, daysLeft: number|null, past }`（`daysLeft` 在 `past` 为真时是 `null`）
   - `totalPapers(conf)`、`groupByAward(conf)`、`groupByYear(conf)`、`pickHighlights(awards, n?)`
 
 - [ ] **Step 1: 写 coverage 的失败测试**
@@ -2341,7 +2341,7 @@ function buildGroup(byPY, names, years) {
       const cells = years.map((y) => (counts[y] ? { year: y, count: counts[y], alpha: 0 } : null));
       const preYears = Object.keys(counts)
         .filter((y) => Number(y) < firstYear)
-        .sort();
+        .sort((a, b) => Number(a) - Number(b));   // 数值排序：别依赖年份都是四位数
       const preTotal = preYears.reduce((sum, y) => sum + counts[y], 0);
       return { publication: name, cells, preYears, preTotal };
     });
@@ -2507,7 +2507,7 @@ describe('flattenDeadlines', () => {
       publication: 'NDSS 2027',
       cycle: 'Cycle 1',
       stage: 'Abstract registration',
-      iso: '2026-07-30',
+      dateText: '2026-07-30',
     });
   });
 
@@ -2526,7 +2526,7 @@ describe('pickUpcomingDeadlines', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 6, 25));   // 2026-07-25
     expect(r.placeholder).toBe(false);
     expect(r.items).toHaveLength(3);
-    expect(r.items.map((i) => i.iso)).toEqual(['2026-07-30', '2026-08-06', '2026-09-20']);
+    expect(r.items.map((i) => i.dateText)).toEqual(['2026-07-30', '2026-08-06', '2026-09-20']);
     expect(r.items.every((i) => i.past === false)).toBe(true);
   });
 
@@ -2538,7 +2538,7 @@ describe('pickUpcomingDeadlines', () => {
 
   it('当天的截止日算未来，天数为 0', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 6, 30));
-    expect(r.items[0].iso).toBe('2026-07-30');
+    expect(r.items[0].dateText).toBe('2026-07-30');
     expect(r.items[0].daysLeft).toBe(0);
     expect(r.items[0].past).toBe(false);
   });
@@ -2547,10 +2547,41 @@ describe('pickUpcomingDeadlines', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 10, 1));   // 2026-11-01
     expect(r.placeholder).toBe(false);
     expect(r.items).toHaveLength(3);
-    expect(r.items[0]).toMatchObject({ iso: '2026-11-14', past: false });
+    expect(r.items[0]).toMatchObject({ dateText: '2026-11-14', past: false });
     // 补位的按「最近过期的排前面」
-    expect(r.items[1]).toMatchObject({ iso: '2026-09-20', past: true });
-    expect(r.items[2]).toMatchObject({ iso: '2026-08-06', past: true });
+    expect(r.items[1]).toMatchObject({ dateText: '2026-09-20', past: true });
+    expect(r.items[2]).toMatchObject({ dateText: '2026-08-06', past: true });
+  });
+
+  it('补位的已过期项 daysLeft 为 null，不给负数', () => {
+    // 这条守的是本模块存在的理由。上一条测试走的正是这段代码，却只用
+    // toMatchObject 检了 dateText 与 past，从没碰 daysLeft ——
+    // 于是「补位项返回 daysLeft: -42」这个缺陷在 37 个用例下全绿通过。
+    const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 10, 1));
+    expect(r.items[1].daysLeft).toBeNull();
+    expect(r.items[2].daysLeft).toBeNull();
+    // 未来项照旧给数字
+    expect(typeof r.items[0].daysLeft).toBe('number');
+  });
+
+  it('任何日期下都不会返回负的 daysLeft（扫一遍整条时间线）', () => {
+    // 性质测试而非单点测试：拿 FIXTURE 里每一个截止日各自前后一天当「今天」
+    // 跑一遍，任何返回项的 daysLeft 要么是非负数，要么是 null。
+    const days = flattenDeadlines(FIXTURE).map((d) => d.date);
+    const probes = [];
+    for (const d of days) {
+      for (const delta of [-1, 0, 1]) {
+        probes.push(new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta));
+      }
+    }
+    for (const today of probes) {
+      for (const item of pickUpcomingDeadlines(FIXTURE, today, 3).items) {
+        expect(
+          item.daysLeft === null || item.daysLeft >= 0,
+          `today=${today.toDateString()} item=${item.dateText} daysLeft=${item.daysLeft}`
+        ).toBe(true);
+      }
+    }
   });
 
   it('一条未来的都没有时给 placeholder，不返回负天数', () => {
@@ -2604,7 +2635,7 @@ export function flattenDeadlines(timeline) {
           publication: pub.publication,
           cycle: cycle.name,
           stage: ddl.stage,
-          iso: ddl.date,
+          dateText: ddl.date,   // 原始字符串，可能是区间；可计算的日期在 date 里
           date,
         });
       }
@@ -2635,8 +2666,15 @@ export function pickUpcomingDeadlines(timeline, today, want = 3) {
     publication: d.publication,
     cycle: d.cycle,
     stage: d.stage,
-    iso: d.iso,
-    daysLeft: Math.round((d.date - base) / dayMs),
+    // dateText 是给人看的原始字符串，区间日期会保留成 '2026-05-01 ~ 2026-05-10'。
+    // 刻意不叫 iso：它并不总是可被 new Date() 解析的 ISO 串，叫 iso 会诱使
+    // 消费方直接 new Date(it.iso)。要拿可计算的日期请用 parseDeadlineDate()。
+    dateText: d.dateText,
+    // 已过期的项不给天数。曾经这里对过期项也算差值，于是会返回 daysLeft: -13
+    // 这样的值 —— 字段名叫 daysLeft，消费方极容易直接渲染成「还剩 -13 天」，
+    // 而那正是这个模块存在的理由。给 null 能让误用当场显形，
+    // 而不是安静地把一个负数印到首页上。
+    daysLeft: isPast ? null : Math.round((d.date - base) / dayMs),
     past: isPast,
   });
 
@@ -3582,10 +3620,10 @@ const { lang, picked } = Astro.props;
     <div class="ph">{t(lang, 'home.f4Placeholder')}</div>
   ) : (
     picked.items.map((it) => (
-      <div class:list={['row', { past: it.past }]} data-ddl={it.iso}>
+      <div class:list={['row', { past: it.past }]} data-ddl={it.dateText}>
         <div class="who">
           <div class="pub">{it.publication} <span class="stage">· {it.stage}</span></div>
-          <div class="date">{it.iso}</div>
+          <div class="date">{it.dateText}</div>
         </div>
         <div class="srf num">
           {it.past ? (
@@ -3620,10 +3658,17 @@ const { lang, picked } = Astro.props;
 - [ ] **Step 6: 实现 home-countdown.js**
 
 ```js
+import { parseDeadlineDate } from '@/lib/deadlines.js';
+
 /**
  * 首页倒计时的客户端刷新。构建时嵌入的天数在部署当天正确，之后会过期；
  * 这里按访客本地时区重算，并在所有截止日都已过去时切成占位文案 ——
  * 否则数据断更后首页会显示「还剩 −30 天」。
+ *
+ * 日期解析**必须复用 parseDeadlineDate**，不要在这里自己写正则。区间日期
+ * （'2026-05-01 ~ 2026-05-10'）该取的是 ~ 之后的结束日；早先这里用
+ * /(\d{4})-(\d{2})-(\d{2})/ 取第一个匹配，于是构建时用结束日、客户端用开始日，
+ * 同一条截止日在两处算出的天数不一样。
  */
 export function initCountdown() {
   const box = document.querySelector('[data-countdown]');
@@ -3638,9 +3683,8 @@ export function initCountdown() {
   let anyFuture = false;
 
   for (const row of rows) {
-    const m = row.dataset.ddl.match(/(\d{4})-(\d{2})-(\d{2})/);
-    if (!m) continue;
-    const date = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    const date = parseDeadlineDate(row.dataset.ddl);
+    if (!date) continue;
     const days = Math.round((date - base) / 86400000);
 
     const slot = row.querySelector('[data-days]');
