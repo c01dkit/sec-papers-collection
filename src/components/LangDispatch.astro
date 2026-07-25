@@ -1,0 +1,51 @@
+---
+import { t } from '@/i18n/index.js';
+const { target = '' } = Astro.props;
+const suffix = target ? `${target}/` : '';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t('zh', 'common.title')}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="alternate" hreflang="zh-CN" href={`https://sec.c01dkit.com/zh/${suffix}`} />
+    <link rel="alternate" hreflang="en" href={`https://sec.c01dkit.com/en/${suffix}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://sec.c01dkit.com/en/${suffix}`} />
+    <noscript><meta http-equiv="refresh" content={`0; url=/en/${suffix}`} /></noscript>
+    <script is:inline define:vars={{ suffix }}>
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem('spc-lang');
+        } catch (e) {}
+        var lang =
+          stored === 'zh' || stored === 'en'
+            ? stored
+            : String(navigator.language || '').toLowerCase().indexOf('zh') === 0
+              ? 'zh'
+              : 'en';
+        // 必须用 replace：用 href 会把本页留在历史里，后退键会在分发页与目标页之间弹跳
+        location.replace('/' + lang + '/' + suffix);
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0; min-height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        background: #fbfaf8; color: #8c7f66;
+        font-family: Georgia, 'Songti SC', serif; font-size: 15px;
+      }
+      @media (prefers-color-scheme: dark) { body { background: #14120f; color: #857a69; } }
+    </style>
+  </head>
+  <body>
+    <p>安全四大汇总</p>
+    <p style="position:absolute;left:-9999px">
+      <a href={`/zh/${suffix}`}>中文</a> / <a href={`/en/${suffix}`}>English</a>
+    </p>
+  </body>
+</html>

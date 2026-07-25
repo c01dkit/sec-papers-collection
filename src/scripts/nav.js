@@ -60,4 +60,17 @@ export function initNav() {
     btn?.addEventListener('click', blurOnMouse);
     menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', blurOnMouse));
   }
+
+  // 语言切换时记住选择，供下次访问 / 时分发
+  const langLink = document.querySelector('a[data-lang-target]');
+  if (langLink && !langLink.dataset.bound) {
+    langLink.dataset.bound = '1';
+    langLink.addEventListener('click', () => {
+      try {
+        localStorage.setItem('spc-lang', langLink.dataset.langTarget);
+      } catch {
+        /* 隐私模式下忽略 */
+      }
+    });
+  }
 }

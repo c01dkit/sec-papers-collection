@@ -1,0 +1,57 @@
+---
+import { t } from '@/i18n/index.js';
+---
+
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-accent="slate">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 · 安全四大汇总</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.ico" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        var t;
+        try { t = localStorage.getItem('spc-theme'); } catch (e) {}
+        d.dataset.theme = t === 'dark' || t === 'light' ? t
+          : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="wrap box">
+      <p class="kicker">404</p>
+      <h1 class="srf" data-i18n-zh>{t('zh', 'notFound.title')}</h1>
+      <h1 class="srf" data-i18n-en hidden>{t('en', 'notFound.title')}</h1>
+      <p data-i18n-zh>{t('zh', 'notFound.desc')}</p>
+      <p data-i18n-en hidden>{t('en', 'notFound.desc')}</p>
+      <p>
+        <a class="lnk" href="/zh/" data-i18n-zh>{t('zh', 'notFound.back')}</a>
+        <a class="lnk" href="/en/" data-i18n-en hidden>{t('en', 'notFound.back')}</a>
+      </p>
+    </main>
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('spc-lang'); } catch (e) {}
+        var lang = stored === 'zh' || stored === 'en' ? stored
+          : String(navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+        var hide = lang === 'zh' ? 'en' : 'zh';
+        document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function (el) { el.hidden = false; });
+        document.querySelectorAll('[data-i18n-' + hide + ']').forEach(function (el) { el.hidden = true; });
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/tokens.css';
+  @import '../styles/global.css';
+  .box { padding-block: clamp(5rem, 18vh, 9rem); }
+  .box .kicker { margin-bottom: 1rem; }
+  .box h1 { margin-bottom: 0.9rem; }
+  .box p { color: var(--muted); max-width: 32rem; }
+</style>

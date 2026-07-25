@@ -48,6 +48,10 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           d.classList.add('reveal-on');
         }
+        try {
+          var cur = location.pathname.match(/^\/(zh|en)\//);
+          if (cur) localStorage.setItem('spc-lang', cur[1]);
+        } catch (e) {}
       })();
 
       // 软导航换入新 document 时把主题状态带过去，否则每次跳转都闪回默认值
