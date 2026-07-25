@@ -22,46 +22,67 @@ function apply(theme, accent) {
   window.__spcThemeTimer = setTimeout(() => el.classList.remove('theme-anim'), 500);
 }
 
-// 持久化：localStorage 供下次首绘同步读取，IndexedDB 供设置页读取。
-// settings-store 在 Task 10 补上；此处动态引入以免它还不存在时报错。
+// 唯一写入口是 patchSettings，镜像同步在它内部完成 —— 别在这里直接写 localStorage
 async function persist(patch) {
   try {
-    if (patch.theme) localStorage.setItem(LS_THEME, patch.theme);
-    if (patch.accent) localStorage.setItem(LS_ACCENT, patch.accent);
-  } catch {
-    /* 隐私模式下 localStorage 可能抛错，忽略 */
-  }
-  try {
-    // settings-store.js 在 Task 10 之前不存在于磁盘上，这个动态 import 注定
-    // 404，要靠下面的 catch 接住。字面量路径会被静态分析提前解析，且实测两条
-    // 流水线的行为不一致：
-    //   - astro build（Rolldown 打包浏览器产物）：字面量 + 未加 @vite-ignore
-    //     时，解析不到直接 UNRESOLVED_IMPORT 构建失败——发生在 try/catch 能起
-    //     作用之前；加 /* @vite-ignore */ 能让它跳过静态解析、留到运行时。
-    //   - vitest 在 jsdom environment 下（比如本文件被 tests/boot.test.js 经
-    //     boot.js 间接 import 时）：同一处哪怕加了 /* @vite-ignore */ 依然会在
-    //     transform 阶段报一模一样的 "Failed to resolve import" 错误；换成
-    //     node environment（如 tests/theme.test.js）则不会。这是本仓库里实测
-    //     到的 Vite jsdom-environment 转换与 Rolldown 生产打包之间的差异，
-    //     不是我们能改的第三方行为。
-    // 用变量装着路径可以在两条流水线里都稳定生效：变量不是字符串字面量，
-    // 两边的静态分析都无法提前解析，因此都会把它当成真正的运行时动态 import
-    // 留到实际执行到这一行才去 fetch，失败了正常落进下面的 catch。
-    // Task 10 建好 settings-store.js 之后，这个变量写法可以改回字面量，
-    // 好让 Vite 恢复对该路径的静态检查（写错路径能被发现）。
-    const settingsStorePath = './settings-store.js';
-    const mod = await import(/* @vite-ignore */ settingsStorePath);
+    const mod = await import('./settings-store.js');
     await mod.patchSettings({
-      ...(patch.theme ? { darkTheme: patch.theme === 'dark' } : {}),
-      ...(patch.accent ? { theme: patch.accent } : {}),
+      ...(patch.theme ? { darkTheme: patch.theme === 'dark', rememberDarkMode: true } : {}),
+      ...(patch.accent ? { theme: patch.accent, rememberTheme: true } : {}),
     });
-  } catch {
-    /* settings-store 不可用时静默降级，localStorage 已足够维持体验 */
+  } catch (err) {
+    console.warn('[theme] 持久化失败，本次切换仅本页有效', err);
+  }
+}
+
+// 只在整个页面会话里跑一次：软导航会重复调 initTheme()，但水合不需要
+// （也不该）每次都重新读库 —— 数据不会在同一个 tab 里凭空变化。
+let hydrated = false;
+
+/**
+ * 把 IndexedDB 里的持久设置水合到本页。老用户的浏览器里只有 IndexedDB、
+ * 没有 localStorage 镜像（旧站从不写 spc-* 键），预绘制脚本读不到镜像时
+ * 只能跟随系统偏好——不补这一步，他们存的主题会在首访时被无声忽略。
+ *
+ * 只在对应的 remember 开关打开、且水合结果与当前已渲染的值不同时才应用，
+ * 避免没必要的 theme-anim 过渡（多数情况下镜像早已和库一致）。
+ */
+async function hydrateAndApply() {
+  if (hydrated) return;
+  hydrated = true;
+  try {
+    const mod = await import('./settings-store.js');
+    const settings = await mod.hydrateSettings();
+    const el = document.documentElement;
+    let theme = el.dataset.theme;
+    let accent = el.dataset.accent;
+    let changed = false;
+
+    if (settings.rememberDarkMode) {
+      const wanted = settings.darkTheme ? 'dark' : 'light';
+      if (wanted !== theme) {
+        theme = wanted;
+        changed = true;
+      }
+    }
+    if (settings.rememberTheme) {
+      const wanted = settings.theme;
+      if (wanted !== accent) {
+        accent = wanted;
+        changed = true;
+      }
+    }
+
+    if (changed) apply(theme, accent);
+  } catch (err) {
+    console.warn('[theme] 水合失败，本页沿用预绘制主题', err);
   }
 }
 
 export function initTheme() {
   const el = document.documentElement;
+
+  hydrateAndApply();
 
   const themeBtn = document.getElementById('themeToggle');
   if (themeBtn && !themeBtn.dataset.bound) {

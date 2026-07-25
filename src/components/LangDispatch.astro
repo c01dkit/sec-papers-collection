@@ -18,10 +18,10 @@ const suffix = target ? `${target}/` : '';
     <noscript><meta http-equiv="refresh" content={`0; url=/en/${suffix}`} /></noscript>
     <script is:inline define:vars={{ suffix }}>
       (function () {
+        var remember = null;
+        try { remember = localStorage.getItem('spc-remember-lang'); } catch (e) {}
         var stored = null;
-        try {
-          stored = localStorage.getItem('spc-lang');
-        } catch (e) {}
+        if (remember !== '0') { try { stored = localStorage.getItem('spc-lang'); } catch (e) {} }
         var lang =
           stored === 'zh' || stored === 'en'
             ? stored

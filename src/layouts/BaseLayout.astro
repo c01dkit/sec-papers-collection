@@ -32,22 +32,23 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
       (function () {
         var d = document.documentElement;
         var ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
-        var t, a;
-        try {
-          t = localStorage.getItem('spc-theme');
-          a = localStorage.getItem('spc-accent');
-        } catch (e) {}
+        var g = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+        // remember 关闭时忽略上次选择，跟随系统偏好
+        var t = g('spc-remember-dark') === '0' ? null : g('spc-theme');
         d.dataset.theme =
           t === 'dark' || t === 'light'
             ? t
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light';
+            : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        var a = g('spc-remember-accent') === '0' ? null : g('spc-accent');
         d.dataset.accent = ACCENTS.indexOf(a) >= 0 ? a : 'slate';
+
         // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           d.classList.add('reveal-on');
         }
+
         try {
           var cur = location.pathname.match(/^\/(zh|en)\//);
           if (cur) localStorage.setItem('spc-lang', cur[1]);
