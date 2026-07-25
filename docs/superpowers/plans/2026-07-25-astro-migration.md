@@ -3159,8 +3159,8 @@ const preLabel = (preYears) =>
         <h2 class="srf">{t(lang, 'home.matrixTitle')}</h2>
       </div>
       <ul class="legend">
-        <li><i style={`background: rgb(${'var(--mx-top-rgb)'} / 0.85)`}></i>{t(lang, 'home.matrixLegendTop')}</li>
-        <li><i style={`background: rgb(${'var(--mx-se-rgb)'} / 0.85)`}></i>{t(lang, 'home.matrixLegendSe')}</li>
+        <li><i style="background: rgb(var(--mx-top-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendTop')}</li>
+        <li><i style="background: rgb(var(--mx-se-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendSe')}</li>
         <li><i style="background: var(--mx-empty)"></i>{t(lang, 'home.matrixLegendEmpty')}</li>
       </ul>
     </div>
