@@ -1630,7 +1630,6 @@ export function initNav() {
 ---
 import { t } from '@/i18n/index.js';
 const { lang } = Astro.props;
-const year = new Date().getFullYear();
 ---
 
 <footer class="ft">
