@@ -3429,7 +3429,9 @@ const { kicker, title, body, linkLabel, href, flip = false, tint = false } = Ast
 ---
 
 <section class:list={['band', { 'band--tint': tint }]}>
-  <div class="wrap fb" class:list={['wrap', 'fb', { flip }]}>
+  <!-- 只用 class:list，别再叠一个静态 class —— 两者同时写会渲染出
+       class="wrap fb wrap fb"（重复的类名对 CSS 无害，但是噪音）。 -->
+  <div class:list={['wrap', 'fb', { flip }]}>
     <div class="txt">
       <div class="kicker" data-reveal>{kicker}</div>
       <h2 class="srf" data-reveal>{title}</h2>
@@ -3956,6 +3958,8 @@ const highlights = pickHighlights(awards, 2);
 ```
 
 - [ ] **Step 10: 补 f1Hits 文案并注册倒计时**
+
+注意：本任务用到的 `home.f1Kicker` … `home.closingCta` 等约 35 个 key，**Task 8 已经一次性加齐了**（那一步贴的是完整的 `home` 文案块）。这里真正缺的只有 `f1Hits` 一条。别去重复添加已有的 key，也别因为「看起来该加一批」而把已有条目重写一遍。
 
 ```json
 // zh.json home 内追加
