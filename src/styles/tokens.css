@@ -1,0 +1,75 @@
+/* ── 语义色：明 ───────────────────────────────────────────── */
+html[data-theme='light'] {
+  --bg: #fbfaf8;
+  --band: #f5f2eb;
+  --panel: #fbfaf8;
+  --ink: #17150f;
+  --muted: #5d5648;
+  --faint: #8c7f66;
+  --hairline: #e3ded4;
+  --hairline-soft: #f0ece3;
+  --hl-bg: #e8dfc8;
+  --gold: #b8973f;
+  --inverse-bg: #17150f;
+  --inverse-ink: #f5f2eb;
+  --inverse-muted: #a89d86;
+  --inverse-hairline: #332f26;
+}
+
+/* ── 语义色：暗（暖墨黑，不是纯黑，才接得住纸感）─────────── */
+html[data-theme='dark'] {
+  --bg: #14120f;
+  --band: #1b1815;
+  --panel: #191614;
+  --ink: #f0ebe2;
+  --muted: #b3a898;
+  --faint: #857a69;
+  --hairline: #302b24;
+  --hairline-soft: #221e19;
+  --hl-bg: #4a3f20;
+  --gold: #cfae5c;
+  --inverse-bg: #f0ebe2;
+  --inverse-ink: #17150f;
+  --inverse-muted: #5d5648;
+  --inverse-hairline: #d6cfc2;
+}
+
+/* ── 强调色：4 组 × 明暗。深色底上需要更亮的一版才不糊 ───── */
+html[data-theme='light'][data-accent='slate']   { --accent: #2f4858; --accent-soft: #a8bcc7; }
+html[data-theme='light'][data-accent='indigo']  { --accent: #3a3f7a; --accent-soft: #b0b3d8; }
+html[data-theme='light'][data-accent='oxblood'] { --accent: #7d3038; --accent-soft: #d3aaae; }
+html[data-theme='light'][data-accent='pine']    { --accent: #2f5744; --accent-soft: #a6c4b5; }
+
+html[data-theme='dark'][data-accent='slate']    { --accent: #7fa8bd; --accent-soft: #3d5b6d; }
+html[data-theme='dark'][data-accent='indigo']   { --accent: #9aa0dd; --accent-soft: #464a80; }
+html[data-theme='dark'][data-accent='oxblood']  { --accent: #d9868f; --accent-soft: #7a3f46; }
+html[data-theme='dark'][data-accent='pine']     { --accent: #83bda1; --accent-soft: #3a6350; }
+
+/* ── 版式与间距 ──────────────────────────────────────────── */
+:root {
+  --font-sans: 'Inter var', ui-sans-serif, system-ui, -apple-system, 'Noto Sans SC', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', 'Songti SC', 'Noto Serif SC', serif;
+
+  --fs-display: clamp(2rem, 1.4rem + 2.6vw, 2.85rem);
+  --fs-h1: clamp(1.5rem, 1.2rem + 1.2vw, 1.95rem);
+  --fs-h2: 1.5rem;
+  --fs-h3: 1.125rem;
+  --fs-body: 0.9375rem;
+  --fs-small: 0.8125rem;
+  --fs-kicker: 0.6875rem;
+
+  --wrap-max: 1120px;
+  --wrap-pad: clamp(1.1rem, 3vw, 2.15rem);
+  --sp-band: clamp(2.6rem, 5vw, 3.5rem);
+  --sp-gap: clamp(1.8rem, 4vw, 2.9rem);
+
+  --radius: 2px;
+  --dur: 0.22s;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* 主题切换时的短暂过渡；不加在 * 上以免拖慢首绘 */
+html.theme-anim,
+html.theme-anim body {
+  transition: background-color 0.45s var(--ease), color 0.45s var(--ease);
+}

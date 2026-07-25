@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url('/fonts/Inter-roman.var.woff2') format('woff2');
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.02em; margin: 0; }
+h1 { font-size: var(--fs-h1); line-height: 1.18; }
+h2 { font-size: var(--fs-h2); line-height: 1.24; }
+h3 { font-size: var(--fs-h3); line-height: 1.3; }
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+/* 正文链接：发丝下划线，不用颜色块 */
+a.lnk {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent-soft);
+  padding-bottom: 1px;
+  transition: border-color var(--dur) var(--ease);
+}
+a.lnk:hover { border-bottom-color: var(--accent); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 布局 ────────────────────────────────────────────────── */
+.wrap { max-width: var(--wrap-max); margin-inline: auto; padding-inline: var(--wrap-pad); }
+.band { padding-block: var(--sp-band); border-top: 1px solid var(--hairline); }
+.band--tint { background: var(--band); }
+.band--inverse { background: var(--inverse-bg); color: var(--inverse-ink); }
+
+.panel { background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius); }
+
+.srf { font-family: var(--font-serif); }
+
+.kicker {
+  font-size: var(--fs-kicker);
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.hl { background: var(--hl-bg); color: var(--ink); }
+
+/* ── 滚动淡入 ────────────────────────────────────────────
+   opacity:0 只在 html.reveal-on 下生效，而 reveal-on 由 <head>
+   内联脚本在「允许动效」时才添加。这样无 JS 或开启减少动效时，
+   内容默认可见。反过来写会让无 JS 用户看到白页。            */
+html.reveal-on [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+html.reveal-on [data-reveal].in { opacity: 1; transform: none; }
+
+/* ── 页面转场：整文档淡入淡出 ───────────────────────────── */
+@keyframes spc-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spc-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+::view-transition-old(root) { animation: spc-fade-out var(--dur) var(--ease) both; }
+::view-transition-new(root) { animation: spc-fade-in var(--dur) var(--ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
