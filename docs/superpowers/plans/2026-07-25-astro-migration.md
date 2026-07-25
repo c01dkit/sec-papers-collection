@@ -864,6 +864,14 @@ git commit -m "feat(styles): 学术编辑风设计系统 tokens
 
 ### Task 4: BaseLayout、转场、主题与滚动淡入
 
+> **执行顺序：本任务在 Task 5 之后做。** `BaseLayout.astro` 要 import `TopNav` 与
+> `Footer`，`boot.js` 要 import `nav.js` —— 这三个文件由 Task 5 创建，所以按 4→5
+> 的顺序做的话 Task 4 过不了自己的构建门禁。依赖是单向的（Task 5 不需要 Task 4 的
+> 任何产物），因此只需调换执行顺序，编号不动。
+>
+> 本任务的人工验收同时覆盖 Task 5 的顶栏视觉检查 —— 顶栏要有页面渲染才看得见，
+> 而第一个渲染它的页面就是这里的 BaseLayout。
+
 **Files:**
 - Create: `src/layouts/BaseLayout.astro`
 - Create: `src/layouts/PageLayout.astro`
@@ -1289,7 +1297,7 @@ Expected: 打印 `✓ 主题保持脚本已内联`
 
 Run: `npm run dev`
 
-在浏览器逐项确认：
+**本任务自身的检查**：
 
 1. `/zh/` 与 `/zh/about/` 之间点链接来回跳 → 整页淡入淡出，**不是**白屏闪一下。
 2. 点主题按钮切到深色 → 再跳到 about 页 → **深色保持住，没有闪回浅色**。（这条专门验 `astro:before-swap`）
@@ -1297,6 +1305,14 @@ Run: `npm run dev`
 4. 首页向下滚 → 底部那段文字淡入。
 5. 系统设置里开「减少动效」后刷新 → 所有内容直接可见，不再有淡入。
 6. 浏览器禁用 JS 后刷新 → 文字**全部可见**（验 `reveal-on` 门控写对了方向）。
+
+**顺延自 Task 5 的顶栏检查**（此刻才第一次有页面渲染顶栏）：
+
+7. 顶栏左侧 5 项平铺，右侧依次是 `其他 ▾` `EN` `◈` `◑`，`其他` 左边有一条竖线。
+8. 当前页在核心 5 项里高亮（下划线 + 深色）；软导航到别页后高亮**跟着变**（验不用 `transition:persist` 的收益）。注意本任务的两个临时页是 `/zh/`（home）与 `/zh/about/`（about），`about` 属于 `其他 ▾` 组，所以核心 5 项此时都不该点亮 —— 要验证核心项高亮，临时改一下某个链接指向 `/zh/search/` 看 404 页之前的顶栏状态，或等 Task 6 之后回看。
+9. 悬停 `其他 ▾` 弹出 3 项；点其中一项跳转后，**鼠标移开菜单会收起**（验 `blurOnMouse`）。
+10. 窗口收窄到 860px 以下 → 出现汉堡，点开是竖排菜单，点任一项后自动收起。
+11. 点 `EN` 跳到 `/en/` 对应同名路径（在 `/zh/about/` 点应到 `/en/about/`）。
 
 - [ ] **Step 13: Commit**
 
@@ -1316,6 +1332,14 @@ boot.js 作为唯一启动点，按 <main data-page> 分派并绑在 astro:page-
 ---
 
 ### Task 5: TopNav、Footer 与语言切换
+
+> **执行顺序：本任务在 Task 4 之前做**（编号不变，只是执行次序调换）。原因见 Task 4
+> 开头的说明：Task 4 的 `BaseLayout` 要 import 本任务的 `TopNav`/`Footer`，`boot.js`
+> 要 import 本任务的 `nav.js`。
+>
+> 本任务产出的组件此刻还没有任何页面 import 它们 —— 这是预期的，Astro 不会因为
+> 组件未被使用而报错，`npm test` 与 `npm run build` 照样能过。顶栏长什么样的**视觉
+> 验收顺延到 Task 4**，那时才有页面把它渲染出来。
 
 **Files:**
 - Create: `src/components/TopNav.astro`
@@ -1657,15 +1681,18 @@ Expected: PASS（含文案漂移守卫，确认新加的 5 条两语齐全）
 Run: `npm run build`
 Expected: 成功
 
-- [ ] **Step 10: 人工验收**
+- [ ] **Step 10: 构建验证（视觉验收顺延到 Task 4）**
 
-Run: `npm run dev`
+此刻还没有页面 import 这些组件，所以顶栏在浏览器里看不到 —— 那是预期的，别为了「能看见」而去改某个页面把它塞进去，Task 4 的 `BaseLayout` 才是它的落位处。
 
-1. 顶栏左侧 5 项平铺，右侧依次是 `其他 ▾` `EN` `◈` `◑`，`其他` 左边有一条竖线。
-2. 当前页在核心 5 项里高亮（下划线 + 深色）；软导航到别页后高亮**跟着变**（验不用 `transition:persist` 的收益）。
-3. 悬停 `其他 ▾` 弹出 3 项；点其中一项跳转后，**鼠标移开菜单会收起**（验 `blurOnMouse`）。
-4. 窗口收窄到 860px 以下 → 出现汉堡，点开是竖排菜单，点任一项后自动收起。
-5. 点 `EN` 跳到 `/en/` 对应同名路径（在 `/zh/about/` 点应到 `/en/about/`）。
+Run: `npx vitest run tests/nav-model.test.js tests/i18n.test.js`
+Expected: PASS。其中文案漂移守卫会确认本步新增的 5 条 key（`common.menu`、`common.mainNav`、`common.accentColor`、`footer.author`、`footer.updateNote`）两语齐全。
+
+Run: `npm run build`
+Expected: 成功，零警告。未被引用的组件不会让 Astro 报错。
+
+Run: `npx astro check 2>&1 | tail -5`
+Expected: 不出现指向本任务新建的四个文件的错误（旧 `.vue` 文件的既有噪音属正常）。
 
 - [ ] **Step 11: Commit**
 
