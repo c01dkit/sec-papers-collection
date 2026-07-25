@@ -881,6 +881,7 @@ git commit -m "feat(styles): 学术编辑风设计系统 tokens
 - Create: `src/pages/[lang]/index.astro`（临时占位，Task 8–9 替换为真首页）
 - Create: `src/pages/[lang]/about.astro`（临时占位，Task 18 替换）
 - Create: `tests/theme.test.js`
+- Create: `tests/boot.test.js`
 - Delete: `src/pages/index.astro`（Task 1 的临时页）
 
 **Interfaces:**
@@ -1069,7 +1070,16 @@ import { initNav } from './nav.js';
 
 const PAGES = new Map();
 
-/** 页面脚本用它注册自己的 init；boot 按 <main data-page> 分派。 */
+/**
+ * 页面脚本用它注册自己的 init；boot 按 <main data-page> 分派。
+ *
+ * **必须在模块顶层同步调用**（通过页面里的静态 `<script>` import）。
+ * Astro 保证 `astro:page-load` 在本页所有静态阻塞脚本执行完之后才触发，
+ * 所以顶层调用一定赶得上。反之，若从 `then()`、async 回调或延迟的
+ * 动态 `import()` 里调用，注册可能发生在 boot() 已经分派之后 ——
+ * 下面的 `if (fn)` 会静默跳过，页面的 init 永不执行，既不报错也无警告。
+ * 那种 bug 的表现是「检索页就是不工作」，极难定位。
+ */
 export function registerPage(name, initFn) {
   PAGES.set(name, initFn);
 }
@@ -1096,6 +1106,119 @@ async function boot() {
 // 所以所有 init 必须幂等（用 dataset.bound 守卫）。
 document.addEventListener('astro:page-load', boot);
 ```
+
+- [ ] **Step 6b: 给 boot.js 的分派补测试**
+
+`boot.js` 的分派是后续 13 个任务共用的入口，而它坏掉的方式是**静默的** —— 页面的 `init` 不执行，既不报错也无警告，表现为「某个页面就是不工作」。这条路径能在 jsdom 里直接测，不需要浏览器。
+
+```js
+// tests/boot.test.js
+// @vitest-environment jsdom
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+// boot.js 在模块顶层就绑定了 astro:page-load，所以每个用例都要重置模块，
+// 否则上一个用例注册的页面和监听器会串进来。
+async function freshBoot() {
+  vi.resetModules();
+  return import('@/scripts/boot.js');
+}
+
+function mountPage(name) {
+  document.body.innerHTML =
+    name === null ? '<main></main>' : `<main data-page="${name}"></main>`;
+}
+
+// boot() 是 async 的，事件派发后要把微任务与一轮宏任务都放干
+const settle = () => new Promise((r) => setTimeout(r, 0));
+
+describe('boot 分派', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('data-page 命中已注册页面时，init 被调用一次', async () => {
+    const { registerPage } = await freshBoot();
+    const init = vi.fn();
+    registerPage('search', init);
+    mountPage('search');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(init).toHaveBeenCalledTimes(1);
+  });
+
+  it('只触发匹配的那个页面，不误触其他已注册页面', async () => {
+    const { registerPage } = await freshBoot();
+    const search = vi.fn();
+    const trends = vi.fn();
+    registerPage('search', search);
+    registerPage('trends', trends);
+    mountPage('trends');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(trends).toHaveBeenCalledTimes(1);
+    expect(search).not.toHaveBeenCalled();
+  });
+
+  it('data-page 未注册时不抛错', async () => {
+    await freshBoot();
+    mountPage('nobody-registered-this');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await expect(settle()).resolves.toBeUndefined();
+  });
+
+  it('没有 data-page 属性时不抛错', async () => {
+    await freshBoot();
+    mountPage(null);
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await expect(settle()).resolves.toBeUndefined();
+  });
+
+  it('页面 init 抛错时被兜住并记录，不冒泡成未处理拒绝', async () => {
+    const { registerPage } = await freshBoot();
+    const err = new Error('页面初始化炸了');
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    registerPage('broken', () => {
+      throw err;
+    });
+    mountPage('broken');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(spy).toHaveBeenCalled();
+    // 错误信息里要带上页面名，否则线上排查时看不出是哪个页面
+    expect(spy.mock.calls[0].join(' ')).toContain('broken');
+  });
+
+  it('软导航重复触发时，init 每次都会跑（页面内容已被换掉）', async () => {
+    const { registerPage } = await freshBoot();
+    const init = vi.fn();
+    registerPage('search', init);
+    mountPage('search');
+
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(init).toHaveBeenCalledTimes(2);
+  });
+});
+```
+
+最后一条记录的是一个**有意的**设计点：`boot()` 本身不做幂等，因为软导航后 DOM 是全新的、页面 init 必须重跑；幂等的责任在各页面自己的 `init()` 内部（`dataset.bound` 守卫）。
+
+Run: `npx vitest run tests/boot.test.js`
+Expected: 6 个用例全部通过
 
 - [ ] **Step 7: 实现 src/layouts/BaseLayout.astro**
 
