@@ -8111,6 +8111,8 @@ v0.2.0 的「里程碑 / Milestone」从版本号移到变更项，让版本号�
 **Files:**
 - Create: `src/pages/[lang]/settings.astro`
 - Create: `src/scripts/settings-form.js`
+- Modify: `src/scripts/settings-store.js`（Step 0 前置：`persistent` 改为写-only 语义）
+- Modify: `tests/settings-store.test.js`（Step 0 的新测试）
 - Modify: `src/scripts/boot.js`、`src/i18n/*.json`
 
 **Interfaces:**
@@ -8118,6 +8120,57 @@ v0.2.0 的「里程碑 / Milestone」从版本号移到变更项，让版本号�
 - Produces: `initSettingsForm() => Promise<void>`（幂等）
 
 改动点：删掉两个 LLM 输入框（全站无消费方），主题色从任意调色改为 4 个精选强调色，加一个收藏管理入口。表单**即改即存**，不要「保存」按钮 —— 原实现有保存按钮 + toast，但这些偏好都是即时生效的开关，多一步确认没有意义。
+
+- [ ] **Step 0（前置）：把 `persistent` 改成「写-only」语义**
+
+本页要用 `isPersistent()` 渲染「存储降级」提示，所以先把这个标志的语义收紧，**否则提示会说谎**。
+
+Task 10 的最终审阅发现（那是我在 Task 10 round 4 自己引入的问题，当时已到五轮上限、故记录下来留到这里修）：`idbGet` 的 `onsuccess` 里也设了 `persistent = true`，于是**一次成功的读会把降级标志清掉，而写可能仍在失败**。这不是刁钻情形 —— 浏览器的 `QuotaExceededError` 正是在写入（要增长存储）时抛出、读取既有数据不受影响。所以「读得到、写不进」恰恰是配额耗尽的典型形态。而本页那句提示的意思是「你的偏好保存不了」，一次成功的读对这件事什么都没证明。
+
+改法：`src/scripts/settings-store.js` 里
+
+1. **删掉 `idbGet` 的 `onsuccess` 中那行 `persistent = true;`**（保留它的 `resolve`）。
+2. **删掉 `openDb` 的 `onsuccess` 中那行 `persistent = true;`** —— 连接开得起来同样不证明写得进去。保留同处的 `db.onclose` 处理。
+3. 只保留 `idbPut` 的 `onsuccess` 里那一行。语义随之变成：**只有一次真实写入成功，才认为存储在正常工作**；任何失败仍照旧置 `false`；模块初值 `true` 是「尚无失败证据」的乐观起点。
+4. 把 `persistent` 声明处的说明同步改成这个新语义，并写明为什么读不算证据。
+
+已核对：现有三条恢复测试（`瞬时失败后重试成功`、`连接健康但事务失败后又成功`、`clearFavorites 成功后也能收回标志`）在断言前都经过写操作，所以这个改动**不会让它们变红**。
+
+再补一条测试，锁住新语义：
+
+```js
+  it('只有读成功不足以清掉降级标志 —— 写不进就该一直显示降级', async () => {
+    // 配额耗尽的典型形态就是「读得到、写不进」。设置页那句提示的意思是
+    // 「你的偏好保存不了」，一次成功的读对这件事什么都没证明。
+    const s = await freshStore();
+    await s.patchSettings({ keywords: ['x'] });   // 先确保库里有东西可读
+
+    const realPut = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function () {
+      const req = {};
+      setTimeout(() => req.onerror && req.onerror(), 0);
+      return req;
+    };
+
+    try {
+      await s.patchSettings({ theme: 'pine' });   // 写失败
+      expect(s.isPersistent()).toBe(false);
+
+      // 读是成功的（数据还在），但写仍然坏着 —— 标志必须保持 false
+      await expect(s.getSettings()).resolves.toBeTruthy();
+      expect(s.isPersistent()).toBe(false);
+
+      await expect(s.getFavorites()).resolves.toEqual([]);
+      expect(s.isPersistent()).toBe(false);
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
+  });
+```
+
+顺带把 `idbGet` 那行删掉后遗留的覆盖不对称也补上 —— Task 10 的审阅指出 `idbPut` 那行有 `clearFavorites` 测试单独隔离验证，而 `idbGet` 那行从来没有。删掉之后这个不对称自然消失，无需另加测试。
+
+改完跑 `npx vitest run tests/settings-store.test.js`（应为 29 条）与 `npm run build`。
 
 - [ ] **Step 1: 追加文案**
 
