@@ -12,7 +12,7 @@ function buildGroup(byPY, names, years) {
       const cells = years.map((y) => (counts[y] ? { year: y, count: counts[y], alpha: 0 } : null));
       const preYears = Object.keys(counts)
         .filter((y) => Number(y) < firstYear)
-        .sort();
+        .sort((a, b) => Number(a) - Number(b));   // 数值排序：别依赖年份都是四位数
       const preTotal = preYears.reduce((sum, y) => sum + counts[y], 0);
       return { publication: name, cells, preYears, preTotal };
     });

@@ -55,7 +55,7 @@ describe('flattenDeadlines', () => {
       publication: 'NDSS 2027',
       cycle: 'Cycle 1',
       stage: 'Abstract registration',
-      iso: '2026-07-30',
+      dateText: '2026-07-30',
     });
   });
 
@@ -74,7 +74,7 @@ describe('pickUpcomingDeadlines', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 6, 25));   // 2026-07-25
     expect(r.placeholder).toBe(false);
     expect(r.items).toHaveLength(3);
-    expect(r.items.map((i) => i.iso)).toEqual(['2026-07-30', '2026-08-06', '2026-09-20']);
+    expect(r.items.map((i) => i.dateText)).toEqual(['2026-07-30', '2026-08-06', '2026-09-20']);
     expect(r.items.every((i) => i.past === false)).toBe(true);
   });
 
@@ -86,7 +86,7 @@ describe('pickUpcomingDeadlines', () => {
 
   it('当天的截止日算未来，天数为 0', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 6, 30));
-    expect(r.items[0].iso).toBe('2026-07-30');
+    expect(r.items[0].dateText).toBe('2026-07-30');
     expect(r.items[0].daysLeft).toBe(0);
     expect(r.items[0].past).toBe(false);
   });
@@ -95,10 +95,41 @@ describe('pickUpcomingDeadlines', () => {
     const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 10, 1));   // 2026-11-01
     expect(r.placeholder).toBe(false);
     expect(r.items).toHaveLength(3);
-    expect(r.items[0]).toMatchObject({ iso: '2026-11-14', past: false });
+    expect(r.items[0]).toMatchObject({ dateText: '2026-11-14', past: false });
     // 补位的按「最近过期的排前面」
-    expect(r.items[1]).toMatchObject({ iso: '2026-09-20', past: true });
-    expect(r.items[2]).toMatchObject({ iso: '2026-08-06', past: true });
+    expect(r.items[1]).toMatchObject({ dateText: '2026-09-20', past: true });
+    expect(r.items[2]).toMatchObject({ dateText: '2026-08-06', past: true });
+  });
+
+  it('补位的已过期项 daysLeft 为 null，不给负数', () => {
+    // 这条守的是本模块存在的理由。上一条测试走的正是这段代码，却只用
+    // toMatchObject 检了 dateText 与 past，从没碰 daysLeft ——
+    // 于是「补位项返回 daysLeft: -42」这个缺陷在 37 个用例下全绿通过。
+    const r = pickUpcomingDeadlines(FIXTURE, new Date(2026, 10, 1));
+    expect(r.items[1].daysLeft).toBeNull();
+    expect(r.items[2].daysLeft).toBeNull();
+    // 未来项照旧给数字
+    expect(typeof r.items[0].daysLeft).toBe('number');
+  });
+
+  it('任何日期下都不会返回负的 daysLeft（扫一遍整条时间线）', () => {
+    // 性质测试而非单点测试：拿 FIXTURE 里每一个截止日各自前后一天当「今天」
+    // 跑一遍，任何返回项的 daysLeft 要么是非负数，要么是 null。
+    const days = flattenDeadlines(FIXTURE).map((d) => d.date);
+    const probes = [];
+    for (const d of days) {
+      for (const delta of [-1, 0, 1]) {
+        probes.push(new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta));
+      }
+    }
+    for (const today of probes) {
+      for (const item of pickUpcomingDeadlines(FIXTURE, today, 3).items) {
+        expect(
+          item.daysLeft === null || item.daysLeft >= 0,
+          `today=${today.toDateString()} item=${item.dateText} daysLeft=${item.daysLeft}`
+        ).toBe(true);
+      }
+    }
   });
 
   it('一条未来的都没有时给 placeholder，不返回负天数', () => {

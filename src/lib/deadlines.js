@@ -28,7 +28,7 @@ export function flattenDeadlines(timeline) {
           publication: pub.publication,
           cycle: cycle.name,
           stage: ddl.stage,
-          iso: ddl.date,
+          dateText: ddl.date,   // 原始字符串，可能是区间；可计算的日期在 date 里
           date,
         });
       }
@@ -59,8 +59,15 @@ export function pickUpcomingDeadlines(timeline, today, want = 3) {
     publication: d.publication,
     cycle: d.cycle,
     stage: d.stage,
-    iso: d.iso,
-    daysLeft: Math.round((d.date - base) / dayMs),
+    // dateText 是给人看的原始字符串，区间日期会保留成 '2026-05-01 ~ 2026-05-10'。
+    // 刻意不叫 iso：它并不总是可被 new Date() 解析的 ISO 串，叫 iso 会诱使
+    // 消费方直接 new Date(it.iso)。要拿可计算的日期请用 parseDeadlineDate()。
+    dateText: d.dateText,
+    // 已过期的项不给天数。曾经这里对过期项也算差值，于是会返回 daysLeft: -13
+    // 这样的值 —— 字段名叫 daysLeft，消费方极容易直接渲染成「还剩 -13 天」，
+    // 而那正是这个模块存在的理由。给 null 能让误用当场显形，
+    // 而不是安静地把一个负数印到首页上。
+    daysLeft: isPast ? null : Math.round((d.date - base) / dayMs),
     past: isPast,
   });
 
