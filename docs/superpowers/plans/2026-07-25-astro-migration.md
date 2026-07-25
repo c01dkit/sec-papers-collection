@@ -390,6 +390,20 @@ describe('文案漂移守卫', () => {
     }
   });
 });
+
+describe('文案之间的依赖关系', () => {
+  it('home.headlineAccent 必须是 home.headline 的子串', () => {
+    // Hero 靠 indexOf 把这个短语从标题里切出来上斜体。两者一旦对不上，
+    // idx 变成 -1，标题会降级成纯文本（Hero 里有 found 判断兜住），
+    // 但强调效果就静默消失了 —— 而这是首屏最显眼的一处排版。
+    // 改写任一语言的标题时，这条会立刻提醒你同步改 accent。
+    for (const lang of LOCALES) {
+      const headline = t(lang, 'home.headline');
+      const accent = t(lang, 'home.headlineAccent');
+      expect(headline, `${lang}: headline 里找不到 accent「${accent}」`).toContain(accent);
+    }
+  });
+});
 ```
 
 ```js
@@ -3049,9 +3063,15 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 const headline = t(lang, 'home.headline');
 const accent = t(lang, 'home.headlineAccent');
 // 把强调短语从标题里切出来单独上色，避免在 JSON 里塞 HTML
+// accent 是 headline 的一个子串，切出来单独上斜体与强调色。
+// found 必须参与渲染判断：若某个语言的 headline 被改写而 headlineAccent 没跟着改，
+// idx 会是 -1，此时 head 是整条标题 —— 要是仍然无条件渲染 <em>{accent}</em>，
+// 页面最大的标题下面就会多出一份孤立的斜体旧短语。降级要降成「纯标题」。
+// tests/i18n.test.js 里有一条守卫断言两语的 accent 都确实是 headline 的子串。
 const idx = headline.indexOf(accent);
-const head = idx >= 0 ? headline.slice(0, idx) : headline;
-const tail = idx >= 0 ? headline.slice(idx + accent.length) : '';
+const found = idx >= 0;
+const head = found ? headline.slice(0, idx) : headline;
+const tail = found ? headline.slice(idx + accent.length) : '';
 
 const stats = [
   { value: nf.format(total), label: t(lang, 'home.statPapers') },
@@ -3064,7 +3084,7 @@ const stats = [
 <section class="hero wrap">
   <div class="kicker" data-reveal>{t(lang, 'home.kicker', { date: syncDate })}</div>
 
-  <h1 class="srf head" data-reveal>{head}<em>{accent}</em>{tail}</h1>
+  <h1 class="srf head" data-reveal>{head}{found && <em>{accent}</em>}{tail}</h1>
 
   <p class="lead" data-reveal>{t(lang, 'home.lead')}</p>
 
@@ -3150,6 +3170,19 @@ const groups = [
 // '2001'…'2013' → '◂01–13'；没有更早数据时返回空
 const preLabel = (preYears) =>
   preYears.length ? `◂${preYears[0].slice(2)}–${preYears[preYears.length - 1].slice(2)}` : '';
+
+// 把 coverage.js 给的 0..1 相对强度压到 0.06..0.50 再上色。
+//
+// 上限刻意停在 0.50：这样格子背景永远不会深到需要把数字反白，四种
+// 「明暗 × 分组」组合下一律用 --ink，最差对比度 5.4:1，全部过 WCAG AA。
+// 早先的做法是让 alpha 跑满 0..1、再在 alpha > 0.55 时把文字换成 --bg，
+// 那样有两个问题：软工/系统组在浅色主题下无论 alpha 取多少都过不了 4.5:1
+// （峰值格只有 3.77:1），而 0.55 这个阈值本身也偏早，alpha 0.7 时四种组合
+// 全部不合规。错就错在用一个固定阈值去伺候两组独立归一、色调不同的调色板。
+// 下限 0.06 是为了让最小的非空格子仍然看得见，不至于和空格混掉。
+//
+// 压缩动态范围的代价很小：每个格子里都印着确切数字，深浅只是冗余编码。
+const displayAlpha = (a) => (0.06 + a * 0.44).toFixed(2);
 ---
 
 <section class="band band--tint">
@@ -3170,6 +3203,7 @@ const preLabel = (preYears) =>
 
     <div class="scroll" data-reveal>
       <table class="mx">
+        <caption class="sr">{t(lang, 'home.matrixTitle')}</caption>
         <thead>
           <tr>
             <th class="corner"><span class="sr">{t(lang, 'search.publication')}</span></th>
@@ -3187,7 +3221,7 @@ const preLabel = (preYears) =>
                 {row.cells.map((cell) =>
                   cell ? (
                     <td
-                      style={`background: rgb(${g.rgb} / ${cell.alpha.toFixed(2)}); ${cell.alpha > 0.55 ? 'color: var(--bg)' : ''}`}
+                      style={`background: rgb(${g.rgb} / ${displayAlpha(cell.alpha)})`}
                       title={`${row.publication} ${cell.year}: ${cell.count}`}
                     >{cell.count}</td>
                   ) : (
@@ -3264,7 +3298,7 @@ const preLabel = (preYears) =>
     font-size: var(--fs-kicker);
     font-variant-numeric: tabular-nums;
     border: 1px solid var(--band);
-    color: var(--muted);
+    color: var(--ink);   /* 一律 --ink：alpha 上限 0.50 保证任何格子上都够对比度 */
   }
   .mx td.empty { background: var(--mx-empty); }
   .pre { color: var(--faint); font-size: 0.62rem; margin-left: 0.3rem; }
