@@ -1313,6 +1313,12 @@ Run: `npm run dev`
 9. 悬停 `其他 ▾` 弹出 3 项；点其中一项跳转后，**鼠标移开菜单会收起**（验 `blurOnMouse`）。
 10. 窗口收窄到 860px 以下 → 出现汉堡，点开是竖排菜单，点任一项后自动收起。
 11. 点 `EN` 跳到 `/en/` 对应同名路径（在 `/zh/about/` 点应到 `/en/about/`）。
+12. **`aria-expanded` 与真实显隐一致**（这条只能在真实浏览器里验，jsdom 无法动态解析 `:hover`，所以 Task 5 当时留下了这个缺口）。打开 DevTools 选中 `.misc-btn`，然后：
+    - 鼠标悬停到 `其他 ▾` 上 → `aria-expanded` 变 `true`，菜单可见。
+    - **保持鼠标不动，点一下按钮** → `aria-expanded` 必须**仍是 `true`**，因为 `:hover` 还成立、菜单还开着。（这正是 fix round 2 引入又被 round 3 修掉的错位：当时会变成 `false`。）
+    - 鼠标移开 → 变 `false`，菜单隐藏。
+    - 用 Tab 键走进按钮再走进三个链接 → 全程 `true`；Tab 出最后一个链接 → 变 `false`。
+    - 焦点在某个链接上按 Escape → 菜单收起且 `aria-expanded` 变 `false`（若此时鼠标恰好悬停在组上，菜单仍可见、`true` 才是正确答案）。
 
 - [ ] **Step 13: Commit**
 
