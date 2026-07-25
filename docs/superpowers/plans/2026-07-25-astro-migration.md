@@ -335,8 +335,10 @@ import en from '@/i18n/en.json';
 
 describe('t()', () => {
   it('按点分路径取值', () => {
+    // 期望值必须照抄 zh.json / en.json 的现有文案，不要凭中文含义反推英文 ——
+    // zh 是「标题检索」，但 en 一直是简短的 "Search"，不是 "Search by Title"
     expect(t('zh', 'menu.search')).toBe('标题检索');
-    expect(t('en', 'menu.search')).toBe('Search by Title');
+    expect(t('en', 'menu.search')).toBe('Search');
   });
 
   it('插值 {var}', () => {
