@@ -1046,8 +1046,39 @@ async function persist(patch) {
   }
 }
 
+// 水合只做一次：软导航后模块仍在内存里，没必要每次 page-load 都读库。
+let hydrated = false;
+
+/**
+ * 把库里的持久偏好补应用到页面上。预绘制脚本只读 localStorage 镜像，
+ * 而老用户没有镜像（旧站不写 spc-* 键），所以首访时得靠这一步把偏好找回来。
+ * 只在 remember 标志允许、且与当前已应用的值不一致时才动 DOM。
+ */
+async function hydrateAndApply() {
+  if (hydrated) return;
+  hydrated = true;
+  try {
+    const mod = await import('./settings-store.js');
+    const s = await mod.hydrateSettings();
+    const el = document.documentElement;
+
+    if (s.rememberDarkMode) {
+      const want = s.darkTheme ? 'dark' : 'light';
+      if (el.dataset.theme !== want) apply(want, el.dataset.accent);
+    }
+    if (s.rememberTheme && ACCENTS.includes(s.theme) && el.dataset.accent !== s.theme) {
+      apply(el.dataset.theme, s.theme);
+    }
+  } catch (err) {
+    // 水合失败不该影响页面 —— 顶多是这次没找回偏好
+    console.warn('[theme] 设置水合失败', err);
+  }
+}
+
 export function initTheme() {
   const el = document.documentElement;
+
+  hydrateAndApply();
 
   const themeBtn = document.getElementById('themeToggle');
   if (themeBtn && !themeBtn.dataset.bound) {
@@ -4252,6 +4283,9 @@ meta_json 的届次文件名硬编码有意为之：数据更新后该届消失�
   - `getFavorites() => Promise<number[]>`（永不 reject）
   - `toggleFavorite(id) => Promise<{favorites: number[], added: boolean}>`（永不 reject）
   - `isPersistent() => boolean` —— IndexedDB 是否真的可用，供 UI 提示降级
+  - `hydrateSettings() => Promise<Settings>`（永不 reject）—— 页面加载后调用一次：
+    读库、把迁移结果写回、填充 localStorage 镜像。老用户只有库没有镜像，缺这一步
+    他们存的主题偏好在新站首访时会被无声忽略。
 
 **存储契约（实现时务必按这个来）**
 
@@ -4529,6 +4563,72 @@ describe('IndexedDB 可用时', () => {
   });
 });
 
+describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
+  it('把迁移后的形状写回库里，死字段真的消失', async () => {
+    const s = await freshStore();
+    // 造一条旧站格式的记录（含两个死字段与已废弃的 theme 值）
+    await s.__writeRaw('app', {
+      theme: 'green',
+      language: 'zh',
+      darkTheme: true,
+      rememberDarkMode: true,
+      rememberTheme: true,
+      showStatusDots: true,
+      llmEndpoint: 'https://api.example.com/v1/chat/completions',
+      llmApiKey: 'sk-must-be-removed',
+      keywords: ['fuzzing', 'C++'],
+    });
+
+    await s.hydrateSettings();
+
+    // 直接读原始记录：迁移必须已落盘，不能只在内存里对
+    const raw = await s.__readRaw('app');
+    expect(raw).not.toHaveProperty('llmEndpoint');
+    expect(raw).not.toHaveProperty('llmApiKey');
+    expect(raw.theme).toBe('slate');          // green 不在新 slug 列表里
+    expect(raw.keywords).toEqual(['fuzzing', 'C++']);
+    expect(raw.showStatusDots).toBe(true);
+    expect(raw.darkTheme).toBe(true);
+  });
+
+  it('填充 localStorage 镜像，供下次首绘同步读取', async () => {
+    const s = await freshStore();
+    await s.__writeRaw('app', {
+      theme: 'pine',
+      language: 'zh',
+      darkTheme: true,
+      rememberDarkMode: true,
+      rememberTheme: true,
+      rememberLanguage: true,
+    });
+    expect(localStorage.getItem(MIRROR.accent)).toBeNull(); // 老用户没有镜像
+
+    await s.hydrateSettings();
+
+    expect(localStorage.getItem(MIRROR.accent)).toBe('pine');
+    expect(localStorage.getItem(MIRROR.theme)).toBe('dark');
+    expect(localStorage.getItem(MIRROR.lang)).toBe('zh');
+    expect(localStorage.getItem(MIRROR.rememberDark)).toBe('1');
+  });
+
+  it('不动收藏', async () => {
+    const s = await freshStore();
+    await s.__writeRaw('favorites', [1, 42, 7]);
+    await s.hydrateSettings();
+    expect(await s.getFavorites()).toEqual([1, 42, 7]); // 顺序也不动
+  });
+
+  it('库里本来是空的也不报错，写入默认值', async () => {
+    const s = await freshStore();
+    await expect(s.hydrateSettings()).resolves.toMatchObject({ theme: 'slate' });
+  });
+
+  it('IndexedDB 不可用时不 reject', async () => {
+    const s = await freshStore({ withIDB: false });
+    await expect(s.hydrateSettings()).resolves.toBeTruthy();
+  });
+});
+
 describe('IndexedDB 不可用时', () => {
   it('getSettings 不抛错，给默认值', async () => {
     const s = await freshStore({ withIDB: false });
@@ -4638,6 +4738,15 @@ export async function __writeRaw(key, value) {
   }
 }
 
+/** 仅供测试：绕过迁移直接读回原始记录，用来断言写回确实落盘了。 */
+export async function __readRaw(key) {
+  try {
+    return await idbGet(key);
+  } catch {
+    return memory[key];
+  }
+}
+
 function mirror(settings) {
   try {
     localStorage.setItem(MIRROR.theme, settings.darkTheme ? 'dark' : 'light');
@@ -4697,6 +4806,39 @@ export async function toggleFavorite(id) {
     memory[KEY_FAV] = next;
   }
   return { favorites: next, added };
+}
+
+/**
+ * 把 IndexedDB 里的持久设置「水合」到运行时。页面加载后调用一次。
+ *
+ * 为什么必须有这一步：预绘制脚本只读 localStorage 镜像，而**老用户的浏览器里
+ * 只有 IndexedDB、没有镜像** —— 旧站从来不写 spc-* 这些键。没有水合的话，
+ * 一个存了几年深色偏好的老用户在新站首次访问时会被无声忽略，直到他再点一次
+ * 开关。旧站是在 App.vue 的 onMounted 里读库并 applySettingsToRuntime 的，
+ * 新站必须有等价物，否则就是功能退化。
+ *
+ * 做三件事：
+ *   1. 读出来（getSettings 内部已跑过 migrateSettings）；
+ *   2. 把迁移后的形状**写回**库里 —— 这才真正清掉 llmEndpoint 这类死字段，
+ *      否则它们会一直躺在用户库里；
+ *   3. 填充 localStorage 镜像，供**下次**首绘同步读取。
+ *
+ * 主题的实际应用不在这里做（那属于 theme.js），本函数只返回设置。
+ *
+ * 代价要如实说明：升级后的**第一次**加载会有一次可见的主题跳变
+ * （系统默认 → 存储值），因为此时镜像还是空的而 IndexedDB 是异步的。
+ * 此后镜像已就位，不再跳。一次跳变换回用户的偏好，好过静默丢掉它。
+ */
+export async function hydrateSettings() {
+  const settings = await getSettings();
+  try {
+    await idbPut(KEY_APP, settings);   // 把迁移结果落盘
+  } catch {
+    persistent = false;
+    memory[KEY_APP] = settings;
+  }
+  mirror(settings);
+  return settings;
 }
 
 export async function clearFavorites() {
@@ -4867,6 +5009,8 @@ console.table({
 6. 库版本仍是 **1**，store 仍只有 `config`，key 仍只有 `app` 与 `favorites` —— 一个都不多。
 7. Application → Local Storage 里出现 6 个 `spc-*` 镜像键，且 `spc-accent` 是 `slate`、`spc-theme` 是 `dark`（因为播种时 `darkTheme: true` 且 `rememberDarkMode: true`）。
 8. 页面确实以深色 + 深石青强调色渲染 —— 说明镜像被预绘制脚本读到了。
+
+（第 3、4、7、8 项依赖 `hydrateSettings()` —— 老用户浏览器里只有 IndexedDB 没有 localStorage 镜像，`initTheme()` 会在加载后调用一次水合，把迁移结果写回并填充镜像。**升级后的第一次加载会看到一次主题跳变**：预绘制时镜像还是空的、只能跟随系统，水合完成后才切到用户存的深色。这是有意接受的代价 —— 一次跳变换回用户的偏好，好过静默丢掉它。第二次加载起镜像已就位，不再跳。）
 
 再验降级：
 
