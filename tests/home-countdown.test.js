@@ -7,15 +7,27 @@ const PLACEHOLDER = '下一轮日期待公布';
 
 // 这段 DOM 必须与 DeadlineDemo.astro 渲染出的结构一致 —— 两者一旦分叉，
 // 测试会绿而线上会错，所以改动 DeadlineDemo 的结构时也要同步改这里。
+const DAYS_LABEL = '天';
+const PASSED_LABEL = '已截止';
+
+// 结构必须与 DeadlineDemo.astro 一致。关键点：past 与非 past 用的是**同一套骨架**
+// （data-days + unit），只有初始文案不同 —— 组件那边也是这么渲染的。
+// 传 { ddl, past: true } 可以造出「构建时已过期」的初始状态。
 function mount(rows) {
   document.body.innerHTML = `
-    <div class="panel demo" data-countdown data-placeholder="${PLACEHOLDER}">
+    <div class="panel demo" data-countdown
+         data-placeholder="${PLACEHOLDER}"
+         data-days-label="${DAYS_LABEL}"
+         data-passed-label="${PASSED_LABEL}">
       ${rows
         .map(
           (r) => `
-        <div class="row" data-ddl="${r.ddl}">
+        <div class="row${r.past ? ' past' : ''}" data-ddl="${r.ddl}">
           <div class="who"><div class="pub">${r.pub ?? 'V'}</div></div>
-          <div class="num"><span data-days>?</span><span class="unit"> 天</span></div>
+          <div class="num">
+            <span data-days>${r.past ? PASSED_LABEL : '?'}</span>
+            <span class="unit">${r.past ? '' : ' ' + DAYS_LABEL}</span>
+          </div>
         </div>`
         )
         .join('')}
@@ -59,7 +71,7 @@ describe('initCountdown', () => {
     const box = mount([{ ddl: '2026-08-06' }, { ddl: '2026-12-01' }]);
     initCountdown();
     expect(isPastAt(box, 0)).toBe(true);
-    expect(numTextAt(box, 0)).toBe('—');
+    expect(numTextAt(box, 0)).toBe(PASSED_LABEL);
     expect(numTextAt(box, 0)).not.toMatch(/-\d/);
     expect(box.textContent).not.toMatch(/-\d+\s*天/);
     // 后面那条仍是未来，正常显示天数
@@ -94,14 +106,37 @@ describe('initCountdown', () => {
     expect(daysAt(box, 1)).toBe('12');
   });
 
-  it('幂等：重复调用不会重复处理', () => {
-    vi.setSystemTime(new Date(2026, 6, 25));
+  it('幂等：守卫生效后，即使时钟前进也不再重算', () => {
+    // 光是「连调三次、值还一样」证明不了任何事：时钟不动时，重跑循环写回的是
+    // 同一个值，把 dataset.bound 守卫整个删掉这条也照样绿 —— 那就是一条
+    // 无法失败的测试。真正能falsify守卫的做法是在两次调用之间推进时钟：
+    // 守卫在，第二次直接 return，显示值停在 12；守卫没了，会被改成 5。
+    vi.setSystemTime(new Date(2026, 6, 25)); // 2026-07-25 → 距 08-06 十二天
     const box = mount([{ ddl: '2026-08-06' }]);
     initCountdown();
-    initCountdown();
+    expect(daysAt(box, 0)).toBe('12');
+
+    vi.setSystemTime(new Date(2026, 7, 1)); // 2026-08-01 → 若重算会变成 5
     initCountdown();
     expect(daysAt(box, 0)).toBe('12');
+
     expect(box.querySelectorAll('[data-ddl]')).toHaveLength(1);
+  });
+
+  it('构建时已过期、查看时却是未来的行：天数与单位都要写回去', () => {
+    // 构建服务器的「今天」与访客本地的「今天」最多能差约 26 小时，
+    // 所以一行在构建时判为已过期、到访客那里又变成未来，是真实可达的。
+    // 这条守的是：摘掉 .past 类的同时，天数和单位也必须一起写对 ——
+    // 早先 past 行根本没有 [data-days] 元素，脚本改得了 class 却写不进文字，
+    // 结果是「样式说未过期、文字还停在已截止」。
+    vi.setSystemTime(new Date(2026, 7, 6)); // 2026-08-06 正是那一天
+    const box = mount([{ ddl: '2026-08-06', past: true }]);
+    initCountdown();
+
+    expect(isPastAt(box, 0)).toBe(false);
+    expect(daysAt(box, 0)).toBe('0');
+    expect(numTextAt(box, 0)).toContain(DAYS_LABEL);
+    expect(numTextAt(box, 0)).not.toContain(PASSED_LABEL);
   });
 
   it('页面上没有倒计时块时安全返回', () => {

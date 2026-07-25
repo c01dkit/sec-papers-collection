@@ -20,6 +20,8 @@ export function initCountdown() {
 
   const now = new Date();
   const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const daysLabel = box.dataset.daysLabel || '';
+  const passedLabel = box.dataset.passedLabel || '';
   let anyFuture = false;
 
   for (const row of rows) {
@@ -28,14 +30,20 @@ export function initCountdown() {
     const days = Math.round((date - base) / 86400000);
 
     const slot = row.querySelector('[data-days]');
+    const unit = row.querySelector('.unit');
+
+    // 两个方向都要处理，且互为逆操作：构建时已过期的行也可能因访客所在时区
+    // 而翻回未来。所以每个分支都把 class、天数、单位三者一并写到位，
+    // 不能只改其中一两个 —— 那样会留下「样式说未过期、文字说已截止」的行。
     if (days >= 0) {
       anyFuture = true;
       row.classList.remove('past');
       if (slot) slot.textContent = String(days);
+      if (unit) unit.textContent = daysLabel ? ` ${daysLabel}` : '';
     } else {
       row.classList.add('past');
-      // 已过期的行不显示负天数
-      if (slot) slot.closest('.num')?.replaceChildren(document.createTextNode('—'));
+      if (slot) slot.textContent = passedLabel;   // 绝不写负数
+      if (unit) unit.textContent = '';
     }
   }
 
