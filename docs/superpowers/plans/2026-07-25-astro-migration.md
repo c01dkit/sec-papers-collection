@@ -33,6 +33,7 @@
 - **所有 `init()` 必须幂等**：用 `el.dataset.bound = '1'` 守卫，因为 `astro:page-load` 在每次软导航后都会触发。
 - **测试命令**：`npm test`（= `vitest run`）。单文件：`npx vitest run tests/<file> -t '<name>'`。
 - **构建门禁**：`npm run build` 必须零报错零警告。
+- **数产物里的出现次数一律用 `grep -o … | wc -l`，不要用 `grep -c`。**Astro 产出的 HTML 是压缩成一行的，而 `grep -c` 数的是**匹配行数**不是出现次数 —— 同一份文件里 `grep -c 'data-reveal'` 得 2、`grep -o … | wc -l` 得 9。用 `-c` 会让本该验证数量的检查悄悄通过或悄悄失败。
 
 ---
 
@@ -3329,7 +3330,7 @@ Expected: PASS（含更新后的 tokens 测试与文案漂移守卫，确认新�
 Run: `npm run build`
 Expected: 成功
 
-Run: `grep -c 'rgb(var(--mx-top-rgb)' dist/zh/index.html`
+Run: `grep -o 'rgb(var(--mx-top-rgb)' dist/zh/index.html | wc -l`
 Expected: 输出 40 以上（四大 4 行 × 最多 12 列的非空格子数）
 
 - [ ] **Step 8: 人工验收**
@@ -3947,7 +3948,7 @@ Expected: PASS（文案漂移守卫确认 `home.f1Hits` 等新 key 两语齐全�
 Run: `npm run build`
 Expected: 成功
 
-Run: `grep -c 'data-reveal' dist/zh/index.html`
+Run: `grep -o 'data-reveal' dist/zh/index.html | wc -l`
 Expected: 25 以上
 
 Run: `grep -q 'data-countdown' dist/zh/index.html && echo "✓ 倒计时挂载点存在"`
@@ -5768,7 +5769,7 @@ Expected: PASS（文案漂移守卫确认新增 `search.*` 两语齐全）
 Run: `npm run build`
 Expected: 成功
 
-Run: `grep -c 'data-fav=' dist/zh/search/index.html`
+Run: `grep -o 'data-fav=' dist/zh/search/index.html | wc -l`
 Expected: `30`（预渲染 30 行）
 
 Run: `grep -q 'Bridge' dist/zh/search/index.html && echo "✓ 预渲染含真实论文标题"`
@@ -6761,7 +6762,7 @@ export function initTimeline() {
 `boot.js` 追加 `registerPage('timeline', () => import('./timeline.js').then((m) => m.initTimeline()));`
 
 Run: `npm run build` → 成功
-Run: `grep -c 'data-ddl' dist/zh/timeline/index.html` → 输出 40 以上
+Run: `grep -o 'data-ddl' dist/zh/timeline/index.html | wc -l` → 输出 40 以上
 
 人工验收（`/zh/timeline/`）：
 
