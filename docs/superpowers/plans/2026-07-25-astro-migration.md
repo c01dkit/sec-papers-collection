@@ -353,13 +353,25 @@ describe('t()', () => {
     expect(() => t('zh', 'nope.not.here')).toThrow(/missing key/);
   });
 
-  it('未知语言回落到默认语言', () => {
+  it('未知语言码整体回落到默认语言的文案树', () => {
     expect(t('fr', 'menu.search')).toBe(t('zh', 'menu.search'));
+  });
+
+  it('已知语言里查不到的 key 一律抛错，不跨语言借文案', () => {
+    // 这一条守的是「en 缺 key 时不能悄悄返回中文」。
+    // 注意：因为下面的漂移守卫保证两语 key 集合恒等，单测里无法构造出
+    // 「zh 有、en 无」的真实情形，所以这里只能验证不存在的 key 会抛错。
+    // 真正兜住不对称回退的是两道防线：漂移守卫（npm test）+ astro build 本身
+    // ——每个页面都会对两种语言各调一次 t()，任一语言漏 key 都会让构建失败。
+    expect(() => t('en', 'menu.__nonexistent__')).toThrow(/missing key/);
+    expect(() => t('zh', 'menu.__nonexistent__')).toThrow(/missing key/);
   });
 });
 
 describe('文案漂移守卫', () => {
   it('zh 与 en 的 key 集合完全一致', () => {
+    // 这条一红意味着 astro build 也会红：t() 不做跨语言回退，
+    // 漏掉的那一侧会在预渲染时抛错。
     const kz = collectKeys(zh).sort();
     const ke = collectKeys(en).sort();
     expect(kz.filter((k) => !ke.includes(k))).toEqual([]);   // zh 独有
@@ -469,11 +481,15 @@ function interpolate(msg, vars) {
 }
 
 export function t(lang, key, vars) {
+  // 未知语言码（不是 zh/en）整体回退到默认语言的文案树。
+  //
+  // 但**已知语言缺 key 时绝不跨语言回退**：en 漏一条文案就抛错、让 astro build
+  // 当场失败。曾经这里多一行 `?? lookup(MESSAGES[DEFAULT_LOCALE], key)`，
+  // 后果是 en 缺 key 时静默返回中文 —— 英文页面渲染出中文散文，构建照样通过。
+  // 那比渲染出裸 key 更糟，也更难被发现。
   const tree = MESSAGES[lang] ?? MESSAGES[DEFAULT_LOCALE];
-  let msg = lookup(tree, key);
-  if (typeof msg !== 'string') msg = lookup(MESSAGES[DEFAULT_LOCALE], key);
+  const msg = lookup(tree, key);
   if (typeof msg !== 'string') {
-    // 构建期抛错，避免线上出现裸 key
     throw new Error(`i18n: missing key "${key}" (lang=${lang})`);
   }
   return vars ? interpolate(msg, vars) : msg;
