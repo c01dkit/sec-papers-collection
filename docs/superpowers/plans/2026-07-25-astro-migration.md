@@ -4795,16 +4795,85 @@ Expected: PASS，全部通过
 Run: `npm run build`
 Expected: 成功
 
-- [ ] **Step 10: 人工验收（用真实浏览器验数据不丢）**
+- [ ] **Step 10: 人工验收 —— 真实浏览器里验「老用户数据不丢」**
 
-**先在旧站上造一条真实的历史数据**：`git stash` 掉当前改动，`git checkout main`，`npm ci && npm run dev`，在检索页星标 2～3 篇论文、在设置页加一个关键词，然后回到 `feat/astro`。
+这是整次迁移唯一**不可逆**的风险点：线上用户浏览器里已经存着收藏和关注关键词，读错或写坏就没了。所以这一步不能只跑单测，必须在真实 IndexedDB 上验。
 
-Run: `npm run dev`
+**不要**为了造历史数据去 `git checkout main` —— 那需要把整套 Vue 工具链 `npm ci` 装回来，还得先清干净工作树，代价大且有风险。直接**按旧格式播种**更快、可重复、可回滚，而且能造出真实点击造不出的迁移场景（比如已废弃的 `theme: 'green'`）。
 
-1. 打开 DevTools → Application → IndexedDB → `spc-settings` → `config`，确认 `favorites` 里还是刚才那几个 ID，`app` 里还有那个关键词。
-2. 点主题按钮 → 刷新 → 深色保持。
-3. Application → Local Storage 里能看到 6 个 `spc-*` 键。
-4. 用无痕窗口打开 → 切主题、点收藏都**不报错**（Console 无红字），行为正常，只是关掉窗口后不保留。
+打开 `npm run dev` 的页面，在 DevTools Console 里跑这段：
+
+```js
+// 完全复刻旧站 SettingsService 的写入形状：
+// 库 spc-settings / store config（keyPath: 'key'）/ 版本 1 / 两个 key: app 与 favorites
+await new Promise((resolve, reject) => {
+  const req = indexedDB.open('spc-settings', 1);
+  req.onupgradeneeded = () => {
+    const db = req.result;
+    if (!db.objectStoreNames.contains('config')) {
+      db.createObjectStore('config', { keyPath: 'key' });
+    }
+  };
+  req.onsuccess = () => {
+    const db = req.result;
+    const tx = db.transaction('config', 'readwrite');
+    const store = tx.objectStore('config');
+    store.put({ key: 'app', value: {
+      theme: 'green',        // 旧 PrimeVue 预设名，不在新的四个 slug 里 → 应迁成 slate
+      language: 'zh',
+      darkTheme: true,
+      rememberLanguage: true,
+      rememberDarkMode: true,
+      rememberTheme: true,
+      showStatusDots: true,
+      llmEndpoint: 'https://api.example.com/v1/chat/completions', // 死字段 → 应被删掉
+      llmApiKey: 'sk-must-be-removed',                            // 死字段 → 应被删掉
+      keywords: ['fuzzing', 'C++'],  // C++ 顺带验高亮的正则转义
+    }});
+    store.put({ key: 'favorites', value: [1, 42, 7] });  // 顺序有意义，不该被排序
+    tx.oncomplete = () => { db.close(); resolve(); };
+    tx.onerror = () => reject(tx.error);
+  };
+  req.onerror = () => reject(req.error);
+});
+console.log('已播种旧格式数据');
+```
+
+然后刷新页面，逐项确认（用 Console 读回，不要只看 DevTools 面板的缓存视图）：
+
+```js
+const read = (key) => new Promise((res, rej) => {
+  const req = indexedDB.open('spc-settings', 1);
+  req.onsuccess = () => {
+    const db = req.result;
+    const r = db.transaction('config').objectStore('config').get(key);
+    r.onsuccess = () => { db.close(); res(r.result?.value); };
+    r.onerror = () => rej(r.error);
+  };
+});
+console.table({
+  favorites: JSON.stringify(await read('favorites')),
+  app: JSON.stringify(await read('app')),
+});
+```
+
+必须全部成立：
+
+1. **`favorites` 仍是 `[1, 42, 7]`，顺序不变** —— 这是最要紧的一条。顺序反映用户添加的先后，不该被排序。
+2. **`keywords` 仍是 `['fuzzing', 'C++']`** —— 一个字符都不能少，`C++` 不能被转义污染。
+3. `theme` 从 `'green'` 迁成 `'slate'`（旧预设名不在新 slug 列表里）。
+4. **`llmEndpoint` 与 `llmApiKey` 这两个 key 已不存在**（不是空字符串，是键本身消失）。
+5. `showStatusDots` / `darkTheme` / 三个 `remember*` 的布尔值原样保留。
+6. 库版本仍是 **1**，store 仍只有 `config`，key 仍只有 `app` 与 `favorites` —— 一个都不多。
+7. Application → Local Storage 里出现 6 个 `spc-*` 镜像键，且 `spc-accent` 是 `slate`、`spc-theme` 是 `dark`（因为播种时 `darkTheme: true` 且 `rememberDarkMode: true`）。
+8. 页面确实以深色 + 深石青强调色渲染 —— 说明镜像被预绘制脚本读到了。
+
+再验降级：
+
+9. 开一个**无痕窗口**访问，切主题、点收藏都不报错（Console 零红字），行为正常，只是关窗后不保留。
+10. 在 Console 里执行 `Object.defineProperty(window, 'indexedDB', { get: () => undefined })` 后刷新（或用禁用存储的浏览器配置），确认页面照常工作、`isPersistent()` 返回 `false`、且有降级提示。
+
+把第 1–8 项的 `console.table` 实际输出、以及第 9–10 项的观察结果原样贴进报告。**任何一项对不上就停下来上报，不要自行调整迁移逻辑去迎合** —— 这里的正确答案是「保住用户数据」，不是「让检查通过」。
 
 - [ ] **Step 11: Commit**
 
