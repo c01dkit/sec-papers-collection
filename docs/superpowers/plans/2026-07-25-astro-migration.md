@@ -985,7 +985,14 @@ async function persist(patch) {
     /* 隐私模式下 localStorage 可能抛错，忽略 */
   }
   try {
-    const mod = await import('./settings-store.js');
+    // @vite-ignore 是必须的：settings-store.js 在 Task 10 之前不存在于磁盘上。
+    // 没有这个注释，Vite/Rolldown 会在 astro build 时把字面量动态 import 纳入
+    // 打包图去静态解析，解析不到就直接 UNRESOLVED_IMPORT 构建失败 —— 这发生在
+    // try/catch 能起作用之前。try/catch 只挡得住运行时的模块加载失败，
+    // 挡不住构建期的路径解析。
+    // Task 10 建好 settings-store.js 之后，这个注释应当移除，
+    // 好让 Vite 恢复对该路径的静态检查（写错路径能被发现）。
+    const mod = await import(/* @vite-ignore */ './settings-store.js');
     await mod.patchSettings({
       ...(patch.theme ? { darkTheme: patch.theme === 'dark' } : {}),
       ...(patch.accent ? { theme: patch.accent } : {}),
@@ -4269,7 +4276,11 @@ export async function clearFavorites() {
 
 - [ ] **Step 8: 让 theme.js 走 patchSettings 而不是自己写 localStorage**
 
-Task 4 的 `theme.js` 里 `persist()` 自己写了 localStorage，现在镜像归 `settings-store` 统管。把 `persist` 整个替换为：
+Task 4 的 `theme.js` 里 `persist()` 自己写了 localStorage，现在镜像归 `settings-store` 统管。
+
+**同时把那行 `/* @vite-ignore */` 去掉** —— 它是 Task 4 的权宜之计：当时 `settings-store.js` 还不存在，字面量动态 import 会在构建期被静态解析成 UNRESOLVED_IMPORT。现在文件有了，注释该退场，好让 Vite 恢复对这个路径的静态检查（写错路径能被发现）。去掉后跑一次 `npm run build` 确认仍然通过。
+
+把 `persist` 整个替换为：
 
 ```js
 // 唯一写入口是 patchSettings，镜像同步在它内部完成 —— 别在这里直接写 localStorage
