@@ -1,57 +1,29 @@
 {
-  "name": "sec-papers-collection-new",
+  "name": "sec-papers-collection",
   "version": "0.3.12",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "build:check": "vite build && npm run preview",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "deploy": "gh-pages -d dist -f --cname sec.c01dkit.com",
-    "deploy:build": "npm run build && npm run deploy",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "deploy:build": "npm run build && npm run deploy"
   },
   "dependencies": {
-    "@primevue/forms": "^4.2.5",
-    "@primevue/themes": "^4.2.4",
-    "chart.js": "^4.4.4",
-    "primeblocks-vue": "file:",
-    "primeflex": "^3.3.1",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.2.4",
-    "prismjs": "1.27.0",
-    "quill": "^2.0.3",
-    "quill-delta": "^5.1.0",
-    "sec-papers-collection-new": "file:",
-    "socket.io-client": "^4.7.5",
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.14.4",
-    "vue-router": "^4.4.0",
-    "zod": "^3.24.1"
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.3",
+    "chart.js": "^4.5.1"
   },
   "devDependencies": {
-    "@primevue/auto-import-resolver": "^4.2.4",
-    "@rushstack/eslint-patch": "^1.8.0",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/eslint-config-prettier": "^9.0.0",
-    "autoprefixer": "^10.4.19",
-    "eslint": "^8.57.0",
-    "eslint-plugin-vue": "^9.23.0",
+    "@astrojs/check": "^0.9.9",
     "gh-pages": "^6.1.1",
-    "postcss": "^8.4.40",
+    "jsdom": "^29.1.1",
     "prettier": "^3.2.5",
-    "sass": "^1.55.0",
-    "tailwindcss": "^3.4.6",
-    "tailwindcss-primeui": "^0.3.2",
-    "unplugin-vue-components": "^0.27.3",
-    "vite": "^5.3.1"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
 }
