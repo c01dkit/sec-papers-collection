@@ -58,6 +58,24 @@ describe('视觉纪律', () => {
     expect(offenders.map((f) => path.relative(process.cwd(), f))).toEqual([]);
   });
 
+  it('.astro 模板里不写 HTML 注释（会被原样输出到产物）', () => {
+    // Astro 把模板区的 <!-- --> 原样输出到产物，frontmatter 里的 // 注释不会。
+    // 开发者备注属于后者。这条守卫存在的原因很朴素：同一个错我在这个项目里犯了
+    // 三次 —— FeatureBlock、DeadlineDemo、TopNav，其中 TopNav 那处在线上待了
+    // 好几个任务才被发现。而且组件会渲染多次，注释就跟着重复多次。
+    const offenders = [];
+    for (const file of styleSources().filter((f) => f.endsWith('.astro'))) {
+      const src = fs.readFileSync(file, 'utf8');
+      // 只看 frontmatter 之后的模板区
+      const m = src.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
+      const template = m ? m[1] : src;
+      if (/<!--/.test(template)) {
+        offenders.push(path.relative(process.cwd(), file));
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
   it('px 字面量圆角不超过 2px', () => {
     // 只查 px 字面量。药丸形开关轨道（rem）与圆形滑块（50%）是「形状即语义」的
     // 表单控件，按 Global Constraints 第 3 条豁免，所以不查 rem/%。

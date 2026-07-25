@@ -1,10 +1,21 @@
 ---
 import { t } from '@/i18n/index.js';
 const { lang, picked } = Astro.props;
+
+// 「天」与「已截止」两个标签挂在容器的 data 属性上：客户端脚本重算后要能把它们
+// 写回去，但脚本里不该出现 i18n。放容器而非每行，因为整块共用同一组标签。
+//
+// 无论 past 与否，每行都渲染同一套骨架（data-days + unit），只是初始文案不同。
+// 早先按 past 分成两种形状（past 行只有 <span class="passed">、根本没有
+// [data-days]），于是某行由「构建时已过期」翻回未来时（构建服务器与访客本地日期
+// 最多差约 26 小时，真实可达），脚本摘得掉 .past 类却写不进天数 ——
+// 行的样式变了、文字还停在「已截止」。形状统一后脚本只有一条代码路径，
+// 测试的 DOM 夹具也能天然忠实。
+//
+// 说明写在 frontmatter 而非模板里的 HTML 注释：Astro 会把模板注释原样输出到产物，
+// 而本组件的行会渲染多次，注释就跟着重复多次。
 ---
 
-<!-- 两个标签放在容器上：客户端脚本重算后要能把「天」与「已截止」写回去，
-     但脚本里不该出现 i18n。放容器而非每行，因为整块共用同一组标签。 -->
 <div class="panel demo" data-countdown
      data-placeholder={t(lang, 'home.f4Placeholder')}
      data-days-label={t(lang, 'home.f4Days')}
@@ -18,12 +29,6 @@ const { lang, picked } = Astro.props;
           <div class="pub">{it.publication} <span class="stage">· {it.stage}</span></div>
           <div class="date">{it.dateText}</div>
         </div>
-        <!-- 无论 past 与否都渲染同一套骨架（data-days + unit），只是初始文案不同。
-             早先这里按 past 分成两种形状：past 行只有 <span class="passed">、
-             根本没有 [data-days]。于是客户端重算时若某行由「构建时已过期」翻回
-             未来（构建服务器与访客本地日期最多能差约 26 小时，真实可达），
-             脚本能摘掉 .past 类却写不进天数 —— 行的样式变了、文字还停在「已截止」。
-             形状统一后脚本只有一条代码路径，测试的 DOM 夹具也能天然忠实。 -->
         <div class="srf num">
           <span data-days>{it.past ? t(lang, 'home.f4Passed') : it.daysLeft}</span>
           <span class="unit">{it.past ? '' : ` ${t(lang, 'home.f4Days')}`}</span>
