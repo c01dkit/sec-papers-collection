@@ -20,7 +20,10 @@
 
 - **Astro 配置固定值**：`output: 'static'`、`site: 'https://sec.c01dkit.com'`、`base: '/'`、`trailingSlash: 'always'`。不使用任何 adapter。
 - **不引入 UI 框架**：不装 Vue、React、Svelte，不装 PrimeVue，不装 Tailwind/PostCSS/autoprefixer。唯一允许的运行时第三方库是 `chart.js`（仅趋势页使用）。
-- **视觉三条纪律**：圆角最大 `2px`；**任何地方不使用 `box-shadow`**；层次只靠发丝线（`--hairline`）和底色深浅（`--bg` / `--band`）。
+- **视觉三条纪律**：
+  1. **任何地方不使用 `box-shadow`** —— 无例外。
+  2. **层次只靠发丝线（`--hairline`）和底色深浅（`--bg` / `--band`）**。
+  3. **面板、卡片、按钮、输入框、徽章的圆角最大 `2px`**（用 `var(--radius)`）。唯一例外是**形状即语义**的表单控件：开关轨道的药丸形、圆形滑块的 `50%`。这类控件的圆角是它的可识别性本身，不属于「用圆角制造层次」。除此之外不得出现更大的圆角。
 - **`src/assets/data/` 目录禁止改动**：Python 管道（`main.py --analyze/--upload`）写入此处，路径必须保持不变。
 - **IndexedDB схема 禁止改动**：库名 `spc-settings`、object store `config`、key `app` 与 `favorites`、`DB_VERSION = 1`。现有用户的收藏与关键词不能丢。
 - **强调色 slug 固定 4 个**：`slate`（默认）、`indigo`、`oxblood`、`pine`。
@@ -614,15 +617,40 @@ describe('tokens.css', () => {
   });
 });
 
+// 这两条纪律要覆盖整个 src/，不能只查 tokens.css 与 global.css ——
+// 违规最可能出现的地方是后续任务里 .astro 组件内的 <style> 块。
+// 现在 src/ 下还没有 .astro 组件，这个守卫先立在这里，随组件到位自动开始生效。
+function styleSources() {
+  const out = [];
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (/\.(astro|css)$/.test(e.name)) out.push(p);
+    }
+  };
+  walk(path.resolve('src'));
+  return out;
+}
+
 describe('视觉纪律', () => {
-  it('全站样式不使用 box-shadow', () => {
-    expect(tokens).not.toMatch(/box-shadow/);
-    expect(global).not.toMatch(/box-shadow/);
+  it('src/ 下任何样式都不使用 box-shadow', () => {
+    const offenders = styleSources().filter((f) => /box-shadow/.test(fs.readFileSync(f, 'utf8')));
+    expect(offenders.map((f) => path.relative(process.cwd(), f))).toEqual([]);
   });
 
-  it('圆角不超过 2px', () => {
-    const radii = [...global.matchAll(/border-radius:\s*([\d.]+)px/g)].map((m) => Number(m[1]));
-    for (const r of radii) expect(r).toBeLessThanOrEqual(2);
+  it('px 字面量圆角不超过 2px', () => {
+    // 只查 px 字面量。药丸形开关轨道（rem）与圆形滑块（50%）是「形状即语义」的
+    // 表单控件，按 Global Constraints 第 3 条豁免，所以不查 rem/%。
+    // 这是一道绊线而非证明：它拦住「随手写个 8px 圆角」这类最常见的破例。
+    const offenders = [];
+    for (const f of styleSources()) {
+      for (const m of fs.readFileSync(f, 'utf8').matchAll(/border-radius:\s*([\d.]+)px/g)) {
+        if (Number(m[1]) > 2) offenders.push(`${path.relative(process.cwd(), f)}: ${m[0]}`);
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 });
 ```
