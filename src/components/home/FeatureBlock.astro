@@ -1,10 +1,14 @@
 ---
 const { kicker, title, body, linkLabel, href, flip = false, tint = false } = Astro.props;
+
+// 下面那个 div 只用 class:list，不要再叠一个静态 class ——
+// 两者同时写，渲染出来的类名会重复一遍。
+// 这条说明放在 frontmatter 而不是写成 HTML 注释：Astro 会把模板里的 HTML 注释
+// 原样输出到产物，本组件在首页用了 5 次，注释就会跟着进产物 5 次；
+// frontmatter 里的注释不会。
 ---
 
 <section class:list={['band', { 'band--tint': tint }]}>
-  <!-- 只用 class:list，别再叠一个静态 class —— 两者同时写会渲染出
-       class="wrap fb wrap fb"（重复的类名对 CSS 无害，但是噪音）。 -->
   <div class:list={['wrap', 'fb', { flip }]}>
     <div class="txt">
       <div class="kicker" data-reveal>{kicker}</div>
