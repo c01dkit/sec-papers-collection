@@ -56,3 +56,17 @@ describe('文案漂移守卫', () => {
     }
   });
 });
+
+describe('home.headlineAccent 必须是 home.headline 的子串', () => {
+  // Hero.astro 靠 headline.indexOf(headlineAccent) 把强调短语切出来单独上色。
+  // t() 只检查 key 是否存在，不检查这个子串关系 —— 如果某语言改了 headline
+  // 却没跟着改 headlineAccent，indexOf 会返回 -1，Hero 会降级成纯标题
+  // （不再报错），这个测试就是防止那种静默降级流入生产环境的唯一防线。
+  it('zh: headlineAccent 出现在 headline 里', () => {
+    expect(zh.home.headline).toContain(zh.home.headlineAccent);
+  });
+
+  it('en: headlineAccent 出现在 headline 里', () => {
+    expect(en.home.headline).toContain(en.home.headlineAccent);
+  });
+});

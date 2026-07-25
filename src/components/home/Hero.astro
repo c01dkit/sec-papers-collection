@@ -7,9 +7,15 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 const headline = t(lang, 'home.headline');
 const accent = t(lang, 'home.headlineAccent');
 // 把强调短语从标题里切出来单独上色，避免在 JSON 里塞 HTML
+// accent 是 headline 的一个子串，切出来单独上斜体与强调色。
+// found 必须参与渲染判断：若某个语言的 headline 被改写而 headlineAccent 没跟着改，
+// idx 会是 -1，此时 head 是整条标题 —— 要是仍然无条件渲染 <em>{accent}</em>，
+// 页面最大的标题下面就会多出一份孤立的斜体旧短语。降级要降成「纯标题」。
+// tests/i18n.test.js 里有一条守卫断言两语的 accent 都确实是 headline 的子串。
 const idx = headline.indexOf(accent);
-const head = idx >= 0 ? headline.slice(0, idx) : headline;
-const tail = idx >= 0 ? headline.slice(idx + accent.length) : '';
+const found = idx >= 0;
+const head = found ? headline.slice(0, idx) : headline;
+const tail = found ? headline.slice(idx + accent.length) : '';
 
 const stats = [
   { value: nf.format(total), label: t(lang, 'home.statPapers') },
@@ -22,7 +28,7 @@ const stats = [
 <section class="hero wrap">
   <div class="kicker" data-reveal>{t(lang, 'home.kicker', { date: syncDate })}</div>
 
-  <h1 class="srf head" data-reveal>{head}<em>{accent}</em>{tail}</h1>
+  <h1 class="srf head" data-reveal>{head}{found && <em>{accent}</em>}{tail}</h1>
 
   <p class="lead" data-reveal>{t(lang, 'home.lead')}</p>
 
