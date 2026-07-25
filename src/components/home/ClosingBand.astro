@@ -1,0 +1,57 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang, total } = Astro.props;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+const cards = [
+  { title: t(lang, 'home.closingSitesTitle'), body: t(lang, 'home.closingSitesBody'), href: `/${lang}/sites/` },
+  { title: t(lang, 'home.closingPrefsTitle'), body: t(lang, 'home.closingPrefsBody'), href: `/${lang}/settings/` },
+  { title: t(lang, 'home.closingOpenTitle'), body: t(lang, 'home.closingOpenBody'), href: 'https://github.com/c01dkit/sec-papers-collection' },
+];
+---
+
+<section class="band band--inverse">
+  <div class="wrap">
+    <div class="kicker k" data-reveal>{t(lang, 'home.closingKicker')}</div>
+    <h2 class="srf ttl" data-reveal>{t(lang, 'home.closingTitle')}</h2>
+
+    <div class="grid" data-reveal>
+      {cards.map((c) => (
+        <a class="cell" href={c.href} rel={c.href.startsWith('http') ? 'noopener' : undefined}
+           target={c.href.startsWith('http') ? '_blank' : undefined}>
+          <div class="srf ct">{c.title}</div>
+          <p class="cb">{c.body}</p>
+        </a>
+      ))}
+    </div>
+
+    <div class="cta" data-reveal>
+      <a class="btn" href={`/${lang}/search/`}>{t(lang, 'home.closingCta', { total: nf.format(total) })}</a>
+      <span class="by">{t(lang, 'footer.author')} · {t(lang, 'footer.updateNote')}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .k { color: var(--inverse-muted); margin-bottom: 0.7rem; }
+  .ttl { margin-bottom: 1.5rem; }
+
+  /* 1px 间隙靠背景色透出，不用 border 也不用阴影 */
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--inverse-hairline);
+  }
+  .cell { background: var(--inverse-bg); padding: 1.05rem 1.15rem; display: block; }
+  .cell:hover .ct { color: var(--accent); }
+  .ct { font-size: 0.95rem; margin-bottom: 0.4rem; transition: color var(--dur) var(--ease); }
+  .cb { font-size: var(--fs-kicker); line-height: 1.7; color: var(--inverse-muted); margin: 0; }
+
+  .cta { margin-top: 1.8rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+  .btn {
+    background: var(--inverse-ink); color: var(--inverse-bg);
+    font-size: var(--fs-small); padding: 0.65rem 1.2rem; border-radius: var(--radius);
+  }
+  .by { font-size: var(--fs-kicker); color: var(--inverse-muted); }
+
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>

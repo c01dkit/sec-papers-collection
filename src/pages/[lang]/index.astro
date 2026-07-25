@@ -3,26 +3,106 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/home/Hero.astro';
 import CoverageMatrix from '@/components/home/CoverageMatrix.astro';
-import { LOCALES } from '@/i18n/index.js';
+import FeatureBlock from '@/components/home/FeatureBlock.astro';
+import SearchDemo from '@/components/home/media/SearchDemo.astro';
+import TrendDemo from '@/components/home/media/TrendDemo.astro';
+import AbstractDemo from '@/components/home/media/AbstractDemo.astro';
+import DeadlineDemo from '@/components/home/media/DeadlineDemo.astro';
+import AwardDemo from '@/components/home/media/AwardDemo.astro';
+import ClosingBand from '@/components/home/ClosingBand.astro';
+import { LOCALES, t } from '@/i18n/index.js';
 import { buildCoverageMatrix, TOP_TIER, SE_SYS } from '@/lib/coverage.js';
+import { buildTotalTrend } from '@/lib/sparkline.js';
+import { pickUpcomingDeadlines } from '@/lib/deadlines.js';
+import { pickHighlights } from '@/lib/awards-model.js';
 import stats from '@/assets/data/data-statistics.json';
 import timeline from '@/assets/data/submission-timeline.json';
+import awards from '@/assets/data/awards.json';
+import quickView from '@/assets/data/data-quick-view.json';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
+// ── 首屏与矩阵 ─────────────────────────────────────────
 const matrix = buildCoverageMatrix(stats);
 const venues = TOP_TIER.concat(SE_SYS).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
-// 用人工同步时间而非构建时间：后者每次部署都变，反而误导
 const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';
+
+// ── 01 检索 ────────────────────────────────────────────
+// 首页演示用的固定词，两语相同，是技术术语不进 i18n
+const SEARCH_TERM = 'fuzz';
+const matched = quickView.filter((p) => p.title.toLowerCase().includes(SEARCH_TERM));
+const searchRows = matched
+  .sort((a, b) => b.year - a.year || a.id - b.id)
+  .slice(0, 3);
+
+// ── 02 趋势 ────────────────────────────────────────────
+// 末年通常还在办、数据不全，画进去是一根断崖，所以掐掉
+const fullYears = stats.years.filter((y) => Number(y) >= 2015);
+const trendYears = fullYears.slice(0, -1);
+const trendPoints = buildTotalTrend(stats, trendYears);
+
+// ── 03 摘要 ────────────────────────────────────────────
+const ABSTRACT_TERMS = ['LLM', 'fuzzing'];
+// 摘要只存在 meta_json 里，需要显式 import 一届。
+// 届次文件名硬编码是有意的：数据更新后若这届消失，astro build 会立刻失败
+// 提醒改这一行，而不是静默渲染出一张空摘要卡。
+const metaLatest = (await import('@/assets/data/meta_json/IEEE S&P - 2026.json')).default;
+// 挑一篇摘要里命中演示词的，命不中就退回第一篇
+const abstractPaper =
+  metaLatest.find(
+    (p) => p.abstract && ABSTRACT_TERMS.some((k) => p.abstract.toLowerCase().includes(k.toLowerCase()))
+  ) ?? metaLatest[0];
+
+// ── 04 时间线 ──────────────────────────────────────────
+const picked = pickUpcomingDeadlines(timeline, new Date(), 3);
+
+// ── 05 名望 ────────────────────────────────────────────
+const highlights = pickHighlights(awards, 2);
 ---
 
 <BaseLayout lang={lang} page="home" title={null} wide={true}>
   <Hero lang={lang} total={stats.total} venues={venues} yearSpan={yearSpan} syncDate={syncDate} />
   <CoverageMatrix lang={lang} matrix={matrix} total={stats.total} />
+
+  <FeatureBlock kicker={t(lang, 'home.f1Kicker')} title={t(lang, 'home.f1Title')}
+                body={t(lang, 'home.f1Body')} linkLabel={t(lang, 'home.f1Link')}
+                href={`/${lang}/search/`}>
+    <SearchDemo lang={lang} rows={searchRows} term={SEARCH_TERM} hits={matched.length} />
+  </FeatureBlock>
+
+  <FeatureBlock kicker={t(lang, 'home.f2Kicker')} title={t(lang, 'home.f2Title')}
+                body={t(lang, 'home.f2Body', {
+                  from: nf.format(trendPoints[0].count),
+                  to: nf.format(trendPoints[trendPoints.length - 1].count),
+                })}
+                linkLabel={t(lang, 'home.f2Link')} href={`/${lang}/trends/`} flip tint>
+    <TrendDemo lang={lang} points={trendPoints} />
+  </FeatureBlock>
+
+  <FeatureBlock kicker={t(lang, 'home.f3Kicker')} title={t(lang, 'home.f3Title')}
+                body={t(lang, 'home.f3Body')} linkLabel={t(lang, 'home.f3Link')}
+                href={`/${lang}/abstract/`}>
+    <AbstractDemo paper={abstractPaper} terms={ABSTRACT_TERMS} />
+  </FeatureBlock>
+
+  <FeatureBlock kicker={t(lang, 'home.f4Kicker')} title={t(lang, 'home.f4Title')}
+                body={t(lang, 'home.f4Body')} linkLabel={t(lang, 'home.f4Link')}
+                href={`/${lang}/timeline/`} flip tint>
+    <DeadlineDemo lang={lang} picked={picked} />
+  </FeatureBlock>
+
+  <FeatureBlock kicker={t(lang, 'home.f5Kicker')} title={t(lang, 'home.f5Title')}
+                body={t(lang, 'home.f5Body')} linkLabel={t(lang, 'home.f5Link')}
+                href={`/${lang}/awards/`}>
+    <AwardDemo lang={lang} highlights={highlights} />
+  </FeatureBlock>
+
+  <ClosingBand lang={lang} total={stats.total} />
 </BaseLayout>

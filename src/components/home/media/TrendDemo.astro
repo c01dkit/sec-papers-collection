@@ -1,0 +1,50 @@
+---
+import { t } from '@/i18n/index.js';
+import { toSparkline } from '@/lib/sparkline.js';
+
+const { lang, points } = Astro.props;
+const spark = toSparkline(points, { width: 100, height: 40 });
+const first = points[0];
+const last = points[points.length - 1];
+const mid = points[Math.floor(points.length / 2)];
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+---
+
+<div class="panel demo">
+  <svg viewBox="0 0 100 44" preserveAspectRatio="none" role="img"
+       aria-label={t(lang, 'home.f2Caption', { from: nf.format(first.count), to: nf.format(last.count) })}>
+    <defs>
+      <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--accent)" stop-opacity="0.18" />
+        <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <line x1="0" y1="40" x2="100" y2="40" stroke="var(--hairline)" stroke-width="0.4" />
+    <line x1="0" y1="20" x2="100" y2="20" stroke="var(--hairline-soft)" stroke-width="0.4" stroke-dasharray="1.5 1.5" />
+    <path d={spark.area} fill="url(#sparkFill)" />
+    <polyline points={spark.line} fill="none" stroke="var(--accent)" stroke-width="0.9"
+              stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+    <circle cx={spark.coords[spark.coords.length - 1][0]} cy={spark.coords[spark.coords.length - 1][1]}
+            r="1.4" fill="var(--accent)" vector-effect="non-scaling-stroke" />
+  </svg>
+  <div class="axis">
+    <span>{first.year}</span><span>{mid.year}</span><span>{last.year}</span>
+  </div>
+  <div class="foot">
+    {t(lang, 'home.f2Caption', { from: nf.format(first.count), to: nf.format(last.count) })}
+  </div>
+</div>
+
+<style>
+  .demo { padding: 0.9rem 1rem 0.7rem; }
+  svg { width: 100%; height: 130px; display: block; }
+  .axis {
+    display: flex; justify-content: space-between;
+    font-size: var(--fs-kicker); color: var(--faint); margin-top: 0.2rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .foot {
+    margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--hairline-soft);
+    font-size: var(--fs-kicker); color: var(--faint);
+  }
+</style>

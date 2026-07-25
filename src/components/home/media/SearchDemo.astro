@@ -1,0 +1,56 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang, rows, term, hits } = Astro.props;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+// 把标题里命中 term 的部分切出来上高亮，大小写不敏感
+function split(title) {
+  const i = title.toLowerCase().indexOf(term.toLowerCase());
+  if (i < 0) return [title];
+  return [title.slice(0, i), title.slice(i, i + term.length), title.slice(i + term.length)];
+}
+---
+
+<div class="panel demo">
+  <div class="bar">
+    <span class="ic" aria-hidden="true">⌕</span>
+    <span class="q">{term}</span>
+  </div>
+  <ul>
+    {rows.map((r) => {
+      const [pre, hit, post] = split(r.title);
+      return (
+        <li>
+          <span class="pub">{r.publication} {r.year}</span>
+          <span class="ttl">{pre}{hit && <b class="hl">{hit}</b>}{post}</span>
+          <span class="star" aria-hidden="true">☆</span>
+        </li>
+      );
+    })}
+  </ul>
+  <div class="foot">{t(lang, 'home.f1Hits', { hits: nf.format(hits), shown: rows.length })}</div>
+</div>
+
+<style>
+  .demo { font-size: var(--fs-kicker); }
+  .bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--hairline);
+  }
+  .ic { color: var(--faint); }
+  .q { color: var(--ink); }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li {
+    display: flex; gap: 0.65rem; align-items: baseline;
+    padding: 0.5rem 0.8rem; border-top: 1px solid var(--hairline-soft);
+    line-height: 1.55;
+  }
+  li:first-child { border-top: 0; }
+  .pub { color: var(--faint); flex: none; width: 4.6rem; font-variant-numeric: tabular-nums; }
+  .ttl { flex: 1; }
+  .star { color: var(--hairline); flex: none; }
+  .foot {
+    padding: 0.5rem 0.8rem; border-top: 1px solid var(--hairline);
+    color: var(--faint);
+  }
+</style>

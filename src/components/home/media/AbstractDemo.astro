@@ -1,0 +1,51 @@
+---
+const { paper, terms } = Astro.props;
+
+// 摘要截到约 210 字符，在词边界断开，避免切断单词
+function clip(text, max = 210) {
+  const s = String(text || '').trim().replace(/\s+/g, ' ');
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  return cut.slice(0, cut.lastIndexOf(' ')) + '…';
+}
+
+// 把 terms 里的词切出来上高亮（构建时做，纯静态）
+function segments(text) {
+  const escaped = terms.filter(Boolean).map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  if (!escaped.length) return [{ text, hit: false }];
+  const re = new RegExp(`(${escaped.join('|')})`, 'gi');
+  const out = [];
+  let last = 0;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) out.push({ text: text.slice(last, m.index), hit: false });
+    out.push({ text: m[0], hit: true });
+    last = re.lastIndex;
+  }
+  if (last < text.length) out.push({ text: text.slice(last), hit: false });
+  return out;
+}
+
+const body = segments(clip(paper.abstract));
+---
+
+<div class="panel demo">
+  <div class="meta">{paper.publication} {paper.year} · #{paper.id}</div>
+  <div class="srf ttl">{paper.title}</div>
+  <p class="body">{body.map((s) => (s.hit ? <b class="hl">{s.text}</b> : s.text))}</p>
+  <div class="tags">
+    {terms.slice(0, 2).map((k) => <span class="tag">{k}</span>)}
+  </div>
+</div>
+
+<style>
+  .demo { padding: 0.9rem 1.05rem 1rem; }
+  .meta { font-size: var(--fs-kicker); color: var(--faint); margin-bottom: 0.45rem; }
+  .ttl { font-size: 0.95rem; line-height: 1.4; margin-bottom: 0.55rem; }
+  .body { font-size: var(--fs-kicker); line-height: 1.78; color: var(--muted); margin: 0; }
+  .tags { display: flex; gap: 0.35rem; margin-top: 0.7rem; flex-wrap: wrap; }
+  .tag {
+    border: 1px solid var(--hairline); color: var(--muted);
+    font-size: 0.62rem; padding: 0.1rem 0.45rem;
+  }
+</style>

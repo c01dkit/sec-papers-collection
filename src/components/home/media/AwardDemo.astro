@@ -1,0 +1,30 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang, highlights } = Astro.props;
+---
+
+<div class="cards">
+  {highlights.map((h) => (
+    <div class="panel card">
+      <div class="tag">{h.awardName} · {h.publication} {h.year}</div>
+      <div class="srf ttl">{h.title}</div>
+    </div>
+  ))}
+  <div class="panel card card--more">
+    <div class="tag tag--muted">{t(lang, 'home.f5More')}</div>
+    <div class="ttl-sm">{t(lang, 'home.f5MoreDetail')}</div>
+  </div>
+</div>
+
+<style>
+  .cards { display: flex; flex-direction: column; gap: 0.55rem; }
+  .card { padding: 0.7rem 0.9rem; border-left: 2px solid var(--gold); }
+  .card--more { border-left-color: var(--hairline); color: var(--muted); }
+  .tag {
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.35rem;
+  }
+  .tag--muted { color: var(--faint); }
+  .ttl { font-size: 0.83rem; line-height: 1.45; }
+  .ttl-sm { font-size: var(--fs-kicker); }
+</style>

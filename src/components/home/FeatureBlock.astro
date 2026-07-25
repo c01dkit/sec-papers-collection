@@ -1,0 +1,38 @@
+---
+const { kicker, title, body, linkLabel, href, flip = false, tint = false } = Astro.props;
+---
+
+<section class:list={['band', { 'band--tint': tint }]}>
+  <div class="wrap fb" class:list={['wrap', 'fb', { flip }]}>
+    <div class="txt">
+      <div class="kicker" data-reveal>{kicker}</div>
+      <h2 class="srf" data-reveal>{title}</h2>
+      <p data-reveal>{body}</p>
+      <a class="lnk more" href={href} data-reveal>{linkLabel} →</a>
+    </div>
+    <div class="media" data-reveal>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .fb {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: var(--sp-gap);
+    align-items: center;
+  }
+  /* 用 order 翻转而非调换 DOM：移动端单列时文字始终在媒体之上 */
+  .fb.flip .txt { order: 2; }
+
+  .txt .kicker { margin-bottom: 0.8rem; }
+  .txt h2 { margin-bottom: 0.8rem; white-space: pre-line; }
+  .txt p { color: var(--muted); font-size: var(--fs-small); max-width: 32rem; }
+  .more { display: inline-block; margin-top: 1rem; font-size: var(--fs-small); }
+
+  @media (max-width: 820px) {
+    .fb { grid-template-columns: 1fr; gap: 1.6rem; }
+    .fb.flip .txt { order: 0; }
+  }
+</style>

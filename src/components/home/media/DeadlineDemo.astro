@@ -1,0 +1,43 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang, picked } = Astro.props;
+---
+
+<div class="panel demo" data-countdown data-placeholder={t(lang, 'home.f4Placeholder')}>
+  {picked.placeholder ? (
+    <div class="ph">{t(lang, 'home.f4Placeholder')}</div>
+  ) : (
+    picked.items.map((it) => (
+      <div class:list={['row', { past: it.past }]} data-ddl={it.dateText}>
+        <div class="who">
+          <div class="pub">{it.publication} <span class="stage">· {it.stage}</span></div>
+          <div class="date">{it.dateText}</div>
+        </div>
+        <div class="srf num">
+          {it.past ? (
+            <span class="passed">{t(lang, 'home.f4Passed')}</span>
+          ) : (
+            <><span data-days>{it.daysLeft}</span><span class="unit"> {t(lang, 'home.f4Days')}</span></>
+          )}
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
+<style>
+  .row {
+    display: flex; align-items: baseline; gap: 0.8rem;
+    padding: 0.7rem 0.9rem; border-top: 1px solid var(--hairline);
+  }
+  .row:first-child { border-top: 0; }
+  .row.past { color: var(--faint); }
+  .who { flex: 1; min-width: 0; }
+  .pub { font-size: var(--fs-small); }
+  .stage { color: var(--faint); }
+  .date { font-size: var(--fs-kicker); color: var(--faint); margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
+  .num { font-size: 1.3rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .row.past .num { color: var(--faint); font-size: var(--fs-small); }
+  .unit, .passed { font-size: var(--fs-kicker); color: var(--faint); }
+  .ph { padding: 1.4rem 0.9rem; text-align: center; color: var(--faint); font-size: var(--fs-small); }
+</style>

@@ -1,6 +1,7 @@
 import { initTheme } from './theme.js';
 import { initReveal } from './reveal.js';
 import { initNav } from './nav.js';
+import { initCountdown } from './home-countdown.js';
 
 const PAGES = new Map();
 
@@ -17,6 +18,10 @@ const PAGES = new Map();
 export function registerPage(name, initFn) {
   PAGES.set(name, initFn);
 }
+
+registerPage('home', () => {
+  initCountdown();
+});
 
 async function boot() {
   initNav();
