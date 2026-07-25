@@ -1,0 +1,21 @@
+---
+import { swapLangInPath } from '@/i18n/paths.js';
+
+const { lang } = Astro.props;
+const other = lang === 'zh' ? 'en' : 'zh';
+const href = swapLangInPath(Astro.url.pathname, other);
+const label = other === 'en' ? 'EN' : '中';
+---
+
+<a class="lang" href={href} hreflang={other === 'zh' ? 'zh-CN' : 'en'}
+   data-lang-target={other} aria-label={other === 'en' ? 'Switch to English' : '切换到中文'}>{label}</a>
+
+<style>
+  .lang {
+    font-size: var(--fs-kicker);
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    transition: color var(--dur) var(--ease);
+  }
+  .lang:hover { color: var(--ink); }
+</style>

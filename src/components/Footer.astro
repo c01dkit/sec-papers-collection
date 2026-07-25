@@ -1,0 +1,26 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="ft">
+  <div class="wrap row">
+    <span>{t(lang, 'footer.author')}</span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span>{t(lang, 'footer.updateNote')}</span>
+    <a class="lnk src" href="https://github.com/c01dkit/sec-papers-collection" rel="noopener" target="_blank">
+      {t(lang, 'common.sourceCode')}
+    </a>
+  </div>
+</footer>
+
+<style>
+  .ft { border-top: 1px solid var(--hairline); padding-block: 1.6rem; }
+  .row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    font-size: var(--fs-small); color: var(--faint);
+  }
+  .sep { color: var(--hairline); }
+  .src { margin-left: auto; }
+</style>
