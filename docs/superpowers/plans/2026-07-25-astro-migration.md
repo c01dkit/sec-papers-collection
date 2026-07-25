@@ -4695,58 +4695,37 @@ describe('降级标志要能恢复', () => {
 });
 
   it('连接健康但事务失败后又成功，标志同样能收回 true', async () => {
-    // 覆盖「连接开着、事务失败」这一类：配额耗尽是最典型的情形。
-    // 只在 openDb 的 onsuccess 里置 true 的话，这条会红 ——
+    // 覆盖「连接开着、事务失败」这一类，配额耗尽是最典型的情形。
+    // 只在 openDb 的 onsuccess 里置 true 的实现会让这条红 ——
     // 因为连接一直是同一个，不会重新 open。
-    localStorage.clear();
-    vi.resetModules();
-    const real = new IDBFactory();
-    let failNextPut = false;
-    globalThis.indexedDB = {
-      open: (...args) => {
-        const req = real.open(...args);
-        const wrap = {};
-        Object.defineProperty(wrap, 'onsuccess', { set(fn) { req.onsuccess = () => {
-          const db = req.result;
-          const realTx = db.transaction.bind(db);
-          db.transaction = (...a) => {
-            const tx = realTx(...a);
-            const realStore = tx.objectStore.bind(tx);
-            tx.objectStore = (n) => {
-              const st = realStore(n);
-              const realPut = st.put.bind(st);
-              st.put = (...pa) => {
-                if (failNextPut) {
-                  failNextPut = false;
-                  const r = {};
-                  setTimeout(() => r.onerror && r.onerror(), 0);
-                  return r;
-                }
-                return realPut(...pa);
-              };
-              return st;
-            };
-            return tx;
-          };
-          fn();
-        }; } });
-        Object.defineProperty(wrap, 'onerror', { set(fn) { req.onerror = fn; } });
-        Object.defineProperty(wrap, 'onupgradeneeded', { set(fn) { req.onupgradeneeded = fn; } });
-        Object.defineProperty(wrap, 'onblocked', { set(fn) { req.onblocked = fn; } });
-        Object.defineProperty(wrap, 'result', { get: () => req.result });
-        Object.defineProperty(wrap, 'transaction', { get: () => req.transaction });
-        return wrap;
-      },
-      databases: () => real.databases(),
+    //
+    // 制造方式：临时替换 IDBObjectStore.prototype.put，让**下一次** put 返回一个
+    // 立即 onerror 的假请求。比包装 indexedDB.open 简单得多，也不用碰连接生命周期。
+    const s = await freshStore();
+    await s.patchSettings({ theme: 'slate' });
+    expect(s.isPersistent()).toBe(true);
+
+    const realPut = IDBObjectStore.prototype.put;
+    let failOnce = true;
+    IDBObjectStore.prototype.put = function (...args) {
+      if (failOnce) {
+        failOnce = false;
+        const req = {};
+        setTimeout(() => req.onerror && req.onerror(), 0);
+        return req;
+      }
+      return realPut.apply(this, args);
     };
-    const s = await import('@/scripts/settings-store.js');
 
-    failNextPut = true;
-    await s.patchSettings({ theme: 'pine' });
-    expect(s.isPersistent()).toBe(false);   // 事务失败 → 降级
+    try {
+      await s.patchSettings({ theme: 'pine' });
+      expect(s.isPersistent()).toBe(false);   // 事务失败 → 降级
 
-    await s.patchSettings({ theme: 'indigo' });
-    expect(s.isPersistent()).toBe(true);    // 写又成功了 → 收回
+      await s.patchSettings({ theme: 'indigo' });
+      expect(s.isPersistent()).toBe(true);    // 写又成功了 → 收回
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
   });
 });
 
