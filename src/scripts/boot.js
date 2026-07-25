@@ -4,7 +4,16 @@ import { initNav } from './nav.js';
 
 const PAGES = new Map();
 
-/** 页面脚本用它注册自己的 init；boot 按 <main data-page> 分派。 */
+/**
+ * 页面脚本用它注册自己的 init；boot 按 <main data-page> 分派。
+ *
+ * **必须在模块顶层同步调用**（通过页面里的静态 `<script>` import）。
+ * Astro 保证 `astro:page-load` 在本页所有静态阻塞脚本执行完之后才触发，
+ * 所以顶层调用一定赶得上。反之，若从 `then()`、async 回调或延迟的
+ * 动态 `import()` 里调用，注册可能发生在 boot() 已经分派之后 ——
+ * 下面的 `if (fn)` 会静默跳过，页面的 init 永不执行，既不报错也无警告。
+ * 那种 bug 的表现是「检索页就是不工作」，极难定位。
+ */
 export function registerPage(name, initFn) {
   PAGES.set(name, initFn);
 }
