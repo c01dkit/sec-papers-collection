@@ -4694,6 +4694,62 @@ describe('降级标志要能恢复', () => {
   });
 });
 
+  it('连接健康但事务失败后又成功，标志同样能收回 true', async () => {
+    // 覆盖「连接开着、事务失败」这一类：配额耗尽是最典型的情形。
+    // 只在 openDb 的 onsuccess 里置 true 的话，这条会红 ——
+    // 因为连接一直是同一个，不会重新 open。
+    localStorage.clear();
+    vi.resetModules();
+    const real = new IDBFactory();
+    let failNextPut = false;
+    globalThis.indexedDB = {
+      open: (...args) => {
+        const req = real.open(...args);
+        const wrap = {};
+        Object.defineProperty(wrap, 'onsuccess', { set(fn) { req.onsuccess = () => {
+          const db = req.result;
+          const realTx = db.transaction.bind(db);
+          db.transaction = (...a) => {
+            const tx = realTx(...a);
+            const realStore = tx.objectStore.bind(tx);
+            tx.objectStore = (n) => {
+              const st = realStore(n);
+              const realPut = st.put.bind(st);
+              st.put = (...pa) => {
+                if (failNextPut) {
+                  failNextPut = false;
+                  const r = {};
+                  setTimeout(() => r.onerror && r.onerror(), 0);
+                  return r;
+                }
+                return realPut(...pa);
+              };
+              return st;
+            };
+            return tx;
+          };
+          fn();
+        }; } });
+        Object.defineProperty(wrap, 'onerror', { set(fn) { req.onerror = fn; } });
+        Object.defineProperty(wrap, 'onupgradeneeded', { set(fn) { req.onupgradeneeded = fn; } });
+        Object.defineProperty(wrap, 'onblocked', { set(fn) { req.onblocked = fn; } });
+        Object.defineProperty(wrap, 'result', { get: () => req.result });
+        Object.defineProperty(wrap, 'transaction', { get: () => req.transaction });
+        return wrap;
+      },
+      databases: () => real.databases(),
+    };
+    const s = await import('@/scripts/settings-store.js');
+
+    failNextPut = true;
+    await s.patchSettings({ theme: 'pine' });
+    expect(s.isPersistent()).toBe(false);   // 事务失败 → 降级
+
+    await s.patchSettings({ theme: 'indigo' });
+    expect(s.isPersistent()).toBe(true);    // 写又成功了 → 收回
+  });
+});
+
 describe('永不 reject：连恶意入参也不例外', () => {
   it('keywords 里塞一个字符串化会抛错的对象，patchSettings 仍然 resolve', async () => {
     const s = await freshStore();
@@ -4829,6 +4885,17 @@ const KEY_APP = 'app';
 const KEY_FAV = 'favorites';
 
 let dbPromise = null;
+
+/**
+ * 「存储当前是否真的在持久化」。
+ *
+ * 语义刻意定成**「最近一次实际读写是否成功」**，而不是「连接是否打开过」：
+ * 连接开着而事务失败是真实存在的情形（配额耗尽最典型），此时数据并没有落盘，
+ * 标志必须为 false；反过来配额腾出来、写又成功了，标志也必须能收回 true。
+ * 早先只在 openDb 的 onsuccess 里置 true，于是这类「连接健康、事务失败」
+ * 一旦发生就再也恢复不了 —— Task 19 的「存储降级」提示会一直挂着，
+ * 而其实早就在正常保存了。名字承诺了什么，就得真的是那个意思。
+ */
 let persistent = true;
 
 // IndexedDB 不可用时的会话内兜底，保证 UI 行为一致
@@ -4909,7 +4976,10 @@ function idbGet(key) {
     (db) =>
       new Promise((resolve, reject) => {
         const req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
-        req.onsuccess = () => resolve(req.result ? req.result.value : null);
+        req.onsuccess = () => {
+          persistent = true;   // 见 markHealthy 说明
+          resolve(req.result ? req.result.value : null);
+        };
         req.onerror = () => reject(req.error);
       })
   );
@@ -4927,7 +4997,10 @@ function idbPut(key, value) {
           plain = JSON.parse(JSON.stringify(value));
         }
         const req = db.transaction(STORE, 'readwrite').objectStore(STORE).put({ key, value: plain });
-        req.onsuccess = () => resolve();
+        req.onsuccess = () => {
+          persistent = true;   // 见下方说明
+          resolve();
+        };
         req.onerror = () => reject(req.error);
       })
   );
