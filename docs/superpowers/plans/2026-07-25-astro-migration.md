@@ -4463,7 +4463,7 @@ export function migrateSettings(raw) {
 ```js
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { IDBFactory } from 'fake-indexeddb';
+import { IDBFactory, IDBObjectStore } from 'fake-indexeddb';
 import { DEFAULT_SETTINGS, MIRROR } from '@/lib/settings-schema.js';
 
 async function freshStore({ withIDB = true } = {}) {
@@ -4729,6 +4729,41 @@ describe('降级标志要能恢复', () => {
   });
 });
 
+  it('clearFavorites 成功后也能收回标志 —— 它前面没有读操作', async () => {
+    // 这条补的是一个真实的覆盖漏洞：patchSettings / toggleFavorite /
+    // hydrateSettings 都会先读（getSettings/getFavorites → idbGet，那里已经会
+    // 置 true），所以 idbPut 自己那行 persistent = true 在这三条路径上是被**遮住**的
+    // —— 把它删掉，上面那条「事务失败后又成功」的测试照样绿。
+    // clearFavorites 是唯一没有前置读的写函数，只有走它才能验到 idbPut 那行。
+    const s = await freshStore();
+    await s.toggleFavorite(1);
+
+    const realPut = IDBObjectStore.prototype.put;
+    let failOnce = true;
+    IDBObjectStore.prototype.put = function (...args) {
+      if (failOnce) {
+        failOnce = false;
+        const req = {};
+        setTimeout(() => req.onerror && req.onerror(), 0);
+        return req;
+      }
+      return realPut.apply(this, args);
+    };
+
+    try {
+      // 先让一次写失败，把标志打到 false
+      await s.toggleFavorite(2);
+      expect(s.isPersistent()).toBe(false);
+
+      // clearFavorites 不读只写：成功后必须靠 idbPut 那行把标志收回来
+      await s.clearFavorites();
+      expect(s.isPersistent()).toBe(true);
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
+  });
+});
+
 describe('永不 reject：连恶意入参也不例外', () => {
   it('keywords 里塞一个字符串化会抛错的对象，patchSettings 仍然 resolve', async () => {
     const s = await freshStore();
@@ -4956,7 +4991,7 @@ function idbGet(key) {
       new Promise((resolve, reject) => {
         const req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
         req.onsuccess = () => {
-          persistent = true;   // 见 markHealthy 说明
+          persistent = true;   // 语义见 persistent 声明处的说明
           resolve(req.result ? req.result.value : null);
         };
         req.onerror = () => reject(req.error);
@@ -4977,7 +5012,7 @@ function idbPut(key, value) {
         }
         const req = db.transaction(STORE, 'readwrite').objectStore(STORE).put({ key, value: plain });
         req.onsuccess = () => {
-          persistent = true;   // 见下方说明
+          persistent = true;   // 语义见 persistent 声明处的说明
           resolve();
         };
         req.onerror = () => reject(req.error);
