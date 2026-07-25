@@ -236,6 +236,8 @@ def fetch_one_paper_in_config(config):
                         yield one_paper_info
 
 def export_data_json(project_base):
+    os.makedirs(project_base, exist_ok=True)
+    os.makedirs(os.path.join(project_base, 'meta_json'), exist_ok=True)
     config = get_config('data.yml')
     json_all = []
     meta_all = {}
@@ -307,9 +309,7 @@ def export_data_json(project_base):
             json.dump(asdict(json_file), open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
         else:
             json.dump(json_file, open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
-
-    if not os.path.exists('./src/assets/data/meta_json'):
-        os.mkdir('./src/assets/data/meta_json')
+    
     for publication in meta_all:
         for year in meta_all[publication]:
             json_file_name = os.path.join('./src/assets/data/meta_json',publication+' - '+year+'.json')
