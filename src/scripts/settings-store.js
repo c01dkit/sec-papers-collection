@@ -9,6 +9,17 @@ const KEY_APP = 'app';
 const KEY_FAV = 'favorites';
 
 let dbPromise = null;
+
+/**
+ * 「存储当前是否真的在持久化」。
+ *
+ * 语义刻意定成**「最近一次实际读写是否成功」**，而不是「连接是否打开过」：
+ * 连接开着而事务失败是真实存在的情形（配额耗尽最典型），此时数据并没有落盘，
+ * 标志必须为 false；反过来配额腾出来、写又成功了，标志也必须能收回 true。
+ * 早先只在 openDb 的 onsuccess 里置 true，于是这类「连接健康、事务失败」
+ * 一旦发生就再也恢复不了 —— Task 19 的「存储降级」提示会一直挂着，
+ * 而其实早就在正常保存了。名字承诺了什么，就得真的是那个意思。
+ */
 let persistent = true;
 
 // IndexedDB 不可用时的会话内兜底，保证 UI 行为一致
@@ -89,7 +100,10 @@ function idbGet(key) {
     (db) =>
       new Promise((resolve, reject) => {
         const req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
-        req.onsuccess = () => resolve(req.result ? req.result.value : null);
+        req.onsuccess = () => {
+          persistent = true;   // 语义见 persistent 声明处的说明
+          resolve(req.result ? req.result.value : null);
+        };
         req.onerror = () => reject(req.error);
       })
   );
@@ -107,7 +121,10 @@ function idbPut(key, value) {
           plain = JSON.parse(JSON.stringify(value));
         }
         const req = db.transaction(STORE, 'readwrite').objectStore(STORE).put({ key, value: plain });
-        req.onsuccess = () => resolve();
+        req.onsuccess = () => {
+          persistent = true;   // 语义见 persistent 声明处的说明
+          resolve();
+        };
         req.onerror = () => reject(req.error);
       })
   );
