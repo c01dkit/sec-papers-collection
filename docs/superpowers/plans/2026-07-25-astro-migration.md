@@ -1299,7 +1299,7 @@ describe('boot 分派', () => {
 ```
 
 Run: `npx vitest run tests/boot.test.js`
-Expected: 8 个用例全部通过
+Expected: 9 个用例全部通过
 
 **再确认这条守卫真的会失败**（否则又是一条自我感觉良好的测试）：临时把 `afterEach` 里的摘除循环注释掉，重跑 `npx vitest run tests/boot.test.js`，最后一条必须报 `expected 1, received 2`。确认后把循环恢复。把这次「故意弄坏再修好」的两段输出都放进报告 —— 那是这条守卫有效的唯一证据。
 
@@ -3657,7 +3657,12 @@ import { t } from '@/i18n/index.js';
 const { lang, picked } = Astro.props;
 ---
 
-<div class="panel demo" data-countdown data-placeholder={t(lang, 'home.f4Placeholder')}>
+<!-- 两个标签放在容器上：客户端脚本重算后要能把「天」与「已截止」写回去，
+     但脚本里不该出现 i18n。放容器而非每行，因为整块共用同一组标签。 -->
+<div class="panel demo" data-countdown
+     data-placeholder={t(lang, 'home.f4Placeholder')}
+     data-days-label={t(lang, 'home.f4Days')}
+     data-passed-label={t(lang, 'home.f4Passed')}>
   {picked.placeholder ? (
     <div class="ph">{t(lang, 'home.f4Placeholder')}</div>
   ) : (
@@ -3667,12 +3672,15 @@ const { lang, picked } = Astro.props;
           <div class="pub">{it.publication} <span class="stage">· {it.stage}</span></div>
           <div class="date">{it.dateText}</div>
         </div>
+        <!-- 无论 past 与否都渲染同一套骨架（data-days + unit），只是初始文案不同。
+             早先这里按 past 分成两种形状：past 行只有 <span class="passed">、
+             根本没有 [data-days]。于是客户端重算时若某行由「构建时已过期」翻回
+             未来（构建服务器与访客本地日期最多能差约 26 小时，真实可达），
+             脚本能摘掉 .past 类却写不进天数 —— 行的样式变了、文字还停在「已截止」。
+             形状统一后脚本只有一条代码路径，测试的 DOM 夹具也能天然忠实。 -->
         <div class="srf num">
-          {it.past ? (
-            <span class="passed">{t(lang, 'home.f4Passed')}</span>
-          ) : (
-            <><span data-days>{it.daysLeft}</span><span class="unit"> {t(lang, 'home.f4Days')}</span></>
-          )}
+          <span data-days>{it.past ? t(lang, 'home.f4Passed') : it.daysLeft}</span>
+          <span class="unit">{it.past ? '' : ` ${t(lang, 'home.f4Days')}`}</span>
         </div>
       </div>
     ))
@@ -3722,6 +3730,8 @@ export function initCountdown() {
 
   const now = new Date();
   const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const daysLabel = box.dataset.daysLabel || '';
+  const passedLabel = box.dataset.passedLabel || '';
   let anyFuture = false;
 
   for (const row of rows) {
@@ -3730,14 +3740,20 @@ export function initCountdown() {
     const days = Math.round((date - base) / 86400000);
 
     const slot = row.querySelector('[data-days]');
+    const unit = row.querySelector('.unit');
+
+    // 两个方向都要处理，且互为逆操作：构建时已过期的行也可能因访客所在时区
+    // 而翻回未来。所以每个分支都把 class、天数、单位三者一并写到位，
+    // 不能只改其中一两个 —— 那样会留下「样式说未过期、文字说已截止」的行。
     if (days >= 0) {
       anyFuture = true;
       row.classList.remove('past');
       if (slot) slot.textContent = String(days);
+      if (unit) unit.textContent = daysLabel ? ` ${daysLabel}` : '';
     } else {
       row.classList.add('past');
-      // 已过期的行不显示负天数
-      if (slot) slot.closest('.num')?.replaceChildren(document.createTextNode('—'));
+      if (slot) slot.textContent = passedLabel;   // 绝不写负数
+      if (unit) unit.textContent = '';
     }
   }
 
@@ -3997,15 +4013,27 @@ const PLACEHOLDER = '下一轮日期待公布';
 
 // 这段 DOM 必须与 DeadlineDemo.astro 渲染出的结构一致 —— 两者一旦分叉，
 // 测试会绿而线上会错，所以改动 DeadlineDemo 的结构时也要同步改这里。
+const DAYS_LABEL = '天';
+const PASSED_LABEL = '已截止';
+
+// 结构必须与 DeadlineDemo.astro 一致。关键点：past 与非 past 用的是**同一套骨架**
+// （data-days + unit），只有初始文案不同 —— 组件那边也是这么渲染的。
+// 传 { ddl, past: true } 可以造出「构建时已过期」的初始状态。
 function mount(rows) {
   document.body.innerHTML = `
-    <div class="panel demo" data-countdown data-placeholder="${PLACEHOLDER}">
+    <div class="panel demo" data-countdown
+         data-placeholder="${PLACEHOLDER}"
+         data-days-label="${DAYS_LABEL}"
+         data-passed-label="${PASSED_LABEL}">
       ${rows
         .map(
           (r) => `
-        <div class="row" data-ddl="${r.ddl}">
+        <div class="row${r.past ? ' past' : ''}" data-ddl="${r.ddl}">
           <div class="who"><div class="pub">${r.pub ?? 'V'}</div></div>
-          <div class="num"><span data-days>?</span><span class="unit"> 天</span></div>
+          <div class="num">
+            <span data-days>${r.past ? PASSED_LABEL : '?'}</span>
+            <span class="unit">${r.past ? '' : ' ' + DAYS_LABEL}</span>
+          </div>
         </div>`
         )
         .join('')}
@@ -4049,7 +4077,7 @@ describe('initCountdown', () => {
     const box = mount([{ ddl: '2026-08-06' }, { ddl: '2026-12-01' }]);
     initCountdown();
     expect(isPastAt(box, 0)).toBe(true);
-    expect(numTextAt(box, 0)).toBe('—');
+    expect(numTextAt(box, 0)).toBe(PASSED_LABEL);
     expect(numTextAt(box, 0)).not.toMatch(/-\d/);
     expect(box.textContent).not.toMatch(/-\d+\s*天/);
     // 后面那条仍是未来，正常显示天数
@@ -4084,14 +4112,37 @@ describe('initCountdown', () => {
     expect(daysAt(box, 1)).toBe('12');
   });
 
-  it('幂等：重复调用不会重复处理', () => {
-    vi.setSystemTime(new Date(2026, 6, 25));
+  it('幂等：守卫生效后，即使时钟前进也不再重算', () => {
+    // 光是「连调三次、值还一样」证明不了任何事：时钟不动时，重跑循环写回的是
+    // 同一个值，把 dataset.bound 守卫整个删掉这条也照样绿 —— 那就是一条
+    // 无法失败的测试。真正能falsify守卫的做法是在两次调用之间推进时钟：
+    // 守卫在，第二次直接 return，显示值停在 12；守卫没了，会被改成 5。
+    vi.setSystemTime(new Date(2026, 6, 25)); // 2026-07-25 → 距 08-06 十二天
     const box = mount([{ ddl: '2026-08-06' }]);
     initCountdown();
-    initCountdown();
+    expect(daysAt(box, 0)).toBe('12');
+
+    vi.setSystemTime(new Date(2026, 7, 1)); // 2026-08-01 → 若重算会变成 5
     initCountdown();
     expect(daysAt(box, 0)).toBe('12');
+
     expect(box.querySelectorAll('[data-ddl]')).toHaveLength(1);
+  });
+
+  it('构建时已过期、查看时却是未来的行：天数与单位都要写回去', () => {
+    // 构建服务器的「今天」与访客本地的「今天」最多能差约 26 小时，
+    // 所以一行在构建时判为已过期、到访客那里又变成未来，是真实可达的。
+    // 这条守的是：摘掉 .past 类的同时，天数和单位也必须一起写对 ——
+    // 早先 past 行根本没有 [data-days] 元素，脚本改得了 class 却写不进文字，
+    // 结果是「样式说未过期、文字还停在已截止」。
+    vi.setSystemTime(new Date(2026, 7, 6)); // 2026-08-06 正是那一天
+    const box = mount([{ ddl: '2026-08-06', past: true }]);
+    initCountdown();
+
+    expect(isPastAt(box, 0)).toBe(false);
+    expect(daysAt(box, 0)).toBe('0');
+    expect(numTextAt(box, 0)).toContain(DAYS_LABEL);
+    expect(numTextAt(box, 0)).not.toContain(PASSED_LABEL);
   });
 
   it('页面上没有倒计时块时安全返回', () => {
@@ -4102,7 +4153,7 @@ describe('initCountdown', () => {
 ```
 
 Run: `npx vitest run tests/home-countdown.test.js`
-Expected: 8 个用例全部通过
+Expected: 9 个用例全部通过
 
 **再确认「区间取结束日」那条真的会失败**（它守的是一个真实发生过的 bug）：临时把 `home-countdown.js` 里的 `parseDeadlineDate(row.dataset.ddl)` 换成早先那种写法 —— `const m = row.dataset.ddl.match(/(\d{4})-(\d{2})-(\d{2})/); const date = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));` —— 重跑，该条必须报错（会判成已过期）。确认后改回。两段输出都放进报告。
 
