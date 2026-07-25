@@ -14,6 +14,33 @@ let persistent = true;
 // IndexedDB 不可用时的会话内兜底，保证 UI 行为一致
 const memory = { [KEY_APP]: null, [KEY_FAV]: null };
 
+/**
+ * 所有**写**操作串行化。
+ *
+ * patchSettings 与 toggleFavorite 都是「读—改—写」：先读出当前值，合并，再写回。
+ * 两个并发调用会各自读到同一个旧值，后写的那个把先写的那个覆盖掉 ——
+ * 用户刚点的设置被静默丢掉，而 DOM 已经改了，于是界面与存储不一致。
+ * 这不是理论问题：initTheme() 里 hydrateAndApply() 是 fire-and-forget，
+ * 紧接着就绑定了主题/强调色两个按钮，所以「水合还在飞、用户已经点了」
+ * 几乎每次加载都存在这个窗口；连点两个按钮也会撞上。
+ *
+ * 用一条 promise 链把写操作排成队。读操作不排队（没必要，也会拖慢）。
+ * 排队后无论水合与点击谁先谁后，结果都正确：先水合则点击读到迁移后的值，
+ * 先点击则水合读到点击后的值。
+ */
+let writeQueue = Promise.resolve();
+
+function serialize(fn) {
+  // 前一个失败也不能卡住后一个，所以 then 的两个分支都跑 fn
+  const run = writeQueue.then(fn, fn);
+  // 队列自身永不 reject，否则一次失败会让后续所有写操作都走 rejected 分支
+  writeQueue = run.then(
+    () => undefined,
+    () => undefined
+  );
+  return run;
+}
+
 export function isPersistent() {
   return persistent;
 }
@@ -33,6 +60,13 @@ function openDb() {
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
     req.onblocked = () => reject(new Error('IndexedDB blocked'));
+  });
+  // 失败时不要把这个 rejected promise 永久缓存下来 —— 那会让一次瞬时故障
+  // （onerror / onblocked）把**整个会话**降级到内存兜底，即使原因早已消失。
+  // 清掉缓存让下次调用重新尝试。注意不要把 .catch() 的返回值赋回 dbPromise，
+  // 否则调用方拿到的就是已被吞掉错误的 resolved promise 了。
+  dbPromise.catch(() => {
+    dbPromise = null;
   });
   return dbPromise;
 }
@@ -108,16 +142,27 @@ export async function getSettings() {
 }
 
 export async function patchSettings(partial) {
-  const current = await getSettings();
-  const next = migrateSettings({ ...current, ...partial });
-  try {
-    await idbPut(KEY_APP, next);
-  } catch {
-    persistent = false;
-    memory[KEY_APP] = next;
-  }
-  mirror(next);
-  return next;
+  return serialize(async () => {
+    const current = await getSettings();
+
+    let next;
+    try {
+      next = migrateSettings({ ...current, ...partial });
+    } catch {
+      // partial 里若有值在字符串化时抛错（keywords 里塞了个 toString 会抛的对象），
+      // 宁可丢掉这次改动也要保住已有设置 —— 契约是永不 reject。
+      return current;
+    }
+
+    try {
+      await idbPut(KEY_APP, next);
+    } catch {
+      persistent = false;
+      memory[KEY_APP] = next;
+    }
+    mirror(next);
+    return next;
+  });
 }
 
 export async function getFavorites() {
@@ -131,18 +176,20 @@ export async function getFavorites() {
 }
 
 export async function toggleFavorite(id) {
-  const current = await getFavorites();
-  const idx = current.indexOf(id);
-  const added = idx < 0;
-  // 保持插入顺序：不排序，让收藏列表反映用户添加的先后
-  const next = added ? [...current, id] : current.filter((x) => x !== id);
-  try {
-    await idbPut(KEY_FAV, next);
-  } catch {
-    persistent = false;
-    memory[KEY_FAV] = next;
-  }
-  return { favorites: next, added };
+  return serialize(async () => {
+    const current = await getFavorites();
+    const idx = current.indexOf(id);
+    const added = idx < 0;
+    // 保持插入顺序：不排序，让收藏列表反映用户添加的先后
+    const next = added ? [...current, id] : current.filter((x) => x !== id);
+    try {
+      await idbPut(KEY_FAV, next);
+    } catch {
+      persistent = false;
+      memory[KEY_FAV] = next;
+    }
+    return { favorites: next, added };
+  });
 }
 
 /**
@@ -167,23 +214,27 @@ export async function toggleFavorite(id) {
  * 此后镜像已就位，不再跳。一次跳变换回用户的偏好，好过静默丢掉它。
  */
 export async function hydrateSettings() {
-  const settings = await getSettings();
-  try {
-    await idbPut(KEY_APP, settings);   // 把迁移结果落盘
-  } catch {
-    persistent = false;
-    memory[KEY_APP] = settings;
-  }
-  mirror(settings);
-  return settings;
+  return serialize(async () => {
+    const settings = await getSettings();
+    try {
+      await idbPut(KEY_APP, settings);   // 把迁移结果落盘
+    } catch {
+      persistent = false;
+      memory[KEY_APP] = settings;
+    }
+    mirror(settings);
+    return settings;
+  });
 }
 
 export async function clearFavorites() {
-  try {
-    await idbPut(KEY_FAV, []);
-  } catch {
-    persistent = false;
-    memory[KEY_FAV] = [];
-  }
-  return [];
+  return serialize(async () => {
+    try {
+      await idbPut(KEY_FAV, []);
+    } catch {
+      persistent = false;
+      memory[KEY_FAV] = [];
+    }
+    return [];
+  });
 }

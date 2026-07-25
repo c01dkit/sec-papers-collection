@@ -1,8 +1,5 @@
 import { ACCENTS, THEMES } from '@/lib/settings-schema.js';
 
-export const LS_THEME = 'spc-theme';
-export const LS_ACCENT = 'spc-accent';
-
 export function nextTheme(cur) {
   return cur === 'dark' ? 'light' : 'dark';
 }

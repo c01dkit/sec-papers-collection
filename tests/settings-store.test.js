@@ -100,6 +100,108 @@ describe('IndexedDB 可用时', () => {
   });
 });
 
+describe('并发写：读—改—写必须串行，不能丢更新', () => {
+  it('两个并发 patchSettings，两处改动都要留下', async () => {
+    const s = await freshStore();
+    // 不 await 第一个就发第二个 —— 这正是连点两个按钮的样子
+    const a = s.patchSettings({ darkTheme: true });
+    const b = s.patchSettings({ theme: 'pine' });
+    await Promise.all([a, b]);
+
+    const got = await s.getSettings();
+    expect(got.darkTheme).toBe(true);   // 没被 b 的旧快照覆盖
+    expect(got.theme).toBe('pine');     // 也没被 a 覆盖
+  });
+
+  it('两个并发 toggleFavorite，两个 id 都要在', async () => {
+    const s = await freshStore();
+    await Promise.all([s.toggleFavorite(1), s.toggleFavorite(2)]);
+    expect((await s.getFavorites()).sort()).toEqual([1, 2]);
+  });
+
+  it('hydrateSettings 与点击并发时，不把用户刚改的值回滚', async () => {
+    const s = await freshStore();
+    // 老用户的库：深色关、强调色是已废弃的 green
+    await s.__writeRaw('app', { theme: 'green', darkTheme: false, rememberDarkMode: true });
+
+    // 水合在飞的同时用户点了深色 —— 这个窗口几乎每次加载都存在
+    const h = s.hydrateSettings();
+    const c = s.patchSettings({ darkTheme: true, rememberDarkMode: true });
+    await Promise.all([h, c]);
+
+    const got = await s.getSettings();
+    expect(got.darkTheme).toBe(true);   // 用户的点击必须活下来
+    expect(got.theme).toBe('slate');    // 迁移也必须生效
+  });
+
+  it('十个并发 toggleFavorite 全部保留，一个不丢', async () => {
+    const s = await freshStore();
+    const ids = [11, 22, 33, 44, 55, 66, 77, 88, 99, 100];
+    await Promise.all(ids.map((i) => s.toggleFavorite(i)));
+    expect((await s.getFavorites()).sort((a, b) => a - b)).toEqual(ids);
+  });
+});
+
+describe('openDb 的失败不该拖垮整个会话', () => {
+  it('一次瞬时失败之后，下一次调用会重新尝试', async () => {
+    localStorage.clear();
+    vi.resetModules();
+    const real = new IDBFactory();
+    let calls = 0;
+    // 第一次 open 直接失败，之后恢复正常
+    globalThis.indexedDB = {
+      open: (...args) => {
+        calls++;
+        if (calls === 1) {
+          const req = {};
+          setTimeout(() => req.onerror && req.onerror(), 0);
+          return req;
+        }
+        return real.open(...args);
+      },
+      databases: () => real.databases(),
+    };
+    const s = await import('@/scripts/settings-store.js');
+
+    // 第一次读：失败 → 走内存兜底
+    await expect(s.getSettings()).resolves.toBeTruthy();
+    expect(s.isPersistent()).toBe(false);
+
+    // 第二次写：应当重新 open 并真的落盘，而不是因为缓存了 rejected promise
+    // 而整个会话都困在内存里
+    await s.patchSettings({ theme: 'pine' });
+    expect(calls).toBeGreaterThan(1);
+    const raw = await s.__readRaw('app');
+    expect(raw?.theme).toBe('pine');
+  });
+});
+
+describe('永不 reject：连恶意入参也不例外', () => {
+  it('keywords 里塞一个字符串化会抛错的对象，patchSettings 仍然 resolve', async () => {
+    const s = await freshStore();
+    await s.patchSettings({ keywords: ['fuzzing'] });
+    const bad = {
+      [Symbol.toPrimitive]() {
+        throw new Error('boom');
+      },
+    };
+    // 契约是永不 reject —— 宁可丢掉这次改动，也要保住已有设置
+    await expect(s.patchSettings({ keywords: [bad] })).resolves.toBeTruthy();
+    expect((await s.getSettings()).keywords).toEqual(['fuzzing']);
+  });
+});
+
+describe('clearFavorites', () => {
+  it('清空后为空数组，且不影响 app 记录', async () => {
+    const s = await freshStore();
+    await s.patchSettings({ keywords: ['x'] });
+    await s.toggleFavorite(5);
+    expect(await s.clearFavorites()).toEqual([]);
+    expect(await s.getFavorites()).toEqual([]);
+    expect((await s.getSettings()).keywords).toEqual(['x']);
+  });
+});
+
 describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
   it('把迁移后的形状写回库里，死字段真的消失', async () => {
     const s = await freshStore();
