@@ -205,7 +205,11 @@ public/
 
 倒计时天数在客户端按本地时区计算，日期本身构建时嵌入。论文标题与摘要本身是英文、与界面语言无关，两语共用同一份数据，不需要翻译。
 
-构建时读取用 frontmatter 里的 `import`（直读本地文件）；运行时读取沿用 `CDN_DATA_BASE`，DEV 下走本地、PROD 下走 CDN。
+构建时读取用 frontmatter 里的 `import`（直读本地文件）。
+
+运行时读取统一走**一个**基址常量：`DATA_BASE = import.meta.env.DEV ? '/data' : CDN_DATA_BASE`。DEV 下的 `/data/**` 由 `astro.config.mjs` 里一段十几行的 Vite 开发中间件映射到 `src/assets/data/**` —— 仅开发期生效，不进构建产物，也不会把 26MB 的 `meta_json` 塞进 `public/`。
+
+这么做是为了消掉现在的一处真实混乱：`Search.vue` 用 `import.meta.env.PROD` 判断环境，`ViewAbstract.vue` 用 `process.env.NODE_ENV`，且后者把开发路径硬编码成 `/src/assets/data/meta_json/...`（Vite 开发服务器特有的路径，Astro 下不存在）。changelog 里「修复本地开发模式论文搜索加载错误」「修复开发环境下获奖论文与投稿时间线数据加载」两条都是这类分叉的产物。收敛成单一基址后，判断只出现在一个文件里一次。
 
 ## 9. 降级规则
 
