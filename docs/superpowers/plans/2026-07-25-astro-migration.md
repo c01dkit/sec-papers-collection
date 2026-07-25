@@ -655,6 +655,24 @@ describe('视觉纪律', () => {
     expect(offenders.map((f) => path.relative(process.cwd(), f))).toEqual([]);
   });
 
+  it('.astro 模板里不写 HTML 注释（会被原样输出到产物）', () => {
+    // Astro 把模板区的 <!-- --> 原样输出到产物，frontmatter 里的 // 注释不会。
+    // 开发者备注属于后者。这条守卫存在的原因很朴素：同一个错我在这个项目里犯了
+    // 三次 —— FeatureBlock、DeadlineDemo、TopNav，其中 TopNav 那处在线上待了
+    // 好几个任务才被发现。而且组件会渲染多次，注释就跟着重复多次。
+    const offenders = [];
+    for (const file of styleSources().filter((f) => f.endsWith('.astro'))) {
+      const src = fs.readFileSync(file, 'utf8');
+      // 只看 frontmatter 之后的模板区
+      const m = src.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
+      const template = m ? m[1] : src;
+      if (/<!--/.test(template)) {
+        offenders.push(path.relative(process.cwd(), file));
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
   it('px 字面量圆角不超过 2px', () => {
     // 只查 px 字面量。药丸形开关轨道（rem）与圆形滑块（50%）是「形状即语义」的
     // 表单控件，按 Global Constraints 第 3 条豁免，所以不查 rem/%。
@@ -1690,6 +1708,13 @@ import LangSwitch from './LangSwitch.astro';
 const { lang } = Astro.props;
 const path = Astro.url.pathname;
 const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
+
+// 「其他 ▾」是一个 disclosure（展开/收起），不是 APG menu —— 它只是三条链接。
+// 因此不用 role="menu"/"menuitem"：那会向读屏软件承诺方向键导航，而我们没有实现，
+// 反而制造更差的体验。也不用 aria-haspopup：按规范它的 "true" 等同于 "menu"，
+// 同样是在声明菜单语义。disclosure 只需要 aria-expanded，由 nav.js 同步。
+//
+// 说明写在 frontmatter 而非模板里的 HTML 注释：Astro 会把模板注释原样输出到产物。
 ---
 
 <header class="hdr" id="siteHeader">
@@ -1708,11 +1733,6 @@ const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
     </nav>
 
     <div class="right">
-      <!-- 这是一个 disclosure（展开/收起）而不是 APG menu：它只是三条链接。
-           不用 role="menu"/"menuitem" —— 那会向读屏软件承诺方向键导航，
-           而我们没有实现，反而制造更差的体验。
-           也不用 aria-haspopup：按规范它的 "true" 等同于 "menu"，同样是在声明
-           菜单语义；disclosure 只需要 aria-expanded 就够了，由 nav.js 同步。 -->
       <div class="misc" id="miscGroup">
         <button type="button" class="misc-btn" aria-expanded="false"
                 data-active={miscActive ? 'true' : undefined}>
@@ -3655,10 +3675,21 @@ const body = segments(clip(paper.abstract));
 ---
 import { t } from '@/i18n/index.js';
 const { lang, picked } = Astro.props;
+
+// 「天」与「已截止」两个标签挂在容器的 data 属性上：客户端脚本重算后要能把它们
+// 写回去，但脚本里不该出现 i18n。放容器而非每行，因为整块共用同一组标签。
+//
+// 无论 past 与否，每行都渲染同一套骨架（data-days + unit），只是初始文案不同。
+// 早先按 past 分成两种形状（past 行只有 <span class="passed">、根本没有
+// [data-days]），于是某行由「构建时已过期」翻回未来时（构建服务器与访客本地日期
+// 最多差约 26 小时，真实可达），脚本摘得掉 .past 类却写不进天数 ——
+// 行的样式变了、文字还停在「已截止」。形状统一后脚本只有一条代码路径，
+// 测试的 DOM 夹具也能天然忠实。
+//
+// 说明写在 frontmatter 而非模板里的 HTML 注释：Astro 会把模板注释原样输出到产物，
+// 而本组件的行会渲染多次，注释就跟着重复多次。
 ---
 
-<!-- 两个标签放在容器上：客户端脚本重算后要能把「天」与「已截止」写回去，
-     但脚本里不该出现 i18n。放容器而非每行，因为整块共用同一组标签。 -->
 <div class="panel demo" data-countdown
      data-placeholder={t(lang, 'home.f4Placeholder')}
      data-days-label={t(lang, 'home.f4Days')}
@@ -3672,12 +3703,6 @@ const { lang, picked } = Astro.props;
           <div class="pub">{it.publication} <span class="stage">· {it.stage}</span></div>
           <div class="date">{it.dateText}</div>
         </div>
-        <!-- 无论 past 与否都渲染同一套骨架（data-days + unit），只是初始文案不同。
-             早先这里按 past 分成两种形状：past 行只有 <span class="passed">、
-             根本没有 [data-days]。于是客户端重算时若某行由「构建时已过期」翻回
-             未来（构建服务器与访客本地日期最多能差约 26 小时，真实可达），
-             脚本能摘掉 .past 类却写不进天数 —— 行的样式变了、文字还停在「已截止」。
-             形状统一后脚本只有一条代码路径，测试的 DOM 夹具也能天然忠实。 -->
         <div class="srf num">
           <span data-days>{it.past ? t(lang, 'home.f4Passed') : it.daysLeft}</span>
           <span class="unit">{it.past ? '' : ` ${t(lang, 'home.f4Days')}`}</span>
@@ -5467,6 +5492,11 @@ const { lang } = Astro.params;
 // 预渲染最新 30 条：按年份降序、同年按 id 升序（spec §8）
 const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
 
+// #ptSeed 内嵌了预渲染那 30 行的完整数据：CDN 拉不到 data.json 时，脚本以此为
+// 数据源继续提供筛选/排序/分页。用内嵌 JSON 而不是从表格 DOM 反推 —— 无损、
+// 不依赖表格列结构，以后改表格不会默默失效。约 5KB 未压缩。
+// #ptI18n 内嵌本地化字符串，免得在 JS 里重建一套 i18n。
+// （这两段说明放 frontmatter：模板里的 HTML 注释会被 Astro 原样输出到产物。）
 const publications = Object.entries(stats.byPublication)
   .sort((a, b) => b[1] - a[1])
   .map(([name, count]) => ({ value: name, label: name, count }));
@@ -5532,12 +5562,8 @@ const years = Object.keys(stats.byYear)
     </div>
   </div>
 
-  <!-- 预渲染那 30 行的完整数据。CDN 拉不到 data.json 时，脚本以此为数据源
-       继续提供筛选/排序/分页。内嵌 JSON 而不是从表格 DOM 反推：无损、
-       不依赖表格列结构，以后改表格不会默默失效。约 5KB 未压缩。 -->
   <script type="application/json" id="ptSeed" set:html={JSON.stringify(seed)} />
 
-  <!-- 供脚本取用的本地化字符串，避免在 JS 里重建一套 i18n -->
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
     loading: t(lang, 'search.loading'),
     loadFailed: t(lang, 'search.loadFailed'),
