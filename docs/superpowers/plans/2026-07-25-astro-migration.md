@@ -4732,7 +4732,7 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 
 **设计要点**
 
-- 首屏 30 行**在构建时预渲染进 HTML**：CDN 挂掉或 JS 未就绪时页面仍有真内容，绝不出现空表格。
+- 首屏 30 行**在构建时预渲染进 HTML**：CDN 挂掉或 JS 未就绪时页面仍有真内容，绝不出现空表格。同一批 30 条记录另以内嵌 `<script type="application/json">` 完整带上，作为 CDN 失败后仍可筛选/排序/分页的数据源 —— **不要**从表格 DOM 反推数据（会丢字段、要从文本 parse 数字、且与列结构紧耦合）。
 - 多选筛选器用原生 `<details>` 做开合 —— 无障碍、零 JS、跟发丝线风格天然契合，不需要自己写 popover 的焦点管理。
 - 全量数据到达后整表由 JS 重渲染；渲染函数只有一个，预渲染的 30 行和后续渲染共用同一套 markup 结构。
 
@@ -4943,6 +4943,11 @@ const years = Object.keys(stats.byYear)
     </div>
   </div>
 
+  <!-- 预渲染那 30 行的完整数据。CDN 拉不到 data.json 时，脚本以此为数据源
+       继续提供筛选/排序/分页。内嵌 JSON 而不是从表格 DOM 反推：无损、
+       不依赖表格列结构，以后改表格不会默默失效。约 5KB 未压缩。 -->
+  <script type="application/json" id="ptSeed" set:html={JSON.stringify(seed)} />
+
   <!-- 供脚本取用的本地化字符串，避免在 JS 里重建一套 i18n -->
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
     loading: t(lang, 'search.loading'),
@@ -5072,15 +5077,21 @@ let els = {};
 const fmt = (tpl, map) =>
   Object.entries(map).reduce((s, [k, v]) => s.replaceAll(k, v), tpl);
 
-/** 从预渲染的 30 行里把数据读回来，作为 CDN 失败时的兜底数据源。 */
-function harvestSeed(tbody) {
-  return [...tbody.querySelectorAll('tr[data-id]')].map((tr) => ({
-    id: Number(tr.dataset.id),
-    publication: tr.querySelector('.c-pub')?.textContent.trim() ?? '',
-    year: Number(tr.querySelector('.c-year')?.textContent.trim()),
-    title: tr.querySelector('[data-title]')?.textContent ?? '',
-    paper: tr.querySelector('.c-act a')?.getAttribute('href') ?? '#',
-  }));
+/**
+ * 读取内嵌的种子数据（预渲染那 30 行的完整记录），作为 CDN 失败时的兜底数据源。
+ * 不从表格 DOM 反推：那样会丢字段、要从文本 parse 数字，而且和表格列结构
+ * 紧耦合 —— 以后改列就默默失效。
+ */
+function readSeed() {
+  const el = document.getElementById('ptSeed');
+  if (!el) return [];
+  try {
+    const rows = JSON.parse(el.textContent);
+    return Array.isArray(rows) ? rows : [];
+  } catch (err) {
+    console.warn('[paper-table] 种子数据解析失败', err);
+    return [];
+  }
 }
 
 function renderTitle(td, title) {
@@ -5242,8 +5253,8 @@ export async function initPaperTable() {
     perPage: document.getElementById('perPage'),
   };
 
-  // 先用预渲染的行当数据源，这样 CDN 失败也有内容可筛
-  state.rows = harvestSeed(tbody);
+  // 先用内嵌的种子数据当数据源，这样 CDN 失败也有内容可筛
+  state.rows = readSeed();
 
   const [settings, favorites] = await Promise.all([getSettings(), getFavorites()]);
   state.keywords = settings.keywords;
