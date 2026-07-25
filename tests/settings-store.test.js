@@ -145,6 +145,25 @@ describe('并发写：读—改—写必须串行，不能丢更新', () => {
     await Promise.all(ids.map((i) => s.toggleFavorite(i)));
     expect((await s.getFavorites()).sort((a, b) => a - b)).toEqual(ids);
   });
+
+  it('水合在前、点击在后同样不丢更新（对称性）', async () => {
+    // 这条与上一条互为镜像。它**单独**并不能检测出竞态 ——
+    // 实测把 serialize 拆掉后它 10/10 全过，因为这个顺序下水合的写入先落盘、
+    // 点击的写入后落盘，正确结果是靠顺序碰巧得到的。
+    // 留着它是为了记录「两种派发顺序都应当安全」这条性质：serialize 的 FIFO
+    // 队列本身与派发顺序无关，将来若有人改成某种带偏向的实现，这条会跟着红。
+    // 真正有鉴别力的是上一条（先点击后水合）。
+    const s = await freshStore();
+    await s.__writeRaw('app', { theme: 'green', darkTheme: false, rememberDarkMode: true });
+
+    const h = s.hydrateSettings();
+    const c = s.patchSettings({ darkTheme: true, rememberDarkMode: true });
+    await Promise.all([h, c]);
+
+    const got = await s.getSettings();
+    expect(got.darkTheme).toBe(true);
+    expect(got.theme).toBe('slate');
+  });
 });
 
 describe('openDb 的失败不该拖垮整个会话', () => {
@@ -178,6 +197,36 @@ describe('openDb 的失败不该拖垮整个会话', () => {
     expect(calls).toBeGreaterThan(1);
     const raw = await s.__readRaw('app');
     expect(raw?.theme).toBe('pine');
+  });
+});
+
+describe('降级标志要能恢复', () => {
+  it('瞬时失败后重试成功，isPersistent() 回到 true', async () => {
+    localStorage.clear();
+    vi.resetModules();
+    const real = new IDBFactory();
+    let calls = 0;
+    globalThis.indexedDB = {
+      open: (...args) => {
+        calls++;
+        if (calls === 1) {
+          const req = {};
+          setTimeout(() => req.onerror && req.onerror(), 0);
+          return req;
+        }
+        return real.open(...args);
+      },
+      databases: () => real.databases(),
+    };
+    const s = await import('@/scripts/settings-store.js');
+
+    await s.getSettings();
+    expect(s.isPersistent()).toBe(false);   // 第一次失败，降级
+
+    await s.patchSettings({ theme: 'pine' });
+    // 重试成功、数据真的落盘了，标志就该收回来 ——
+    // 否则 Task 19 的降级提示会永久挂着，等于对用户说假话
+    expect(s.isPersistent()).toBe(true);
   });
 });
 

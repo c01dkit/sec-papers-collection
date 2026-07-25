@@ -57,7 +57,20 @@ function openDb() {
       const db = req.result;
       if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE, { keyPath: 'key' });
     };
-    req.onsuccess = () => resolve(req.result);
+    req.onsuccess = () => {
+      const db = req.result;
+      // 开成功就把降级标志收回来。否则一次瞬时故障之后，即使重试成功、
+      // 数据其实又在持久化了，isPersistent() 仍会一直返回 false，
+      // Task 19 的「存储降级」提示会永久挂着 —— 那是在对用户说假话。
+      persistent = true;
+      // 连接被外部关掉（onversionchange、用户清了站点数据）时要让缓存失效，
+      // 否则 dbPromise 会一直指向一个死连接：后续每次操作都失败并落到内存兜底，
+      // 数据不丢但再也不会重试。这和 openDb 失败后清缓存是同一类问题。
+      db.onclose = () => {
+        dbPromise = null;
+      };
+      resolve(db);
+    };
     req.onerror = () => reject(req.error);
     req.onblocked = () => reject(new Error('IndexedDB blocked'));
   });
@@ -137,7 +150,14 @@ export async function getSettings() {
     return migrateSettings(raw);
   } catch {
     persistent = false;
+  }
+  // 兜底路径也要包住 migrateSettings：契约是永不 reject，而 patchSettings 与
+  // hydrateSettings 都直接 await 这个函数、外面没有 try，
+  // 所以这里漏出去的异常会一路穿透到调用方。
+  try {
     return migrateSettings(memory[KEY_APP]);
+  } catch {
+    return DEFAULT_SETTINGS();
   }
 }
 
