@@ -1,0 +1,13 @@
+---
+// src/pages/[lang]/about.astro —— Task 18 会替换
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params;
+---
+<PageLayout lang={lang} page="about" title={t(lang, 'menu.about')} kicker="临时">
+  <p><a class="lnk" href={`/${lang}/`}>回首页</a></p>
+</PageLayout>

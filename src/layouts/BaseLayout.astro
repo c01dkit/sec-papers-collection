@@ -1,0 +1,89 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import TopNav from '@/components/TopNav.astro';
+import Footer from '@/components/Footer.astro';
+import { t } from '@/i18n/index.js';
+
+const { lang, title, description, page, wide = false } = Astro.props;
+
+const siteName = t(lang, 'common.title');
+const fullTitle = title ? `${title} · ${siteName}` : siteName;
+const desc = description ?? t(lang, 'home.metaDescription');
+const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
+---
+
+<!doctype html>
+<html lang={htmlLang} data-theme="light" data-accent="slate">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(Astro.url.pathname.replace(/^\/(zh|en)/, '/zh'), Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(Astro.url.pathname.replace(/^\/(zh|en)/, '/en'), Astro.site)} />
+    <ClientRouter />
+
+    <script is:inline>
+      // 首绘前同步定主题：必须 is:inline，打包成 module 会 defer 从而闪一下默认主题。
+      // 数据源是 localStorage（同步），IndexedDB 是异步的、来不及。
+      (function () {
+        var d = document.documentElement;
+        var ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
+        var t, a;
+        try {
+          t = localStorage.getItem('spc-theme');
+          a = localStorage.getItem('spc-accent');
+        } catch (e) {}
+        d.dataset.theme =
+          t === 'dark' || t === 'light'
+            ? t
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        d.dataset.accent = ACCENTS.indexOf(a) >= 0 ? a : 'slate';
+        // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('reveal-on');
+        }
+      })();
+
+      // 软导航换入新 document 时把主题状态带过去，否则每次跳转都闪回默认值
+      document.addEventListener('astro:before-swap', function (e) {
+        var cur = document.documentElement;
+        var nxt = e.newDocument.documentElement;
+        nxt.dataset.theme = cur.dataset.theme;
+        nxt.dataset.accent = cur.dataset.accent;
+        if (cur.classList.contains('reveal-on')) nxt.classList.add('reveal-on');
+      });
+    </script>
+  </head>
+
+  <body>
+    <a class="skip" href="#content">{t(lang, 'common.skipToContent')}</a>
+    <TopNav lang={lang} />
+    <main id="content" data-page={page} class={wide ? '' : 'wrap main-pad'}>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      import '@/scripts/boot.js';
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.6rem 1rem;
+    z-index: 99;
+  }
+  .skip:focus { left: 0; }
+  .main-pad { padding-block: clamp(1.5rem, 3vw, 2.6rem) var(--sp-band); }
+</style>

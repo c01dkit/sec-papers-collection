@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { lang, title, description, page, kicker, lead } = Astro.props;
+---
+
+<BaseLayout lang={lang} title={title} description={description} page={page}>
+  <header class="page-head">
+    {kicker && <div class="kicker" data-reveal>{kicker}</div>}
+    <h1 data-reveal>{title}</h1>
+    {lead && <p class="lead" data-reveal>{lead}</p>}
+  </header>
+  <slot />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-bottom: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: clamp(1.2rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .page-head .kicker { margin-bottom: 0.7rem; }
+  .lead {
+    margin: 0.9rem 0 0;
+    max-width: 46rem;
+    color: var(--muted);
+  }
+</style>
