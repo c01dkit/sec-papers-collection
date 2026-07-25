@@ -26,9 +26,11 @@ const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
     <div class="right">
       <!-- 这是一个 disclosure（展开/收起）而不是 APG menu：它只是三条链接。
            不用 role="menu"/"menuitem" —— 那会向读屏软件承诺方向键导航，
-           而我们没有实现，反而制造更差的体验。aria-expanded 由 nav.js 同步。 -->
+           而我们没有实现，反而制造更差的体验。
+           也不用 aria-haspopup：按规范它的 "true" 等同于 "menu"，同样是在声明
+           菜单语义；disclosure 只需要 aria-expanded 就够了，由 nav.js 同步。 -->
       <div class="misc" id="miscGroup">
-        <button type="button" class="misc-btn" aria-haspopup="true" aria-expanded="false"
+        <button type="button" class="misc-btn" aria-expanded="false"
                 data-active={miscActive ? 'true' : undefined}>
           {t(lang, 'menu.misc')}<span class="caret" aria-hidden="true">▾</span>
         </button>
