@@ -1491,9 +1491,11 @@ const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
     <div class="right">
       <!-- 这是一个 disclosure（展开/收起）而不是 APG menu：它只是三条链接。
            不用 role="menu"/"menuitem" —— 那会向读屏软件承诺方向键导航，
-           而我们没有实现，反而制造更差的体验。aria-expanded 由 nav.js 同步。 -->
+           而我们没有实现，反而制造更差的体验。
+           也不用 aria-haspopup：按规范它的 "true" 等同于 "menu"，同样是在声明
+           菜单语义；disclosure 只需要 aria-expanded 就够了，由 nav.js 同步。 -->
       <div class="misc" id="miscGroup">
-        <button type="button" class="misc-btn" aria-haspopup="true" aria-expanded="false"
+        <button type="button" class="misc-btn" aria-expanded="false"
                 data-active={miscActive ? 'true' : undefined}>
           {t(lang, 'menu.misc')}<span class="caret" aria-hidden="true">▾</span>
         </button>
@@ -1618,31 +1620,37 @@ export function initNav() {
   if (misc && !misc.dataset.bound) {
     misc.dataset.bound = '1';
     const btn = misc.querySelector('.misc-btn');
+    const menu = misc.querySelector('.misc-menu');
 
-    // 菜单的显隐由 CSS 的 :hover / :focus-within 决定，aria-expanded 必须跟着它走。
-    // 只在 HTML 里写死 aria-expanded="false" 的话，菜单在视觉上打开时读屏软件
-    // 仍会播报「已折叠」—— 控件对辅助技术说了假话。
-    const setExpanded = (open) => btn?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // 菜单显隐完全由 CSS 决定（:hover 或 :focus-within 任一成立即展开）。
+    // aria-expanded 不去用 JS 复现那套规则，而是**读 CSS 的结论** ——
+    // 直接查 computed display。
+    //
+    // 为什么必须这样：早先的版本用各个事件分别推断状态，结果鼠标悬停时点一下
+    // 按钮就错位 —— blurOnMouse 的 blur 触发 focusout，JS 据此判定「已折叠」，
+    // 但 :hover 仍然成立、菜单在视觉上还开着，于是读屏播报与实际相反，
+    // 而且要等鼠标真正离开才恢复。读结论而不是推规则，这一整类错位都不存在。
+    const syncExpanded = () => {
+      if (!btn || !menu) return;
+      const open = getComputedStyle(menu).display !== 'none';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    // 统一延到下一帧：focus 与 hover 引起的样式变化在本轮事件里可能还没落定
+    const scheduleSync = () => requestAnimationFrame(syncExpanded);
 
-    misc.addEventListener('mouseenter', () => setExpanded(true));
-    misc.addEventListener('mouseleave', () => {
-      // 鼠标移开但焦点还在组内时，:focus-within 让菜单仍然是开着的
-      if (!misc.contains(document.activeElement)) setExpanded(false);
-    });
-    misc.addEventListener('focusin', () => setExpanded(true));
-    misc.addEventListener('focusout', () => {
-      // focusout 早于新焦点落位，下一帧再判断焦点去了哪里
-      requestAnimationFrame(() => {
-        if (!misc.contains(document.activeElement)) setExpanded(false);
-      });
-    });
+    // mouseenter/mouseleave 不冒泡，挂在组上正好只关心组的边界；
+    // focusin/focusout 冒泡，因此也能捕获三个链接的进出。
+    for (const evt of ['mouseenter', 'mouseleave', 'focusin', 'focusout']) {
+      misc.addEventListener(evt, scheduleSync);
+    }
 
-    // Escape 收起：把焦点移出组，让 :focus-within 释放
+    // Escape 收起：把焦点移出组，让 :focus-within 释放。
+    // 若此时鼠标仍悬停在组上，菜单依然是开着的 —— syncExpanded 会如实报告 true，
+    // 因为那确实是 CSS 的结论。
     misc.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
-      btn?.blur();
-      misc.querySelectorAll('.misc-menu a').forEach((a) => a.blur());
-      setExpanded(false);
+      if (misc.contains(document.activeElement)) document.activeElement.blur();
+      scheduleSync();
     });
 
     // 鼠标点击后主动 blur，把显隐交还给 hover；键盘激活（detail===0）保留焦点。
@@ -1650,7 +1658,7 @@ export function initNav() {
       if (e.detail > 0) e.currentTarget.blur();
     };
     btn?.addEventListener('click', blurOnMouse);
-    misc.querySelectorAll('.misc-menu a').forEach((a) => a.addEventListener('click', blurOnMouse));
+    menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', blurOnMouse));
   }
 }
 ```
