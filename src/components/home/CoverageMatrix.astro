@@ -1,0 +1,149 @@
+---
+import { t } from '@/i18n/index.js';
+
+const { lang, matrix, total } = Astro.props;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+const groups = [
+  { rows: matrix.top.rows, rgb: 'var(--mx-top-rgb)', strong: true },
+  { rows: matrix.se.rows, rgb: 'var(--mx-se-rgb)', strong: false },
+];
+
+// '2001'…'2013' → '◂01–13'；没有更早数据时返回空
+const preLabel = (preYears) =>
+  preYears.length ? `◂${preYears[0].slice(2)}–${preYears[preYears.length - 1].slice(2)}` : '';
+---
+
+<section class="band band--tint">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <div class="head-text">
+        <div class="kicker">{t(lang, 'home.matrixKicker')}</div>
+        <h2 class="srf">{t(lang, 'home.matrixTitle')}</h2>
+      </div>
+      <ul class="legend">
+        <li><i style="background: rgb(var(--mx-top-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendTop')}</li>
+        <li><i style="background: rgb(var(--mx-se-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendSe')}</li>
+        <li><i style="background: var(--mx-empty)"></i>{t(lang, 'home.matrixLegendEmpty')}</li>
+      </ul>
+    </div>
+
+    <p class="lead" data-reveal>{t(lang, 'home.matrixLead')}</p>
+
+    <div class="scroll" data-reveal>
+      <table class="mx">
+        <thead>
+          <tr>
+            <th class="corner"><span class="sr">{t(lang, 'search.publication')}</span></th>
+            {matrix.years.map((y) => <th scope="col">{y}</th>)}
+          </tr>
+        </thead>
+        {groups.map((g) => (
+          <tbody class={g.strong ? 'g g--strong' : 'g'}>
+            {g.rows.map((row) => (
+              <tr>
+                <th scope="row">
+                  {row.publication}
+                  {row.preYears.length > 0 && <span class="pre">{preLabel(row.preYears)}</span>}
+                </th>
+                {row.cells.map((cell) =>
+                  cell ? (
+                    <td
+                      style={`background: rgb(${g.rgb} / ${cell.alpha.toFixed(2)}); ${cell.alpha > 0.55 ? 'color: var(--bg)' : ''}`}
+                      title={`${row.publication} ${cell.year}: ${cell.count}`}
+                    >{cell.count}</td>
+                  ) : (
+                    <td class="empty"></td>
+                  )
+                )}
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+
+    <p class="note" data-reveal>
+      {t(lang, 'home.matrixNote', {
+        total: nf.format(total),
+        topMax: matrix.top.max,
+        seMax: matrix.se.max,
+      })}
+    </p>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+  }
+  .head-text { flex: 1 1 16rem; }
+  .head .kicker { margin-bottom: 0.55rem; }
+
+  .legend {
+    display: flex;
+    gap: 1.15rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0 0 0.25rem;
+    padding: 0;
+    font-size: var(--fs-kicker);
+    color: var(--faint);
+  }
+  .legend li { display: flex; align-items: center; gap: 0.4rem; }
+  .legend i { width: 10px; height: 10px; display: block; }
+
+  .lead { color: var(--muted); font-size: var(--fs-small); margin-bottom: 1.35rem; max-width: 42rem; }
+
+  /* 宽表在自己的容器里横向滚动，页面 body 绝不横向滚 */
+  .scroll { overflow-x: auto; }
+
+  .mx { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 42rem; }
+  .mx th, .mx td { font-weight: 400; }
+  .mx thead th {
+    padding: 0 1px 7px;
+    text-align: center;
+    font-size: var(--fs-kicker);
+    color: var(--faint);
+  }
+  .mx .corner { width: 6.2rem; }
+  .mx tbody th {
+    text-align: right;
+    padding-right: 0.75rem;
+    white-space: nowrap;
+    font-size: var(--fs-kicker);
+    color: var(--muted);
+  }
+  .g--strong tbody th, .mx .g--strong th { color: var(--ink); font-weight: 600; }
+  .mx tbody td {
+    padding: 0;
+    height: 26px;
+    text-align: center;
+    font-size: var(--fs-kicker);
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--band);
+    color: var(--muted);
+  }
+  .mx td.empty { background: var(--mx-empty); }
+  .pre { color: var(--faint); font-size: 0.62rem; margin-left: 0.3rem; }
+
+  /* 两组之间留一条空隙 */
+  .g + .g tr:first-child th, .g + .g tr:first-child td { padding-top: 9px; }
+
+  .note {
+    margin: 0.9rem 0 0;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--hairline);
+    font-size: var(--fs-kicker);
+    color: var(--faint);
+  }
+
+  .sr {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+</style>

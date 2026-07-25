@@ -1,18 +1,28 @@
 ---
-// src/pages/[lang]/index.astro —— Task 8/9 会替换为真首页
+// src/pages/[lang]/index.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/home/Hero.astro';
+import CoverageMatrix from '@/components/home/CoverageMatrix.astro';
 import { LOCALES } from '@/i18n/index.js';
-import { t } from '@/i18n/index.js';
+import { buildCoverageMatrix, TOP_TIER, SE_SYS } from '@/lib/coverage.js';
+import stats from '@/assets/data/data-statistics.json';
+import timeline from '@/assets/data/submission-timeline.json';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
 }
+
 const { lang } = Astro.params;
+
+const matrix = buildCoverageMatrix(stats);
+const venues = TOP_TIER.concat(SE_SYS).filter((n) => stats.byPublicationAndYear[n]).length;
+const years = stats.years.map(Number);
+const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
+// 用人工同步时间而非构建时间：后者每次部署都变，反而误导
+const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';
 ---
-<BaseLayout lang={lang} page="home" title={null}>
-  <h1 data-reveal>{t(lang, 'common.title')}</h1>
-  <p data-reveal>临时首页，用于验证转场与主题。</p>
-  <p><a class="lnk" href={`/${lang}/about/`}>去关于页</a></p>
-  <div style="height:120vh"></div>
-  <p data-reveal>这段应该在滚动到时淡入。</p>
+
+<BaseLayout lang={lang} page="home" title={null} wide={true}>
+  <Hero lang={lang} total={stats.total} venues={venues} yearSpan={yearSpan} syncDate={syncDate} />
+  <CoverageMatrix lang={lang} matrix={matrix} total={stats.total} />
 </BaseLayout>

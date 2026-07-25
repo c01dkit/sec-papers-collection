@@ -1,0 +1,89 @@
+---
+import { t } from '@/i18n/index.js';
+
+const { lang, total, venues, yearSpan, syncDate } = Astro.props;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+const headline = t(lang, 'home.headline');
+const accent = t(lang, 'home.headlineAccent');
+// 把强调短语从标题里切出来单独上色，避免在 JSON 里塞 HTML
+const idx = headline.indexOf(accent);
+const head = idx >= 0 ? headline.slice(0, idx) : headline;
+const tail = idx >= 0 ? headline.slice(idx + accent.length) : '';
+
+const stats = [
+  { value: nf.format(total), label: t(lang, 'home.statPapers') },
+  { value: String(venues), label: t(lang, 'home.statVenues') },
+  { value: yearSpan, label: t(lang, 'home.statYears') },
+  { value: t(lang, 'home.statCadenceValue'), label: t(lang, 'home.statCadence') },
+];
+---
+
+<section class="hero wrap">
+  <div class="kicker" data-reveal>{t(lang, 'home.kicker', { date: syncDate })}</div>
+
+  <h1 class="srf head" data-reveal>{head}<em>{accent}</em>{tail}</h1>
+
+  <p class="lead" data-reveal>{t(lang, 'home.lead')}</p>
+
+  <div class="cta" data-reveal>
+    <a class="btn btn--solid" href={`/${lang}/search/`}>{t(lang, 'home.ctaSearch')}</a>
+    <a class="btn btn--ghost" href={`/${lang}/trends/`}>{t(lang, 'home.ctaTrends')}</a>
+  </div>
+
+  <dl class="stats" data-reveal>
+    {stats.map((s) => (
+      <div class="stat">
+        <dt class="srf">{s.value}</dt>
+        <dd class="kicker">{s.label}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .hero { padding-block: clamp(3rem, 8vw, 4.6rem) clamp(2.4rem, 6vw, 3.4rem); }
+  .hero .kicker { margin-bottom: 1.15rem; }
+
+  .head {
+    font-size: var(--fs-display);
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    margin-bottom: 1.05rem;
+    max-width: 40ch;
+    white-space: pre-line;   /* 让文案里的 \n 生效，各语言自己决定断句 */
+  }
+  .head em { font-style: italic; color: var(--accent); }
+
+  .lead { max-width: 30rem; color: var(--muted); }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.7rem; }
+  .btn {
+    font-size: var(--fs-small);
+    padding: 0.65rem 1.2rem;
+    border-radius: var(--radius);
+    transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .btn--solid { background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+  .btn--solid:hover { background: var(--accent); border-color: var(--accent); }
+  .btn--ghost { border: 1px solid var(--hairline); color: var(--ink); }
+  .btn--ghost:hover { border-color: var(--ink); }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2.7rem 0 0;
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.2rem;
+  }
+  .stat { padding-inline: 2.2rem; border-right: 1px solid var(--hairline); }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: 0; }
+  .stat dt { font-size: 1.55rem; line-height: 1.1; }
+  .stat dd { margin: 0.35rem 0 0; }
+
+  @media (max-width: 640px) {
+    .stats { gap: 1.2rem 0; }
+    .stat { flex: 1 1 44%; padding-inline: 0 1rem; border-right: 0; }
+  }
+</style>
