@@ -986,14 +986,24 @@ async function persist(patch) {
     /* 隐私模式下 localStorage 可能抛错，忽略 */
   }
   try {
-    // @vite-ignore 是必须的：settings-store.js 在 Task 10 之前不存在于磁盘上。
-    // 没有这个注释，Vite/Rolldown 会在 astro build 时把字面量动态 import 纳入
-    // 打包图去静态解析，解析不到就直接 UNRESOLVED_IMPORT 构建失败 —— 这发生在
-    // try/catch 能起作用之前。try/catch 只挡得住运行时的模块加载失败，
-    // 挡不住构建期的路径解析。
-    // Task 10 建好 settings-store.js 之后，这个注释应当移除，
-    // 好让 Vite 恢复对该路径的静态检查（写错路径能被发现）。
-    const mod = await import(/* @vite-ignore */ './settings-store.js');
+    // settings-store.js 在 Task 10 之前不存在于磁盘上，这个动态 import 注定失败，
+    // 要靠下面的 catch 接住。但字面量路径会被静态分析提前解析，而两条流水线的
+    // 行为并不一致（本仓库实测）：
+    //   - astro build（Rolldown 生产打包）：字面量且无 @vite-ignore 时直接
+    //     UNRESOLVED_IMPORT 构建失败 —— 发生在 try/catch 起作用之前；
+    //     加 /* @vite-ignore */ 可跳过静态解析、留到运行时。
+    //   - vitest 的 jsdom environment（本文件被 tests/boot.test.js 经 boot.js
+    //     间接引入时）：同一处即便加了 /* @vite-ignore */ 仍会在 transform 阶段
+    //     报 "Failed to resolve import"；换成 node environment 则不会。
+    // 把路径装进变量能在两条流水线里都稳定生效：变量不是字符串字面量，
+    // 两边的静态分析都无法提前解析，于是都当作真正的运行时动态 import，
+    // 执行到这一行才去取，失败正常落进 catch。
+    //
+    // Task 10 建好 settings-store.js 之后，把这里改回字面量
+    // `await import('./settings-store.js')` 并去掉变量与 @vite-ignore ——
+    // 那时静态解析能成功，恢复静态检查才能在路径写错时发现问题。
+    const settingsStorePath = './settings-store.js';
+    const mod = await import(/* @vite-ignore */ settingsStorePath);
     await mod.patchSettings({
       ...(patch.theme ? { darkTheme: patch.theme === 'dark' } : {}),
       ...(patch.accent ? { theme: patch.accent } : {}),
@@ -1116,8 +1126,15 @@ document.addEventListener('astro:page-load', boot);
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-// boot.js 在模块顶层就绑定了 astro:page-load，所以每个用例都要重置模块，
-// 否则上一个用例注册的页面和监听器会串进来。
+// boot.js 在模块顶层就 document.addEventListener('astro:page-load', boot)。
+// vi.resetModules() 只让下次 import 拿到新模块实例，**不会摘掉上一个实例已经
+// 挂在 document 上的监听器** —— 不处理的话监听器会逐个用例累积（1→2→3…），
+// 每次 dispatch 都会把之前所有模块实例的 boot 一起跑一遍。目前恰好无害
+// （六个用例的 page 名互不相同），但这等于测试之间没有隔离，
+// 而这套测试正是要给「后续 13 个任务共用的分派入口」当回归网 ——
+// 网自己漏着不行。所以显式记录并在 afterEach 摘掉。
+let pageLoadListeners = [];
+
 async function freshBoot() {
   vi.resetModules();
   return import('@/scripts/boot.js');
@@ -1134,9 +1151,21 @@ const settle = () => new Promise((r) => setTimeout(r, 0));
 describe('boot 分派', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
+    pageLoadListeners = [];
+    // 必须在 freshBoot() 之前装好：boot.js 是在被 import 的那一刻注册监听器的
+    const realAdd = document.addEventListener.bind(document);
+    vi.spyOn(document, 'addEventListener').mockImplementation((type, fn, opts) => {
+      if (type === 'astro:page-load') pageLoadListeners.push(fn);
+      return realAdd(type, fn, opts);
+    });
   });
+
   afterEach(() => {
     vi.restoreAllMocks();
+    for (const fn of pageLoadListeners) {
+      document.removeEventListener('astro:page-load', fn);
+    }
+    pageLoadListeners = [];
   });
 
   it('data-page 命中已注册页面时，init 被调用一次', async () => {
@@ -1217,8 +1246,20 @@ describe('boot 分派', () => {
 
 最后一条记录的是一个**有意的**设计点：`boot()` 本身不做幂等，因为软导航后 DOM 是全新的、页面 init 必须重跑；幂等的责任在各页面自己的 `init()` 内部（`dataset.bound` 守卫）。
 
+再补一条验证隔离本身有效的用例，放在 describe 末尾 —— 否则「监听器不累积」只是注释里的声明，没人守：
+
+```js
+  it('用例之间不残留监听器（隔离自检）', async () => {
+    await freshBoot();
+    // beforeEach 装的 spy 记录了本用例内新增的 astro:page-load 监听器；
+    // 每个用例只 freshBoot 一次，因此这里应当恰好是 1 —— 若变成 2 以上，
+    // 说明 afterEach 的摘除失效、前面用例的监听器漏了过来。
+    expect(pageLoadListeners).toHaveLength(1);
+  });
+```
+
 Run: `npx vitest run tests/boot.test.js`
-Expected: 6 个用例全部通过
+Expected: 7 个用例全部通过
 
 - [ ] **Step 7: 实现 src/layouts/BaseLayout.astro**
 
@@ -4401,7 +4442,15 @@ export async function clearFavorites() {
 
 Task 4 的 `theme.js` 里 `persist()` 自己写了 localStorage，现在镜像归 `settings-store` 统管。
 
-**同时把那行 `/* @vite-ignore */` 去掉** —— 它是 Task 4 的权宜之计：当时 `settings-store.js` 还不存在，字面量动态 import 会在构建期被静态解析成 UNRESOLVED_IMPORT。现在文件有了，注释该退场，好让 Vite 恢复对这个路径的静态检查（写错路径能被发现）。去掉后跑一次 `npm run build` 确认仍然通过。
+**同时把 `theme.js` 里那个动态 import 改回字面量**：
+
+```js
+    const mod = await import('./settings-store.js');
+```
+
+把 `const settingsStorePath = ...` 那行、`/* @vite-ignore */` 以及解释这套权宜之计的整段注释一并删掉。它们是 Task 4 的临时措施 —— 当时 `settings-store.js` 还不存在，字面量路径在 `astro build` 会 UNRESOLVED_IMPORT、在 vitest 的 jsdom environment 下即便加了 `@vite-ignore` 也会 transform 失败，所以只能用变量绕开两边的静态分析。现在文件有了，静态解析能成功，改回字面量才能恢复静态检查 —— 否则以后把路径写错不会有任何人告诉你。
+
+改完必须跑三样确认都通过：`npx vitest run tests/boot.test.js`（jsdom 环境，Task 4 踩坑的那条）、`npm test`、`npm run build`。
 
 把 `persist` 整个替换为：
 
