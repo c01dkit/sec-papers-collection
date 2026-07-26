@@ -5711,6 +5711,9 @@ describe('highlightSegments', () => {
   it('切段后拼回原文，一个字符不多不少', () => {
     const segs = highlightSegments('a fuzz b fuzz c', [{ text: 'fuzz' }]);
     expect(text(segs)).toBe('a fuzz b fuzz c');
+    // 两半都得断言：只验「拼回原文」的话，一个永不切段的实现也会绿。
+    // 这条守的是「切归切，字符不许变」，缺了下面这句就只剩后半句。
+    expect(segs.length).toBeGreaterThan(1);
   });
 
   it('命中多处', () => {
@@ -5773,6 +5776,9 @@ describe('highlightSegments', () => {
     const segs = highlightSegments('ab', [{ text: 'a' }, { text: 'b' }]);
     expect(segs.every((s) => s.text.length > 0)).toBe(true);
     expect(text(segs)).toBe('ab');
+    // 同上：不切段的实现同样「没有空段」。断言它确实切成了两段，
+    // 这条才不必依赖别的用例存在才有意义。
+    expect(segs).toHaveLength(2);
   });
 });
 ```
