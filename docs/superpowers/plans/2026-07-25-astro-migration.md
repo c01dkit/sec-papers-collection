@@ -7281,7 +7281,7 @@ meta_json 文件名含空格与 &，用 encodeURIComponent。
 // tests/trend-series.test.js
 import { describe, it, expect } from 'vitest';
 import { buildSeries } from '@/lib/trend-series.js';
-import { SERIES_COLORS } from '@/lib/chart-palette.js';
+import { SERIES_COLORS, seriesStyle } from '@/lib/chart-palette.js';
 import stats from '@/assets/data/data-statistics.json';
 
 describe('buildSeries', () => {
@@ -7333,6 +7333,28 @@ describe('buildSeries', () => {
   it('空数据返回空数组而不是崩', () => {
     expect(buildSeries({ overview: [] })).toEqual([]);
     expect(buildSeries({})).toEqual([]);
+  });
+});
+
+describe('seriesStyle', () => {
+  // 注入取值函数（而不是传 isDark）正是这次配色改法的理由 —— 那就得真测它。
+  const fake = (name) => `resolved(${name})`;
+
+  it('按序取色，超过 4 条线时回绕', () => {
+    expect(seriesStyle(0, fake).borderColor).toBe('resolved(--chart-1)');
+    expect(seriesStyle(3, fake).borderColor).toBe('resolved(--chart-4)');
+    expect(seriesStyle(4, fake).borderColor).toBe('resolved(--chart-1)');
+  });
+
+  it('后两条线带虚线，做颜色之外的冗余编码', () => {
+    expect(seriesStyle(0, fake).borderDash).toEqual([]);
+    expect(seriesStyle(1, fake).borderDash).toEqual([]);
+    expect(seriesStyle(2, fake).borderDash).toEqual([5, 3]);
+    expect(seriesStyle(3, fake).borderDash).toEqual([2, 3]);
+  });
+
+  it('交出去的是解析后的值，不是变量名 —— Chart.js 不认 var()', () => {
+    expect(seriesStyle(0, fake).borderColor).not.toMatch(/^--/);
   });
 });
 
@@ -7549,7 +7571,11 @@ export async function initTrendsChart() {
     });
     window.__spcTrendThemeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-theme', 'data-accent'],
+      // 只盯 data-theme。图表用的每个变量（--chart-1..4、--faint、--muted、
+      // --hairline、--hairline-soft、--ink、--panel）都只随明暗变，没有一个
+      // 随强调色变 —— data-accent 只影响 --accent / --accent-soft。把它列进来
+      // 只会让用户换强调色时白白销毁重建三张图，动画重放一遍，颜色分毫未变。
+      attributeFilter: ['data-theme'],
     });
   }
 
