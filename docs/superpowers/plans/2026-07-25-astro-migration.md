@@ -5477,8 +5477,11 @@ describe('sortRows', () => {
     expect(sortRows(ROWS, 'publication', 'asc').map((r) => r.id)).toEqual([3, 5, 1, 2, 4]);
   });
 
-  it('不认识的 key 原样返回顺序', () => {
-    expect(sortRows(ROWS, 'nope', 'asc').map((r) => r.id)).toEqual([1, 2, 3, 4, 5]);
+  it('不认识的 key 原样返回顺序（不偷偷按 id 排）', () => {
+    // 必须用打乱过的输入。ROWS 本身就是 id 升序，拿它来断言的话，
+    //「原样返回」与「回落到按 id 排序」两种实现都会绿 —— 这条就区分不了它们。
+    const shuffled = [ROWS[3], ROWS[0], ROWS[4], ROWS[1], ROWS[2]]; // ids: 4,1,5,2,3
+    expect(sortRows(shuffled, 'nope', 'asc').map((r) => r.id)).toEqual([4, 1, 5, 2, 3]);
   });
 
   it('返回新数组，不原地改', () => {
