@@ -9215,39 +9215,160 @@ git rm -f build-and-deploy.sh
 
 - [ ] **Step 4b: 清掉没人消费的孤儿文案 key**
 
-Vue 时代的文案表有 165 个 key，删掉 `src/views/` 与 `src/components/dashboard/` 之后，其中相当一部分再没有任何消费方（`configurator.*`、`nav.*`、`test.*`、`dashboard.*`、`papers.*` 等整组，以及 `menu.main`/`menu.home` 这类只在旧侧边栏分组里用过的条目）。留着它们会让文案表越读越像考古现场，也会让「漂移守卫」在两语间维护一堆死条目。
+删掉 `src/views/`、`src/components/dashboard/`、`src/layout/` 之后，Vue 时代的大批文案
+再没有任何消费方。留着会让文案表越读越像考古现场，也逼着「漂移守卫」在两语之间
+维护一堆死条目。
 
-已知的一处重复必须处理：`notFound.message` 与 `notFound.backHome` 是 Vue 时代遗留，Task 6 新增的 `notFound.desc` 与 `notFound.back` 是同一语义的新键（Task 6 按「只增不改」的约束没有动旧键，处理正确）。旧的两个已无消费方，在此删除。
+**不要用 grep 找孤儿。** 静态搜字符串看不见动态拼出来的 key —— 站点里就有
+`` t(lang, `moreSites.list.${l.key}.title`) `` 和 `` t(lang, `aboutPage.link.${l.key}`) ``
+这样的写法，grep 会把它们全部误判成孤儿，照着删会让构建当场炸掉（`t()` 缺 key 抛错）。
 
-先跑这个脚本列出孤儿，**不要凭印象删**：
+改用实测：给 `t()` 临时插桩，跑一次完整构建（两种语言、所有页面都会渲染，
+因此每一个可达的 `t()` 调用都会被记录），再拿文案表去减。
 
 ```bash
-python3 - <<'PY'
-import json, re, subprocess, sys
-
-keys = set()
-def walk(o, p=''):
-    if isinstance(o, dict):
-        for k, v in o.items(): walk(v, f'{p}.{k}' if p else k)
-    else: keys.add(p)
-walk(json.load(open('src/i18n/zh.json')))
-
-# 收集 src/ 下所有源码文本（排除文案表自身）
-src = subprocess.run(
-    ['grep', '-rh', '-oE', r"'[a-zA-Z][a-zA-Z0-9_.]*'", 'src/',
-     '--include=*.astro', '--include=*.js', '--include=*.ts'],
-    capture_output=True, text=True).stdout
-used = set(m.strip("'") for m in src.split('\n') if m)
-
-orphans = sorted(k for k in keys if k not in used)
-print(f'共 {len(keys)} 个 key，其中 {len(orphans)} 个无消费方：')
-for k in orphans: print('  ', k)
-PY
+cp src/i18n/index.js /tmp/i18n-index.bak
+python3 - <<'PY2'
+p='src/i18n/index.js'; s=open(p).read()
+a='export function t(lang, key, vars) {'
+b=a + """
+  try { require('node:fs').appendFileSync('/tmp/t-keys.log', key + '\\n'); } catch {}"""
+open(p,'w').write(s.replace(a,b,1))
+PY2
+rm -f /tmp/t-keys.log
+npm run build >/dev/null 2>&1
+git checkout src/i18n/index.js      # 插桩必须还原，别提交进去
+sort -u /tmp/t-keys.log | wc -l     # 实际用到的 key 数
 ```
 
-判断规则：脚本报出的孤儿里，**凡是本计划任何页面都不会用到的，删掉两语对应条目**。拿不准的留着（宁可多留一条死文案，也不要删掉某个页面真在用的 key —— `t()` 缺 key 会让构建失败，所以删错了会立刻暴露，但那是在你已经提交之后）。删完必须跑 `npm test`（漂移守卫会确认两语仍然对齐）与 `npm run build`（任何被误删的 key 都会让构建当场失败）。
+我已经跑过一遍，结果作为交叉校验（若你的结果与此不符，**先查你自己的跑法，
+再来找我** —— 数据是我这边核对过的）：
 
-把删掉的 key 数量与清单写进报告。
+- `src/i18n/zh.json` 与 `en.json` 各 **274** 个 key，两边键集完全一致；
+- 一次完整构建实际用到 **176** 个；
+- 因此孤儿 **98** 个，按命名空间分布：`common` 15、`dashboard` 17、`test` 13、
+  `search` 9、`papers` 8、`settings` 8、`configurator` 6、`awards` 4、`menu` 4、
+  `nav` 4、`abstract` 3、`timelinePage` 3、`notFound` 2、`trends` 2；
+- 「用到但文案表里没有」的集合为空 —— 说明构建期没有任何键靠运气活着。
+
+完整清单（**两份 locale 都要删，删完两边必须仍然键集一致**）：
+
+```
+  abstract.loadingPapers
+  abstract.papers
+  abstract.selectPublication
+  awards.awards
+  awards.papers
+  awards.selectHint
+  awards.selectHintDetail
+  common.add
+  common.cancel
+  common.confirm
+  common.customStyle
+  common.delete
+  common.edit
+  common.feedback
+  common.filter
+  common.language
+  common.loading
+  common.noData
+  common.notice
+  common.reset
+  common.save
+  common.search
+  configurator.menuMode
+  configurator.overlay
+  configurator.presets
+  configurator.primary
+  configurator.static
+  configurator.surface
+  dashboard.feedback
+  dashboard.notices
+  dashboard.paperStats.papers
+  dashboard.paperStats.status.advanced
+  dashboard.paperStats.status.pending
+  dashboard.paperStats.status.processed
+  dashboard.paperStats.status.processing
+  dashboard.paperStats.subtitle
+  dashboard.paperStats.title
+  dashboard.paperStats.totalPapers
+  dashboard.paperStats.year
+  dashboard.projectStars
+  dashboard.recentUpdate
+  dashboard.stats
+  dashboard.title
+  dashboard.totalPapers
+  dashboard.totalPublications
+  menu.home
+  menu.main
+  menu.paper
+  menu.reputation
+  nav.dashboard
+  nav.misc
+  nav.papers
+  nav.reputation
+  notFound.backHome
+  notFound.message
+  papers.abstract
+  papers.author
+  papers.keywords
+  papers.paperTitle
+  papers.search
+  papers.title
+  papers.venue
+  papers.year
+  search.authors
+  search.copy
+  search.favorites
+  search.loadingMessage
+  search.pageReport
+  search.previewMessage
+  search.publicationSelected
+  search.showingResults
+  search.url
+  settings.actions.reset
+  settings.actions.save
+  settings.title
+  settings.toast.loadFailed
+  settings.toast.saveFailed
+  settings.toast.saved
+  settings.unsupported.desc
+  settings.unsupported.title
+  test.currentLanguage
+  test.currentTime
+  test.dashboard
+  test.description
+  test.direction
+  test.instructions
+  test.instructionsText
+  test.loading
+  test.locale
+  test.papers
+  test.samples
+  test.search
+  test.title
+  timelinePage.needsJs
+  timelinePage.next
+  timelinePage.passed
+  trends.acceptedPapers
+  trends.title
+```
+
+其中几条值得单说：
+
+- `notFound.message` / `notFound.backHome` 是 Vue 时代的键，Task 6 新增的
+  `notFound.desc` / `notFound.back` 是同一语义的新键。Task 6 按「只增不改」没动旧的，
+  处理正确；现在旧的确实没人用了，在此删除。
+- `settings.unsupported.title` / `.desc` 曾被设置页的降级提示复用，Task 19 换成了
+  不预设原因的 `settings.degraded`（旧文案说「浏览器不支持 IndexedDB」，而实际
+  场景是配额耗尽 —— 浏览器支持得好好的，只是写不进去），旧的两条因此成为孤儿。
+- `timelinePage.next` / `.passed` / `.needsJs`、`awards.*` 的四条、`abstract.*` 的三条，
+  都是我在各自 brief 里要了却从没让模板用上的 —— 每一条都是我的疏漏，不是实现问题。
+- `test.*` 十三条来自 `I18nTest.vue`，随该文件一并消失。
+
+删完再跑一次上面的插桩流程复核：应当变成 176 个 key、0 个孤儿。
+最后确认 `npm run build` 仍然零错误零警告 —— `t()` 缺 key 会抛错，所以构建通过
+本身就是「没有误删」的强证据。
 
 - [ ] **Step 5: 更新 CLAUDE.md**
 
