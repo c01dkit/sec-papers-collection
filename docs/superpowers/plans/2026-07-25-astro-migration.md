@@ -5906,7 +5906,9 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 "loading": "正在加载全部论文…",
 "loadFailed": "无法加载完整论文列表（可能是网络或 CDN 问题）。当前显示的是最新 30 篇。",
 "retry": "重试",
-"previewNote": "预览：最新 {count} 篇。完整列表加载中…",
+"lead": "检索历年安全顶会论文：按会议与年份筛选，按标题搜索，收藏感兴趣的条目。",
+"previewNote": "预览：最新 __N__ 篇，完整列表加载中…",
+"previewOffline": "离线预览：__N__ 篇（完整列表暂不可用）",
 "favoritesOnly": "仅看收藏",
 "selected": "已选 {count}",
 "perPage": "每页",
@@ -5923,7 +5925,9 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 "loading": "Loading all papers…",
 "loadFailed": "Could not load the full paper list (network or CDN issue). Showing the 30 most recent.",
 "retry": "Retry",
-"previewNote": "Preview: {count} most recent. Loading the full list…",
+"lead": "Search accepted papers from top security venues — filter by venue and year, search titles, and star the ones worth keeping.",
+"previewNote": "Preview: __N__ most recent, loading the full list…",
+"previewOffline": "Offline preview: __N__ papers (full list unavailable)",
 "favoritesOnly": "Favorites only",
 "selected": "{count} selected",
 "perPage": "Per page",
@@ -6033,7 +6037,16 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 
 // 预渲染最新 30 条：按年份降序、同年按 id 升序（spec §8）
+// 论文标题是从会议网站抓来的。set:html 不做转义，标题里只要出现 </script>
+// 就能提前闭合这个标签，其后的内容会被当页面 HTML 解析。当前 15,600 条里没有
+// 这种标题，但数据每次抓取都会变，不能指望它一直没有。
+const safeJson = (v) => JSON.stringify(v).replaceAll('<', '\\u003c');
+
 const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
+// 预渲染只铺第一页。铺满 30 行的话，JS 一接管就立刻换成 15 行的分页结果，
+// 用户在最常访问的页面上看到一次明显的内容跳动，另有约 2.5 KB HTML 白发一遍。
+// #ptSeed 仍内嵌全部 30 条 —— 那是 CDN 失败时的兜底数据集，越多越有得筛。
+const prerender = seed.slice(0, 15);   // 与 initialState().perPage 一致
 
 // #ptSeed 内嵌了预渲染那 30 行的完整数据：CDN 拉不到 data.json 时，脚本以此为
 // 数据源继续提供筛选/排序/分页。用内嵌 JSON 而不是从表格 DOM 反推 —— 无损、
@@ -6050,7 +6063,7 @@ const years = Object.keys(stats.byYear)
 ---
 
 <PageLayout lang={lang} page="search" title={t(lang, 'menu.search')}
-            lead={t(lang, 'search.previewNote', { count: seed.length })}>
+            lead={t(lang, 'search.lead')}>
 
   <div class="toolbar">
     <label class="q">
@@ -6099,13 +6112,13 @@ const years = Object.keys(stats.byYear)
           <option>15</option><option>30</option><option>50</option><option>100</option>
         </select>
       </label>
-      <button type="button" id="pgPrev" aria-label={t(lang, 'search.prevPage')}>‹</button>
+      <button type="button" id="pgPrev" disabled aria-label={t(lang, 'search.prevPage')}>‹</button>
       <span id="pgInfo"></span>
-      <button type="button" id="pgNext" aria-label={t(lang, 'search.nextPage')}>›</button>
+      <button type="button" id="pgNext" disabled aria-label={t(lang, 'search.nextPage')}>›</button>
     </div>
   </div>
 
-  <script type="application/json" id="ptSeed" set:html={JSON.stringify(seed)} />
+  <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
     loading: t(lang, 'search.loading'),
@@ -6168,23 +6181,6 @@ const years = Object.keys(stats.byYear)
   }
   .pt th:hover { color: var(--ink); }
   .pt th[data-dir]::after { content: attr(data-dir); margin-left: 0.3rem; color: var(--accent); }
-  .pt td {
-    padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
-    font-size: var(--fs-small); vertical-align: baseline;
-  }
-  .pt tbody tr:hover { background: var(--band); }
-  .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
-  .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
-  .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .c-act { width: 4.2rem; white-space: nowrap; }
-  .c-act a, .c-act button {
-    background: none; border: 0; padding: 0 0.2rem; cursor: pointer;
-    font: inherit; color: var(--faint);
-  }
-  .c-act a:hover, .c-act button:hover { color: var(--accent); }
-  .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
-  .c-act button[aria-pressed='true'] { color: var(--gold); }
-
   .empty { padding: 2.5rem 0; text-align: center; color: var(--faint); font-size: var(--fs-small); }
 
   .pager {
@@ -6205,6 +6201,30 @@ const years = Object.keys(stats.byYear)
   }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>
+
+<style is:global>
+  /* 这些规则必须是 is:global。表格的行来自两个地方 —— 构建期的 PaperRow.astro，
+     和运行期 paper-table.js 里的 buildRow —— 两者都拿不到 search.astro 的 scope
+     属性（Astro 只给本文件模板里写出的元素加），所以写在上面那个 scoped 块里的
+     行规则一条都不会生效：表头有样式、表体没有，肉眼一看就是坏的。
+     选择器一律以 .pt 打头，把作用范围限制在这张表内。 */
+  .pt td {
+    padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
+    font-size: var(--fs-small); vertical-align: baseline;
+  }
+  .pt tbody tr:hover { background: var(--band); }
+  .pt .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .pt .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
+  .pt .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pt .c-act { width: 4.2rem; white-space: nowrap; }
+  .pt .c-act a, .pt .c-act button {
+    background: none; border: 0; padding: 0 0.2rem; cursor: pointer;
+    font: inherit; color: var(--faint);
+  }
+  .pt .c-act a:hover, .pt .c-act button:hover { color: var(--accent); }
+  .pt .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
+  .pt .c-act button[aria-pressed='true'] { color: var(--gold); }
+</style>
 ```
 
 - [ ] **Step 5: 实现 paper-table.js**
@@ -6214,7 +6234,11 @@ import { applyFilters, sortRows, paginate, loadPapers } from '@/lib/papers.js';
 import { highlightSegments } from '@/lib/highlight.js';
 import { getSettings, getFavorites, toggleFavorite, isPersistent } from './settings-store.js';
 
-const state = {
+// state 必须能整体重建。模块在软导航时不会重新执行（同一个 bundle URL），
+// 但 DOM 是全新的、dataset.bound 也没了，于是 init 会再跑一次。若此时只重置
+// rows，上一次访问留下的筛选条件会活下来，而界面上的控件全是空的 ——
+// 表现为「什么都没选，表格却是空的」，用户无从下手。
+const initialState = () => ({
   rows: [],          // 全量（或预渲染的种子）
   favorites: new Set(),
   keywords: [],
@@ -6226,8 +6250,10 @@ const state = {
   sortDir: 'asc',
   page: 1,
   perPage: 15,
-  loaded: false,     // 全量数据是否已到位
-};
+  status: 'loading', // 'loading' | 'loaded' | 'failed'
+});
+
+let state = initialState();
 
 let i18n = {};
 let els = {};
@@ -6253,8 +6279,12 @@ function readSeed() {
 }
 
 function renderTitle(td, title) {
+  // 必须用 trim 后的查询。applyFilters 内部会 trim，而这里不 trim 的话，
+  // 输入一个空格：什么都不会被筛掉（对的），但每个标题里的每个空格都被标成命中；
+  // 反过来 "fuzz " 能正确筛选却一处都高亮不出来。
+  const q = state.query.trim();
   const patterns = [
-    ...(state.query ? [{ text: state.query, cls: 'q-hit' }] : []),
+    ...(q ? [{ text: q, cls: 'q-hit' }] : []),
     ...state.keywords.map((k) => ({ text: k, cls: 'hl' })),
   ];
   const frag = document.createDocumentFragment();
@@ -6342,9 +6372,10 @@ function render() {
   els.tbody.replaceChildren(...page.rows.map(buildRow));
   els.empty.hidden = page.total > 0;
 
-  els.count.textContent = state.loaded
-    ? fmt(i18n.total, { __N__: page.total.toLocaleString() })
-    : els.count.textContent;
+  // 三态都要如实写出来。原先在未加载时保留旧文本，结果 CDN 失败后计数永远停在
+  // 「预览 30 篇」，而表格已经在按筛选条件变化 —— 两者对不上。
+  const countTpl = { loading: i18n.previewNote, loaded: i18n.total, failed: i18n.previewOffline }[state.status];
+  els.count.textContent = fmt(countTpl, { __N__: page.total.toLocaleString() });
   els.pgInfo.textContent = fmt(i18n.pageOf, {
     __P__: String(page.page),
     __C__: String(page.pageCount),
@@ -6358,6 +6389,17 @@ function readDropdown(details, placeholder) {
   const slot = details.querySelector('[data-fd-value]');
   slot.textContent = checked.length ? fmt(i18n.selected, { __N__: String(checked.length) }) : placeholder;
   return checked;
+}
+
+// 复制提示必须和 #notice 分开。共用一个槽位时，复制一次就会把 CDN 失败提示
+// 连同它的「重试」按钮一起 replaceChildren 掉，两秒后再把整条隐藏 ——
+// 用户失去了唯一的恢复入口，且没有任何迹象表明发生过这件事。
+let toastTimer = 0;
+function showToast(text) {
+  els.toast.textContent = text;
+  els.toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { els.toast.hidden = true; }, 2000);
 }
 
 function showNotice(text, onRetry) {
@@ -6379,12 +6421,13 @@ async function fetchFull() {
   try {
     const data = await loadPapers();
     state.rows = data;
-    state.loaded = true;
-    els.count.textContent = fmt(i18n.total, { __N__: data.length.toLocaleString() });
-    render();
+    state.status = 'loaded';
+    render();   // render 自己会按 status 写计数
   } catch (err) {
     console.warn('[paper-table] 全量数据加载失败，保留预渲染内容', err);
-    // 预渲染的 30 行仍在 state.rows 里，页面依旧可读
+    // 种子数据仍在 state.rows 里，页面依旧可筛可排
+    state.status = 'failed';
+    render();   // 让计数改口说「离线预览」，而不是停在「加载中」
     showNotice(i18n.loadFailed, true);
   }
 }
@@ -6394,11 +6437,14 @@ export async function initPaperTable() {
   if (!tbody || tbody.dataset.bound) return;
   tbody.dataset.bound = '1';
 
+  state = initialState();   // 见 initialState 上方注释：软导航必须清干净
+
   i18n = JSON.parse(document.getElementById('ptI18n').textContent);
   els = {
     tbody,
     empty: document.getElementById('ptEmpty'),
     notice: document.getElementById('notice'),
+    toast: document.getElementById('ptToast'),
     count: document.getElementById('ptCount'),
     pgInfo: document.getElementById('pgInfo'),
     pgPrev: document.getElementById('pgPrev'),
@@ -6518,8 +6564,7 @@ export async function initPaperTable() {
     const title = tr.querySelector('[data-title]')?.textContent ?? '';
     try {
       await navigator.clipboard.writeText(title);
-      showNotice(i18n.copied, false);
-      setTimeout(() => { els.notice.hidden = true; }, 2000);
+      showToast(i18n.copied);
     } catch {
       /* 无剪贴板权限时静默 */
     }
