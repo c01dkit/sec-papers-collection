@@ -6029,7 +6029,11 @@ const { id, label, options, placeholder } = Astro.props;
 
   .fd-menu {
     position: absolute; z-index: 10; left: 0; top: calc(100% + 0.35rem);
-    min-width: 12rem; max-height: 17rem; overflow-y: auto;
+    /* min-width 给了下界却没有上界：菜单是绝对定位的，展开时若这个下拉本身
+       靠近视口右缘，12rem 的菜单就会伸出屏幕，把页面顶出横向滚动条。
+       窄屏上工具栏会换行，下拉的横向位置因此不固定，不能假定它总在左边。 */
+    min-width: 12rem; max-width: calc(100vw - 1.5rem);
+    max-height: 17rem; overflow-y: auto;
     background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius);
     padding: 0.3rem 0;
   }
