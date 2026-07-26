@@ -36,6 +36,30 @@ const publications = Object.entries(stats.byPublication)
 const years = Object.keys(stats.byYear)
   .sort((a, b) => Number(b) - Number(a))
   .map((y) => ({ value: y, label: y, count: stats.byYear[y] }));
+
+// 排序表头必须是 <th> 里的原生 <button>，不能把 click 绑在裸 <th> 上。
+// 实测（真实 Chrome，/zh/search/）：五个 <th> 全是 tabindex=null / role=null /
+// aria-sort=null，26 步 tab 走查里一个都没出现 —— 键盘用户没有任何办法给
+// 15,600 条论文排序，也没有替代控件。排序方向当时只由
+// `th[data-dir]::after { content: attr(data-dir) }` 那个 ↑/↓ 表达，纯 CSS 生成，
+// 没有程序化等价物。
+// 用原生 button 而不是 tabindex="0" + role="button" + 自己处理按键：
+// Enter/Space、焦点环、role 全部免费且正确。aria-sort 留在 <th> 上 ——
+// ARIA 要求它挂在 columnheader 上，由 paper-table.js 与 data-dir 一起写。
+//
+// <th> 上那个 aria-label 不是多余的。columnheader 的名字默认取自内容，而内容
+// 现在有两处污染：按钮的 aria-label（「按年份排序」）和 `::after` 用
+// content:attr(data-dir) 生成的 ↑/↓ —— 实测 CDP AX 树里列头名字变成
+// 「按年份排序 ↑」。而列头名字会在读屏播报**每一个数据单元格**时被念一遍，
+// 15,600 行都要带上「按…排序 ↑」。显式 aria-label 把列头钉回干净的列名，
+// 排序意图留给按钮自己的名字，排序状态留给 aria-sort。（箭头那处污染在改成
+// 按钮之前就存在了，一并修掉。）
+const sortCols = [
+  { key: 'id', cls: 'c-id', label: 'ID' },
+  { key: 'publication', cls: 'c-pub', label: t(lang, 'search.publication') },
+  { key: 'year', cls: 'c-year', label: t(lang, 'search.year') },
+  { key: 'title', cls: 'c-title', label: t(lang, 'search.title') },
+];
 ---
 
 <PageLayout lang={lang} page="search" title={t(lang, 'menu.search')}
@@ -44,7 +68,8 @@ const years = Object.keys(stats.byYear)
   <div class="toolbar">
     <label class="q">
       <span class="ic" aria-hidden="true">⌕</span>
-      <input type="search" id="q" placeholder={t(lang, 'search.searchPlaceholder')}
+      <input type="search" id="q" aria-label={t(lang, 'search.searchLabel')}
+             placeholder={t(lang, 'search.searchPlaceholder')}
              autocomplete="off" spellcheck="false" />
     </label>
 
@@ -66,11 +91,12 @@ const years = Object.keys(stats.byYear)
     <table class="pt">
       <thead>
         <tr>
-          <th class="c-id" data-sort="id">ID</th>
-          <th class="c-pub" data-sort="publication">{t(lang, 'search.publication')}</th>
-          <th class="c-year" data-sort="year">{t(lang, 'search.year')}</th>
-          <th class="c-title" data-sort="title">{t(lang, 'search.title')}</th>
-          <th class="c-act"><span class="sr">{t(lang, 'search.paper')}</span></th>
+          {sortCols.map((c) => (
+            <th class={c.cls} scope="col" data-sort={c.key} aria-sort="none" aria-label={c.label}>
+              <button type="button" aria-label={t(lang, 'search.sortBy', { column: c.label })}>{c.label}</button>
+            </th>
+          ))}
+          <th class="c-act" scope="col"><span class="sr">{t(lang, 'search.paper')}</span></th>
         </tr>
       </thead>
       <tbody id="ptBody">
@@ -168,9 +194,15 @@ const years = Object.keys(stats.byYear)
     text-align: left; font-weight: 400; font-family: var(--font-sans);
     font-size: var(--fs-kicker); letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--faint); padding: 0 0.5rem 0.5rem; border-bottom: 1px solid var(--hairline);
-    cursor: pointer; user-select: none; white-space: nowrap;
+    user-select: none; white-space: nowrap;
   }
-  .pt th:hover { color: var(--ink); }
+  /* cursor/hover 从 <th> 挪到 <button> 上：现在只有按钮真的会排序，
+     整格都显示手型就是在暗示一块点不动的区域可点。 */
+  .pt th button {
+    background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+    font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+  }
+  .pt th button:hover { color: var(--ink); }
   .pt th[data-dir]::after { content: attr(data-dir); margin-left: 0.3rem; color: var(--accent); }
   .empty { padding: 2.5rem 0; text-align: center; color: var(--faint); font-size: var(--fs-small); }
 

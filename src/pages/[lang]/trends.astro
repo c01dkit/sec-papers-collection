@@ -10,17 +10,74 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const groups = buildSeries(stats);
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+// 这一页原先的全部内容就是三个 <canvas>，实测 aria-label=null、role=null、
+// innerHTML=""：读屏用户在 /zh/trends/ 上能拿到的是 h1「趋势」加三个组名，
+// 别的什么都没有。<noscript> 只管 JS 关掉的情况，管不了「JS 开着但不用眼睛看」。
+//
+// 正确的做法本项目里已经有了 —— TrendDemo.astro:14 用 role="img" 配一句概括性
+// aria-label —— 只是没搬到真页面上。这里把它补上，并且再给每张图配一张
+// 逐年数据表：概括句回答「这张图讲什么」，表格给出具体数字。
+//
+// 表格默认视觉隐藏（.tbl），但读屏能读到；JS 关掉时由页面里的 <noscript> 放出来，
+// 顺便把三个空的 .canvas-box 收掉 —— 否则无 JS 访客要面对约 1,250px 的空白，
+// 而数据本来就已经在构建产物里（#trendData 内嵌的是同一份）。
+//
+// 概括句与表格里的数字全部由 buildSeries 的结果现算，不硬写：会议数、年份范围、
+// 合计篇数三项与 data-statistics.json 同源，数据一变文案跟着变。
+const summarize = (g) => ({
+  label: t(lang, g.labelKey),
+  venues: String(g.series.length),
+  from: g.years[0],
+  to: g.years[g.years.length - 1],
+  total: nf.format(g.series.reduce((s, v) => s + v.data.reduce((a, b) => a + (b ?? 0), 0), 0)),
+});
 ---
 
 <PageLayout lang={lang} page="trends" title={t(lang, 'menu.trends')}
             lead={t(lang, 'trendsPage.lead')}>
+
+  <noscript>
+    <style is:inline>
+      /* 无 JS 时：收掉三个永远画不出东西的空画布，把已经在 HTML 里的数据表放出来。
+         选择器写两段（0,2,0）与 .tbl 的 scoped 规则同级但在其后，再加 !important
+         兜底 —— 与 awards.astro 的 <noscript> 块同一套做法和同一个理由。 */
+      .chart-sec .canvas-box { display: none !important; }
+      .chart-sec .tbl {
+        position: static !important; width: auto !important; height: auto !important;
+        overflow-x: auto !important; clip: auto !important;
+      }
+    </style>
+  </noscript>
+
   {groups.map((g) => (
     <section class="chart-sec" data-reveal>
       <h2 class="srf">{t(lang, g.labelKey)}</h2>
-      <div class="canvas-box">
-        <canvas data-chart={g.category}></canvas>
-      </div>
       <noscript><p class="ns">{t(lang, 'trendsPage.needsJs')}</p></noscript>
+      <div class="canvas-box">
+        <canvas data-chart={g.category} role="img"
+                aria-label={t(lang, 'trendsPage.chartSummary', summarize(g))}></canvas>
+      </div>
+      <div class="tbl">
+        <table>
+          <caption>{t(lang, 'trendsPage.tableCaption', { label: t(lang, g.labelKey) })}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{t(lang, 'search.publication')}</th>
+              {g.years.map((y) => <th scope="col">{y}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {g.series.map((s) => (
+              <tr>
+                <th scope="row">{s.label}</th>
+                {s.data.map((n) => <td>{n == null ? '—' : nf.format(n)}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   ))}
 
@@ -32,4 +89,23 @@ const groups = buildSeries(stats);
   .chart-sec h2 { margin-bottom: 0.9rem; }
   .canvas-box { height: min(58vh, 26rem); position: relative; }
   .ns { color: var(--faint); font-size: var(--fs-small); }
+
+  /* 视觉隐藏但读屏可达。不复用 search.astro 的 .sr：那条是 scoped 的、只对它
+     自己的模板生效，而这里还需要 <noscript> 能把它整条撤销 —— 所以本页自己定义
+     一份，撤销规则就写在上面那个 noscript 块里，两者挨着放，改一处看得见另一处。 */
+  .tbl {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .tbl table { border-collapse: collapse; font-size: var(--fs-small); min-width: 100%; }
+  .tbl caption {
+    text-align: left; color: var(--faint); font-size: var(--fs-kicker);
+    padding-bottom: 0.4rem;
+  }
+  .tbl th, .tbl td {
+    padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
+    font-variant-numeric: tabular-nums; text-align: right; font-weight: 400;
+  }
+  .tbl thead th { color: var(--faint); font-size: var(--fs-kicker); }
+  .tbl th[scope='row'] { text-align: left; color: var(--ink); white-space: nowrap; }
 </style>

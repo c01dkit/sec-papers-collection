@@ -225,6 +225,25 @@ export async function initPaperTable() {
     perPage: document.getElementById('perPage'),
   };
 
+  // 表头从 tbody 反查同一张表拿到，而不是 document.querySelectorAll('.pt th…')：
+  // 类名是全站命名空间（Task 17 的 .bar 就是这么撞死获奖页的），而这里本来就
+  // 有一个确定的根可用。
+  const sortHeads = [...(tbody.closest('table')?.querySelectorAll('th[data-sort]') ?? [])];
+
+  // aria-sort 与 data-dir 必须一起写：前者是读屏能拿到的排序状态，
+  // 后者驱动 ::after 那个 ↑/↓ 箭头。只写一个就会有一方在说谎。
+  const paintSort = () => {
+    for (const th of sortHeads) {
+      const active = th.dataset.sort === state.sortKey;
+      if (active) {
+        th.dataset.dir = state.sortDir === 'asc' ? '↑' : '↓';
+      } else {
+        delete th.dataset.dir;
+      }
+      th.setAttribute('aria-sort', !active ? 'none' : state.sortDir === 'asc' ? 'ascending' : 'descending');
+    }
+  };
+
   // 先用内嵌的种子数据当数据源，这样 CDN 失败也有内容可筛
   state.rows = readSeed();
 
@@ -281,7 +300,7 @@ export async function initPaperTable() {
     readDropdown(els.fYear, i18n.anyYear);
     els.favOnly.setAttribute('aria-pressed', 'false');
     els.favOnly.querySelector('span').textContent = '☆';
-    document.querySelectorAll('.pt th[data-dir]').forEach((th) => delete th.dataset.dir);
+    paintSort();   // sortKey 已置空 —— 箭头和 aria-sort 一起收回
     render();
   });
 
@@ -302,16 +321,17 @@ export async function initPaperTable() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  document.querySelectorAll('.pt th[data-sort]').forEach((th) => {
-    th.addEventListener('click', () => {
+  // 事件绑在 <th> 里的 <button> 上，不是 <th> 上：原生按钮自带 tab 停靠点、
+  // Enter/Space 激活和 button role，这三样是键盘用户能排序的全部前提。
+  for (const th of sortHeads) {
+    th.querySelector('button')?.addEventListener('click', () => {
       const key = th.dataset.sort;
       state.sortDir = state.sortKey === key && state.sortDir === 'asc' ? 'desc' : 'asc';
       state.sortKey = key;
-      document.querySelectorAll('.pt th[data-dir]').forEach((o) => delete o.dataset.dir);
-      th.dataset.dir = state.sortDir === 'asc' ? '↑' : '↓';
+      paintSort();
       render();
     });
-  });
+  }
 
   // 行内委托：收藏按钮 + 点标题复制
   tbody.addEventListener('click', async (e) => {

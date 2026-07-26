@@ -9,6 +9,13 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 
+// 四个开关的可见文案在兄弟节点 .lt 里，开关本身是个空的 <button>（里面只有滑块
+// <span class="knob">）—— 名字取不出来。实测（CDP AX 树，/zh/settings/）是四个
+// `button ""`：读屏用户连着听到四遍「按钮，未按下」，分不清哪个是深色模式、
+// 哪个是记住语言，而这一页是这些偏好的唯一入口。
+// 所以给 .lt / .ld 各配一个 id，用 aria-labelledby 关联名字、aria-describedby
+// 关联说明 —— 而不是把 tg.label 复制进 aria-label：那样文案存在两份，改一处
+// 就会漂。id 用 key 拼，key 来自 schema 的字段名，天然唯一。
 const toggles = [
   { key: 'darkTheme', label: t(lang, 'settings.darkMode.label'), desc: t(lang, 'settings.darkMode.desc') },
   { key: 'rememberDarkMode', label: t(lang, 'settings.form.rememberDarkMode.label'), desc: t(lang, 'settings.form.rememberDarkMode.desc') },
@@ -42,11 +49,12 @@ const toggles = [
   {toggles.map((tg) => (
     <section class="row" data-reveal>
       <div class="label">
-        <div class="lt">{tg.label}</div>
-        <p class="ld">{tg.desc}</p>
+        <div class="lt" id={`lt-${tg.key}`}>{tg.label}</div>
+        <p class="ld" id={`ld-${tg.key}`}>{tg.desc}</p>
       </div>
       <div class="control">
-        <button type="button" class="switch" data-toggle={tg.key} aria-pressed="false">
+        <button type="button" class="switch" data-toggle={tg.key} aria-pressed="false"
+                aria-labelledby={`lt-${tg.key}`} aria-describedby={`ld-${tg.key}`}>
           <span class="knob"></span>
         </button>
       </div>
