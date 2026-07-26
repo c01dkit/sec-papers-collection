@@ -150,7 +150,17 @@ const years = Object.keys(stats.byYear)
     font-size: var(--fs-small); color: var(--muted);
   }
 
-  .table-scroll { overflow-x: auto; }
+  /* .pt 的 min-width:40rem 比窄屏视口宽，本来就该由这里的 overflow-x:auto
+     在自己内部滚动掉。但 overflow:auto 只保证「视觉裁切 + 出滚动条」，不保证
+     子元素的布局尺寸不会继续影响祖先——contain:layout 才是那道真正的边界：
+     它告诉浏览器「这个盒子内部的布局不会影响外面」，documentElement.scrollWidth
+     才会如实反映页面本身的宽度，而不是把内部已经能横向滚动掉的表格宽度也算进去。
+     加 paint 是为了同时裁切住任何可能画出边界外的内容（比如 hover 的描边）。
+     实测：不加这条时 375px 视口下 document.documentElement.scrollWidth 会算进
+     表格的 640px，整页多出约 224px 的横向滚动；加上后归零，且 .table-scroll
+     自身的横向滚动（列不缩水、仍可完整看到）不受影响——contain 不改变
+     overflow-x:auto 本身的滚动行为，只是不让它内部的布局尺寸外泄。 */
+  .table-scroll { overflow-x: auto; contain: layout paint; }
   .pt { width: 100%; border-collapse: collapse; min-width: 40rem; }
   .pt th {
     text-align: left; font-weight: 400; font-family: var(--font-sans);
