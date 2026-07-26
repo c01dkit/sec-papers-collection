@@ -13,7 +13,16 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 
 // 预渲染最新 30 条：按年份降序、同年按 id 升序（spec §8）
+// 论文标题是从会议网站抓来的。set:html 不做转义，标题里只要出现 </script>
+// 就能提前闭合这个标签，其后的内容会被当页面 HTML 解析。当前 15,600 条里没有
+// 这种标题，但数据每次抓取都会变，不能指望它一直没有。
+const safeJson = (v) => JSON.stringify(v).replaceAll('<', '\\u003c');
+
 const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
+// 预渲染只铺第一页。铺满 30 行的话，JS 一接管就立刻换成 15 行的分页结果，
+// 用户在最常访问的页面上看到一次明显的内容跳动，另有约 2.5 KB HTML 白发一遍。
+// #ptSeed 仍内嵌全部 30 条 —— 那是 CDN 失败时的兜底数据集，越多越有得筛。
+const prerender = seed.slice(0, 15);   // 与 initialState().perPage 一致
 
 // #ptSeed 内嵌了预渲染那 30 行的完整数据：CDN 拉不到 data.json 时，脚本以此为
 // 数据源继续提供筛选/排序/分页。用内嵌 JSON 而不是从表格 DOM 反推 —— 无损、
@@ -30,7 +39,7 @@ const years = Object.keys(stats.byYear)
 ---
 
 <PageLayout lang={lang} page="search" title={t(lang, 'menu.search')}
-            lead={t(lang, 'search.previewNote', { count: seed.length })}>
+            lead={t(lang, 'search.lead')}>
 
   <div class="toolbar">
     <label class="q">
@@ -64,14 +73,14 @@ const years = Object.keys(stats.byYear)
         </tr>
       </thead>
       <tbody id="ptBody">
-        {seed.map((row) => <PaperRow lang={lang} row={row} />)}
+        {prerender.map((row) => <PaperRow lang={lang} row={row} />)}
       </tbody>
     </table>
     <p class="empty" id="ptEmpty" hidden>{t(lang, 'search.noResults')}</p>
   </div>
 
   <div class="pager">
-    <span class="count" id="ptCount">{t(lang, 'search.previewNote', { count: seed.length })}</span>
+    <span class="count" id="ptCount">{t(lang, 'search.previewNote').replace('__N__', String(seed.length))}</span>
     <div class="pg">
       <label class="per">
         {t(lang, 'search.perPage')}
@@ -79,13 +88,13 @@ const years = Object.keys(stats.byYear)
           <option>15</option><option>30</option><option>50</option><option>100</option>
         </select>
       </label>
-      <button type="button" id="pgPrev" aria-label={t(lang, 'search.prevPage')}>‹</button>
+      <button type="button" id="pgPrev" disabled aria-label={t(lang, 'search.prevPage')}>‹</button>
       <span id="pgInfo"></span>
-      <button type="button" id="pgNext" aria-label={t(lang, 'search.nextPage')}>›</button>
+      <button type="button" id="pgNext" disabled aria-label={t(lang, 'search.nextPage')}>›</button>
     </div>
   </div>
 
-  <script type="application/json" id="ptSeed" set:html={JSON.stringify(seed)} />
+  <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
     loading: t(lang, 'search.loading'),
@@ -148,23 +157,6 @@ const years = Object.keys(stats.byYear)
   }
   .pt th:hover { color: var(--ink); }
   .pt th[data-dir]::after { content: attr(data-dir); margin-left: 0.3rem; color: var(--accent); }
-  .pt td {
-    padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
-    font-size: var(--fs-small); vertical-align: baseline;
-  }
-  .pt tbody tr:hover { background: var(--band); }
-  .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
-  .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
-  .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .c-act { width: 4.2rem; white-space: nowrap; }
-  .c-act a, .c-act button {
-    background: none; border: 0; padding: 0 0.2rem; cursor: pointer;
-    font: inherit; color: var(--faint);
-  }
-  .c-act a:hover, .c-act button:hover { color: var(--accent); }
-  .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
-  .c-act button[aria-pressed='true'] { color: var(--gold); }
-
   .empty { padding: 2.5rem 0; text-align: center; color: var(--faint); font-size: var(--fs-small); }
 
   .pager {
@@ -184,4 +176,28 @@ const years = Object.keys(stats.byYear)
     margin-left: 0.3rem;
   }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
+
+<style is:global>
+  /* 这些规则必须是 is:global。表格的行来自两个地方 —— 构建期的 PaperRow.astro，
+     和运行期 paper-table.js 里的 buildRow —— 两者都拿不到 search.astro 的 scope
+     属性（Astro 只给本文件模板里写出的元素加），所以写在上面那个 scoped 块里的
+     行规则一条都不会生效：表头有样式、表体没有，肉眼一看就是坏的。
+     选择器一律以 .pt 打头，把作用范围限制在这张表内。 */
+  .pt td {
+    padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
+    font-size: var(--fs-small); vertical-align: baseline;
+  }
+  .pt tbody tr:hover { background: var(--band); }
+  .pt .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .pt .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
+  .pt .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pt .c-act { width: 4.2rem; white-space: nowrap; }
+  .pt .c-act a, .pt .c-act button {
+    background: none; border: 0; padding: 0 0.2rem; cursor: pointer;
+    font: inherit; color: var(--faint);
+  }
+  .pt .c-act a:hover, .pt .c-act button:hover { color: var(--accent); }
+  .pt .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
+  .pt .c-act button[aria-pressed='true'] { color: var(--gold); }
 </style>

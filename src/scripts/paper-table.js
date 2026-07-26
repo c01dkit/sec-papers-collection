@@ -2,7 +2,11 @@ import { applyFilters, sortRows, paginate, loadPapers } from '@/lib/papers.js';
 import { highlightSegments } from '@/lib/highlight.js';
 import { getSettings, getFavorites, toggleFavorite, isPersistent } from './settings-store.js';
 
-const state = {
+// state 必须能整体重建。模块在软导航时不会重新执行（同一个 bundle URL），
+// 但 DOM 是全新的、dataset.bound 也没了，于是 init 会再跑一次。若此时只重置
+// rows，上一次访问留下的筛选条件会活下来，而界面上的控件全是空的 ——
+// 表现为「什么都没选，表格却是空的」，用户无从下手。
+const initialState = () => ({
   rows: [],          // 全量（或预渲染的种子）
   favorites: new Set(),
   keywords: [],
@@ -14,8 +18,10 @@ const state = {
   sortDir: 'asc',
   page: 1,
   perPage: 15,
-  loaded: false,     // 全量数据是否已到位
-};
+  status: 'loading', // 'loading' | 'loaded' | 'failed'
+});
+
+let state = initialState();
 
 let i18n = {};
 let els = {};
@@ -41,8 +47,12 @@ function readSeed() {
 }
 
 function renderTitle(td, title) {
+  // 必须用 trim 后的查询。applyFilters 内部会 trim，而这里不 trim 的话，
+  // 输入一个空格：什么都不会被筛掉（对的），但每个标题里的每个空格都被标成命中；
+  // 反过来 "fuzz " 能正确筛选却一处都高亮不出来。
+  const q = state.query.trim();
   const patterns = [
-    ...(state.query ? [{ text: state.query, cls: 'q-hit' }] : []),
+    ...(q ? [{ text: q, cls: 'q-hit' }] : []),
     ...state.keywords.map((k) => ({ text: k, cls: 'hl' })),
   ];
   const frag = document.createDocumentFragment();
@@ -130,9 +140,10 @@ function render() {
   els.tbody.replaceChildren(...page.rows.map(buildRow));
   els.empty.hidden = page.total > 0;
 
-  els.count.textContent = state.loaded
-    ? fmt(i18n.total, { __N__: page.total.toLocaleString() })
-    : els.count.textContent;
+  // 三态都要如实写出来。原先在未加载时保留旧文本，结果 CDN 失败后计数永远停在
+  // 「预览 30 篇」，而表格已经在按筛选条件变化 —— 两者对不上。
+  const countTpl = { loading: i18n.previewNote, loaded: i18n.total, failed: i18n.previewOffline }[state.status];
+  els.count.textContent = fmt(countTpl, { __N__: page.total.toLocaleString() });
   els.pgInfo.textContent = fmt(i18n.pageOf, {
     __P__: String(page.page),
     __C__: String(page.pageCount),
@@ -146,6 +157,17 @@ function readDropdown(details, placeholder) {
   const slot = details.querySelector('[data-fd-value]');
   slot.textContent = checked.length ? fmt(i18n.selected, { __N__: String(checked.length) }) : placeholder;
   return checked;
+}
+
+// 复制提示必须和 #notice 分开。共用一个槽位时，复制一次就会把 CDN 失败提示
+// 连同它的「重试」按钮一起 replaceChildren 掉，两秒后再把整条隐藏 ——
+// 用户失去了唯一的恢复入口，且没有任何迹象表明发生过这件事。
+let toastTimer = 0;
+function showToast(text) {
+  els.toast.textContent = text;
+  els.toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { els.toast.hidden = true; }, 2000);
 }
 
 function showNotice(text, onRetry) {
@@ -167,12 +189,13 @@ async function fetchFull() {
   try {
     const data = await loadPapers();
     state.rows = data;
-    state.loaded = true;
-    els.count.textContent = fmt(i18n.total, { __N__: data.length.toLocaleString() });
-    render();
+    state.status = 'loaded';
+    render();   // render 自己会按 status 写计数
   } catch (err) {
     console.warn('[paper-table] 全量数据加载失败，保留预渲染内容', err);
-    // 预渲染的 30 行仍在 state.rows 里，页面依旧可读
+    // 种子数据仍在 state.rows 里，页面依旧可筛可排
+    state.status = 'failed';
+    render();   // 让计数改口说「离线预览」，而不是停在「加载中」
     showNotice(i18n.loadFailed, true);
   }
 }
@@ -182,11 +205,14 @@ export async function initPaperTable() {
   if (!tbody || tbody.dataset.bound) return;
   tbody.dataset.bound = '1';
 
+  state = initialState();   // 见 initialState 上方注释：软导航必须清干净
+
   i18n = JSON.parse(document.getElementById('ptI18n').textContent);
   els = {
     tbody,
     empty: document.getElementById('ptEmpty'),
     notice: document.getElementById('notice'),
+    toast: document.getElementById('ptToast'),
     count: document.getElementById('ptCount'),
     pgInfo: document.getElementById('pgInfo'),
     pgPrev: document.getElementById('pgPrev'),
@@ -306,8 +332,7 @@ export async function initPaperTable() {
     const title = tr.querySelector('[data-title]')?.textContent ?? '';
     try {
       await navigator.clipboard.writeText(title);
-      showNotice(i18n.copied, false);
-      setTimeout(() => { els.notice.hidden = true; }, 2000);
+      showToast(i18n.copied);
     } catch {
       /* 无剪贴板权限时静默 */
     }
