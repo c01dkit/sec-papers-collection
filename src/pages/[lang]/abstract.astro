@@ -99,6 +99,13 @@ const groups = groupVenues(stats);
   #abResult .abs {
     margin: 0.5rem 0 0; font-size: var(--fs-small); line-height: 1.8;
     color: var(--muted); text-align: justify; hyphens: auto;
+    /* hyphens: auto 只对真实单词按语言规则断字，对没有断点的长串（裸链接、
+       残留的 LaTeX 如 textcolor{blue}{href{...}}）完全无效。全量摘要语料里
+       实测有 160 个长度 > 45 字符的不可断字符串，分布在 49 个届次里，
+       最长 110 字符（ASE 2025 里的一条）——375px 下会把整个文档撑出横向
+       滚动条（NDSS 2025 的 AlphaDog 摘要就是这样触发的）。标题另外核对过，
+       没有超过 40 字符的不可断串，所以不需要同样处理。 */
+    overflow-wrap: anywhere;
   }
   #abResult .abs--none { font-style: italic; color: var(--faint); }
   #abResult .skel { height: 0.7rem; background: var(--hairline-soft); margin: 0.4rem 0; }
