@@ -5903,7 +5903,6 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 
 ```json
 // zh.json search 内追加
-"loading": "正在加载全部论文…",
 "loadFailed": "无法加载完整论文列表（可能是网络或 CDN 问题）。当前显示的是最新 30 篇。",
 "retry": "重试",
 "lead": "检索历年安全顶会论文：按会议与年份筛选，按标题搜索，收藏感兴趣的条目。",
@@ -5922,7 +5921,6 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 
 ```json
 // en.json search 内追加
-"loading": "Loading all papers…",
 "loadFailed": "Could not load the full paper list (network or CDN issue). Showing the 30 most recent.",
 "retry": "Retry",
 "lead": "Search accepted papers from top security venues — filter by venue and year, search titles, and star the ones worth keeping.",
@@ -6084,6 +6082,7 @@ const years = Object.keys(stats.byYear)
   </div>
 
   <p class="notice" id="notice" hidden></p>
+  <p class="toast" id="ptToast" hidden role="status" aria-live="polite"></p>
 
   <div class="table-scroll">
     <table class="pt">
@@ -6121,8 +6120,9 @@ const years = Object.keys(stats.byYear)
   <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
-    loading: t(lang, 'search.loading'),
     loadFailed: t(lang, 'search.loadFailed'),
+    previewNote: t(lang, 'search.previewNote'),
+    previewOffline: t(lang, 'search.previewOffline'),
     retry: t(lang, 'search.retry'),
     total: t(lang, 'search.totalPapers', { count: '__N__' }),
     pageOf: t(lang, 'search.pageOf', { page: '__P__', pageCount: '__C__' }),
@@ -6169,6 +6169,12 @@ const years = Object.keys(stats.byYear)
     background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
     padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
     color: var(--ink);
+  }
+
+  .toast {
+    border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
+    padding: 0.4rem 0.8rem; margin: 0 0 1rem;
+    font-size: var(--fs-small); color: var(--muted);
   }
 
   .table-scroll { overflow-x: auto; }
@@ -6574,6 +6580,87 @@ export async function initPaperTable() {
   fetchFull();
 }
 ```
+
+- [ ] **Step 5b: 加接线测试 `tests/wiring.test.js`**
+
+页面模板和它的脚本是两个文件，靠两样东西对接：脚本读 `i18n.<key>`，模板必须把这个
+key 内嵌进 `#…I18n`；脚本 `getElementById('<id>')`，模板必须真的有这个 id。任何一处
+对不上，`npm test` 全绿、`npm run build` 零警告，页面在浏览器里直接抛异常 —— 而异常
+点常在 `render()` 开头，于是整页 JS 报废：数据请求发不出去、分页永远禁用、失败提示
+永远出不来。本任务已经这么栽过两次（缺 `previewNote`/`previewOffline`、缺 `#ptToast`），
+所以把它变成一条能红的测试。Task 14–19 每加一个页面脚本，就往 `PAIRS` 里加一行。
+
+```js
+import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+
+const PAIRS = [
+  {
+    name: 'search',
+    script: 'src/scripts/paper-table.js',
+    templates: ['src/pages/[lang]/search.astro', 'src/components/PaperRow.astro'],
+  },
+];
+
+// 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，
+// 因为里面还嵌着 t(lang, 'x', { count: '__N__' }) 这种自带花括号的调用。
+function embeddedKeys(src) {
+  const keys = new Set();
+  const marker = 'JSON.stringify({';
+  let i = src.indexOf(marker);
+  while (i !== -1) {
+    let depth = 1;
+    let j = i + marker.length;
+    const start = j;
+    while (j < src.length && depth > 0) {
+      if (src[j] === '{') depth += 1;
+      else if (src[j] === '}') depth -= 1;
+      j += 1;
+    }
+    const body = src.slice(start, j - 1);
+    let d = 0;
+    for (const line of body.split('\n')) {
+      const m = /^\s*(\w+)\s*:/.exec(line);
+      if (m && d === 0) keys.add(m[1]);
+      for (const ch of line) {
+        if (ch === '{') d += 1;
+        else if (ch === '}') d -= 1;
+      }
+    }
+    i = src.indexOf(marker, j);
+  }
+  return keys;
+}
+
+describe.each(PAIRS)('$name 页：脚本与模板的接线', ({ script, templates }) => {
+  const js = readFileSync(script, 'utf8');
+  const tpl = templates.map((f) => readFileSync(f, 'utf8')).join('\n');
+
+  it('脚本引用的每个 i18n key 都被模板内嵌了', () => {
+    const used = [...new Set([...js.matchAll(/i18n\.(\w+)/g)].map((m) => m[1]))].sort();
+    const embedded = embeddedKeys(tpl);
+    expect(used.filter((k) => !embedded.has(k))).toEqual([]);
+  });
+
+  it('模板内嵌的每个 i18n key 都真的有人用 —— 不留死文案', () => {
+    const used = new Set([...js.matchAll(/i18n\.(\w+)/g)].map((m) => m[1]));
+    expect([...embeddedKeys(tpl)].filter((k) => !used.has(k)).sort()).toEqual([]);
+  });
+
+  it('脚本 getElementById 的每个 id 都在模板里存在', () => {
+    const want = [...new Set([...js.matchAll(/getElementById\('([^']+)'\)/g)].map((m) => m[1]))].sort();
+    const have = new Set([...tpl.matchAll(/id="([^"{]+)"/g)].map((m) => m[1]));
+    expect(want.filter((id) => !have.has(id))).toEqual([]);
+  });
+});
+```
+
+- [ ] **Step 5c: 先确认它能红**
+
+把 `previewOffline` 从 `#ptI18n` 里临时删掉，跑 `npx vitest run tests/wiring.test.js`，
+必须看到第一条断言失败并列出 `["previewOffline"]`；再把 `#ptToast` 那行临时注释掉，
+必须看到第三条失败并列出 `["ptToast"]`。两条都确认后恢复原状，重跑必须全绿。
+两份输出都贴进报告 —— 没红过的测试不算测试。
 
 - [ ] **Step 6: 注册页面并补高亮样式**
 
