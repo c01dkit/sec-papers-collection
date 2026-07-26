@@ -22,6 +22,11 @@ const PAIRS = [
     script: 'src/scripts/timeline.js',
     templates: ['src/pages/[lang]/timeline.astro'],
   },
+  {
+    name: 'awards',
+    script: 'src/scripts/awards-view.js',
+    templates: ['src/pages/[lang]/awards.astro'],
+  },
 ];
 
 // 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，

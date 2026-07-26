@@ -1,0 +1,112 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { totalPapers, groupByAward, groupByYear } from '@/lib/awards-model.js';
+import awards from '@/assets/data/awards.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+const confs = awards.map((c) => ({
+  publication: c.publication,
+  total: totalPapers(c),
+  awardCount: c.awards.length,
+  byAward: groupByAward(c),
+  byYear: groupByYear(c),
+}));
+---
+
+<PageLayout lang={lang} page="awards" title={t(lang, 'menu.awards')} lead={t(lang, 'awards.lead')}>
+
+  <div class="bar">
+    <div class="tabs" role="tablist" aria-label={t(lang, 'search.publication')}>
+      {confs.map((c, i) => (
+        <button type="button" role="tab" class="tab" data-conf={c.publication}
+                aria-selected={i === 0 ? 'true' : 'false'}>
+          {c.publication}
+          <em>{nf.format(c.total)}</em>
+        </button>
+      ))}
+    </div>
+
+    <div class="group-toggle">
+      <span class="kicker">{t(lang, 'awards.groupBy')}</span>
+      <button type="button" class="gt" data-group="award" aria-pressed="true">{t(lang, 'awards.byType')}</button>
+      <button type="button" class="gt" data-group="year" aria-pressed="false">{t(lang, 'awards.byYear')}</button>
+    </div>
+  </div>
+
+  {confs.map((c, ci) => (
+    <div class="panel-conf" data-conf-panel={c.publication} hidden={ci !== 0}>
+      {[['award', c.byAward], ['year', c.byYear]].map(([mode, groups]) => (
+        <div data-group-panel={mode} hidden={mode !== 'award'}>
+          {groups.map((g) => (
+            <section class="grp">
+              <h2 class="ghead">
+                <span class="srf">{g.label}</span>
+                <em>{nf.format(g.count)}</em>
+              </h2>
+              <ul class="plist">
+                {g.papers.map((p) => (
+                  <li>
+                    <span class="ttl srf">{p.title}</span>
+                    <span class="badge">{mode === 'award' ? p.year : p.awardName}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      ))}
+    </div>
+  ))}
+</PageLayout>
+
+<style>
+  .bar {
+    display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+    justify-content: space-between; margin-bottom: 1.5rem;
+    padding-bottom: 0.9rem; border-bottom: 1px solid var(--hairline);
+  }
+  .tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tab {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.35rem 0.7rem; cursor: pointer; font: inherit; font-size: var(--fs-small);
+    color: var(--muted); display: inline-flex; align-items: baseline; gap: 0.4rem;
+  }
+  .tab em { font-style: normal; font-size: var(--fs-kicker); color: var(--faint); }
+  .tab:hover { border-color: var(--ink); color: var(--ink); }
+  .tab[aria-selected='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .tab[aria-selected='true'] em { color: var(--bg); opacity: 0.65; }
+
+  .group-toggle { display: flex; align-items: center; gap: 0.4rem; }
+  .gt {
+    background: none; border: 0; cursor: pointer; font: inherit;
+    font-size: var(--fs-small); color: var(--faint); padding: 0.2rem 0.3rem;
+  }
+  .gt[aria-pressed='true'] { color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+
+  .grp { margin-bottom: 1.9rem; }
+  .ghead {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    font-size: var(--fs-h3); margin-bottom: 0.6rem;
+    padding-bottom: 0.4rem; border-bottom: 1px solid var(--hairline-soft);
+  }
+  .ghead em { font-style: normal; font-size: var(--fs-kicker); color: var(--faint); }
+
+  .plist { list-style: none; margin: 0; padding: 0; }
+  .plist li {
+    display: flex; gap: 0.9rem; align-items: baseline; justify-content: space-between;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--hairline-soft);
+  }
+  .ttl { font-size: 0.9rem; line-height: 1.5; }
+  .badge {
+    flex: none; font-size: var(--fs-kicker); color: var(--gold);
+    border: 1px solid var(--gold); border-radius: var(--radius);
+    padding: 0.05rem 0.4rem; white-space: nowrap;
+  }
+</style>

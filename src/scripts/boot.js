@@ -40,6 +40,8 @@ registerPage('trends', async () => {
 
 registerPage('timeline', () => import('./timeline.js').then((m) => m.initTimeline()));
 
+registerPage('awards', () => import('./awards-view.js').then((m) => m.initAwardsView()));
+
 async function boot() {
   initNav();
   initTheme();
