@@ -88,7 +88,7 @@ export const CHANGELOG = {
 // GET，所以这里改成纯文字链接，与「更多网站」去掉 favicon 是同一个理由：
 // 不引第三方图片。表单里的三个隐藏字段原样带在查询串上。
 export const SUPPORT_LINKS = [
-  { key: 'afdian', url: 'https://afdian.com/a/c01dkit' },
+  { key: 'ldxp', url: 'https://pay.ldxp.cn/item/qd6781' },
   { key: 'paypal', url: 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5HS3WCERWAAQ&currency_code=USD' },
   { key: 'issues', url: 'https://github.com/c01dkit/sec-papers-collection/issues' },
   { key: 'form', url: 'https://docs.google.com/forms/d/e/1FAIpQLSdCJoJiUNJmRN7AXvdh6TbP3sZE6Srgj5hMRlQBqTkq2NiG4Q/viewform?usp=sf_link' },

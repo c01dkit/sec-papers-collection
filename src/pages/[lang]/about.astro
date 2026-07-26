@@ -16,24 +16,8 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 <PageLayout lang={lang} page="about" title={t(lang, 'menu.about')}
             lead={t(lang, 'aboutPage.lead', { total: nf.format(stats.total) })}>
 
-  <section class="sec" data-reveal>
-    <h2 class="kicker">{t(lang, 'about.timeline')}</h2>
-    <ol class="log">
-      {entries.map((e) => (
-        <li class="entry">
-          <div class="meta">
-            <span class="srf ver">{e.version}</span>
-            <span class="date">{e.date}</span>
-          </div>
-          <ul class="items">
-            {e.items.map((it) => <li>{it}</li>)}
-          </ul>
-        </li>
-      ))}
-    </ol>
-  </section>
 
-  <section class="sec" data-reveal>
+    <section class="sec" data-reveal>
     <h2 class="kicker">{t(lang, 'aboutPage.support')}</h2>
     <p class="stext">{t(lang, 'aboutPage.supportText')}</p>
     <ul class="links">
@@ -62,6 +46,25 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
       ))}
     </ul>
   </section>
+  
+  <section class="sec" data-reveal>
+    <h2 class="kicker">{t(lang, 'about.timeline')}</h2>
+    <ol class="log">
+      {entries.map((e) => (
+        <li class="entry">
+          <div class="meta">
+            <span class="srf ver">{e.version}</span>
+            <span class="date">{e.date}</span>
+          </div>
+          <ul class="items">
+            {e.items.map((it) => <li>{it}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+
 </PageLayout>
 
 <style>
