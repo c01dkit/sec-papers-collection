@@ -72,7 +72,7 @@
 | `src/lib/deadlines.js` | 投稿截止日展开与「未来优先」规则 | `flattenDeadlines` `pickUpcomingDeadlines(timeline, today, want)` |
 | `src/lib/awards-model.js` | 获奖数据分组 | `groupByAward(conf)` `groupByYear(conf)` `totalPapers(conf)` `pickHighlights(awards, n)` |
 | `src/lib/settings-schema.js` | 设置项默认值与迁移（不碰 IndexedDB，纯函数） | `DEFAULT_SETTINGS()` `migrateSettings(raw)` `ACCENTS` |
-| `src/lib/chart-palette.js` | 趋势页系列配色（每张图最多 4 条线） | `SERIES(themeIsDark)` |
+| `src/lib/chart-palette.js` | 趋势页系列配色（只存 `--chart-*` 变量名，色值在 tokens.css） | `SERIES_COLORS` `seriesStyle(index, cssVar)` |
 
 ### 浏览器副作用层
 
@@ -7270,7 +7270,7 @@ meta_json 文件名含空格与 &，用 encodeURIComponent。
 - Consumes: `groupVenues` 的分组概念（但独立实现，数据源是 `stats.overview`）
 - Produces:
   - `buildSeries(stats) => Array<{ category, labelKey, years: string[], series: Array<{ label, data: (number|null)[] }> }>`
-  - `SERIES_COLORS: string[]`（4 个，每张图最多 4 条线所以够用）
+  - `SERIES_COLORS: string[]`（4 个 CSS 变量名，非色值）、`seriesStyle(index, cssVar)`
   - `initTrendsChart() => Promise<void>`（幂等）
 
 **关键发现**：`stats.overview[].borderColor` 存的是 PrimeVue CSS 变量名（`--p-purple-400` 等），PrimeVue 移除后这些变量不存在了，必须换掉。好在**每个 category 各画一张图、每张最多 4 条线**，所以只需要 4 个可区分的颜色，不是 10 个 —— 这让编辑风的低饱和配色仍能保持可辨识。
@@ -7350,17 +7350,28 @@ describe('SERIES_COLORS', () => {
 // src/lib/chart-palette.js
 // 每个 category 各一张图、每张最多 4 条线，所以 4 个颜色就够 —— 不需要 10 个。
 // 这让低饱和的编辑风配色仍能保持可辨识度。
-// 明暗两套：深色底上需要提亮，否则低饱和的线会糊进背景。
-export const SERIES_COLORS = ['#2f4858', '#7d3038', '#6b5b2f', '#2f5744'];
-export const SERIES_COLORS_DARK = ['#7fa8bd', '#d9868f', '#c4a962', '#83bda1'];
+//
+// 色值不写在这里。Chart.js 会把颜色烤进实例、之后不再跟 CSS 变量走，但这只说明
+// 需要在构建那一刻把变量解析成具体值，不说明色值本身该以十六进制字面量躺在这个
+// 文件里 —— 那样明暗两套颜色就有两个来源（tokens.css 一份、这里一份），也违反
+// 「颜色只认设计系统自定义属性，交给 Chart.js 的也不例外」这条全局约束。
+// 真正的值放在 tokens.css 的 --chart-1..--chart-4（明暗各一套），与首页覆盖矩阵
+// 的 --mx-top-rgb / --mx-se-rgb 同一路数：固定、不随用户选的 --accent 变，
+// 只随明暗切换。本模块只存变量名，调用方在建图那一刻用 getComputedStyle 读值；
+// 主题一变，重建时自然读到新值。
+export const SERIES_COLORS = ['--chart-1', '--chart-2', '--chart-3', '--chart-4'];
 
 // 低饱和配色下光靠颜色区分不够稳，给后两条线加虚线做冗余编码
 export const SERIES_DASH = [[], [], [5, 3], [2, 3]];
 
-export function seriesStyle(index, isDark) {
-  const palette = isDark ? SERIES_COLORS_DARK : SERIES_COLORS;
+/**
+ * @param {number} index 第几条线（0-based）
+ * @param {(name: string) => string} cssVar 读取 CSS 自定义属性的函数，由调用方注入。
+ *   本模块因此不碰 DOM，是纯函数、可测。
+ */
+export function seriesStyle(index, cssVar) {
   return {
-    borderColor: palette[index % palette.length],
+    borderColor: cssVar(SERIES_COLORS[index % SERIES_COLORS.length]),
     borderDash: SERIES_DASH[index % SERIES_DASH.length],
   };
 }
