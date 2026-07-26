@@ -30,10 +30,10 @@ describe('IndexedDB 可用时', () => {
   it('patch 是合并而非覆盖', async () => {
     const s = await freshStore();
     await s.patchSettings({ keywords: ['a'] });
-    await s.patchSettings({ showStatusDots: true });
+    await s.patchSettings({ rememberTheme: true });
     const got = await s.getSettings();
     expect(got.keywords).toEqual(['a']);
-    expect(got.showStatusDots).toBe(true);
+    expect(got.rememberTheme).toBe(true);
   });
 
   it('读取时对库里的脏数据做迁移', async () => {
@@ -90,13 +90,21 @@ describe('IndexedDB 可用时', () => {
     db.close();
   });
 
-  it('镜像六个键到 localStorage 供预绘制同步读取', async () => {
+  it('镜像五个键到 localStorage 供预绘制同步读取（没有 lang —— 那个键归 nav.js 管）', async () => {
     const s = await freshStore();
-    await s.patchSettings({ theme: 'oxblood', darkTheme: true, language: 'zh', rememberDarkMode: true });
+    await s.patchSettings({
+      theme: 'oxblood',
+      darkTheme: true,
+      rememberDarkMode: true,
+      rememberTheme: true,
+      rememberLanguage: true,
+    });
     expect(localStorage.getItem(MIRROR.accent)).toBe('oxblood');
     expect(localStorage.getItem(MIRROR.theme)).toBe('dark');
-    expect(localStorage.getItem(MIRROR.lang)).toBe('zh');
     expect(localStorage.getItem(MIRROR.rememberDark)).toBe('1');
+    expect(localStorage.getItem(MIRROR.rememberAccent)).toBe('1');
+    expect(localStorage.getItem(MIRROR.rememberLang)).toBe('1');
+    expect(MIRROR).not.toHaveProperty('lang');
   });
 });
 
@@ -297,6 +305,36 @@ describe('降级标志要能恢复', () => {
     }
   });
 
+  it('连接开得起来也不足以清掉降级标志', async () => {
+    // Step 0 删了两处 persistent = true：idbGet 的和 openDb 的。上一条测试盯住了
+    // idbGet，openDb 那处却没人守 —— 把它加回去，全套测试照样全绿。补这条。
+    // 语义上同理：连接健康完全不代表写得进去，配额耗尽时连接一直是好的。
+    const s = await freshStore();
+
+    const realPut = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function () {
+      const req = {};
+      setTimeout(() => req.onerror && req.onerror(), 0);
+      return req;
+    };
+
+    try {
+      await s.patchSettings({ theme: 'pine' });   // 写失败 → 标志落下
+      expect(s.isPersistent()).toBe(false);
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
+
+    // 丢掉缓存连接，下一次操作会重新 open。open 成功本身不该把标志抬回来。
+    s.__reopenDb();
+    await s.getSettings();                     // 触发重新 open + 一次成功的读
+    expect(s.isPersistent()).toBe(false);
+
+    // 只有一次真正成功的写才算数
+    await s.patchSettings({ theme: 'indigo' });
+    expect(s.isPersistent()).toBe(true);
+  });
+
   it('只有读成功不足以清掉降级标志 —— 写不进就该一直显示降级', async () => {
     // 配额耗尽的典型形态就是「读得到、写不进」。设置页那句提示的意思是
     // 「你的偏好保存不了」，一次成功的读对这件事什么都没证明。
@@ -355,7 +393,10 @@ describe('clearFavorites', () => {
 describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
   it('把迁移后的形状写回库里，死字段真的消失', async () => {
     const s = await freshStore();
-    // 造一条旧站格式的记录（含两个死字段与已废弃的 theme 值）
+    // 造一条旧站格式的记录（含四个死字段与已废弃的 theme 值）：llmEndpoint/
+    // llmApiKey 全站无消费方；language 从来没人写过、真正的语言记忆在 nav.js
+    // 直接写的 spc-lang 里；showStatusDots 唯一消费方 PaperStats.vue 已随旧
+    // Vue 应用一起删除。四者都该被当成死字段丢掉。
     await s.__writeRaw('app', {
       theme: 'green',
       language: 'zh',
@@ -374,9 +415,10 @@ describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
     const raw = await s.__readRaw('app');
     expect(raw).not.toHaveProperty('llmEndpoint');
     expect(raw).not.toHaveProperty('llmApiKey');
+    expect(raw).not.toHaveProperty('language');
+    expect(raw).not.toHaveProperty('showStatusDots');
     expect(raw.theme).toBe('slate');          // green 不在新 slug 列表里
     expect(raw.keywords).toEqual(['fuzzing', 'C++']);
-    expect(raw.showStatusDots).toBe(true);
     expect(raw.darkTheme).toBe(true);
   });
 
@@ -384,7 +426,6 @@ describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
     const s = await freshStore();
     await s.__writeRaw('app', {
       theme: 'pine',
-      language: 'zh',
       darkTheme: true,
       rememberDarkMode: true,
       rememberTheme: true,
@@ -396,7 +437,6 @@ describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
 
     expect(localStorage.getItem(MIRROR.accent)).toBe('pine');
     expect(localStorage.getItem(MIRROR.theme)).toBe('dark');
-    expect(localStorage.getItem(MIRROR.lang)).toBe('zh');
     expect(localStorage.getItem(MIRROR.rememberDark)).toBe('1');
   });
 

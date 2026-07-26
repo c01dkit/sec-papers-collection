@@ -132,6 +132,14 @@ function idbPut(key, value) {
   );
 }
 
+/**
+ * 仅供测试：丢掉缓存的连接，让下一次操作重新 open。
+ * 用来验证「重新 open 成功」本身不该把降级标志抬回来 —— 只有 idbPut 成功才算数。
+ */
+export function __reopenDb() {
+  dbPromise = null;
+}
+
 /** 仅供测试：绕过迁移直接写入原始值，用来模拟库里的旧格式数据。 */
 export async function __writeRaw(key, value) {
   try {
@@ -154,7 +162,9 @@ function mirror(settings) {
   try {
     localStorage.setItem(MIRROR.theme, settings.darkTheme ? 'dark' : 'light');
     localStorage.setItem(MIRROR.accent, settings.theme);
-    localStorage.setItem(MIRROR.lang, settings.language);
+    // 没有 spc-lang：那个键唯一合法的写手是 nav.js（切语言时）和 BaseLayout 的
+    // 预绘制脚本（每次访问时按当前 URL 写）。settings.language 已经从 schema 里
+    // 整体删掉了，见 settings-schema.js 里 MIRROR 声明处的说明。
     localStorage.setItem(MIRROR.rememberDark, settings.rememberDarkMode ? '1' : '0');
     localStorage.setItem(MIRROR.rememberAccent, settings.rememberTheme ? '1' : '0');
     localStorage.setItem(MIRROR.rememberLang, settings.rememberLanguage ? '1' : '0');

@@ -20,6 +20,16 @@ describe('DEFAULT_SETTINGS', () => {
     expect(d).not.toHaveProperty('llmEndpoint');
     expect(d).not.toHaveProperty('llmApiKey');
   });
+
+  it('不含已移除的 language / showStatusDots 字段', () => {
+    // language 从来没有写手（没有任何 patchSettings 调用带过它），永远停在
+    // 默认值 'en'，却会被 mirror() 用来覆盖 nav.js 刚写好的真实 spc-lang ——
+    // 于是整体删掉。showStatusDots 唯一消费方 PaperStats.vue 已随旧 Vue 应用
+    // 一起删除，同样归为死字段。
+    const d = DEFAULT_SETTINGS();
+    expect(d).not.toHaveProperty('language');
+    expect(d).not.toHaveProperty('showStatusDots');
+  });
 });
 
 describe('migrateSettings', () => {
@@ -29,9 +39,9 @@ describe('migrateSettings', () => {
   });
 
   it('保留已知字段', () => {
-    const out = migrateSettings({ keywords: ['fuzz'], showStatusDots: true });
+    const out = migrateSettings({ keywords: ['fuzz'], rememberTheme: true });
     expect(out.keywords).toEqual(['fuzz']);
-    expect(out.showStatusDots).toBe(true);
+    expect(out.rememberTheme).toBe(true);
   });
 
   it('theme 语义从 PrimeVue 预设名变成强调色 slug', () => {
@@ -49,9 +59,14 @@ describe('migrateSettings', () => {
     expect(out).not.toHaveProperty('llmApiKey');
   });
 
-  it('language 脏值回落到 en', () => {
-    expect(migrateSettings({ language: 'zh' }).language).toBe('zh');
-    expect(migrateSettings({ language: 'fr' }).language).toBe('en');
+  it('language 字段已整体移除 —— 真正的语言记忆由 nav.js 直接写 spc-lang，不经过这里', () => {
+    const out = migrateSettings({ language: 'zh' });
+    expect(out).not.toHaveProperty('language');
+  });
+
+  it('删掉已移除的 showStatusDots 字段', () => {
+    const out = migrateSettings({ showStatusDots: true });
+    expect(out).not.toHaveProperty('showStatusDots');
   });
 
   it('keywords 不是数组时归零，元素强制成非空字符串', () => {
