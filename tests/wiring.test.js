@@ -7,6 +7,11 @@ const PAIRS = [
     script: 'src/scripts/paper-table.js',
     templates: ['src/pages/[lang]/search.astro', 'src/components/PaperRow.astro'],
   },
+  {
+    name: 'abstract',
+    script: 'src/scripts/abstract-view.js',
+    templates: ['src/pages/[lang]/abstract.astro'],
+  },
 ];
 
 // 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，

@@ -1,0 +1,105 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { groupVenues } from '@/lib/venue-groups.js';
+import stats from '@/assets/data/data-statistics.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const groups = groupVenues(stats);
+
+// 结果区（骨架屏、错误/空态提示、论文列表）整个由 abstract-view.js 用
+// createElement 构建，那些元素永远拿不到本文件模板的 scope 属性 ——
+// 所以 .hint/.head/.list/.item/.ttl/.ext/.abs/.skel 这批规则都放进下面的
+// <style is:global> 块。只有 .picker 内那套「会议行 + 年份 chip」是本文件
+// 模板里真实写出的元素，留在 scoped 块里。
+---
+
+<PageLayout lang={lang} page="abstract" title={t(lang, 'menu.abstract')}
+            lead={t(lang, 'abstractPage.lead')}>
+
+  <nav class="picker" aria-label={t(lang, 'menu.abstract')}>
+    {groups.map((g) => (
+      <section class="grp">
+        <h2 class="kicker">{t(lang, g.labelKey)}</h2>
+        {g.venues.map((v) => (
+          <div class="venue">
+            <span class="vname">{v.name}</span>
+            <div class="years">
+              {v.years.map((y) => (
+                <button type="button" class="yr" data-venue={v.name} data-year={y}
+                        aria-pressed="false" title={`${v.counts[y]}`}>{y}</button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+    ))}
+  </nav>
+
+  <div class="result" id="abResult" aria-live="polite">
+    <p class="hint">{t(lang, 'abstract.emptyHint')}</p>
+  </div>
+
+  <script type="application/json" id="abI18n" set:html={JSON.stringify({
+    loading: t(lang, 'abstractPage.loading'),
+    failed: t(lang, 'abstractPage.failed'),
+    noData: t(lang, 'abstractPage.noData'),
+    count: t(lang, 'abstractPage.count', { count: '__N__' }),
+    noAbstract: t(lang, 'abstract.noAbstract'),
+    openPaper: t(lang, 'abstract.openPaper'),
+  })} />
+</PageLayout>
+
+<style>
+  .picker { border-bottom: 1px solid var(--hairline); padding-bottom: 1.2rem; margin-bottom: 1.4rem; }
+  .grp { margin-bottom: 1rem; }
+  .grp:last-child { margin-bottom: 0; }
+  .grp h2 { margin-bottom: 0.55rem; }
+
+  .venue {
+    display: flex; gap: 0.8rem; align-items: baseline;
+    padding: 0.3rem 0; border-top: 1px solid var(--hairline-soft);
+  }
+  .vname { flex: none; width: 6.5rem; font-size: var(--fs-small); color: var(--ink); }
+  .years { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+  .yr {
+    background: none; border: 1px solid transparent; border-radius: var(--radius);
+    padding: 0.1rem 0.35rem; cursor: pointer; font: inherit;
+    font-size: var(--fs-kicker); color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .yr:hover { border-color: var(--hairline); color: var(--ink); }
+  .yr[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+</style>
+
+<style is:global>
+  /* 下面这些规则匹配的元素全部（或部分）由 abstract-view.js 用 createElement
+     构建：骨架屏、错误/空态提示、论文列表。它们不是本文件模板里写出来的，
+     拿不到 scope 属性，写进上面的 scoped 块里不会生效——见 Task 13 的教训。
+     .hint 尤其要放这里：它既出现在本文件模板的初始占位文案里，也由脚本在
+     加载中/失败/空态时重新 createElement 出来，两处必须样式一致。 */
+  #abResult .hint { color: var(--faint); font-size: var(--fs-small); padding: 2.5rem 0; text-align: center; }
+
+  #abResult .head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1rem; }
+  #abResult .head h2 { font-size: var(--fs-h2); }
+  #abResult .head .n { font-size: var(--fs-kicker); color: var(--faint); }
+
+  #abResult .list { list-style: none; margin: 0; padding: 0; }
+  #abResult .item { padding: 0.9rem 0 1rem; border-top: 1px solid var(--hairline-soft); }
+  #abResult .item:first-child { border-top: 0; }
+  #abResult .ttl {
+    font-family: var(--font-serif); font-size: 1rem; line-height: 1.45;
+    display: inline; margin-right: 0.3rem;
+  }
+  #abResult .ext { font-size: 0.7rem; color: var(--faint); }
+  #abResult .ext:hover { color: var(--accent); }
+  #abResult .abs {
+    margin: 0.5rem 0 0; font-size: var(--fs-small); line-height: 1.8;
+    color: var(--muted); text-align: justify; hyphens: auto;
+  }
+  #abResult .abs--none { font-style: italic; color: var(--faint); }
+  #abResult .skel { height: 0.7rem; background: var(--hairline-soft); margin: 0.4rem 0; }
+</style>

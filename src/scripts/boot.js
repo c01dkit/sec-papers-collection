@@ -28,6 +28,11 @@ registerPage('search', async () => {
   await initPaperTable();
 });
 
+registerPage('abstract', async () => {
+  const { initAbstractView } = await import('./abstract-view.js');
+  await initAbstractView();
+});
+
 async function boot() {
   initNav();
   initTheme();
