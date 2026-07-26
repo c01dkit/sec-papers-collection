@@ -63,15 +63,34 @@ OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under 
 ### Astro frontend (`src/`)
 - **Pages:** `src/pages/[lang]/*.astro` — prerendered for both `zh` and `en` via `getStaticPaths`. `src/pages/index.astro` is a client-side language dispatcher; `src/pages/{paper,reputation,misc}/*.astro` are redirect stubs for pre-0.4.0 URLs.
 - **Layouts:** `src/layouts/BaseLayout.astro` (head + ClientRouter transitions + TopNav + Footer), `src/layouts/PageLayout.astro` (shared content-page header)
-- **Pure logic (`src/lib/`)** — no DOM, fully unit-tested: `papers`, `highlight`, `coverage`, `sparkline`, `deadlines`, `awards-model`, `venue-groups`, `trend-series`, `settings-schema`, `nav-model`, `chart-palette`, `cdn`
-- **Browser side (`src/scripts/`)** — `boot.js` is the single entry point; it dispatches by `<main data-page>` and is bound to `astro:page-load` (soft navigation does not re-run page `<script>` tags, so every page's `init()` must guard idempotency with `dataset.bound`)
-- **i18n:** `src/i18n/{zh,en}.json` + `index.js`; `t()` **throws** on a missing key so a missing translation fails the build instead of shipping a bare key
-- **Storage:** `src/scripts/settings-store.js` is the only file in the codebase that touches IndexedDB. DB `spc-settings` / store `config` / keys `app` + `favorites` / version `1` — **do not change these**, existing users' data lives under them. Theme, accent color, and language are additionally mirrored to localStorage because prerendered pages need to read them synchronously before any script runs.
+- **Pure logic (`src/lib/`)** — no DOM, unit-tested (every module except the nine-line `cdn.js`): `papers`, `highlight`, `coverage`, `sparkline`, `deadlines`, `awards-model`, `venue-groups`, `trend-series`, `settings-schema`, `nav-model`, `chart-palette`, `cdn`
+- **Browser side (`src/scripts/`)** — `boot.js` is the single entry point; it dispatches by `<main data-page>` and is bound to `astro:page-load`
+- **i18n:** `src/i18n/{zh,en}.json` + `index.js`; `t()` **throws** on a missing key so a missing translation fails the build instead of shipping a bare key. Every page renders in both `zh` and `en`, so a one-sided key fails the build — always add copy to **both** files.
+- **Storage:** `src/scripts/settings-store.js` is the only file in the codebase that touches IndexedDB. DB `spc-settings` / store `config` / keys `app` + `favorites` / version `1` — **do not change these**, existing users' data lives under them. Theme, accent colour and the three `remember*` flags are additionally mirrored to localStorage because prerendered pages need to read them synchronously before any script runs.
+  - **Language is deliberately *not* a stored setting and must not become one again.** There is no `language` field in the schema and `spc-lang` is not mirrored. `spc-lang` records "the language the visitor actually browsed" and has exactly two legitimate writers: `nav.js` (on clicking the language switch) and `BaseLayout`'s pre-paint script (per visit, from the URL prefix). A `language` field used to exist and be mirrored; nothing ever wrote it, so `mirror()` kept overwriting the real `spc-lang` with its stale default — a Chinese reader who switched to Chinese and then toggled any setting was silently reset to English. See the long note at `src/lib/settings-schema.js:5-15`.
+
+### Invariants that each cost a Critical to learn
+
+Four rules, none of them obvious from reading the code, all of them earned the hard way. Breaking any one produces a silent failure rather than an error.
+
+1. **Astro's scoped `<style>` only reaches elements written in that file's own template.** It compiles to `.x[data-astro-cid-…]`, and elements built by `createElement` (or rendered by a child component) never carry that attribute — the rules simply don't match and the element ships completely unstyled. Style those from `<style is:global>` behind a narrow prefix (`#abResult .hint`, `.pt td`, `[data-countdown] .ph`). Adding a class to an element that *is* in the template (`.step.past`, `.row.past`) is fine to keep scoped. `tests/wiring.test.js` has a tripwire for the `className = '…'` case; it does not and cannot cover everything.
+2. **Page scripts must take their root with `getElementById`; class names are a site-wide namespace.** A `.bar` in a page script once matched TopNav's `.bar` and killed the awards page. Two pre-constraint uses survive (`abstract-view.js`'s `.picker`, `timeline.js`'s `.pub` — and `.pub` is now used by three components), so don't copy them.
+3. **Module-level state in a page script survives soft navigation; the DOM does not.** `astro:page-load` re-runs `init()` against a brand-new DOM with no `dataset.bound`, but the module is not re-evaluated. Reset everything you hold — see `paper-table.js:5-8` (`state = initialState()`). Every `init()` must also be idempotent via `dataset.bound`.
+4. **Adding a page script means adding a row to `tests/wiring.test.js`'s `PAIRS`.** That is what guards the template↔script contract (embedded i18n keys, `getElementById` ids, scoped-CSS misuse). Note what it does *not* guard: the `data-*` and `querySelector` contracts (`[data-fd-value]`, `.step[data-ddl]`, `canvas[data-chart]`, …). Rename one of those and the page silently stops working with nothing red.
+
+### Degrading without JavaScript
+
+Every page must stay readable, and **no control may be presented as live when it cannot work**. The convention, applied on `awards`, `trends`, `settings`, `abstract` and `TopNav`:
+
+- Content that is already in the static HTML but hidden for the scripted view → un-hide it from `<noscript><style is:inline>` (specificity must beat both the scoped rule and `global.css`'s `[hidden]`, which is `(0,1,0) !important`; use two-part or id selectors plus `!important`).
+- Controls that only work with JS → hide them in the same block, or ship them `disabled` in the static markup so `paint*()` can enable them later (`#favClear`).
+- Keep a control visible only if it carries information beyond its action — the abstract page's year chips are also the index of available editions, so they stay (with an honest notice); the settings switches carry nothing, so they go.
+- The reveal-on-scroll gate is set by an inline head script and released by the bundle. Anything that can leave the gate on with the release never running blanks the page — the failsafe lives in `BaseLayout.astro` (`window.__spcRevealReady`); don't remove it.
 
 ### Key tech
 - Astro 7 (static output), hand-written CSS (no UI framework)
 - Chart.js for trend visualizations
-- IndexedDB (+ localStorage mirror) for user settings: theme, dark mode, accent color, language, favorites, preferred keywords
+- IndexedDB (+ localStorage mirror) for user settings: accent colour, dark mode, the three `remember*` flags, favorites, preferred keywords (**not** language — see above)
 - Vitest + jsdom + fake-indexeddb for testing
 
 ## Paper Status Values
