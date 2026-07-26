@@ -11,7 +11,7 @@ import DeadlineDemo from '@/components/home/media/DeadlineDemo.astro';
 import AwardDemo from '@/components/home/media/AwardDemo.astro';
 import ClosingBand from '@/components/home/ClosingBand.astro';
 import { LOCALES, t } from '@/i18n/index.js';
-import { buildCoverageMatrix, TOP_TIER, SE_SYS } from '@/lib/coverage.js';
+import { buildCoverageMatrix, matrixVenues } from '@/lib/coverage.js';
 import { buildTotalTrend } from '@/lib/sparkline.js';
 import { pickUpcomingDeadlines } from '@/lib/deadlines.js';
 import { pickHighlights } from '@/lib/awards-model.js';
@@ -29,7 +29,8 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
 // ── 首屏与矩阵 ─────────────────────────────────────────
 const matrix = buildCoverageMatrix(stats);
-const venues = TOP_TIER.concat(SE_SYS).filter((n) => stats.byPublicationAndYear[n]).length;
+const { top: topVenues, se: seVenues } = matrixVenues(stats);
+const venues = topVenues.concat(seVenues).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
 const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';

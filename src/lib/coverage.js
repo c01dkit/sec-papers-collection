@@ -1,6 +1,20 @@
-export const TOP_TIER = ['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'];
-export const SE_SYS = ['ICSE', 'ASE', 'FSE', 'ISSTA', 'ASPLOS', 'SOSP'];
+import { venuesByCategory } from './venue-groups.js';
+
 export const MATRIX_YEARS = Array.from({ length: 12 }, (_, i) => String(2015 + i));
+
+/**
+ * 首页矩阵的两个分组：安全四大（top-tier）与「软工 + 系统」合并成一行
+ * （se）。名单同样从 overview[].category 推出，不写死——原因见
+ * venue-groups.js 顶部注释：写死会让 CLAUDE.md 记录的「改 data.yml +
+ * --analyze」加会议流程安静地漏掉矩阵里的新会议。
+ */
+export function matrixVenues(stats) {
+  const byCat = venuesByCategory(stats);
+  return {
+    top: byCat.get('top-tier') || [],
+    se: [...(byCat.get('software-engineering') || []), ...(byCat.get('system') || [])],
+  };
+}
 
 function buildGroup(byPY, names, years) {
   const firstYear = Number(years[0]);
@@ -32,9 +46,10 @@ function buildGroup(byPY, names, years) {
 
 export function buildCoverageMatrix(stats, years = MATRIX_YEARS) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
+  const { top, se } = matrixVenues(stats);
   return {
     years,
-    top: buildGroup(byPY, TOP_TIER, years),
-    se: buildGroup(byPY, SE_SYS, years),
+    top: buildGroup(byPY, top, years),
+    se: buildGroup(byPY, se, years),
   };
 }

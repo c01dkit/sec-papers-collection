@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildCoverageMatrix, TOP_TIER, SE_SYS, MATRIX_YEARS } from '@/lib/coverage.js';
+import { buildCoverageMatrix, MATRIX_YEARS } from '@/lib/coverage.js';
 import stats from '@/assets/data/data-statistics.json';
 
 describe('MATRIX_YEARS', () => {
@@ -13,9 +13,11 @@ describe('MATRIX_YEARS', () => {
 describe('buildCoverageMatrix', () => {
   const m = buildCoverageMatrix(stats);
 
-  it('两组行数与常量一致', () => {
-    expect(m.top.rows.map((r) => r.publication)).toEqual(TOP_TIER);
-    expect(m.se.rows.map((r) => r.publication)).toEqual(SE_SYS);
+  it('两组行数与实际会议名单一致', () => {
+    // 字面量数组而非引用生成它们的同一个常量——原先这条拿 TOP_TIER/SE_SYS
+    // 自己跟自己比，天然循环，永远不可能变红。
+    expect(m.top.rows.map((r) => r.publication)).toEqual(['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS']);
+    expect(m.se.rows.map((r) => r.publication)).toEqual(['ICSE', 'ASE', 'FSE', 'ISSTA', 'ASPLOS', 'SOSP']);
   });
 
   it('两组各自归一 —— 峰值不同，不能共用一个 max', () => {
