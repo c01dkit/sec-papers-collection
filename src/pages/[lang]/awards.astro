@@ -22,7 +22,7 @@ const confs = awards.map((c) => ({
 
 <PageLayout lang={lang} page="awards" title={t(lang, 'menu.awards')} lead={t(lang, 'awards.lead')}>
 
-  <div class="bar">
+  <div class="bar" id="awBar">
     <div class="tabs" role="tablist" aria-label={t(lang, 'search.publication')}>
       {confs.map((c, i) => (
         <button type="button" role="tab" class="tab" data-conf={c.publication}
@@ -39,6 +39,17 @@ const confs = awards.map((c) => ({
       <button type="button" class="gt" data-group="year" aria-pressed="false">{t(lang, 'awards.byYear')}</button>
     </div>
   </div>
+
+  <noscript>
+    <style is:inline>
+      /* 没有 JS 时标签页和分组按钮都点不动，被藏起来的 299 篇就永远出不来。
+         本页构建时已全量渲染，内容本就在 HTML 里 —— 撤掉 hidden 即可全部可读。
+         选择器写两个属性（0,2,0）压过 global.css 的 [hidden]（0,1,0）。
+         同时藏掉那排点不动的控件，免得看着能按其实不能。 */
+      [data-conf-panel][hidden], [data-group-panel][hidden] { display: block !important; }
+      #awBar { display: none !important; }
+    </style>
+  </noscript>
 
   {confs.map((c, ci) => (
     <div class="panel-conf" data-conf-panel={c.publication} hidden={ci !== 0}>
@@ -105,8 +116,11 @@ const confs = awards.map((c) => ({
   }
   .ttl { font-size: 0.9rem; line-height: 1.5; }
   .badge {
-    flex: none; font-size: var(--fs-kicker); color: var(--gold);
+    /* 按年份分组时这里放的是奖项全名（最长「Distinguished Paper Award
+       Honorable Mentions」），flex:none + nowrap 会把 375px 的行顶出去 17px。
+       年份只有四个字符、本来就不换行，所以直接允许收缩换行即可。 */
+    flex: 0 1 auto; min-width: 0; font-size: var(--fs-kicker); color: var(--gold);
     border: 1px solid var(--gold); border-radius: var(--radius);
-    padding: 0.05rem 0.4rem; white-space: nowrap;
+    padding: 0.05rem 0.4rem;
   }
 </style>

@@ -1,5 +1,9 @@
 export function initAwardsView() {
-  const bar = document.querySelector('.bar');
+  // 必须按 id 取。document.querySelector('.bar') 会先命中 TopNav 的
+  // <div class="wrap bar">（它在 DOM 里更靠前），于是监听挂错元素、页面上
+  // 所有按钮都点不动；更糟的是 dataset.bound 被写到了 TopNav 上，而 TopNav
+  // 跨软导航一直存在，从此这个 init 永远早退。
+  const bar = document.getElementById('awBar');
   if (!bar || bar.dataset.bound) return;
   bar.dataset.bound = '1';
 
