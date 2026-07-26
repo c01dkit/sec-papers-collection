@@ -67,7 +67,7 @@
 | `src/lib/cdn.js` | 运行时数据基址**唯一**来源 | `DATA_BASE` `CDN_DATA_BASE` |
 | `src/lib/papers.js` | 论文筛选 / 排序 / 分页 / 加载 | `applyFilters` `sortRows` `paginate` `loadPapers` |
 | `src/lib/highlight.js` | 关键词切段（从 `composables/useHighlight.js` 移植，去掉全局单例依赖） | `highlightSegments(text, patterns)` |
-| `src/lib/coverage.js` | 首页覆盖矩阵数据 | `buildCoverageMatrix(stats)` `TOP_TIER` `SE_SYS` `MATRIX_YEARS` |
+| `src/lib/coverage.js` | 首页覆盖矩阵数据 | `buildCoverageMatrix(stats)` `matrixVenues(stats)` `MATRIX_YEARS` |
 | `src/lib/sparkline.js` | 手写 SVG 折线坐标计算 | `buildTotalTrend(stats, years)` `toSparkline(points, opts)` |
 | `src/lib/deadlines.js` | 投稿截止日展开与「未来优先」规则 | `flattenDeadlines` `pickUpcomingDeadlines(timeline, today, want)` |
 | `src/lib/awards-model.js` | 获奖数据分组 | `groupByAward(conf)` `groupByYear(conf)` `totalPapers(conf)` `pickHighlights(awards, n)` |
@@ -2316,7 +2316,7 @@ more-sites→sites。
 **Interfaces:**
 - Consumes: 无（只吃 JSON 数据对象，不自己读文件）
 - Produces:
-  - `TOP_TIER: string[]`（4 个）、`SE_SYS: string[]`（6 个）、`MATRIX_YEARS: string[]`（`'2015'`…`'2026'`）
+  - `matrixVenues(stats) => { topTier: string[], seSys: string[] }`（从 `overview[].category` 推出）、`MATRIX_YEARS: string[]`（`'2015'`…`'2026'`）
   - `buildCoverageMatrix(stats, years?) => { years, top: Group, se: Group }`，其中 `Group = { rows: Row[], max: number }`，`Row = { publication, cells: (Cell|null)[], preYears: string[], preTotal: number }`，`Cell = { year, count, alpha }`
   - `buildTotalTrend(stats, years) => Array<{year: string, count: number}>`
   - `toSparkline(points, opts?) => { max, coords, line, area }`
@@ -2332,7 +2332,7 @@ more-sites→sites。
 ```js
 // tests/coverage.test.js
 import { describe, it, expect } from 'vitest';
-import { buildCoverageMatrix, TOP_TIER, SE_SYS, MATRIX_YEARS } from '@/lib/coverage.js';
+import { buildCoverageMatrix, matrixVenues, MATRIX_YEARS } from '@/lib/coverage.js';
 import stats from '@/assets/data/data-statistics.json';
 
 describe('MATRIX_YEARS', () => {
@@ -2347,8 +2347,12 @@ describe('buildCoverageMatrix', () => {
   const m = buildCoverageMatrix(stats);
 
   it('两组行数与常量一致', () => {
-    expect(m.top.rows.map((r) => r.publication)).toEqual(TOP_TIER);
-    expect(m.se.rows.map((r) => r.publication)).toEqual(SE_SYS);
+    // 写死期望值。原先拿 TOP_TIER 常量去断言由同一个常量生成的输出，
+    // 是一条自我循环、永远不会红的测试 —— 名单改错了它也照样绿。
+    expect(m.top.rows.map((r) => r.publication))
+      .toEqual(['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS']);
+    expect(m.se.rows.map((r) => r.publication))
+      .toEqual(['ICSE', 'ASE', 'FSE', 'ISSTA', 'ASPLOS', 'SOSP']);
   });
 
   it('两组各自归一 —— 峰值不同，不能共用一个 max', () => {
@@ -2408,8 +2412,10 @@ Expected: FAIL，`Cannot find module '@/lib/coverage.js'`
 - [ ] **Step 3: 实现 src/lib/coverage.js**
 
 ```js
-export const TOP_TIER = ['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'];
-export const SE_SYS = ['ICSE', 'ASE', 'FSE', 'ISSTA', 'ASPLOS', 'SOSP'];
+// 名单同样从 overview[].category 推出，理由见 venue-groups.js：
+// 写死会让「改 data.yml 加会议」这个纯数据流程安静地漏掉新会议。
+// 对当前数据，推导结果与原先写死的两个常量逐字相同（有测试钉住）。
+import { venuesByCategory } from './venue-groups.js';
 export const MATRIX_YEARS = Array.from({ length: 12 }, (_, i) => String(2015 + i));
 
 function buildGroup(byPY, names, years) {
@@ -2440,12 +2446,22 @@ function buildGroup(byPY, names, years) {
   return { rows, max };
 }
 
+/** 矩阵两组的会议名单。软工与系统在矩阵里并作一组，但 overview 里是两个 category。 */
+export function matrixVenues(stats) {
+  const byCat = venuesByCategory(stats);
+  return {
+    topTier: byCat.get('top-tier') || [],
+    seSys: [...(byCat.get('software-engineering') || []), ...(byCat.get('system') || [])],
+  };
+}
+
 export function buildCoverageMatrix(stats, years = MATRIX_YEARS) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
+  const { topTier, seSys } = matrixVenues(stats);
   return {
     years,
-    top: buildGroup(byPY, TOP_TIER, years),
-    se: buildGroup(byPY, SE_SYS, years),
+    top: buildGroup(byPY, topTier, years),
+    se: buildGroup(byPY, seSys, years),
   };
 }
 ```
@@ -3398,7 +3414,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/home/Hero.astro';
 import CoverageMatrix from '@/components/home/CoverageMatrix.astro';
 import { LOCALES } from '@/i18n/index.js';
-import { buildCoverageMatrix, TOP_TIER, SE_SYS } from '@/lib/coverage.js';
+import { buildCoverageMatrix, matrixVenues } from '@/lib/coverage.js';
 import stats from '@/assets/data/data-statistics.json';
 import timeline from '@/assets/data/submission-timeline.json';
 
@@ -3409,7 +3425,8 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 
 const matrix = buildCoverageMatrix(stats);
-const venues = TOP_TIER.concat(SE_SYS).filter((n) => stats.byPublicationAndYear[n]).length;
+const mv = matrixVenues(stats);
+const venues = mv.topTier.concat(mv.seSys).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
 // 用人工同步时间而非构建时间：后者每次部署都变，反而误导
@@ -3952,7 +3969,7 @@ import DeadlineDemo from '@/components/home/media/DeadlineDemo.astro';
 import AwardDemo from '@/components/home/media/AwardDemo.astro';
 import ClosingBand from '@/components/home/ClosingBand.astro';
 import { LOCALES, t } from '@/i18n/index.js';
-import { buildCoverageMatrix, TOP_TIER, SE_SYS } from '@/lib/coverage.js';
+import { buildCoverageMatrix, matrixVenues } from '@/lib/coverage.js';
 import { buildTotalTrend } from '@/lib/sparkline.js';
 import { pickUpcomingDeadlines } from '@/lib/deadlines.js';
 import { pickHighlights } from '@/lib/awards-model.js';
@@ -3970,7 +3987,8 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
 // ── 首屏与矩阵 ─────────────────────────────────────────
 const matrix = buildCoverageMatrix(stats);
-const venues = TOP_TIER.concat(SE_SYS).filter((n) => stats.byPublicationAndYear[n]).length;
+const mv = matrixVenues(stats);
+const venues = mv.topTier.concat(mv.seSys).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
 const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';
@@ -6796,6 +6814,8 @@ git commit -m "feat(search): 检索页重写为原生 JS
 import { describe, it, expect } from 'vitest';
 import { groupVenues } from '@/lib/venue-groups.js';
 import stats from '@/assets/data/data-statistics.json';
+import zh from '@/i18n/zh.json';
+import en from '@/i18n/en.json';
 
 describe('groupVenues', () => {
   const groups = groupVenues(stats);
@@ -6804,12 +6824,37 @@ describe('groupVenues', () => {
     expect(groups.map((g) => g.key)).toEqual(['top-tier', 'software-engineering', 'system']);
   });
 
-  it('每组的文案 key 指向 abstract.* 且两语存在', () => {
+  it('每组的文案 key 指向 abstract.*', () => {
     expect(groups.map((g) => g.labelKey)).toEqual([
       'abstract.topTier',
       'abstract.softwareEngineering',
       'abstract.system',
     ]);
+  });
+
+  it('这些 key 在两份 locale 里都真的存在', () => {
+    // 原来这条的名字里写着「两语存在」却根本没查 locale。t() 缺 key 会抛，
+    // 所以缺了会在构建时炸——但那是构建的功劳，不是这条测试的。要么真查，要么改名。
+    for (const g of groups) {
+      const [ns, key] = g.labelKey.split('.');
+      expect(zh[ns]?.[key], `zh ${g.labelKey}`).toBeTruthy();
+      expect(en[ns]?.[key], `en ${g.labelKey}`).toBeTruthy();
+    }
+  });
+
+  it('新增会议只要出现在 overview 里就会被列出 —— 不用改前端代码', () => {
+    // 这是本次修复的回归测试。CLAUDE.md 记的加会议流程是纯数据操作
+    // （改 data.yml + 跑 --analyze）。名单一旦写死在前端，那个流程会安静地
+    // 产出一个缺会议的站点：不报错、不空组，只是查不到。
+    const withNew = {
+      ...stats,
+      overview: [...stats.overview, { category: 'top-tier', label: 'FancySec' }],
+      byPublicationAndYear: { ...stats.byPublicationAndYear, FancySec: { 2026: 7 } },
+    };
+    const top = groupVenues(withNew).find((g) => g.key === 'top-tier');
+    expect(top.venues.map((v) => v.name)).toContain('FancySec');
+    // 没列进 ORDER 的排在本组末尾，而不是被丢掉
+    expect(top.venues.at(-1).name).toBe('FancySec');
   });
 
   it('只列出数据里真实存在的会议 —— 避免出现空选项', () => {
@@ -6851,20 +6896,43 @@ describe('groupVenues', () => {
 - [ ] **Step 2: 实现 src/lib/venue-groups.js**
 
 ```js
-// 分组依据 data-statistics.json 里 overview[].category 的三个取值。
-// 不硬编码会议名单——名单从实际数据推出，新增会议不用改这里。
+// 会议名单从 data-statistics.json 的 overview[].category 推出，不写死。
+// CLAUDE.md 记的加会议流程是「改 data.yml，跑 --analyze」——纯数据操作。
+// 名单写死在前端的话，那个流程会安静地产出一个缺会议的站点：没有报错、
+// 没有空分组，就是查不到，得有人肉眼发现。
 const GROUPS = [
-  { key: 'top-tier', labelKey: 'abstract.topTier', names: ['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS'] },
-  { key: 'software-engineering', labelKey: 'abstract.softwareEngineering', names: ['ICSE', 'ASE', 'FSE', 'ISSTA'] },
-  { key: 'system', labelKey: 'abstract.system', names: ['ASPLOS', 'SOSP'] },
+  { key: 'top-tier', labelKey: 'abstract.topTier' },
+  { key: 'software-engineering', labelKey: 'abstract.softwareEngineering' },
+  { key: 'system', labelKey: 'abstract.system' },
 ];
+
+// ORDER 只决定已知会议的展示顺序，不决定谁进得来。没列进来的新会议排在
+// 本组末尾——顺序不理想总好过被丢掉。
+const ORDER = ['IEEE S&P', 'ACM CCS', 'USENIX Sec', 'NDSS', 'ICSE', 'ASE', 'FSE', 'ISSTA', 'ASPLOS', 'SOSP'];
+const rank = (name) => {
+  const i = ORDER.indexOf(name);
+  return i === -1 ? ORDER.length : i;
+};
+
+/** 从 overview 推出「分类 → 会议名数组」，供本模块与 coverage.js 共用。 */
+export function venuesByCategory(stats) {
+  const out = new Map();
+  for (const s of (stats && stats.overview) || []) {
+    if (!s || !s.category || !s.label) continue;
+    if (!out.has(s.category)) out.set(s.category, []);
+    out.get(s.category).push(s.label);
+  }
+  for (const list of out.values()) list.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+  return out;
+}
 
 export function groupVenues(stats) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
+  const byCat = venuesByCategory(stats);
   return GROUPS.map((g) => ({
     key: g.key,
     labelKey: g.labelKey,
-    venues: g.names
+    venues: (byCat.get(g.key) || [])
       .filter((name) => byPY[name])   // 只列真实存在的，避免空选项
       .map((name) => ({
         name,
