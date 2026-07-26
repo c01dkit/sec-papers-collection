@@ -8140,7 +8140,7 @@ git commit -m "feat(awards): 获奖页重写，两种分组均构建时渲染
 ```js
 // tests/changelog.test.js
 import { describe, it, expect } from 'vitest';
-import { CHANGELOG, SPONSORS } from '@/data/changelog.js';
+import { CHANGELOG, SPONSORS, SUPPORT_LINKS } from '@/data/changelog.js';
 import { SITES } from '@/data/sites.js';
 import { collectKeys } from '@/i18n/index.js';
 import zh from '@/i18n/zh.json';
@@ -8259,6 +8259,19 @@ export const CHANGELOG = {
   ],
 };
 
+// 旧版 About.vue 的「支持与反馈」区。整个 Vue 应用会在 Task 20 删掉，
+// 这些渠道若不搬过来就会随之从生产环境永久消失 —— 而赞助者名单还留着，
+// 变成「谁捐过看得见、想捐却无处可捐」。
+// PayPal 原本是个 POST 表单配一张 S3 上的图片按钮；hosted button 支持
+// GET，所以这里改成纯文字链接，与「更多网站」去掉 favicon 是同一个理由：
+// 不引第三方图片。表单里的三个隐藏字段原样带在查询串上。
+export const SUPPORT_LINKS = [
+  { key: 'afdian', url: 'https://afdian.com/a/c01dkit' },
+  { key: 'paypal', url: 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5HS3WCERWAAQ&currency_code=USD' },
+  { key: 'issues', url: 'https://github.com/c01dkit/sec-papers-collection/issues' },
+  { key: 'form', url: 'https://docs.google.com/forms/d/e/1FAIpQLSdCJoJiUNJmRN7AXvdh6TbP3sZE6Srgj5hMRlQBqTkq2NiG4Q/viewform?usp=sf_link' },
+];
+
 export const SPONSORS = [
   { name: '爱发电用户_a3458', amount: '20 RMB', date: '2025-12-02', comment: '很有帮助的网站！（如果可以的话，希望之后可以再多加一些软工那边的会议）' },
   { name: 'cy', amount: '66 RMB', date: '2025-01-21', comment: '' },
@@ -8319,6 +8332,20 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
   </section>
 
   <section class="sec" data-reveal>
+    <h2 class="kicker">{t(lang, 'aboutPage.support')}</h2>
+    <p class="stext">{t(lang, 'aboutPage.supportText')}</p>
+    <ul class="links">
+      {SUPPORT_LINKS.map((l) => (
+        <li>
+          <a class="lnk" href={l.url} target="_blank" rel="noopener">
+            {t(lang, `aboutPage.link.${l.key}`)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec" data-reveal>
     <h2 class="kicker">{t(lang, 'about.sponsors')}</h2>
     <ul class="sponsors">
       {SPONSORS.map((s) => (
@@ -8338,6 +8365,10 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 <style>
   .sec { margin-bottom: var(--sp-band); }
   .sec > .kicker { margin-bottom: 1rem; }
+
+  .stext { font-size: var(--fs-small); color: var(--muted); line-height: 1.8; margin: 0 0 0.9rem; }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .links li { font-size: var(--fs-small); }
 
   .log { list-style: none; margin: 0; padding: 0; }
   .entry {
@@ -8438,7 +8469,35 @@ const cards = SITES.map((s) => ({
 </style>
 ```
 
-追加文案 `aboutPage.lead`（两语），删掉旧 service 目录：
+追加文案（两语，只增不改）。`aboutPage.lead` 之外，还要补「支持与反馈」区的文案 ——
+这些渠道原本在旧版 About.vue 里，Task 20 会把整个 Vue 应用删掉，不搬过来就会随之
+从生产环境永久消失，而赞助者名单还留着，变成「谁捐过看得见、想捐却无处可捐」：
+
+```json
+// zh.json aboutPage 内追加
+"support": "支持与反馈",
+"supportText": "网站由我一个人利用业余时间维护。如果它帮到了你，可以请我喝杯咖啡；有任何建议或发现问题，也欢迎直接告诉我。",
+"link": {
+  "afdian": "爱发电 · 请我喝杯茶 🍵",
+  "paypal": "PayPal · 请我喝杯咖啡 ☕",
+  "issues": "在 GitHub 提 issue",
+  "form": "填写反馈问卷"
+}
+```
+
+```json
+// en.json aboutPage 内追加
+"support": "Support & Feedback",
+"supportText": "This site is maintained by one person in spare time. If it helped you, you can buy me a coffee — and if you have suggestions or spot a problem, please just tell me.",
+"link": {
+  "afdian": "Afdian · buy me a tea 🍵",
+  "paypal": "PayPal · buy me a coffee ☕",
+  "issues": "Open an issue on GitHub",
+  "form": "Fill in the feedback form"
+}
+```
+
+删掉旧 service 目录：
 
 ```bash
 git rm -f src/service/AboutService.js src/service/AwardService.js \
@@ -8455,7 +8514,7 @@ Run: `npx vitest run tests/changelog.test.js` → PASS
 
 Run: `npm run build` → 成功
 
-人工验收：`/zh/about/` 更新日志 25 条、版本号与日期左侧对齐、赞助者三条；`/zh/sites/` 六张卡片、1px 细线网格、hover 变底色、点开新标签；`/en/` 两页文案全英文。
+人工验收：`/zh/about/` 更新日志 **26 条**、版本号与日期左侧对齐、支持与反馈四个链接、赞助者三条；`/zh/sites/` 六张卡片、1px 细线网格、hover 变底色、点开新标签；`/en/` 两页文案全英文。
 
 - [ ] **Step 6: Commit**
 
