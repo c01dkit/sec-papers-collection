@@ -16,10 +16,24 @@ const groups = groupVenues(stats);
 // 所以 .hint/.head/.list/.item/.ttl/.ext/.abs/.skel 这批规则都放进下面的
 // <style is:global> 块。只有 .picker 内那套「会议行 + 年份 chip」是本文件
 // 模板里真实写出的元素，留在 scoped 块里。
+//
+// <noscript> 那条提示是本页唯一诚实的选择。全站「核心内容无 JS 也能读」这句话
+// 在这一页上是**不成立**的：摘要是运行期按届次单独 fetch 的，一篇都拿不到。
+// 实测 375px 关 JS：121 个可见且未 disabled 的按钮、一句永远无法被满足的
+// 「请选择会议和年份」、零提示。所以明说取不回来，并指一条真的能走的路
+// （检索页不依赖脚本也能读标题与外链）。
+//
+// 与设置页不同，这里**不藏**那些按钮：年份 chip 同时是「哪些会议有哪些届次」的
+// 索引，本身携带信息，藏掉等于把内容也删了。设置页的开关不携带信息、只提供
+// 一个动作，所以那边藏。两页的差别是有意的，不是不一致。
 ---
 
 <PageLayout lang={lang} page="abstract" title={t(lang, 'menu.abstract')}
             lead={t(lang, 'abstractPage.lead')}>
+
+  <noscript>
+    <p class="nojs">{t(lang, 'abstractPage.needsJs')}</p>
+  </noscript>
 
   <nav class="picker" aria-label={t(lang, 'menu.abstract')}>
     {groups.map((g) => (
@@ -55,6 +69,11 @@ const groups = groupVenues(stats);
 </PageLayout>
 
 <style>
+  .nojs {
+    font-size: var(--fs-kicker); line-height: 1.75; color: var(--ink);
+    border-left: 2px solid var(--gold); padding: 0.5rem 0 0.5rem 0.8rem;
+    margin: 0 0 1.4rem;
+  }
   .picker { border-bottom: 1px solid var(--hairline); padding-bottom: 1.2rem; margin-bottom: 1.4rem; }
   .grp { margin-bottom: 1rem; }
   .grp:last-child { margin-bottom: 0; }

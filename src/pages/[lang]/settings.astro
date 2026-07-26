@@ -16,6 +16,10 @@ const { lang } = Astro.params;
 // 所以给 .lt / .ld 各配一个 id，用 aria-labelledby 关联名字、aria-describedby
 // 关联说明 —— 而不是把 tg.label 复制进 aria-label：那样文案存在两份，改一处
 // 就会漂。id 用 key 拼，key 来自 schema 的字段名，天然唯一。
+//
+// #favClear 的静态标记里带 disabled：paintFav() 会按收藏数把它打开或关掉，
+// 但那要等 JS 跑起来。不写的话，「唯一一个明显该失效的按钮」反倒成了无 JS 时
+// 唯一看着能按的 —— 实测此前 JS 关时它 enabled、JS 开时 disabled，正好反了。
 const toggles = [
   { key: 'darkTheme', label: t(lang, 'settings.darkMode.label'), desc: t(lang, 'settings.darkMode.desc') },
   { key: 'rememberDarkMode', label: t(lang, 'settings.form.rememberDarkMode.label'), desc: t(lang, 'settings.form.rememberDarkMode.desc') },
@@ -29,6 +33,21 @@ const toggles = [
 
   <p class="privacy" data-reveal>{t(lang, 'settings.privacyNotice')}</p>
   <p class="warn" id="stWarn" hidden>{t(lang, 'settings.degraded')}</p>
+
+  <noscript>
+    <p class="warn">{t(lang, 'settings.needsJs')}</p>
+    <style is:inline>
+      /* 没有 JS 时这一页的 14 个开关全是死的，而此前没有任何提示 ——
+         实测 375px 关 JS：14 个可见且未 disabled 的按钮、1 个输入框、无提示。
+         按获奖页立下的约定处理：说明为什么不能用，同时把点不动的控件藏掉。
+         只藏 .control 那一列，标签与说明留着 —— 那些文字本身就在解释每一项设置
+         是干什么的，是有价值的内容；而一个按钮不携带信息，只提供一个动作，
+         点了没反应就纯粹是骗人。这也是为什么摘要页的处理不同（那边的年份按钮
+         同时是「有哪些届次」的索引，藏了会丢信息，所以只加提示不藏）。
+         选择器两段（0,2,0）压过 scoped 的 .control（0,1,0 + scope）。 */
+      .row .control { display: none !important; }
+    </style>
+  </noscript>
 
   <section class="row" data-reveal>
     <div class="label">
@@ -81,7 +100,7 @@ const toggles = [
       <p class="ld" id="favDesc">{t(lang, 'settings.favorites.desc', { count: '…' })}</p>
     </div>
     <div class="control">
-      <button type="button" class="danger" id="favClear">{t(lang, 'settings.favorites.clear')}</button>
+      <button type="button" class="danger" id="favClear" disabled>{t(lang, 'settings.favorites.clear')}</button>
     </div>
   </section>
 

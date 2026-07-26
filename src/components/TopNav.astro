@@ -48,6 +48,25 @@ const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
       <button type="button" class="icon" id="themeToggle" aria-label={t(lang, 'common.theme')}>◑</button>
     </div>
   </div>
+
+  <noscript>
+    <style is:inline>
+      /* 窄屏下 .core 靠 .hdr.open 显隐，而那个类只有 nav.js 会加 —— 没有 JS 时
+         实测 375px 上 5 条核心导航 0 条可见、汉堡按钮看得见但点不动，
+         整页可达的 <a href> 只剩 4 个（跳过链接、站名、语言、GitHub）。
+         手机 + 关 JS 的访客落在除首页以外任何一页上，只能靠站名回首页再绕。
+         本页面本来就是静态 HTML，链接全在，撤掉 display:none 即可。
+         用 #primaryNav.core（1,1,0）压过 :global(.hdr.open) .core（0,3,0 含 scope），
+         再加 !important 兜底 —— 与 awards.astro 的 <noscript> 块同一套做法。 */
+      @media (max-width: 860px) {
+        #primaryNav.core { display: flex !important; }
+        #navToggle { display: none !important; }
+      }
+      /* 主题与强调色两个按钮在所有宽度下都只有 JS 才有用。把它们留着「看着能按、
+         按了没反应」比拿掉更糟，所以按同一条原则一起藏掉。 */
+      #themeToggle, #accentCycle { display: none !important; }
+    </style>
+  </noscript>
 </header>
 
 <style>

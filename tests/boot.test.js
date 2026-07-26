@@ -87,6 +87,42 @@ describe('boot 分派', () => {
     await expect(settle()).resolves.toBeUndefined();
   });
 
+  it('三个全局 init 各自兜错：initNav 抛错不能带走 initTheme 与 initReveal', async () => {
+    // 守的是一条会让整站看起来变白页的路径。boot() 原先把三个全局 init 直接串在
+    // 一起，于是 initNav 或 initTheme 里任何一处抛错都会跳过 initReveal ——
+    // 而 <html class="reveal-on"> 是 <head> 内联脚本加的、给每个 [data-reveal]
+    // 上了 opacity:0，解除门控的 .in 只有 initReveal 会加。结果是首页 38 个
+    // [data-reveal] 全停在 opacity:0（实测），页面上有 2,698 个字符却一个都看不见。
+    //
+    // 断言 initReveal **被调用过**，而不是断言「不抛错」：后者在串行版本下也是
+    // 绿的（boot 是 async，抛错只变成一个被吞掉的 rejected promise），
+    // 那种断言对这个 bug 毫无鉴别力。
+    vi.resetModules();
+    const order = [];
+    vi.doMock('@/scripts/nav.js', () => ({
+      initNav: () => {
+        order.push('nav');
+        throw new Error('nav 炸了');
+      },
+    }));
+    vi.doMock('@/scripts/theme.js', () => ({ initTheme: () => order.push('theme') }));
+    vi.doMock('@/scripts/reveal.js', () => ({ initReveal: () => order.push('reveal') }));
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    await import('@/scripts/boot.js');
+    mountPage(null);
+    document.dispatchEvent(new Event('astro:page-load'));
+    await settle();
+
+    expect(order).toEqual(['nav', 'theme', 'reveal']);
+    expect(spy.mock.calls.flat().join(' ')).toContain('nav');
+
+    vi.doUnmock('@/scripts/nav.js');
+    vi.doUnmock('@/scripts/theme.js');
+    vi.doUnmock('@/scripts/reveal.js');
+    vi.resetModules();
+  });
+
   it('页面 init 抛错时被兜住并记录，不冒泡成未处理拒绝', async () => {
     const { registerPage } = await freshBoot();
     const err = new Error('页面初始化炸了');

@@ -47,6 +47,29 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
         // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           d.classList.add('reveal-on');
+
+          // 门控是这里加的（内联、同步，为的是不闪一下全可见的内容），
+          // 但解除门控的 .in 是 bundle 里的 reveal.js 加的。两者之间必须有个
+          // 保险，否则「内联跑了、bundle 没到」就等于整页停在 opacity:0 ——
+          // 实测（真实 Chrome，abort /_astro/*.js）首页 38/38 个 [data-reveal]
+          // opacity 全 0、h1 也是 0，而 body.innerText 有 2,698 个字符。
+          // 「无 JS」那条路本来就没问题（内联根本不跑，门控就不存在），
+          // 之前防的是错的那一头。
+          //
+          // 用 window load 而不是固定延时：实测它就是「所有子资源尘埃落定」——
+          // bundle 被 abort 时 160ms 就触发，bundle 被人为拖慢 1,800ms 时它等到
+          // 1,827ms 才触发（和 astro:page-load 同一毫秒）。所以它既不会在健康
+          // 加载上误触，也不会在失败时干等。再留 500ms 余量给同一毫秒内的
+          // 派发顺序，安全系数约 500 倍。
+          //
+          // 万一余量仍不够（极端情况下 astro:page-load 落在 load+500ms 之后），
+          // 代价只是这一次没有淡入动画 —— 与开了「减少动效」的用户看到的完全
+          // 一样。反过来漏掉这个保险的代价是内容永远不出现。方向选对了。
+          window.addEventListener('load', function () {
+            setTimeout(function () {
+              if (!window.__spcRevealReady) d.classList.remove('reveal-on');
+            }, 500);
+          });
         }
 
         try {
