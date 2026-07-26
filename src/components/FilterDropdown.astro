@@ -1,0 +1,49 @@
+---
+const { id, label, options, placeholder } = Astro.props;
+---
+
+<details class="fd" id={id}>
+  <summary>
+    <span class="fd-label">{label}</span>
+    <span class="fd-value" data-fd-value>{placeholder}</span>
+    <span class="fd-caret" aria-hidden="true">▾</span>
+  </summary>
+  <div class="fd-menu" role="group" aria-label={label}>
+    {options.map((o) => (
+      <label class="fd-opt">
+        <input type="checkbox" value={String(o.value)} />
+        <span>{o.label}</span>
+        {o.count != null && <em>{o.count}</em>}
+      </label>
+    ))}
+  </div>
+</details>
+
+<style>
+  .fd { position: relative; }
+  summary {
+    display: flex; align-items: baseline; gap: 0.4rem; cursor: pointer;
+    list-style: none; padding: 0.4rem 0.6rem;
+    border: 1px solid var(--hairline); border-radius: var(--radius);
+    font-size: var(--fs-small); white-space: nowrap;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { border-color: var(--ink); }
+  .fd-label { color: var(--faint); font-size: var(--fs-kicker); }
+  .fd-value { color: var(--ink); }
+  .fd-caret { color: var(--faint); font-size: 0.6rem; }
+
+  .fd-menu {
+    position: absolute; z-index: 10; left: 0; top: calc(100% + 0.35rem);
+    min-width: 12rem; max-height: 17rem; overflow-y: auto;
+    background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.3rem 0;
+  }
+  .fd-opt {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.3rem 0.7rem; font-size: var(--fs-small); cursor: pointer;
+  }
+  .fd-opt:hover { background: var(--band); }
+  .fd-opt em { margin-left: auto; color: var(--faint); font-style: normal; font-size: var(--fs-kicker); }
+  .fd-opt input { accent-color: var(--accent); }
+</style>

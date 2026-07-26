@@ -61,6 +61,9 @@ a.lnk:hover { border-bottom-color: var(--accent); }
 
 .hl { background: var(--hl-bg); color: var(--ink); }
 
+/* 搜索词命中用强调色下划线，与关键词高亮的底色区分开，两者叠加时才看得清 */
+.q-hit { color: var(--accent); border-bottom: 1px solid var(--accent); font-weight: 600; }
+
 /* ── 滚动淡入 ────────────────────────────────────────────
    opacity:0 只在 html.reveal-on 下生效，而 reveal-on 由 <head>
    内联脚本在「允许动效」时才添加。这样无 JS 或开启减少动效时，

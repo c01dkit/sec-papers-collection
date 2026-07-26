@@ -1,0 +1,21 @@
+---
+import { t } from '@/i18n/index.js';
+const { lang, row } = Astro.props;
+const hasLink = row.paper && row.paper !== '#';
+---
+
+<tr data-id={row.id}>
+  <td class="c-id">{row.id}</td>
+  <td class="c-pub">{row.publication}</td>
+  <td class="c-year">{row.year}</td>
+  <td class="c-title"><span data-title>{row.title}</span></td>
+  <td class="c-act">
+    {hasLink ? (
+      <a href={row.paper} target="_blank" rel="noopener" title={t(lang, 'search.openPaper')} aria-label={t(lang, 'search.openPaper')}>↗</a>
+    ) : (
+      <span class="off" aria-hidden="true">↗</span>
+    )}
+    <button type="button" data-fav={row.id} title={t(lang, 'search.toggleFavorite')}
+            aria-pressed="false" aria-label={t(lang, 'search.toggleFavorite')}>☆</button>
+  </td>
+</tr>

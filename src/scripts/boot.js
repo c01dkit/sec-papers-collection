@@ -23,6 +23,11 @@ registerPage('home', () => {
   initCountdown();
 });
 
+registerPage('search', async () => {
+  const { initPaperTable } = await import('./paper-table.js');
+  await initPaperTable();
+});
+
 async function boot() {
   initNav();
   initTheme();

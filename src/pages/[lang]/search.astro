@@ -1,0 +1,187 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import FilterDropdown from '@/components/FilterDropdown.astro';
+import PaperRow from '@/components/PaperRow.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import stats from '@/assets/data/data-statistics.json';
+import quickView from '@/assets/data/data-quick-view.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+
+// 预渲染最新 30 条：按年份降序、同年按 id 升序（spec §8）
+const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
+
+// #ptSeed 内嵌了预渲染那 30 行的完整数据：CDN 拉不到 data.json 时，脚本以此为
+// 数据源继续提供筛选/排序/分页。用内嵌 JSON 而不是从表格 DOM 反推 —— 无损、
+// 不依赖表格列结构，以后改表格不会默默失效。约 5KB 未压缩。
+// #ptI18n 内嵌本地化字符串，免得在 JS 里重建一套 i18n。
+// （这两段说明放 frontmatter：模板里的 HTML 注释会被 Astro 原样输出到产物。）
+const publications = Object.entries(stats.byPublication)
+  .sort((a, b) => b[1] - a[1])
+  .map(([name, count]) => ({ value: name, label: name, count }));
+
+const years = Object.keys(stats.byYear)
+  .sort((a, b) => Number(b) - Number(a))
+  .map((y) => ({ value: y, label: y, count: stats.byYear[y] }));
+---
+
+<PageLayout lang={lang} page="search" title={t(lang, 'menu.search')}
+            lead={t(lang, 'search.previewNote', { count: seed.length })}>
+
+  <div class="toolbar">
+    <label class="q">
+      <span class="ic" aria-hidden="true">⌕</span>
+      <input type="search" id="q" placeholder={t(lang, 'search.searchPlaceholder')}
+             autocomplete="off" spellcheck="false" />
+    </label>
+
+    <FilterDropdown id="fPub" label={t(lang, 'search.publication')}
+                    options={publications} placeholder={t(lang, 'search.anyPublication')} />
+    <FilterDropdown id="fYear" label={t(lang, 'search.year')}
+                    options={years} placeholder={t(lang, 'search.anyYear')} />
+
+    <button type="button" id="favOnly" class="tgl" aria-pressed="false">
+      <span aria-hidden="true">☆</span> {t(lang, 'search.favoritesOnly')}
+    </button>
+    <button type="button" id="clearAll" class="tgl">{t(lang, 'search.clearFilters')}</button>
+  </div>
+
+  <p class="notice" id="notice" hidden></p>
+
+  <div class="table-scroll">
+    <table class="pt">
+      <thead>
+        <tr>
+          <th class="c-id" data-sort="id">ID</th>
+          <th class="c-pub" data-sort="publication">{t(lang, 'search.publication')}</th>
+          <th class="c-year" data-sort="year">{t(lang, 'search.year')}</th>
+          <th class="c-title" data-sort="title">{t(lang, 'search.title')}</th>
+          <th class="c-act"><span class="sr">{t(lang, 'search.paper')}</span></th>
+        </tr>
+      </thead>
+      <tbody id="ptBody">
+        {seed.map((row) => <PaperRow lang={lang} row={row} />)}
+      </tbody>
+    </table>
+    <p class="empty" id="ptEmpty" hidden>{t(lang, 'search.noResults')}</p>
+  </div>
+
+  <div class="pager">
+    <span class="count" id="ptCount">{t(lang, 'search.previewNote', { count: seed.length })}</span>
+    <div class="pg">
+      <label class="per">
+        {t(lang, 'search.perPage')}
+        <select id="perPage">
+          <option>15</option><option>30</option><option>50</option><option>100</option>
+        </select>
+      </label>
+      <button type="button" id="pgPrev" aria-label={t(lang, 'search.prevPage')}>‹</button>
+      <span id="pgInfo"></span>
+      <button type="button" id="pgNext" aria-label={t(lang, 'search.nextPage')}>›</button>
+    </div>
+  </div>
+
+  <script type="application/json" id="ptSeed" set:html={JSON.stringify(seed)} />
+
+  <script type="application/json" id="ptI18n" set:html={JSON.stringify({
+    loading: t(lang, 'search.loading'),
+    loadFailed: t(lang, 'search.loadFailed'),
+    retry: t(lang, 'search.retry'),
+    total: t(lang, 'search.totalPapers', { count: '__N__' }),
+    pageOf: t(lang, 'search.pageOf', { page: '__P__', pageCount: '__C__' }),
+    selected: t(lang, 'search.selected', { count: '__N__' }),
+    anyPublication: t(lang, 'search.anyPublication'),
+    anyYear: t(lang, 'search.anyYear'),
+    copied: t(lang, 'search.copied'),
+    notPersistent: t(lang, 'search.notPersistent'),
+    openPaper: t(lang, 'search.openPaper'),
+    toggleFavorite: t(lang, 'search.toggleFavorite'),
+  })} />
+</PageLayout>
+
+<style>
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    margin-bottom: 1rem;
+  }
+  .q {
+    display: flex; align-items: center; gap: 0.4rem; flex: 1 1 13rem;
+    border: 1px solid var(--hairline); border-radius: var(--radius); padding: 0.4rem 0.6rem;
+  }
+  .q:focus-within { border-color: var(--ink); }
+  .q .ic { color: var(--faint); }
+  .q input {
+    border: 0; background: none; color: var(--ink); font: inherit;
+    font-size: var(--fs-small); width: 100%; outline: none;
+  }
+  .tgl {
+    background: none; cursor: pointer; font: inherit; font-size: var(--fs-small);
+    color: var(--muted); border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.4rem 0.7rem; white-space: nowrap;
+  }
+  .tgl:hover { border-color: var(--ink); color: var(--ink); }
+  .tgl[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); }
+
+  .notice {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+    border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
+    padding: 0.6rem 0.8rem; margin: 0 0 1rem;
+    font-size: var(--fs-small); color: var(--muted);
+  }
+  .notice button {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
+    color: var(--ink);
+  }
+
+  .table-scroll { overflow-x: auto; }
+  .pt { width: 100%; border-collapse: collapse; min-width: 40rem; }
+  .pt th {
+    text-align: left; font-weight: 400; font-family: var(--font-sans);
+    font-size: var(--fs-kicker); letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--faint); padding: 0 0.5rem 0.5rem; border-bottom: 1px solid var(--hairline);
+    cursor: pointer; user-select: none; white-space: nowrap;
+  }
+  .pt th:hover { color: var(--ink); }
+  .pt th[data-dir]::after { content: attr(data-dir); margin-left: 0.3rem; color: var(--accent); }
+  .pt td {
+    padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline-soft);
+    font-size: var(--fs-small); vertical-align: baseline;
+  }
+  .pt tbody tr:hover { background: var(--band); }
+  .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
+  .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .c-act { width: 4.2rem; white-space: nowrap; }
+  .c-act a, .c-act button {
+    background: none; border: 0; padding: 0 0.2rem; cursor: pointer;
+    font: inherit; color: var(--faint);
+  }
+  .c-act a:hover, .c-act button:hover { color: var(--accent); }
+  .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
+  .c-act button[aria-pressed='true'] { color: var(--gold); }
+
+  .empty { padding: 2.5rem 0; text-align: center; color: var(--faint); font-size: var(--fs-small); }
+
+  .pager {
+    display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center;
+    justify-content: space-between; margin-top: 1rem;
+    font-size: var(--fs-kicker); color: var(--faint);
+  }
+  .pg { display: flex; align-items: center; gap: 0.6rem; }
+  .pg button {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    width: 1.7rem; height: 1.7rem; cursor: pointer; color: var(--ink);
+  }
+  .pg button:disabled { color: var(--hairline); cursor: default; }
+  .per select {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    color: var(--ink); font: inherit; font-size: var(--fs-kicker); padding: 0.15rem 0.3rem;
+    margin-left: 0.3rem;
+  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
