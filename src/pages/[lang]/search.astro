@@ -150,16 +150,18 @@ const years = Object.keys(stats.byYear)
     font-size: var(--fs-small); color: var(--muted);
   }
 
-  /* .pt 的 min-width:40rem 比窄屏视口宽，本来就该由这里的 overflow-x:auto
-     在自己内部滚动掉。但 overflow:auto 只保证「视觉裁切 + 出滚动条」，不保证
-     子元素的布局尺寸不会继续影响祖先——contain:layout 才是那道真正的边界：
-     它告诉浏览器「这个盒子内部的布局不会影响外面」，documentElement.scrollWidth
-     才会如实反映页面本身的宽度，而不是把内部已经能横向滚动掉的表格宽度也算进去。
-     加 paint 是为了同时裁切住任何可能画出边界外的内容（比如 hover 的描边）。
-     实测：不加这条时 375px 视口下 document.documentElement.scrollWidth 会算进
-     表格的 640px，整页多出约 224px 的横向滚动；加上后归零，且 .table-scroll
-     自身的横向滚动（列不缩水、仍可完整看到）不受影响——contain 不改变
-     overflow-x:auto 本身的滚动行为，只是不让它内部的布局尺寸外泄。 */
+  /* .pt 的 min-width:40rem 比窄屏视口宽，本该由 overflow-x:auto 在容器内部滚动掉。
+     实测（真实 Chrome 126，375px）：不加 contain 时 documentElement.scrollWidth
+     为 599（多出 224px 的整页横向滚动），加上后为 375，归零；而 .table-scroll
+     自身的 340/640 横向滚动不受影响，最后一列仍可滚到、列宽不缩水。
+     消融过：contain:layout、contain:paint、transform 三者各自都能修好，
+     flow-root、显式 width、isolation 都不行。
+
+     诚实交代：为什么 overflow-x:auto 单独不够，我们没能说清。三轮独立排查都没
+     定位到真正的区分点 —— 首页 CoverageMatrix 是同样的「overflow-x:auto + 超宽表格」
+     结构却不溢出，而「它被揭示动画的 transform 顺带保护了」这个解释已被证伪
+     （强制 transform:none 后依然不溢出）。所以这一行是靠直接测量站住的，
+     不是靠机制推导。谁要改动它，请先在 375px 下量一遍再动。 */
   .table-scroll { overflow-x: auto; contain: layout paint; }
   .pt { width: 100%; border-collapse: collapse; min-width: 40rem; }
   .pt th {
