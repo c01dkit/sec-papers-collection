@@ -4378,9 +4378,9 @@ describe('migrateSettings', () => {
   });
 
   it('保留已知字段', () => {
-    const out = migrateSettings({ keywords: ['fuzz'], showStatusDots: true });
+    const out = migrateSettings({ keywords: ['fuzz'], rememberTheme: true });
     expect(out.keywords).toEqual(['fuzz']);
-    expect(out.showStatusDots).toBe(true);
+    expect(out.rememberTheme).toBe(true);
   });
 
   it('theme 语义从 PrimeVue 预设名变成强调色 slug', () => {
@@ -4398,9 +4398,14 @@ describe('migrateSettings', () => {
     expect(out).not.toHaveProperty('llmApiKey');
   });
 
-  it('language 脏值回落到 en', () => {
-    expect(migrateSettings({ language: 'zh' }).language).toBe('zh');
-    expect(migrateSettings({ language: 'fr' }).language).toBe('en');
+  it('language 与 showStatusDots 作为历史字段被丢弃', () => {
+    // 两者都没有活的消费方：language 从来没有 Astro 侧的写入方，却会被 mirror()
+    // 反向覆盖真正的 spc-lang；showStatusDots 只有 Task 20 待删的 PaperStats.vue 用。
+    // 判定标准与 llmEndpoint 一样 —— 没人消费的字段不该留在用户库里。
+    const out = migrateSettings({ language: 'zh', showStatusDots: true, keywords: ['x'] });
+    expect(out).not.toHaveProperty('language');
+    expect(out).not.toHaveProperty('showStatusDots');
+    expect(out.keywords).toEqual(['x']);   // 同一次迁移里，该留的要留住
   });
 
   it('keywords 不是数组时归零，元素强制成非空字符串', () => {
@@ -4461,12 +4466,17 @@ export const MIRROR = {
 export function DEFAULT_SETTINGS() {
   return {
     theme: 'slate',            // 强调色 slug（语义已从 PrimeVue 预设名改变）
-    language: 'en',
     darkTheme: false,
+    // 注意这里没有 language。当前语言由 URL 决定，「上次选的语言」写在
+    // localStorage 的 spc-lang 里，唯一写入方是语言切换器（nav.js）。
+    // 早先 schema 里还留了一份 language，而 Astro 侧没有任何代码写它 ——
+    // 于是它恒为默认值 'en'，却被 mirror() 每次落盘时反向盖回 spc-lang：
+    // 中文用户切到中文、再改任意一项设置，语言记忆就被悄悄改回英文，
+    // 打开「记住语言」后下次访问 / 会被送去 /en/。一份从不更新的副本
+    // 去覆盖真正的来源，是这个 bug 的全部成因。
     rememberLanguage: false,
     rememberDarkMode: false,
     rememberTheme: false,
-    showStatusDots: false,
     keywords: [],
   };
 }
@@ -4481,12 +4491,10 @@ export function migrateSettings(raw) {
   const out = DEFAULT_SETTINGS();
 
   out.theme = ACCENTS.includes(src.theme) ? src.theme : 'slate';
-  out.language = LANGS.includes(src.language) ? src.language : 'en';
   out.darkTheme = Boolean(src.darkTheme);
   out.rememberLanguage = Boolean(src.rememberLanguage);
   out.rememberDarkMode = Boolean(src.rememberDarkMode);
   out.rememberTheme = Boolean(src.rememberTheme);
-  out.showStatusDots = Boolean(src.showStatusDots);
   out.keywords = Array.isArray(src.keywords)
     ? src.keywords.filter((k) => k !== null && k !== undefined && String(k) !== '').map(String)
     : [];
@@ -4532,10 +4540,10 @@ describe('IndexedDB 可用时', () => {
   it('patch 是合并而非覆盖', async () => {
     const s = await freshStore();
     await s.patchSettings({ keywords: ['a'] });
-    await s.patchSettings({ showStatusDots: true });
+    await s.patchSettings({ rememberTheme: true });
     const got = await s.getSettings();
     expect(got.keywords).toEqual(['a']);
-    expect(got.showStatusDots).toBe(true);
+    expect(got.rememberTheme).toBe(true);
   });
 
   it('读取时对库里的脏数据做迁移', async () => {
@@ -4594,7 +4602,7 @@ describe('IndexedDB 可用时', () => {
 
   it('镜像六个键到 localStorage 供预绘制同步读取', async () => {
     const s = await freshStore();
-    await s.patchSettings({ theme: 'oxblood', darkTheme: true, language: 'zh', rememberDarkMode: true });
+    await s.patchSettings({ theme: 'oxblood', darkTheme: true, rememberDarkMode: true });
     expect(localStorage.getItem(MIRROR.accent)).toBe('oxblood');
     expect(localStorage.getItem(MIRROR.theme)).toBe('dark');
     expect(localStorage.getItem(MIRROR.lang)).toBe('zh');
@@ -4851,10 +4859,12 @@ describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
     const raw = await s.__readRaw('app');
     expect(raw).not.toHaveProperty('llmEndpoint');
     expect(raw).not.toHaveProperty('llmApiKey');
+    // language 与 showStatusDots 同属没有活消费方的历史字段，一并清掉
+    expect(raw).not.toHaveProperty('language');
+    expect(raw).not.toHaveProperty('showStatusDots');
     expect(raw.theme).toBe('slate');          // green 不在新 slug 列表里
     expect(raw.keywords).toEqual(['fuzzing', 'C++']);
-    expect(raw.showStatusDots).toBe(true);
-    expect(raw.darkTheme).toBe(true);
+    expect(raw.darkTheme).toBe(true);         // 该留的必须留住
   });
 
   it('填充 localStorage 镜像，供下次首绘同步读取', async () => {
@@ -5059,6 +5069,15 @@ function idbPut(key, value) {
   );
 }
 
+/**
+ * 仅供测试：丢弃缓存的连接，让下一次操作重新 open 一遍。
+ * 用来验证「连接开得起来」本身不会把降级标志抬回 true —— 配额耗尽时
+ * 连接一直是健康的，能不能写是另一回事。
+ */
+export function __reopenDb() {
+  dbPromise = null;
+}
+
 /** 仅供测试：绕过迁移直接写入原始值，用来模拟库里的旧格式数据。 */
 export async function __writeRaw(key, value) {
   try {
@@ -5081,7 +5100,8 @@ function mirror(settings) {
   try {
     localStorage.setItem(MIRROR.theme, settings.darkTheme ? 'dark' : 'light');
     localStorage.setItem(MIRROR.accent, settings.theme);
-    localStorage.setItem(MIRROR.lang, settings.language);
+    // 不写 MIRROR.lang：spc-lang 的唯一写入方是语言切换器（nav.js）。
+    // 详见 DEFAULT_SETTINGS 里关于 language 的说明。
     localStorage.setItem(MIRROR.rememberDark, settings.rememberDarkMode ? '1' : '0');
     localStorage.setItem(MIRROR.rememberAccent, settings.rememberTheme ? '1' : '0');
     localStorage.setItem(MIRROR.rememberLang, settings.rememberLanguage ? '1' : '0');
@@ -8549,6 +8569,20 @@ v0.2.0 的「里程碑 / Milestone」从版本号移到变更项，让版本号�
 
 改动点：删掉两个 LLM 输入框（全站无消费方），主题色从任意调色改为 4 个精选强调色，加一个收藏管理入口。表单**即改即存**，不要「保存」按钮 —— 原实现有保存按钮 + toast，但这些偏好都是即时生效的开关，多一步确认没有意义。
 
+两语各追加一条降级提示文案（只增不改）。**不要复用 `settings.unsupported.desc`** ——
+那句写的是「当前浏览器不支持 IndexedDB」，而 Step 0 真正针对的是配额耗尽：
+浏览器支持得好好的、连接也健康，只是写不进去。用一句不预设原因的说法：
+
+```json
+// zh.json settings 内追加
+"degraded": "偏好暂时保存不了（浏览器本地存储不可写），改动在本次访问内有效，关闭页面后会丢失。"
+```
+
+```json
+// en.json settings 内追加
+"degraded": "Preferences can't be saved right now (local storage is not writable). Changes apply for this visit and will be lost when you close the page."
+```
+
 - [ ] **Step 0（前置）：把 `persistent` 改成「写-only」语义**
 
 本页要用 `isPersistent()` 渲染「存储降级」提示，所以先把这个标志的语义收紧，**否则提示会说谎**。
@@ -8567,6 +8601,36 @@ Task 10 的最终审阅发现（那是我在 Task 10 round 4 自己引入的问�
 再补一条测试，锁住新语义：
 
 ```js
+  it('连接开得起来也不足以清掉降级标志', async () => {
+    // Step 0 删了两处 persistent = true：idbGet 的和 openDb 的。上一条测试盯住了
+    // idbGet，openDb 那处却没人守 —— 把它加回去，全套测试照样全绿。补这条。
+    // 语义上同理：连接健康完全不代表写得进去，配额耗尽时连接一直是好的。
+    const s = await freshStore();
+
+    const realPut = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function () {
+      const req = {};
+      setTimeout(() => req.onerror && req.onerror(), 0);
+      return req;
+    };
+
+    try {
+      await s.patchSettings({ theme: 'pine' });   // 写失败 → 标志落下
+      expect(s.isPersistent()).toBe(false);
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
+
+    // 丢掉缓存连接，下一次操作会重新 open。open 成功本身不该把标志抬回来。
+    s.__reopenDb();
+    await s.getSettings();                     // 触发重新 open + 一次成功的读
+    expect(s.isPersistent()).toBe(false);
+
+    // 只有一次真正成功的写才算数
+    await s.patchSettings({ theme: 'indigo' });
+    expect(s.isPersistent()).toBe(true);
+  });
+
   it('只有读成功不足以清掉降级标志 —— 写不进就该一直显示降级', async () => {
     // 配额耗尽的典型形态就是「读得到、写不进」。设置页那句提示的意思是
     // 「你的偏好保存不了」，一次成功的读对这件事什么都没证明。
@@ -8641,7 +8705,6 @@ const toggles = [
   { key: 'rememberDarkMode', label: t(lang, 'settings.form.rememberDarkMode.label'), desc: t(lang, 'settings.form.rememberDarkMode.desc') },
   { key: 'rememberTheme', label: t(lang, 'settings.form.rememberTheme.label'), desc: t(lang, 'settings.form.rememberTheme.desc') },
   { key: 'rememberLanguage', label: t(lang, 'settings.form.rememberLanguage.label'), desc: t(lang, 'settings.form.rememberLanguage.desc') },
-  { key: 'showStatusDots', label: t(lang, 'settings.form.showStatusDots.label'), desc: t(lang, 'settings.form.showStatusDots.desc') },
 ];
 ---
 
@@ -8649,7 +8712,7 @@ const toggles = [
             lead={t(lang, 'settings.subtitle')}>
 
   <p class="privacy" data-reveal>{t(lang, 'settings.privacyNotice')}</p>
-  <p class="warn" id="stWarn" hidden>{t(lang, 'settings.unsupported.desc')}</p>
+  <p class="warn" id="stWarn" hidden>{t(lang, 'settings.degraded')}</p>
 
   <section class="row" data-reveal>
     <div class="label">
