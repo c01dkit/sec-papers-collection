@@ -6097,14 +6097,14 @@ const years = Object.keys(stats.byYear)
         </tr>
       </thead>
       <tbody id="ptBody">
-        {seed.map((row) => <PaperRow lang={lang} row={row} />)}
+        {prerender.map((row) => <PaperRow lang={lang} row={row} />)}
       </tbody>
     </table>
     <p class="empty" id="ptEmpty" hidden>{t(lang, 'search.noResults')}</p>
   </div>
 
   <div class="pager">
-    <span class="count" id="ptCount">{t(lang, 'search.previewNote', { count: seed.length })}</span>
+    <span class="count" id="ptCount">{t(lang, 'search.previewNote').replace('__N__', String(seed.length))}</span>
     <div class="pg">
       <label class="per">
         {t(lang, 'search.perPage')}
