@@ -15,7 +15,7 @@ export function initAwardsView() {
       panel.hidden = panel.dataset.confPanel !== name;
     }
     for (const tab of bar.querySelectorAll('.tab')) {
-      tab.setAttribute('aria-selected', tab.dataset.conf === name ? 'true' : 'false');
+      tab.setAttribute('aria-pressed', tab.dataset.conf === name ? 'true' : 'false');
     }
   };
 
