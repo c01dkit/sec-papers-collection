@@ -1,0 +1,57 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { SITES } from '@/data/sites.js';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const cards = SITES.map((s) => ({
+  ...s,
+  host: new URL(s.url).hostname.replace(/^www\./, ''),
+  title: t(lang, `moreSites.list.${s.key}.title`),
+  desc: t(lang, `moreSites.list.${s.key}.desc`),
+}));
+---
+
+<PageLayout lang={lang} page="sites" title={t(lang, 'moreSites.title')}
+            lead={t(lang, 'moreSites.subtitle')}>
+  <ul class="grid">
+    {cards.map((c) => (
+      <li data-reveal>
+        <a class="card" href={c.url} target="_blank" rel="noopener">
+          <span class="host">{c.host}</span>
+          <span class="srf ttl">{c.title}</span>
+          <span class="desc">{c.desc}</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</PageLayout>
+
+<style>
+  .grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1px; background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+  .card {
+    display: block; position: relative; background: var(--bg);
+    padding: 1.05rem 1.15rem 1.15rem; height: 100%;
+    transition: background-color var(--dur) var(--ease);
+  }
+  .card:hover { background: var(--band); }
+  .host { display: block; font-size: var(--fs-kicker); color: var(--faint); margin-bottom: 0.5rem; }
+  .ttl { display: block; font-size: 0.98rem; line-height: 1.4; margin-bottom: 0.45rem; }
+  .card:hover .ttl { color: var(--accent); }
+  .desc { display: block; font-size: var(--fs-kicker); line-height: 1.75; color: var(--muted); }
+  .arrow {
+    position: absolute; top: 1rem; right: 1.1rem;
+    font-size: 0.7rem; color: var(--hairline);
+  }
+  .card:hover .arrow { color: var(--accent); }
+</style>
