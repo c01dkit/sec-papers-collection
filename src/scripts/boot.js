@@ -33,6 +33,11 @@ registerPage('abstract', async () => {
   await initAbstractView();
 });
 
+registerPage('trends', async () => {
+  const { initTrendsChart } = await import('./trends-chart.js');
+  await initTrendsChart();
+});
+
 async function boot() {
   initNav();
   initTheme();

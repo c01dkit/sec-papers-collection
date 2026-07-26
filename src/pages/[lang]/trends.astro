@@ -1,0 +1,35 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { buildSeries } from '@/lib/trend-series.js';
+import stats from '@/assets/data/data-statistics.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const groups = buildSeries(stats);
+---
+
+<PageLayout lang={lang} page="trends" title={t(lang, 'menu.trends')}
+            lead={t(lang, 'trendsPage.lead')}>
+  {groups.map((g) => (
+    <section class="chart-sec" data-reveal>
+      <h2 class="srf">{t(lang, g.labelKey)}</h2>
+      <div class="canvas-box">
+        <canvas data-chart={g.category}></canvas>
+      </div>
+      <noscript><p class="ns">{t(lang, 'trendsPage.needsJs')}</p></noscript>
+    </section>
+  ))}
+
+  <script type="application/json" id="trendData" set:html={JSON.stringify(groups)} />
+</PageLayout>
+
+<style>
+  .chart-sec { margin-bottom: var(--sp-band); }
+  .chart-sec h2 { margin-bottom: 0.9rem; }
+  .canvas-box { height: min(58vh, 26rem); position: relative; }
+  .ns { color: var(--faint); font-size: var(--fs-small); }
+</style>
