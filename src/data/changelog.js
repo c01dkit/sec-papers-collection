@@ -1,5 +1,17 @@
 export const CHANGELOG = {
   zh: [
+    { version: 'v0.4.0', date: '2026-07-25', items: [
+      '🎉 里程碑：全站用 Astro 重写，从单页应用改为静态多页',
+      '✨ 全新首页：随滚动淡入的分块功能介绍，含 10 会议 × 12 年的收录覆盖矩阵',
+      '✨ 左侧导航栏改为顶部导航栏，核心 5 项一次点击直达',
+      '✨ 页面切换改为淡入淡出',
+      '中英文改为分语言预渲染（/zh/ 与 /en/），旧链接自动跳转',
+      '移除 PrimeVue 与 Tailwind，改为手写设计系统；主题色收窄为 4 个精选强调色',
+      '获奖论文、投稿时间线、关于、更多网站四页改为纯静态，关掉 JS 也完整可读',
+      '检索页首屏 30 篇改为构建时预渲染，CDN 异常时仍可读可筛',
+      '移除无实际作用的大模型接口设置项',
+      '收藏与偏好关键词的本地数据完整保留',
+    ] },
     { version: 'v0.3.12', date: '2026-04-16', items: ['✨ 在`其他`下新增`更多网站`页面', '更新投稿时间线至 NDSS 2027', '美化`论文摘要`页', '美化`标题检索`表格'] },
     { version: 'v0.3.11', date: '2026-04-03', items: ['新增论文收藏功能，支持 IndexedDB 持久化', '新增偏好关键词高亮（搜索页与摘要页）', '新增语言、明暗模式、主题色的记忆开关', '启用设置页面入口', '新增 404 页面（支持中英文）', '搜索页重构为 Composition API', '修复开发环境下获奖论文与投稿时间线数据加载', '主题配置面板支持中文', '清理废弃的仪表盘组件'] },
     { version: 'v0.3.10', date: '2026-03-29', items: ['添加ASE 15-25论文'] },
@@ -28,6 +40,18 @@ export const CHANGELOG = {
     { version: 'v0.1.0', date: '2023-05-15', items: ['首次发布 sec.c01dkit.com', '使用 mkdocs 作为网站生成器'] },
   ],
   en: [
+    { version: 'v0.4.0', date: '2026-07-25', items: [
+      '🎉 Milestone: rewritten on Astro, from single-page app to static multi-page',
+      '✨ New home page: scroll-revealed feature sections and a 10-venue × 12-year coverage matrix',
+      '✨ Sidebar navigation replaced by a top bar, all five core pages one click away',
+      '✨ Cross-page fade transitions',
+      'Chinese and English are now prerendered per language (/zh/ and /en/); old links redirect automatically',
+      'Removed PrimeVue and Tailwind in favor of a hand-written design system; accent colors narrowed to four',
+      'Awards, submission timeline, about and more-sites are now fully static and readable without JS',
+      'Search page prerenders its first 30 rows, so it stays readable and filterable if the CDN fails',
+      'Removed the LLM endpoint settings, which had no effect',
+      'Existing favorites and watched keywords are preserved',
+    ] },
     { version: 'v0.3.12', date: '2026-04-16', items: ['✨ Add `More Sites` page under Misc with curated resources', 'Update Submission Timeline to NDSS 2027', 'Beautify `Abstract` page', 'Beautify `Search` table'] },
     { version: 'v0.3.11', date: '2026-04-03', items: ['Add paper favorites with IndexedDB persistence', 'Add keyword highlighting in Search and Abstract pages', 'Add remember-preference toggles for language, dark mode, and theme color', 'Enable Settings page in sidebar navigation', 'Add 404 page with i18n support', 'Refactor Search page to Composition API', 'Fix dev-mode data loading for Awards and Submission Timeline', 'Internationalize theme configurator panel', 'Clean up unused dashboard components'] },
     { version: 'v0.3.10', date: '2026-03-29', items: ['Add ASE 15-25'] },

@@ -34,27 +34,25 @@
 
 ## 网站使用指南
 
-网站基于 Vue 3 + Vite 实现，采用 PrimeVue 4 组件库，支持中英双语、明暗模式与主题色自定义。所有用户偏好仅保存在本机浏览器的 IndexedDB 中，不会上传到任何服务器。
+网站基于 Astro 实现为静态站点，中英文分语言预渲染（`/zh/`、`/en/`），无前端框架、手写 CSS，支持中英双语、明暗模式与强调色自定义。所有用户偏好仅保存在本机浏览器的 IndexedDB 中，不会上传到任何服务器。
 
-进入网站后，可通过左侧菜单访问以下页面：
+进入网站后，可通过顶部导航栏访问以下页面：
 
-### 首页（总览）
+### 首页
 
-- 展示论文总数、收录会议数、项目星标数、最近更新时间。
-- **会议年度统计**：按会议与年份展示每年的收录论文数量，并以彩色圆点标记每个会议年份的处理状态：
-  - `已校对`（绿）：人工核对完成
-  - `待校对`（黄）：尚未核对
-  - `待补充`（橙）：缺少链接或摘要等关键信息
-  - `已分析`（蓝）：经过 LLM 分析、带有主题标签
-- 状态圆点默认隐藏（避免密集恐惧症不适），可在「设置」中开启。
+- 随滚动依次淡入的分块式着陆页：Hero 区展示论文/会议/年份等实时统计；
+  「收录覆盖矩阵」按 10 个会议 × 12 年展示每年录用论文数（格子越深，当年录用越多，
+  空格表示该会议当年不办或尚未收录）；随后是检索、趋势、摘要、投稿时间线、
+  获奖论文五个功能块，各自一段简介与跳转入口。
 
 ### 论文 → 标题检索
 
 - 全量论文标题检索；可按会议、年份多选筛选。
 - 点击列表行即可一键复制论文标题。
-- 点击纸夹图标 `pi-paperclip` 在新标签页打开论文链接。
+- 点击纸夹图标在新标签页打开论文链接。
 - 点击星标可将论文加入个人收藏；顶部的「仅看收藏」按钮可一键过滤出已收藏论文。
-- 偏好关键词会以主题色高亮显示在标题中。
+- 偏好关键词会以强调色高亮显示在标题中。
+- 首屏 30 篇在构建时预渲染，即使 CDN 数据一时拉取不到，页面仍可读、可筛选。
 
 ### 论文 → 近年录用趋势
 
@@ -81,6 +79,7 @@
 
 - 项目更新日志（Changelog）。
 - 赞助者名单（自 v0.3.0 起）。
+- 「支持与反馈」区：爱发电 / PayPal 赞助链接、GitHub issue 入口、反馈问卷。
 
 ### 其他 → 更多网站
 
@@ -99,18 +98,15 @@
 
 - **记住语言选择**：保存中英文偏好，下次访问自动恢复。
 - **记住明暗模式**：保存亮色 / 暗色模式选择。
-- **记住主题色**：保存主色调选择。
-- **显示状态圆点**：开启或关闭首页论文统计中的彩色圆点。
-- **偏好关键词**：添加感兴趣的关键词，会在标题检索与论文摘要中以主题色高亮。
-- **大模型接口**：可配置 OpenAI 兼容的 API 地址与 Key（用于浏览器内调用 LLM 的功能）。
-- **论文收藏**：在「标题检索」中收藏的论文以本地 IndexedDB 持久化。
+- **记住强调色**：保存你在 4 个精选强调色中的选择。
+- **偏好关键词**：添加感兴趣的关键词，会在标题检索与论文摘要中以强调色高亮。
+- **论文收藏**：在「标题检索」中收藏的论文以本地 IndexedDB 持久化；本页也可一键清空收藏。
 
-### 顶部工具栏
+### 顶部导航栏
 
-- 切换中英文。
-- 切换明暗模式。
-- 打开主题配置面板（自定义主色调、菜单模式等）。
-- 跳转到反馈表单与项目仓库。
+- 核心 5 项（检索、趋势、摘要、投稿时间线、获奖论文）一次点击直达，非核心页面收进右侧「其他 ▾」下拉。
+- 切换中英文、切换明暗模式、循环切换强调色。
+- 移动端收起为汉堡菜单。
 
 ## 仓库结构
 
@@ -123,9 +119,10 @@ src/assets/data/          前端使用的 JSON 数据
   data-quick-view.json    每个会议的最近 100 篇论文
   data-statistics.json    按会议 / 年份 / 分类的聚合统计
   meta_json/<会议>-<年份>.json   每届完整数据，含摘要
-src/views/                Vue 页面
-src/service/              数据加载服务与 IndexedDB 封装
-src/locales/              en.json / zh.json
+src/pages/                Astro 页面（[lang]/*.astro 分中英文预渲染）
+src/lib/                  无 DOM 的纯函数模块（papers、highlight、coverage、settings-schema 等）
+src/scripts/              浏览器端控制脚本，含 settings-store.js（IndexedDB + localStorage）
+src/i18n/                 zh.json / en.json + index.js（t() 缺 key 会抛错）
 data.yml                  会议主配置（年份、XPath、官方文件等）
 main.py                   后端入口
 ```
@@ -146,8 +143,8 @@ uv run main.py --analyze    # 爬取/解析并重新生成 src/assets/data/ 下�
 
 ### 更新非论文信息
 
-- 自 v0.3.6 起，可在 `data.yml` 中通过 `status` 字段标注会议状态：`notchecked`（默认） / `inprogress` / `done` / `advanced`，分别在首页显示为 `待校对` / `待补充` / `已校对` / `已分析`。
-- 自 v0.3.0 起，`src/service/xxxService.js` 系列文件存放与论文本身无直接关系的关键信息（更新日志、赞助名单、投稿时间线、获奖论文等）。直接编辑这些文件即可发布最新内容。
+- 自 v0.3.6 起，可在 `data.yml` 中通过 `status` 字段标注会议处理状态（供维护者内部使用）：`notchecked`（默认） / `inprogress` / `done` / `advanced`。自 v0.4.0 起该字段不再展示在网站上。
+- 获奖论文与投稿时间线是手工维护的 JSON，不由 `--analyze` 生成：`src/assets/data/awards.json` 与 `src/assets/data/submission-timeline.json` 是 `src/assets/data/` 下仅有的两个未被 `.gitignore` 忽略的文件，直接编辑即可。更新日志与赞助名单在 `src/data/changelog.js`；「更多网站」的链接在 `src/data/sites.js`。直接编辑这些文件即可发布最新内容。
 
 ### LLM 主题分析
 
@@ -176,16 +173,16 @@ uv run analyzers/bib_analyzer.py official_cache/<文件>.bib
 
 ```bash
 npm install
-npm run dev              # 启动 Vite 开发服务器
+npm run dev              # 启动 Astro 开发服务器
 npm run build            # 生产构建到 dist/
 npm run preview          # 预览构建结果
-npm run lint             # ESLint --fix
-npm run format           # Prettier 格式化
+npm run check            # astro check
+npm test                 # vitest run
 npm run deploy           # 将 dist/ 发布到 GitHub Pages（--cname sec.c01dkit.com）
 npm run deploy:build     # 构建后立即发布
 ```
 
-界面基于 [PrimeVue 4](https://primevue.org/) 与 Tailwind CSS 3，图表使用 Chart.js。`primevue-document.md` 中记录了开发本站时使用的组件用法。
+网站基于 Astro 实现，手写 CSS，无 UI 框架、无 Tailwind；图表使用 Chart.js。
 
 ## 完整发布流程
 

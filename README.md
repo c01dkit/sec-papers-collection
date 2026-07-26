@@ -34,15 +34,15 @@ System venues:
 
 ## Website features
 
-The site is a Vue 3 + Vite single-page app deployed at `sec.c01dkit.com`. From the left sidebar you can reach:
+The site is an Astro static site, prerendered per language (`/zh/` and `/en/`) and deployed at `sec.c01dkit.com`. From the top navigation bar you can reach:
 
-- **Home** — paper totals, per-conference yearly breakdown, recent updates, status badges (verified / pending / require-updates / advanced).
-- **Search** — full title search across all included papers, filter by venue and year, click a row to copy the title, click the paperclip to open the paper, click the star to favorite. A "Favorites Only" toggle filters to your starred entries.
+- **Home** — a scroll-revealed landing page: hero with live paper/venue/year stats, a coverage matrix (10 venues × 12 years, shaded by yearly accepted-paper count), and one feature block per core page (search, trends, abstracts, submission timeline, awards).
+- **Search** — full title search across all included papers, filter by venue and year, click a row to copy the title, click the paperclip to open the paper, click the star to favorite. A "Favorites Only" toggle filters to your starred entries. The first 30 rows are prerendered at build time, so the page stays readable and filterable even if the CDN is unreachable.
 - **Trends** — yearly accepted-paper trend charts grouped by category (top-tier, software engineering, system).
-- **Abstract** — pick a venue and year to read accepted papers with their abstracts, with the user's preferred keywords highlighted in the theme color.
+- **Abstract** — pick a venue and year to read accepted papers with their abstracts, with the user's preferred keywords highlighted in the accent color.
 - **Submission Timeline** — full submission/notification/camera-ready timeline for each Big-Four venue, kept in sync with the official CFPs.
 - **Awards** — best-paper / distinguished-paper awards across years, grouped by year or by award type.
-- **About** — changelog and the list of supporters.
+- **About** — changelog, list of supporters, and a "Support & Feedback" section (donation links, GitHub issues, feedback form).
 - **More Sites** — curated links to related resources (best-paper-awards aggregators, CCF deadlines, Connected Papers, WisPaper, CS Papers, etc.).
 - **Settings** — theming and personal preferences (see below).
 
@@ -50,12 +50,10 @@ The site is a Vue 3 + Vite single-page app deployed at `sec.c01dkit.com`. From t
 
 All preferences are persisted in your browser's IndexedDB only — nothing is uploaded.
 
-- Light / dark mode toggle, primary color picker, menu mode (static / overlay).
-- Language toggle: English / 中文 (vue-i18n).
-- Remember-preference switches for language, dark mode, and theme color.
-- Show/hide the colored status dots on the home page (off by default).
+- Light / dark mode toggle, accent color picker (4 curated colors).
+- Language toggle: English / 中文.
+- Remember-preference switches for language, dark mode, and accent color.
 - Preferred keywords for highlighting in Search and Abstract pages.
-- LLM endpoint URL and API key (used by the in-browser features that talk to an OpenAI-compatible API).
 - Paper favorites stored locally; surfaced in the Search page.
 
 ## Repository layout
@@ -69,9 +67,10 @@ src/assets/data/          generated JSON consumed by the frontend
   data-quick-view.json    100 latest papers per publication
   data-statistics.json    aggregated counts by publication / year / category
   meta_json/<Pub>-<Yr>.json   per-conference details with abstracts
-src/views/                Vue pages
-src/service/              data-loading services and IndexedDB wrapper
-src/locales/              en.json / zh.json
+src/pages/                Astro pages ([lang]/*.astro prerendered per language)
+src/lib/                  pure-function modules (papers, highlight, coverage, settings-schema, ...)
+src/scripts/              browser-side controllers, incl. settings-store.js (IndexedDB + localStorage)
+src/i18n/                 zh.json / en.json + index.js (t() throws on a missing key)
 data.yml                  master config (venues, years, XPaths, official files)
 main.py                   orchestrator entry point
 ```
@@ -92,8 +91,8 @@ To speed up local crawling, unzip `cache.zip` into the repo root so the cached H
 
 ### Updating key information
 
-- Since v0.3.6, the `status` keyword in `data.yml` marks each conference's processing state: `notchecked` (default) / `inprogress` / `done` / `advanced`, surfaced as `Not verified` / `Require updates` / `Verified` / `Advanced processed` on the home page.
-- Since v0.3.0, files under `src/service/*Service.js` hold information that is not derived from papers themselves (changelog, sponsor list, submission timeline, awards). Edit them directly to publish news.
+- Since v0.3.6, the `status` keyword in `data.yml` marks each conference's processing state for maintainers: `notchecked` (default) / `inprogress` / `done` / `advanced` (LLM-analyzed). It is no longer surfaced on the site itself as of v0.4.0.
+- Awards and the submission timeline are hand-maintained JSON, not generated by `--analyze`: `src/assets/data/awards.json` and `src/assets/data/submission-timeline.json` are the two files under `src/assets/data/` that are *not* git-ignored (see `.gitignore`) — edit them directly. The changelog and supporter/sponsor list live in `src/data/changelog.js`; the "More Sites" links live in `src/data/sites.js`. Edit those directly to publish news.
 
 ### LLM-assisted topic classification
 
@@ -122,16 +121,16 @@ This rewrites empty cite keys with random UUIDs in place. Cite keys are not used
 
 ```bash
 npm install
-npm run dev              # Vite dev server
+npm run dev              # Astro dev server
 npm run build            # production build → dist/
 npm run preview          # preview the build
-npm run lint             # ESLint with --fix
-npm run format           # Prettier
+npm run check            # astro check
+npm test                 # vitest run
 npm run deploy           # publish dist/ to GitHub Pages (--cname sec.c01dkit.com)
 npm run deploy:build     # build + deploy
 ```
 
-UI components are from [PrimeVue 4](https://primevue.org/) with Tailwind CSS 3; charts are Chart.js. See `primevue-document.md` for component-usage notes used while developing this site.
+The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts are Chart.js.
 
 ## Full publish cycle
 
