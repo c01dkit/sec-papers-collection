@@ -52,5 +52,20 @@ const { lang, picked } = Astro.props;
   .num { font-size: 1.3rem; color: var(--accent); font-variant-numeric: tabular-nums; }
   .row.past .num { color: var(--faint); font-size: var(--fs-small); }
   .unit, .passed { font-size: var(--fs-kicker); color: var(--faint); }
-  .ph { padding: 1.4rem 0.9rem; text-align: center; color: var(--faint); font-size: var(--fs-small); }
+</style>
+
+<style is:global>
+  /* .ph 必须是 is:global，不能留在上面那个 scoped 块里。
+     所有截止日都过去时，home-countdown.js:51-54 用 createElement 造一个 .ph
+     顶掉整块内容，那个元素永远拿不到本文件模板的 scope 属性 ——
+     实测产物里规则编译成 `.ph[data-astro-cid-ux5xdal3]{…}` 而
+     `grep -o 'class="ph"' dist/zh/index.html` 为 0，也就是说构建期那条分支
+     （picked.placeholder）在现有数据下从不成立，**线上存在的 .ph 只有脚本造的
+     那一个**，规则一条都命中不了。表现是首页截止卡片变成一行齐左、正文字号、
+     --ink 色、零内边距的裸文字 —— 而那正是倒计时存在的意义所在（数据断更）。
+     实测修复前：text-align=start、color=#17150f(--ink)、font-size=15px、padding=0。
+     选择器以 [data-countdown] 打头，把作用范围锁在倒计时块内。 */
+  [data-countdown] .ph {
+    padding: 1.4rem 0.9rem; text-align: center; color: var(--faint); font-size: var(--fs-small);
+  }
 </style>

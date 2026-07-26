@@ -32,6 +32,19 @@ const PAIRS = [
     script: 'src/scripts/settings-form.js',
     templates: ['src/pages/[lang]/settings.astro'],
   },
+  // home 之前不在这张表里。补进来的**唯一**有牙齿的断言是下面那条作用域
+  // 检查（.ph 那个 bug 正是它抓的）；前三条对 home 全是空转 ——
+  // home-countdown.js 里没有 i18n.* 引用、DeadlineDemo.astro 里没有
+  // JSON.stringify({ 块、脚本也不用 getElementById。写清楚是免得有人把这一行
+  // 的绿色读成「首页倒计时的接线被守住了」：它的
+  // data-countdown / data-ddl / data-days / data-days-label / data-passed-label /
+  // data-placeholder / .unit 这套契约目前仍然只有 home-countdown.test.js
+  // 的手写夹具在守，改名不会红。
+  {
+    name: 'home',
+    script: 'src/scripts/home-countdown.js',
+    templates: ['src/components/home/media/DeadlineDemo.astro'],
+  },
 ];
 
 // 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，
@@ -116,5 +129,42 @@ describe.each(PAIRS)('$name 页：脚本与模板的接线', ({ script, template
     const want = [...new Set([...js.matchAll(/getElementById\('([^']+)'\)/g)].map((m) => m[1]))].sort();
     const have = new Set([...tpl.matchAll(/id="([^"{]+)"/g)].map((m) => m[1]));
     expect(want.filter((id) => !have.has(id))).toEqual([]);
+  });
+
+  it('脚本 createElement 出来的类名，不能只由配对模板的 scoped <style> 提供样式', () => {
+    // Astro 的 scoped <style> 只作用于**本文件模板里写出的**元素（编译成
+    // `.x[data-astro-cid-…]`）。脚本用 createElement 造的元素永远拿不到那个
+    // scope 属性，于是规则一条都命中不了，元素渲染成完全无样式的裸内容。
+    //
+    // 这个坑在本次迁移里踩了四次（Task 13 两轮、Task 17、以及 DeadlineDemo 的
+    // .ph —— 最后那个在三轮任务级复审里都没被看见，因为构建期那条
+    // picked.placeholder 分支在现有数据下从不成立，线上存在的 .ph 只有脚本造的
+    // 那一个）。所以立一道机械的绊线。
+    //
+    // 规则本身很干净：`.className = '…'` 一定发生在 createElement 出来的新元素上
+    // （需要 is:global），而 `classList.add/remove/toggle` 是往**已有**元素上加类
+    // （scoped 完全正确 —— 比如 timeline 的 .step.past、DeadlineDemo 的 .row.past）。
+    // 所以只看前者，不看后者，一条豁免名单都不需要。
+    //
+    // 为什么按配对逐个查、不做全站类名比对：类名只在同一个 scope 里才会互相
+    // 影响。ClosingBand 自己模板里的 .ttl 与 abstract-view.js 造的 .ttl 撞名
+    // 但互不相干 —— 全站比对会报 9 个假阳性，一个真的都没有。
+    const created = new Set();
+    for (const m of js.matchAll(/\.className\s*=\s*'([^']+)'/g)) {
+      for (const cls of m[1].split(/\s+/)) created.add(cls);
+    }
+
+    // 只留 scoped 块（没有 is:global / is:inline 的那些），并把声明体挖掉，
+    // 免得声明里出现的 .5rem 之类被当成选择器。
+    let selectors = '';
+    for (const m of tpl.matchAll(/<style([^>]*)>([\s\S]*?)<\/style>/g)) {
+      if (/is:global|is:inline/.test(m[1])) continue;
+      selectors += m[2].replace(/\{[^{}]*\}/g, '{}') + '\n';
+    }
+
+    const offenders = [...created].filter((cls) =>
+      new RegExp(`\\.${cls.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`).test(selectors)
+    );
+    expect(offenders.sort()).toEqual([]);
   });
 });

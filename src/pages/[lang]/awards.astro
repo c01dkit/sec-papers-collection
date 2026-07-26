@@ -141,5 +141,18 @@ const confs = awards.map((c) => ({
     flex: 0 1 auto; min-width: 0; font-size: var(--fs-kicker); color: var(--gold);
     border: 1px solid var(--gold); border-radius: var(--radius);
     padding: 0.05rem 0.4rem;
+    /* 上面那个 min-width:0 单独存在时是个真 bug，不是渲染误差。它让 flex 项能
+       收缩到「Distinguished」这个断不开的词的 min-content 宽度以下，于是文字
+       从自己的金色边框右侧穿出去。
+       为什么三轮排查都没找到：元素的 getBoundingClientRect() 看不见文本溢出 ——
+       量出来 maxElemRight 恰好等于 375、没有任何盒子越界，而
+       Range.getBoundingClientRect() 一遍就找到了。
+       实测 375px、USENIX Sec 按年份分组：documentElement.scrollWidth 384 /
+       clientWidth 375；23 个 badge（JS 关掉时 303 个）的文本右边缘超出自身边框，
+       最差一个边框止于 x=357.4 而文字画到 x=384。加这一行后 scrollWidth 归到 375，
+       JS 开与关都是。
+       用 overflow-wrap 而不是 min-width:min-content：与紧邻的 .ttl（第 135 行）
+       和 abstract.astro 的 .abs 对同一类问题的处理保持一致。 */
+    overflow-wrap: anywhere;
   }
 </style>
