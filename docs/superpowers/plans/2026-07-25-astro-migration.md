@@ -786,6 +786,13 @@ html.theme-anim body {
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* 作者样式里的任何 display 都会盖过 UA 样式对 [hidden] 的 display:none。
+   本项目有多处「平时 hidden、需要时用脚本显示」的元素（检索页的提示条、
+   摘要页的结果区、获奖页的分组面板、设置页的降级警告），只要它们的类上写了
+   display，hidden 就会失效 —— 表现为页面上常驻一条空白条，看起来像布局错乱
+   而不像 bug，很难往这上面想。所以在全局兜一次。 */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -5889,7 +5896,10 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 
 - [ ] **Step 1: 追加文案**
 
-现有 `search.*` 已有大部分 key，补这几条（两语）：
+现有 `search.*` 已有大部分 key，补下面这些（两语）。
+
+**注意 `anyPublication` 与 `anyYear` 早已存在**（值分别是「任意会议 / 任意年份」与
+「Any Publication / Any Year」），不在下面的清单里 —— 别去覆盖它们，现有文案没问题。
 
 ```json
 // zh.json search 内追加
@@ -5898,8 +5908,6 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 "retry": "重试",
 "previewNote": "预览：最新 {count} 篇。完整列表加载中…",
 "favoritesOnly": "仅看收藏",
-"anyPublication": "全部会议",
-"anyYear": "全部年份",
 "selected": "已选 {count}",
 "perPage": "每页",
 "prevPage": "上一页",
@@ -5917,8 +5925,6 @@ git commit -m "feat(highlight): 关键词切段移植为纯函数
 "retry": "Retry",
 "previewNote": "Preview: {count} most recent. Loading the full list…",
 "favoritesOnly": "Favorites only",
-"anyPublication": "All venues",
-"anyYear": "All years",
 "selected": "{count} selected",
 "perPage": "Per page",
 "prevPage": "Previous",
