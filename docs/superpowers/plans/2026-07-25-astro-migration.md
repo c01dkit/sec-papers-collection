@@ -18,6 +18,12 @@
 
 以下是项目级约束，**每个任务的要求都隐含包含本节**：
 
+- **页面脚本取根元素必须用 `getElementById`，不要用 `document.querySelector('.某个类')`。**
+  类名在整站是共享命名空间：`.bar` 同时存在于 TopNav、首页的 SearchDemo 和获奖页，
+  而 `querySelector` 返回文档里第一个匹配 —— 也就是布局里的那个，不是本页的。
+  后果不只是监听挂错元素（页面上所有按钮点不动），还会把 `dataset.bound` 写到
+  跨软导航一直存在的布局元素上，从此该 init 永远早退。Task 17 整页交互因此全废。
+
 - **Astro 的 scoped `<style>` 只作用于「本文件模板里写出来的元素」。** 组件传下去的
   子元素、以及运行时 `createElement` 出来的元素，都拿不到 scope 属性，针对它们的规则
   写在 scoped 块里等于没写。判断标准不是「这条规则长得像什么」，而是「它要匹配的元素
@@ -7877,16 +7883,12 @@ JS 只做两件事：压暗已过阶段、标出每个周期各自的「下一�
 
 ```json
 // zh.json awards 内追加
-"lead": "四大安全会议历年最佳论文、杰出论文与 Distinguished Paper 汇总。",
-"allVenues": "全部会议",
-"totalPapers": "共 {count} 篇"
+"lead": "四大安全会议历年最佳论文、杰出论文与 Distinguished Paper 汇总。"
 ```
 
 ```json
 // en.json awards 内追加
-"lead": "Best paper, outstanding paper and distinguished paper awards across the four major security venues.",
-"allVenues": "All venues",
-"totalPapers": "{count} papers"
+"lead": "Best paper, outstanding paper and distinguished paper awards across the four major security venues."
 ```
 
 - [ ] **Step 2: 实现获奖页**
@@ -7916,7 +7918,7 @@ const confs = awards.map((c) => ({
 
 <PageLayout lang={lang} page="awards" title={t(lang, 'menu.awards')} lead={t(lang, 'awards.lead')}>
 
-  <div class="bar">
+  <div class="bar" id="awBar">
     <div class="tabs" role="tablist" aria-label={t(lang, 'search.publication')}>
       {confs.map((c, i) => (
         <button type="button" role="tab" class="tab" data-conf={c.publication}
@@ -7933,6 +7935,17 @@ const confs = awards.map((c) => ({
       <button type="button" class="gt" data-group="year" aria-pressed="false">{t(lang, 'awards.byYear')}</button>
     </div>
   </div>
+
+  <noscript>
+    <style is:inline>
+      /* 没有 JS 时标签页和分组按钮都点不动，被藏起来的 299 篇就永远出不来。
+         本页构建时已全量渲染，内容本就在 HTML 里 —— 撤掉 hidden 即可全部可读。
+         选择器写两个属性（0,2,0）压过 global.css 的 [hidden]（0,1,0）。
+         同时藏掉那排点不动的控件，免得看着能按其实不能。 */
+      [data-conf-panel][hidden], [data-group-panel][hidden] { display: block !important; }
+      #awBar { display: none !important; }
+    </style>
+  </noscript>
 
   {confs.map((c, ci) => (
     <div class="panel-conf" data-conf-panel={c.publication} hidden={ci !== 0}>
@@ -7999,9 +8012,12 @@ const confs = awards.map((c) => ({
   }
   .ttl { font-size: 0.9rem; line-height: 1.5; }
   .badge {
-    flex: none; font-size: var(--fs-kicker); color: var(--gold);
+    /* 按年份分组时这里放的是奖项全名（最长「Distinguished Paper Award
+       Honorable Mentions」），flex:none + nowrap 会把 375px 的行顶出去 17px。
+       年份只有四个字符、本来就不换行，所以直接允许收缩换行即可。 */
+    flex: 0 1 auto; min-width: 0; font-size: var(--fs-kicker); color: var(--gold);
     border: 1px solid var(--gold); border-radius: var(--radius);
-    padding: 0.05rem 0.4rem; white-space: nowrap;
+    padding: 0.05rem 0.4rem;
   }
 </style>
 ```
@@ -8010,7 +8026,11 @@ const confs = awards.map((c) => ({
 
 ```js
 export function initAwardsView() {
-  const bar = document.querySelector('.bar');
+  // 必须按 id 取。document.querySelector('.bar') 会先命中 TopNav 的
+  // <div class="wrap bar">（它在 DOM 里更靠前），于是监听挂错元素、页面上
+  // 所有按钮都点不动；更糟的是 dataset.bound 被写到了 TopNav 上，而 TopNav
+  // 跨软导航一直存在，从此这个 init 永远早退。
+  const bar = document.getElementById('awBar');
   if (!bar || bar.dataset.bound) return;
   bar.dataset.bound = '1';
 
