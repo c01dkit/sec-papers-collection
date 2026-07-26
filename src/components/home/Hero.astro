@@ -12,7 +12,10 @@ const accent = t(lang, 'home.headlineAccent');
 // idx 会是 -1，此时 head 是整条标题 —— 要是仍然无条件渲染 <em>{accent}</em>，
 // 页面最大的标题下面就会多出一份孤立的斜体旧短语。降级要降成「纯标题」。
 // tests/i18n.test.js 里有一条守卫断言两语的 accent 都确实是 headline 的子串。
-const idx = headline.indexOf(accent);
+// accent 为空串是「这个语言的标题不需要强调短语」的正当写法（中文标题短，
+// 切一段出来反而碎）。但空串的 indexOf 恒为 0，会让下面判定成「找到了」，
+// 于是渲染出一个空的 <em></em> 挂在页面最大的标题前面。空串要当作没有。
+const idx = accent === '' ? -1 : headline.indexOf(accent);
 const found = idx >= 0;
 const head = found ? headline.slice(0, idx) : headline;
 const tail = found ? headline.slice(idx + accent.length) : '';

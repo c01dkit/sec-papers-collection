@@ -48,9 +48,19 @@ describe('文案漂移守卫', () => {
     expect(ke.filter((k) => !kz.includes(k))).toEqual([]);   // en 独有
   });
 
-  it('两语都没有空字符串文案', () => {
+  // 空串一律视为「加了 key 却忘了填」，唯独这几个例外：空串在语义上就是
+  // 「本语言不需要这一项」。清单要短，加进来必须写清为什么 —— 否则这条守卫
+  // 会被一条条例外掏空，最后什么都拦不住。
+  const EMPTY_OK = new Set([
+    // 中文标题短（「论文辑录」），再切一段出来做斜体强调反而显碎；
+    // 英文标题长，才需要强调后半句。Hero.astro 对空串按「无强调」处理。
+    'home.headlineAccent',
+  ]);
+
+  it('两语都没有空字符串文案（EMPTY_OK 里的除外）', () => {
     for (const lang of LOCALES) {
       for (const key of collectKeys(lang === 'zh' ? zh : en)) {
+        if (EMPTY_OK.has(key)) continue;
         expect(t(lang, key), `${lang}:${key}`).not.toBe('');
       }
     }
