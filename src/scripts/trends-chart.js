@@ -83,12 +83,26 @@ export async function initTrendsChart() {
 
   // 明暗切换后重建：Chart.js 把颜色烤进了实例，改 CSS 变量不会让它自己更新
   if (!window.__spcTrendThemeObserver) {
+    // 只盯 data-theme。图表用到的每个变量（--chart-1..4、--faint、--muted、
+    // --hairline、--hairline-soft、--ink、--panel）都只随明暗变，没有一个
+    // 随强调色变——data-accent 只影响 --accent/--accent-soft，两者图表都不用。
+    //
+    // 但光缩小 attributeFilter 还不够：theme.js 的 apply(theme, accent) 每次
+    // 调用都会无条件重写 el.dataset.theme = theme，哪怕值没变——顶部导航条的
+    // 强调色按钮点击时传的正是 apply(el.dataset.theme, accent)，把当前主题原样
+    // 传回去。MutationObserver 只关心「属性被写过」，不关心「值有没有变」，
+    // 同值重写一样会触发一次 attributes 记录（已用最小复现验证过）。所以这里
+    // 额外记一份上次的值，值没变就不重建，真正做到「只有主题真的换了才重建」。
+    let lastTheme = document.documentElement.dataset.theme;
     window.__spcTrendThemeObserver = new MutationObserver(() => {
+      const cur = document.documentElement.dataset.theme;
+      if (cur === lastTheme) return;
+      lastTheme = cur;
       if (charts.length) build();
     });
     window.__spcTrendThemeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-theme', 'data-accent'],
+      attributeFilter: ['data-theme'],
     });
   }
 
