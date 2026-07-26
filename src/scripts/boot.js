@@ -38,6 +38,8 @@ registerPage('trends', async () => {
   await initTrendsChart();
 });
 
+registerPage('timeline', () => import('./timeline.js').then((m) => m.initTimeline()));
+
 async function boot() {
   initNav();
   initTheme();

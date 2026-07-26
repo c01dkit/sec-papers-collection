@@ -1,0 +1,93 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import timeline from '@/assets/data/submission-timeline.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params;
+---
+
+<PageLayout lang={lang} page="timeline" title={t(lang, 'menu.submissionTimeline')}
+            lead={t(lang, 'timelinePage.lead')}>
+
+  {timeline.map((pub) => (
+    <section class="pub" data-reveal>
+      <div class="pub-head">
+        <h2 class="srf">
+          <a href={pub.url} target="_blank" rel="noopener">{pub.publication} <span class="ext">↗</span></a>
+        </h2>
+        <dl class="facts">
+          <dt class="kicker">{t(lang, 'timelinePage.period')}</dt><dd>{pub.date}</dd>
+          <dt class="kicker">{t(lang, 'timelinePage.place')}</dt><dd>{pub.place}</dd>
+          <dt class="kicker">{t(lang, 'timelinePage.timezone')}</dt><dd>{pub.timezone}</dd>
+          <dt class="kicker">{t(lang, 'timelinePage.synced')}</dt><dd>{pub.update}</dd>
+        </dl>
+      </div>
+
+      <div class="cycles">
+        {pub.cycles.map((cycle) => (
+          <div class="cycle" data-cycle>
+            <h3 class="kicker cname">{cycle.name}</h3>
+            <ol class="steps">
+              {cycle.ddls.map((ddl) => (
+                <li class="step" data-ddl={ddl.date}>
+                  <span class="dot" aria-hidden="true"></span>
+                  <span class="date">{ddl.date}</span>
+                  <span class="stage">{ddl.stage}</span>
+                  <span class="days" data-days></span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <script type="application/json" id="tlI18n" set:html={JSON.stringify({
+    daysLeft: t(lang, 'timelinePage.daysLeft', { days: '__N__' }),
+    today: t(lang, 'timelinePage.today'),
+  })} />
+</PageLayout>
+
+<style>
+  .pub { margin-bottom: var(--sp-band); padding-bottom: var(--sp-band); border-bottom: 1px solid var(--hairline); }
+  .pub:last-of-type { border-bottom: 0; }
+
+  .pub-head { margin-bottom: 1.3rem; }
+  .pub-head h2 { margin-bottom: 0.7rem; }
+  .pub-head .ext { font-size: 0.7rem; color: var(--faint); }
+  .pub-head a:hover { color: var(--accent); }
+
+  .facts { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.8rem; margin: 0; }
+  .facts dt { align-self: baseline; }
+  .facts dd { margin: 0; font-size: var(--fs-small); color: var(--muted); }
+
+  .cycles { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--sp-gap); }
+  .cname { margin-bottom: 0.7rem; color: var(--muted); }
+
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: grid; grid-template-columns: 0.9rem 5.6rem 1fr auto;
+    gap: 0.5rem; align-items: baseline;
+    padding: 0.4rem 0; font-size: var(--fs-kicker);
+    border-left: 1px solid var(--hairline); margin-left: 0.28rem; padding-left: 0.8rem;
+    position: relative;
+  }
+  .dot {
+    position: absolute; left: -0.28rem; top: 0.75rem;
+    width: 5px; height: 5px; background: var(--hairline);
+  }
+  .date { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .stage { color: var(--muted); line-height: 1.5; }
+  .days { color: var(--accent); white-space: nowrap; }
+
+  .step.past { color: var(--faint); }
+  .step.past .date, .step.past .stage { color: var(--faint); }
+
+  .step.next { border-left-color: var(--accent); }
+  .step.next .dot { background: var(--accent); width: 7px; height: 7px; left: -0.35rem; }
+  .step.next .stage, .step.next .date { color: var(--ink); }
+</style>

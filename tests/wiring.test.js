@@ -17,6 +17,11 @@ const PAIRS = [
     script: 'src/scripts/trends-chart.js',
     templates: ['src/pages/[lang]/trends.astro'],
   },
+  {
+    name: 'timeline',
+    script: 'src/scripts/timeline.js',
+    templates: ['src/pages/[lang]/timeline.astro'],
+  },
 ];
 
 // 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，
