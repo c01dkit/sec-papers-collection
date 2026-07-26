@@ -112,6 +112,16 @@ const miscActive = MISC_NAV.some((n) => isActive(path, lang, n.slug));
     background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius);
     padding: 0.3rem 0; display: none;
   }
+  /* 面板与按钮之间那 0.7rem 的视觉间距是一段「谁都不属于」的死区：鼠标从按钮
+     往下移到面板的路上会经过它，此时既不在 .misc 上也不在面板上，:hover 断掉，
+     面板当场消失 —— 用户根本点不到选项。面板本身是 .misc 的 DOM 子节点，
+     所以悬停面板是能维持 :hover 的，缺的只是这段路。用一个透明的 ::before
+     把它补上，高度与间距严格相等，既不吃掉按钮的点击区域，也不改变观感。
+     （只在面板 display:block 时才存在，收起时不会挡住任何东西。） */
+  .misc-menu::before {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: -0.7rem; height: 0.7rem;
+  }
   /* 桌面端靠 hover/focus-within 显隐 */
   .misc:hover .misc-menu, .misc:focus-within .misc-menu { display: block; }
   .misc-menu a {
