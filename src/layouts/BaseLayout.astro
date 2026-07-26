@@ -6,7 +6,10 @@ import TopNav from '@/components/TopNav.astro';
 import Footer from '@/components/Footer.astro';
 import { t } from '@/i18n/index.js';
 
-const { lang, title, description, page, wide = false } = Astro.props;
+// footer=false 供首页使用：首页以 ClosingBand 收尾，那是一块深色反色区，
+// 后面再接一条浅色 footer 会把「深色收尾」这个设计意图切断。而且 footer 的
+// 全部内容（作者 + 更新频率）ClosingBand 的 CTA 行里已经有了，接上去只是重复。
+const { lang, title, description, page, wide = false, footer = true } = Astro.props;
 
 const siteName = t(lang, 'common.title');
 const fullTitle = title ? `${title} · ${siteName}` : siteName;
@@ -95,7 +98,7 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
     <main id="content" data-page={page} class={wide ? '' : 'wrap main-pad'}>
       <slot />
     </main>
-    <Footer lang={lang} />
+    {footer && <Footer lang={lang} />}
     <script>
       import '@/scripts/boot.js';
     </script>
