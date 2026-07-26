@@ -42,6 +42,8 @@ registerPage('timeline', () => import('./timeline.js').then((m) => m.initTimelin
 
 registerPage('awards', () => import('./awards-view.js').then((m) => m.initAwardsView()));
 
+registerPage('settings', () => import('./settings-form.js').then((m) => m.initSettingsForm()));
+
 async function boot() {
   initNav();
   initTheme();

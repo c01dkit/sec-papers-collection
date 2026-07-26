@@ -13,12 +13,15 @@ let dbPromise = null;
 /**
  * 「存储当前是否真的在持久化」。
  *
- * 语义刻意定成**「最近一次实际读写是否成功」**，而不是「连接是否打开过」：
- * 连接开着而事务失败是真实存在的情形（配额耗尽最典型），此时数据并没有落盘，
- * 标志必须为 false；反过来配额腾出来、写又成功了，标志也必须能收回 true。
- * 早先只在 openDb 的 onsuccess 里置 true，于是这类「连接健康、事务失败」
- * 一旦发生就再也恢复不了 —— Task 19 的「存储降级」提示会一直挂着，
- * 而其实早就在正常保存了。名字承诺了什么，就得真的是那个意思。
+ * 语义是**写-only**：只有一次真实的写入（idbPut）成功，才认为存储在正常
+ * 工作；任何失败仍照旧置 false。模块初值 true 是「尚无失败证据」的乐观起点。
+ *
+ * 读操作（idbGet/openDb 成功）**不会**把这个标志置回 true。原因是浏览器的
+ * `QuotaExceededError` 恰恰是在写入（要增长存储）时抛出，读取既有数据完全
+ * 不受影响 —— 「读得到、写不进」正是配额耗尽的典型形态。Task 19 的「存储
+ * 降级」提示说的是「你的偏好保存不了」，一次成功的读对这件事什么都没证明，
+ * 用它清掉标志只会让提示说谎。之前 idbGet 与 openDb 的 onsuccess 里也置了
+ * true，于是一次成功的读就能在写仍在失败时把降级标志抹掉，已改正。
  */
 let persistent = true;
 
@@ -70,10 +73,8 @@ function openDb() {
     };
     req.onsuccess = () => {
       const db = req.result;
-      // 开成功就把降级标志收回来。否则一次瞬时故障之后，即使重试成功、
-      // 数据其实又在持久化了，isPersistent() 仍会一直返回 false，
-      // Task 19 的「存储降级」提示会永久挂着 —— 那是在对用户说假话。
-      persistent = true;
+      // 连接开得起来同样不证明写得进去（persistent 是写-only 语义，见上方
+      // 声明处的说明），所以这里不再置 persistent = true。
       // 连接被外部关掉（onversionchange、用户清了站点数据）时要让缓存失效，
       // 否则 dbPromise 会一直指向一个死连接：后续每次操作都失败并落到内存兜底，
       // 数据不丢但再也不会重试。这和 openDb 失败后清缓存是同一类问题。
@@ -101,7 +102,8 @@ function idbGet(key) {
       new Promise((resolve, reject) => {
         const req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
         req.onsuccess = () => {
-          persistent = true;   // 语义见 persistent 声明处的说明
+          // 读成功不置 persistent = true —— 语义见 persistent 声明处的说明：
+          // 读不受配额耗尽影响，一次成功的读证明不了写是好的。
           resolve(req.result ? req.result.value : null);
         };
         req.onerror = () => reject(req.error);

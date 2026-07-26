@@ -296,6 +296,34 @@ describe('降级标志要能恢复', () => {
       IDBObjectStore.prototype.put = realPut;
     }
   });
+
+  it('只有读成功不足以清掉降级标志 —— 写不进就该一直显示降级', async () => {
+    // 配额耗尽的典型形态就是「读得到、写不进」。设置页那句提示的意思是
+    // 「你的偏好保存不了」，一次成功的读对这件事什么都没证明。
+    const s = await freshStore();
+    await s.patchSettings({ keywords: ['x'] });   // 先确保库里有东西可读
+
+    const realPut = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function () {
+      const req = {};
+      setTimeout(() => req.onerror && req.onerror(), 0);
+      return req;
+    };
+
+    try {
+      await s.patchSettings({ theme: 'pine' });   // 写失败
+      expect(s.isPersistent()).toBe(false);
+
+      // 读是成功的（数据还在），但写仍然坏着 —— 标志必须保持 false
+      await expect(s.getSettings()).resolves.toBeTruthy();
+      expect(s.isPersistent()).toBe(false);
+
+      await expect(s.getFavorites()).resolves.toEqual([]);
+      expect(s.isPersistent()).toBe(false);
+    } finally {
+      IDBObjectStore.prototype.put = realPut;
+    }
+  });
 });
 
 describe('永不 reject：连恶意入参也不例外', () => {

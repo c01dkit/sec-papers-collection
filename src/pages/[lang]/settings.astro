@@ -1,0 +1,183 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { ACCENTS } from '@/lib/settings-schema.js';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+
+const toggles = [
+  { key: 'darkTheme', label: t(lang, 'settings.darkMode.label'), desc: t(lang, 'settings.darkMode.desc') },
+  { key: 'rememberDarkMode', label: t(lang, 'settings.form.rememberDarkMode.label'), desc: t(lang, 'settings.form.rememberDarkMode.desc') },
+  { key: 'rememberTheme', label: t(lang, 'settings.form.rememberTheme.label'), desc: t(lang, 'settings.form.rememberTheme.desc') },
+  { key: 'rememberLanguage', label: t(lang, 'settings.form.rememberLanguage.label'), desc: t(lang, 'settings.form.rememberLanguage.desc') },
+  { key: 'showStatusDots', label: t(lang, 'settings.form.showStatusDots.label'), desc: t(lang, 'settings.form.showStatusDots.desc') },
+];
+---
+
+<PageLayout lang={lang} page="settings" title={t(lang, 'menu.settings')}
+            lead={t(lang, 'settings.subtitle')}>
+
+  <p class="privacy" data-reveal>{t(lang, 'settings.privacyNotice')}</p>
+  <p class="warn" id="stWarn" hidden>{t(lang, 'settings.unsupported.desc')}</p>
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.accent.label')}</div>
+      <p class="ld">{t(lang, 'settings.accent.desc')}</p>
+    </div>
+    <div class="control swatches" role="radiogroup" aria-label={t(lang, 'settings.accent.label')}>
+      {ACCENTS.map((a) => (
+        <button type="button" role="radio" class="sw" data-accent-pick={a}
+                aria-checked="false" title={t(lang, `settings.accentNames.${a}`)}>
+          <i data-accent-swatch={a}></i>
+          <span>{t(lang, `settings.accentNames.${a}`)}</span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  {toggles.map((tg) => (
+    <section class="row" data-reveal>
+      <div class="label">
+        <div class="lt">{tg.label}</div>
+        <p class="ld">{tg.desc}</p>
+      </div>
+      <div class="control">
+        <button type="button" class="switch" data-toggle={tg.key} aria-pressed="false">
+          <span class="knob"></span>
+        </button>
+      </div>
+    </section>
+  ))}
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.form.keywords.label')}</div>
+      <p class="ld">{t(lang, 'settings.form.keywords.desc')}</p>
+    </div>
+    <div class="control">
+      <div class="kwadd">
+        <input type="text" id="kwInput" placeholder={t(lang, 'settings.form.keywords.placeholder')} />
+        <button type="button" id="kwAdd">{t(lang, 'settings.form.keywords.add')}</button>
+      </div>
+      <div class="kwlist" id="kwList"></div>
+    </div>
+  </section>
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.favorites.label')}</div>
+      <p class="ld" id="favDesc">{t(lang, 'settings.favorites.desc', { count: '…' })}</p>
+    </div>
+    <div class="control">
+      <button type="button" class="danger" id="favClear">{t(lang, 'settings.favorites.clear')}</button>
+    </div>
+  </section>
+
+  <p class="saved" id="stSaved" hidden>{t(lang, 'settings.autoSaved')}</p>
+
+  <script type="application/json" id="stI18n" set:html={JSON.stringify({
+    favDesc: t(lang, 'settings.favorites.desc', { count: '__N__' }),
+    confirm: t(lang, 'settings.favorites.confirm'),
+    cleared: t(lang, 'settings.favorites.cleared'),
+    remove: t(lang, 'settings.keywordRemove', { word: '__W__' }),
+    autoSaved: t(lang, 'settings.autoSaved'),
+  })} />
+</PageLayout>
+
+<style>
+  .privacy, .warn {
+    font-size: var(--fs-kicker); line-height: 1.75; color: var(--muted);
+    border-left: 2px solid var(--hairline); padding: 0.5rem 0 0.5rem 0.8rem;
+    margin: 0 0 1.6rem;
+  }
+  .warn { border-left-color: var(--gold); color: var(--ink); }
+
+  .row {
+    display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: start;
+    padding: 1rem 0; border-top: 1px solid var(--hairline-soft);
+  }
+  .lt { font-size: var(--fs-small); color: var(--ink); }
+  .ld { margin: 0.25rem 0 0; font-size: var(--fs-kicker); color: var(--faint); line-height: 1.7; max-width: 34rem; }
+  .control { justify-self: end; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .sw {
+    display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.3rem 0.55rem; font: inherit; font-size: var(--fs-kicker); color: var(--muted);
+  }
+  .sw i { width: 11px; height: 11px; display: block; }
+  .sw:hover { border-color: var(--ink); color: var(--ink); }
+  .sw[aria-checked='true'] { border-color: var(--ink); color: var(--ink); }
+  /* 色块要显示各自的颜色，而不是当前生效的 --accent */
+  i[data-accent-swatch='slate'] { background: #2f4858; }
+  i[data-accent-swatch='indigo'] { background: #3a3f7a; }
+  i[data-accent-swatch='oxblood'] { background: #7d3038; }
+  i[data-accent-swatch='pine'] { background: #2f5744; }
+  html[data-theme='dark'] i[data-accent-swatch='slate'] { background: #7fa8bd; }
+  html[data-theme='dark'] i[data-accent-swatch='indigo'] { background: #9aa0dd; }
+  html[data-theme='dark'] i[data-accent-swatch='oxblood'] { background: #d9868f; }
+  html[data-theme='dark'] i[data-accent-swatch='pine'] { background: #83bda1; }
+
+  .switch {
+    width: 2.4rem; height: 1.25rem; border: 1px solid var(--hairline);
+    border-radius: 0.65rem; background: none; cursor: pointer; padding: 0;
+    position: relative; transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .knob {
+    position: absolute; top: 2px; left: 2px; width: 0.95rem; height: 0.95rem;
+    background: var(--faint); border-radius: 50%;
+    transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .switch[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); }
+  .switch[aria-pressed='true'] .knob { transform: translateX(1.13rem); background: var(--accent); }
+
+  .kwadd { display: flex; gap: 0.35rem; }
+  .kwadd input {
+    border: 1px solid var(--hairline); border-radius: var(--radius); background: none;
+    color: var(--ink); font: inherit; font-size: var(--fs-small); padding: 0.35rem 0.5rem; width: 11rem;
+  }
+  .kwadd input:focus { border-color: var(--ink); outline: none; }
+  .kwadd button, .danger {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    cursor: pointer; font: inherit; font-size: var(--fs-small); color: var(--ink);
+    padding: 0.35rem 0.7rem;
+  }
+  .kwadd button:hover { border-color: var(--ink); }
+  .danger:hover { border-color: var(--gold); color: var(--gold); }
+
+  .kwlist { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; justify-content: flex-end; }
+
+  .saved {
+    margin: 1.2rem 0 0; font-size: var(--fs-kicker); color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .row { grid-template-columns: 1fr; gap: 0.7rem; }
+    .control { justify-self: start; }
+    .kwlist { justify-content: flex-start; }
+  }
+</style>
+
+<style is:global>
+  /* .kw 这几条规则必须是 is:global：关键词 chip 由 settings-form.js 的
+     renderKeywords() 用 createElement 在运行期造出来、塞进 #kwList，
+     拿不到本文件模板的 scope 属性 —— 写在上面那个 scoped 块里的话，
+     chip 会渲染成完全无样式的裸文字（没有边框、圆角、间距、hover 色）。
+     选择器一律以 .kw 打头，把作用范围限制在关键词 chip 上。 */
+  .kw {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.1rem 0.2rem 0.1rem 0.45rem; font-size: var(--fs-kicker); color: var(--muted);
+  }
+  .kw button {
+    background: none; border: 0; cursor: pointer; color: var(--faint);
+    font: inherit; padding: 0 0.2rem; line-height: 1;
+  }
+  .kw button:hover { color: var(--gold); }
+</style>
