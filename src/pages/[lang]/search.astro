@@ -143,11 +143,6 @@ const years = Object.keys(stats.byYear)
     padding: 0.6rem 0.8rem; margin: 0 0 1rem;
     font-size: var(--fs-small); color: var(--muted);
   }
-  .notice button {
-    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
-    padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
-    color: var(--ink);
-  }
 
   .toast {
     border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
@@ -187,6 +182,15 @@ const years = Object.keys(stats.byYear)
 </style>
 
 <style is:global>
+  /* 「重试」按钮是 showNotice 里 createElement 出来的，同样拿不到 scope 属性，
+     所以它的规则也必须在这里。判断依据不是「这条规则长得像不像行样式」，
+     而是「它要匹配的元素是不是本文件模板里写出来的」—— 不是，就得 global。 */
+  .notice button {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
+    color: var(--ink);
+  }
+
   /* 这些规则必须是 is:global。表格的行来自两个地方 —— 构建期的 PaperRow.astro，
      和运行期 paper-table.js 里的 buildRow —— 两者都拿不到 search.astro 的 scope
      属性（Astro 只给本文件模板里写出的元素加），所以写在上面那个 scoped 块里的

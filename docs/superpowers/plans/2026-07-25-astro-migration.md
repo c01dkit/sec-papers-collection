@@ -18,6 +18,14 @@
 
 以下是项目级约束，**每个任务的要求都隐含包含本节**：
 
+- **Astro 的 scoped `<style>` 只作用于「本文件模板里写出来的元素」。** 组件传下去的
+  子元素、以及运行时 `createElement` 出来的元素，都拿不到 scope 属性，针对它们的规则
+  写在 scoped 块里等于没写。判断标准不是「这条规则长得像什么」，而是「它要匹配的元素
+  是不是本文件模板里写出来的」—— 不是，就必须放进 `<style is:global>`，并给选择器加
+  一个够窄的前缀（如 `.pt`）限定作用域。Task 13 在这上面栽了两次：整个表体无样式，
+  以及修完之后残留的「重试」按钮无样式。凡是页面脚本会 `createElement` 的元素，
+  写完样式后都要回头核一遍它落在哪个块里。
+
 - **Astro 配置固定值**：`output: 'static'`、`site: 'https://sec.c01dkit.com'`、`base: '/'`、`trailingSlash: 'always'`。不使用任何 adapter。
 - **不引入 UI 框架**：不装 Vue、React、Svelte，不装 PrimeVue，不装 Tailwind/PostCSS/autoprefixer。唯一允许的运行时第三方库是 `chart.js`（仅趋势页使用）。
 - **视觉三条纪律**：
