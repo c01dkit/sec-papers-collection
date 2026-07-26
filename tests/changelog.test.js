@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CHANGELOG, SPONSORS } from '@/data/changelog.js';
+import { CHANGELOG, SPONSORS, SUPPORT_LINKS } from '@/data/changelog.js';
 import { SITES } from '@/data/sites.js';
 import { collectKeys } from '@/i18n/index.js';
 import zh from '@/i18n/zh.json';

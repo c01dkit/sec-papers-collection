@@ -57,6 +57,19 @@ export const CHANGELOG = {
   ],
 };
 
+// 旧版 About.vue 的「支持与反馈」区。整个 Vue 应用会在 Task 20 删掉，
+// 这些渠道若不搬过来就会随之从生产环境永久消失 —— 而赞助者名单还留着，
+// 变成「谁捐过看得见、想捐却无处可捐」。
+// PayPal 原本是个 POST 表单配一张 S3 上的图片按钮；hosted button 支持
+// GET，所以这里改成纯文字链接，与「更多网站」去掉 favicon 是同一个理由：
+// 不引第三方图片。表单里的三个隐藏字段原样带在查询串上。
+export const SUPPORT_LINKS = [
+  { key: 'afdian', url: 'https://afdian.com/a/c01dkit' },
+  { key: 'paypal', url: 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5HS3WCERWAAQ&currency_code=USD' },
+  { key: 'issues', url: 'https://github.com/c01dkit/sec-papers-collection/issues' },
+  { key: 'form', url: 'https://docs.google.com/forms/d/e/1FAIpQLSdCJoJiUNJmRN7AXvdh6TbP3sZE6Srgj5hMRlQBqTkq2NiG4Q/viewform?usp=sf_link' },
+];
+
 export const SPONSORS = [
   { name: '爱发电用户_a3458', amount: '20 RMB', date: '2025-12-02', comment: '很有帮助的网站！（如果可以的话，希望之后可以再多加一些软工那边的会议）' },
   { name: 'cy', amount: '66 RMB', date: '2025-01-21', comment: '' },

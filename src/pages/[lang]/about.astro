@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import { LOCALES, t } from '@/i18n/index.js';
-import { CHANGELOG, SPONSORS } from '@/data/changelog.js';
+import { CHANGELOG, SPONSORS, SUPPORT_LINKS } from '@/data/changelog.js';
 import stats from '@/assets/data/data-statistics.json';
 
 export function getStaticPaths() {
@@ -34,6 +34,20 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
   </section>
 
   <section class="sec" data-reveal>
+    <h2 class="kicker">{t(lang, 'aboutPage.support')}</h2>
+    <p class="stext">{t(lang, 'aboutPage.supportText')}</p>
+    <ul class="links">
+      {SUPPORT_LINKS.map((l) => (
+        <li>
+          <a class="lnk" href={l.url} target="_blank" rel="noopener">
+            {t(lang, `aboutPage.link.${l.key}`)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec" data-reveal>
     <h2 class="kicker">{t(lang, 'about.sponsors')}</h2>
     <ul class="sponsors">
       {SPONSORS.map((s) => (
@@ -53,6 +67,10 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 <style>
   .sec { margin-bottom: var(--sp-band); }
   .sec > .kicker { margin-bottom: 1rem; }
+
+  .stext { font-size: var(--fs-small); color: var(--muted); line-height: 1.8; margin: 0 0 0.9rem; }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .links li { font-size: var(--fs-small); }
 
   .log { list-style: none; margin: 0; padding: 0; }
   .entry {
