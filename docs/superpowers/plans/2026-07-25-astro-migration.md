@@ -7919,10 +7919,10 @@ const confs = awards.map((c) => ({
 <PageLayout lang={lang} page="awards" title={t(lang, 'menu.awards')} lead={t(lang, 'awards.lead')}>
 
   <div class="bar" id="awBar">
-    <div class="tabs" role="tablist" aria-label={t(lang, 'search.publication')}>
+    <div class="tabs" aria-label={t(lang, 'search.publication')}>
       {confs.map((c, i) => (
-        <button type="button" role="tab" class="tab" data-conf={c.publication}
-                aria-selected={i === 0 ? 'true' : 'false'}>
+        <button type="button" class="tab" data-conf={c.publication}
+                aria-pressed={i === 0 ? 'true' : 'false'}>
           {c.publication}
           <em>{nf.format(c.total)}</em>
         </button>
@@ -7944,11 +7944,16 @@ const confs = awards.map((c) => ({
          同时藏掉那排点不动的控件，免得看着能按其实不能。 */
       [data-conf-panel][hidden], [data-group-panel][hidden] { display: block !important; }
       #awBar { display: none !important; }
+      /* 会议名平时只出现在被隐藏的标签按钮上。不把它显出来的话，无 JS 用户会看到
+         四段一模一样的「Distinguished Paper Award」，完全无从分辨属于哪个会议 ——
+         等于放开了 390 篇却拿掉了归属信息。 */
+      .conf-name { display: block !important; }
     </style>
   </noscript>
 
   {confs.map((c, ci) => (
     <div class="panel-conf" data-conf-panel={c.publication} hidden={ci !== 0}>
+      <h2 class="conf-name">{c.publication}</h2>
       {[['award', c.byAward], ['year', c.byYear]].map(([mode, groups]) => (
         <div data-group-panel={mode} hidden={mode !== 'award'}>
           {groups.map((g) => (
@@ -7987,8 +7992,8 @@ const confs = awards.map((c) => ({
   }
   .tab em { font-style: normal; font-size: var(--fs-kicker); color: var(--faint); }
   .tab:hover { border-color: var(--ink); color: var(--ink); }
-  .tab[aria-selected='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .tab[aria-selected='true'] em { color: var(--bg); opacity: 0.65; }
+  .tab[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .tab[aria-pressed='true'] em { color: var(--bg); opacity: 0.65; }
 
   .group-toggle { display: flex; align-items: center; gap: 0.4rem; }
   .gt {
@@ -8010,6 +8015,14 @@ const confs = awards.map((c) => ({
     display: flex; gap: 0.9rem; align-items: baseline; justify-content: space-between;
     padding: 0.5rem 0; border-bottom: 1px solid var(--hairline-soft);
   }
+  /* 有 JS 时会议名由标签按钮表达，这里藏起来避免重复；noscript 里再放出来。 */
+  .conf-name {
+    display: none;
+    font-family: var(--font-serif); font-size: 1.05rem; font-weight: 400;
+    margin: 1.4rem 0 0.6rem; padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
   .ttl {
     font-size: 0.9rem; line-height: 1.5;
     /* 论文标题同样是抓来的，同样可能出现断不开的长串（本库里就有一个 30 字符的
@@ -8048,7 +8061,7 @@ export function initAwardsView() {
       panel.hidden = panel.dataset.confPanel !== name;
     }
     for (const tab of bar.querySelectorAll('.tab')) {
-      tab.setAttribute('aria-selected', tab.dataset.conf === name ? 'true' : 'false');
+      tab.setAttribute('aria-pressed', tab.dataset.conf === name ? 'true' : 'false');
     }
   };
 
