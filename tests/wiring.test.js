@@ -16,21 +16,35 @@ function embeddedKeys(src) {
   const marker = 'JSON.stringify({';
   let i = src.indexOf(marker);
   while (i !== -1) {
+    // 配平时必须跳过字符串字面量：文案里出现一个落单的 { 或 }，边界就会找错，
+    // 于是这条测试从此静默漏检 —— 一条不会红的结构测试比没有测试更糟。
     let depth = 1;
     let j = i + marker.length;
+    let quote = '';
     const start = j;
     while (j < src.length && depth > 0) {
-      if (src[j] === '{') depth += 1;
-      else if (src[j] === '}') depth -= 1;
+      const ch = src[j];
+      if (quote) {
+        if (ch === '\\') j += 1;
+        else if (ch === quote) quote = '';
+      } else if (ch === "'" || ch === '"' || ch === '`') quote = ch;
+      else if (ch === '{') depth += 1;
+      else if (ch === '}') depth -= 1;
       j += 1;
     }
     const body = src.slice(start, j - 1);
     let d = 0;
+    let q = '';
     for (const line of body.split('\n')) {
       const m = /^\s*(\w+)\s*:/.exec(line);
-      if (m && d === 0) keys.add(m[1]);
-      for (const ch of line) {
-        if (ch === '{') d += 1;
+      if (m && d === 0 && !q) keys.add(m[1]);
+      for (let k = 0; k < line.length; k += 1) {
+        const ch = line[k];
+        if (q) {
+          if (ch === '\\') k += 1;
+          else if (ch === q) q = '';
+        } else if (ch === "'" || ch === '"' || ch === '`') q = ch;
+        else if (ch === '{') d += 1;
         else if (ch === '}') d -= 1;
       }
     }
@@ -38,6 +52,25 @@ function embeddedKeys(src) {
   }
   return keys;
 }
+
+// helper 自己也要被测。它要是在一般情况下解析错了，上面三条断言会永远绿，
+// 而它们本该是 Task 14–19 复用的防线。
+describe('embeddedKeys', () => {
+  it('取出顶层 key', () => {
+    const src = "set:html={JSON.stringify({\n  a: 1,\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+
+  it('不把嵌套对象里的 key 当成顶层', () => {
+    const src = "set:html={JSON.stringify({\n  a: t(l, 'k', { count: 1 }),\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+
+  it('字符串里落单的花括号不影响配平', () => {
+    const src = "set:html={JSON.stringify({\n  a: '有个 { 在文案里',\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+});
 
 describe.each(PAIRS)('$name 页：脚本与模板的接线', ({ script, templates }) => {
   const js = readFileSync(script, 'utf8');
