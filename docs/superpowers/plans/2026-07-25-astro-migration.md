@@ -6884,9 +6884,7 @@ export function groupVenues(stats) {
   "loading": "正在加载论文…",
   "failed": "加载失败，请稍后重试。",
   "noData": "该年份暂无摘要数据。",
-  "count": "{count} 篇",
-  "expandAll": "全部展开",
-  "collapseAll": "全部收起"
+  "count": "{count} 篇"
 }
 ```
 
@@ -6897,9 +6895,7 @@ export function groupVenues(stats) {
   "loading": "Loading papers…",
   "failed": "Loading failed. Please try again later.",
   "noData": "No abstracts available for this year yet.",
-  "count": "{count} papers",
-  "expandAll": "Expand all",
-  "collapseAll": "Collapse all"
+  "count": "{count} papers"
 }
 ```
 
