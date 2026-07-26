@@ -2316,7 +2316,7 @@ more-sites→sites。
 **Interfaces:**
 - Consumes: 无（只吃 JSON 数据对象，不自己读文件）
 - Produces:
-  - `matrixVenues(stats) => { topTier: string[], seSys: string[] }`（从 `overview[].category` 推出）、`MATRIX_YEARS: string[]`（`'2015'`…`'2026'`）
+  - `matrixVenues(stats) => { top: string[], se: string[] }`（从 `overview[].category` 推出，键名与 `buildCoverageMatrix` 的分组一致）、`MATRIX_YEARS: string[]`（`'2015'`…`'2026'`）
   - `buildCoverageMatrix(stats, years?) => { years, top: Group, se: Group }`，其中 `Group = { rows: Row[], max: number }`，`Row = { publication, cells: (Cell|null)[], preYears: string[], preTotal: number }`，`Cell = { year, count, alpha }`
   - `buildTotalTrend(stats, years) => Array<{year: string, count: number}>`
   - `toSparkline(points, opts?) => { max, coords, line, area }`
@@ -2450,18 +2450,18 @@ function buildGroup(byPY, names, years) {
 export function matrixVenues(stats) {
   const byCat = venuesByCategory(stats);
   return {
-    topTier: byCat.get('top-tier') || [],
-    seSys: [...(byCat.get('software-engineering') || []), ...(byCat.get('system') || [])],
+    top: byCat.get('top-tier') || [],
+    se: [...(byCat.get('software-engineering') || []), ...(byCat.get('system') || [])],
   };
 }
 
 export function buildCoverageMatrix(stats, years = MATRIX_YEARS) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
-  const { topTier, seSys } = matrixVenues(stats);
+  const { top, se } = matrixVenues(stats);
   return {
     years,
-    top: buildGroup(byPY, topTier, years),
-    se: buildGroup(byPY, seSys, years),
+    top: buildGroup(byPY, top, years),
+    se: buildGroup(byPY, se, years),
   };
 }
 ```
@@ -3425,8 +3425,8 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 
 const matrix = buildCoverageMatrix(stats);
-const mv = matrixVenues(stats);
-const venues = mv.topTier.concat(mv.seSys).filter((n) => stats.byPublicationAndYear[n]).length;
+const { top: topVenues, se: seVenues } = matrixVenues(stats);
+const venues = topVenues.concat(seVenues).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
 // 用人工同步时间而非构建时间：后者每次部署都变，反而误导
@@ -3987,8 +3987,8 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
 // ── 首屏与矩阵 ─────────────────────────────────────────
 const matrix = buildCoverageMatrix(stats);
-const mv = matrixVenues(stats);
-const venues = mv.topTier.concat(mv.seSys).filter((n) => stats.byPublicationAndYear[n]).length;
+const { top: topVenues, se: seVenues } = matrixVenues(stats);
+const venues = topVenues.concat(seVenues).filter((n) => stats.byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years)).slice(2)}`;
 const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';
