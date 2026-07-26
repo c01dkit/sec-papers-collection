@@ -60,6 +60,7 @@ const years = Object.keys(stats.byYear)
   </div>
 
   <p class="notice" id="notice" hidden></p>
+  <p class="toast" id="ptToast" hidden role="status" aria-live="polite"></p>
 
   <div class="table-scroll">
     <table class="pt">
@@ -97,8 +98,9 @@ const years = Object.keys(stats.byYear)
   <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
   <script type="application/json" id="ptI18n" set:html={JSON.stringify({
-    loading: t(lang, 'search.loading'),
     loadFailed: t(lang, 'search.loadFailed'),
+    previewNote: t(lang, 'search.previewNote'),
+    previewOffline: t(lang, 'search.previewOffline'),
     retry: t(lang, 'search.retry'),
     total: t(lang, 'search.totalPapers', { count: '__N__' }),
     pageOf: t(lang, 'search.pageOf', { page: '__P__', pageCount: '__C__' }),
@@ -145,6 +147,12 @@ const years = Object.keys(stats.byYear)
     background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
     padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
     color: var(--ink);
+  }
+
+  .toast {
+    border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
+    padding: 0.4rem 0.8rem; margin: 0 0 1rem;
+    font-size: var(--fs-small); color: var(--muted);
   }
 
   .table-scroll { overflow-x: auto; }
