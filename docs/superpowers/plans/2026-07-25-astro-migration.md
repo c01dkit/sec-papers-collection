@@ -6165,11 +6165,6 @@ const years = Object.keys(stats.byYear)
     padding: 0.6rem 0.8rem; margin: 0 0 1rem;
     font-size: var(--fs-small); color: var(--muted);
   }
-  .notice button {
-    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
-    padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
-    color: var(--ink);
-  }
 
   .toast {
     border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
@@ -6209,6 +6204,15 @@ const years = Object.keys(stats.byYear)
 </style>
 
 <style is:global>
+  /* 「重试」按钮是 showNotice 里 createElement 出来的，同样拿不到 scope 属性，
+     所以它的规则也必须在这里。判断依据不是「这条规则长得像不像行样式」，
+     而是「它要匹配的元素是不是本文件模板里写出来的」—— 不是，就得 global。 */
+  .notice button {
+    background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 0.2rem 0.6rem; cursor: pointer; font: inherit; font-size: var(--fs-kicker);
+    color: var(--ink);
+  }
+
   /* 这些规则必须是 is:global。表格的行来自两个地方 —— 构建期的 PaperRow.astro，
      和运行期 paper-table.js 里的 buildRow —— 两者都拿不到 search.astro 的 scope
      属性（Astro 只给本文件模板里写出的元素加），所以写在上面那个 scoped 块里的
@@ -6609,21 +6613,35 @@ function embeddedKeys(src) {
   const marker = 'JSON.stringify({';
   let i = src.indexOf(marker);
   while (i !== -1) {
+    // 配平时必须跳过字符串字面量：文案里出现一个落单的 { 或 }，边界就会找错，
+    // 于是这条测试从此静默漏检 —— 一条不会红的结构测试比没有测试更糟。
     let depth = 1;
     let j = i + marker.length;
+    let quote = '';
     const start = j;
     while (j < src.length && depth > 0) {
-      if (src[j] === '{') depth += 1;
-      else if (src[j] === '}') depth -= 1;
+      const ch = src[j];
+      if (quote) {
+        if (ch === '\\') j += 1;
+        else if (ch === quote) quote = '';
+      } else if (ch === "'" || ch === '"' || ch === '`') quote = ch;
+      else if (ch === '{') depth += 1;
+      else if (ch === '}') depth -= 1;
       j += 1;
     }
     const body = src.slice(start, j - 1);
     let d = 0;
+    let q = '';
     for (const line of body.split('\n')) {
       const m = /^\s*(\w+)\s*:/.exec(line);
-      if (m && d === 0) keys.add(m[1]);
-      for (const ch of line) {
-        if (ch === '{') d += 1;
+      if (m && d === 0 && !q) keys.add(m[1]);
+      for (let k = 0; k < line.length; k += 1) {
+        const ch = line[k];
+        if (q) {
+          if (ch === '\\') k += 1;
+          else if (ch === q) q = '';
+        } else if (ch === "'" || ch === '"' || ch === '`') q = ch;
+        else if (ch === '{') d += 1;
         else if (ch === '}') d -= 1;
       }
     }
@@ -6631,6 +6649,25 @@ function embeddedKeys(src) {
   }
   return keys;
 }
+
+// helper 自己也要被测。它要是在一般情况下解析错了，上面三条断言会永远绿，
+// 而它们本该是 Task 14–19 复用的防线。
+describe('embeddedKeys', () => {
+  it('取出顶层 key', () => {
+    const src = "set:html={JSON.stringify({\n  a: 1,\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+
+  it('不把嵌套对象里的 key 当成顶层', () => {
+    const src = "set:html={JSON.stringify({\n  a: t(l, 'k', { count: 1 }),\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+
+  it('字符串里落单的花括号不影响配平', () => {
+    const src = "set:html={JSON.stringify({\n  a: '有个 { 在文案里',\n  b: 2,\n})}";
+    expect([...embeddedKeys(src)].sort()).toEqual(['a', 'b']);
+  });
+});
 
 describe.each(PAIRS)('$name 页：脚本与模板的接线', ({ script, templates }) => {
   const js = readFileSync(script, 'utf8');
@@ -6660,7 +6697,8 @@ describe.each(PAIRS)('$name 页：脚本与模板的接线', ({ script, template
 把 `previewOffline` 从 `#ptI18n` 里临时删掉，跑 `npx vitest run tests/wiring.test.js`，
 必须看到第一条断言失败并列出 `["previewOffline"]`；再把 `#ptToast` 那行临时注释掉，
 必须看到第三条失败并列出 `["ptToast"]`。两条都确认后恢复原状，重跑必须全绿。
-两份输出都贴进报告 —— 没红过的测试不算测试。
+再把 `#ptI18n` 里任意一个 key 改名（例如 `retry` → `retryX`），必须看到第二条
+「不留死文案」失败。三份输出都贴进报告 —— 没红过的测试不算测试。
 
 - [ ] **Step 6: 注册页面并补高亮样式**
 
