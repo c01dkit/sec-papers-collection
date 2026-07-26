@@ -114,7 +114,13 @@ const confs = awards.map((c) => ({
     display: flex; gap: 0.9rem; align-items: baseline; justify-content: space-between;
     padding: 0.5rem 0; border-bottom: 1px solid var(--hairline-soft);
   }
-  .ttl { font-size: 0.9rem; line-height: 1.5; }
+  .ttl {
+    font-size: 0.9rem; line-height: 1.5;
+    /* 论文标题同样是抓来的，同样可能出现断不开的长串（本库里就有一个 30 字符的
+       `DifferentialPrivacy.framework:`）。摘要页在 375px 上已经因为这个顶出过
+       横向滚动条，这里用同一条规则堵住，理由见 abstract.astro 的 .abs。 */
+    overflow-wrap: anywhere;
+  }
   .badge {
     /* 按年份分组时这里放的是奖项全名（最长「Distinguished Paper Award
        Honorable Mentions」），flex:none + nowrap 会把 375px 的行顶出去 17px。
