@@ -7566,7 +7566,15 @@ export async function initTrendsChart() {
 
   // 明暗切换后重建：Chart.js 把颜色烤进了实例，改 CSS 变量不会让它自己更新
   if (!window.__spcTrendThemeObserver) {
+    // 只收窄 attributeFilter 还不够。theme.js 的 apply() 每次调用都会无条件写
+    // el.dataset.theme（换强调色时也走同一个 apply），而 MutationObserver 只看
+    // 「属性被写过」，不看「值有没有变」—— 同值重写照样产生一条 attributes 记录。
+    // 所以再记一份上次的值，值没变就不重建，才真正做到「主题真的换了才重建」。
+    let lastTheme = document.documentElement.dataset.theme;
     window.__spcTrendThemeObserver = new MutationObserver(() => {
+      const cur = document.documentElement.dataset.theme;
+      if (cur === lastTheme) return;
+      lastTheme = cur;
       if (charts.length) build();
     });
     window.__spcTrendThemeObserver.observe(document.documentElement, {
