@@ -7,6 +7,24 @@ const fmt = (tpl, map) => Object.entries(map).reduce((s, [k, v]) => s.replaceAll
 let i18n = {};
 let savedTimer;
 
+// settings 与 i18n 一样放模块级，不放 initSettingsForm 的局部。
+// 原因是下面那个 spc:settings-change 监听器只注册一次（挂在 window 上，
+// 没有随 DOM 一起消失的宿主可依附），而 initSettingsForm 每次软导航都会重跑；
+// 若 settings 是局部变量，那个一次性注册的监听器会永久闭包住**第一次**访问的
+// 那个绑定，之后一直照着过期值重画。initSettingsForm 每次都会重新赋值它，
+// 所以模块级在这里不构成软导航陈旧状态（那条教训见 paper-table.js:5-8）。
+let settings = null;
+let settingsListenerBound = false;
+
+// 深色开关与强调色色块的**真相是 DOM**（<html data-theme> / <html data-accent>），
+// 不是库里的字段。两个理由：
+//   1. 顶栏的 ◑/◈ 直接改 DOM，走的是 theme.js，不经过本页任何代码；
+//   2. rememberDarkMode 关掉时，预绘制脚本按系统偏好渲染，库里的 darkTheme
+//      可能与页面实际相反 —— 这种情况下连首次加载显示的都是错的。
+// 读 DOM 让这两项永远与用户眼睛看到的一致。其余三个 remember* 开关不受 DOM
+// 影响，仍然读 settings。
+const isDark = () => document.documentElement.dataset.theme === 'dark';
+
 // msg 省略时显示通用的「已自动保存」；clearFavorites 之后传 i18n.cleared，
 // 让一次破坏性操作得到一句专门的确认，而不是和其它字段改动共用同一句提示。
 function flashSaved(msg) {
@@ -42,7 +60,7 @@ export async function initSettingsForm() {
 
   i18n = JSON.parse(document.getElementById('stI18n').textContent);
 
-  let settings = await getSettings();
+  settings = await getSettings();
   if (!isPersistent() && warn) warn.hidden = false;
 
   // 只在打开页面那一刻查一次 isPersistent() 是不够的：hydrateAndApply() 在
@@ -67,8 +85,9 @@ export async function initSettingsForm() {
 
   // ── 强调色 ──────────────────────────────────────────
   const paintAccent = () => {
+    const cur = document.documentElement.dataset.accent;
     for (const btn of document.querySelectorAll('[data-accent-pick]')) {
-      btn.setAttribute('aria-checked', btn.dataset.accentPick === settings.theme ? 'true' : 'false');
+      btn.setAttribute('aria-checked', btn.dataset.accentPick === cur ? 'true' : 'false');
     }
   };
   for (const btn of document.querySelectorAll('[data-accent-pick]')) {
@@ -85,24 +104,43 @@ export async function initSettingsForm() {
   // ── 开关 ────────────────────────────────────────────
   const paintToggles = () => {
     for (const btn of document.querySelectorAll('[data-toggle]')) {
-      btn.setAttribute('aria-pressed', settings[btn.dataset.toggle] ? 'true' : 'false');
+      const key = btn.dataset.toggle;
+      const on = key === 'darkTheme' ? isDark() : !!settings[key];
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     }
   };
   for (const btn of document.querySelectorAll('[data-toggle]')) {
     btn.addEventListener('click', async () => {
       const key = btn.dataset.toggle;
-      const next = !settings[key];
       // 深色开关要立刻作用到页面，不能等下次刷新
       if (key === 'darkTheme') {
+        // next 同样从 DOM 推。用 !settings.darkTheme 的话，顶栏切过之后
+        // settings 还是旧值，取反会算出「切到当前已经是的那个主题」——
+        // 实测就是点了没反应（dark → dark），而开关自己翻了过去。
+        const next = !isDark();
         applyTheme(next ? 'dark' : 'light', document.documentElement.dataset.accent);
         await save({ darkTheme: next, rememberDarkMode: true });
       } else {
-        await save({ [key]: next });
+        await save({ [key]: !settings[key] });
       }
       paintToggles();
     });
   }
   paintToggles();
+
+  // 顶栏的 ◑/◈ 改完并落盘之后会广播权威结果（见 theme.js 的 persist）。
+  // 收到就整份换掉并重画 —— 这一步管的是 remember* 那三个开关：
+  // theme.js 会把 rememberDarkMode / rememberTheme 一并写成 true，
+  // 而它们无法从 DOM 推出来。深色与强调色两项本来就读 DOM，不依赖这个事件。
+  if (!settingsListenerBound) {
+    settingsListenerBound = true;
+    window.addEventListener('spc:settings-change', (e) => {
+      if (!document.getElementById('kwList')) return;   // 已经不在设置页了
+      if (e.detail) settings = e.detail;
+      paintAccent();
+      paintToggles();
+    });
+  }
 
   // ── 关键词 ──────────────────────────────────────────
   const input = document.getElementById('kwInput');

@@ -23,10 +23,25 @@ function apply(theme, accent) {
 async function persist(patch) {
   try {
     const mod = await import('./settings-store.js');
-    await mod.patchSettings({
+    const next = await mod.patchSettings({
       ...(patch.theme ? { darkTheme: patch.theme === 'dark', rememberDarkMode: true } : {}),
       ...(patch.accent ? { theme: patch.accent, rememberTheme: true } : {}),
     });
+    // 顶栏的 ◑/◈ 与设置页写的是同一条记录，而设置页只在 init 时读过一次库 ——
+    // 不广播的话它会一直显示旧值（实测：页面已经是深色，它自己的「深色模式」
+    // 开关还读 OFF；indigo 已生效，被标 checked 的还是 slate）。
+    //
+    // 派发点选在写**完成之后**、并把权威结果放进 detail，而不是在 apply() 里
+    // 一改 DOM 就发：那样监听方只能自己再去读一次库，而这次读会与本次写竞速，
+    // 有可能读到写之前的值再盖回去。带上结果就没有竞速可言。
+    //
+    // 也不用 MutationObserver：apply() 经常用同值重写 dataset.theme，
+    // 观察者必须各自去重（trends-chart.js:97 那个就是这么做的），再加一个
+    // 只会把同一个坑挖第二遍 —— 这一点在上一轮复审里被明确记过。
+    //
+    // 唯一的派发者就是这里（顶栏那两个按钮）。别的写入方目前都不派发；
+    // 需要的话自己加，不要假设已经有了。
+    window.dispatchEvent(new CustomEvent('spc:settings-change', { detail: next }));
   } catch (err) {
     console.warn('[theme] 持久化失败，本次切换仅本页有效', err);
   }
