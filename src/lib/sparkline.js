@@ -1,8 +1,18 @@
+/**
+ * @param {import('./types.d.ts').Stats} stats
+ * @param {string[]} years
+ * @returns {import('./types.d.ts').TrendPoint[]}
+ */
 export function buildTotalTrend(stats, years) {
   const byYear = (stats && stats.byYear) || {};
   return years.map((y) => ({ year: y, count: byYear[y] ?? 0 }));
 }
 
+/**
+ * @param {import('./types.d.ts').TrendPoint[]} points
+ * @param {{ width?: number, height?: number, decimals?: number }} [opts]
+ * @returns {import('./types.d.ts').Sparkline}
+ */
 export function toSparkline(points, { width = 100, height = 40, decimals = 2 } = {}) {
   const max = Math.max(1, ...points.map((p) => p.count));
   const step = points.length > 1 ? width / (points.length - 1) : 0;

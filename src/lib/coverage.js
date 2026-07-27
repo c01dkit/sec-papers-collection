@@ -7,6 +7,9 @@ export const MATRIX_YEARS = Array.from({ length: 12 }, (_, i) => String(2015 + i
  * （se）。名单同样从 overview[].category 推出，不写死——原因见
  * venue-groups.js 顶部注释：写死会让 CLAUDE.md 记录的「改 data.yml +
  * --analyze」加会议流程安静地漏掉矩阵里的新会议。
+ *
+ * @param {import('./types.d.ts').Stats} stats
+ * @returns {import('./types.d.ts').MatrixVenues}
  */
 export function matrixVenues(stats) {
   const byCat = venuesByCategory(stats);
@@ -16,6 +19,12 @@ export function matrixVenues(stats) {
   };
 }
 
+/**
+ * @param {Record<string, Record<string, number>>} byPY
+ * @param {string[]} names
+ * @param {string[]} years
+ * @returns {import('./types.d.ts').MatrixGroup}
+ */
 function buildGroup(byPY, names, years) {
   const firstYear = Number(years[0]);
 
@@ -44,6 +53,11 @@ function buildGroup(byPY, names, years) {
   return { rows, max };
 }
 
+/**
+ * @param {import('./types.d.ts').Stats} stats
+ * @param {string[]} [years]
+ * @returns {import('./types.d.ts').CoverageMatrix}
+ */
 export function buildCoverageMatrix(stats, years = MATRIX_YEARS) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
   const { top, se } = matrixVenues(stats);

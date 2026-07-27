@@ -4,6 +4,9 @@ const ISO_DATE = /(\d{4})-(\d{2})-(\d{2})/;
  * 把截止日字符串解析成本地午夜的 Date。
  * 不能用 new Date('2026-06-04')：那会被当成 UTC 午夜，在 UTC-x 时区会退到前一天。
  * 区间（含 ~）取结束日；'TBA' 之类返回 null 由调用方跳过。
+ *
+ * @param {string | null | undefined} raw
+ * @returns {Date | null}
  */
 export function parseDeadlineDate(raw) {
   if (!raw || typeof raw !== 'string') return null;
@@ -17,7 +20,12 @@ function localMidnight(d) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
+/**
+ * @param {import('./types.d.ts').TimelinePublication[]} timeline
+ * @returns {import('./types.d.ts').FlatDeadline[]}
+ */
 export function flattenDeadlines(timeline) {
+  /** @type {import('./types.d.ts').FlatDeadline[]} */
   const out = [];
   for (const pub of timeline || []) {
     for (const cycle of pub.cycles || []) {
@@ -42,6 +50,11 @@ export function flattenDeadlines(timeline) {
  *   - 只显示未来的截止日，按日期升序；
  *   - 未来不足 want 条时，用最近的已过期项补齐并标 past；
  *   - 一条未来的都没有 → placeholder=true，绝不显示负天数。
+ *
+ * @param {import('./types.d.ts').TimelinePublication[]} timeline
+ * @param {Date} today
+ * @param {number} [want]
+ * @returns {import('./types.d.ts').UpcomingDeadlines}
  */
 export function pickUpcomingDeadlines(timeline, today, want = 3) {
   const flat = flattenDeadlines(timeline);
@@ -55,6 +68,11 @@ export function pickUpcomingDeadlines(timeline, today, want = 3) {
 
   const past = flat.filter((d) => d.date < base).sort((a, b) => b.date - a.date);
 
+  /**
+   * @param {import('./types.d.ts').FlatDeadline} d
+   * @param {boolean} isPast
+   * @returns {import('./types.d.ts').DeadlineItem}
+   */
   const toItem = (d, isPast) => ({
     publication: d.publication,
     cycle: d.cycle,

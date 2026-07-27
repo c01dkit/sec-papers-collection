@@ -1,5 +1,12 @@
 ---
 import { t } from '@/i18n/index.js';
+import type { UpcomingDeadlines } from '@/lib/types.d.ts';
+
+interface Props {
+  lang: string;
+  picked: UpcomingDeadlines;
+}
+
 const { lang, picked } = Astro.props;
 
 // 「天」与「已截止」两个标签挂在容器的 data 属性上：客户端脚本重算后要能把它们

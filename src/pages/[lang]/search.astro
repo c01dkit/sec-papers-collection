@@ -16,7 +16,7 @@ const { lang } = Astro.params;
 // 论文标题是从会议网站抓来的。set:html 不做转义，标题里只要出现 </script>
 // 就能提前闭合这个标签，其后的内容会被当页面 HTML 解析。当前 15,600 条里没有
 // 这种标题，但数据每次抓取都会变，不能指望它一直没有。
-const safeJson = (v) => JSON.stringify(v).replaceAll('<', '\\u003c');
+const safeJson = (v: unknown) => JSON.stringify(v).replaceAll('<', '\\u003c');
 
 const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
 // 预渲染只铺第一页。铺满 30 行的话，JS 一接管就立刻换成 15 行的分页结果，
@@ -33,9 +33,12 @@ const publications = Object.entries(stats.byPublication)
   .sort((a, b) => b[1] - a[1])
   .map(([name, count]) => ({ value: name, label: name, count }));
 
-const years = Object.keys(stats.byYear)
+// 同 index.astro：Object.keys 给的是 string，直接拿去索引 TS 从 JSON 推出的
+// 具名年份键类型会报 ts(7053)，先取成 Record 再索引。
+const byYear: Record<string, number | undefined> = stats.byYear;
+const years = Object.keys(byYear)
   .sort((a, b) => Number(b) - Number(a))
-  .map((y) => ({ value: y, label: y, count: stats.byYear[y] }));
+  .map((y) => ({ value: y, label: y, count: byYear[y] }));
 
 // 排序表头必须是 <th> 里的原生 <button>，不能把 click 绑在裸 <th> 上。
 // 实测（真实 Chrome，/zh/search/）：五个 <th> 全是 tabindex=null / role=null /
@@ -121,9 +124,9 @@ const sortCols = [
   </div>
   <p class="toast" id="ptToast" hidden role="status" aria-live="polite"></p>
 
-  <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
+  <script is:inline type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
-  <script type="application/json" id="ptI18n" set:html={JSON.stringify({
+  <script is:inline type="application/json" id="ptI18n" set:html={JSON.stringify({
     loadFailed: t(lang, 'search.loadFailed'),
     previewNote: t(lang, 'search.previewNote'),
     previewOffline: t(lang, 'search.previewOffline'),

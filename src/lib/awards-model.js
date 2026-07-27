@@ -1,7 +1,15 @@
+/**
+ * @param {import('./types.d.ts').AwardConference} conf
+ * @returns {number}
+ */
 export function totalPapers(conf) {
   return (conf.awards || []).reduce((sum, a) => sum + (a.papers || []).length, 0);
 }
 
+/**
+ * @param {import('./types.d.ts').AwardConference} conf
+ * @returns {import('./types.d.ts').AwardGroup[]}
+ */
 export function groupByAward(conf) {
   return (conf.awards || []).map((award) => ({
     key: `award-${award.name}`,
@@ -11,7 +19,12 @@ export function groupByAward(conf) {
   }));
 }
 
+/**
+ * @param {import('./types.d.ts').AwardConference} conf
+ * @returns {import('./types.d.ts').AwardGroup[]}
+ */
 export function groupByYear(conf) {
+  /** @type {Map<string, import('./types.d.ts').AwardGroupPaper[]>} */
   const buckets = new Map();
   for (const award of conf.awards || []) {
     for (const paper of award.papers || []) {
@@ -33,8 +46,13 @@ export function groupByYear(conf) {
 /**
  * 首页获奖精选。确定性排序（年份降序 → 会议名 → 标题），
  * 再贪心地优先凑不同会议 —— 结果进构建产物，不能随调用变化。
+ *
+ * @param {import('./types.d.ts').AwardConference[]} awards
+ * @param {number} [n]
+ * @returns {import('./types.d.ts').AwardHighlight[]}
  */
 export function pickHighlights(awards, n = 2) {
+  /** @type {import('./types.d.ts').AwardHighlight[]} */
   const flat = [];
   for (const conf of awards || []) {
     for (const award of conf.awards || []) {
@@ -56,6 +74,7 @@ export function pickHighlights(awards, n = 2) {
       a.title.localeCompare(b.title)
   );
 
+  /** @type {import('./types.d.ts').AwardHighlight[]} */
   const picked = [];
   const seenPubs = new Set();
   for (const item of flat) {

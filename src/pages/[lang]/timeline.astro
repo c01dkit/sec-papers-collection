@@ -46,7 +46,7 @@ const { lang } = Astro.params;
     </section>
   ))}
 
-  <script type="application/json" id="tlI18n" set:html={JSON.stringify({
+  <script is:inline type="application/json" id="tlI18n" set:html={JSON.stringify({
     daysLeft: t(lang, 'timelinePage.daysLeft', { days: '__N__' }),
     today: t(lang, 'timelinePage.today'),
   })} />

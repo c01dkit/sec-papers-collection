@@ -1,8 +1,15 @@
 ---
+import type { Paper } from '@/lib/types.d.ts';
+
+interface Props {
+  paper: Paper;
+  terms: string[];
+}
+
 const { paper, terms } = Astro.props;
 
 // 摘要截到约 210 字符，在词边界断开，避免切断单词
-function clip(text, max = 210) {
+function clip(text: string | undefined, max = 210) {
   const s = String(text || '').trim().replace(/\s+/g, ' ');
   if (s.length <= max) return s;
   const cut = s.slice(0, max);
@@ -10,7 +17,7 @@ function clip(text, max = 210) {
 }
 
 // 把 terms 里的词切出来上高亮（构建时做，纯静态）
-function segments(text) {
+function segments(text: string) {
   const escaped = terms.filter(Boolean).map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   if (!escaped.length) return [{ text, hit: false }];
   const re = new RegExp(`(${escaped.join('|')})`, 'gi');

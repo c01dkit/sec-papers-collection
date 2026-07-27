@@ -1,6 +1,12 @@
 ---
 import { t } from '@/i18n/index.js';
 import { toSparkline } from '@/lib/sparkline.js';
+import type { TrendPoint } from '@/lib/types.d.ts';
+
+interface Props {
+  lang: string;
+  points: TrendPoint[];
+}
 
 const { lang, points } = Astro.props;
 const spark = toSparkline(points, { width: 100, height: 40 });

@@ -1,5 +1,14 @@
 ---
 import { t } from '@/i18n/index.js';
+import type { Paper } from '@/lib/types.d.ts';
+
+interface Props {
+  lang: string;
+  rows: Paper[];
+  term: string;
+  hits: number;
+}
+
 const { lang, rows, term, hits } = Astro.props;
 const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 

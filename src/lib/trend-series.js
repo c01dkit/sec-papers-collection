@@ -6,6 +6,10 @@ const LABEL_KEYS = {
 
 const ORDER = ['top-tier', 'software-engineering', 'system'];
 
+/**
+ * @param {import('./types.d.ts').Stats} stats
+ * @returns {import('./types.d.ts').TrendGroup[]}
+ */
 export function buildSeries(stats) {
   const overview = (stats && stats.overview) || [];
   if (!overview.length) return [];

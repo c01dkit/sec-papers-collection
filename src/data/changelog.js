@@ -1,3 +1,8 @@
+// 标成 Record<string, …> 而不是让 TS 从字面量推 `{ zh, en }`：about.astro 用
+// `CHANGELOG[lang]` 取，而 lang 来自 Astro.params，类型只是 string，
+// 用 string 索引一个只有 zh/en 两个具名键的类型会报 ts(7053)。
+// 索引取不到时那边有 `?? CHANGELOG.en` 兜底，未知语言码的行为不变。
+/** @type {Record<string, import('@/lib/types.d.ts').ChangelogEntry[]>} */
 export const CHANGELOG = {
   zh: [
     { version: 'v0.4.0', date: '2026-07-25', items: [

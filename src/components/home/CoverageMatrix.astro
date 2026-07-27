@@ -1,5 +1,12 @@
 ---
 import { t } from '@/i18n/index.js';
+import type { CoverageMatrix } from '@/lib/types.d.ts';
+
+interface Props {
+  lang: string;
+  matrix: CoverageMatrix;
+  total: number;
+}
 
 const { lang, matrix, total } = Astro.props;
 const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
@@ -10,7 +17,7 @@ const groups = [
 ];
 
 // '2001'…'2013' → '◂01–13'；没有更早数据时返回空
-const preLabel = (preYears) =>
+const preLabel = (preYears: string[]) =>
   preYears.length ? `◂${preYears[0].slice(2)}–${preYears[preYears.length - 1].slice(2)}` : '';
 
 // 把 coverage.js 给的 0..1 相对强度压到 0.06..0.50 再上色。
@@ -24,7 +31,7 @@ const preLabel = (preYears) =>
 // 下限 0.06 是为了让最小的非空格子仍然看得见，不至于和空格混掉。
 //
 // 压缩动态范围的代价很小：每个格子里都印着确切数字，深浅只是冗余编码。
-const displayAlpha = (a) => (0.06 + a * 0.44).toFixed(2);
+const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
 ---
 
 <section class="band band--tint">

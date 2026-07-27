@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import { LOCALES, t } from '@/i18n/index.js';
 import { buildSeries } from '@/lib/trend-series.js';
+import type { TrendGroup } from '@/lib/types.d.ts';
 import stats from '@/assets/data/data-statistics.json';
 
 export function getStaticPaths() {
@@ -26,12 +27,15 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 //
 // 概括句与表格里的数字全部由 buildSeries 的结果现算，不硬写：会议数、年份范围、
 // 合计篇数三项与 data-statistics.json 同源，数据一变文案跟着变。
-const summarize = (g) => ({
+const summarize = (g: TrendGroup) => ({
   label: t(lang, g.labelKey),
   venues: String(g.series.length),
   from: g.years[0],
   to: g.years[g.years.length - 1],
-  total: nf.format(g.series.reduce((s, v) => s + v.data.reduce((a, b) => a + (b ?? 0), 0), 0)),
+  // reduce<number> 的类型参数不能省：data 是 (number | null)[]，不写的话 TS 会挑中
+  // 「累加器与元素同类型」那个重载，把 a 也推成 number | null，于是 a + … 报 ts(18047)。
+  // 断线用的 null 在这里当 0 计（b ?? 0），求和语义不变。
+  total: nf.format(g.series.reduce((s, v) => s + v.data.reduce<number>((a, b) => a + (b ?? 0), 0), 0)),
 });
 ---
 
@@ -81,7 +85,7 @@ const summarize = (g) => ({
     </section>
   ))}
 
-  <script type="application/json" id="trendData" set:html={JSON.stringify(groups)} />
+  <script is:inline type="application/json" id="trendData" set:html={JSON.stringify(groups)} />
 </PageLayout>
 
 <style>

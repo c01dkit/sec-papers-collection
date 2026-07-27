@@ -16,7 +16,12 @@ const rank = (name) => {
   return i === -1 ? ORDER.length : i;
 };
 
-/** 从 overview 推出「分类 → 会议名数组」，供本模块与 coverage.js 共用。 */
+/**
+ * 从 overview 推出「分类 → 会议名数组」，供本模块与 coverage.js 共用。
+ *
+ * @param {import('./types.d.ts').Stats} stats
+ * @returns {Map<string, string[]>}
+ */
 export function venuesByCategory(stats) {
   const out = new Map();
   for (const s of (stats && stats.overview) || []) {
@@ -28,6 +33,10 @@ export function venuesByCategory(stats) {
   return out;
 }
 
+/**
+ * @param {import('./types.d.ts').Stats} stats
+ * @returns {import('./types.d.ts').VenueGroup[]}
+ */
 export function groupVenues(stats) {
   const byPY = (stats && stats.byPublicationAndYear) || {};
   const byCat = venuesByCategory(stats);

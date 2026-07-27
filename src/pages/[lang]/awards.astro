@@ -58,7 +58,10 @@ const confs = awards.map((c) => ({
   {confs.map((c, ci) => (
     <div class="panel-conf" data-conf-panel={c.publication} hidden={ci !== 0}>
       <h2 class="conf-name">{c.publication}</h2>
-      {[['award', c.byAward], ['year', c.byYear]].map(([mode, groups]) => (
+      {/* as const 不能省：没有它，这个数组的元素类型会被推成
+          `(string | AwardGroup[])[]`，解构出的 groups 因此带上 string，
+          groups.map 直接报 ts(2339)。加上之后 mode 还收窄成 'award' | 'year'。 */}
+      {([['award', c.byAward], ['year', c.byYear]] as const).map(([mode, groups]) => (
         <div data-group-panel={mode} hidden={mode !== 'award'}>
           {groups.map((g) => (
             <section class="grp">
