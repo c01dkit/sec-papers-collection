@@ -349,9 +349,9 @@ def prepare_official_data():
                 json.dump(all_results,f,ensure_ascii=False)
         return len(all_results)
 
-    def parse_bib_file(bib_file_names:list[str], __publication:str):
+    def parse_bib_file(bib_file_names:list[str], __publication:str, __url_template:str=None):
         from analyzers.bib_analyzer import BIB_OBJ
-        bib = BIB_OBJ(__publication)
+        bib = BIB_OBJ(__publication, __url_template)
         if '-' in bib_file_names[0]:
             json_file_name = bib_file_names[0].split('-')[0] + '.json'
         else:
@@ -395,7 +395,8 @@ def prepare_official_data():
                     if official_file.endswith('csv'):
                         paper_num = parse_csv_file(official_files, publication_config['name'])
                     elif official_file.endswith('bib'):
-                        paper_num = parse_bib_file(official_files, publication_config['name'])
+                        paper_num = parse_bib_file(official_files, publication_config['name'],
+                                                   publication_config.get('paper_url_template'))
                     else:
                         paper_num = 0
                     print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")

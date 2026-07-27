@@ -170,7 +170,7 @@ usenix_security:
       #      link_xpath: //article/h2/a/@href
       #      link_prefix: https://www.usenix.org
       #      abstract_xpath: //article/h2/a/../../div/div/div[last()]
-      url: https://www.usenix.org/conf%C3%A9rence/usenixsecurity25/technical-sessions
+      url: https://www.usenix.org/conference/usenixsecurity25/technical-sessions
       title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
       link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
       abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
@@ -681,3 +681,66 @@ asplos:
       official_file: asplos16.bib
     - year: 2015
       official_file: asplos15.bib
+osdi:
+  name: OSDI
+  category: system
+  # https://www.usenix.org/conferences/byname/179
+  # OSDI 由 USENIX 出版，ACM DL 导出的 bib 全系列都没有 url/doi 字段，只有形如
+  # "3767901.3767902" 的 DL 条目号（= bib 的 entry key）。ACM 给这类无 DOI 记录挂的是
+  # 10.5555 前缀，见 osdi14.bib 里 "for DOI: 10.5555/2685048.2685070" 那条 review 记录。
+  # 该前缀不在 doi.org 注册，只在 dl.acm.org 上可解析。不配这项则论文链接为 '#'。
+  paper_url_template: 'https://dl.acm.org/doi/10.5555/{id}'
+  # 2004 / 2021 / 2022 / 2023 的 bib 还没下到 official_cache/，补齐后按同样格式加进来。
+  # 1996、1999 的 ACM DL 导出没有 abstract 字段，bib_analyzer 只收录带 abstract 的条目，
+  # 解析出来是 0 篇（还会导致 osdi96.json / osdi99.json 生成不出来），故暂不列入。
+  sites: # https://dl.acm.org/conference/osdi/proceedings
+    - year: 2026
+      url: https://www.usenix.org/conference/osdi26/technical-sessions
+      title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
+      link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
+      abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
+      link_prefix: https://www.usenix.org
+    - year: 2025
+      official_file: 'osdi25.bib'
+    - year: 2024
+      official_file: 'osdi24.bib'
+    - year: 2023
+      url: https://www.usenix.org/conference/osdi23/technical-sessions
+      title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
+      link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
+      abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
+      link_prefix: https://www.usenix.org
+    - year: 2022
+      url: https://www.usenix.org/conference/osdi22/technical-sessions
+      title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
+      link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
+      abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
+      link_prefix: https://www.usenix.org
+    - year: 2021
+      url: https://www.usenix.org/conference/osdi21/technical-sessions
+      title_xpath:  //div[@class="usenix-schedule-media media-header"]/../../../../h2/a
+      link_xpath: //div[@class="usenix-schedule-media media-header"]/../../../../h2/a/@href
+      abstract_xpath: //div[@class="usenix-schedule-media media-header"]/../../../..//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
+      link_prefix: https://www.usenix.org
+    - year: 2020
+      official_file: 'osdi20.bib'
+    - year: 2018
+      official_file: 'osdi18.bib'
+    - year: 2016
+      official_file: 'osdi16.bib'
+    - year: 2014
+      official_file: 'osdi14.bib'
+    - year: 2012
+      official_file: 'osdi12.bib'
+    - year: 2010
+      official_file: 'osdi10.bib'
+    - year: 2008
+      official_file: 'osdi08.bib'
+    - year: 2006
+      official_file: 'osdi06.bib'
+    - year: 2002
+      official_file: 'osdi02.bib'
+    - year: 2000
+      official_file: 'osdi00.bib'
+    - year: 1994
+      official_file: 'osdi94.bib'
