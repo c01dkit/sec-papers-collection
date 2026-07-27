@@ -82,6 +82,50 @@ html.reveal-on [data-reveal] {
 }
 html.reveal-on [data-reveal].in { opacity: 1; transform: none; }
 
+/* ── 滚动条 ──────────────────────────────────────────────
+   原生页面滚动条要占掉一条约 15px 的沟槽，而本站各页内容高度差得很远（首页
+   一屏多、检索页几十屏），于是「上一页没滚动条、下一页有」时整块版心会横向
+   弹一下。把原生的收掉，改由 #pageSb 画一条悬浮滑块：它是 fixed 的，不参与
+   布局、不占宽度，页间跳转时版心纹丝不动。
+   代价是这条滑块要靠 JS 才画得出来 —— 无 JS 时由 BaseLayout 的 <noscript>
+   把原生滚动条还回去（宁可让它跳，也不能连滚动位置都看不见）。 */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
+.page-sb {
+  position: fixed;
+  /* top 同时是 JS 的数据源：page-scrollbar.js 用 getComputedStyle 读它来算
+     滑轨长度，所以「上下两端的留白」这个数字全站只有这里一处。 */
+  top: 14px;
+  right: 6px;
+  width: 6px;
+  border-radius: var(--radius);
+  background: var(--sb-thumb);
+  opacity: 0;
+  /* 隐藏时必须让开指针。它是个 fixed 元素，opacity:0 照样吃点击 ——
+     不写这行，视口右缘就常驻一条谁也看不见、却能吞掉点击的死带。 */
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  z-index: 100;
+  touch-action: none;
+}
+.page-sb.visible { opacity: 1; pointer-events: auto; }
+.page-sb:hover, .page-sb.dragging { background: var(--sb-thumb-hover); }
+/* 6px 宽的东西不好抓。左右各外扩 5px 撑出一个 16px 的把手，视觉上仍是 6px。 */
+.page-sb::before { content: ''; position: absolute; inset: 0 -5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-sb { transition: none; }
+}
+
+/* 局部滚动区（宽表、下拉菜单）不收原生滚动条：在窄屏上它是「这里还能横着滚」
+   的唯一提示，藏掉就没人知道最后几列的存在。只压细、去掉滑轨底色，让它跟
+   悬浮滑块看起来是一套。Safari 18.2 以下不认这两个属性，退回原生外观。 */
+.table-scroll, .scroll, .fd-menu {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) transparent;
+}
+
 /* ── 页面转场：整文档淡入淡出 ───────────────────────────── */
 @keyframes spc-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes spc-fade-out { from { opacity: 1; } to { opacity: 0; } }

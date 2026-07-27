@@ -1,6 +1,7 @@
 import { initTheme } from './theme.js';
 import { initReveal } from './reveal.js';
 import { initNav } from './nav.js';
+import { initPageScrollbar } from './page-scrollbar.js';
 import { initCountdown } from './home-countdown.js';
 
 const PAGES = new Map();
@@ -45,13 +46,19 @@ registerPage('awards', () => import('./awards-view.js').then((m) => m.initAwards
 registerPage('settings', () => import('./settings-form.js').then((m) => m.initSettingsForm()));
 
 async function boot() {
-  // 三个全局 init 各自独立兜错。原先它们直接串在一起，于是 initNav 或 initTheme
+  // 全局 init 各自独立兜错。原先它们直接串在一起，于是 initNav 或 initTheme
   // 里任何一处抛错都会跳过 initReveal —— reveal-on 留在 <html> 上而没人加 .in，
   // 整页 [data-reveal] 停在 opacity:0，看起来就是一张白页。一个坏了的汉堡菜单
   // 不该让整页内容消失。
   // BaseLayout 的内联保险也能兜住这一路，但那要等 window load + 500ms；
   // 这里当场兜住，代价是零。
-  for (const [name, fn] of [['nav', initNav], ['theme', initTheme], ['reveal', initReveal]]) {
+  // scrollbar 放最后：它开局要量一次文档高度，让前面几个先把 DOM 动完。
+  for (const [name, fn] of [
+    ['nav', initNav],
+    ['theme', initTheme],
+    ['reveal', initReveal],
+    ['scrollbar', initPageScrollbar],
+  ]) {
     try {
       fn();
     } catch (err) {

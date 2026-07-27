@@ -87,7 +87,7 @@ describe('boot 分派', () => {
     await expect(settle()).resolves.toBeUndefined();
   });
 
-  it('三个全局 init 各自兜错：initNav 抛错不能带走 initTheme 与 initReveal', async () => {
+  it('全局 init 各自兜错：initNav 抛错不能带走后面几个', async () => {
     // 守的是一条会让整站看起来变白页的路径。boot() 原先把三个全局 init 直接串在
     // 一起，于是 initNav 或 initTheme 里任何一处抛错都会跳过 initReveal ——
     // 而 <html class="reveal-on"> 是 <head> 内联脚本加的、给每个 [data-reveal]
@@ -107,6 +107,9 @@ describe('boot 分派', () => {
     }));
     vi.doMock('@/scripts/theme.js', () => ({ initTheme: () => order.push('theme') }));
     vi.doMock('@/scripts/reveal.js', () => ({ initReveal: () => order.push('reveal') }));
+    vi.doMock('@/scripts/page-scrollbar.js', () => ({
+      initPageScrollbar: () => order.push('scrollbar'),
+    }));
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     await import('@/scripts/boot.js');
@@ -114,12 +117,13 @@ describe('boot 分派', () => {
     document.dispatchEvent(new Event('astro:page-load'));
     await settle();
 
-    expect(order).toEqual(['nav', 'theme', 'reveal']);
+    expect(order).toEqual(['nav', 'theme', 'reveal', 'scrollbar']);
     expect(spy.mock.calls.flat().join(' ')).toContain('nav');
 
     vi.doUnmock('@/scripts/nav.js');
     vi.doUnmock('@/scripts/theme.js');
     vi.doUnmock('@/scripts/reveal.js');
+    vi.doUnmock('@/scripts/page-scrollbar.js');
     vi.resetModules();
   });
 

@@ -45,6 +45,15 @@ const PAIRS = [
     script: 'src/scripts/home-countdown.js',
     templates: ['src/components/home/media/DeadlineDemo.astro'],
   },
+  // 不是页面脚本（它跟 nav/theme/reveal 一样由 boot 无条件跑），但模板契约同样
+  // 存在且同样细：#pageSb 这个 id 一旦在 BaseLayout 里改名，滑块就静默消失 ——
+  // 页面照样能滚，只是永远看不见滚动条，没有任何报错。四条断言里只有
+  // getElementById 那条对它有牙齿，够了。
+  {
+    name: 'page-scrollbar',
+    script: 'src/scripts/page-scrollbar.js',
+    templates: ['src/layouts/BaseLayout.astro'],
+  },
 ];
 
 // 从 set:html={JSON.stringify({ … })} 里取顶层 key。用花括号配平而不是正则，

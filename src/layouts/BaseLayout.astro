@@ -90,6 +90,22 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
         if (cur.classList.contains('reveal-on')) nxt.classList.add('reveal-on');
       });
     </script>
+
+    <noscript>
+      <style is:inline>
+        /* global.css 收掉了原生页面滚动条，改由 #pageSb 那条悬浮滑块顶上 ——
+           而画那条滑块的是 JS。没有 JS 时两头落空：页面只剩滚轮和键盘能滚，
+           且没有任何「现在在第几屏、一共多少屏」的指示。所以把原生的还回去。
+           这么一来无 JS 用户会重新遇到「有无滚动条导致版心左右跳」的老问题，
+           那是刻意的取舍：跳一下看得见内容，好过不跳但不知道自己在哪。
+           scrollbar-width 与 ::-webkit-scrollbar 两条都要写 —— Chrome/Firefox
+           认前者且认了就忽略后者，Safari 18.2 以下反过来只认后者。 */
+        html { scrollbar-width: auto !important; }
+        html::-webkit-scrollbar { display: block !important; }
+        /* 那条永远不会被画出来的滑块，别留在文档里吃指针 */
+        #pageSb { display: none !important; }
+      </style>
+    </noscript>
   </head>
 
   <body>
@@ -99,6 +115,7 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
       <slot />
     </main>
     {footer && <Footer lang={lang} />}
+    <div class="page-sb" id="pageSb" aria-hidden="true"></div>
     <script>
       import '@/scripts/boot.js';
     </script>
