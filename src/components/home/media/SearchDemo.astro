@@ -4,7 +4,7 @@ const { lang, rows, term, hits } = Astro.props;
 const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
 // 把标题里命中 term 的部分切出来上高亮，大小写不敏感
-function split(title) {
+function split(title:string) {
   const i = title.toLowerCase().indexOf(term.toLowerCase());
   if (i < 0) return [title];
   return [title.slice(0, i), title.slice(i, i + term.length), title.slice(i + term.length)];

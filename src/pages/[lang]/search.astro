@@ -85,7 +85,6 @@ const sortCols = [
   </div>
 
   <p class="notice" id="notice" hidden></p>
-  <p class="toast" id="ptToast" hidden role="status" aria-live="polite"></p>
 
   <div class="table-scroll">
     <table class="pt">
@@ -120,6 +119,7 @@ const sortCols = [
       <button type="button" id="pgNext" disabled aria-label={t(lang, 'search.nextPage')}>›</button>
     </div>
   </div>
+  <p class="toast" id="ptToast" hidden role="status" aria-live="polite"></p>
 
   <script type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
@@ -172,7 +172,7 @@ const sortCols = [
 
   .toast {
     border: 1px solid var(--hairline); border-left: 2px solid var(--accent);
-    padding: 0.4rem 0.8rem; margin: 0 0 1rem;
+    padding: 0.4rem 0.8rem; margin: 1rem 0 1rem;
     font-size: var(--fs-small); color: var(--muted);
   }
 
