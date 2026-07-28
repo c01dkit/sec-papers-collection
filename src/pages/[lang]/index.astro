@@ -12,6 +12,7 @@ import AwardDemo from '@/components/home/media/AwardDemo.astro';
 import ClosingBand from '@/components/home/ClosingBand.astro';
 import { LOCALES, t } from '@/i18n/index.js';
 import { buildCoverageMatrix, matrixVenues } from '@/lib/coverage.js';
+import { compareIds } from '@/lib/papers.js';
 import { buildTotalTrend } from '@/lib/sparkline.js';
 import { pickUpcomingDeadlines } from '@/lib/deadlines.js';
 import { pickHighlights } from '@/lib/awards-model.js';
@@ -44,7 +45,7 @@ const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '
 const SEARCH_TERM = 'fuzz';
 const matched = quickView.filter((p) => p.title.toLowerCase().includes(SEARCH_TERM));
 const searchRows = matched
-  .sort((a, b) => b.year - a.year || a.id - b.id)
+  .sort((a, b) => b.year - a.year || compareIds(a.id, b.id))
   .slice(0, 3);
 
 // ── 02 趋势 ────────────────────────────────────────────

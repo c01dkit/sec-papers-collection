@@ -21,11 +21,17 @@ export function applyFilters(rows, criteria) {
   });
 }
 
+// id 是字符串（'IO25001'），必须用关系运算比较，不能相减 —— 字符串相减得 NaN，
+// 而 Array.sort 的比较器返回 NaN 不会抛错，只会让排序静默退化成近似不变。
+// 不用 localeCompare：id 只含 ASCII 大写字母与数字，裸比较即码点序，
+// 且结果要进构建产物，必须与语言环境无关。
+export const compareIds = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
 // 只定义主键比较；二级键（id 升序）在 sortRows 里恒定附加。
 // 别把二级键写进这里再对整体 reverse() —— 那会把「同年按 id 升序」也翻过来，
 // 降序时 [1,2,3,4,5] 会变成 [2,1,4,3,5]，与预期不符。
 const PRIMARY = {
-  id: (a, b) => a.id - b.id,
+  id: (a, b) => compareIds(a.id, b.id),
   year: (a, b) => a.year - b.year,
   title: (a, b) => String(a.title).localeCompare(String(b.title)),
   publication: (a, b) => String(a.publication).localeCompare(String(b.publication)),
@@ -36,7 +42,7 @@ export function sortRows(rows, key, dir = 'asc') {
   if (!primary) return [...rows];
   const sign = dir === 'desc' ? -1 : 1;
   // 方向只作用于主键；主键相等时恒按 id 升序
-  return [...rows].sort((a, b) => sign * primary(a, b) || a.id - b.id);
+  return [...rows].sort((a, b) => sign * primary(a, b) || compareIds(a.id, b.id));
 }
 
 export function paginate(rows, page, size) {

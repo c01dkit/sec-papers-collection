@@ -50,26 +50,26 @@ describe('IndexedDB 可用时', () => {
   it('收藏能增删且顺序稳定', async () => {
     const s = await freshStore();
     expect(await s.getFavorites()).toEqual([]);
-    const r1 = await s.toggleFavorite(42);
-    expect(r1).toEqual({ favorites: [42], added: true });
-    await s.toggleFavorite(7);
-    expect(await s.getFavorites()).toEqual([42, 7]);
-    const r2 = await s.toggleFavorite(42);
-    expect(r2).toEqual({ favorites: [7], added: false });
+    const r1 = await s.toggleFavorite('IO25042');
+    expect(r1).toEqual({ favorites: ['IO25042'], added: true });
+    await s.toggleFavorite('IC24007');
+    expect(await s.getFavorites()).toEqual(['IO25042', 'IC24007']);
+    const r2 = await s.toggleFavorite('IO25042');
+    expect(r2).toEqual({ favorites: ['IC24007'], added: false });
   });
 
   it('设置与收藏互不干扰（同 store 不同 key）', async () => {
     const s = await freshStore();
-    await s.toggleFavorite(1);
+    await s.toggleFavorite('IO25001');
     await s.patchSettings({ keywords: ['x'] });
-    expect(await s.getFavorites()).toEqual([1]);
+    expect(await s.getFavorites()).toEqual(['IO25001']);
     expect((await s.getSettings()).keywords).toEqual(['x']);
   });
 
   it('沿用现有 schema：库名 / store 名 / key 名一字不改', async () => {
     const s = await freshStore();
     await s.patchSettings({ theme: 'pine' });
-    await s.toggleFavorite(1);
+    await s.toggleFavorite('IO25001');
 
     const dbs = await globalThis.indexedDB.databases();
     expect(dbs.map((d) => d.name)).toContain('spc-settings');
@@ -123,8 +123,8 @@ describe('并发写：读—改—写必须串行，不能丢更新', () => {
 
   it('两个并发 toggleFavorite，两个 id 都要在', async () => {
     const s = await freshStore();
-    await Promise.all([s.toggleFavorite(1), s.toggleFavorite(2)]);
-    expect((await s.getFavorites()).sort()).toEqual([1, 2]);
+    await Promise.all([s.toggleFavorite('IO25001'), s.toggleFavorite('IO25002')]);
+    expect((await s.getFavorites()).sort()).toEqual(['IO25001', 'IO25002']);
   });
 
   it('hydrateSettings 与点击并发时，不把用户刚改的值回滚', async () => {
@@ -149,9 +149,9 @@ describe('并发写：读—改—写必须串行，不能丢更新', () => {
 
   it('十个并发 toggleFavorite 全部保留，一个不丢', async () => {
     const s = await freshStore();
-    const ids = [11, 22, 33, 44, 55, 66, 77, 88, 99, 100];
+    const ids = Array.from({ length: 10 }, (_, i) => `IU25${String(i + 11).padStart(3, '0')}`);
     await Promise.all(ids.map((i) => s.toggleFavorite(i)));
-    expect((await s.getFavorites()).sort((a, b) => a - b)).toEqual(ids);
+    expect((await s.getFavorites()).sort()).toEqual([...ids].sort());
   });
 
   it('水合在前、点击在后同样不丢更新（对称性）', async () => {
@@ -278,7 +278,7 @@ describe('降级标志要能恢复', () => {
     // —— 把它删掉，上面那条「事务失败后又成功」的测试照样绿。
     // clearFavorites 是唯一没有前置读的写函数，只有走它才能验到 idbPut 那行。
     const s = await freshStore();
-    await s.toggleFavorite(1);
+    await s.toggleFavorite('IO25001');
 
     const realPut = IDBObjectStore.prototype.put;
     let failOnce = true;
@@ -294,7 +294,7 @@ describe('降级标志要能恢复', () => {
 
     try {
       // 先让一次写失败，把标志打到 false
-      await s.toggleFavorite(2);
+      await s.toggleFavorite('IO25002');
       expect(s.isPersistent()).toBe(false);
 
       // clearFavorites 不读只写：成功后必须靠 idbPut 那行把标志收回来
@@ -383,7 +383,7 @@ describe('clearFavorites', () => {
   it('清空后为空数组，且不影响 app 记录', async () => {
     const s = await freshStore();
     await s.patchSettings({ keywords: ['x'] });
-    await s.toggleFavorite(5);
+    await s.toggleFavorite('IN26005');
     expect(await s.clearFavorites()).toEqual([]);
     expect(await s.getFavorites()).toEqual([]);
     expect((await s.getSettings()).keywords).toEqual(['x']);
@@ -442,9 +442,25 @@ describe('hydrateSettings —— 老用户数据的迁移与镜像', () => {
 
   it('不动收藏', async () => {
     const s = await freshStore();
-    await s.__writeRaw('favorites', [1, 42, 7]);
+    await s.__writeRaw('favorites', ['IO25001', 'IO25042', 'IC24007']);
     await s.hydrateSettings();
-    expect(await s.getFavorites()).toEqual([1, 42, 7]); // 顺序也不动
+    expect(await s.getFavorites()).toEqual(['IO25001', 'IO25042', 'IC24007']); // 顺序也不动
+  });
+
+  // v0.5.0 之前 id 是递增整数，收藏存的就是数字。新 id 是 'IO25001' 这样的字符串，
+  // 两者无法映射，只能丢弃。留着的话 favorites.has(row.id) 永远不命中，
+  // 表现为「收藏了但星号不亮」—— 比干净地清掉更难排查。
+  it('丢弃 v0.5.0 之前的数字收藏，保留同一数组里的新格式', async () => {
+    const s = await freshStore();
+    await s.__writeRaw('favorites', [42, 'IO25001', 7, 'IC24007', null]);
+    expect(await s.getFavorites()).toEqual(['IO25001', 'IC24007']);
+  });
+
+  it('整份收藏都是旧格式时退成空数组，而不是报错', async () => {
+    const s = await freshStore();
+    await s.__writeRaw('favorites', [1, 2, 3]);
+    await expect(s.getFavorites()).resolves.toEqual([]);
+    await expect(s.hydrateSettings()).resolves.toBeTruthy();
   });
 
   it('库里本来是空的也不报错，写入默认值', async () => {
@@ -479,7 +495,7 @@ describe('IndexedDB 不可用时', () => {
 
   it('收藏操作不抛错，退成本会话有效', async () => {
     const s = await freshStore({ withIDB: false });
-    await expect(s.toggleFavorite(5)).resolves.toEqual({ favorites: [5], added: true });
-    expect(await s.getFavorites()).toEqual([5]);
+    await expect(s.toggleFavorite('IN26005')).resolves.toEqual({ favorites: ['IN26005'], added: true });
+    expect(await s.getFavorites()).toEqual(['IN26005']);
   });
 });

@@ -40,7 +40,10 @@ export interface Stats {
 
 /** 论文行。abstract 只存在于 meta_json/[Publication - Year].json，列表数据里没有。 */
 export interface Paper {
-  id: number;
+  /** 7 字符永久标识，如 'IO25001'。见 docs/id-rule.md。收藏功能以此为主键。 */
+  id: string;
+  /** 4 字符可变标签（类型 + topic + 奖项），如 '1A3N'。目前不在 UI 中展示。 */
+  tag: string;
   year: number;
   title: string;
   category: string;

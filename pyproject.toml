@@ -21,3 +21,12 @@ dependencies = [
     "requests>=2.32.5",
     "socksio>=1.0.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+# 前端的 vitest 只认 tests/**/*.test.js，两套测试共用一个目录互不干扰
+testpaths = ["tests"]

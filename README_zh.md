@@ -30,7 +30,7 @@
 
 - ASPLOS
 - SOSP
-- OSDI（待补充）
+- OSDI
 
 ## 网站使用指南
 
@@ -179,7 +179,6 @@ npm run preview          # 预览构建结果
 npm run check            # astro check
 npm test                 # vitest run
 npm run deploy           # 将 dist/ 发布到 GitHub Pages（--cname sec.c01dkit.com）
-npm run deploy:build     # 构建后立即发布
 ```
 
 网站基于 Astro 实现，手写 CSS，无 UI 框架、无 Tailwind；图表使用 Chart.js。
@@ -187,8 +186,7 @@ npm run deploy:build     # 构建后立即发布
 ## 完整发布流程
 
 ```bash
-uv run main.py --analyze --zip
-npm run build
+uv run main.py --analyze --upload
 npm run deploy           # Fork 后请同步修改 package.json 中的 --cname
 git add .
 git commit -m "update $DATE"

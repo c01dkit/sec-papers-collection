@@ -5,6 +5,7 @@ import PaperRow from '@/components/PaperRow.astro';
 import { LOCALES, t } from '@/i18n/index.js';
 import stats from '@/assets/data/data-statistics.json';
 import quickView from '@/assets/data/data-quick-view.json';
+import { compareIds } from '@/lib/papers.js';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -18,7 +19,7 @@ const { lang } = Astro.params;
 // 这种标题，但数据每次抓取都会变，不能指望它一直没有。
 const safeJson = (v: unknown) => JSON.stringify(v).replaceAll('<', '\\u003c');
 
-const seed = [...quickView].sort((a, b) => b.year - a.year || a.id - b.id).slice(0, 30);
+const seed = [...quickView].sort((a, b) => b.year - a.year || compareIds(a.id, b.id)).slice(0, 30);
 // 预渲染只铺第一页。铺满 30 行的话，JS 一接管就立刻换成 15 行的分页结果，
 // 用户在最常访问的页面上看到一次明显的内容跳动，另有约 2.5 KB HTML 白发一遍。
 // #ptSeed 仍内嵌全部 30 条 —— 那是 CDN 失败时的兜底数据集，越多越有得筛。
@@ -248,7 +249,8 @@ const sortCols = [
     font-size: var(--fs-small); vertical-align: baseline;
   }
   .pt tbody tr:hover { background: var(--band); }
-  .pt .c-id { width: 4rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+  /* id 是 7 字符的 'IO25001'，4rem 装不下 */
+  .pt .c-id { width: 5.5rem; color: var(--faint); font-variant-numeric: tabular-nums; }
   .pt .c-pub { width: 7rem; color: var(--muted); white-space: nowrap; }
   .pt .c-year { width: 4rem; color: var(--muted); font-variant-numeric: tabular-nums; }
   .pt .c-act { width: 4.2rem; white-space: nowrap; }

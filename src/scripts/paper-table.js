@@ -337,7 +337,9 @@ export async function initPaperTable() {
   tbody.addEventListener('click', async (e) => {
     const favBtn = e.target.closest('[data-fav]');
     if (favBtn) {
-      const id = Number(favBtn.dataset.fav);
+      // id 是 'IO25001' 这样的字符串，别 Number() —— 会得到 NaN，
+      // 收藏静默存成 [NaN] 且 favorites.has(row.id) 永不命中
+      const id = favBtn.dataset.fav;
       const { favorites: next, added } = await toggleFavorite(id);
       state.favorites = new Set(next);
       favBtn.setAttribute('aria-pressed', added ? 'true' : 'false');

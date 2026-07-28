@@ -26,6 +26,9 @@ Frontend is Astro 7 with hand-written CSS (no UI framework, no Tailwind). Design
 uv sync                             # Install Python deps
 uv run main.py --analyze            # Crawl/parse papers and generate JSON data files
 uv run main.py --llm-analyze        # Analyze abstracts with LLM (requires .env)
+uv run main.py --llm-tag            # Fill in tag positions static sources couldn't (requires .env)
+uv run main.py --llm-tag --llm-tag-limit 0   # Count what --llm-tag would cost, without any request
+uv run pytest                       # Python tests (analyzers/); pytest is a dev dependency
 uv run main.py --zip                # Create encrypted zip of crawl cache
 uv run main.py --unzip              # Unzip crawl cache
 uv run main.py --upload             # Upload CHANGED src/assets/data/ JSON to Aliyun OSS (served via CDN)
@@ -92,6 +95,28 @@ Every page must stay readable, and **no control may be presented as live when it
 - Chart.js for trend visualizations
 - IndexedDB (+ localStorage mirror) for user settings: accent colour, dark mode, the three `remember*` flags, favorites, preferred keywords (**not** language — see above)
 - Vitest + jsdom + fake-indexeddb for testing
+
+## Paper IDs — `id_ledger.json` is load-bearing
+
+Every paper carries a 7-char permanent `id` (`IO25001` = domain + venue + year + in-venue
+sequence) and a 4-char mutable `tag` (type + topic + award). Full rules in
+**`docs/id-rule.md`** — that file is the spec, `analyzers/id_taxonomy.py` is the
+implementation, and `tests/test_id_taxonomy.py` re-parses the doc to assert they match.
+
+Three things that will bite:
+
+1. **`id_ledger.json` (repo root, ~1.2MB, tracked) is what makes IDs permanent.** It maps
+   `publication → year → compact(title) → sequence`. Delete or regenerate it and every ID
+   in the site reshuffles — which is exactly the churn this whole scheme exists to kill.
+   It must stay in git; `official_cache/` is git-ignored, so it cannot live there.
+   `load_ledger()` refuses to swallow a corrupt file for the same reason.
+2. **Topic codes are append-only.** They ship inside `data.json` and every `meta_json/*.json`;
+   changing a historical code mutates every record referencing it. New topics take the next
+   free slot in their band (`01`–`7F` security, `80`–`BF` SE, `C0`–`EF` systems).
+3. **`id` is a string, and it is the `favorites` primary key.** Never `a.id - b.id` —
+   string subtraction yields `NaN`, and a comparator returning `NaN` does not throw; sorting
+   just silently degrades. Use `compareIds` from `src/lib/papers.js` (bare `<`/`>`, not
+   `localeCompare` — sort results go into build output and must be locale-independent).
 
 ## Paper Status Values
 

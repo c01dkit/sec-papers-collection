@@ -214,13 +214,18 @@ export async function patchSettings(partial) {
   });
 }
 
+// v0.5.0 起论文 id 从递增整数换成 'IO25001' 这样的字符串（见 docs/id-rule.md）。
+// 旧的数字收藏无法映射到新 id，直接丢弃 —— 留着只会让 favorites.has(row.id)
+// 永远不命中，表现为「收藏了但看不出来」，比干净地清掉更难懂。
+const isCurrentId = (x) => typeof x === 'string' && x.length > 0;
+
 export async function getFavorites() {
   try {
     const raw = await idbGet(KEY_FAV);
-    return Array.isArray(raw) ? raw : [];
+    return Array.isArray(raw) ? raw.filter(isCurrentId) : [];
   } catch {
     persistent = false;
-    return Array.isArray(memory[KEY_FAV]) ? memory[KEY_FAV] : [];
+    return Array.isArray(memory[KEY_FAV]) ? memory[KEY_FAV].filter(isCurrentId) : [];
   }
 }
 

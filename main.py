@@ -6,12 +6,17 @@ import os
 import datetime
 import json
 import analyzers.oss_uploader as oss_uploader
+import analyzers.paper_id as paper_id
 import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
 from lxml import etree
 
 load_dotenv()
+
+# 全仓库唯一的 compact 实现在 analyzers/paper_id.py —— 它是台账的键，
+# 改动定义会让全站 ID 重新洗牌。
+compact = paper_id.compact
 
 @dataclass
 class AcceptanceTrend:
@@ -35,7 +40,10 @@ class Statistics:
 
 @dataclass
 class PaperInfo:
-    id: int = -1
+    #: 7 字符永久标识，见 docs/id-rule.md 第 1 节。由台账固定，跨轮次不变。
+    id: str = ''
+    #: 4 字符可变标签（类型 + topic + 奖项），见 docs/id-rule.md 第 2 节。
+    tag: str = '000N'
     year: int = -1
     title: str = '#'
     category: str = '#'
@@ -160,82 +168,122 @@ def get_abstract(html, config):
         return result
     else:
         return None
-def fetch_one_paper_in_config(config):
+def fetch_one_venue_in_config(publication, publication_config, one_site_config):
+    """
+    Fetch (online or from cache) every paper of ONE venue (publication x year).
+
+    Returns a list of PaperInfo with `id` and `tag` still at their defaults --
+    those are filled in by fetch_one_paper_in_config, which needs the whole venue
+    at once to number it.
+    """
+    papers = []
+    # first priority: use json file as details
+    official_file = one_site_config.get('official_file',None)
+    if official_file is not None:
+        if isinstance(official_file, list):
+            official_file = official_file[0].split('-')[0] + '.json'
+        json_details = official_file[:official_file.index('.')] + '.json'
+        print(f'Use official data for {publication} {one_site_config["year"]}')
+        with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            for paper_detail in data:
+                papers.append(PaperInfo(
+                    year=one_site_config['year'],
+                    title=paper_detail['title'],
+                    category=publication_config.get('category', '#'),
+                    publication=paper_detail.get('publication', publication_config['name']),
+                    paper=paper_detail.get('paper', '#'),
+                    abstract=paper_detail.get('abstract', '#'),
+                    status=one_site_config.get('status', 'notchecked')
+                ))
+    else:
+        # second priority: crawl website if json file does not exist
+        use_cache = one_site_config.get('use_cache', True)
+        html, time = get_html(one_site_config['url'], use_cache)
+        print(f'Use crawled data for {publication} {one_site_config["year"]}')
+        if html is not None:
+            if type(html) is list:
+                titles = []
+                links = []
+                abstracts = []
+                for h in html:
+                    titles += get_titles(h, one_site_config)
+                    links += get_links(h, one_site_config)
+                    abstracts += get_abstract(h, one_site_config)
+                if links is not None:
+                    assert(len(links)==len(titles))
+                if abstracts is not None:
+                    assert (len(titles)==len(abstracts))
+            else:
+                titles = get_titles(html, one_site_config)
+                links = get_links(html, one_site_config)
+                abstracts = get_abstract(html, one_site_config)
+                if links is not None:
+                    assert(len(links)==len(titles))
+                if abstracts is not None:
+                    assert (len(abstracts)==len(titles))
+            for i in range(len(titles)):
+                t = titles[i].strip().replace('\n','')
+                papers.append(PaperInfo(
+                    year=one_site_config['year'],
+                    title=t,
+                    publication=publication_config['name'],
+                    category=publication_config.get('category','#'),
+                    paper='#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
+                    abstract='#' if abstracts is None else abstracts[i],
+                    status=one_site_config.get('status','notchecked')
+                ))
+    return papers
+
+def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
     """
     This function will fetch (online or in cache) and return one paper info.
     This function is used as an iterator, yielding all papers from top to bottom in the config.
+
+    Papers are gathered one venue (publication x year) at a time before being
+    yielded: the in-venue sequence number is allocated across the whole venue at
+    once, so a per-paper generator cannot see enough to number it. Callers still
+    consume it paper by paper.
+
+    `ledger` is mutated in place. Pass your own dict and call
+    paper_id.save_ledger() afterwards to persist newly allocated numbers;
+    callers that only read (e.g. --llm-analyze) can leave it as None.
+
     :param config:
+    :param ledger: id_ledger.json contents, or None to load it
+    :param tag_store: analyzers.tag_store.TagStore, or None to load it
     :return:
     """
-    paper_id = 0
+    prefixes = paper_id.collect_prefixes(config)
+    if ledger is None:
+        ledger = paper_id.load_ledger()
+    if tag_store is None:
+        from analyzers.tag_store import TagStore
+        tag_store = TagStore.load()
+
     for publication in config:
         publication_config = config[publication]
+        # The venue identity for numbering comes from the config, not from any
+        # per-paper 'publication' override in the official json.
+        name = publication_config['name']
+        prefix = prefixes[name]
         for one_site_config in publication_config['sites']:
-            # first priority: use json file as details
-            official_file = one_site_config.get('official_file',None)
-            if official_file is not None:
-                if isinstance(official_file, list):
-                    official_file = official_file[0].split('-')[0] + '.json'
-                json_details = official_file[:official_file.index('.')] + '.json'
-                print(f'Use official data for {publication} {one_site_config["year"]}')
-                with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    for paper_detail in data:
-                        paper_id += 1
-                        one_paper_info = PaperInfo(
-                            id=paper_id,
-                            year=one_site_config['year'],
-                            title=paper_detail['title'],
-                            category=publication_config.get('category', '#'),
-                            publication=paper_detail.get('publication', publication_config['name']),
-                            paper=paper_detail.get('paper', '#'),
-                            abstract=paper_detail.get('abstract', '#'),
-                            status=one_site_config.get('status', 'notchecked')
-                        )
-                        yield one_paper_info
-            else:
-                # second priority: crawl website if json file does not exist
-                use_cache = one_site_config.get('use_cache', True)
-                html, time = get_html(one_site_config['url'], use_cache)
-                print(f'Use crawled data for {publication} {one_site_config["year"]}')
-                if html is not None:
-                    if type(html) is list:
-                        titles = []
-                        links = []
-                        abstracts = []
-                        for h in html:
-                            titles += get_titles(h, one_site_config)
-                            links += get_links(h, one_site_config)
-                            abstracts += get_abstract(h, one_site_config)
-                        if links is not None:
-                            assert(len(links)==len(titles))
-                        if abstracts is not None:
-                            assert (len(titles)==len(abstracts))
-                    else:
-                        titles = get_titles(html, one_site_config)
-                        links = get_links(html, one_site_config)
-                        abstracts = get_abstract(html, one_site_config)
-                        if links is not None:
-                            assert(len(links)==len(titles))
-                        if abstracts is not None:
-                            assert (len(abstracts)==len(titles))
-                    for i in range(len(titles)):
-                        t = titles[i].strip().replace('\n','')
-                        paper_id += 1
-                        
-                        one_paper_info = PaperInfo(
-                            id=paper_id,
-                            year=one_site_config['year'],
-                            title=t,
-                            publication=publication_config['name'],
-                            category=publication_config.get('category','#'),
-                            paper='#' if links is None else one_site_config.get('link_prefix','')+links[i], # The url of the paper. If not found, return '#' by default.
-                            abstract='#' if abstracts is None else abstracts[i],
-                            status=one_site_config.get('status','notchecked')
-                        )
-                        yield one_paper_info
+            year = one_site_config['year']
+            papers = fetch_one_venue_in_config(publication, publication_config, one_site_config)
+            if not papers:
+                continue
+            ids = paper_id.assign_ids(
+                ledger, prefix, name, year,
+                [(p.title, p.paper) for p in papers],
+            )
+            for one_paper_info, assigned_id in zip(papers, ids):
+                one_paper_info.id = assigned_id
+                one_paper_info.tag = tag_store.tag_for(name, year, one_paper_info.title)
+                yield one_paper_info
 
 def export_data_json(project_base):
+    from analyzers.tag_store import TagStore
+
     os.makedirs(project_base, exist_ok=True)
     os.makedirs(os.path.join(project_base, 'meta_json'), exist_ok=True)
     config = get_config('data.yml')
@@ -244,10 +292,16 @@ def export_data_json(project_base):
     quick_view = []
     statistics = Statistics()
 
+    # The ledger is what makes IDs permanent; it must be saved even when nothing
+    # else changed, and it must live in git (see docs/id-rule.md section 4).
+    ledger = paper_id.load_ledger()
+    ledger_before = json.dumps(ledger, sort_keys=True)
+    tag_store = TagStore.load()
+
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
                  '--p-amber-400','--p-blue-400','--p-purple-400',]
     publication_acceptance_trend = {}
-    for paper_info in fetch_one_paper_in_config(config):
+    for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store):
         publication = paper_info.publication
         year = str(paper_info.year)
 
@@ -314,6 +368,13 @@ def export_data_json(project_base):
         for year in meta_all[publication]:
             json_file_name = os.path.join('./src/assets/data/meta_json',publication+' - '+year+'.json')
             json.dump(meta_all[publication][year],open(json_file_name, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+    if json.dumps(ledger, sort_keys=True) != ledger_before:
+        paper_id.save_ledger(ledger)
+        print(f'Updated {paper_id.LEDGER_PATH} (commit it -- IDs depend on it)')
+    stats = paper_id.ledger_stats(ledger)
+    print(f"ID ledger: {stats['entries']} papers across {stats['venues']} venues, "
+          f"{stats['publications']} publications")
 
 def prepare_official_data():
     """
@@ -466,8 +527,48 @@ def analyze_abstracts_and_titles():
                     log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
                     log_file.flush()
     
-def compact(title: str) -> str:
-    return ''.join(c for c in title if c.isalnum()).lower()
+def analyze_tags_with_llm(limit=None):
+    """
+    Fill in the tag positions that the static sources could not (see docs/id-rule.md).
+
+    Static backfill from official_cache/advanced_data/ already covers 11269 papers
+    for free; only what is still at its default value costs a request.
+    """
+    from analyzers import tag_analyzer
+    from analyzers.tag_store import TagStore, store_key
+
+    config = get_config('data.yml')
+    tag_store = TagStore.load()
+    done = tag_analyzer.cached_keys()
+    ledger = paper_id.load_ledger()
+
+    pending = []
+    for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store):
+        if len(paper_info.abstract) <= 50:
+            continue   # no abstract to reason about
+        key = store_key(paper_info.publication, paper_info.year, paper_info.title)
+        if key in done:
+            continue
+        if tag_store.needs_llm(paper_info.publication, paper_info.year, paper_info.title):
+            pending.append(paper_info)
+
+    print(f'{len(pending)} paper(s) need an LLM call'
+          + (f', processing the first {limit}' if limit is not None else ''))
+    # `--llm-tag-limit 0` prints the count and stops: a free cost estimate.
+    if limit is not None:
+        pending = pending[:limit]
+
+    for i, paper_info in enumerate(pending, 1):
+        try:
+            type_code, topic_code = tag_analyzer.analyze_one(paper_info.title, paper_info.abstract)
+        except RuntimeError as exc:
+            print(f'  [{i}/{len(pending)}] SKIP {paper_info.title[:60]} -- {exc}')
+            continue
+        tag_analyzer.append_result(
+            paper_info.publication, paper_info.year, paper_info.title, type_code, topic_code
+        )
+        print(f'  [{i}/{len(pending)}] {type_code}{topic_code} {paper_info.title[:60]}')
+    print('Run `uv run main.py --analyze` to fold the new tags into the JSON data.')
 
 def check_duplicate_titles():
     meta_dir = './src/assets/data/meta_json'
@@ -514,6 +615,17 @@ if __name__ == '__main__':
         help="Analyze papers' abstract with LLM"
     )
     parser.add_argument(
+        '--llm-tag',
+        action='store_true',
+        help="Fill in tag positions the static sources could not (see docs/id-rule.md)"
+    )
+    parser.add_argument(
+        '--llm-tag-limit',
+        type=int,
+        default=None,
+        help="Only process the first N papers with --llm-tag (useful for a cost check)"
+    )
+    parser.add_argument(
         '--check-titles',
         action='store_true',
         help="Check for duplicate titles across all meta_json files"
@@ -536,6 +648,8 @@ if __name__ == '__main__':
         export_data_json('src/assets/data/')
     if args.llm_analyze:
         analyze_abstracts_and_titles()
+    if args.llm_tag:
+        analyze_tags_with_llm(limit=args.llm_tag_limit)
     if args.check_titles:
         check_duplicate_titles()
     if args.seed_upload_cache:

@@ -30,7 +30,7 @@ System venues:
 
 - ASPLOS
 - SOSP
-- OSDI (TODO)
+- OSDI
 
 ## Website features
 
@@ -127,7 +127,6 @@ npm run preview          # preview the build
 npm run check            # astro check
 npm test                 # vitest run
 npm run deploy           # publish dist/ to GitHub Pages (--cname sec.c01dkit.com)
-npm run deploy:build     # build + deploy
 ```
 
 The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts are Chart.js.
@@ -135,8 +134,7 @@ The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts
 ## Full publish cycle
 
 ```bash
-uv run main.py --analyze --zip
-npm run build
+uv run main.py --analyze --upload
 npm run deploy           # update package.json's --cname if you fork this
 git add .
 git commit -m "update $DATE"

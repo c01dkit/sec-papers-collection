@@ -5,6 +5,7 @@
 /** @type {Record<string, import('@/lib/types.d.ts').ChangelogEntry[]>} */
 export const CHANGELOG = {
   zh: [
+    { version: 'v0.4.1', date: '2026-07-28', items: ['新增OSDI 1994-2026', '更新论文ID计算方式'] },
     { version: 'v0.4.0', date: '2026-07-25', items: [
       '🎉 里程碑：全站用 Astro 重写，从单页应用改为静态多页',
       '✨ 全新首页：随滚动淡入的分块功能介绍，含 10 会议 × 12 年的收录覆盖矩阵',
@@ -45,6 +46,7 @@ export const CHANGELOG = {
     { version: 'v0.1.0', date: '2023-05-15', items: ['首次发布 sec.c01dkit.com', '使用 mkdocs 作为网站生成器'] },
   ],
   en: [
+    { version: 'v0.4.1', date: '2026-07-28', items: ['Add OSDI 1994-2026', 'Update paper ID pattern'] },
     { version: 'v0.4.0', date: '2026-07-25', items: [
       '🎉 Milestone: rewritten on Astro, from single-page app to static multi-page',
       '✨ New home page: scroll-revealed feature sections and a 10-venue × 12-year coverage matrix',
