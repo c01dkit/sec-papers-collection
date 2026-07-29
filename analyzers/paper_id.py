@@ -250,14 +250,19 @@ def assign_ids(
 
 
 def ledger_stats(ledger: dict) -> dict:
-    """台账概况，供 `--analyze` 收尾时打印。"""
-    venues = 0
+    """
+    台账概况，供 `--analyze` 收尾时打印。
+
+    `publications` 数会议（IEEE S&P 算一个），`editions` 数场次（publication x
+    year，IEEE S&P 2024 与 2025 算两个）。两个词别混用——见 docs/id-rule.md。
+    """
+    editions = 0
     entries = 0
     for years in ledger.values():
         for group in years.values():
-            venues += 1
+            editions += 1
             entries += len(group)
-    return {'publications': len(ledger), 'venues': venues, 'entries': entries}
+    return {'publications': len(ledger), 'editions': editions, 'entries': entries}
 
 
 def iter_ledger_keys(ledger: dict) -> Iterable[tuple[str, str, str, int]]:

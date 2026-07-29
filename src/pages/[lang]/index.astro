@@ -30,15 +30,20 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 
 // ── 首屏与矩阵 ─────────────────────────────────────────
 const matrix = buildCoverageMatrix(stats);
-const { top: topVenues, se: seVenues } = matrixVenues(stats);
+const { top: topVenues, se: seVenues, sys: sysVenues } = matrixVenues(stats);
 // 先取成 Record：直接写 stats.byPublicationAndYear[n] 是拿 string 去索引 TS 从
 // JSON 推出的具名键类型（'IEEE S&P' | 'ACM CCS' | …），报 ts(7053)。
 const byPublicationAndYear: Record<string, Record<string, number> | undefined> =
   stats.byPublicationAndYear;
-const venues = topVenues.concat(seVenues).filter((n) => byPublicationAndYear[n]).length;
+const venues = topVenues.concat(seVenues, sysVenues).filter((n) => byPublicationAndYear[n]).length;
 const years = stats.years.map(Number);
 const yearSpan = `${Math.min(...years)}–${String(Math.max(...years))}`;
-const syncDate = timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '';
+// --analyze 运行当天的日期，由 main.py 写进 data-statistics.json。
+// 这里原先读的是 submission-timeline.json 里各 CFP 的 update 最大值 —— 那个
+// 文件是手工维护的 CFP 表，跟爬取没有任何关系，于是刷完一万多篇论文首页
+// 「数据同步于」纹丝不动。|| 兜的是「数据文件是加这个字段之前生成的」，
+// 退回旧口径总好过在首页印一个 undefined；跑一次 --analyze 就不会走到它。
+const syncDate = stats.sync_date || (timeline.map((p) => p.update).filter(Boolean).sort().pop() ?? '');
 
 // ── 01 检索 ────────────────────────────────────────────
 // 首页演示用的固定词，两语相同，是技术术语不进 i18n

@@ -41,7 +41,7 @@ describe('buildSeries', () => {
   it('真实数据点对得上', () => {
     const top = groups.find((g) => g.category === 'top-tier');
     const usenix = top.series.find((s) => s.label === 'USENIX Sec');
-    expect(usenix.data[top.years.indexOf('2025')]).toBe(439);
+    expect(usenix.data[top.years.indexOf('2025')]).toBe(454);
   });
 
   it('不再引用 PrimeVue 的 CSS 变量名', () => {

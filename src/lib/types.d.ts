@@ -141,11 +141,13 @@ export interface CoverageMatrix {
   years: string[];
   top: MatrixGroup;
   se: MatrixGroup;
+  sys: MatrixGroup;
 }
 
 export interface MatrixVenues {
   top: string[];
   se: string[];
+  sys: string[];
 }
 
 // ── lib/deadlines.js 的产物 ───────────────────────────────────────

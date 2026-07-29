@@ -14,6 +14,7 @@ const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
 const groups = [
   { rows: matrix.top.rows, rgb: 'var(--mx-top-rgb)', strong: true },
   { rows: matrix.se.rows, rgb: 'var(--mx-se-rgb)', strong: false },
+  { rows: matrix.sys.rows, rgb: 'var(--mx-sys-rgb)', strong: false },
 ];
 
 // '2001'…'2013' → '◂01–13'；没有更早数据时返回空
@@ -22,13 +23,17 @@ const preLabel = (preYears: string[]) =>
 
 // 把 coverage.js 给的 0..1 相对强度压到 0.06..0.50 再上色。
 //
-// 上限刻意停在 0.50：这样格子背景永远不会深到需要把数字反白，四种
-// 「明暗 × 分组」组合下一律用 --ink，最差对比度 5.4:1，全部过 WCAG AA。
+// 上限刻意停在 0.50：这样格子背景永远不会深到需要把数字反白，六种
+// 「明暗 × 分组」组合下一律用 --ink，最差对比度 5.4:1（深色软工组），
+// 全部过 WCAG AA；新加的系统组是浅色 6.5:1 / 深色 5.8:1，没有拉低下限。
 // 早先的做法是让 alpha 跑满 0..1、再在 alpha > 0.55 时把文字换成 --bg，
 // 那样有两个问题：软工/系统组在浅色主题下无论 alpha 取多少都过不了 4.5:1
 // （峰值格只有 3.77:1），而 0.55 这个阈值本身也偏早，alpha 0.7 时四种组合
-// 全部不合规。错就错在用一个固定阈值去伺候两组独立归一、色调不同的调色板。
+// 全部不合规。错就错在用一个固定阈值去伺候几组独立归一、色调不同的调色板。
 // 下限 0.06 是为了让最小的非空格子仍然看得见，不至于和空格混掉。
+//
+// 加组要连着改三处：tokens.css 的 --mx-*-rgb（明暗各一）、上面的 groups、
+// 下面 legend 的 li，并且新色要在 alpha 0.50 下重算这里的对比度。
 //
 // 压缩动态范围的代价很小：每个格子里都印着确切数字，深浅只是冗余编码。
 const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
@@ -44,6 +49,7 @@ const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
       <ul class="legend">
         <li><i style="background: rgb(var(--mx-top-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendTop')}</li>
         <li><i style="background: rgb(var(--mx-se-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendSe')}</li>
+        <li><i style="background: rgb(var(--mx-sys-rgb) / 0.85)"></i>{t(lang, 'home.matrixLegendSys')}</li>
         <li><i style="background: var(--mx-empty)"></i>{t(lang, 'home.matrixLegendEmpty')}</li>
       </ul>
     </div>
@@ -89,6 +95,7 @@ const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
         total: nf.format(total),
         topMax: matrix.top.max,
         seMax: matrix.se.max,
+        sysMax: matrix.sys.max,
       })}
     </p>
   </div>

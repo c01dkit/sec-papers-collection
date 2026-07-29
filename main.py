@@ -37,6 +37,11 @@ class Statistics:
     byPublicationAndYear: dict = field(default_factory=dict)
     byPublicationAndYearAndStatus: dict = field(default_factory=dict)
     years: list = field(default_factory=list)
+    #: 本次 --analyze 的运行日期（本地时区，YYYY-MM-DD）。首页 Hero 的
+    #: 「数据同步于」读它。原先那里读的是 submission-timeline.json 里各 CFP
+    #: 的 update 最大值 —— 那个文件是手工维护的，跟爬取毫无关系，于是刷完
+    #: 一万多篇论文首页日期纹丝不动。这个字段就是为了让它跟着数据走。
+    sync_date: str = ''
 
 @dataclass
 class PaperInfo:
@@ -168,13 +173,17 @@ def get_abstract(html, config):
         return result
     else:
         return None
-def fetch_one_venue_in_config(publication, publication_config, one_site_config):
+def fetch_one_edition_in_config(publication, publication_config, one_site_config):
     """
-    Fetch (online or from cache) every paper of ONE venue (publication x year).
+    Fetch (online or from cache) every paper of ONE edition (publication x year).
+
+    "Edition" is one instance of a conference (IEEE S&P 2025); "publication" is
+    the series it belongs to (IEEE S&P). Do not call either one a "venue" -- the
+    frontend uses that word for the series. See docs/id-rule.md.
 
     Returns a list of PaperInfo with `id` and `tag` still at their defaults --
-    those are filled in by fetch_one_paper_in_config, which needs the whole venue
-    at once to number it.
+    those are filled in by fetch_one_paper_in_config, which needs the whole
+    edition at once to number it.
     """
     papers = []
     # first priority: use json file as details
@@ -240,10 +249,10 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
     This function will fetch (online or in cache) and return one paper info.
     This function is used as an iterator, yielding all papers from top to bottom in the config.
 
-    Papers are gathered one venue (publication x year) at a time before being
-    yielded: the in-venue sequence number is allocated across the whole venue at
-    once, so a per-paper generator cannot see enough to number it. Callers still
-    consume it paper by paper.
+    Papers are gathered one edition (publication x year) at a time before being
+    yielded: the in-edition sequence number is allocated across the whole
+    edition at once, so a per-paper generator cannot see enough to number it.
+    Callers still consume it paper by paper.
 
     `ledger` is mutated in place. Pass your own dict and call
     paper_id.save_ledger() afterwards to persist newly allocated numbers;
@@ -263,13 +272,13 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
 
     for publication in config:
         publication_config = config[publication]
-        # The venue identity for numbering comes from the config, not from any
-        # per-paper 'publication' override in the official json.
+        # The publication identity for numbering comes from the config, not from
+        # any per-paper 'publication' override in the official json.
         name = publication_config['name']
         prefix = prefixes[name]
         for one_site_config in publication_config['sites']:
             year = one_site_config['year']
-            papers = fetch_one_venue_in_config(publication, publication_config, one_site_config)
+            papers = fetch_one_edition_in_config(publication, publication_config, one_site_config)
             if not papers:
                 continue
             ids = paper_id.assign_ids(
@@ -353,6 +362,7 @@ def export_data_json(project_base):
            
     statistics.byYear = dict(sorted(statistics.byYear.items(), key=lambda x: int(x[0])))
     statistics.years = list(statistics.byYear.keys())
+    statistics.sync_date = datetime.date.today().isoformat()
 
     for json_name, json_file in {
         'data-statistics.json': statistics,
@@ -373,7 +383,7 @@ def export_data_json(project_base):
         paper_id.save_ledger(ledger)
         print(f'Updated {paper_id.LEDGER_PATH} (commit it -- IDs depend on it)')
     stats = paper_id.ledger_stats(ledger)
-    print(f"ID ledger: {stats['entries']} papers across {stats['venues']} venues, "
+    print(f"ID ledger: {stats['entries']} papers across {stats['editions']} editions, "
           f"{stats['publications']} publications")
 
 def prepare_official_data():

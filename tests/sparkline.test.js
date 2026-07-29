@@ -37,10 +37,10 @@ describe('buildTotalTrend', () => {
     ]);
   });
 
-  it('真实数据 2015→2025 起点 894 终点 2342', () => {
+  it('真实数据 2015→2025 起点 894 终点 2410', () => {
     const years = Array.from({ length: 11 }, (_, i) => String(2015 + i));
     const pts = buildTotalTrend(stats, years);
     expect(pts[0]).toEqual({ year: '2015', count: 894 });
-    expect(pts[10]).toEqual({ year: '2025', count: 2342 });
+    expect(pts[10]).toEqual({ year: '2025', count: 2410 });
   });
 });

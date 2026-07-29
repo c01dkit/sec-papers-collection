@@ -98,10 +98,19 @@ Every page must stay readable, and **no control may be presented as live when it
 
 ## Paper IDs — `id_ledger.json` is load-bearing
 
-Every paper carries a 7-char permanent `id` (`IO25001` = domain + venue + year + in-venue
-sequence) and a 4-char mutable `tag` (type + topic + award). Full rules in
+Every paper carries a 7-char permanent `id` (`IO25001` = domain + publication + year +
+in-edition sequence) and a 4-char mutable `tag` (type + topic + award). Full rules in
 **`docs/id-rule.md`** — that file is the spec, `analyzers/id_taxonomy.py` is the
 implementation, and `tests/test_id_taxonomy.py` re-parses the doc to assert they match.
+
+**Publication vs. edition — don't write "venue" in code.** A *publication* is the
+conference series (IEEE S&P, 11 of them); an *edition* is one instance of it
+(IEEE S&P 2025 — publication × year, 134 of them). `docs/id-rule.md` calls these
+「会议」and「场次」. The word *venue* used to mean the series in the frontend and the
+edition in the Python pipeline, so `ledger_stats` reported "134 venues, 11 publications"
+in one breath; it is now retired from identifiers on the Python side. The frontend still
+uses it for the series (`src/lib/venue-groups.js`, `home.statVenues`), which is at least
+self-consistent — but new code should say `publication` or `edition`.
 
 Three things that will bite:
 

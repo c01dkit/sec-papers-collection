@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from analyzers import paper_id as P  # noqa: E402
 
 
-def venue(*titles):
+def edition(*titles):
     """把标题列表变成 (title, url) 序列，URL 由标题派生。"""
     return [(t, f'https://example.org/{t.lower().replace(" ", "-")}') for t in titles]
 
@@ -125,7 +125,7 @@ def test_collect_prefixes_rejects_malformed():
 # --------------------------------------------------------------------------
 
 def test_assignment_is_deterministic():
-    papers = venue('Bravo', 'Alpha', 'Charlie')
+    papers = edition('Bravo', 'Alpha', 'Charlie')
     a, b = {}, {}
     assert P.assign_seq(a, 'IEEE S&P', 2025, papers) == P.assign_seq(b, 'IEEE S&P', 2025, papers)
     assert a == b
@@ -133,14 +133,14 @@ def test_assignment_is_deterministic():
 
 def test_assignment_follows_sorted_title_order_on_a_fresh_ledger():
     ledger = {}
-    seqs = P.assign_seq(ledger, 'IEEE S&P', 2025, venue('Bravo', 'Alpha', 'Charlie'))
+    seqs = P.assign_seq(ledger, 'IEEE S&P', 2025, edition('Bravo', 'Alpha', 'Charlie'))
     # 输入顺序 Bravo/Alpha/Charlie，但分号按 compact(title) 升序
     assert seqs == [2, 1, 3]
 
 
 def test_assignment_is_independent_of_input_order():
-    forward = P.assign_seq({}, 'IEEE S&P', 2025, venue('Alpha', 'Bravo', 'Charlie'))
-    reverse = P.assign_seq({}, 'IEEE S&P', 2025, venue('Charlie', 'Bravo', 'Alpha'))
+    forward = P.assign_seq({}, 'IEEE S&P', 2025, edition('Alpha', 'Bravo', 'Charlie'))
+    reverse = P.assign_seq({}, 'IEEE S&P', 2025, edition('Charlie', 'Bravo', 'Alpha'))
     assert forward == [1, 2, 3]
     assert reverse == [3, 2, 1]
 
@@ -152,11 +152,11 @@ def test_inserting_a_paper_leaves_every_other_id_untouched():
     最坏的情况 —— 其余每一篇的 ID 都必须纹丝不动。
     """
     ledger = {}
-    original = venue('Bravo', 'Charlie', 'Delta')
+    original = edition('Bravo', 'Charlie', 'Delta')
     first = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, original)
 
     # "Alpha" 排在所有已有论文之前
-    augmented = venue('Alpha', 'Bravo', 'Charlie', 'Delta')
+    augmented = edition('Alpha', 'Bravo', 'Charlie', 'Delta')
     second = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, augmented)
 
     assert second[1:] == first, '补录一篇后其余论文的 ID 发生了变化'
@@ -165,26 +165,26 @@ def test_inserting_a_paper_leaves_every_other_id_untouched():
 
 def test_removing_a_paper_leaves_every_other_id_untouched():
     ledger = {}
-    first = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, venue('Alpha', 'Bravo', 'Charlie'))
+    first = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, edition('Alpha', 'Bravo', 'Charlie'))
     # 中间那篇被数据源删掉了
-    second = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, venue('Alpha', 'Charlie'))
+    second = P.assign_ids(ledger, 'IU', 'USENIX Sec', 2025, edition('Alpha', 'Charlie'))
     assert second == [first[0], first[2]]
 
 
 def test_reassigning_after_removal_does_not_recycle_the_freed_number():
     ledger = {}
-    P.assign_seq(ledger, 'USENIX Sec', 2025, venue('Alpha', 'Bravo', 'Charlie'))
-    P.assign_seq(ledger, 'USENIX Sec', 2025, venue('Alpha', 'Charlie'))
+    P.assign_seq(ledger, 'USENIX Sec', 2025, edition('Alpha', 'Bravo', 'Charlie'))
+    P.assign_seq(ledger, 'USENIX Sec', 2025, edition('Alpha', 'Charlie'))
     # Bravo 的 2 号是孤儿，但仍占位；新论文取 4 而不是 2
-    seqs = P.assign_seq(ledger, 'USENIX Sec', 2025, venue('Alpha', 'Charlie', 'Zulu'))
+    seqs = P.assign_seq(ledger, 'USENIX Sec', 2025, edition('Alpha', 'Charlie', 'Zulu'))
     assert seqs == [1, 3, 4]
 
 
-def test_venues_are_numbered_independently():
+def test_editions_are_numbered_independently():
     ledger = {}
-    a = P.assign_seq(ledger, 'IEEE S&P', 2025, venue('Alpha', 'Bravo'))
-    b = P.assign_seq(ledger, 'ACM CCS', 2025, venue('Charlie', 'Delta'))
-    c = P.assign_seq(ledger, 'IEEE S&P', 2024, venue('Echo',))
+    a = P.assign_seq(ledger, 'IEEE S&P', 2025, edition('Alpha', 'Bravo'))
+    b = P.assign_seq(ledger, 'ACM CCS', 2025, edition('Charlie', 'Delta'))
+    c = P.assign_seq(ledger, 'IEEE S&P', 2024, edition('Echo',))
     assert a == [1, 2] and b == [1, 2] and c == [1]
 
 
@@ -249,13 +249,13 @@ def test_papers_without_a_url_still_get_numbers():
 # --------------------------------------------------------------------------
 
 def test_sequence_999_is_allowed():
-    papers = venue(*[f'Paper {i:04d}' for i in range(999)])
+    papers = edition(*[f'Paper {i:04d}' for i in range(999)])
     seqs = P.assign_seq({}, 'USENIX Sec', 2025, papers)
     assert max(seqs) == 999
 
 
 def test_sequence_1000_raises_rather_than_truncating():
-    papers = venue(*[f'Paper {i:04d}' for i in range(1000)])
+    papers = edition(*[f'Paper {i:04d}' for i in range(1000)])
     with pytest.raises(ValueError, match='超过上限'):
         P.assign_seq({}, 'USENIX Sec', 2025, papers)
 
@@ -285,7 +285,7 @@ def test_load_ledger_rejects_duplicate_sequence_numbers(tmp_path):
 def test_ledger_roundtrip(tmp_path):
     path = str(tmp_path / 'id_ledger.json')
     ledger = {}
-    P.assign_seq(ledger, 'IEEE S&P', 2025, venue('Alpha', 'Bravo'))
+    P.assign_seq(ledger, 'IEEE S&P', 2025, edition('Alpha', 'Bravo'))
     P.save_ledger(ledger, path)
     assert P.load_ledger(path) == ledger
 
@@ -293,8 +293,8 @@ def test_ledger_roundtrip(tmp_path):
 def test_saved_ledger_is_key_sorted_so_diffs_stay_clean(tmp_path):
     path = str(tmp_path / 'id_ledger.json')
     ledger = {}
-    P.assign_seq(ledger, 'IEEE S&P', 2025, venue('Zulu', 'Alpha'))
-    P.assign_seq(ledger, 'ACM CCS', 2025, venue('Mike',))
+    P.assign_seq(ledger, 'IEEE S&P', 2025, edition('Zulu', 'Alpha'))
+    P.assign_seq(ledger, 'ACM CCS', 2025, edition('Mike',))
     P.save_ledger(ledger, path)
     text = open(path, encoding='utf-8').read()
     assert text.index('"ACM CCS"') < text.index('"IEEE S&P"')
@@ -303,7 +303,7 @@ def test_saved_ledger_is_key_sorted_so_diffs_stay_clean(tmp_path):
 
 def test_ledger_stats():
     ledger = {}
-    P.assign_seq(ledger, 'IEEE S&P', 2025, venue('Alpha', 'Bravo'))
-    P.assign_seq(ledger, 'IEEE S&P', 2024, venue('Charlie',))
-    P.assign_seq(ledger, 'ACM CCS', 2025, venue('Delta',))
-    assert P.ledger_stats(ledger) == {'publications': 2, 'venues': 3, 'entries': 4}
+    P.assign_seq(ledger, 'IEEE S&P', 2025, edition('Alpha', 'Bravo'))
+    P.assign_seq(ledger, 'IEEE S&P', 2024, edition('Charlie',))
+    P.assign_seq(ledger, 'ACM CCS', 2025, edition('Delta',))
+    assert P.ledger_stats(ledger) == {'publications': 2, 'editions': 3, 'entries': 4}

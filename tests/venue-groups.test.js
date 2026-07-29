@@ -46,7 +46,7 @@ describe('groupVenues', () => {
 
   it('只列出数据里真实存在的会议 —— 避免出现空选项', () => {
     const all = groups.flatMap((g) => g.venues.map((v) => v.name));
-    expect(all).toHaveLength(10);
+    expect(all).toHaveLength(11);
     for (const name of all) {
       expect(stats.byPublicationAndYear[name]).toBeTruthy();
     }

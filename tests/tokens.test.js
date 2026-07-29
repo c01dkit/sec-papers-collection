@@ -10,7 +10,7 @@ const THEMES = ['light', 'dark'];
 
 describe('tokens.css', () => {
   it('明暗两套语义色都定义齐全', () => {
-    const vars = ['--bg', '--band', '--panel', '--ink', '--muted', '--faint', '--hairline', '--hairline-soft', '--hl-bg', '--mx-top-rgb', '--mx-se-rgb', '--mx-empty'];
+    const vars = ['--bg', '--band', '--panel', '--ink', '--muted', '--faint', '--hairline', '--hairline-soft', '--hl-bg', '--mx-top-rgb', '--mx-se-rgb', '--mx-sys-rgb', '--mx-empty'];
     for (const theme of THEMES) {
       const block = tokens.match(new RegExp(`\\[data-theme=['"]?${theme}['"]?\\]\\s*\\{([^}]*)\\}`));
       expect(block, `缺少 data-theme=${theme} 区块`).toBeTruthy();

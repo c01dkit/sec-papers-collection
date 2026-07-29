@@ -15,8 +15,14 @@ html[data-theme='light'] {
   --inverse-muted: #a89d86;
   --inverse-hairline: #332f26;
 
+  /* 覆盖矩阵三组各一色。选色不是凭好看：格子最深只到 alpha 0.50（见
+     CoverageMatrix.astro 的说明），三色两两之间必须在那个深度还分得开。
+     系统组这支取的是 --chart-2 同一支暗红——先试过 --chart-4 的松绿，
+     压到 0.50 后与 --mx-top-rgb 的板岩蓝只差 ΔE76 10.4，浅色下辨不开；
+     暗红是 17.3，跟原本 top↔se 的 17.3 齐平，等于加第三色没有变糊。 */
   --mx-top-rgb: 47 72 88;
   --mx-se-rgb: 140 127 102;
+  --mx-sys-rgb: 125 48 56;
   --mx-empty: #f2eee6;
 
   /* 自绘滚动条滑块。用 --ink 的半透明而不是 --hairline：滑块要压在任意底色
@@ -52,8 +58,10 @@ html[data-theme='dark'] {
   --inverse-muted: #5d5648;
   --inverse-hairline: #d6cfc2;
 
+  /* 见浅色块里的选色说明；深色底同样验过，三色最小 ΔE76 17.6 */
   --mx-top-rgb: 127 168 189;
   --mx-se-rgb: 176 163 138;
+  --mx-sys-rgb: 217 134 143;
   --mx-empty: #201c18;
 
   /* 见浅色块里的说明；深色底上同样的 alpha 会显得更重，所以调低一档 */
