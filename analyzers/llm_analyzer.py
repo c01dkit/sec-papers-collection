@@ -8,17 +8,17 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+API_KEY = os.getenv("API_KEY")
 MODEL=os.getenv("MODEL", "gpt-4o-mini")
 BASE_URL=os.getenv("BASE_URL", "https://api.openai.com/v1")
 
-if not OPENAI_API_KEY:
-    raise EnvironmentError("OPENAI_API_KEY is not set in the environment.")
+if not API_KEY:
+    raise EnvironmentError("API_KEY is not set in the environment.")
 
 
 
 client = OpenAI(
-    api_key=OPENAI_API_KEY,
+    api_key=API_KEY,
     base_url=BASE_URL,
 )
 

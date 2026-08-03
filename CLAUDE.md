@@ -134,7 +134,7 @@ Papers in the data pipeline have a `status` field: `notchecked` → `inprogress`
 ## Environment
 
 Copy `.env.example` to `.env` for LLM analysis and cache encryption:
-- `OPENAI_API_KEY`, `MODEL`, `BASE_URL` — for `--llm-analyze`
+- `API_KEY`, `MODEL`, `BASE_URL` — for `--llm-analyze`
 - `PRIVATE_ZIP_PASSWD` — for cache zip encryption
 
 ## Adding a New Conference/Year

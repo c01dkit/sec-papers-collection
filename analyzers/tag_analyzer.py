@@ -75,9 +75,9 @@ def _get_client():
     if _client is None:
         from openai import OpenAI
 
-        api_key = os.getenv('OPENAI_API_KEY')
+        api_key = os.getenv('API_KEY')
         if not api_key:
-            raise EnvironmentError('OPENAI_API_KEY is not set; --llm-tag needs it in .env')
+            raise EnvironmentError('API_KEY is not set; --llm-tag needs it in .env')
         _client = OpenAI(api_key=api_key, base_url=os.getenv('BASE_URL', 'https://api.openai.com/v1'))
     return _client
 

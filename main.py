@@ -524,6 +524,7 @@ def analyze_abstracts_and_titles():
     os.makedirs('official_cache/advanced_data', exist_ok=True)
     title_cache = {}
     for paper_info in fetch_one_paper_in_config(config):
+        paper_info: PaperInfo
         log_file_path = os.path.join('official_cache/advanced_data', f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
         if log_file_path not in title_cache:
             title_cache[log_file_path] = titles_in_file(log_file_path)
@@ -613,7 +614,7 @@ def check_duplicate_titles():
         print()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Helper")
+    parser = argparse.ArgumentParser(description="This is the controller of sec.c01dkit.com. You can use this script to parse websites and bib files to generate the core json files.")
     parser.add_argument(
         '--analyze',
         action='store_true',
