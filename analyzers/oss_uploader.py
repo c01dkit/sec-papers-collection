@@ -4,6 +4,8 @@ import hashlib
 import oss2
 from dotenv import load_dotenv
 
+from analyzers.console import console, stage_progress
+
 load_dotenv()
 
 OSS_ACCESS_KEY_ID = os.getenv('OSS_ACCESS_KEY_ID')
@@ -63,7 +65,7 @@ def _load_cache(cache_file):
             with open(cache_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except (json.JSONDecodeError, OSError):
-            print(f'  Warning: cache {cache_file} unreadable, treating as empty')
+            console.print(f'  Warning: cache {cache_file} unreadable, treating as empty', style='yellow', markup=False)
     return {}
 
 
@@ -91,26 +93,33 @@ def upload_data_dir(local_dir=LOCAL_DATA_DIR, prefix=OSS_PREFIX,
     uploaded = 0
     skipped = 0
 
-    for local_path, rel_path in _iter_json_files(local_dir):
-        digest = _file_hash(local_path)
-        new_cache[rel_path] = digest
-        if not force and cache.get(rel_path) == digest:
-            skipped += 1
-            continue
-        if bucket is None:
-            bucket = _get_bucket()
-        key = f'{prefix}/{rel_path}'
-        bucket.put_object_from_file(
-            key,
-            local_path,
-            headers={'Content-Type': 'application/json; charset=utf-8'},
-        )
-        uploaded += 1
-        print(f'  Uploaded {key}')
+    files = list(_iter_json_files(local_dir))
+    with stage_progress() as progress:
+        task = progress.add_task('上传 OSS', total=len(files))
+        for local_path, rel_path in files:
+            progress.update(task, description=f'上传 OSS · {rel_path}')
+            digest = _file_hash(local_path)
+            new_cache[rel_path] = digest
+            if not force and cache.get(rel_path) == digest:
+                skipped += 1
+                progress.advance(task)
+                continue
+            if bucket is None:
+                bucket = _get_bucket()
+            key = f'{prefix}/{rel_path}'
+            bucket.put_object_from_file(
+                key,
+                local_path,
+                headers={'Content-Type': 'application/json; charset=utf-8'},
+            )
+            uploaded += 1
+            console.print(f'Uploaded {key}', markup=False)
+            progress.advance(task)
+        progress.update(task, description='上传 OSS')
 
     _save_cache(new_cache, cache_file)
-    print(f'Uploaded {uploaded} file(s), skipped {skipped} unchanged '
-          f'(oss://{OSS_BUCKET}/{prefix}/)')
+    console.print(f'[green]✓[/green] Uploaded {uploaded} file(s), skipped {skipped} unchanged '
+                  f'(oss://{OSS_BUCKET}/{prefix}/)')
     return uploaded
 
 
@@ -124,5 +133,5 @@ def seed_upload_cache(local_dir=LOCAL_DATA_DIR, cache_file=CACHE_FILE):
         raise RuntimeError(f'Local data directory not found: {local_dir}')
     cache = {rel: _file_hash(path) for path, rel in _iter_json_files(local_dir)}
     _save_cache(cache, cache_file)
-    print(f'Seeded upload cache with {len(cache)} file(s): {cache_file}')
+    console.print(f'[green]✓[/green] Seeded upload cache with {len(cache)} file(s): {cache_file}')
     return cache

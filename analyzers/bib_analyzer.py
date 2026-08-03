@@ -4,6 +4,11 @@ import bibtexparser
 import uuid
 import sys
 
+try:
+    from analyzers.console import console
+except ImportError:  # 直接以脚本运行（uv run analyzers/bib_analyzer.py official_cache/xxx.bib）时
+    from console import console
+
 class BIB_OBJ:
     def __init__(self, publication, url_template=None):
         self.publication = publication
@@ -45,7 +50,7 @@ class BIB_OBJ:
                 self.bib = bibtexparser.load(f)
                 return True
         else:
-            print(f'{filename} not found')
+            console.print(f'{filename} not found', style='yellow', markup=False)
             return False
         
     def fix_bib_name(self, filename):

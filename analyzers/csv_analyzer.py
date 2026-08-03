@@ -3,6 +3,11 @@ import os
 import chardet
 import json
 
+try:
+    from analyzers.console import console
+except ImportError:  # 直接以脚本运行（uv run analyzers/csv_analyzer.py）时
+    from console import console
+
 
 
 class CSV_SOURCE:
@@ -33,13 +38,13 @@ class CSV_SOURCE:
                 result = chardet.detect(f.read())
             self.encoding = result['encoding']
             if self.encoding != 'utf-8':
-                print(f'Failed to detect encoding: {self.encoding} of {filename}')
+                console.print(f'Failed to detect encoding: {self.encoding} of {filename}', style='yellow', markup=False)
                 return False
             df = pd.read_csv(filename, encoding=self.encoding)
             self.df = df
             return True
         else:
-            print(f'File {filename} does not exist')
+            console.print(f'File {filename} does not exist', style='yellow', markup=False)
             return False
 
 def test():

@@ -626,7 +626,7 @@ def analyze_tags_with_llm(limit=None):
 def check_duplicate_titles():
     meta_dir = './src/assets/data/meta_json'
     if not os.path.exists(meta_dir):
-        print(f'Directory not found: {meta_dir}')
+        console.print(f'Directory not found: {meta_dir}', style='red', markup=False)
         return
 
     # Map compact title -> list of (source, original_title)
@@ -646,13 +646,13 @@ def check_duplicate_titles():
 
     duplicates = {k: v for k, v in seen.items() if len(v) > 1}
     if not duplicates:
-        print('No duplicate titles found.')
+        console.print('[green]✓[/green] No duplicate titles found.')
         return
 
-    print(f'Found {len(duplicates)} duplicate title(s):')
+    console.print(f'Found {len(duplicates)} duplicate title(s):', style='yellow', markup=False)
     for entries in duplicates.values():
         for source, title in entries:
-            print(f'  [{source}] {title}')
+            console.print(f'  [{source}] {title}', markup=False)
         print()
 
 if __name__ == '__main__':
