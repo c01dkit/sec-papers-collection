@@ -11,6 +11,7 @@ import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
 from lxml import etree
+from analyzers.console import console, stage_progress
 
 load_dotenv()
 
@@ -78,7 +79,7 @@ def get_cache(url):
 def save_cache(url, data, time):
     h = hash_url(url)
     with open('cache/'+h, 'wb') as f:
-        print(f'Save {url} in cache/{h}')
+        console.print(f'Save {url} in cache/{h}', style='dim', markup=False)
         pickle.dump({'data':data,'time':time}, f)
 
 def get_html(url, use_cache=True):
@@ -109,7 +110,7 @@ def get_html(url, use_cache=True):
             save_cache(url, res.text, d)
             return html,d
         else:
-            print(f'Failed to get {url}')
+            console.print(f'Failed to get {url}', style='red', markup=False)
             return None,None
 def get_titles(html, config):
     if config['title_xpath'] == '':
@@ -192,7 +193,7 @@ def fetch_one_edition_in_config(publication, publication_config, one_site_config
         if isinstance(official_file, list):
             official_file = official_file[0].split('-')[0] + '.json'
         json_details = official_file[:official_file.index('.')] + '.json'
-        print(f'Use official data for {publication} {one_site_config["year"]}')
+        console.print(f'Use official data for {publication} {one_site_config["year"]}', style='dim', markup=False)
         with open(os.path.join('official_cache',json_details), 'r', encoding='utf-8') as f:
             data = json.load(f)
             for paper_detail in data:
@@ -209,7 +210,7 @@ def fetch_one_edition_in_config(publication, publication_config, one_site_config
         # second priority: crawl website if json file does not exist
         use_cache = one_site_config.get('use_cache', True)
         html, time = get_html(one_site_config['url'], use_cache)
-        print(f'Use crawled data for {publication} {one_site_config["year"]}')
+        console.print(f'Use crawled data for {publication} {one_site_config["year"]}', style='dim', markup=False)
         if html is not None:
             if type(html) is list:
                 titles = []
@@ -244,7 +245,7 @@ def fetch_one_edition_in_config(publication, publication_config, one_site_config
                 ))
     return papers
 
-def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
+def fetch_one_paper_in_config(config, ledger=None, tag_store=None, on_edition=None):
     """
     This function will fetch (online or in cache) and return one paper info.
     This function is used as an iterator, yielding all papers from top to bottom in the config.
@@ -261,6 +262,9 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
     :param config:
     :param ledger: id_ledger.json contents, or None to load it
     :param tag_store: analyzers.tag_store.TagStore, or None to load it
+    :param on_edition: optional callback (name, year, paper_count), called once
+        per edition right after it is fetched (including empty ones) -- used by
+        --analyze to drive the progress bar
     :return:
     """
     prefixes = paper_id.collect_prefixes(config)
@@ -279,6 +283,8 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None):
         for one_site_config in publication_config['sites']:
             year = one_site_config['year']
             papers = fetch_one_edition_in_config(publication, publication_config, one_site_config)
+            if on_edition is not None:
+                on_edition(name, year, len(papers))
             if not papers:
                 continue
             ids = paper_id.assign_ids(
@@ -307,52 +313,59 @@ def export_data_json(project_base):
     ledger_before = json.dumps(ledger, sort_keys=True)
     tag_store = TagStore.load()
 
+    total_editions = sum(len(config[p]['sites']) for p in config)
+
     color_set = ['--p-emerald-400','--p-lime-400','--p-red-400',
                  '--p-amber-400','--p-blue-400','--p-purple-400',]
     publication_acceptance_trend = {}
-    for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store):
-        publication = paper_info.publication
-        year = str(paper_info.year)
+    with stage_progress() as progress:
+        task = progress.add_task('汇总论文与生成 JSON', total=total_editions)
+        def on_edition(name, year, count):
+            progress.update(task, description=f'汇总论文与生成 JSON · {name} {year}', advance=1)
+        for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store, on_edition=on_edition):
+            publication = paper_info.publication
+            year = str(paper_info.year)
 
-        # No abstract for small file
-        no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k!='abstract'}
+            # No abstract for small file
+            no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k!='abstract'}
 
-        # Full paper info
-        json_all.append(no_abs_one_paper_info)
+            # Full paper info
+            json_all.append(no_abs_one_paper_info)
 
-        # Save meta data in official_cache
-        meta_all.setdefault(publication,{})
-        meta_all[publication].setdefault(year,[])
-        meta_all[publication][year].append(asdict(paper_info))
+            # Save meta data in official_cache
+            meta_all.setdefault(publication,{})
+            meta_all[publication].setdefault(year,[])
+            meta_all[publication][year].append(asdict(paper_info))
 
-        # Statistics
-        statistics.total += 1
-        statistics.byPublication.setdefault(publication,0)
-        statistics.byPublication[publication] += 1
-        statistics.byYear.setdefault(year,0)
-        statistics.byYear[year] += 1
-        statistics.byPublicationAndYear.setdefault(publication,{})
-        statistics.byPublicationAndYear[publication].setdefault(year,0)
-        statistics.byPublicationAndYear[publication][year] += 1
-        
-        statistics.byPublicationAndYearAndStatus.setdefault(publication,{})
-        statistics.byPublicationAndYearAndStatus[publication].setdefault(year, paper_info.status)
+            # Statistics
+            statistics.total += 1
+            statistics.byPublication.setdefault(publication,0)
+            statistics.byPublication[publication] += 1
+            statistics.byYear.setdefault(year,0)
+            statistics.byYear[year] += 1
+            statistics.byPublicationAndYear.setdefault(publication,{})
+            statistics.byPublicationAndYear[publication].setdefault(year,0)
+            statistics.byPublicationAndYear[publication][year] += 1
 
-        # Quick view: generate a small version of full paper info (100 latest paper from each publication)
-        if statistics.byPublication[publication] <= 100:
-            quick_view.append(no_abs_one_paper_info)
+            statistics.byPublicationAndYearAndStatus.setdefault(publication,{})
+            statistics.byPublicationAndYearAndStatus[publication].setdefault(year, paper_info.status)
 
-        # Overview
-        publication_acceptance_trend.setdefault(paper_info.category,{})
+            # Quick view: generate a small version of full paper info (100 latest paper from each publication)
+            if statistics.byPublication[publication] <= 100:
+                quick_view.append(no_abs_one_paper_info)
 
-        if publication not in publication_acceptance_trend[paper_info.category]:
-            publication_acceptance_trend[paper_info.category][publication] = AcceptanceTrend(
-                category=paper_info.category,
-                label=publication,
-            )
+            # Overview
+            publication_acceptance_trend.setdefault(paper_info.category,{})
 
-        publication_acceptance_trend[paper_info.category][publication].map_data.setdefault(year, 0)
-        publication_acceptance_trend[paper_info.category][publication].map_data[year] += 1  
+            if publication not in publication_acceptance_trend[paper_info.category]:
+                publication_acceptance_trend[paper_info.category][publication] = AcceptanceTrend(
+                    category=paper_info.category,
+                    label=publication,
+                )
+
+            publication_acceptance_trend[paper_info.category][publication].map_data.setdefault(year, 0)
+            publication_acceptance_trend[paper_info.category][publication].map_data[year] += 1
+        progress.update(task, description='汇总论文与生成 JSON')
     for category, publication_names in publication_acceptance_trend.items():
         sub_color_set = color_set.copy()
         for publication_name, trend in publication_names.items():
@@ -381,10 +394,10 @@ def export_data_json(project_base):
 
     if json.dumps(ledger, sort_keys=True) != ledger_before:
         paper_id.save_ledger(ledger)
-        print(f'Updated {paper_id.LEDGER_PATH} (commit it -- IDs depend on it)')
+        console.print(f'Updated {paper_id.LEDGER_PATH} (commit it -- IDs depend on it)', style='yellow')
     stats = paper_id.ledger_stats(ledger)
-    print(f"ID ledger: {stats['entries']} papers across {stats['editions']} editions, "
-          f"{stats['publications']} publications")
+    console.print(f"[green]✓[/green] 汇总 {statistics.total} 篇论文 · ID ledger: {stats['entries']} papers across "
+                  f"{stats['editions']} editions, {stats['publications']} publications")
 
 def prepare_official_data():
     """
@@ -413,7 +426,7 @@ def prepare_official_data():
                 seen_titles.add(key)
                 deduped.append(paper)
         if len(deduped) != len(all_results):
-            print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}')
+            console.print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}', style='yellow', markup=False)
         all_results = deduped
         if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
@@ -440,37 +453,49 @@ def prepare_official_data():
                 seen_titles.add(key)
                 deduped.append(paper)
         if len(deduped) != len(all_results):
-            print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}')
+            console.print(f'  Removed {len(all_results) - len(deduped)} duplicate(s) from {json_file_name}', style='yellow', markup=False)
         all_results = deduped
         if len(all_results) > 0:
             with open(os.path.join('official_cache',json_file_name), 'w', encoding='utf8') as f:
                 json.dump(all_results,f,ensure_ascii=False)
         return len(all_results)
     config = get_config('data.yml')
-    for publication in config:
-        publication_config = config[publication]
-        for one_site_config in publication_config['sites']:
-            official_file = one_site_config.get('official_file',None)
-            if official_file is None: continue
-            # parsed data will be cached in .json file
-            if isinstance(official_file, str):
-                json_file = official_file[:official_file.index('.')] + '.json'
-                official_files = [official_file]
-            elif isinstance(official_file, list):
-                json_file = official_file[0][:official_file[0].index('-')] + '.json'
-                official_files = official_file
-            else:
-                raise ValueError('official_file must be str or list of str')
-            if not os.path.exists(os.path.join('official_cache',json_file)):
-                for official_file in official_files:
-                    if official_file.endswith('csv'):
-                        paper_num = parse_csv_file(official_files, publication_config['name'])
-                    elif official_file.endswith('bib'):
-                        paper_num = parse_bib_file(official_files, publication_config['name'],
-                                                   publication_config.get('paper_url_template'))
-                    else:
-                        paper_num = 0
-                    print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers")
+    total = sum(
+        1
+        for publication in config
+        for one_site_config in config[publication]['sites']
+        if one_site_config.get('official_file') is not None
+    )
+    with stage_progress() as progress:
+        task = progress.add_task('解析官方数据', total=total)
+        for publication in config:
+            publication_config = config[publication]
+            for one_site_config in publication_config['sites']:
+                official_file = one_site_config.get('official_file',None)
+                if official_file is None: continue
+                progress.update(task, description=f'解析官方数据 · {publication} {one_site_config["year"]}')
+                # parsed data will be cached in .json file
+                if isinstance(official_file, str):
+                    json_file = official_file[:official_file.index('.')] + '.json'
+                    official_files = [official_file]
+                elif isinstance(official_file, list):
+                    json_file = official_file[0][:official_file[0].index('-')] + '.json'
+                    official_files = official_file
+                else:
+                    raise ValueError('official_file must be str or list of str')
+                if not os.path.exists(os.path.join('official_cache',json_file)):
+                    for official_file in official_files:
+                        if official_file.endswith('csv'):
+                            paper_num = parse_csv_file(official_files, publication_config['name'])
+                        elif official_file.endswith('bib'):
+                            paper_num = parse_bib_file(official_files, publication_config['name'],
+                                                       publication_config.get('paper_url_template'))
+                        else:
+                            paper_num = 0
+                        console.print(f"Generating official data for {publication} {one_site_config['year']} : {paper_num} papers", markup=False)
+                progress.advance(task)
+        progress.update(task, description='解析官方数据')
+    console.print(f'[green]✓[/green] 官方数据解析完成（{total} 个官方数据源）')
 
 
 
@@ -667,4 +692,4 @@ if __name__ == '__main__':
         oss_uploader.seed_upload_cache()
     if args.upload:
         oss_uploader.upload_data_dir()
-    print('All done.')
+    console.print('[green]✓[/green] All done.')
