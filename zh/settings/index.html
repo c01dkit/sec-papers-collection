@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light" data-accent="slate" data-fontsize="large" data-pagewidth="medium" data-astro-cid-z4jru4n3><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>设置 · 论文辑录</title><meta name="description" content="IEEE S&amp;P、USENIX Security、ACM CCS、NDSS 等 10 个顶级会议的论文检索、录用趋势、摘要、获奖与投稿时间线。"><link rel="icon" href="/favicon.ico"><link rel="alternate" hreflang="zh-CN" href="https://sec.c01dkit.com/zh/settings/"><link rel="alternate" hreflang="en" href="https://sec.c01dkit.com/en/settings/"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><script>
+      // 首绘前同步定主题：必须 is:inline，打包成 module 会 defer 从而闪一下默认主题。
+      // 数据源是 localStorage（同步），IndexedDB 是异步的、来不及。
+      (function () {
+        var d = document.documentElement;
+        var ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
+        var g = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+        // remember 关闭时忽略上次选择，跟随系统偏好
+        var t = g('spc-remember-dark') === '0' ? null : g('spc-theme');
+        d.dataset.theme =
+          t === 'dark' || t === 'light'
+            ? t
+            : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        var a = g('spc-remember-accent') === '0' ? null : g('spc-accent');
+        d.dataset.accent = ACCENTS.indexOf(a) >= 0 ? a : 'slate';
+
+        // 字号与版心宽度没有 remember 开关：设置页选了就一直生效。
+        // 回落值必须与 DEFAULT_SETTINGS 一致（字号默认 large、版心默认 medium），
+        // 否则首访（尚无镜像）会先绘出另一档、水合后再跳一下。
+        var FS = ['small', 'medium', 'large'];
+        var f = g('spc-fontsize');
+        d.dataset.fontsize = FS.indexOf(f) >= 0 ? f : 'large';
+
+        var PW = ['narrow', 'medium', 'wide', 'full'];
+        var w = g('spc-pagewidth');
+        d.dataset.pagewidth = PW.indexOf(w) >= 0 ? w : 'medium';
+
+        // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('reveal-on');
+
+          // 门控是这里加的（内联、同步，为的是不闪一下全可见的内容），
+          // 但解除门控的 .in 是 bundle 里的 reveal.js 加的。两者之间必须有个
+          // 保险，否则「内联跑了、bundle 没到」就等于整页停在 opacity:0 ——
+          // 实测（真实 Chrome，abort /_astro/*.js）首页 38/38 个 [data-reveal]
+          // opacity 全 0、h1 也是 0，而 body.innerText 有 2,698 个字符。
+          // 「无 JS」那条路本来就没问题（内联根本不跑，门控就不存在），
+          // 之前防的是错的那一头。
+          //
+          // 用 window load 而不是固定延时：实测它就是「所有子资源尘埃落定」——
+          // bundle 被 abort 时 160ms 就触发，bundle 被人为拖慢 1,800ms 时它等到
+          // 1,827ms 才触发（和 astro:page-load 同一毫秒）。所以它既不会在健康
+          // 加载上误触，也不会在失败时干等。再留 500ms 余量给同一毫秒内的
+          // 派发顺序，安全系数约 500 倍。
+          //
+          // 万一余量仍不够（极端情况下 astro:page-load 落在 load+500ms 之后），
+          // 代价只是这一次没有淡入动画 —— 与开了「减少动效」的用户看到的完全
+          // 一样。反过来漏掉这个保险的代价是内容永远不出现。方向选对了。
+          window.addEventListener('load', function () {
+            setTimeout(function () {
+              if (!window.__spcRevealReady) d.classList.remove('reveal-on');
+            }, 500);
+          });
+        }
+
+        try {
+          var cur = location.pathname.match(/^\/(zh|en)\//);
+          if (cur) localStorage.setItem('spc-lang', cur[1]);
+        } catch (e) {}
+      })();
+
+      // 软导航换入新 document 时把主题状态带过去，否则每次跳转都闪回默认值
+      document.addEventListener('astro:before-swap', function (e) {
+        var cur = document.documentElement;
+        var nxt = e.newDocument.documentElement;
+        nxt.dataset.theme = cur.dataset.theme;
+        nxt.dataset.accent = cur.dataset.accent;
+        nxt.dataset.fontsize = cur.dataset.fontsize;
+        nxt.dataset.pagewidth = cur.dataset.pagewidth;
+        if (cur.classList.contains('reveal-on')) nxt.classList.add('reveal-on');
+      });
+    </script><noscript><style>
+        /* global.css 收掉了原生页面滚动条，改由 #pageSb 那条悬浮滑块顶上 ——
+           而画那条滑块的是 JS。没有 JS 时两头落空：页面只剩滚轮和键盘能滚，
+           且没有任何「现在在第几屏、一共多少屏」的指示。所以把原生的还回去。
+           这么一来无 JS 用户会重新遇到「有无滚动条导致版心左右跳」的老问题，
+           那是刻意的取舍：跳一下看得见内容，好过不跳但不知道自己在哪。
+           scrollbar-width 与 ::-webkit-scrollbar 两条都要写 —— Chrome/Firefox
+           认前者且认了就忽略后者，Safari 18.2 以下反过来只认后者。 */
+        html { scrollbar-width: auto !important; }
+        html::-webkit-scrollbar { display: block !important; }
+        /* 那条永远不会被画出来的滑块，别留在文档里吃指针 */
+        #pageSb { display: none !important; }
+      </style></noscript><link rel="stylesheet" href="/_astro/BaseLayout.DmkZAvAW.css"><style>.page-head[data-astro-cid-xa52sxzc]{border-bottom:1px solid var(--hairline);margin-bottom:clamp(1.2rem,3vw,2rem);padding-bottom:clamp(1.2rem,3vw,2rem)}.page-head[data-astro-cid-xa52sxzc] .kicker[data-astro-cid-xa52sxzc]{margin-bottom:.7rem}.lead[data-astro-cid-xa52sxzc]{color:var(--muted);margin:.9rem 0 0}
+</style><link rel="stylesheet" href="/_astro/settings.C66tSyFI.css"></head><body data-astro-cid-z4jru4n3><a class="skip" href="#content" data-astro-cid-z4jru4n3>跳到主要内容</a><header class="hdr" id="siteHeader" data-astro-cid-adsqeljt><div class="wrap bar" data-astro-cid-adsqeljt><a class="brand srf" href="/zh/" data-astro-cid-adsqeljt>论文辑录</a><button class="burger" id="navToggle" aria-label="菜单" aria-expanded="false" aria-controls="primaryNav" data-astro-cid-adsqeljt><span data-astro-cid-adsqeljt></span></button><nav class="core" id="primaryNav" aria-label="主导航" data-astro-cid-adsqeljt><a href="/zh/search/" data-astro-cid-adsqeljt>标题检索</a><a href="/zh/trends/" data-astro-cid-adsqeljt>录用趋势</a><a href="/zh/abstract/" data-astro-cid-adsqeljt>论文摘要</a><a href="/zh/timeline/" data-astro-cid-adsqeljt>流程时间线</a><a href="/zh/awards/" data-astro-cid-adsqeljt>获奖论文</a></nav><div class="right" data-astro-cid-adsqeljt><div class="misc" id="miscGroup" data-astro-cid-adsqeljt><button type="button" class="misc-btn" aria-expanded="false" data-active="true" data-astro-cid-adsqeljt>其他<span class="caret" aria-hidden="true" data-astro-cid-adsqeljt>▾</span></button><div class="misc-menu" data-astro-cid-adsqeljt><a href="/zh/sites/" data-astro-cid-adsqeljt>更多网站</a><a href="/zh/about/" data-astro-cid-adsqeljt>关于</a><a href="/zh/settings/" aria-current="page" data-astro-cid-adsqeljt>设置</a></div></div><a class="lang" href="/en/settings/" hreflang="en" data-lang-target="en" aria-label="Switch to English" data-astro-cid-lemdd452>EN</a><button type="button" class="icon" id="accentCycle" aria-label="强调色" title="强调色" data-astro-cid-adsqeljt>◈</button><button type="button" class="icon" id="themeToggle" aria-label="切换主题" title="切换主题" data-astro-cid-adsqeljt>◑</button></div></div><noscript><style>
+      /* 窄屏下 .core 靠 .hdr.open 显隐，而那个类只有 nav.js 会加 —— 没有 JS 时
+         实测 375px 上 5 条核心导航 0 条可见、汉堡按钮看得见但点不动，
+         整页可达的 <a href> 只剩 4 个（跳过链接、站名、语言、GitHub）。
+         手机 + 关 JS 的访客落在除首页以外任何一页上，只能靠站名回首页再绕。
+         本页面本来就是静态 HTML，链接全在，撤掉 display:none 即可。
+         用 #primaryNav.core（1,1,0）压过 :global(.hdr.open) .core（0,3,0 含 scope），
+         再加 !important 兜底 —— 与 awards.astro 的 <noscript> 块同一套做法。 */
+      @media (max-width: 860px) {
+        #primaryNav.core { display: flex !important; }
+        #navToggle { display: none !important; }
+      }
+      /* 主题与强调色两个按钮在所有宽度下都只有 JS 才有用。把它们留着「看着能按、
+         按了没反应」比拿掉更糟，所以按同一条原则一起藏掉。 */
+      #themeToggle, #accentCycle { display: none !important; }
+    </style></noscript></header><main id="content" data-page="settings" class="wrap main-pad" data-astro-cid-z4jru4n3><header class="page-head" data-astro-cid-xa52sxzc><h1 data-reveal data-astro-cid-xa52sxzc>设置</h1><p class="lead" data-reveal data-astro-cid-xa52sxzc>设置偏好将保存在本机浏览器中，之后看需求可集成登录功能，实现多端同步。</p></header><p class="privacy" data-reveal data-astro-cid-flxlmkgg>你的偏好仅保存在本机浏览器的 IndexedDB 中。我们不会使用这些数据追踪、识别或分析网站访问者，也不会将任何数据上传到服务器。</p><p class="warn" id="stWarn" hidden data-astro-cid-flxlmkgg>偏好暂时保存不了（浏览器本地存储不可写），改动在本次访问内有效，关闭页面后会丢失。</p><noscript><p class="warn" data-astro-cid-flxlmkgg>这些开关需要 JavaScript 才能读写，开启后刷新本页即可使用。下面保留了每一项的说明，供你先了解各项设置的作用。</p><style>
+      /* 没有 JS 时这一页的 14 个开关全是死的，而此前没有任何提示 ——
+         实测 375px 关 JS：14 个可见且未 disabled 的按钮、1 个输入框、无提示。
+         按获奖页立下的约定处理：说明为什么不能用，同时把点不动的控件藏掉。
+         只藏 .control 那一列，标签与说明留着 —— 那些文字本身就在解释每一项设置
+         是干什么的，是有价值的内容；而一个按钮不携带信息，只提供一个动作，
+         点了没反应就纯粹是骗人。这也是为什么摘要页的处理不同（那边的年份按钮
+         同时是「有哪些届次」的索引，藏了会丢信息，所以只加提示不藏）。
+         选择器两段（0,2,0）压过 scoped 的 .control（0,1,0 + scope）。 */
+      .row .control { display: none !important; }
+    </style></noscript><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" data-astro-cid-flxlmkgg>字号</div><p class="ld" data-astro-cid-flxlmkgg>全站文字的大小，即时生效。</p></div><div class="control swatches" role="radiogroup" aria-label="字号" data-astro-cid-flxlmkgg><button type="button" role="radio" class="sw" data-fontsize-pick="small" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>小</span></button><button type="button" role="radio" class="sw" data-fontsize-pick="medium" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>中</span></button><button type="button" role="radio" class="sw" data-fontsize-pick="large" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>大</span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" data-astro-cid-flxlmkgg>版心宽度</div><p class="ld" data-astro-cid-flxlmkgg>页面内容区的最大宽度。「超宽」不设上限，随浏览器窗口铺满。</p></div><div class="control swatches" role="radiogroup" aria-label="版心宽度" data-astro-cid-flxlmkgg><button type="button" role="radio" class="sw" data-pagewidth-pick="narrow" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>窄</span></button><button type="button" role="radio" class="sw" data-pagewidth-pick="medium" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>中</span></button><button type="button" role="radio" class="sw" data-pagewidth-pick="wide" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>宽</span></button><button type="button" role="radio" class="sw" data-pagewidth-pick="full" aria-checked="false" data-astro-cid-flxlmkgg><span data-astro-cid-flxlmkgg>超宽</span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" data-astro-cid-flxlmkgg>强调色</div><p class="ld" data-astro-cid-flxlmkgg>用于链接、图表与高亮的单一强调色。</p></div><div class="control swatches" role="radiogroup" aria-label="强调色" data-astro-cid-flxlmkgg><button type="button" role="radio" class="sw" data-accent-pick="slate" aria-checked="false" title="深石青" data-astro-cid-flxlmkgg><i data-accent-swatch="slate" data-astro-cid-flxlmkgg></i><span data-astro-cid-flxlmkgg>深石青</span></button><button type="button" role="radio" class="sw" data-accent-pick="indigo" aria-checked="false" title="墨蓝" data-astro-cid-flxlmkgg><i data-accent-swatch="indigo" data-astro-cid-flxlmkgg></i><span data-astro-cid-flxlmkgg>墨蓝</span></button><button type="button" role="radio" class="sw" data-accent-pick="oxblood" aria-checked="false" title="赤赭" data-astro-cid-flxlmkgg><i data-accent-swatch="oxblood" data-astro-cid-flxlmkgg></i><span data-astro-cid-flxlmkgg>赤赭</span></button><button type="button" role="radio" class="sw" data-accent-pick="pine" aria-checked="false" title="松绿" data-astro-cid-flxlmkgg><i data-accent-swatch="pine" data-astro-cid-flxlmkgg></i><span data-astro-cid-flxlmkgg>松绿</span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" id="lt-darkTheme" data-astro-cid-flxlmkgg>深色模式</div><p class="ld" id="ld-darkTheme" data-astro-cid-flxlmkgg>也可以点顶栏的 ◑ 随时切换。</p></div><div class="control" data-astro-cid-flxlmkgg><button type="button" class="switch" data-toggle="darkTheme" aria-pressed="false" aria-labelledby="lt-darkTheme" aria-describedby="ld-darkTheme" data-astro-cid-flxlmkgg><span class="knob" data-astro-cid-flxlmkgg></span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" id="lt-rememberDarkMode" data-astro-cid-flxlmkgg>记住明暗模式</div><p class="ld" id="ld-rememberDarkMode" data-astro-cid-flxlmkgg>保存亮色/暗色模式设置，下次访问时自动恢复。</p></div><div class="control" data-astro-cid-flxlmkgg><button type="button" class="switch" data-toggle="rememberDarkMode" aria-pressed="false" aria-labelledby="lt-rememberDarkMode" aria-describedby="ld-rememberDarkMode" data-astro-cid-flxlmkgg><span class="knob" data-astro-cid-flxlmkgg></span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" id="lt-rememberTheme" data-astro-cid-flxlmkgg>记住主题色</div><p class="ld" id="ld-rememberTheme" data-astro-cid-flxlmkgg>保存你在调色板面板中选择的主色调。</p></div><div class="control" data-astro-cid-flxlmkgg><button type="button" class="switch" data-toggle="rememberTheme" aria-pressed="false" aria-labelledby="lt-rememberTheme" aria-describedby="ld-rememberTheme" data-astro-cid-flxlmkgg><span class="knob" data-astro-cid-flxlmkgg></span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" id="lt-rememberLanguage" data-astro-cid-flxlmkgg>记住语言选择</div><p class="ld" id="ld-rememberLanguage" data-astro-cid-flxlmkgg>保存当前语言偏好，下次访问时自动恢复。</p></div><div class="control" data-astro-cid-flxlmkgg><button type="button" class="switch" data-toggle="rememberLanguage" aria-pressed="false" aria-labelledby="lt-rememberLanguage" aria-describedby="ld-rememberLanguage" data-astro-cid-flxlmkgg><span class="knob" data-astro-cid-flxlmkgg></span></button></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" data-astro-cid-flxlmkgg>偏好关键词</div><p class="ld" data-astro-cid-flxlmkgg>在标题/摘要中高亮这些词语。可添加多个，会使用主题色高亮。</p></div><div class="control" data-astro-cid-flxlmkgg><div class="kwadd" data-astro-cid-flxlmkgg><input type="text" id="kwInput" placeholder="输入关键词回车添加" data-astro-cid-flxlmkgg><button type="button" id="kwAdd" data-astro-cid-flxlmkgg>添加</button></div><div class="kwlist" id="kwList" data-astro-cid-flxlmkgg></div></div></section><section class="row" data-reveal data-astro-cid-flxlmkgg><div class="label" data-astro-cid-flxlmkgg><div class="lt" data-astro-cid-flxlmkgg>收藏的论文</div><p class="ld" id="favDesc" data-astro-cid-flxlmkgg>共 … 篇。清空后无法恢复。</p></div><div class="control" data-astro-cid-flxlmkgg><button type="button" class="danger" id="favClear" disabled data-astro-cid-flxlmkgg>清空收藏</button></div></section><p class="saved" id="stSaved" hidden data-astro-cid-flxlmkgg>已自动保存</p><script type="application/json" id="stI18n">{"favDesc":"共 __N__ 篇。清空后无法恢复。","confirm":"确定要清空全部收藏吗？此操作无法撤销。","cleared":"已清空","remove":"移除关键词 __W__","autoSaved":"已自动保存"}</script></main><footer class="ft" data-astro-cid-jo6i4kqk><div class="wrap row" data-astro-cid-jo6i4kqk><span data-astro-cid-jo6i4kqk><a class="lnk src" href="https://github.com/c01dkit" rel="noopener" target="_blank" data-astro-cid-jo6i4kqk>c01dkit @ ZJU</a></span><span class="sep" aria-hidden="true" data-astro-cid-jo6i4kqk>·</span><span data-astro-cid-jo6i4kqk>2026</span><a class="lnk src" href="https://github.com/c01dkit/sec-papers-collection" rel="noopener" target="_blank" data-astro-cid-jo6i4kqk>Github开源</a></div></footer><div class="page-sb" id="pageSb" aria-hidden="true" data-astro-cid-z4jru4n3></div><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.CcSQxqzW.js"></script></body></html>

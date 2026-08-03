@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en" data-theme="light" data-accent="slate" data-fontsize="large" data-pagewidth="medium" data-astro-cid-z4jru4n3><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>More Sites · Sec Papers</title><meta name="description" content="Search papers, acceptance trends, abstracts, awards and submission deadlines across 10 top venues including IEEE S&amp;P, USENIX Security, ACM CCS and NDSS."><link rel="icon" href="/favicon.ico"><link rel="alternate" hreflang="zh-CN" href="https://sec.c01dkit.com/zh/sites/"><link rel="alternate" hreflang="en" href="https://sec.c01dkit.com/en/sites/"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><script>
+      // 首绘前同步定主题：必须 is:inline，打包成 module 会 defer 从而闪一下默认主题。
+      // 数据源是 localStorage（同步），IndexedDB 是异步的、来不及。
+      (function () {
+        var d = document.documentElement;
+        var ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
+        var g = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+        // remember 关闭时忽略上次选择，跟随系统偏好
+        var t = g('spc-remember-dark') === '0' ? null : g('spc-theme');
+        d.dataset.theme =
+          t === 'dark' || t === 'light'
+            ? t
+            : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        var a = g('spc-remember-accent') === '0' ? null : g('spc-accent');
+        d.dataset.accent = ACCENTS.indexOf(a) >= 0 ? a : 'slate';
+
+        // 字号与版心宽度没有 remember 开关：设置页选了就一直生效。
+        // 回落值必须与 DEFAULT_SETTINGS 一致（字号默认 large、版心默认 medium），
+        // 否则首访（尚无镜像）会先绘出另一档、水合后再跳一下。
+        var FS = ['small', 'medium', 'large'];
+        var f = g('spc-fontsize');
+        d.dataset.fontsize = FS.indexOf(f) >= 0 ? f : 'large';
+
+        var PW = ['narrow', 'medium', 'wide', 'full'];
+        var w = g('spc-pagewidth');
+        d.dataset.pagewidth = PW.indexOf(w) >= 0 ? w : 'medium';
+
+        // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('reveal-on');
+
+          // 门控是这里加的（内联、同步，为的是不闪一下全可见的内容），
+          // 但解除门控的 .in 是 bundle 里的 reveal.js 加的。两者之间必须有个
+          // 保险，否则「内联跑了、bundle 没到」就等于整页停在 opacity:0 ——
+          // 实测（真实 Chrome，abort /_astro/*.js）首页 38/38 个 [data-reveal]
+          // opacity 全 0、h1 也是 0，而 body.innerText 有 2,698 个字符。
+          // 「无 JS」那条路本来就没问题（内联根本不跑，门控就不存在），
+          // 之前防的是错的那一头。
+          //
+          // 用 window load 而不是固定延时：实测它就是「所有子资源尘埃落定」——
+          // bundle 被 abort 时 160ms 就触发，bundle 被人为拖慢 1,800ms 时它等到
+          // 1,827ms 才触发（和 astro:page-load 同一毫秒）。所以它既不会在健康
+          // 加载上误触，也不会在失败时干等。再留 500ms 余量给同一毫秒内的
+          // 派发顺序，安全系数约 500 倍。
+          //
+          // 万一余量仍不够（极端情况下 astro:page-load 落在 load+500ms 之后），
+          // 代价只是这一次没有淡入动画 —— 与开了「减少动效」的用户看到的完全
+          // 一样。反过来漏掉这个保险的代价是内容永远不出现。方向选对了。
+          window.addEventListener('load', function () {
+            setTimeout(function () {
+              if (!window.__spcRevealReady) d.classList.remove('reveal-on');
+            }, 500);
+          });
+        }
+
+        try {
+          var cur = location.pathname.match(/^\/(zh|en)\//);
+          if (cur) localStorage.setItem('spc-lang', cur[1]);
+        } catch (e) {}
+      })();
+
+      // 软导航换入新 document 时把主题状态带过去，否则每次跳转都闪回默认值
+      document.addEventListener('astro:before-swap', function (e) {
+        var cur = document.documentElement;
+        var nxt = e.newDocument.documentElement;
+        nxt.dataset.theme = cur.dataset.theme;
+        nxt.dataset.accent = cur.dataset.accent;
+        nxt.dataset.fontsize = cur.dataset.fontsize;
+        nxt.dataset.pagewidth = cur.dataset.pagewidth;
+        if (cur.classList.contains('reveal-on')) nxt.classList.add('reveal-on');
+      });
+    </script><noscript><style>
+        /* global.css 收掉了原生页面滚动条，改由 #pageSb 那条悬浮滑块顶上 ——
+           而画那条滑块的是 JS。没有 JS 时两头落空：页面只剩滚轮和键盘能滚，
+           且没有任何「现在在第几屏、一共多少屏」的指示。所以把原生的还回去。
+           这么一来无 JS 用户会重新遇到「有无滚动条导致版心左右跳」的老问题，
+           那是刻意的取舍：跳一下看得见内容，好过不跳但不知道自己在哪。
+           scrollbar-width 与 ::-webkit-scrollbar 两条都要写 —— Chrome/Firefox
+           认前者且认了就忽略后者，Safari 18.2 以下反过来只认后者。 */
+        html { scrollbar-width: auto !important; }
+        html::-webkit-scrollbar { display: block !important; }
+        /* 那条永远不会被画出来的滑块，别留在文档里吃指针 */
+        #pageSb { display: none !important; }
+      </style></noscript><link rel="stylesheet" href="/_astro/BaseLayout.DmkZAvAW.css"><style>.page-head[data-astro-cid-xa52sxzc]{border-bottom:1px solid var(--hairline);margin-bottom:clamp(1.2rem,3vw,2rem);padding-bottom:clamp(1.2rem,3vw,2rem)}.page-head[data-astro-cid-xa52sxzc] .kicker[data-astro-cid-xa52sxzc]{margin-bottom:.7rem}.lead[data-astro-cid-xa52sxzc]{color:var(--muted);margin:.9rem 0 0}
+.grid[data-astro-cid-gkysg3fi]{background:var(--hairline);border:1px solid var(--hairline);grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1px;margin:0;padding:0;list-style:none;display:grid}.card[data-astro-cid-gkysg3fi]{background:var(--bg);height:100%;transition:background-color var(--dur) var(--ease);padding:1.05rem 1.15rem 1.15rem;display:block;position:relative}.card[data-astro-cid-gkysg3fi]:hover{background:var(--band)}.host[data-astro-cid-gkysg3fi]{font-size:var(--fs-kicker);color:var(--faint);margin-bottom:.5rem;display:block}.ttl[data-astro-cid-gkysg3fi]{margin-bottom:.45rem;font-size:.98rem;line-height:1.4;display:block}.card[data-astro-cid-gkysg3fi]:hover .ttl[data-astro-cid-gkysg3fi]{color:var(--accent)}.desc[data-astro-cid-gkysg3fi]{font-size:var(--fs-kicker);color:var(--muted);line-height:1.75;display:block}.arrow[data-astro-cid-gkysg3fi]{color:var(--hairline);font-size:.7rem;position:absolute;top:1rem;right:1.1rem}.card[data-astro-cid-gkysg3fi]:hover .arrow[data-astro-cid-gkysg3fi]{color:var(--accent)}
+</style></head><body data-astro-cid-z4jru4n3><a class="skip" href="#content" data-astro-cid-z4jru4n3>Skip to main content</a><header class="hdr" id="siteHeader" data-astro-cid-adsqeljt><div class="wrap bar" data-astro-cid-adsqeljt><a class="brand srf" href="/en/" data-astro-cid-adsqeljt>Sec Papers</a><button class="burger" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="primaryNav" data-astro-cid-adsqeljt><span data-astro-cid-adsqeljt></span></button><nav class="core" id="primaryNav" aria-label="Main navigation" data-astro-cid-adsqeljt><a href="/en/search/" data-astro-cid-adsqeljt>Search</a><a href="/en/trends/" data-astro-cid-adsqeljt>Trends</a><a href="/en/abstract/" data-astro-cid-adsqeljt>Abstract</a><a href="/en/timeline/" data-astro-cid-adsqeljt>Timeline</a><a href="/en/awards/" data-astro-cid-adsqeljt>Awards</a></nav><div class="right" data-astro-cid-adsqeljt><div class="misc" id="miscGroup" data-astro-cid-adsqeljt><button type="button" class="misc-btn" aria-expanded="false" data-active="true" data-astro-cid-adsqeljt>Misc<span class="caret" aria-hidden="true" data-astro-cid-adsqeljt>▾</span></button><div class="misc-menu" data-astro-cid-adsqeljt><a href="/en/sites/" aria-current="page" data-astro-cid-adsqeljt>More Sites</a><a href="/en/about/" data-astro-cid-adsqeljt>About</a><a href="/en/settings/" data-astro-cid-adsqeljt>Settings</a></div></div><a class="lang" href="/zh/sites/" hreflang="zh-CN" data-lang-target="zh" aria-label="切换到中文" data-astro-cid-lemdd452>中</a><button type="button" class="icon" id="accentCycle" aria-label="Accent color" title="Accent color" data-astro-cid-adsqeljt>◈</button><button type="button" class="icon" id="themeToggle" aria-label="Toggle Theme" title="Toggle Theme" data-astro-cid-adsqeljt>◑</button></div></div><noscript><style>
+      /* 窄屏下 .core 靠 .hdr.open 显隐，而那个类只有 nav.js 会加 —— 没有 JS 时
+         实测 375px 上 5 条核心导航 0 条可见、汉堡按钮看得见但点不动，
+         整页可达的 <a href> 只剩 4 个（跳过链接、站名、语言、GitHub）。
+         手机 + 关 JS 的访客落在除首页以外任何一页上，只能靠站名回首页再绕。
+         本页面本来就是静态 HTML，链接全在，撤掉 display:none 即可。
+         用 #primaryNav.core（1,1,0）压过 :global(.hdr.open) .core（0,3,0 含 scope），
+         再加 !important 兜底 —— 与 awards.astro 的 <noscript> 块同一套做法。 */
+      @media (max-width: 860px) {
+        #primaryNav.core { display: flex !important; }
+        #navToggle { display: none !important; }
+      }
+      /* 主题与强调色两个按钮在所有宽度下都只有 JS 才有用。把它们留着「看着能按、
+         按了没反应」比拿掉更糟，所以按同一条原则一起藏掉。 */
+      #themeToggle, #accentCycle { display: none !important; }
+    </style></noscript></header><main id="content" data-page="sites" class="wrap main-pad" data-astro-cid-z4jru4n3><header class="page-head" data-astro-cid-xa52sxzc><h1 data-reveal data-astro-cid-xa52sxzc>More Sites</h1><p class="lead" data-reveal data-astro-cid-xa52sxzc>A curated list of useful resources for academic security research and conference tracking. Click any card to open in a new tab.</p></header><ul class="grid" data-astro-cid-gkysg3fi><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://jeffhuang.com/best_paper_awards/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>jeffhuang.com</span><span class="srf ttl" data-astro-cid-gkysg3fi>Best Paper Awards in Computer Science</span><span class="desc" data-astro-cid-gkysg3fi>A long-running collection of best paper awards across 32 computer science conferences since 1996, maintained by Jeff Huang.</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://ccfddl.top/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>ccfddl.top</span><span class="srf ttl" data-astro-cid-gkysg3fi>CCF Conference Deadlines</span><span class="desc" data-astro-cid-gkysg3fi>Tracks upcoming submission deadlines for conferences listed in the CCF recommended catalog, organized by topic and tier.</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://ccf.atom.im/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>ccf.atom.im</span><span class="srf ttl" data-astro-cid-gkysg3fi>CCF Recommended Conferences and Journals</span><span class="desc" data-astro-cid-gkysg3fi>An accessible mirror of the China Computer Federation&#39;s recommended catalog of international conferences and journals (Tier A/B/C).</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://www.connectedpapers.com/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>connectedpapers.com</span><span class="srf ttl" data-astro-cid-gkysg3fi>Connected Papers</span><span class="desc" data-astro-cid-gkysg3fi>Visualize related work as an interactive graph: enter a seed paper and explore prior work, derivative work, and similar papers in your field.</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://wispaper.ai/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>wispaper.ai</span><span class="srf ttl" data-astro-cid-gkysg3fi>WisPaper</span><span class="desc" data-astro-cid-gkysg3fi>AI-powered literature search that takes natural-language queries and uses Intent Verification to surface the papers most relevant to your research goal.</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li><li data-reveal data-astro-cid-gkysg3fi><a class="card" href="https://cspapers.org/" target="_blank" rel="noopener" data-astro-cid-gkysg3fi><span class="host" data-astro-cid-gkysg3fi>cspapers.org</span><span class="srf ttl" data-astro-cid-gkysg3fi>CS Papers</span><span class="desc" data-astro-cid-gkysg3fi>A search engine for computer science conference papers (csrankings.org venues, including the security top tier) with fast filtering by venue/year and an open API.</span><span class="arrow" aria-hidden="true" data-astro-cid-gkysg3fi>↗</span></a></li></ul></main><footer class="ft" data-astro-cid-jo6i4kqk><div class="wrap row" data-astro-cid-jo6i4kqk><span data-astro-cid-jo6i4kqk><a class="lnk src" href="https://github.com/c01dkit" rel="noopener" target="_blank" data-astro-cid-jo6i4kqk>c01dkit @ ZJU</a></span><span class="sep" aria-hidden="true" data-astro-cid-jo6i4kqk>·</span><span data-astro-cid-jo6i4kqk>2026</span><a class="lnk src" href="https://github.com/c01dkit/sec-papers-collection" rel="noopener" target="_blank" data-astro-cid-jo6i4kqk>Source Code</a></div></footer><div class="page-sb" id="pageSb" aria-hidden="true" data-astro-cid-z4jru4n3></div><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.CcSQxqzW.js"></script></body></html>

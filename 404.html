@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light" data-accent="slate"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>404 · 安全四大汇总</title><meta name="robots" content="noindex"><link rel="icon" href="/favicon.ico"><script>
+      (function () {
+        var d = document.documentElement;
+        var t;
+        try { t = localStorage.getItem('spc-theme'); } catch (e) {}
+        d.dataset.theme = t === 'dark' || t === 'light' ? t
+          : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+    </script><link rel="stylesheet" href="/_astro/404.ajtpKquH.css"></head><body><main class="wrap box"><p class="kicker">404</p><h1 class="srf" data-i18n-zh>页面未找到</h1><h1 class="srf" data-i18n-en hidden>Page Not Found</h1><p data-i18n-zh>链接可能已经变了。站点在 2026 年做过一次改版，旧地址大多会自动跳转 —— 如果你是从书签进来的，回首页重新找一下。</p><p data-i18n-en hidden>The link may have changed. The site was reorganized in 2026 and most old addresses redirect automatically — if you arrived from a bookmark, start again from the home page.</p><p><a class="lnk" href="/zh/" data-i18n-zh>回首页</a><a class="lnk" href="/en/" data-i18n-en hidden>Back to home</a></p></main><script>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('spc-lang'); } catch (e) {}
+        var lang = stored === 'zh' || stored === 'en' ? stored
+          : String(navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+        var hide = lang === 'zh' ? 'en' : 'zh';
+        document.querySelectorAll('[data-i18n-' + lang + ']').forEach(function (el) { el.hidden = false; });
+        document.querySelectorAll('[data-i18n-' + hide + ']').forEach(function (el) { el.hidden = true; });
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      })();
+    </script></body></html>
