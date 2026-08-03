@@ -162,6 +162,8 @@ function mirror(settings) {
   try {
     localStorage.setItem(MIRROR.theme, settings.darkTheme ? 'dark' : 'light');
     localStorage.setItem(MIRROR.accent, settings.theme);
+    localStorage.setItem(MIRROR.fontSize, settings.fontSize);
+    localStorage.setItem(MIRROR.pageWidth, settings.pageWidth);
     // 没有 spc-lang：那个键唯一合法的写手是 nav.js（切语言时）和 BaseLayout 的
     // 预绘制脚本（每次访问时按当前 URL 写）。settings.language 已经从 schema 里
     // 整体删掉了，见 settings-schema.js 里 MIRROR 声明处的说明。

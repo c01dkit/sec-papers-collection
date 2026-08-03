@@ -1,6 +1,6 @@
 import { getSettings, patchSettings, getFavorites, clearFavorites, isPersistent } from './settings-store.js';
 import { applyTheme } from './theme.js';
-import { ACCENTS } from '@/lib/settings-schema.js';
+import { ACCENTS, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
 
 const fmt = (tpl, map) => Object.entries(map).reduce((s, [k, v]) => s.replaceAll(k, v), tpl);
 
@@ -83,6 +83,43 @@ export async function initSettingsForm() {
     return settings;
   };
 
+  // ── 字号 ────────────────────────────────────────────
+  // 与强调色同理，真相是 DOM（<html data-fontsize>，预绘制脚本按镜像写好）。
+  const paintFontSize = () => {
+    const cur = document.documentElement.dataset.fontsize || 'large';
+    for (const btn of document.querySelectorAll('[data-fontsize-pick]')) {
+      btn.setAttribute('aria-checked', btn.dataset.fontsizePick === cur ? 'true' : 'false');
+    }
+  };
+  for (const btn of document.querySelectorAll('[data-fontsize-pick]')) {
+    btn.addEventListener('click', async () => {
+      const size = btn.dataset.fontsizePick;
+      if (!FONT_SIZES.includes(size)) return;
+      document.documentElement.dataset.fontsize = size;
+      await save({ fontSize: size });
+      paintFontSize();
+    });
+  }
+  paintFontSize();
+
+  // ── 版心宽度 ────────────────────────────────────────
+  const paintPageWidth = () => {
+    const cur = document.documentElement.dataset.pagewidth || 'medium';
+    for (const btn of document.querySelectorAll('[data-pagewidth-pick]')) {
+      btn.setAttribute('aria-checked', btn.dataset.pagewidthPick === cur ? 'true' : 'false');
+    }
+  };
+  for (const btn of document.querySelectorAll('[data-pagewidth-pick]')) {
+    btn.addEventListener('click', async () => {
+      const width = btn.dataset.pagewidthPick;
+      if (!PAGE_WIDTHS.includes(width)) return;
+      document.documentElement.dataset.pagewidth = width;
+      await save({ pageWidth: width });
+      paintPageWidth();
+    });
+  }
+  paintPageWidth();
+
   // ── 强调色 ──────────────────────────────────────────
   const paintAccent = () => {
     const cur = document.documentElement.dataset.accent;
@@ -137,6 +174,8 @@ export async function initSettingsForm() {
     window.addEventListener('spc:settings-change', (e) => {
       if (!document.getElementById('kwList')) return;   // 已经不在设置页了
       if (e.detail) settings = e.detail;
+      paintFontSize();
+      paintPageWidth();
       paintAccent();
       paintToggles();
     });

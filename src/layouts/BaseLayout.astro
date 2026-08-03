@@ -18,7 +18,7 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
 ---
 
 <!doctype html>
-<html lang={htmlLang} data-theme="light" data-accent="slate">
+<html lang={htmlLang} data-theme="light" data-accent="slate" data-fontsize="large" data-pagewidth="medium">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,6 +46,17 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
 
         var a = g('spc-remember-accent') === '0' ? null : g('spc-accent');
         d.dataset.accent = ACCENTS.indexOf(a) >= 0 ? a : 'slate';
+
+        // 字号与版心宽度没有 remember 开关：设置页选了就一直生效。
+        // 回落值必须与 DEFAULT_SETTINGS 一致（字号默认 large、版心默认 medium），
+        // 否则首访（尚无镜像）会先绘出另一档、水合后再跳一下。
+        var FS = ['small', 'medium', 'large'];
+        var f = g('spc-fontsize');
+        d.dataset.fontsize = FS.indexOf(f) >= 0 ? f : 'large';
+
+        var PW = ['narrow', 'medium', 'wide', 'full'];
+        var w = g('spc-pagewidth');
+        d.dataset.pagewidth = PW.indexOf(w) >= 0 ? w : 'medium';
 
         // 只有允许动效时才开启 reveal 门控，否则内容保持默认可见
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -87,6 +98,8 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
         var nxt = e.newDocument.documentElement;
         nxt.dataset.theme = cur.dataset.theme;
         nxt.dataset.accent = cur.dataset.accent;
+        nxt.dataset.fontsize = cur.dataset.fontsize;
+        nxt.dataset.pagewidth = cur.dataset.pagewidth;
         if (cur.classList.contains('reveal-on')) nxt.classList.add('reveal-on');
       });
     </script>

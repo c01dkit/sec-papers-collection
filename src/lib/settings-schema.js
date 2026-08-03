@@ -1,5 +1,11 @@
 export const ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
 export const THEMES = ['light', 'dark'];
+// 'small' 是站点原始字号（16px 基准），即「无规则」档 ——
+// tokens.css 只为 medium/large 写根字号覆盖。默认档取 'large'。
+export const FONT_SIZES = ['small', 'medium', 'large'];
+// 版心宽度（--wrap-max）：narrow 是站点原始的 1120px，即「无规则」档；
+// full 表示不设上限，以浏览器窗口实际宽度为准（max-width: none）。默认档取 'medium'。
+export const PAGE_WIDTHS = ['narrow', 'medium', 'wide', 'full'];
 
 /**
  * localStorage 镜像键名。存在的唯一理由是预绘制脚本要同步读取。
@@ -16,6 +22,8 @@ export const THEMES = ['light', 'dark'];
 export const MIRROR = {
   theme: 'spc-theme',
   accent: 'spc-accent',
+  fontSize: 'spc-fontsize',
+  pageWidth: 'spc-pagewidth',
   rememberDark: 'spc-remember-dark',
   rememberAccent: 'spc-remember-accent',
   rememberLang: 'spc-remember-lang',
@@ -24,6 +32,8 @@ export const MIRROR = {
 export function DEFAULT_SETTINGS() {
   return {
     theme: 'slate',            // 强调色 slug（语义已从 PrimeVue 预设名改变）
+    fontSize: 'large',
+    pageWidth: 'medium',
     darkTheme: false,
     rememberLanguage: false,
     rememberDarkMode: false,
@@ -44,6 +54,8 @@ export function migrateSettings(raw) {
   const out = DEFAULT_SETTINGS();
 
   out.theme = ACCENTS.includes(src.theme) ? src.theme : 'slate';
+  out.fontSize = FONT_SIZES.includes(src.fontSize) ? src.fontSize : 'large';
+  out.pageWidth = PAGE_WIDTHS.includes(src.pageWidth) ? src.pageWidth : 'medium';
   out.darkTheme = Boolean(src.darkTheme);
   out.rememberLanguage = Boolean(src.rememberLanguage);
   out.rememberDarkMode = Boolean(src.rememberDarkMode);

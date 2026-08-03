@@ -1,4 +1,4 @@
-import { ACCENTS, THEMES } from '@/lib/settings-schema.js';
+import { ACCENTS, THEMES, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
 
 export function nextTheme(cur) {
   return cur === 'dark' ? 'light' : 'dark';
@@ -86,6 +86,15 @@ async function hydrateAndApply() {
     }
 
     if (changed) apply(theme, accent);
+
+    // 字号与版心宽度没有 remember 开关，库里存了就生效。镜像被清而库还在时
+    // 靠这里恢复；直接写 dataset 而不走 apply()：theme-anim 只管颜色过渡。
+    if (FONT_SIZES.includes(settings.fontSize) && settings.fontSize !== el.dataset.fontsize) {
+      el.dataset.fontsize = settings.fontSize;
+    }
+    if (PAGE_WIDTHS.includes(settings.pageWidth) && settings.pageWidth !== el.dataset.pagewidth) {
+      el.dataset.pagewidth = settings.pageWidth;
+    }
   } catch (err) {
     console.warn('[theme] 水合失败，本页沿用预绘制主题', err);
   }

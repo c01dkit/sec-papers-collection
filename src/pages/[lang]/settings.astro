@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import { LOCALES, t } from '@/i18n/index.js';
-import { ACCENTS } from '@/lib/settings-schema.js';
+import { ACCENTS, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -48,6 +48,36 @@ const toggles = [
       .row .control { display: none !important; }
     </style>
   </noscript>
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.fontSize.label')}</div>
+      <p class="ld">{t(lang, 'settings.fontSize.desc')}</p>
+    </div>
+    <div class="control swatches" role="radiogroup" aria-label={t(lang, 'settings.fontSize.label')}>
+      {FONT_SIZES.map((s) => (
+        <button type="button" role="radio" class="sw" data-fontsize-pick={s}
+                aria-checked="false">
+          <span>{t(lang, `settings.fontSizeNames.${s}`)}</span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.pageWidth.label')}</div>
+      <p class="ld">{t(lang, 'settings.pageWidth.desc')}</p>
+    </div>
+    <div class="control swatches" role="radiogroup" aria-label={t(lang, 'settings.pageWidth.label')}>
+      {PAGE_WIDTHS.map((w) => (
+        <button type="button" role="radio" class="sw" data-pagewidth-pick={w}
+                aria-checked="false">
+          <span>{t(lang, `settings.pageWidthNames.${w}`)}</span>
+        </button>
+      ))}
+    </div>
+  </section>
 
   <section class="row" data-reveal>
     <div class="label">

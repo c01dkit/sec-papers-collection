@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DEFAULT_SETTINGS, migrateSettings, ACCENTS, THEMES } from '@/lib/settings-schema.js';
+import { DEFAULT_SETTINGS, migrateSettings, ACCENTS, THEMES, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
 
 describe('DEFAULT_SETTINGS', () => {
   it('每次返回新对象，避免调用方互相污染', () => {
@@ -13,6 +13,11 @@ describe('DEFAULT_SETTINGS', () => {
   it('默认强调色是 slate，默认浅色', () => {
     expect(DEFAULT_SETTINGS().theme).toBe('slate');
     expect(DEFAULT_SETTINGS().darkTheme).toBe(false);
+  });
+
+  it('默认字号是 large，默认版心是 medium', () => {
+    expect(DEFAULT_SETTINGS().fontSize).toBe('large');
+    expect(DEFAULT_SETTINGS().pageWidth).toBe('medium');
   });
 
   it('不含已废弃的 LLM 字段', () => {
@@ -51,6 +56,21 @@ describe('migrateSettings', () => {
     expect(migrateSettings({ theme: 'green' }).theme).toBe('slate');
     expect(migrateSettings({ theme: 'teal' }).theme).toBe('slate');
     expect(migrateSettings({ theme: undefined }).theme).toBe('slate');
+  });
+
+  it('pageWidth 只认四档，脏值回落默认档 medium', () => {
+    expect(migrateSettings({ pageWidth: 'narrow' }).pageWidth).toBe('narrow');
+    expect(migrateSettings({ pageWidth: 'wide' }).pageWidth).toBe('wide');
+    expect(migrateSettings({ pageWidth: 'full' }).pageWidth).toBe('full');
+    expect(migrateSettings({ pageWidth: '1120px' }).pageWidth).toBe('medium');
+    expect(migrateSettings({ pageWidth: undefined }).pageWidth).toBe('medium');
+  });
+
+  it('fontSize 只认三档，脏值回落默认档 large', () => {
+    expect(migrateSettings({ fontSize: 'small' }).fontSize).toBe('small');
+    expect(migrateSettings({ fontSize: 'medium' }).fontSize).toBe('medium');
+    expect(migrateSettings({ fontSize: 'huge' }).fontSize).toBe('large');
+    expect(migrateSettings({ fontSize: undefined }).fontSize).toBe('large');
   });
 
   it('删掉已废弃的 LLM 字段', () => {
@@ -98,5 +118,13 @@ describe('常量', () => {
 
   it('2 个主题', () => {
     expect(THEMES).toEqual(['light', 'dark']);
+  });
+
+  it('3 档字号，从小到大排列', () => {
+    expect(FONT_SIZES).toEqual(['small', 'medium', 'large']);
+  });
+
+  it('4 档版心宽度，从窄到宽排列', () => {
+    expect(PAGE_WIDTHS).toEqual(['narrow', 'medium', 'wide', 'full']);
   });
 });

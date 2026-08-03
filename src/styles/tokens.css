@@ -86,6 +86,21 @@ html[data-theme='dark'][data-accent='indigo']   { --accent: #9aa0dd; --accent-so
 html[data-theme='dark'][data-accent='oxblood']  { --accent: #d9868f; --accent-soft: #7a3f46; }
 html[data-theme='dark'][data-accent='pine']     { --accent: #83bda1; --accent-soft: #3a6350; }
 
+/* ── 字号：三档整体缩放 ──────────────────────────────────────
+   全站尺寸一律以 rem 记，改根字号即等比缩放。「小」是站点原始字号，
+   不写规则（保持 UA 默认基准）。用百分比而不是 px，尊重用户在浏览器里
+   改过的默认字号。 */
+html[data-fontsize='medium'] { font-size: 106.25%; }  /* 16px 基准下 17px */
+html[data-fontsize='large']  { font-size: 112.5%; }   /* 16px 基准下 18px */
+
+/* ── 版心宽度：四档 ──────────────────────────────────────────
+   「窄」是站点原始的 1120px（:root 里的默认值，不写规则）。
+   唯一消费方是 global.css 的 .wrap { max-width: var(--wrap-max) }，
+   所以「超宽」用 none 表示不设上限 —— 版心随浏览器窗口铺满。 */
+html[data-pagewidth='medium'] { --wrap-max: 1280px; }
+html[data-pagewidth='wide']   { --wrap-max: 1440px; }
+html[data-pagewidth='full']   { --wrap-max: none; }
+
 /* ── 版式与间距 ──────────────────────────────────────────── */
 :root {
   --font-sans: 'Inter var', ui-sans-serif, system-ui, -apple-system, 'Noto Sans SC', sans-serif;
@@ -97,7 +112,7 @@ html[data-theme='dark'][data-accent='pine']     { --accent: #83bda1; --accent-so
   --fs-h3: 1.125rem;
   --fs-body: 0.9375rem;
   --fs-small: 0.8125rem;
-  --fs-kicker: 0.6875rem;
+  --fs-kicker: 0.75rem;
 
   --wrap-max: 1120px;
   --wrap-pad: clamp(1.1rem, 3vw, 2.15rem);

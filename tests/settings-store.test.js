@@ -90,10 +90,12 @@ describe('IndexedDB 可用时', () => {
     db.close();
   });
 
-  it('镜像五个键到 localStorage 供预绘制同步读取（没有 lang —— 那个键归 nav.js 管）', async () => {
+  it('镜像七个键到 localStorage 供预绘制同步读取（没有 lang —— 那个键归 nav.js 管）', async () => {
     const s = await freshStore();
     await s.patchSettings({
       theme: 'oxblood',
+      fontSize: 'large',
+      pageWidth: 'wide',
       darkTheme: true,
       rememberDarkMode: true,
       rememberTheme: true,
@@ -101,6 +103,8 @@ describe('IndexedDB 可用时', () => {
     });
     expect(localStorage.getItem(MIRROR.accent)).toBe('oxblood');
     expect(localStorage.getItem(MIRROR.theme)).toBe('dark');
+    expect(localStorage.getItem(MIRROR.fontSize)).toBe('large');
+    expect(localStorage.getItem(MIRROR.pageWidth)).toBe('wide');
     expect(localStorage.getItem(MIRROR.rememberDark)).toBe('1');
     expect(localStorage.getItem(MIRROR.rememberAccent)).toBe('1');
     expect(localStorage.getItem(MIRROR.rememberLang)).toBe('1');
