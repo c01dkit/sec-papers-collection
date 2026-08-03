@@ -548,20 +548,30 @@ def analyze_abstracts_and_titles():
     config = get_config('data.yml')
     os.makedirs('official_cache/advanced_data', exist_ok=True)
     title_cache = {}
-    for paper_info in fetch_one_paper_in_config(config):
-        paper_info: PaperInfo
-        log_file_path = os.path.join('official_cache/advanced_data', f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
-        if log_file_path not in title_cache:
-            title_cache[log_file_path] = titles_in_file(log_file_path)
-        if paper_info.title in title_cache[log_file_path]:
-            continue  # Already analyzed
-        if len(paper_info.abstract) > 50 and paper_info.status != 'advanced':
+    pending = []
+    with stage_progress() as progress:
+        scan = progress.add_task('扫描待分析论文', total=None)
+        for paper_info in fetch_one_paper_in_config(config):
+            paper_info: PaperInfo
+            progress.advance(scan)
+            log_file_path = os.path.join('official_cache/advanced_data', f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
+            if log_file_path not in title_cache:
+                title_cache[log_file_path] = titles_in_file(log_file_path)
+            if paper_info.title in title_cache[log_file_path]:
+                continue  # Already analyzed
+            if len(paper_info.abstract) > 50 and paper_info.status != 'advanced':
+                pending.append((paper_info, log_file_path))
+    console.print(f'{len(pending)} paper(s) need an LLM call', markup=False)
+    with stage_progress() as progress:
+        task = progress.add_task('LLM 分析摘要', total=len(pending))
+        for paper_info, log_file_path in pending:
             result = analyze_title_and_abs(paper_info.title, paper_info.abstract)
-            print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}")
+            console.print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}", markup=False)
             if result.get('topics_en', 'unknown') != 'unknown':
                 with open(log_file_path, 'a', encoding='utf-8') as log_file:
                     log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
                     log_file.flush()
+            progress.advance(task)
     
 def analyze_tags_with_llm(limit=None):
     """
@@ -579,32 +589,39 @@ def analyze_tags_with_llm(limit=None):
     ledger = paper_id.load_ledger()
 
     pending = []
-    for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store):
-        if len(paper_info.abstract) <= 50:
-            continue   # no abstract to reason about
-        key = store_key(paper_info.publication, paper_info.year, paper_info.title)
-        if key in done:
-            continue
-        if tag_store.needs_llm(paper_info.publication, paper_info.year, paper_info.title):
-            pending.append(paper_info)
+    with stage_progress() as progress:
+        scan = progress.add_task('扫描待补全论文', total=None)
+        for paper_info in fetch_one_paper_in_config(config, ledger=ledger, tag_store=tag_store):
+            progress.advance(scan)
+            if len(paper_info.abstract) <= 50:
+                continue   # no abstract to reason about
+            key = store_key(paper_info.publication, paper_info.year, paper_info.title)
+            if key in done:
+                continue
+            if tag_store.needs_llm(paper_info.publication, paper_info.year, paper_info.title):
+                pending.append(paper_info)
 
-    print(f'{len(pending)} paper(s) need an LLM call'
-          + (f', processing the first {limit}' if limit is not None else ''))
+    console.print(f'{len(pending)} paper(s) need an LLM call'
+          + (f', processing the first {limit}' if limit is not None else ''), markup=False)
     # `--llm-tag-limit 0` prints the count and stops: a free cost estimate.
     if limit is not None:
         pending = pending[:limit]
 
-    for i, paper_info in enumerate(pending, 1):
-        try:
-            type_code, topic_code = tag_analyzer.analyze_one(paper_info.title, paper_info.abstract)
-        except RuntimeError as exc:
-            print(f'  [{i}/{len(pending)}] SKIP {paper_info.title[:60]} -- {exc}')
-            continue
-        tag_analyzer.append_result(
-            paper_info.publication, paper_info.year, paper_info.title, type_code, topic_code
-        )
-        print(f'  [{i}/{len(pending)}] {type_code}{topic_code} {paper_info.title[:60]}')
-    print('Run `uv run main.py --analyze` to fold the new tags into the JSON data.')
+    with stage_progress() as progress:
+        task = progress.add_task('LLM 补全 tag', total=len(pending))
+        for paper_info in pending:
+            try:
+                type_code, topic_code = tag_analyzer.analyze_one(paper_info.title, paper_info.abstract)
+            except RuntimeError as exc:
+                console.print(f'SKIP {paper_info.title[:60]} -- {exc}', style='yellow', markup=False)
+                progress.advance(task)
+                continue
+            tag_analyzer.append_result(
+                paper_info.publication, paper_info.year, paper_info.title, type_code, topic_code
+            )
+            console.print(f'{type_code}{topic_code} {paper_info.title[:60]}', markup=False)
+            progress.advance(task)
+    console.print('Run `uv run main.py --analyze` to fold the new tags into the JSON data.')
 
 def check_duplicate_titles():
     meta_dir = './src/assets/data/meta_json'
