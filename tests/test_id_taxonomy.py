@@ -76,28 +76,97 @@ def test_category_priority_targets_are_known_types():
         assert code in T.KNOWN_TYPE_CODES, f'{needle!r} 映射到未知类型码 {code!r}'
 
 
+def test_zh_names_cover_exactly_the_topic_codes():
+    assert set(T.TOPIC_NAMES_ZH) == set(T.TOPIC_CODES.values()), '中文名与码表的码集合不一致'
+    assert all(v.strip() for v in T.TOPIC_NAMES_ZH.values()), '有空的中文名'
+    assert len(set(T.TOPIC_NAMES_ZH.values())) == len(T.TOPIC_NAMES_ZH), '中文名重复'
+
+
+def test_topic_groups_are_ordered_disjoint_and_inside_bands():
+    prev = 0
+    for lo, hi, band, en, zh in T.TOPIC_GROUPS:
+        lo_i, hi_i = int(lo, 16), int(hi, 16)
+        assert prev < lo_i <= hi_i, f'分组 {lo}-{hi} 与前一组重叠或倒序'
+        prev = hi_i
+        assert T.band_of(lo) == band == T.band_of(hi), f'分组 {lo}-{hi} 跨段或段名 {band!r} 不对'
+        assert en.strip() and zh.strip(), f'分组 {lo}-{hi} 缺名字'
+
+
+def test_every_topic_code_belongs_to_exactly_one_group():
+    for name, code in T.TOPIC_CODES.items():
+        hits = [g for g in T.TOPIC_GROUPS if g[0] <= code <= g[1]]
+        assert len(hits) == 1, f'{name!r} ({code}) 属于 {len(hits)} 个分组'
+        assert T.group_of(code) == hits[0]
+    assert T.group_of(T.TOPIC_UNCLASSIFIED) is None
+    assert T.group_of(T.TOPIC_OTHER) is None
+    assert T.group_of('zz') is None
+
+
+def test_type_names_cover_known_type_codes():
+    assert set(T.TYPE_NAMES) == T.KNOWN_TYPE_CODES
+    for code, (en, zh) in T.TYPE_NAMES.items():
+        assert en.strip() and zh.strip(), f'类型 {code} 缺名字'
+
+
+def test_band_names_cover_bands():
+    assert set(T.BAND_NAMES) == {name for name, _lo, _hi in T.TOPIC_BANDS}
+
+
+def test_export_taxonomy_shape():
+    data = T.export_taxonomy()
+    json.dumps(data, ensure_ascii=False)   # 必须可序列化
+    assert [b['key'] for b in data['bands']] == [name for name, _lo, _hi in T.TOPIC_BANDS]
+    assert data['bands'][0] == {'key': 'security', 'lo': '01', 'hi': '7F',
+                                'en': T.BAND_NAMES['security'][0], 'zh': T.BAND_NAMES['security'][1]}
+    assert len(data['groups']) == 15
+    assert data['groups'][0] == {'lo': '01', 'hi': '0F', 'band': 'security',
+                                 'en': 'Systems and infrastructure security', 'zh': '系统与基础设施安全'}
+    assert set(data['topics']) == set(T.TOPIC_CODES.values()) | {T.TOPIC_UNCLASSIFIED, T.TOPIC_OTHER}
+    assert list(data['topics']) == sorted(data['topics']), 'topics 按码排序'
+    assert data['topics']['32'] == {'en': 'Side channels', 'zh': '侧信道'}
+    assert data['topics']['00'] == {'en': 'Unclassified', 'zh': '未分类'}
+    assert data['topics']['FF'] == {'en': 'Other', 'zh': '其他'}
+    assert set(data['types']) == {'0', '1', '2', '3', '4', '5', '6', '7', '9'}
+    for entry in list(data['topics'].values()) + list(data['types'].values()):
+        assert entry['en'].strip() and entry['zh'].strip()
+
+
 # --------------------------------------------------------------------------
 # 与规则文档同步
 # --------------------------------------------------------------------------
 
 def _parse_doc():
-    """从 docs/id-rule.md 第 3 节重新解析码表，用于比对。"""
+    """从 docs/id-rule.md 第 3 节重新解析码表，用于比对。
+
+    返回 (topics, aliases, names_zh, groups)：
+      topics   规范名 -> 码
+      aliases  非规范串 -> 码
+      names_zh 码 -> 中文名
+      groups   [(lo, hi, zh, en)]，按文档出现顺序
+    """
     doc = open(DOC, encoding='utf-8').read()
     body = doc[doc.index('## 3. topic 完整码表'):doc.index('### 3.4 别名表')]
     alias_body = doc[doc.index('### 3.4 别名表'):doc.index('## 4. 台账')]
-    rows = re.findall(r'^\| `([0-9A-F]{2})` \| (.+?) \|$', body, re.M)
-    topics = {name.strip(): code for code, name in rows if name.strip() != '保留'}
+    rows = re.findall(r'^\| `([0-9A-F]{2})` \| (.+?) \| (.+?) \|$', body, re.M)
+    topics = {name.strip(): code for code, name, _zh in rows if name.strip() != '保留'}
+    names_zh = {code: zh.strip() for code, name, zh in rows if name.strip() != '保留'}
+    groups = [
+        (lo, hi, zh.strip(), en.strip())
+        for lo, hi, zh, en in re.findall(
+            r'^#### `([0-9A-F]{2})`–`([0-9A-F]{2})` (.+?) · (.+?)$', body, re.M
+        )
+    ]
     aliases = {
         raw: code
         for _count, raw, code in re.findall(
             r'^\| (\d+) \| `(.+?)` \| `([0-9A-F]{2})` \|$', alias_body, re.M
         )
     }
-    return topics, aliases
+    return topics, aliases, names_zh, groups
 
 
 def test_topic_table_matches_doc():
-    topics, _ = _parse_doc()
+    topics, _, _, _ = _parse_doc()
     assert topics == T.TOPIC_CODES, (
         'analyzers/id_taxonomy.py 与 docs/id-rule.md 第 3 节不一致；'
         '只差 ' + repr(set(topics.items()) ^ set(T.TOPIC_CODES.items()))
@@ -105,11 +174,25 @@ def test_topic_table_matches_doc():
 
 
 def test_alias_table_matches_doc():
-    _, aliases = _parse_doc()
+    _, aliases, _, _ = _parse_doc()
     assert aliases == T.TOPIC_ALIASES, (
         'analyzers/id_taxonomy.py 与 docs/id-rule.md 第 3.4 节不一致；'
         '只差 ' + repr(set(aliases.items()) ^ set(T.TOPIC_ALIASES.items()))
     )
+
+
+def test_topic_zh_names_match_doc():
+    _, _, names_zh, _ = _parse_doc()
+    assert names_zh == T.TOPIC_NAMES_ZH, (
+        'TOPIC_NAMES_ZH 与 docs/id-rule.md 第 3 节「中文」列不一致；'
+        '只差 ' + repr(set(names_zh.items()) ^ set(T.TOPIC_NAMES_ZH.items()))
+    )
+
+
+def test_topic_groups_match_doc():
+    _, _, _, groups = _parse_doc()
+    expected = [(lo, hi, zh, en) for lo, hi, _band, en, zh in T.TOPIC_GROUPS]
+    assert groups == expected, 'TOPIC_GROUPS 与 docs/id-rule.md 第 3 节的分组标题不一致'
 
 
 # --------------------------------------------------------------------------

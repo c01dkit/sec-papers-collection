@@ -147,6 +147,10 @@ SOSP/OSDI/ASPLOS 则完全没有对应 topic。
 
 **一篇论文可能有多个 topic，ID 只放一个：取 `topics_en[0]`。**
 
+码表连同中英文名由 `--analyze` 导出到 `src/assets/data/topics.json`
+（`id_taxonomy.export_taxonomy()`）。前端显示的主题名、类型名只从那个文件读，
+不在 i18n 里另存一份。
+
 ### 2.3 t[3] 奖项
 
 | 码 | 含义 | `awards.json` 中的奖项名 |
@@ -180,288 +184,288 @@ SOSP/OSDI/ASPLOS 则完全没有对应 topic。
 
 ### 3.1 安全段 `01`–`7F`
 
-#### `01`–`0F` 系统与基础设施安全
+#### `01`–`0F` 系统与基础设施安全 · Systems and infrastructure security
 
-| 码 | Topic |
-| --- | --- |
-| `01` | System security |
-| `02` | Operating systems security |
-| `03` | Distributed systems security |
-| `04` | Cloud computing security |
-| `05` | Security for cloud/edge computing |
-| `06` | Embedded systems security |
-| `07` | IoT security |
-| `08` | Security for cyber-physical systems |
-| `09` | Security for large-scale critical infrastructures |
-| `0A` | Security architectures |
-| `0B` | Trustworthy computing |
-| `0C` | Virtualization and container security |
-| `0D` | Storage and file system security |
-| `0E` | VR/AR security |
-| `0F` | Game security |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `01` | System security | 系统安全 |
+| `02` | Operating systems security | 操作系统安全 |
+| `03` | Distributed systems security | 分布式系统安全 |
+| `04` | Cloud computing security | 云计算安全 |
+| `05` | Security for cloud/edge computing | 云/边缘计算安全 |
+| `06` | Embedded systems security | 嵌入式系统安全 |
+| `07` | IoT security | 物联网安全 |
+| `08` | Security for cyber-physical systems | 信息物理系统安全 |
+| `09` | Security for large-scale critical infrastructures | 大规模关键基础设施安全 |
+| `0A` | Security architectures | 安全体系结构 |
+| `0B` | Trustworthy computing | 可信计算 |
+| `0C` | Virtualization and container security | 虚拟化与容器安全 |
+| `0D` | Storage and file system security | 存储与文件系统安全 |
+| `0E` | VR/AR security | VR/AR 安全 |
+| `0F` | Game security | 游戏安全 |
 
-#### `10`–`1F` 网络与 Web 安全
+#### `10`–`1F` 网络与 Web 安全 · Network and web security
 
-| 码 | Topic |
-| --- | --- |
-| `10` | Network security |
-| `11` | Network security measurement |
-| `12` | Network infrastructure security |
-| `13` | Intrusion detection and prevention |
-| `14` | Denial-of-service attacks and countermeasures |
-| `15` | Analysis of network and security protocols |
-| `16` | Integrating security in network protocols |
-| `17` | Network security policy implementation and management |
-| `18` | Security for emerging networks |
-| `19` | Security for future Internet architectures |
-| `1A` | Wireless and mobile security/privacy |
-| `1B` | Web security and privacy |
-| `1C` | Security of web-based applications and services |
-| `1D` | Mobile security |
-| `1E` | Browser security |
-| `1F` | Software-defined networking security |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `10` | Network security | 网络安全 |
+| `11` | Network security measurement | 网络安全测量 |
+| `12` | Network infrastructure security | 网络基础设施安全 |
+| `13` | Intrusion detection and prevention | 入侵检测与防御 |
+| `14` | Denial-of-service attacks and countermeasures | 拒绝服务攻击与对策 |
+| `15` | Analysis of network and security protocols | 网络与安全协议分析 |
+| `16` | Integrating security in network protocols | 网络协议的安全集成 |
+| `17` | Network security policy implementation and management | 网络安全策略实施与管理 |
+| `18` | Security for emerging networks | 新兴网络安全 |
+| `19` | Security for future Internet architectures | 未来互联网架构安全 |
+| `1A` | Wireless and mobile security/privacy | 无线与移动安全/隐私 |
+| `1B` | Web security and privacy | Web 安全与隐私 |
+| `1C` | Security of web-based applications and services | Web 应用与服务安全 |
+| `1D` | Mobile security | 移动安全 |
+| `1E` | Browser security | 浏览器安全 |
+| `1F` | Software-defined networking security | 软件定义网络安全 |
 
-#### `20`–`2F` 软件与程序分析安全
+#### `20`–`2F` 软件与程序分析安全 · Software and program analysis security
 
-| 码 | Topic |
-| --- | --- |
-| `20` | Software security |
-| `21` | Automated security analysis of source code and binaries |
-| `22` | Program and binary analysis |
-| `23` | Fuzzing and vulnerability discovery |
-| `24` | Software supply chain security |
-| `25` | Malware analysis and unwanted software |
-| `26` | Anti-malware techniques |
-| `27` | Forensics and diagnostics for security |
-| `28` | Cyber-crime defense and forensics |
-| `29` | Cyber attack prevention, detection, investigation, and response |
-| `2A` | Attacks with novel insights, techniques, or results |
-| `2B` | Memory safety and exploit mitigation |
-| `2C` | Reverse engineering |
-| `2D` | Language-based security |
-| `2E`–`2F` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `20` | Software security | 软件安全 |
+| `21` | Automated security analysis of source code and binaries | 源代码与二进制的自动化安全分析 |
+| `22` | Program and binary analysis | 程序与二进制分析 |
+| `23` | Fuzzing and vulnerability discovery | 模糊测试与漏洞挖掘 |
+| `24` | Software supply chain security | 软件供应链安全 |
+| `25` | Malware analysis and unwanted software | 恶意软件分析与不良软件 |
+| `26` | Anti-malware techniques | 反恶意软件技术 |
+| `27` | Forensics and diagnostics for security | 安全取证与诊断 |
+| `28` | Cyber-crime defense and forensics | 网络犯罪防御与取证 |
+| `29` | Cyber attack prevention, detection, investigation, and response | 网络攻击的预防、检测、调查与响应 |
+| `2A` | Attacks with novel insights, techniques, or results | 具有新见解、新技术或新结果的攻击 |
+| `2B` | Memory safety and exploit mitigation | 内存安全与漏洞利用缓解 |
+| `2C` | Reverse engineering | 逆向工程 |
+| `2D` | Language-based security | 基于语言的安全 |
+| `2E`–`2F` | 保留 | — |
 
-#### `30`–`3F` 硬件与侧信道
+#### `30`–`3F` 硬件与侧信道 · Hardware and side channels
 
-| 码 | Topic |
-| --- | --- |
-| `30` | Hardware security |
-| `31` | Secure computer architectures |
-| `32` | Side channels |
-| `33` | Detection of malicious or counterfeit hardware |
-| `34` | Automated security analysis of hardware designs |
-| `35` | Physical security |
-| `36`–`3F` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `30` | Hardware security | 硬件安全 |
+| `31` | Secure computer architectures | 安全计算机体系结构 |
+| `32` | Side channels | 侧信道 |
+| `33` | Detection of malicious or counterfeit hardware | 恶意或伪造硬件检测 |
+| `34` | Automated security analysis of hardware designs | 硬件设计的自动化安全分析 |
+| `35` | Physical security | 物理安全 |
+| `36`–`3F` | 保留 | — |
 
-#### `40`–`4F` 密码学
+#### `40`–`4F` 密码学 · Cryptography
 
-| 码 | Topic |
-| --- | --- |
-| `40` | Applied cryptography |
-| `41` | Applications of cryptography |
-| `42` | Analysis of deployed cryptography and protocols |
-| `43` | Cryptographic implementation analysis |
-| `44` | New cryptographic protocols with real-world applications |
-| `45` | Public key infrastructures and key management |
-| `46` | Secure multi-party computation |
-| `47` | Information theory and security |
-| `48`–`4F` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `40` | Applied cryptography | 应用密码学 |
+| `41` | Applications of cryptography | 密码学应用 |
+| `42` | Analysis of deployed cryptography and protocols | 已部署密码系统与协议分析 |
+| `43` | Cryptographic implementation analysis | 密码实现分析 |
+| `44` | New cryptographic protocols with real-world applications | 面向实际应用的新密码协议 |
+| `45` | Public key infrastructures and key management | 公钥基础设施与密钥管理 |
+| `46` | Secure multi-party computation | 安全多方计算 |
+| `47` | Information theory and security | 信息论与安全 |
+| `48`–`4F` | 保留 | — |
 
-#### `50`–`5F` 区块链与访问控制
+#### `50`–`5F` 区块链与访问控制 · Blockchain and access control
 
-| 码 | Topic |
-| --- | --- |
-| `50` | Blockchains and distributed ledger security |
-| `51` | Security and privacy for blockchains and cryptocurrencies |
-| `52` | Smart contract security |
-| `53` | Authentication, access control, and authorization |
-| `54`–`5F` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `50` | Blockchains and distributed ledger security | 区块链与分布式账本安全 |
+| `51` | Security and privacy for blockchains and cryptocurrencies | 区块链与加密货币的安全与隐私 |
+| `52` | Smart contract security | 智能合约安全 |
+| `53` | Authentication, access control, and authorization | 认证、访问控制与授权 |
+| `54`–`5F` | 保留 | — |
 
-#### `60`–`6F` 隐私
+#### `60`–`6F` 隐私 · Privacy
 
-| 码 | Topic |
-| --- | --- |
-| `60` | Privacy and anonymity |
-| `61` | Privacy and anonymity in networks and distributed systems |
-| `62` | Privacy-preserving computation |
-| `63` | Privacy attacks |
-| `64` | Privacy metrics |
-| `65` | Surveillance and censorship |
-| `66` | Security and privacy metrics |
-| `67` | Social network security and privacy |
-| `68`–`6F` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `60` | Privacy and anonymity | 隐私与匿名 |
+| `61` | Privacy and anonymity in networks and distributed systems | 网络与分布式系统中的隐私与匿名 |
+| `62` | Privacy-preserving computation | 隐私保护计算 |
+| `63` | Privacy attacks | 隐私攻击 |
+| `64` | Privacy metrics | 隐私度量 |
+| `65` | Surveillance and censorship | 监控与审查 |
+| `66` | Security and privacy metrics | 安全与隐私度量 |
+| `67` | Social network security and privacy | 社交网络安全与隐私 |
+| `68`–`6F` | 保留 | — |
 
-#### `70`–`7F` 人因、机器学习与方法学
+#### `70`–`7F` 人因、机器学习与方法学 · Human factors, machine learning and methodology
 
-| 码 | Topic |
-| --- | --- |
-| `70` | Human-centered security and privacy |
-| `71` | Usable security and privacy |
-| `72` | User studies for security and privacy |
-| `73` | Security and privacy law, policy, and ethics |
-| `74` | Security education and training |
-| `75` | Security for at-risk populations |
-| `76` | Understanding and mitigating information manipulation, disinformation, harassment, extremism, and abuse |
-| `77` | Economics of security and privacy |
-| `78` | Formal methods and verification |
-| `79` | Program verification for security |
-| `7A` | Security of machine learning |
-| `7B` | Privacy of machine learning |
-| `7C` | ML integrity and availability |
-| `7D` | Attacks on ML systems |
-| `7E` | Verifying security and privacy properties of ML algorithms |
-| `7F` | Special problems and tradeoffs (security vs. efficiency/usability/cost/ethics) |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `70` | Human-centered security and privacy | 以人为中心的安全与隐私 |
+| `71` | Usable security and privacy | 可用安全与隐私 |
+| `72` | User studies for security and privacy | 安全与隐私的用户研究 |
+| `73` | Security and privacy law, policy, and ethics | 安全与隐私的法律、政策与伦理 |
+| `74` | Security education and training | 安全教育与培训 |
+| `75` | Security for at-risk populations | 高风险人群的安全 |
+| `76` | Understanding and mitigating information manipulation, disinformation, harassment, extremism, and abuse | 信息操纵、虚假信息、骚扰、极端主义与滥用的理解与缓解 |
+| `77` | Economics of security and privacy | 安全与隐私经济学 |
+| `78` | Formal methods and verification | 形式化方法与验证 |
+| `79` | Program verification for security | 面向安全的程序验证 |
+| `7A` | Security of machine learning | 机器学习安全 |
+| `7B` | Privacy of machine learning | 机器学习隐私 |
+| `7C` | ML integrity and availability | 机器学习的完整性与可用性 |
+| `7D` | Attacks on ML systems | 针对机器学习系统的攻击 |
+| `7E` | Verifying security and privacy properties of ML algorithms | 机器学习算法安全与隐私属性验证 |
+| `7F` | Special problems and tradeoffs (security vs. efficiency/usability/cost/ethics) | 特殊问题与权衡（安全与效率/可用性/成本/伦理） |
 
 ### 3.2 软件工程段 `80`–`BF`
 
-#### `80`–`8F` 测试与分析
+#### `80`–`8F` 测试与分析 · Testing and analysis
 
-| 码 | Topic |
-| --- | --- |
-| `80` | Software testing |
-| `81` | Test generation and prioritization |
-| `82` | Static analysis and linting |
-| `83` | Dynamic analysis and instrumentation |
-| `84` | Symbolic execution and constraint solving |
-| `85` | Program verification and model checking |
-| `86` | Automated program repair |
-| `87` | Fault localization and debugging |
-| `88` | Bug and defect prediction |
-| `89` | Mutation testing |
-| `8A` | Concurrency and distributed system testing |
-| `8B` | GUI and end-to-end testing |
-| `8C` | Performance analysis and profiling |
-| `8D` | Regression testing and continuous integration |
-| `8E` | Flaky test analysis |
-| `8F` | Runtime verification and monitoring |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `80` | Software testing | 软件测试 |
+| `81` | Test generation and prioritization | 测试生成与优先级排序 |
+| `82` | Static analysis and linting | 静态分析与代码检查 |
+| `83` | Dynamic analysis and instrumentation | 动态分析与插桩 |
+| `84` | Symbolic execution and constraint solving | 符号执行与约束求解 |
+| `85` | Program verification and model checking | 程序验证与模型检验 |
+| `86` | Automated program repair | 自动程序修复 |
+| `87` | Fault localization and debugging | 缺陷定位与调试 |
+| `88` | Bug and defect prediction | 缺陷预测 |
+| `89` | Mutation testing | 变异测试 |
+| `8A` | Concurrency and distributed system testing | 并发与分布式系统测试 |
+| `8B` | GUI and end-to-end testing | GUI 与端到端测试 |
+| `8C` | Performance analysis and profiling | 性能分析与剖析 |
+| `8D` | Regression testing and continuous integration | 回归测试与持续集成 |
+| `8E` | Flaky test analysis | 不稳定测试分析 |
+| `8F` | Runtime verification and monitoring | 运行时验证与监控 |
 
-#### `90`–`9F` 程序与代码
+#### `90`–`9F` 程序与代码 · Programs and code
 
-| 码 | Topic |
-| --- | --- |
-| `90` | Program comprehension |
-| `91` | Code search and recommendation |
-| `92` | Code clone detection |
-| `93` | Refactoring |
-| `94` | Program synthesis |
-| `95` | Compilers and language implementation |
-| `96` | Type systems and language design |
-| `97` | API design, usage and misuse |
-| `98` | Configuration and build systems |
-| `99` | Dependency and package management |
-| `9A` | Code review |
-| `9B` | Version control and change analysis |
-| `9C` | Technical debt and code smells |
-| `9D` | Documentation and comments |
-| `9E` | Logging and observability |
-| `9F` | Software architecture and design |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `90` | Program comprehension | 程序理解 |
+| `91` | Code search and recommendation | 代码搜索与推荐 |
+| `92` | Code clone detection | 代码克隆检测 |
+| `93` | Refactoring | 重构 |
+| `94` | Program synthesis | 程序合成 |
+| `95` | Compilers and language implementation | 编译器与语言实现 |
+| `96` | Type systems and language design | 类型系统与语言设计 |
+| `97` | API design, usage and misuse | API 设计、使用与误用 |
+| `98` | Configuration and build systems | 配置与构建系统 |
+| `99` | Dependency and package management | 依赖与包管理 |
+| `9A` | Code review | 代码评审 |
+| `9B` | Version control and change analysis | 版本控制与变更分析 |
+| `9C` | Technical debt and code smells | 技术债与代码异味 |
+| `9D` | Documentation and comments | 文档与注释 |
+| `9E` | Logging and observability | 日志与可观测性 |
+| `9F` | Software architecture and design | 软件架构与设计 |
 
-#### `A0`–`AF` 过程、人与 AI
+#### `A0`–`AF` 过程、人与 AI · Process, people and AI
 
-| 码 | Topic |
-| --- | --- |
-| `A0` | Requirements engineering |
-| `A1` | Software process and project management |
-| `A2` | Developer productivity and human factors |
-| `A3` | Empirical studies of developers |
-| `A4` | Open source ecosystems and community |
-| `A5` | Mining software repositories |
-| `A6` | Software maintenance and evolution |
-| `A7` | Software reuse |
-| `A8` | Software engineering education |
-| `A9` | Large language models for software engineering |
-| `AA` | Machine learning for software engineering |
-| `AB` | Software engineering for machine learning systems |
-| `AC` | AI code generation and programming assistants |
-| `AD` | Benchmarks and datasets for software engineering |
-| `AE` | Software ecosystems and app stores |
-| `AF` | Green and sustainable software |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `A0` | Requirements engineering | 需求工程 |
+| `A1` | Software process and project management | 软件过程与项目管理 |
+| `A2` | Developer productivity and human factors | 开发者效率与人因 |
+| `A3` | Empirical studies of developers | 开发者实证研究 |
+| `A4` | Open source ecosystems and community | 开源生态与社区 |
+| `A5` | Mining software repositories | 软件仓库挖掘 |
+| `A6` | Software maintenance and evolution | 软件维护与演化 |
+| `A7` | Software reuse | 软件复用 |
+| `A8` | Software engineering education | 软件工程教育 |
+| `A9` | Large language models for software engineering | 面向软件工程的大语言模型 |
+| `AA` | Machine learning for software engineering | 面向软件工程的机器学习 |
+| `AB` | Software engineering for machine learning systems | 机器学习系统的软件工程 |
+| `AC` | AI code generation and programming assistants | AI 代码生成与编程助手 |
+| `AD` | Benchmarks and datasets for software engineering | 软件工程基准与数据集 |
+| `AE` | Software ecosystems and app stores | 软件生态与应用商店 |
+| `AF` | Green and sustainable software | 绿色与可持续软件 |
 
-#### `B0`–`BF` 领域与质量属性
+#### `B0`–`BF` 领域与质量属性 · Domains and quality attributes
 
-| 码 | Topic |
-| --- | --- |
-| `B0` | Mobile app analysis |
-| `B1` | Web application engineering |
-| `B2` | Cloud and microservice engineering |
-| `B3` | DevOps and deployment |
-| `B4` | Embedded and cyber-physical software |
-| `B5` | Blockchain and smart contract engineering |
-| `B6` | Quantum software engineering |
-| `B7` | Safety-critical software and certification |
-| `B8` | Reliability and availability engineering |
-| `B9` | Usability and accessibility engineering |
-| `BA` | Software energy efficiency |
-| `BB` | Software licensing and legal issues |
-| `BC` | Formal specification |
-| `BD` | Software modeling and model-driven engineering |
-| `BE` | Software analytics |
-| `BF` | 保留 |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `B0` | Mobile app analysis | 移动应用分析 |
+| `B1` | Web application engineering | Web 应用工程 |
+| `B2` | Cloud and microservice engineering | 云与微服务工程 |
+| `B3` | DevOps and deployment | DevOps 与部署 |
+| `B4` | Embedded and cyber-physical software | 嵌入式与信息物理软件 |
+| `B5` | Blockchain and smart contract engineering | 区块链与智能合约工程 |
+| `B6` | Quantum software engineering | 量子软件工程 |
+| `B7` | Safety-critical software and certification | 安全关键软件与认证 |
+| `B8` | Reliability and availability engineering | 可靠性与可用性工程 |
+| `B9` | Usability and accessibility engineering | 可用性与无障碍工程 |
+| `BA` | Software energy efficiency | 软件能效 |
+| `BB` | Software licensing and legal issues | 软件许可与法律问题 |
+| `BC` | Formal specification | 形式化规约 |
+| `BD` | Software modeling and model-driven engineering | 软件建模与模型驱动工程 |
+| `BE` | Software analytics | 软件分析学 |
+| `BF` | 保留 | — |
 
 ### 3.3 系统段 `C0`–`EF`
 
-#### `C0`–`CF` 操作系统与分布式
+#### `C0`–`CF` 操作系统与分布式 · Operating systems and distributed systems
 
-| 码 | Topic |
-| --- | --- |
-| `C0` | Operating system design |
-| `C1` | Kernel and microkernel architecture |
-| `C2` | Virtualization and hypervisors |
-| `C3` | Containers and sandboxing |
-| `C4` | Memory management |
-| `C5` | Scheduling |
-| `C6` | Concurrency and synchronization |
-| `C7` | File systems |
-| `C8` | Storage systems |
-| `C9` | Persistent memory |
-| `CA` | I/O and device drivers |
-| `CB` | Serverless and cloud runtimes |
-| `CC` | Distributed systems |
-| `CD` | Consensus and replication |
-| `CE` | Fault tolerance and reliability |
-| `CF` | Formal verification of systems |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `C0` | Operating system design | 操作系统设计 |
+| `C1` | Kernel and microkernel architecture | 内核与微内核架构 |
+| `C2` | Virtualization and hypervisors | 虚拟化与虚拟机监控器 |
+| `C3` | Containers and sandboxing | 容器与沙箱 |
+| `C4` | Memory management | 内存管理 |
+| `C5` | Scheduling | 调度 |
+| `C6` | Concurrency and synchronization | 并发与同步 |
+| `C7` | File systems | 文件系统 |
+| `C8` | Storage systems | 存储系统 |
+| `C9` | Persistent memory | 持久内存 |
+| `CA` | I/O and device drivers | I/O 与设备驱动 |
+| `CB` | Serverless and cloud runtimes | 无服务器与云运行时 |
+| `CC` | Distributed systems | 分布式系统 |
+| `CD` | Consensus and replication | 共识与复制 |
+| `CE` | Fault tolerance and reliability | 容错与可靠性 |
+| `CF` | Formal verification of systems | 系统形式化验证 |
 
-#### `D0`–`DF` 网络与体系结构
+#### `D0`–`DF` 网络与体系结构 · Networking and architecture
 
-| 码 | Topic |
-| --- | --- |
-| `D0` | Datacenter networking |
-| `D1` | Network stacks and RDMA |
-| `D2` | Computer architecture |
-| `D3` | Memory and cache hierarchy |
-| `D4` | Accelerators and heterogeneous computing |
-| `D5` | GPU systems |
-| `D6` | Interconnects and network-on-chip |
-| `D7` | Processor microarchitecture |
-| `D8` | Near-data and in-memory processing |
-| `D9` | Non-volatile and emerging memory |
-| `DA` | Energy and power management |
-| `DB` | Reconfigurable computing and FPGA |
-| `DC` | Quantum computing systems |
-| `DD` | Compilers and runtime systems |
-| `DE` | Binary translation and emulation |
-| `DF` | Hardware/software co-design |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `D0` | Datacenter networking | 数据中心网络 |
+| `D1` | Network stacks and RDMA | 网络协议栈与 RDMA |
+| `D2` | Computer architecture | 计算机体系结构 |
+| `D3` | Memory and cache hierarchy | 内存与缓存层次 |
+| `D4` | Accelerators and heterogeneous computing | 加速器与异构计算 |
+| `D5` | GPU systems | GPU 系统 |
+| `D6` | Interconnects and network-on-chip | 互连与片上网络 |
+| `D7` | Processor microarchitecture | 处理器微架构 |
+| `D8` | Near-data and in-memory processing | 近数据与存内计算 |
+| `D9` | Non-volatile and emerging memory | 非易失与新型存储器 |
+| `DA` | Energy and power management | 能耗与功耗管理 |
+| `DB` | Reconfigurable computing and FPGA | 可重构计算与 FPGA |
+| `DC` | Quantum computing systems | 量子计算系统 |
+| `DD` | Compilers and runtime systems | 编译器与运行时系统 |
+| `DE` | Binary translation and emulation | 二进制翻译与仿真 |
+| `DF` | Hardware/software co-design | 软硬件协同设计 |
 
-#### `E0`–`EF` 应用系统
+#### `E0`–`EF` 应用系统 · Application systems
 
-| 码 | Topic |
-| --- | --- |
-| `E0` | Machine learning systems |
-| `E1` | LLM serving and inference systems |
-| `E2` | Training systems and parallelism |
-| `E3` | Data processing and analytics systems |
-| `E4` | Database systems |
-| `E5` | Key-value stores and caching |
-| `E6` | Graph processing systems |
-| `E7` | Stream processing |
-| `E8` | Edge and mobile systems |
-| `E9` | Real-time systems |
-| `EA` | Blockchain systems |
-| `EB` | Trusted execution environments |
-| `EC` | System performance measurement |
-| `ED` | Tracing, debugging and diagnosis for systems |
-| `EE` | Benchmarks and workload characterization |
-| `EF` | Resource management and scheduling policies |
+| 码 | Topic | 中文 |
+| --- | --- | --- |
+| `E0` | Machine learning systems | 机器学习系统 |
+| `E1` | LLM serving and inference systems | 大模型推理服务系统 |
+| `E2` | Training systems and parallelism | 训练系统与并行 |
+| `E3` | Data processing and analytics systems | 数据处理与分析系统 |
+| `E4` | Database systems | 数据库系统 |
+| `E5` | Key-value stores and caching | 键值存储与缓存 |
+| `E6` | Graph processing systems | 图处理系统 |
+| `E7` | Stream processing | 流处理 |
+| `E8` | Edge and mobile systems | 边缘与移动系统 |
+| `E9` | Real-time systems | 实时系统 |
+| `EA` | Blockchain systems | 区块链系统 |
+| `EB` | Trusted execution environments | 可信执行环境 |
+| `EC` | System performance measurement | 系统性能测量 |
+| `ED` | Tracing, debugging and diagnosis for systems | 系统追踪、调试与诊断 |
+| `EE` | Benchmarks and workload characterization | 基准测试与负载特征分析 |
+| `EF` | Resource management and scheduling policies | 资源管理与调度策略 |
 
 ### 3.4 别名表
 
