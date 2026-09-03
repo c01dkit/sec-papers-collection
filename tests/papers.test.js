@@ -56,6 +56,33 @@ describe('applyFilters', () => {
     expect(applyFilters(ROWS, { publications: [], years: [] })).toHaveLength(5);
   });
 
+  it('主题多选取并集（比较 tag 第 2-3 位）', () => {
+    // ROWS 的 tag：R1 '107N'(07) R2 '123N'(23) R3 '123D'(23) R4 '178N'(78) R5 '596N'(96)
+    expect(applyFilters(ROWS, { topics: ['23'] }).map((r) => r.id)).toEqual([R2, R3]);
+    expect(applyFilters(ROWS, { topics: ['23', '96'] }).map((r) => r.id)).toEqual([R2, R3, R5]);
+  });
+
+  it('类型多选取并集（比较 tag 第 1 位）', () => {
+    expect(applyFilters(ROWS, { types: ['5'] }).map((r) => r.id)).toEqual([R5]);
+    expect(applyFilters(ROWS, { types: ['1'] })).toHaveLength(4);
+  });
+
+  it('主题与类型与其他维度取交集', () => {
+    const out = applyFilters(ROWS, { topics: ['23'], publications: ['ACM CCS'], types: ['1'] });
+    expect(out.map((r) => r.id)).toEqual([R3]);
+  });
+
+  it('主题 / 类型空数组视为不筛', () => {
+    expect(applyFilters(ROWS, { topics: [], types: [] })).toHaveLength(5);
+  });
+
+  it('没有 tag 的行按未分类 00 / 待分析 0 处理', () => {
+    const rows = [...ROWS, { id: 'IN24001', year: 2024, title: 'No tag', publication: 'NDSS' }];
+    expect(applyFilters(rows, { topics: ['00'] }).map((r) => r.id)).toEqual(['IN24001']);
+    expect(applyFilters(rows, { types: ['0'] }).map((r) => r.id)).toEqual(['IN24001']);
+    expect(applyFilters(rows, { topics: ['23'] }).map((r) => r.id)).toEqual([R2, R3]);
+  });
+
   it('仅看收藏', () => {
     const favorites = new Set([R2, R5]);
     expect(applyFilters(ROWS, { favoritesOnly: true, favorites }).map((r) => r.id)).toEqual([R2, R5]);

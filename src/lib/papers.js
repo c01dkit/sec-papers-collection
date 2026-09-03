@@ -1,4 +1,5 @@
 import { DATA_BASE } from './cdn.js';
+import { parseTag } from './tags.js';
 
 const DEFAULT_PAGE_SIZE = 15;
 
@@ -10,6 +11,8 @@ export function applyFilters(rows, criteria) {
   const yearSet = c.years && c.years.length ? new Set(c.years.map(Number)) : null;
   const favoritesOnly = Boolean(c.favoritesOnly);
   const favorites = c.favorites instanceof Set ? c.favorites : null;
+  const topicSet = c.topics && c.topics.length ? new Set(c.topics) : null;
+  const typeSet = c.types && c.types.length ? new Set(c.types) : null;
 
   return rows.filter((row) => {
     // 用 includes 而非正则：用户可能输入 C++ 或 ( ，正则会误匹配甚至抛错
@@ -17,6 +20,11 @@ export function applyFilters(rows, criteria) {
     if (pubSet && !pubSet.has(row.publication)) return false;
     if (yearSet && !yearSet.has(Number(row.year))) return false;
     if (favoritesOnly && !(favorites && favorites.has(row.id))) return false;
+    if (topicSet || typeSet) {
+      const tag = parseTag(row.tag);   // 没有 tag 的行按 '0' / '00' 计，见 tags.js
+      if (topicSet && !topicSet.has(tag.topic)) return false;
+      if (typeSet && !typeSet.has(tag.type)) return false;
+    }
     return true;
   });
 }
