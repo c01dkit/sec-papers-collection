@@ -7,6 +7,7 @@ import datetime
 import json
 import analyzers.oss_uploader as oss_uploader
 import analyzers.paper_id as paper_id
+import analyzers.id_taxonomy as id_taxonomy
 import argparse
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
@@ -37,6 +38,10 @@ class Statistics:
     byYear: dict = field(default_factory=dict)
     byPublicationAndYear: dict = field(default_factory=dict)
     byPublicationAndYearAndStatus: dict = field(default_factory=dict)
+    #: tag 第 2-3 位（topic 码）-> 篇数；只含出现过的码，按码排序。主题索引页与检索页下拉读它。
+    byTopic: dict = field(default_factory=dict)
+    #: tag 第 1 位（类型码）-> 篇数。
+    byType: dict = field(default_factory=dict)
     years: list = field(default_factory=list)
     #: 本次 --analyze 的运行日期（本地时区，YYYY-MM-DD）。首页 Hero 的
     #: 「数据同步于」读它。原先那里读的是 submission-timeline.json 里各 CFP
@@ -57,6 +62,16 @@ class PaperInfo:
     paper: str = '#'
     abstract: str = '#'
     status: str = 'notchecked'
+
+def tally_tag(statistics: Statistics, tag) -> None:
+    """把一篇论文的 tag 计入 byType / byTopic。
+
+    畸形 tag 按默认值 '000N' 计，而不是跳过：两张表的合计必须等于 total，
+    否则索引页的「已分类」百分比会算错。
+    """
+    t = tag if isinstance(tag, str) and len(tag) == 4 else '000N'
+    statistics.byType[t[0]] = statistics.byType.get(t[0], 0) + 1
+    statistics.byTopic[t[1:3]] = statistics.byTopic.get(t[1:3], 0) + 1
 
 def get_config(filename):
     with open(filename, 'r', encoding='utf-8') as f:
@@ -349,6 +364,7 @@ def export_data_json(project_base):
 
             statistics.byPublicationAndYearAndStatus.setdefault(publication,{})
             statistics.byPublicationAndYearAndStatus[publication].setdefault(year, paper_info.status)
+            tally_tag(statistics, paper_info.tag)
 
             # Quick view: generate a small version of full paper info (100 latest paper from each publication)
             if statistics.byPublication[publication] <= 100:
@@ -374,6 +390,8 @@ def export_data_json(project_base):
             statistics.overview.append(asdict(trend))
            
     statistics.byYear = dict(sorted(statistics.byYear.items(), key=lambda x: int(x[0])))
+    statistics.byTopic = dict(sorted(statistics.byTopic.items()))
+    statistics.byType = dict(sorted(statistics.byType.items()))
     statistics.years = list(statistics.byYear.keys())
     statistics.sync_date = datetime.date.today().isoformat()
 
@@ -381,6 +399,7 @@ def export_data_json(project_base):
         'data-statistics.json': statistics,
         'data-quick-view.json': quick_view,
         'data.json': json_all,
+        'topics.json': id_taxonomy.export_taxonomy(),
     }.items():
         if hasattr(json_file, '__dataclass_fields__'):
             json.dump(asdict(json_file), open(os.path.join(project_base + json_name), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
