@@ -211,6 +211,9 @@ function readDropdown(details, placeholder) {
 // 筛选条件写回 URL（replaceState，不产生历史记录），结果因此可分享、可从主题索引页深链。
 // 「仅看收藏」是本地状态，不进 URL。全空时把 ?… 整段去掉。
 function syncUrl() {
+  // 软导航后 120ms 防抖可能才触发：此时 els 指向已脱离文档的旧 DOM，
+  // location.pathname 已是新页面，不能把 ?q=… 写到别的页面上去。
+  if (!els.tbody?.isConnected) return;
   const next = location.pathname + writeSearchParams(state);
   if (next === location.pathname + location.search) return;
   history.replaceState(history.state, '', next);
@@ -358,6 +361,8 @@ export async function initPaperTable() {
     for (const input of details.querySelectorAll('input[value]')) input.checked = want.has(input.value);
     state[field] = readDropdown(details, placeholder);
   }
+  // 把未知的值从地址栏里去掉、编码规范化：分享出去的 URL 要和页面实际在做的事一致
+  syncUrl();
 
   const [settings, favorites] = await Promise.all([getSettings(), getFavorites()]);
   state.keywords = settings.keywords;
@@ -378,7 +383,8 @@ export async function initPaperTable() {
   });
 
   for (const [details, field, placeholder] of dropdowns) {
-    details.addEventListener('change', () => {
+    details.addEventListener('change', (e) => {
+      if (e.target?.type !== 'checkbox') return;   // 过滤框的 change 不是筛选变化
       state[field] = readDropdown(details, placeholder);
       state.page = 1;
       render();
@@ -468,7 +474,11 @@ export async function initPaperTable() {
     const topicBtn = e.target.closest('[data-topic]');
     if (topicBtn) {
       const code = topicBtn.dataset.topic;
-      for (const input of els.fTopic.querySelectorAll('input[value]')) input.checked = input.value === code;
+      const inputs = [...els.fTopic.querySelectorAll('input[value]')];
+      // 选项在构建期按篇数 > 0 裁剪，行来自运行期的 CDN 数据：两者可能错位。
+      // 没有对应选项时保持现状，而不是把已有的主题筛选清空。
+      if (!inputs.some((input) => input.value === code)) return;
+      for (const input of inputs) input.checked = input.value === code;
       state.topics = readDropdown(els.fTopic, i18n.anyTopic);
       state.page = 1;
       render();

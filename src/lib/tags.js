@@ -50,6 +50,9 @@ export function typeLabel(taxonomy, code, lang) {
 const inRange = (code, lo, hi) => code >= lo && code <= hi;
 const sum = (xs) => xs.reduce((s, x) => s + x.count, 0);
 
+// 显式 .sort() 不是多余的：topics.json 虽按码写入，但 Object.keys 会把 '10'…'99'
+// 这类整数样的键排到 '00'…'0F' 前面（V8 的整数键优先规则）。去掉排序，下拉与索引页
+// 的顺序就会静默乱掉。
 function topicsIn(taxonomy, lo, hi) {
   return Object.keys(taxonomy.topics)
     .filter((code) => !SENTINEL_TOPICS.includes(code) && inRange(code, lo, hi))

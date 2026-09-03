@@ -22,10 +22,10 @@ def test_tally_tag_counts_type_and_topic():
 
 def test_tally_tag_treats_malformed_tag_as_default():
     s = M.Statistics()
-    for tag in ['', None, 'bad', '12345']:
+    for tag in ['', None, 'bad', '12345', '1a3N', '123n']:
         M.tally_tag(s, tag)
-    assert s.byType == {'0': 4}
-    assert s.byTopic == {'00': 4}
+    assert s.byType == {'0': 6}
+    assert s.byTopic == {'00': 6}
 
 
 def test_statistics_has_the_two_new_tables_by_default():

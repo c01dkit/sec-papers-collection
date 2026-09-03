@@ -3,6 +3,7 @@ import pickle
 import yaml
 import hashlib
 import os
+import re
 import datetime
 import json
 import analyzers.oss_uploader as oss_uploader
@@ -63,13 +64,16 @@ class PaperInfo:
     abstract: str = '#'
     status: str = 'notchecked'
 
+_TAG_RE = re.compile(r'^[0-9][0-9A-F]{2}[A-Z]$')   # 与 src/lib/tags.js 的 TAG_RE 一致
+
 def tally_tag(statistics: Statistics, tag) -> None:
     """把一篇论文的 tag 计入 byType / byTopic。
 
     畸形 tag 按默认值 '000N' 计，而不是跳过：两张表的合计必须等于 total，
     否则索引页的「已分类」百分比会算错。
+    「畸形」的定义与前端 parseTag 完全一致（同一条正则），否则会出现下拉里的篇数大于筛出的行数。
     """
-    t = tag if isinstance(tag, str) and len(tag) == 4 else '000N'
+    t = tag if isinstance(tag, str) and _TAG_RE.match(tag) else '000N'
     statistics.byType[t[0]] = statistics.byType.get(t[0], 0) + 1
     statistics.byTopic[t[1:3]] = statistics.byTopic.get(t[1:3], 0) + 1
 

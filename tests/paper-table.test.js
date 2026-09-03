@@ -110,7 +110,7 @@ describe('paper-table：主题 / 类型 / URL', () => {
     // 先把 23 也勾上，再点 07 的按钮，结果应只剩 07
     const cb = document.querySelector('#fTopic input[value="23"]');
     cb.checked = true;
-    document.getElementById('fTopic').dispatchEvent(new Event('change'));
+    cb.dispatchEvent(new Event('change', { bubbles: true }));
     expect(checked('fTopic')).toEqual(['07', '23']);
     expect(location.search).toBe('?topic=07&topic=23');
     document.querySelector('#ptBody tr[data-id="IO26001"] button[data-topic]').click();
@@ -150,8 +150,33 @@ describe('paper-table：主题 / 类型 / URL', () => {
     await new Promise((r) => setTimeout(r, 150));   // 脚本里的 120ms 防抖（不用假计时器：boot 自己要等真实的 tick）
     const pub = document.querySelector('#fPub input[value="ACM CCS"]');
     pub.checked = true;
-    document.getElementById('fPub').dispatchEvent(new Event('change'));
+    pub.dispatchEvent(new Event('change', { bubbles: true }));
     expect(location.search).toBe('?q=fuzz&pub=ACM+CCS');
     expect(rowIds()).toEqual(['IC25001']);
+  });
+
+  it('URL 里未知的码在回填后被规范化掉', async () => {
+    await boot('?topic=ZZ&type=6&pub=Nope');
+    expect(location.search).toBe('?type=6');
+  });
+
+  it('行内主题码在下拉里没有选项时不动现有筛选', async () => {
+    await boot('?topic=23');
+    // 造一行下拉里没有的主题码
+    const tr = document.querySelector('#ptBody tr[data-id="IO26002"]');
+    const btn = tr.querySelector('button[data-topic]');
+    btn.dataset.topic = 'ZZ';
+    btn.click();
+    expect(checked('fTopic')).toEqual(['23']);
+    expect(location.search).toBe('?topic=23');
+  });
+
+  it('过滤框上的 change 事件不触发筛选', async () => {
+    await boot('?topic=23');
+    const box = document.querySelector('#fTopic [data-fd-search]');
+    box.value = 'x';
+    box.dispatchEvent(new Event('change', { bubbles: true }));
+    expect(checked('fTopic')).toEqual(['23']);
+    expect(rowIds()).toEqual(['IO26002', 'IC25001']);
   });
 });

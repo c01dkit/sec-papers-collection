@@ -41,6 +41,7 @@ uv run main.py --seed-upload-cache  # Mark current JSON as already-uploaded (ski
 ```bash
 uv run main.py --analyze --upload --zip && npm run build && npm run deploy
 ```
+`--analyze --upload` without `npm run build` leaves the search dropdowns' and topics page's per-topic counts stale — they are baked in at build time while the rows come from the CDN.
 
 ## Architecture
 
@@ -80,7 +81,7 @@ Four rules, none of them obvious from reading the code, all of them earned the h
 1. **Astro's scoped `<style>` only reaches elements written in that file's own template.** It compiles to `.x[data-astro-cid-…]`, and elements built by `createElement` (or rendered by a child component) never carry that attribute — the rules simply don't match and the element ships completely unstyled. Style those from `<style is:global>` behind a narrow prefix (`#abResult .hint`, `.pt td`, `[data-countdown] .ph`). Adding a class to an element that *is* in the template (`.step.past`, `.row.past`) is fine to keep scoped. `tests/wiring.test.js` has a tripwire for the `className = '…'` case; it does not and cannot cover everything.
 2. **Page scripts must take their root with `getElementById`; class names are a site-wide namespace.** A `.bar` in a page script once matched TopNav's `.bar` and killed the awards page. Two pre-constraint uses survive (`abstract-view.js`'s `.picker`, `timeline.js`'s `.pub` — and `.pub` is now used by three components), so don't copy them.
 3. **Module-level state in a page script survives soft navigation; the DOM does not.** `astro:page-load` re-runs `init()` against a brand-new DOM with no `dataset.bound`, but the module is not re-evaluated. Reset everything you hold — see `paper-table.js:5-8` (`state = initialState()`). Every `init()` must also be idempotent via `dataset.bound`.
-4. **Adding a page script means adding a row to `tests/wiring.test.js`'s `PAIRS`.** That is what guards the template↔script contract (embedded i18n keys, `getElementById` ids, scoped-CSS misuse). Note what it does *not* guard: the `data-*` and `querySelector` contracts (`[data-fd-value]`, `[data-fd-search]`, `[data-topic]`, `.step[data-ddl]`, `canvas[data-chart]`, …). Rename one of those and the page silently stops working with nothing red.
+4. **Adding a page script means adding a row to `tests/wiring.test.js`'s `PAIRS`.** That is what guards the template↔script contract (embedded i18n keys, `getElementById` ids, scoped-CSS misuse). Note what it does *not* guard: the `data-*` and `querySelector` contracts (`[data-fd-value]`, `[data-fd-search]`, `[data-topic]`, `.step[data-ddl]`, `canvas[data-chart]`, …). Rename one of those and the page silently stops working with nothing red. `FilterDropdown.astro`'s `groups` mode also assumes its container is `position: relative` (the menu anchors to it) — a comment, not a test, guards that.
 
 ### Degrading without JavaScript
 
