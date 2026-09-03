@@ -5,7 +5,7 @@ const PAIRS = [
   {
     name: 'search',
     script: 'src/scripts/paper-table.js',
-    templates: ['src/pages/[lang]/search.astro', 'src/components/PaperRow.astro'],
+    templates: ['src/pages/[lang]/search.astro', 'src/components/PaperRow.astro', 'src/components/FilterDropdown.astro'],
   },
   {
     name: 'abstract',

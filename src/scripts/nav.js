@@ -66,6 +66,9 @@ export function initNav() {
   if (langLink && !langLink.dataset.bound) {
     langLink.dataset.bound = '1';
     langLink.addEventListener('click', () => {
+      // href 是构建期按路径算的（LangSwitch.astro），?q=…&topic=… 只有此刻才知道。
+      // 本监听器挂在元素上，比 ClientRouter 在 document 上的监听先跑，改 href 来得及。
+      langLink.search = location.search;
       try {
         localStorage.setItem('spc-lang', langLink.dataset.langTarget);
       } catch {
