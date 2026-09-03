@@ -6,6 +6,8 @@ import { LOCALES, t } from '@/i18n/index.js';
 import stats from '@/assets/data/data-statistics.json';
 import quickView from '@/assets/data/data-quick-view.json';
 import { compareIds } from '@/lib/papers.js';
+import { topicOptions, typeOptions, localName } from '@/lib/tags.js';
+import taxonomy from '@/assets/data/topics.json';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -40,6 +42,16 @@ const byYear: Record<string, number | undefined> = stats.byYear;
 const years = Object.keys(byYear)
   .sort((a, b) => Number(b) - Number(a))
   .map((y) => ({ value: y, label: y, count: byYear[y] }));
+
+// 主题 / 类型下拉的选项：只列篇数 > 0 的。哨兵（未分类 / 其他）收在末尾一组。
+const topicGroups = topicOptions(taxonomy, stats, lang, t(lang, 'topicsPage.sentinels'));
+const typeOpts = typeOptions(taxonomy, stats, lang);
+
+// 当前语言的 码 -> 名。PaperRow（预渲染）与 paper-table.js 的 buildRow（运行期，经 #ptTax）
+// 共用这一份，两边文字才会一致。约 6KB 未压缩。
+const names = (table: Record<string, { en: string; zh: string }>) =>
+  Object.fromEntries(Object.entries(table).map(([code, n]) => [code, localName(n, lang) ?? code]));
+const labels = { types: names(taxonomy.types), topics: names(taxonomy.topics) };
 
 // 排序表头必须是 <th> 里的原生 <button>，不能把 click 绑在裸 <th> 上。
 // 实测（真实 Chrome，/zh/search/）：五个 <th> 全是 tabindex=null / role=null /
@@ -81,6 +93,11 @@ const sortCols = [
                     options={publications} placeholder={t(lang, 'search.anyPublication')} />
     <FilterDropdown id="fYear" label={t(lang, 'search.year')}
                     options={years} placeholder={t(lang, 'search.anyYear')} />
+    <FilterDropdown id="fTopic" label={t(lang, 'search.topic')} groups={topicGroups}
+                    placeholder={t(lang, 'search.anyTopic')}
+                    searchable searchPlaceholder={t(lang, 'search.filterTopics')} />
+    <FilterDropdown id="fType" label={t(lang, 'search.type')} options={typeOpts}
+                    placeholder={t(lang, 'search.anyType')} />
 
     <button type="button" id="favOnly" class="tgl" aria-pressed="false">
       <span aria-hidden="true">☆</span> {t(lang, 'search.favoritesOnly')}
@@ -103,7 +120,7 @@ const sortCols = [
         </tr>
       </thead>
       <tbody id="ptBody">
-        {prerender.map((row) => <PaperRow lang={lang} row={row} />)}
+        {prerender.map((row) => <PaperRow lang={lang} row={row} labels={labels} />)}
       </tbody>
     </table>
     <p class="empty" id="ptEmpty" hidden>{t(lang, 'search.noResults')}</p>
@@ -127,6 +144,8 @@ const sortCols = [
 
   <script is:inline type="application/json" id="ptSeed" set:html={safeJson(seed)} />
 
+  <script is:inline type="application/json" id="ptTax" set:html={safeJson(labels)} />
+
   <script is:inline type="application/json" id="ptI18n" set:html={JSON.stringify({
     loadFailed: t(lang, 'search.loadFailed'),
     previewNote: t(lang, 'search.previewNote'),
@@ -146,6 +165,7 @@ const sortCols = [
 
 <style>
   .toolbar {
+    position: relative;
     display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
     margin-bottom: 1rem;
   }
@@ -261,4 +281,18 @@ const sortCols = [
   .pt .c-act a:hover, .pt .c-act button:hover { color: var(--accent); }
   .pt .c-act .off { color: var(--hairline); padding: 0 0.2rem; }
   .pt .c-act button[aria-pressed='true'] { color: var(--gold); }
+
+  /* 标题下方的「类型 · 主题」小字。两处渲染：PaperRow.astro（预渲染）与
+     paper-table.js 的 buildRow（运行期 createElement）—— 后者拿不到 scope 属性，
+     所以这批规则必须 global，并以 .pt 限定范围。 */
+  .pt .meta {
+    display: block; margin-top: 0.15rem;
+    font-family: var(--font-sans); font-size: var(--fs-kicker); color: var(--faint);
+  }
+  .pt .meta > * + *::before { content: '·'; margin: 0 0.4rem; color: var(--hairline); }
+  .pt .meta button {
+    background: none; border: 0; padding: 0; cursor: pointer;
+    font: inherit; color: var(--faint); border-bottom: 1px solid transparent;
+  }
+  .pt .meta button:hover { color: var(--accent); border-bottom-color: var(--accent); }
 </style>

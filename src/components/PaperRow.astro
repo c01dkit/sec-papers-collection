@@ -1,14 +1,32 @@
 ---
 import { t } from '@/i18n/index.js';
-const { lang, row } = Astro.props;
+import { parseTag } from '@/lib/tags.js';
+
+// labels 是当前语言的 码 -> 名（search.astro 算好后同时喂给这里与 #ptTax），
+// 所以预渲染的行与 paper-table.js 运行期造的行文字完全一致。
+// 结构必须与 paper-table.js 的 buildRow 保持一致：.meta > span(类型) + button[data-topic](主题)。
+const { lang, row, labels } = Astro.props;
 const hasLink = row.paper && row.paper !== '#';
+const tag = parseTag(row.tag);
+const typeText = tag.type === '0' ? '' : (labels?.types?.[tag.type] ?? tag.type);
+const topicText = tag.topic === '00' ? '' : (labels?.topics?.[tag.topic] ?? tag.topic);
 ---
 
 <tr data-id={row.id}>
   <td class="c-id">{row.id}</td>
   <td class="c-pub">{row.publication}</td>
   <td class="c-year">{row.year}</td>
-  <td class="c-title"><span data-title>{row.title}</span></td>
+  <td class="c-title">
+    <span data-title>{row.title}</span>
+    {(typeText || topicText) && (
+      <span class="meta">
+        {typeText && <span>{typeText}</span>}
+        {topicText && (
+          <button type="button" data-topic={tag.topic} title={t(lang, 'search.filterByTopic')}>{topicText}</button>
+        )}
+      </span>
+    )}
+  </td>
   <td class="c-act">
     {hasLink ? (
       <a href={row.paper} target="_blank" rel="noopener" title={t(lang, 'search.openPaper')} aria-label={t(lang, 'search.openPaper')}>↗</a>

@@ -1,23 +1,36 @@
 ---
-import type { FilterOption } from '@/lib/types.d.ts';
+import type { FilterOption, FilterGroup } from '@/lib/types.d.ts';
 
 interface Props {
   id: string;
   label: string;
-  options: FilterOption[];
   placeholder: string;
+  /** 平铺选项（会议 / 年份 / 类型）。与 groups 二选一。 */
+  options?: FilterOption[];
+  /** 分组选项（主题：15 个分组 + 末尾哨兵组）。 */
+  groups?: FilterGroup[];
+  /** 菜单顶部放一个就地过滤框。过滤逻辑在页面脚本里（本组件没有脚本）。 */
+  searchable?: boolean;
+  searchPlaceholder?: string;
 }
 
-const { id, label, options, placeholder } = Astro.props;
+const {
+  id, label, placeholder, options = [], groups = [], searchable = false, searchPlaceholder = '',
+} = Astro.props;
+const grouped = groups.length > 0;
 ---
 
-<details class="fd" id={id}>
+<details class:list={['fd', { 'fd--grp': grouped }]} id={id}>
   <summary>
     <span class="fd-label">{label}</span>
     <span class="fd-value" data-fd-value>{placeholder}</span>
     <span class="fd-caret" aria-hidden="true">▾</span>
   </summary>
   <div class="fd-menu" role="group" aria-label={label}>
+    {searchable && (
+      <input type="search" class="fd-search" data-fd-search placeholder={searchPlaceholder}
+             aria-label={searchPlaceholder} autocomplete="off" spellcheck="false" />
+    )}
     {options.map((o) => (
       <label class="fd-opt">
         <input type="checkbox" value={String(o.value)} />
@@ -25,11 +38,29 @@ const { id, label, options, placeholder } = Astro.props;
         {o.count != null && <em>{o.count}</em>}
       </label>
     ))}
+    {groups.map((g) => (
+      <div class="fd-grp" role="group" aria-label={g.label}>
+        <div class="fd-ghead">{g.label}</div>
+        {g.options.map((o) => (
+          <label class="fd-opt">
+            <input type="checkbox" value={String(o.value)} />
+            <span>{o.label}</span>
+            {o.count != null && <em>{o.count}</em>}
+          </label>
+        ))}
+      </div>
+    ))}
   </div>
 </details>
 
 <style>
   .fd { position: relative; }
+  /* 分组模式（主题下拉，196 项、名字很长）的菜单不挂在自己下面，而是挂在工具栏下面：
+     .fd--grp 不定位，于是 .fd-menu 的包含块变成最近的定位祖先 —— search.astro 把
+     .toolbar 设成了 position: relative。这样菜单永远从工具栏左缘开始、宽度不超过
+     工具栏，不管这个下拉在换行后的工具栏里落在哪一列，都不会伸出视口。
+     代价：用本组件的页面若传 groups，必须给容器 position: relative。 */
+  .fd--grp { position: static; }
   summary {
     display: flex; align-items: baseline; gap: 0.4rem; cursor: pointer;
     list-style: none; padding: 0.4rem 0.6rem;
@@ -52,6 +83,20 @@ const { id, label, options, placeholder } = Astro.props;
     background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius);
     padding: 0.3rem 0;
   }
+  .fd--grp .fd-menu { width: min(24rem, 100%); max-height: 22rem; }
+  .fd-search {
+    position: sticky; top: 0; z-index: 1;
+    display: block; width: calc(100% - 1.4rem); margin: 0.1rem 0.7rem 0.3rem;
+    padding: 0.3rem 0.5rem; box-sizing: border-box;
+    background: var(--panel); color: var(--ink); font: inherit; font-size: var(--fs-small);
+    border: 1px solid var(--hairline); border-radius: var(--radius); outline: none;
+  }
+  .fd-search:focus { border-color: var(--ink); }
+  .fd-ghead {
+    padding: 0.5rem 0.7rem 0.15rem; font-size: var(--fs-kicker); letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .fd-grp + .fd-grp { border-top: 1px solid var(--hairline-soft); margin-top: 0.2rem; }
   .fd-opt {
     display: flex; align-items: center; gap: 0.5rem;
     padding: 0.3rem 0.7rem; font-size: var(--fs-small); cursor: pointer;
