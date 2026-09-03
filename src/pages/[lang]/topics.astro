@@ -1,0 +1,135 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { LOCALES, t } from '@/i18n/index.js';
+import { buildTopicIndex } from '@/lib/tags.js';
+import taxonomy from '@/assets/data/topics.json';
+import stats from '@/assets/data/data-statistics.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const nf = new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US');
+
+// 纯静态页：所有数字在构建期算好，链接是普通 <a>，没有页面脚本，关掉 JS 完整可用。
+// buildTopicIndex 在 data-statistics.json 缺 byTopic 时会抛错让构建失败 ——
+// 那是「先跑 --analyze」的信号，不是要在这里兜住的东西。
+const index = buildTopicIndex(taxonomy, stats, lang);
+const pct = index.total ? ((index.classified / index.total) * 100).toFixed(1) : '0.0';
+const sentinelMax = index.sentinels.reduce((m, s) => Math.max(m, s.count), 0);
+const typeMax = index.types.reduce((m, s) => Math.max(m, s.count), 0);
+
+const href = (param: string, code: string) => `/${lang}/search/?${param}=${code}`;
+// 横条宽度：按所在段 / 表的最大值归一，非零至少 1% 免得看不见
+const width = (count: number, max: number) => (max && count ? `${Math.max(1, Math.round((count / max) * 100))}%` : '0%');
+---
+
+<PageLayout lang={lang} page="topics" title={t(lang, 'menu.topics')} lead={t(lang, 'topicsPage.lead')}>
+
+  <p class="sum" data-reveal>
+    {t(lang, 'topicsPage.summary', {
+      classified: nf.format(index.classified),
+      pct,
+      unclassified: nf.format(index.total - index.classified),
+    })}
+  </p>
+
+  {index.bands.map((b) => (
+    <section class="band-sec" data-reveal>
+      <h2 class="bh"><span class="srf">{b.label}</span><em>{nf.format(b.total)}</em></h2>
+      {b.groups.map((g) => (
+        <div class="grp">
+          <h3 class="kicker"><span>{g.lo}–{g.hi} · {g.label}</span><em>{nf.format(g.total)}</em></h3>
+          <ol class="tl">
+            {g.topics.map((tp) => (
+              <li class:list={['row', { zero: tp.count === 0 }]}>
+                <span class="code">{tp.code}</span>
+                {tp.count > 0
+                  ? <a class="name" href={href('topic', tp.code)}>{tp.label}</a>
+                  : <span class="name">{tp.label}</span>}
+                <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, b.max)}`}></i></span>
+                <span class="n">{nf.format(tp.count)}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </section>
+  ))}
+
+  <section class="band-sec" data-reveal>
+    <h2 class="bh"><span class="srf">{t(lang, 'topicsPage.sentinels')}</span></h2>
+    <ol class="tl">
+      {index.sentinels.map((tp) => (
+        <li class:list={['row', { zero: tp.count === 0 }]}>
+          <span class="code">{tp.code}</span>
+          {tp.count > 0
+            ? <a class="name" href={href('topic', tp.code)}>{tp.label}</a>
+            : <span class="name">{tp.label}</span>}
+          <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, sentinelMax)}`}></i></span>
+          <span class="n">{nf.format(tp.count)}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="band-sec" data-reveal>
+    <h2 class="bh"><span class="srf">{t(lang, 'topicsPage.typesTitle')}</span></h2>
+    <ol class="tl">
+      {index.types.map((tp) => (
+        <li class:list={['row', { zero: tp.count === 0 }]}>
+          <span class="code">{tp.code}</span>
+          {tp.count > 0
+            ? <a class="name" href={href('type', tp.code)}>{tp.label}</a>
+            : <span class="name">{tp.label}</span>}
+          <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, typeMax)}`}></i></span>
+          <span class="n">{nf.format(tp.count)}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+</PageLayout>
+
+<style>
+  .sum { margin: 0 0 var(--sp-band); color: var(--muted); font-size: var(--fs-small); }
+
+  .band-sec { margin-bottom: var(--sp-band); }
+  .bh {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--hairline);
+  }
+  .bh em, .grp h3 em {
+    font-style: normal; color: var(--faint); font-size: var(--fs-kicker);
+    font-variant-numeric: tabular-nums; letter-spacing: 0; text-transform: none;
+  }
+
+  .grp { margin-bottom: 1.4rem; }
+  .grp:last-child { margin-bottom: 0; }
+  .grp h3 { display: flex; justify-content: space-between; gap: 1rem; margin: 0 0 0.4rem; }
+
+  .tl { list-style: none; margin: 0; padding: 0; }
+  .row {
+    display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) minmax(4rem, 10rem) 3.5rem;
+    align-items: center; gap: 0.6rem;
+    padding: 0.38rem 0; border-bottom: 1px solid var(--hairline-soft);
+    font-size: var(--fs-small);
+  }
+  .code { color: var(--faint); font-size: var(--fs-kicker); font-variant-numeric: tabular-nums; }
+  .name { color: var(--ink); }
+  a.name { border-bottom: 1px solid transparent; }
+  a.name:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .zero .name { color: var(--faint); }
+
+  /* 2px 细横条，按段内最大值归一。无阴影、无圆角 —— 与首页覆盖矩阵同一套克制。 */
+  .bar { display: block; height: 2px; background: var(--hairline-soft); }
+  .bar i { display: block; height: 100%; width: var(--w, 0%); background: var(--accent); }
+  .zero .bar { visibility: hidden; }
+
+  .n { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 2rem minmax(0, 1fr) 3rem; }
+    .bar { display: none; }
+  }
+</style>

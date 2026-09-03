@@ -3,8 +3,8 @@ import { CORE_NAV, MISC_NAV, isActive } from '@/lib/nav-model.js';
 import { t } from '@/i18n/index.js';
 
 describe('导航模型', () => {
-  it('核心 5 项平铺，顺序为检索/趋势/摘要/时间线/获奖', () => {
-    expect(CORE_NAV.map((n) => n.slug)).toEqual(['search', 'trends', 'abstract', 'timeline', 'awards']);
+  it('核心 6 项平铺，顺序为标题检索/主题检索/趋势/摘要/时间线/获奖', () => {
+    expect(CORE_NAV.map((n) => n.slug)).toEqual(['search', 'topics', 'trends', 'abstract', 'timeline', 'awards']);
   });
 
   it('其他 3 项：更多网站/关于/设置', () => {
