@@ -33,6 +33,10 @@ export interface Stats {
   byYear: Record<string, number>;
   byPublicationAndYear: Record<string, Record<string, number>>;
   byPublicationAndYearAndStatus: Record<string, Record<string, string>>;
+  /** tag 第 2-3 位（topic 码）-> 篇数，只含出现过的码。v0.5.0 起由 --analyze 生成。 */
+  byTopic: Record<string, number>;
+  /** tag 第 1 位（类型码）-> 篇数。 */
+  byType: Record<string, number>;
   years: string[];
 }
 
@@ -42,7 +46,7 @@ export interface Stats {
 export interface Paper {
   /** 7 字符永久标识，如 'IO25001'。见 docs/id-rule.md。收藏功能以此为主键。 */
   id: string;
-  /** 4 字符可变标签（类型 + topic + 奖项），如 '1A3N'。目前不在 UI 中展示。 */
+  /** 4 字符可变标签（类型 + topic + 奖项），如 '1A3N'。用 lib/tags.js 的 parseTag 拆，别自己切片。 */
   tag: string;
   year: number;
   title: string;
@@ -233,4 +237,77 @@ export interface FilterOption {
   value: string;
   label: string;
   count?: number;
+}
+
+/** FilterDropdown 的一个分组（groups 模式）。 */
+export interface FilterGroup {
+  label: string;
+  options: FilterOption[];
+}
+
+// ── src/assets/data/topics.json（analyzers/id_taxonomy.py export_taxonomy()）──
+
+export interface TaxonomyName {
+  en: string;
+  zh: string;
+}
+
+export interface TaxonomyBand extends TaxonomyName {
+  key: string;
+  lo: string;
+  hi: string;
+}
+
+export interface TaxonomyGroup extends TaxonomyName {
+  lo: string;
+  hi: string;
+  band: string;
+}
+
+export interface Taxonomy {
+  bands: TaxonomyBand[];
+  groups: TaxonomyGroup[];
+  /** 含 '00' 与 'FF' 两个哨兵码。 */
+  topics: Record<string, TaxonomyName>;
+  types: Record<string, TaxonomyName>;
+}
+
+// ── lib/tags.js 的产物 ────────────────────────────────────────────
+
+export interface ParsedTag {
+  type: string;
+  topic: string;
+  award: string;
+}
+
+export interface TopicEntry {
+  code: string;
+  label: string;
+  count: number;
+}
+
+export interface TopicGroupIndex {
+  lo: string;
+  hi: string;
+  label: string;
+  total: number;
+  topics: TopicEntry[];
+}
+
+export interface TopicBandIndex {
+  key: string;
+  label: string;
+  total: number;
+  /** 段内最大篇数；索引页横条按它归一。 */
+  max: number;
+  groups: TopicGroupIndex[];
+}
+
+export interface TopicIndex {
+  bands: TopicBandIndex[];
+  sentinels: TopicEntry[];
+  types: TopicEntry[];
+  total: number;
+  /** total 减去 '00' 的篇数。 */
+  classified: number;
 }
