@@ -37,7 +37,8 @@ System venues:
 The site is an Astro static site, prerendered per language (`/zh/` and `/en/`) and deployed at `sec.c01dkit.com`. From the top navigation bar you can reach:
 
 - **Home** — a scroll-revealed landing page: hero with live paper/venue/year stats, a coverage matrix (10 venues × 12 years, shaded by yearly accepted-paper count), and one feature block per core page (search, trends, abstracts, submission timeline, awards).
-- **Search** — full title search across all included papers, filter by venue and year, click a row to copy the title, click the paperclip to open the paper, click the star to favorite. A "Favorites Only" toggle filters to your starred entries. The first 30 rows are prerendered at build time, so the page stays readable and filterable even if the CDN is unreachable.
+- **Search** — full title search across all included papers, filter by venue, year, topic and paper type, click a row to copy the title, click the paperclip to open the paper, click the star to favorite. Each row shows the paper's type and primary topic; click the topic to filter by it. Filters live in the URL, so a search can be shared. A "Favorites Only" toggle filters to your starred entries. The first 30 rows are prerendered at build time, so the page stays readable and filterable even if the CDN is unreachable.
+- **Topics** — browse every paper by field (security / software engineering / systems), group and topic, with per-topic counts; click a topic to open it in Search with the filter already applied. Each paper is counted under its primary topic only.
 - **Trends** — yearly accepted-paper trend charts grouped by category (top-tier, software engineering, system).
 - **Abstract** — pick a venue and year to read accepted papers with their abstracts, with the user's preferred keywords highlighted in the accent color.
 - **Submission Timeline** — full submission/notification/camera-ready timeline for each Big-Four venue, kept in sync with the official CFPs.
@@ -66,6 +67,7 @@ src/assets/data/          generated JSON consumed by the frontend
   data.json               full paper list (no abstracts, for size)
   data-quick-view.json    100 latest papers per publication
   data-statistics.json    aggregated counts by publication / year / category
+  topics.json             topic / type code table with zh + en names (from analyzers/id_taxonomy.py)
   meta_json/<Pub>-<Yr>.json   per-conference details with abstracts
 src/pages/                Astro pages ([lang]/*.astro prerendered per language)
 src/lib/                  pure-function modules (papers, highlight, coverage, settings-schema, ...)

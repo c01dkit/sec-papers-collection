@@ -5,6 +5,11 @@
 /** @type {Record<string, import('@/lib/types.d.ts').ChangelogEntry[]>} */
 export const CHANGELOG = {
   zh: [
+    { version: 'v0.5.0', date: '2026-09-03', items: [
+      '✨ 新增「主题检索」页：按 安全 / 软工 / 系统 三个领域、15 个分组、198 个主题浏览全部论文，附各主题篇数',
+      '标题检索新增「主题」「类型」筛选；每行显示论文类型与主题，点主题名即按该主题筛选',
+      '检索条件写入 URL，结果可直接分享；切换语言时保留筛选',
+    ] },
     { version: 'v0.4.1', date: '2026-07-28', items: ['新增OSDI 1994-2026', '更新论文ID计算方式'] },
     { version: 'v0.4.0', date: '2026-07-25', items: [
       '🎉 里程碑：全站用 Astro 重写，从单页应用改为静态多页',
@@ -46,6 +51,11 @@ export const CHANGELOG = {
     { version: 'v0.1.0', date: '2023-05-15', items: ['首次发布 sec.c01dkit.com', '使用 mkdocs 作为网站生成器'] },
   ],
   en: [
+    { version: 'v0.5.0', date: '2026-09-03', items: [
+      '✨ New Topics page: browse every paper by field (security / SE / systems), group and topic, with per-topic counts',
+      'Search gains Topic and Type filters; each row shows its type and topic, click the topic to filter by it',
+      'Search filters now live in the URL so results can be shared; switching language keeps them',
+    ] },
     { version: 'v0.4.1', date: '2026-07-28', items: ['Add OSDI 1994-2026', 'Update paper ID pattern'] },
     { version: 'v0.4.0', date: '2026-07-25', items: [
       '🎉 Milestone: rewritten on Astro, from single-page app to static multi-page',

@@ -46,7 +46,7 @@ uv run main.py --analyze --upload --zip && npm run build && npm run deploy
 
 **Data flow:** `data.yml` (conference config) → `main.py` (Python processing) → JSON files in `src/assets/data/` → uploaded to Aliyun OSS (`--upload`) → served to the frontend, split between build time and runtime:
 
-- **Build time:** a handful of pages read `src/assets/data/` directly off disk while Astro prerenders (e.g. the search page's first-30-rows fallback, the home page's coverage matrix) — this data is baked into the static HTML and works even if the CDN is down.
+- **Build time:** a handful of pages read `src/assets/data/` directly off disk while Astro prerenders (e.g. the search page's first-30-rows fallback, the home page's coverage matrix) — this data is baked into the static HTML and works even if the CDN is down. The topics page and the search page's topic / type dropdowns read `topics.json` and the `byTopic` / `byType` counts the same way.
 - **Runtime (client-side fetch):** the search page's full list and the abstract page's per-conference `meta_json` are fetched in-browser at `DATA_BASE`. In DEV that resolves to `/data/**`, served by a Vite dev middleware in `astro.config.mjs` that maps it straight to `src/assets/data/**` (never symlinked into `public/`, which would copy the ~26MB `meta_json` tree into `dist/`). In PROD it resolves to the CDN (`cdn.c01dkit.com/sec-papers/`). The single DEV/PROD branch lives in `src/lib/cdn.js` (`DATA_BASE`) — no other file may reference `import.meta.env.DEV/PROD`; a guard test (`tests/no-legacy.test.js`) enforces this.
 
 OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under the `sec-papers/` key prefix in the `premium-cdn` bucket.
@@ -60,13 +60,14 @@ OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under 
 ### Generated JSON assets (`src/assets/data/`)
 - `data.json` — full paper list (no abstracts for size)
 - `data-quick-view.json` — 100 latest papers per publication
-- `data-statistics.json` — aggregated stats by publication/year/category
+- `data-statistics.json` — aggregated stats by publication/year/category, plus `byTopic` / `byType` (paper counts per tag code)
+- `topics.json` — topic / type code table with zh + en names, exported by `analyzers/id_taxonomy.py::export_taxonomy()`. The frontend never hard-codes a topic name; both `topics.astro` and the search page's dropdowns read this file at build time.
 - `meta_json/[Publication - Year].json` — full per-conference details with abstracts
 
 ### Astro frontend (`src/`)
 - **Pages:** `src/pages/[lang]/*.astro` — prerendered for both `zh` and `en` via `getStaticPaths`. `src/pages/index.astro` is a client-side language dispatcher; `src/pages/{paper,reputation,misc}/*.astro` are redirect stubs for pre-0.4.0 URLs.
 - **Layouts:** `src/layouts/BaseLayout.astro` (head + ClientRouter transitions + TopNav + Footer), `src/layouts/PageLayout.astro` (shared content-page header)
-- **Pure logic (`src/lib/`)** — no DOM, unit-tested (every module except the nine-line `cdn.js`): `papers`, `highlight`, `coverage`, `sparkline`, `deadlines`, `awards-model`, `venue-groups`, `trend-series`, `settings-schema`, `nav-model`, `chart-palette`, `cdn`
+- **Pure logic (`src/lib/`)** — no DOM, unit-tested (every module except the nine-line `cdn.js`): `papers`, `tags`, `search-url`, `highlight`, `coverage`, `sparkline`, `deadlines`, `awards-model`, `venue-groups`, `trend-series`, `settings-schema`, `nav-model`, `chart-palette`, `cdn`
 - **Browser side (`src/scripts/`)** — `boot.js` is the single entry point; it dispatches by `<main data-page>` and is bound to `astro:page-load`
 - **i18n:** `src/i18n/{zh,en}.json` + `index.js`; `t()` **throws** on a missing key so a missing translation fails the build instead of shipping a bare key. Every page renders in both `zh` and `en`, so a one-sided key fails the build — always add copy to **both** files.
 - **Storage:** `src/scripts/settings-store.js` is the only file in the codebase that touches IndexedDB. DB `spc-settings` / store `config` / keys `app` + `favorites` / version `1` — **do not change these**, existing users' data lives under them. Theme, accent colour and the three `remember*` flags are additionally mirrored to localStorage because prerendered pages need to read them synchronously before any script runs.
@@ -79,7 +80,7 @@ Four rules, none of them obvious from reading the code, all of them earned the h
 1. **Astro's scoped `<style>` only reaches elements written in that file's own template.** It compiles to `.x[data-astro-cid-…]`, and elements built by `createElement` (or rendered by a child component) never carry that attribute — the rules simply don't match and the element ships completely unstyled. Style those from `<style is:global>` behind a narrow prefix (`#abResult .hint`, `.pt td`, `[data-countdown] .ph`). Adding a class to an element that *is* in the template (`.step.past`, `.row.past`) is fine to keep scoped. `tests/wiring.test.js` has a tripwire for the `className = '…'` case; it does not and cannot cover everything.
 2. **Page scripts must take their root with `getElementById`; class names are a site-wide namespace.** A `.bar` in a page script once matched TopNav's `.bar` and killed the awards page. Two pre-constraint uses survive (`abstract-view.js`'s `.picker`, `timeline.js`'s `.pub` — and `.pub` is now used by three components), so don't copy them.
 3. **Module-level state in a page script survives soft navigation; the DOM does not.** `astro:page-load` re-runs `init()` against a brand-new DOM with no `dataset.bound`, but the module is not re-evaluated. Reset everything you hold — see `paper-table.js:5-8` (`state = initialState()`). Every `init()` must also be idempotent via `dataset.bound`.
-4. **Adding a page script means adding a row to `tests/wiring.test.js`'s `PAIRS`.** That is what guards the template↔script contract (embedded i18n keys, `getElementById` ids, scoped-CSS misuse). Note what it does *not* guard: the `data-*` and `querySelector` contracts (`[data-fd-value]`, `.step[data-ddl]`, `canvas[data-chart]`, …). Rename one of those and the page silently stops working with nothing red.
+4. **Adding a page script means adding a row to `tests/wiring.test.js`'s `PAIRS`.** That is what guards the template↔script contract (embedded i18n keys, `getElementById` ids, scoped-CSS misuse). Note what it does *not* guard: the `data-*` and `querySelector` contracts (`[data-fd-value]`, `[data-fd-search]`, `[data-topic]`, `.step[data-ddl]`, `canvas[data-chart]`, …). Rename one of those and the page silently stops working with nothing red.
 
 ### Degrading without JavaScript
 
@@ -102,6 +103,9 @@ Every paper carries a 7-char permanent `id` (`IO25001` = domain + publication + 
 in-edition sequence) and a 4-char mutable `tag` (type + topic + award). Full rules in
 **`docs/id-rule.md`** — that file is the spec, `analyzers/id_taxonomy.py` is the
 implementation, and `tests/test_id_taxonomy.py` re-parses the doc to assert they match.
+Since v0.5.0 the frontend reads `tag` (`src/lib/tags.js::parseTag`): the search page
+filters on topic / type and shows them per row, and `/[lang]/topics/` is the index. Only
+the primary topic (`topics_en[0]`) is encoded, so a paper is findable under one topic.
 
 **Publication vs. edition — don't write "venue" in code.** A *publication* is the
 conference series (IEEE S&P, 11 of them); an *edition* is one instance of it
