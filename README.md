@@ -129,6 +129,7 @@ npm run preview          # preview the build
 npm run check            # astro check
 npm test                 # vitest run
 npm run deploy           # publish dist/ to GitHub Pages (--cname sec.c01dkit.com)
+npm run deploy:cf        # publish dist/ to Cloudflare Pages by direct upload (wrangler; --project-name sec-papers-collection)
 ```
 
 The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts are Chart.js.
@@ -142,3 +143,5 @@ git add .
 git commit -m "update $DATE"
 git push origin main
 ```
+
+For Cloudflare Pages, replace `npm run deploy` with `npm run deploy:cf` (wrangler must be installed; it reads `CLOUDFLARE_API_TOKEN` from `.env`, see `.env.example`). Cloudflare's own git-connected build cannot work here: the generated data JSON under `src/assets/data/` is git-ignored and only exists where `--analyze` ran, so keep automatic deployments disabled on the Pages project and direct-upload `dist/` instead.

@@ -94,7 +94,7 @@ class TagStore:
                 continue
             publication, year = stem.rsplit(' - ', 1)
             for record in _iter_jsonl(path):
-                title = record.get('title_en') or record.get('title')
+                title = record.get('title') or record.get('title_en')  # 源标题原文优先；老行只有 LLM 回写的 title_en
                 if not title:
                     continue
                 topics = record.get('topics_en') or []

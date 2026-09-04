@@ -10,7 +10,7 @@
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "deploy": "gh-pages -d dist -f -t --cname sec.c01dkit.com",
+    "deploy": "wrangler pages deploy dist --env-file=.env --project-name=sec-papers-collection --branch=main --commit-dirty=true",
     "predeploy": "npm run build"
   },
   "dependencies": {

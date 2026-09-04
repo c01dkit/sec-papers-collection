@@ -187,6 +187,7 @@ npm run preview          # 预览构建结果
 npm run check            # astro check
 npm test                 # vitest run
 npm run deploy           # 将 dist/ 发布到 GitHub Pages（--cname sec.c01dkit.com）
+npm run deploy:cf        # 将 dist/ 直传到 Cloudflare Pages（wrangler；--project-name sec-papers-collection）
 ```
 
 网站基于 Astro 实现，手写 CSS，无 UI 框架、无 Tailwind；图表使用 Chart.js。
@@ -200,3 +201,5 @@ git add .
 git commit -m "update $DATE"
 git push origin main
 ```
+
+若部署到 Cloudflare Pages，把 `npm run deploy` 换成 `npm run deploy:cf`（需本机装有 wrangler；令牌从 `.env` 的 `CLOUDFLARE_API_TOKEN` 读取，见 `.env.example`）。Cloudflare 自带的 Git 联动构建在本仓库无法成功：`src/assets/data/` 下生成的数据 JSON 被 git 忽略，只存在于跑过 `--analyze` 的机器上，因此请在 Pages 项目里关闭自动部署，改为本地构建后直传 `dist/`。

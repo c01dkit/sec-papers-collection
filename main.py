@@ -544,10 +544,19 @@ def title_exists_in_file(file_path: str, title: str) -> bool:
                 return True
     return False
 
+#: `--llm-analyze` 的追加式产出目录；文件名形如 `IEEE S&P - 2026 - advanced.jsonl`。
+ADVANCED_DIR = os.path.join('official_cache', 'advanced_data')
+
+
 def titles_in_file(file_path: str) -> set:
     """
-    Return True if `title` already appears under the "title" key
-    in any JSON line inside `file_path`.
+    Return the `compact()` keys of every paper already analyzed into `file_path`.
+
+    Both the source title (`title`, written since the resume fix) and the LLM's own
+    `title_en` (the only key older rows carry) are counted, and `model_used` is
+    deliberately ignored: a v0.3.8 leftover that only counted `gemini-3-pro` rows made
+    every later model's output invisible, so each run re-analyzed the same papers
+    (IEEE S&P 2026: 199 papers, 433 rows) and an interrupted run could never resume.
     """
     title_set = set()
     if not os.path.exists(file_path):
@@ -562,14 +571,17 @@ def titles_in_file(file_path: str) -> set:
                 record = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            if record['model_used'] != 'gemini-3-pro': # DEBUG: only consider gemini-3-pro results
-                continue
-            title_set.add(record.get('title_en'))
+            for key in ('title', 'title_en'):
+                title = record.get(key)
+                if title:
+                    title_set.add(compact(title))
     return title_set
+
+
 def analyze_abstracts_and_titles():
     from analyzers.llm_analyzer import analyze_title_and_abs
     config = get_config('data.yml')
-    os.makedirs('official_cache/advanced_data', exist_ok=True)
+    os.makedirs(ADVANCED_DIR, exist_ok=True)
     title_cache = {}
     pending = []
     with stage_progress() as progress:
@@ -577,23 +589,29 @@ def analyze_abstracts_and_titles():
         for paper_info in fetch_one_paper_in_config(config):
             paper_info: PaperInfo
             progress.advance(scan)
-            log_file_path = os.path.join('official_cache/advanced_data', f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
+            log_file_path = os.path.join(ADVANCED_DIR, f"{paper_info.publication} - {paper_info.year} - advanced.jsonl")
             if log_file_path not in title_cache:
                 title_cache[log_file_path] = titles_in_file(log_file_path)
-            if paper_info.title in title_cache[log_file_path]:
-                continue  # Already analyzed
+            key = compact(paper_info.title)
+            if key in title_cache[log_file_path]:
+                continue  # Already analyzed (any model, any earlier run), or queued below
             if len(paper_info.abstract) > 50 and paper_info.status != 'advanced':
                 pending.append((paper_info, log_file_path))
+                title_cache[log_file_path].add(key)  # a title listed twice in one edition is queued once
     console.print(f'{len(pending)} paper(s) need an LLM call', markup=False)
     with stage_progress() as progress:
         task = progress.add_task('LLM 分析摘要', total=len(pending))
         for paper_info, log_file_path in pending:
-            result = analyze_title_and_abs(paper_info.title, paper_info.abstract)
-            console.print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}", markup=False)
-            if result.get('topics_en', 'unknown') != 'unknown':
-                with open(log_file_path, 'a', encoding='utf-8') as log_file:
-                    log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
-                    log_file.flush()
+            try:
+                result = analyze_title_and_abs(paper_info.title, paper_info.abstract)
+                console.print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}", markup=False)
+                if result.get('topics_en', 'unknown') != 'unknown':
+                    result['title'] = paper_info.title  # source title verbatim: the resume key, independent of what the LLM echoes back
+                    with open(log_file_path, 'a', encoding='utf-8') as log_file:
+                        log_file.write(json.dumps(result, ensure_ascii=False)+'\n')
+                        log_file.flush()
+            except (ValueError, RuntimeError) as exc:
+                console.print(f'SKIP {paper_info.title[:60]} -- {exc}', style='yellow', markup=False)
             progress.advance(task)
     
 def analyze_tags_with_llm(limit=None):

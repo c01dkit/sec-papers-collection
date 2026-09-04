@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-An Astro static site displaying curated academic security papers from top-tier conferences (IEEE S&P, USENIX Security, ACM CCS, NDSS) and related venues (ICSE, ISSTA, FSE, ASPLOS, SOSP). Deployed to GitHub Pages at sec.c01dkit.com. As of v0.4.0 the site is prerendered per-language (`/zh/`, `/en/`) with no client-side framework — pages ship hand-written CSS and small vanilla-JS controllers.
+An Astro static site displaying curated academic security papers from top-tier conferences (IEEE S&P, USENIX Security, ACM CCS, NDSS) and related venues (ICSE, ISSTA, FSE, ASPLOS, SOSP). Deployed to GitHub Pages at sec.c01dkit.com (`npm run deploy`) and to Cloudflare Pages by direct upload (`npm run deploy:cf`, see *Deploying to Cloudflare Pages* below). As of v0.4.0 the site is prerendered per-language (`/zh/`, `/en/`) with no client-side framework — pages ship hand-written CSS and small vanilla-JS controllers.
 
 ## Commands
 
@@ -15,8 +15,8 @@ npm run build    # Static build to dist/
 npm run preview  # Preview the build
 npm run check    # astro check
 npm test         # vitest run
-npm run deploy   # Deploy dist/ to GitHub Pages
-npm run deploy:build
+npm run deploy      # Build, then push dist/ to GitHub Pages (gh-pages)
+npm run deploy:cf   # Build, then direct-upload dist/ to Cloudflare Pages (wrangler reads CLOUDFLARE_API_TOKEN from .env)
 ```
 
 Frontend is Astro 7 with hand-written CSS (no UI framework, no Tailwind). Design tokens live in `src/styles/tokens.css`; the visual direction is "academic editorial" — warm off-white paper, serif headlines, hairline rules, **no box-shadow anywhere**, max 2px radius.
@@ -40,8 +40,13 @@ uv run main.py --seed-upload-cache  # Mark current JSON as already-uploaded (ski
 ### Full publish cycle
 ```bash
 uv run main.py --analyze --upload --zip && npm run build && npm run deploy
+uv run main.py --analyze --upload --zip && npm run deploy:cf   # same, targeting Cloudflare Pages
 ```
 `--analyze --upload` without `npm run build` leaves the search dropdowns' and topics page's per-topic counts stale — they are baked in at build time while the rows come from the CDN.
+
+### Deploying to Cloudflare Pages
+
+Cloudflare's git-connected build **cannot work for this repo and must stay disabled.** `src/assets/data/*` is git-ignored (only `awards.json` and `submission-timeline.json` are tracked), yet `data-statistics.json`, `data-quick-view.json`, `topics.json` and `meta_json/IEEE S&P - 2026.json` are imported at build time — so a clone-and-build on Cloudflare dies at Rolldown's import resolution (first hit: `abstract.astro`; fixing that one file only surfaces the next). The data exists only where `--analyze` ran, so the site is built locally and `dist/` is direct-uploaded with `npm run deploy:cf`. The Pages project stays git-connected (that is allowed; the reverse migration is not), but in the dashboard set **Build → Branch control → "Enable automatic production branch deployments" off** and the preview branch to **None**, or every push starts a doomed build. The project name is hard-coded in the script, next to gh-pages' `--cname`; change both if you fork.
 
 ## Architecture
 
@@ -57,6 +62,7 @@ OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under 
 - `data.yml` — master config defining conferences with XPath selectors for web scraping, or references to official CSV/BIB files
 - Crawl results cached in `cache/` (pickle files, SHA256-keyed); official data in `official_cache/`
 - `llm_analyzer.py` — uses OpenAI API (configurable via `.env`) to classify paper topics; results cached in JSONL
+  - `--llm-analyze` appends to `official_cache/advanced_data/<Publication> - <Year> - advanced.jsonl` and resumes by `compact(title)`, reading both the stored source `title` and the LLM's `title_en`, and **ignoring `model_used`**. A leftover `gemini-3-pro`-only filter once made every other model's rows invisible, so each run re-analyzed them (S&P 2026: 199 papers, 433 rows) and an interrupted run never resumed. Downstream (`tag_store`) is last-row-wins per key, so a duplicate row is waste, not corruption.
 
 ### Generated JSON assets (`src/assets/data/`)
 - `data.json` — full paper list (no abstracts for size)
@@ -141,6 +147,7 @@ Papers in the data pipeline have a `status` field: `notchecked` → `inprogress`
 Copy `.env.example` to `.env` for LLM analysis and cache encryption:
 - `API_KEY`, `MODEL`, `BASE_URL` — for `--llm-analyze`
 - `PRIVATE_ZIP_PASSWD` — for cache zip encryption
+- `CLOUDFLARE_API_TOKEN` — for `npm run deploy:cf` (passed to wrangler via `--env-file=.env`; no `wrangler login` needed)
 
 ## Adding a New Conference/Year
 
