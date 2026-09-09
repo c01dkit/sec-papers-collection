@@ -1,11 +1,14 @@
 export const ACCENTS = ['slate', 'indigo', 'oxblood', 'pine'];
 export const THEMES = ['light', 'dark'];
 // 'small' 是站点原始字号（16px 基准），即「无规则」档 ——
-// tokens.css 只为 medium/large 写根字号覆盖。默认档取 'large'。
-export const FONT_SIZES = ['small', 'medium', 'large'];
+// tokens.css 只为 medium/large/xlarge 写根字号覆盖。默认档取 'large'。
+export const FONT_SIZES = ['small', 'medium', 'large', 'xlarge'];
 // 版心宽度（--wrap-max）：narrow 是站点原始的 1120px，即「无规则」档；
 // full 表示不设上限，以浏览器窗口实际宽度为准（max-width: none）。默认档取 'medium'。
 export const PAGE_WIDTHS = ['narrow', 'medium', 'wide', 'full'];
+// 摘要页每篇摘要的初始语言：page = 跟随当前页面语言（/zh/ 显中文、/en/ 显英文），
+// zh / en = 固定。中文摘要来自 LLM 回写（meta_json 的 abstract_zh），缺时回落英文。
+export const ABSTRACT_LANGS = ['page', 'zh', 'en'];
 
 /**
  * localStorage 镜像键名。存在的唯一理由是预绘制脚本要同步读取。
@@ -39,6 +42,8 @@ export function DEFAULT_SETTINGS() {
     rememberDarkMode: false,
     rememberTheme: false,
     keywords: [],
+    abstractSwitch: true,      // 摘要页每篇标题行右侧是否显示 中/EN 切换
+    abstractLang: 'page',      // 摘要初始语言，见 ABSTRACT_LANGS
   };
 }
 
@@ -63,6 +68,10 @@ export function migrateSettings(raw) {
   out.keywords = Array.isArray(src.keywords)
     ? src.keywords.filter((k) => k !== null && k !== undefined && String(k) !== '').map(String)
     : [];
+  // 老库里没有这两个字段（v0.5.x 之前）：undefined 要落到默认的「显示」，
+  // 所以不能写 Boolean(src.abstractSwitch)。
+  out.abstractSwitch = src.abstractSwitch === undefined ? true : Boolean(src.abstractSwitch);
+  out.abstractLang = ABSTRACT_LANGS.includes(src.abstractLang) ? src.abstractLang : 'page';
 
   return out;
 }

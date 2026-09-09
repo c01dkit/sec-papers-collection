@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DEFAULT_SETTINGS, migrateSettings, ACCENTS, THEMES, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
+import { DEFAULT_SETTINGS, migrateSettings, ACCENTS, THEMES, FONT_SIZES, PAGE_WIDTHS, ABSTRACT_LANGS } from '@/lib/settings-schema.js';
 
 describe('DEFAULT_SETTINGS', () => {
   it('每次返回新对象，避免调用方互相污染', () => {
@@ -18,6 +18,11 @@ describe('DEFAULT_SETTINGS', () => {
   it('默认字号是 large，默认版心是 medium', () => {
     expect(DEFAULT_SETTINGS().fontSize).toBe('large');
     expect(DEFAULT_SETTINGS().pageWidth).toBe('medium');
+  });
+
+  it('摘要语言默认跟随页面，切换开关默认显示', () => {
+    expect(DEFAULT_SETTINGS().abstractLang).toBe('page');
+    expect(DEFAULT_SETTINGS().abstractSwitch).toBe(true);
   });
 
   it('不含已废弃的 LLM 字段', () => {
@@ -66,11 +71,28 @@ describe('migrateSettings', () => {
     expect(migrateSettings({ pageWidth: undefined }).pageWidth).toBe('medium');
   });
 
-  it('fontSize 只认三档，脏值回落默认档 large', () => {
+  it('fontSize 只认四档，脏值回落默认档 large', () => {
     expect(migrateSettings({ fontSize: 'small' }).fontSize).toBe('small');
     expect(migrateSettings({ fontSize: 'medium' }).fontSize).toBe('medium');
+    expect(migrateSettings({ fontSize: 'xlarge' }).fontSize).toBe('xlarge');
     expect(migrateSettings({ fontSize: 'huge' }).fontSize).toBe('large');
     expect(migrateSettings({ fontSize: undefined }).fontSize).toBe('large');
+  });
+
+  it('abstractLang 只认三档，脏值回落 page', () => {
+    expect(migrateSettings({ abstractLang: 'zh' }).abstractLang).toBe('zh');
+    expect(migrateSettings({ abstractLang: 'en' }).abstractLang).toBe('en');
+    expect(migrateSettings({ abstractLang: 'page' }).abstractLang).toBe('page');
+    expect(migrateSettings({ abstractLang: 'zh-CN' }).abstractLang).toBe('page');
+    expect(migrateSettings({ abstractLang: undefined }).abstractLang).toBe('page');
+  });
+
+  it('abstractSwitch 老库缺字段时落到默认的「显示」，显式 false 才关', () => {
+    // v0.5.x 之前的库没有这个字段；Boolean(undefined) 会把所有老用户静默关掉
+    expect(migrateSettings({ keywords: [] }).abstractSwitch).toBe(true);
+    expect(migrateSettings({ abstractSwitch: false }).abstractSwitch).toBe(false);
+    expect(migrateSettings({ abstractSwitch: 0 }).abstractSwitch).toBe(false);
+    expect(migrateSettings({ abstractSwitch: 'yes' }).abstractSwitch).toBe(true);
   });
 
   it('删掉已废弃的 LLM 字段', () => {
@@ -120,11 +142,15 @@ describe('常量', () => {
     expect(THEMES).toEqual(['light', 'dark']);
   });
 
-  it('3 档字号，从小到大排列', () => {
-    expect(FONT_SIZES).toEqual(['small', 'medium', 'large']);
+  it('4 档字号，从小到大排列', () => {
+    expect(FONT_SIZES).toEqual(['small', 'medium', 'large', 'xlarge']);
   });
 
   it('4 档版心宽度，从窄到宽排列', () => {
     expect(PAGE_WIDTHS).toEqual(['narrow', 'medium', 'wide', 'full']);
+  });
+
+  it('3 档摘要语言，page 在首位（它是默认档）', () => {
+    expect(ABSTRACT_LANGS).toEqual(['page', 'zh', 'en']);
   });
 });

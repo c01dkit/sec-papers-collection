@@ -55,6 +55,8 @@ export interface Paper {
   paper: string;
   status: string;
   abstract?: string;
+  /** LLM 译写的中文摘要，同样只在 meta_json 里；对不上或未分析的论文为空串。 */
+  abstract_zh?: string;
 }
 
 // ── src/assets/data/submission-timeline.json ──────────────────────

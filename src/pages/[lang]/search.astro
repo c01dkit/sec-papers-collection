@@ -292,10 +292,20 @@ const sortCols = [
     display: block; margin-top: 0.15rem;
     font-family: var(--font-sans); font-size: var(--fs-kicker); color: var(--faint);
   }
-  .pt .meta > * + *::before { content: '·'; margin: 0 0.4rem; color: var(--hairline); }
+  /* 分隔点挂在类型 span 的 ::after 上，而不是主题按钮的 ::before：伪元素算按钮
+     盒子的一部分，挂在按钮上时下划线和底色都会把「·」一起划进去。 */
+  .pt .meta > span:not(:last-child)::after { content: '·'; margin: 0 0.4rem; color: var(--hairline); }
   .pt .meta button {
     background: none; border: 0; padding: 0; cursor: pointer;
-    font: inherit; color: var(--faint); border-bottom: 1px solid transparent;
+    font: inherit; color: var(--faint);
   }
-  .pt .meta button:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  /* 悬浮样式打在按钮里的行内 span 上，不打在按钮上：按钮是 inline-block，盒子高到
+     整个行框，底色会一路铺到下划线之下；行内 span 的盒子只有字体内容区，
+     border-bottom 又正好画在 padding 盒底边 —— 底色下缘与下划线天然贴合。
+     主题页 .name a 用的是同一套，两边看起来才一致。 */
+  .pt .meta button:hover { color: var(--accent); }
+  .pt .meta button:hover > span {
+    background: var(--accent-wash); border-bottom: 1px solid var(--accent); padding-bottom: 0.08em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
 </style>

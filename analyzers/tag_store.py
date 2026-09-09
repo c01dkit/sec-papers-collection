@@ -100,9 +100,13 @@ class TagStore:
                 topics = record.get('topics_en') or []
                 if isinstance(topics, str):
                     topics = [topics]
+                abstract_zh = record.get('abstract_zh')
                 result[store_key(publication, year, title)] = {
                     'topic': taxonomy.topic_code(topics[0]) if topics else taxonomy.TOPIC_UNCLASSIFIED,
                     'type': taxonomy.type_code_from_categories(record.get('categories')),
+                    # 中文摘要顺路带出来，供 meta_json 的 abstract_zh 用。不是 tag 的
+                    # 一部分，但键完全相同，再开一份索引只会多读一遍 16k 行的文件。
+                    'abstract_zh': abstract_zh.strip() if isinstance(abstract_zh, str) else '',
                 }
         return result
 
@@ -176,6 +180,10 @@ class TagStore:
         names = list(self.awards.get(store_key(publication, year, title), ()))
         names += self.awards.get(store_key(publication, ANY_YEAR, title), ())
         return taxonomy.award_code(names)
+
+    def abstract_zh_for(self, publication: str, year, title: str) -> str:
+        """LLM 回写的中文摘要；没对上或该行没有就给空串。"""
+        return self.advanced.get(store_key(publication, year, title), {}).get('abstract_zh', '')
 
     def tag_for(self, publication: str, year, title: str) -> str:
         return build_tag(

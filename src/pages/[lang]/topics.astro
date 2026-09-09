@@ -45,9 +45,7 @@ const width = (count: number, max: number) => (max && count ? `${Math.max(1, Mat
             {g.topics.map((tp) => (
               <li class:list={['row', { zero: tp.count === 0 }]}>
                 <span class="code">{tp.code}</span>
-                {tp.count > 0
-                  ? <a class="name" href={href('topic', tp.code)}>{tp.label}</a>
-                  : <span class="name">{tp.label}</span>}
+                <span class="name">{tp.count > 0 ? <a href={href('topic', tp.code)}>{tp.label}</a> : tp.label}</span>
                 <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, b.max)}`}></i></span>
                 <span class="n">{nf.format(tp.count)}</span>
               </li>
@@ -64,9 +62,7 @@ const width = (count: number, max: number) => (max && count ? `${Math.max(1, Mat
       {index.sentinels.map((tp) => (
         <li class:list={['row', { zero: tp.count === 0 }]}>
           <span class="code">{tp.code}</span>
-          {tp.count > 0
-            ? <a class="name" href={href('topic', tp.code)}>{tp.label}</a>
-            : <span class="name">{tp.label}</span>}
+          <span class="name">{tp.count > 0 ? <a href={href('topic', tp.code)}>{tp.label}</a> : tp.label}</span>
           <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, sentinelMax)}`}></i></span>
           <span class="n">{nf.format(tp.count)}</span>
         </li>
@@ -80,9 +76,7 @@ const width = (count: number, max: number) => (max && count ? `${Math.max(1, Mat
       {index.types.map((tp) => (
         <li class:list={['row', { zero: tp.count === 0 }]}>
           <span class="code">{tp.code}</span>
-          {tp.count > 0
-            ? <a class="name" href={href('type', tp.code)}>{tp.label}</a>
-            : <span class="name">{tp.label}</span>}
+          <span class="name">{tp.count > 0 ? <a href={href('type', tp.code)}>{tp.label}</a> : tp.label}</span>
           <span class="bar" aria-hidden="true"><i style={`--w:${width(tp.count, typeMax)}`}></i></span>
           <span class="n">{nf.format(tp.count)}</span>
         </li>
@@ -116,9 +110,18 @@ const width = (count: number, max: number) => (max && count ? `${Math.max(1, Mat
     font-size: var(--fs-small);
   }
   .code { color: var(--faint); font-size: var(--fs-kicker); font-variant-numeric: tabular-nums; }
+  /* .name 是网格单元（会被拉满整列），链接放在里面保持行内：底色与下划线只跟着
+     文字走，不会划过整列的空白。下划线用行内元素的 border-bottom 而不是
+     text-decoration：border 画在 padding 盒底边，与底色下缘共用同一条边，
+     不会像 text-underline-offset 那样随字体度量与底色错开。
+     box-decoration-break: clone 让折行后每一行各自有完整的底色和下划线。
+     与检索页 .pt .meta button > span 同一套。 */
   .name { color: var(--ink); }
-  a.name { border-bottom: 1px solid transparent; }
-  a.name:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .name a:hover {
+    color: var(--accent); background: var(--accent-wash);
+    border-bottom: 1px solid var(--accent); padding-bottom: 0.08em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
   .zero .name { color: var(--faint); }
 
   /* 2px 细横条，按段内最大值归一。无阴影、无圆角 —— 与首页覆盖矩阵同一套克制。 */

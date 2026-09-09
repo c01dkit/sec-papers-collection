@@ -65,6 +65,12 @@ const groups = groupVenues(stats);
     count: t(lang, 'abstractPage.count', { count: '__N__' }),
     noAbstract: t(lang, 'abstract.noAbstract'),
     openPaper: t(lang, 'abstract.openPaper'),
+    langSwitch: t(lang, 'abstract.langSwitch'),
+    langZh: t(lang, 'abstract.langZh'),
+    langEn: t(lang, 'abstract.langEn'),
+    // 不是文案，是「跟随页面」档要跟的那个语言。放在这里而不是读 <html lang>：
+    // 那个值是 zh-CN / en，与设置里的 zh / en 不同名，少一次映射少一处漂移。
+    pageLang: lang,
   })} />
 </PageLayout>
 
@@ -109,12 +115,31 @@ const groups = groupVenues(stats);
   #abResult .list { list-style: none; margin: 0; padding: 0; }
   #abResult .item { padding: 0.9rem 0 1rem; border-top: 1px solid var(--hairline-soft); }
   #abResult .item:first-child { border-top: 0; }
+  /* 标题行：左边标题 + 外链，右边（可选的）中/EN 切换。切换靠右顶格、
+     不随标题换行挤走 —— flex 而不是 float，标题多行时它停在首行基线上。 */
+  #abResult .trow { display: flex; align-items: baseline; gap: 0.8rem; }
+  #abResult .tmain { flex: 1 1 auto; min-width: 0; }
   #abResult .ttl {
     font-family: var(--font-serif); font-size: 1rem; line-height: 1.45;
     display: inline; margin-right: 0.3rem;
   }
   #abResult .ext { font-size: 0.7rem; color: var(--faint); }
   #abResult .ext:hover { color: var(--accent); }
+  /* 中/EN 切换：两个字段并排，当前语言反白，另一个淡出。样式与年份 chip
+     同一套语汇（hairline 边框、2px 圆角、无阴影）。 */
+  #abResult .lsw {
+    flex: none; display: inline-flex; align-items: stretch;
+    border: 1px solid var(--hairline); border-radius: var(--radius);
+    background: none; padding: 0; cursor: pointer; font: inherit;
+    font-size: var(--fs-kicker); line-height: 1; color: var(--faint);
+    /* 钉在标题首行而不是整块的竖直中点：标题折成三行时按钮不该悬在半空 */
+    align-self: flex-start; margin-top: 0.1rem; overflow: hidden;
+  }
+  #abResult .lsw span { padding: 0.22rem 0.4rem; }
+  #abResult .lsw span[data-l='en'] { letter-spacing: 0.04em; }
+  #abResult .lsw span.on { background: var(--ink); color: var(--bg); }
+  #abResult .lsw:hover { border-color: var(--ink); color: var(--ink); }
+  #abResult .lsw:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   #abResult .abs {
     margin: 0.5rem 0 0; font-size: var(--fs-small); line-height: 1.8;
     color: var(--muted); text-align: justify; hyphens: auto;

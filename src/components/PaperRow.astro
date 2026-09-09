@@ -4,7 +4,8 @@ import { parseTag } from '@/lib/tags.js';
 
 // labels 是当前语言的 码 -> 名（search.astro 算好后同时喂给这里与 #ptTax），
 // 所以预渲染的行与 paper-table.js 运行期造的行文字完全一致。
-// 结构必须与 paper-table.js 的 buildRow 保持一致：.meta > span(类型) + button[data-topic](主题)。
+// 结构必须与 paper-table.js 的 buildMeta 保持一致：.meta > span(类型) + button[data-topic] > span(主题)。
+// 按钮里多套一层 span 是给悬浮样式用的（见 search.astro 的说明）。
 const { lang, row, labels } = Astro.props;
 const hasLink = row.paper && row.paper !== '#';
 const tag = parseTag(row.tag);
@@ -22,7 +23,7 @@ const topicText = tag.topic === '00' ? '' : (labels?.topics?.[tag.topic] ?? tag.
       <span class="meta">
         {typeText && <span>{typeText}</span>}
         {topicText && (
-          <button type="button" data-topic={tag.topic} title={t(lang, 'search.filterByTopic')}>{topicText}</button>
+          <button type="button" data-topic={tag.topic} title={t(lang, 'search.filterByTopic')}><span>{topicText}</span></button>
         )}
       </span>
     )}

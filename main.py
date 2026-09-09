@@ -62,6 +62,9 @@ class PaperInfo:
     publication: str = '#'
     paper: str = '#'
     abstract: str = '#'
+    #: LLM 回写的中文摘要（`official_cache/advanced_data/*.jsonl` 的 `abstract_zh`），
+    #: 按 `tag_store.store_key` 对上原文标题才有，对不上为空串。只进 meta_json，不进 data.json（体积）。
+    abstract_zh: str = ''
     status: str = 'notchecked'
 
 _TAG_RE = re.compile(r'^[0-9][0-9A-F]{2}[A-Z]$')   # 与 src/lib/tags.js 的 TAG_RE 一致
@@ -313,6 +316,7 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None, on_edition=No
             for one_paper_info, assigned_id in zip(papers, ids):
                 one_paper_info.id = assigned_id
                 one_paper_info.tag = tag_store.tag_for(name, year, one_paper_info.title)
+                one_paper_info.abstract_zh = tag_store.abstract_zh_for(name, year, one_paper_info.title)
                 yield one_paper_info
 
 def export_data_json(project_base):
@@ -345,8 +349,8 @@ def export_data_json(project_base):
             publication = paper_info.publication
             year = str(paper_info.year)
 
-            # No abstract for small file
-            no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k!='abstract'}
+            # No abstract (either language) for small file
+            no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k not in ('abstract', 'abstract_zh')}
 
             # Full paper info
             json_all.append(no_abs_one_paper_info)

@@ -89,7 +89,8 @@ function renderTitle(td, title) {
 }
 
 // 标题下方的「类型 · 主题」。结构必须与 PaperRow.astro 一致：
-// .meta > span(类型) + button[data-topic](主题)。类型 0 / 主题 00 不渲染；两者都没有时不渲染 .meta。
+// .meta > span(类型) + button[data-topic] > span(主题)。类型 0 / 主题 00 不渲染；两者都没有时不渲染 .meta。
+// 按钮里多套一层 span 是给悬浮样式用的（见 search.astro 的说明）。
 // 样式在 search.astro 的 <style is:global> 里 —— 这里是 createElement，拿不到 scope 属性。
 function buildMeta(row) {
   const tag = parseTag(row.tag);
@@ -108,7 +109,9 @@ function buildMeta(row) {
     b.type = 'button';
     b.dataset.topic = tag.topic;
     b.title = i18n.filterByTopic;
-    b.textContent = topicText;
+    const inner = document.createElement('span');
+    inner.textContent = topicText;
+    b.appendChild(inner);
     meta.appendChild(b);
   }
   return meta;

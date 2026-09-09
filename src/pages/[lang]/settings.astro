@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import { LOCALES, t } from '@/i18n/index.js';
-import { ACCENTS, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
+import { ACCENTS, FONT_SIZES, PAGE_WIDTHS, ABSTRACT_LANGS } from '@/lib/settings-schema.js';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -26,6 +26,10 @@ const toggles = [
   { key: 'rememberTheme', label: t(lang, 'settings.form.rememberTheme.label'), desc: t(lang, 'settings.form.rememberTheme.desc') },
   { key: 'rememberLanguage', label: t(lang, 'settings.form.rememberLanguage.label'), desc: t(lang, 'settings.form.rememberLanguage.desc') },
 ];
+// 摘要页的两项放在一起：先选默认语言，再决定要不要逐篇切换的按钮。
+// abstractSwitch 走通用的 [data-toggle] 路径（settings-form.js 里 save({[key]: !settings[key]})），
+// abstractLang 是三选一，和字号/版心同一套 radiogroup 写法，只是真相在 settings 而不在 DOM。
+const abstractToggle = { key: 'abstractSwitch', label: t(lang, 'settings.abstractSwitch.label'), desc: t(lang, 'settings.abstractSwitch.desc') };
 ---
 
 <PageLayout lang={lang} page="settings" title={t(lang, 'menu.settings')}
@@ -109,6 +113,34 @@ const toggles = [
       </div>
     </section>
   ))}
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt">{t(lang, 'settings.abstractLang.label')}</div>
+      <p class="ld">{t(lang, 'settings.abstractLang.desc')}</p>
+    </div>
+    <div class="control swatches" role="radiogroup" aria-label={t(lang, 'settings.abstractLang.label')}>
+      {ABSTRACT_LANGS.map((l) => (
+        <button type="button" role="radio" class="sw" data-abstractlang-pick={l}
+                aria-checked="false">
+          <span>{t(lang, `settings.abstractLangNames.${l}`)}</span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="row" data-reveal>
+    <div class="label">
+      <div class="lt" id={`lt-${abstractToggle.key}`}>{abstractToggle.label}</div>
+      <p class="ld" id={`ld-${abstractToggle.key}`}>{abstractToggle.desc}</p>
+    </div>
+    <div class="control">
+      <button type="button" class="switch" data-toggle={abstractToggle.key} aria-pressed="false"
+              aria-labelledby={`lt-${abstractToggle.key}`} aria-describedby={`ld-${abstractToggle.key}`}>
+        <span class="knob"></span>
+      </button>
+    </div>
+  </section>
 
   <section class="row" data-reveal>
     <div class="label">

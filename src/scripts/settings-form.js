@@ -1,6 +1,6 @@
 import { getSettings, patchSettings, getFavorites, clearFavorites, isPersistent } from './settings-store.js';
 import { applyTheme } from './theme.js';
-import { ACCENTS, FONT_SIZES, PAGE_WIDTHS } from '@/lib/settings-schema.js';
+import { ACCENTS, FONT_SIZES, PAGE_WIDTHS, ABSTRACT_LANGS } from '@/lib/settings-schema.js';
 
 const fmt = (tpl, map) => Object.entries(map).reduce((s, [k, v]) => s.replaceAll(k, v), tpl);
 
@@ -138,6 +138,25 @@ export async function initSettingsForm() {
   }
   paintAccent();
 
+  // ── 摘要默认语言 ────────────────────────────────────
+  // 与字号/版心不同，这一项没有 DOM 真相（页面上没有任何地方按它渲染），
+  // 读 settings 即可。
+  const paintAbstractLang = () => {
+    const cur = settings.abstractLang;
+    for (const btn of document.querySelectorAll('[data-abstractlang-pick]')) {
+      btn.setAttribute('aria-checked', btn.dataset.abstractlangPick === cur ? 'true' : 'false');
+    }
+  };
+  for (const btn of document.querySelectorAll('[data-abstractlang-pick]')) {
+    btn.addEventListener('click', async () => {
+      const pick = btn.dataset.abstractlangPick;
+      if (!ABSTRACT_LANGS.includes(pick)) return;
+      await save({ abstractLang: pick });
+      paintAbstractLang();
+    });
+  }
+  paintAbstractLang();
+
   // ── 开关 ────────────────────────────────────────────
   const paintToggles = () => {
     for (const btn of document.querySelectorAll('[data-toggle]')) {
@@ -177,6 +196,7 @@ export async function initSettingsForm() {
       paintFontSize();
       paintPageWidth();
       paintAccent();
+      paintAbstractLang();
       paintToggles();
     });
   }

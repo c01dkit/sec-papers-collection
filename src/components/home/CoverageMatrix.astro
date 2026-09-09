@@ -1,6 +1,7 @@
 ---
 import { t } from '@/i18n/index.js';
 import type { CoverageMatrix } from '@/lib/types.d.ts';
+import { abstractHref } from '@/lib/abstract-url.js';
 
 interface Props {
   lang: string;
@@ -75,10 +76,13 @@ const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
                 </th>
                 {row.cells.map((cell) =>
                   cell ? (
-                    <td
-                      style={`background: rgb(${g.rgb} / ${displayAlpha(cell.alpha)})`}
-                      title={`${row.publication} ${cell.year}: ${cell.count}`}
-                    >{cell.count}</td>
+                    <td style={`background: rgb(${g.rgb} / ${displayAlpha(cell.alpha)})`}>
+                      <a
+                        class="cell"
+                        href={abstractHref(lang, row.publication, cell.year)}
+                        title={t(lang, 'home.matrixCellTitle', { pub: row.publication, year: cell.year, count: cell.count })}
+                      >{cell.count}</a>
+                    </td>
                   ) : (
                     <td class="empty"></td>
                   )
@@ -157,10 +161,23 @@ const displayAlpha = (a: number) => (0.06 + a * 0.44).toFixed(2);
     color: var(--ink);   /* 一律 --ink：alpha 上限 0.50 保证任何格子上都够对比度 */
   }
   .mx td.empty { background: var(--mx-empty); }
+  /* 每个有数的格子都是一条到摘要页对应届次的链接（/[lang]/abstract/?pub=…&year=…）。
+     链接撑满整格，点击面积就是整格；不下划线、不变色，颜色深浅已经在编码数量，
+     再叠一层链接色会把矩阵读成一片蓝。悬停 / 键盘聚焦用 1px 内描边（inset
+     outline）指示，与全站「hairline、无阴影」的语汇一致。◂01–13 那种合并的
+     早年汇总没有单个届次可跳，所以只有格子是链接。 */
+  .mx td .cell {
+    display: block; height: 100%; line-height: 24px;
+    color: inherit; text-decoration: none;
+  }
+  .mx td .cell:hover, .mx td .cell:focus-visible {
+    outline: 1px solid var(--ink); outline-offset: -1px;
+  }
   .pre { color: var(--faint); font-size: 0.62rem; margin-left: 0.3rem; }
 
-  /* 两组之间留一条空隙 */
-  .g + .g tr:first-child th, .g + .g tr:first-child td { padding-top: 9px; }
+  /* 三组之间不留空隙，靠 legend 的三种色相区分分组。早先这里给下一组首行
+     加 padding-top 留空，那会把撑满整格的 .cell 顶出格高（ICSE / ASPLOS 两行
+     比别行高）；后来换成 9px 空行，又被嫌断开。贴合是有意为之。 */
 
   .note {
     margin: 0.9rem 0 0;

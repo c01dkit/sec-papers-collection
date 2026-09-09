@@ -86,12 +86,17 @@ html[data-theme='dark'][data-accent='indigo']   { --accent: #9aa0dd; --accent-so
 html[data-theme='dark'][data-accent='oxblood']  { --accent: #d9868f; --accent-soft: #7a3f46; }
 html[data-theme='dark'][data-accent='pine']     { --accent: #83bda1; --accent-soft: #3a6350; }
 
-/* ── 字号：三档整体缩放 ──────────────────────────────────────
+/* 链接悬浮的淡色底（博客同款做法：强调色 14% 透明）。--accent-soft 是实色中间调，
+   压在文字底下太重；这支随 --accent 派生，明暗与四种强调色都不用再各写一份。 */
+html { --accent-wash: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+/* ── 字号：四档整体缩放 ──────────────────────────────────────
    全站尺寸一律以 rem 记，改根字号即等比缩放。「小」是站点原始字号，
    不写规则（保持 UA 默认基准）。用百分比而不是 px，尊重用户在浏览器里
    改过的默认字号。 */
 html[data-fontsize='medium'] { font-size: 106.25%; }  /* 16px 基准下 17px */
 html[data-fontsize='large']  { font-size: 112.5%; }   /* 16px 基准下 18px */
+html[data-fontsize='xlarge'] { font-size: 125%; }     /* 16px 基准下 20px；前三档只差 1px，「超大」要拉开才有意义 */
 
 /* ── 版心宽度：四档 ──────────────────────────────────────────
    「窄」是站点原始的 1120px（:root 里的默认值，不写规则）。

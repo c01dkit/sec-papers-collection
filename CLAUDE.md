@@ -69,7 +69,7 @@ OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under 
 - `data-quick-view.json` — 100 latest papers per publication
 - `data-statistics.json` — aggregated stats by publication/year/category, plus `byTopic` / `byType` (paper counts per tag code)
 - `topics.json` — topic / type code table with zh + en names, exported by `analyzers/id_taxonomy.py::export_taxonomy()`. The frontend never hard-codes a topic name; both `topics.astro` and the search page's dropdowns read this file at build time.
-- `meta_json/[Publication - Year].json` — full per-conference details with abstracts
+- `meta_json/[Publication - Year].json` — full per-conference details with abstracts. `abstract_zh` is the LLM-translated Chinese abstract, pulled from `official_cache/advanced_data/*.jsonl` by `TagStore.abstract_zh_for()` (same `store_key` lookup as the tag); empty string when no row matches. It is deliberately excluded from `data.json` / `data-quick-view.json` (size). The abstract page's per-paper 中/EN switch (`settings.abstractSwitch`, `settings.abstractLang`) only appears when both languages are present.
 
 ### Astro frontend (`src/`)
 - **Pages:** `src/pages/[lang]/*.astro` — prerendered for both `zh` and `en` via `getStaticPaths`. `src/pages/index.astro` is a client-side language dispatcher; `src/pages/{paper,reputation,misc}/*.astro` are redirect stubs for pre-0.4.0 URLs.
