@@ -10,6 +10,7 @@ import analyzers.oss_uploader as oss_uploader
 import analyzers.paper_id as paper_id
 import analyzers.id_taxonomy as id_taxonomy
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
 from dataclasses import dataclass, field, asdict
 from lxml import etree
@@ -551,6 +552,44 @@ def title_exists_in_file(file_path: str, title: str) -> bool:
 #: `--llm-analyze` 的追加式产出目录；文件名形如 `IEEE S&P - 2026 - advanced.jsonl`。
 ADVANCED_DIR = os.path.join('official_cache', 'advanced_data')
 
+#: `--llm-analyze` / `--llm-tag` 同时在途的请求数；`--llm-concurrency` 可改。
+LLM_CONCURRENCY = 8
+
+
+def run_concurrently(items, fn, workers):
+    """
+    Run `fn(item)` for every item on `workers` threads; yield `(item, future)` as each finishes.
+
+    Futures come back to the caller's thread, so `future.result()` re-raises inside the
+    caller's own `try`, and the JSONL appends stay single-writer with no lock. Rows land
+    in completion order rather than input order — harmless, both caches are keyed by
+    title (`titles_in_file`, `tag_analyzer.cached_keys`) and read last-row-wins.
+
+    If the caller's loop dies (Ctrl-C, a failed write), the queued requests are cancelled
+    here. Left alone, `ThreadPoolExecutor`'s exit hook would run every one of them before
+    the process could quit. The ≤ `workers` already in flight still finish; their results
+    are dropped and simply re-requested next run.
+    """
+    pool = ThreadPoolExecutor(max_workers=workers)
+    futures = {}
+    try:
+        for item in items:
+            futures[pool.submit(fn, item)] = item
+        for future in as_completed(futures):
+            yield futures[future], future
+    finally:
+        cancelled = sum(future.cancel() for future in futures)
+        pool.shutdown(wait=False)
+        if cancelled:
+            console.print(f'Cancelled {cancelled} queued LLM request(s)', style='yellow', markup=False)
+
+
+def positive_int(value):
+    number = int(value)
+    if number < 1:
+        raise argparse.ArgumentTypeError(f'must be >= 1, got {value}')
+    return number
+
 
 def titles_in_file(file_path: str) -> set:
     """
@@ -582,7 +621,7 @@ def titles_in_file(file_path: str) -> set:
     return title_set
 
 
-def analyze_abstracts_and_titles():
+def analyze_abstracts_and_titles(concurrency=LLM_CONCURRENCY):
     from analyzers.llm_analyzer import analyze_title_and_abs
     config = get_config('data.yml')
     os.makedirs(ADVANCED_DIR, exist_ok=True)
@@ -602,12 +641,13 @@ def analyze_abstracts_and_titles():
             if len(paper_info.abstract) > 50 and paper_info.status != 'advanced':
                 pending.append((paper_info, log_file_path))
                 title_cache[log_file_path].add(key)  # a title listed twice in one edition is queued once
-    console.print(f'{len(pending)} paper(s) need an LLM call', markup=False)
+    console.print(f'{len(pending)} paper(s) need an LLM call, {concurrency} at a time', markup=False)
     with stage_progress() as progress:
         task = progress.add_task('LLM 分析摘要', total=len(pending))
-        for paper_info, log_file_path in pending:
+        jobs = run_concurrently(pending, lambda job: analyze_title_and_abs(job[0].title, job[0].abstract), concurrency)
+        for (paper_info, log_file_path), future in jobs:
             try:
-                result = analyze_title_and_abs(paper_info.title, paper_info.abstract)
+                result = future.result()
                 console.print(f"Analyzed {paper_info.title} : {result.get('topics_en', 'unknown')}", markup=False)
                 if result.get('topics_en', 'unknown') != 'unknown':
                     result['title'] = paper_info.title  # source title verbatim: the resume key, independent of what the LLM echoes back
@@ -618,7 +658,7 @@ def analyze_abstracts_and_titles():
                 console.print(f'SKIP {paper_info.title[:60]} -- {exc}', style='yellow', markup=False)
             progress.advance(task)
     
-def analyze_tags_with_llm(limit=None):
+def analyze_tags_with_llm(limit=None, concurrency=LLM_CONCURRENCY):
     """
     Fill in the tag positions that the static sources could not (see docs/id-rule.md).
 
@@ -647,16 +687,18 @@ def analyze_tags_with_llm(limit=None):
                 pending.append(paper_info)
 
     console.print(f'{len(pending)} paper(s) need an LLM call'
-          + (f', processing the first {limit}' if limit is not None else ''), markup=False)
+          + (f', processing the first {limit}' if limit is not None else '')
+          + f', {concurrency} at a time', markup=False)
     # `--llm-tag-limit 0` prints the count and stops: a free cost estimate.
     if limit is not None:
         pending = pending[:limit]
 
     with stage_progress() as progress:
         task = progress.add_task('LLM 补全 tag', total=len(pending))
-        for paper_info in pending:
+        jobs = run_concurrently(pending, lambda p: tag_analyzer.analyze_one(p.title, p.abstract), concurrency)
+        for paper_info, future in jobs:
             try:
-                type_code, topic_code = tag_analyzer.analyze_one(paper_info.title, paper_info.abstract)
+                type_code, topic_code = future.result()
             except RuntimeError as exc:
                 console.print(f'SKIP {paper_info.title[:60]} -- {exc}', style='yellow', markup=False)
                 progress.advance(task)
@@ -724,6 +766,12 @@ if __name__ == '__main__':
         help="Only process the first N papers with --llm-tag (useful for a cost check)"
     )
     parser.add_argument(
+        '--llm-concurrency',
+        type=positive_int,
+        default=LLM_CONCURRENCY,
+        help=f"Concurrent LLM requests for --llm-analyze / --llm-tag (default {LLM_CONCURRENCY})"
+    )
+    parser.add_argument(
         '--check-titles',
         action='store_true',
         help="Check for duplicate titles across all meta_json files"
@@ -745,9 +793,9 @@ if __name__ == '__main__':
             prepare_official_data()
         export_data_json('src/assets/data/')
     if args.llm_analyze:
-        analyze_abstracts_and_titles()
+        analyze_abstracts_and_titles(concurrency=args.llm_concurrency)
     if args.llm_tag:
-        analyze_tags_with_llm(limit=args.llm_tag_limit)
+        analyze_tags_with_llm(limit=args.llm_tag_limit, concurrency=args.llm_concurrency)
     if args.check_titles:
         check_duplicate_titles()
     if args.seed_upload_cache:

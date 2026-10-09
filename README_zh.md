@@ -165,7 +165,7 @@ BASE_URL=...
 PRIVATE_ZIP_PASSWD=...   # 用于 cache.zip 加密
 ```
 
-分析结果会缓存为 JSONL，避免重复请求。
+分析结果会缓存为 JSONL，避免重复请求。`--llm-analyze` 与 `--llm-tag` 默认同时发送 8 个并发请求，可用 `--llm-concurrency N` 调整（服务商返回 429 限流时调低即可）。
 
 ### 缺失 cite key 的 BIB 文件
 

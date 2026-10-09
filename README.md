@@ -107,7 +107,7 @@ BASE_URL=...
 PRIVATE_ZIP_PASSWD=...   # password for cache.zip
 ```
 
-Results are cached as JSONL to avoid re-querying.
+Results are cached as JSONL to avoid re-querying. `--llm-analyze` and `--llm-tag` send 8 requests concurrently by default; use `--llm-concurrency N` to change that (e.g. lower it if your provider returns 429s).
 
 ### `bib` files without cite keys
 

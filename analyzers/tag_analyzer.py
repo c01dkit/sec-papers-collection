@@ -17,6 +17,7 @@ from __future__ import annotations
 import datetime
 import json
 import os
+import threading
 
 from analyzers import id_taxonomy as taxonomy
 from analyzers.tag_store import CACHE_PATH, store_key
@@ -67,18 +68,24 @@ def _system_message() -> str:
 
 
 _client = None
+_client_lock = threading.Lock()
 
 
 def _get_client():
-    """延迟建 client：没有 API key 时 `import` 本模块不该炸。"""
-    global _client
-    if _client is None:
-        from openai import OpenAI
+    """延迟建 client：没有 API key 时 `import` 本模块不该炸。
 
-        api_key = os.getenv('API_KEY')
-        if not api_key:
-            raise EnvironmentError('API_KEY is not set; --llm-tag needs it in .env')
-        _client = OpenAI(api_key=api_key, base_url=os.getenv('BASE_URL', 'https://api.openai.com/v1'))
+    `--llm-tag` 从多个线程同时调用这里（`main.run_concurrently`），所以加锁 ——
+    OpenAI client 本身线程安全，全进程共用一个、共用一个连接池。
+    """
+    global _client
+    with _client_lock:
+        if _client is None:
+            from openai import OpenAI
+
+            api_key = os.getenv('API_KEY')
+            if not api_key:
+                raise EnvironmentError('API_KEY is not set; --llm-tag needs it in .env')
+            _client = OpenAI(api_key=api_key, base_url=os.getenv('BASE_URL', 'https://api.openai.com/v1'))
     return _client
 
 

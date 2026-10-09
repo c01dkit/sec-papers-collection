@@ -6,12 +6,6 @@
 uv run main.py --analyze --upload
 ```
 
-## Publish Website (GitHub Pages)
-
-```shell
-npm run deploy
-```
-
 ## Publish Website (Cloudflare Pages, direct upload)
 
 ```shell

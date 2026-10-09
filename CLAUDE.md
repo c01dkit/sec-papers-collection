@@ -28,6 +28,7 @@ uv run main.py --analyze            # Crawl/parse papers and generate JSON data 
 uv run main.py --llm-analyze        # Analyze abstracts with LLM (requires .env)
 uv run main.py --llm-tag            # Fill in tag positions static sources couldn't (requires .env)
 uv run main.py --llm-tag --llm-tag-limit 0   # Count what --llm-tag would cost, without any request
+uv run main.py --llm-tag --llm-concurrency 4 # Both LLM commands send 8 requests at a time by default; lower it on 429s
 uv run pytest                       # Python tests (analyzers/); pytest is a dev dependency
 uv run main.py --zip                # Create encrypted zip of crawl cache
 uv run main.py --unzip              # Unzip crawl cache
@@ -63,6 +64,7 @@ OSS credentials and endpoint live in `.env` (`OSS_*`); objects are stored under 
 - Crawl results cached in `cache/` (pickle files, SHA256-keyed); official data in `official_cache/`
 - `llm_analyzer.py` — uses OpenAI API (configurable via `.env`) to classify paper topics; results cached in JSONL
   - `--llm-analyze` appends to `official_cache/advanced_data/<Publication> - <Year> - advanced.jsonl` and resumes by `compact(title)`, reading both the stored source `title` and the LLM's `title_en`, and **ignoring `model_used`**. A leftover `gemini-3-pro`-only filter once made every other model's rows invisible, so each run re-analyzed them (S&P 2026: 199 papers, 433 rows) and an interrupted run never resumed. Downstream (`tag_store`) is last-row-wins per key, so a duplicate row is waste, not corruption.
+  - `--llm-analyze` and `--llm-tag` both go through `main.run_concurrently()` (thread pool, `--llm-concurrency`, default 8). Requests run on worker threads, but results come back to the main thread, which does every JSONL append and every console print — keep it that way and no lock is needed. Rows therefore land in completion order, not input order (harmless, see above). Its `finally` cancels queued futures on purpose: `ThreadPoolExecutor`'s exit hook would otherwise *run* every queued request after a Ctrl-C before the process could quit. Anything lazily initialised that a worker touches needs a lock (`tag_analyzer._get_client`).
 
 ### Generated JSON assets (`src/assets/data/`)
 - `data.json` — full paper list (no abstracts for size)
