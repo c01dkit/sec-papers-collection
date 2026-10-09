@@ -5,23 +5,23 @@ import path from 'node:path';
 const pkg = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'utf8'));
 
 /**
- * GitHub Pages 的 legacy 构建管线会把产物过一遍 Jekyll，而 Jekyll 默认丢弃
- * 所有以 `_` 开头的文件和目录 —— Astro 的全部 JS/CSS 都在 `_astro/` 下。
- * 结果是 HTML 正常 200、每个 `/_astro/*` 全部 404，页面裸奔且无脚本。
- * 关掉 Jekyll 需要两件事同时成立，缺一则线上静默失效：
- *   1. 站点根目录有 `.nojekyll`（由 public/ 复制进 dist/）
- *   2. gh-pages 带 --dotfiles，否则它的默认 glob 根本不匹配点文件
+ * 站点由本地构建后直传 Cloudflare Pages（Cloudflare 的 Git 联动构建拿不到被 git
+ * 忽略的数据 JSON，见 CLAUDE.md）。直传什么就上线什么，所以两件事缺一则静默出错：
+ *   1. predeploy 必须先 build —— 否则 `npm run deploy` 会把上一次的旧 dist/ 原样
+ *      发出去，构建时写死的统计、下拉框、场次列表都停在旧数据上，且没有任何报错。
+ *   2. deploy 直传的必须是 dist/，项目名不能丢。
  */
-describe('GitHub Pages 部署', () => {
-  it('public/.nojekyll 存在，构建后落到站点根目录', () => {
-    expect(fs.existsSync(path.resolve('public/.nojekyll'))).toBe(true);
+describe('Cloudflare Pages 部署', () => {
+  it('predeploy 先构建，deploy 不会发布过期的 dist/', () => {
+    expect(pkg.scripts.predeploy).toBe('npm run build');
   });
 
-  it('deploy 脚本带 --dotfiles，否则 .nojekyll 不会被发布', () => {
-    expect(pkg.scripts.deploy).toMatch(/(^|\s)(--dotfiles|-t)(\s|$)/);
+  it('deploy 用 wrangler 直传 dist/ 到 sec-papers-collection 项目', () => {
+    expect(pkg.scripts.deploy).toMatch(/^wrangler pages deploy dist\s/);
+    expect(pkg.scripts.deploy).toMatch(/--project-name[= ]sec-papers-collection(\s|$)/);
   });
 
-  it('deploy 脚本仍然带 CNAME（自定义域名靠它保留）', () => {
-    expect(pkg.scripts.deploy).toMatch(/--cname\s+sec\.c01dkit\.com/);
+  it('令牌从 .env 读取，不依赖 wrangler login', () => {
+    expect(pkg.scripts.deploy).toMatch(/--env-file[= ]\.env(\s|$)/);
   });
 });

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-An Astro static site displaying curated academic security papers from top-tier conferences (IEEE S&P, USENIX Security, ACM CCS, NDSS) and related venues (ICSE, ISSTA, FSE, ASPLOS, SOSP). Deployed to GitHub Pages at sec.c01dkit.com (`npm run deploy`) and to Cloudflare Pages by direct upload (`npm run deploy:cf`, see *Deploying to Cloudflare Pages* below). As of v0.4.0 the site is prerendered per-language (`/zh/`, `/en/`) with no client-side framework — pages ship hand-written CSS and small vanilla-JS controllers.
+An Astro static site displaying curated academic security papers from top-tier conferences (IEEE S&P, USENIX Security, ACM CCS, NDSS) and related venues (ICSE, ISSTA, FSE, ASPLOS, SOSP). Deployed to Cloudflare Pages at sec.c01dkit.com by direct upload (`npm run deploy`, see *Deploying to Cloudflare Pages* below); it moved off GitHub Pages in `257ab99`. As of v0.4.0 the site is prerendered per-language (`/zh/`, `/en/`) with no client-side framework — pages ship hand-written CSS and small vanilla-JS controllers.
 
 ## Commands
 
@@ -15,8 +15,7 @@ npm run build    # Static build to dist/
 npm run preview  # Preview the build
 npm run check    # astro check
 npm test         # vitest run
-npm run deploy      # Build, then push dist/ to GitHub Pages (gh-pages)
-npm run deploy:cf   # Build, then direct-upload dist/ to Cloudflare Pages (wrangler reads CLOUDFLARE_API_TOKEN from .env)
+npm run deploy   # predeploy runs `npm run build`, then wrangler direct-uploads dist/ to Cloudflare Pages (CLOUDFLARE_API_TOKEN from .env)
 ```
 
 Frontend is Astro 7 with hand-written CSS (no UI framework, no Tailwind). Design tokens live in `src/styles/tokens.css`; the visual direction is "academic editorial" — warm off-white paper, serif headlines, hairline rules, **no box-shadow anywhere**, max 2px radius.
@@ -30,24 +29,28 @@ uv run main.py --llm-tag            # Fill in tag positions static sources could
 uv run main.py --llm-tag --llm-tag-limit 0   # Count what --llm-tag would cost, without any request
 uv run main.py --llm-tag --llm-concurrency 4 # Both LLM commands send 8 requests at a time by default; lower it on 429s
 uv run pytest                       # Python tests (analyzers/); pytest is a dev dependency
-uv run main.py --zip                # Create encrypted zip of crawl cache
-uv run main.py --unzip              # Unzip crawl cache
 uv run main.py --upload             # Upload CHANGED src/assets/data/ JSON to Aliyun OSS (served via CDN)
 uv run main.py --seed-upload-cache  # Mark current JSON as already-uploaded (skips them on next --upload)
 ```
 
 `--upload` hashes each JSON (SHA256) against `oss_upload_cache.json` (git-ignored, local only) and only uploads files whose content changed. After a manual/first upload, run `--seed-upload-cache` once so subsequent uploads are incremental.
 
+There is no `--zip` / `--unzip` any more: both flags were dropped from `main.py` in `3e959a6` (`analyzers/zip_manager.py` is left unwired), and passing one makes argparse reject the whole command before anything runs.
+
 ### Full publish cycle
 ```bash
-uv run main.py --analyze --upload --zip && npm run build && npm run deploy
-uv run main.py --analyze --upload --zip && npm run deploy:cf   # same, targeting Cloudflare Pages
+uv run main.py --analyze --llm-analyze --llm-tag   # only when new papers need LLM topics / tags / abstract_zh
+uv run main.py --analyze --upload                  # fold the LLM output into the JSON, upload what changed
+npm run deploy                                     # rebuild with the new data and publish
 ```
-`--analyze --upload` without `npm run build` leaves the search dropdowns' and topics page's per-topic counts stale — they are baked in at build time while the rows come from the CDN.
+
+**Why two `main.py` runs.** Flags execute in a fixed order — `--analyze` → `--llm-analyze` → `--llm-tag` → `--upload` — whatever order they are typed in. So `--analyze --llm-analyze --llm-tag --upload` in one run exports the JSON *before* the LLM writes anything, then uploads that stale JSON; the new results only appear after the next `--analyze`. The first `--analyze` is not redundant either: its `prepare_official_data()` turns `official_cache/` CSV/BIB into the JSON that a new `official_file` edition needs before the LLM steps can even see its papers.
+
+**Why `npm run deploy` after every data change.** `--upload` only refreshes what the browser fetches from the CDN at runtime: `data.json` (the search page's full list) and `meta_json/*.json` (the abstract page's papers). Everything else is imported at build time and stays stale until a rebuild: the home page's stats, coverage matrix and quick view; the search page's first 30 rows and its publication / year / topic / type dropdowns with counts; the topics, trends and about pages; and the abstract page's edition picker (`groupVenues(stats)`) — so a **new edition's `meta_json` sits on the CDN unreachable from the UI** until you redeploy.
 
 ### Deploying to Cloudflare Pages
 
-Cloudflare's git-connected build **cannot work for this repo and must stay disabled.** `src/assets/data/*` is git-ignored (only `awards.json` and `submission-timeline.json` are tracked), yet `data-statistics.json`, `data-quick-view.json`, `topics.json` and `meta_json/IEEE S&P - 2026.json` are imported at build time — so a clone-and-build on Cloudflare dies at Rolldown's import resolution (first hit: `abstract.astro`; fixing that one file only surfaces the next). The data exists only where `--analyze` ran, so the site is built locally and `dist/` is direct-uploaded with `npm run deploy:cf`. The Pages project stays git-connected (that is allowed; the reverse migration is not), but in the dashboard set **Build → Branch control → "Enable automatic production branch deployments" off** and the preview branch to **None**, or every push starts a doomed build. The project name is hard-coded in the script, next to gh-pages' `--cname`; change both if you fork.
+Cloudflare's git-connected build **cannot work for this repo and must stay disabled.** `src/assets/data/*` is git-ignored (only `awards.json` and `submission-timeline.json` are tracked), yet `data-statistics.json`, `data-quick-view.json`, `topics.json` and `meta_json/IEEE S&P - 2026.json` are imported at build time — so a clone-and-build on Cloudflare dies at Rolldown's import resolution (first hit: `abstract.astro`; fixing that one file only surfaces the next). The data exists only where `--analyze` ran, so the site is built locally and `dist/` is direct-uploaded with `npm run deploy`. The Pages project stays git-connected (that is allowed; the reverse migration is not), but in the dashboard set **Build → Branch control → "Enable automatic production branch deployments" off** and the preview branch to **None**, or every push starts a doomed build. The project name (`sec-papers-collection`) is hard-coded in the `deploy` script; change it if you fork.
 
 ## Architecture
 
@@ -146,10 +149,11 @@ Papers in the data pipeline have a `status` field: `notchecked` → `inprogress`
 
 ## Environment
 
-Copy `.env.example` to `.env` for LLM analysis and cache encryption:
-- `API_KEY`, `MODEL`, `BASE_URL` — for `--llm-analyze`
-- `PRIVATE_ZIP_PASSWD` — for cache zip encryption
-- `CLOUDFLARE_API_TOKEN` — for `npm run deploy:cf` (passed to wrangler via `--env-file=.env`; no `wrangler login` needed)
+Copy `.env.example` to `.env` for LLM analysis, upload and deploy:
+- `API_KEY`, `MODEL`, `BASE_URL` — for `--llm-analyze` / `--llm-tag`
+- `OSS_ACCESS_KEY_ID`, `OSS_ACCESS_KEY_SECRET`, `OSS_BUCKET`, `OSS_ENDPOINT` — for `--upload`
+- `CLOUDFLARE_API_TOKEN` — for `npm run deploy` (passed to wrangler via `--env-file=.env`; no `wrangler login` needed)
+- `PRIVATE_ZIP_PASSWD` — only read by the unwired `analyzers/zip_manager.py` (see `--zip` above); nothing on the current command line uses it
 
 ## Adding a New Conference/Year
 

@@ -4,7 +4,7 @@
 
 ## TLDR
 
-A curated collection of academic papers in cybersecurity (and adjacent fields), sorted by venue and year, deployed via GitHub Pages.
+A curated collection of academic papers in cybersecurity (and adjacent fields), sorted by venue and year, deployed on Cloudflare Pages.
 
 **[Visit the website at sec.c01dkit.com](https://sec.c01dkit.com)**
 
@@ -61,7 +61,7 @@ All preferences are persisted in your browser's IndexedDB only — nothing is up
 
 ```
 analyzers/                Python crawl/parse/LLM analysis modules
-cache/                    pickled crawl cache (SHA-256 keyed; see cache.zip)
+cache/                    pickled crawl cache (SHA-256 keyed; git-ignored, local only)
 official_cache/           official CSV/BIB files from venues
 src/assets/data/          generated JSON consumed by the frontend
   data.json               full paper list (no abstracts, for size)
@@ -89,7 +89,7 @@ uv sync                     # set up the Python environment
 uv run main.py --analyze    # crawl/parse and regenerate JSON in src/assets/data/
 ```
 
-To speed up local crawling, unzip `cache.zip` into the repo root so the cached HTML/JSON is reused.
+Crawled pages are cached under `cache/` (git-ignored), so later `--analyze` runs reuse them instead of fetching again, unless a site entry sets `use_cache: false`.
 
 ### Updating key information
 
@@ -104,7 +104,6 @@ To speed up local crawling, unzip `cache.zip` into the repo root so the cached H
 API_KEY=...
 MODEL=...
 BASE_URL=...
-PRIVATE_ZIP_PASSWD=...   # password for cache.zip
 ```
 
 Results are cached as JSONL to avoid re-querying. `--llm-analyze` and `--llm-tag` send 8 requests concurrently by default; use `--llm-concurrency N` to change that (e.g. lower it if your provider returns 429s).
@@ -128,8 +127,7 @@ npm run build            # production build → dist/
 npm run preview          # preview the build
 npm run check            # astro check
 npm test                 # vitest run
-npm run deploy           # publish dist/ to GitHub Pages (--cname sec.c01dkit.com)
-npm run deploy:cf        # publish dist/ to Cloudflare Pages by direct upload (wrangler; --project-name sec-papers-collection)
+npm run deploy           # build, then publish dist/ to Cloudflare Pages by direct upload (wrangler; --project-name sec-papers-collection)
 ```
 
 The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts are Chart.js.
@@ -137,11 +135,14 @@ The site is Astro with hand-written CSS — no UI framework, no Tailwind. Charts
 ## Full publish cycle
 
 ```bash
-uv run main.py --analyze --upload
-npm run deploy           # update package.json's --cname if you fork this
+uv run main.py --analyze --llm-analyze --llm-tag   # only when new papers need LLM analysis
+uv run main.py --analyze --upload                  # fold the LLM output into the JSON, then upload
+npm run deploy           # rebuild with the new data and publish; update the --project-name if you fork this
 git add .
 git commit -m "update $DATE"
 git push origin main
 ```
 
-For Cloudflare Pages, replace `npm run deploy` with `npm run deploy:cf` (wrangler must be installed; it reads `CLOUDFLARE_API_TOKEN` from `.env`, see `.env.example`). Cloudflare's own git-connected build cannot work here: the generated data JSON under `src/assets/data/` is git-ignored and only exists where `--analyze` ran, so keep automatic deployments disabled on the Pages project and direct-upload `dist/` instead.
+`main.py` always runs its steps in the order `--analyze` → `--llm-analyze` → `--llm-tag` → `--upload`, so in a single run the LLM results would miss that run's JSON export. Hence the second `--analyze`. `--upload` alone only refreshes the paper lists and abstracts the browser fetches from the CDN; statistics, filters and the list of editions are built into the pages, so `npm run deploy` is needed after every data change.
+
+`npm run deploy` needs wrangler installed and reads `CLOUDFLARE_API_TOKEN` from `.env` (see `.env.example`). Cloudflare's own git-connected build cannot work here: the generated data JSON under `src/assets/data/` is git-ignored and only exists where `--analyze` ran, so keep automatic deployments disabled on the Pages project and direct-upload `dist/` instead.

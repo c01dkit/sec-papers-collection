@@ -4,7 +4,7 @@
 
 ## 简介
 
-本项目持续整理网络与系统安全方向（及相关领域）顶级会议的录用论文，按会议和年份分类，并通过 GitHub Pages 部署为可在线访问的网站。
+本项目持续整理网络与系统安全方向（及相关领域）顶级会议的录用论文，按会议和年份分类，并通过 Cloudflare Pages 部署为可在线访问的网站。
 
 **网站访问地址：[https://sec.c01dkit.com](https://sec.c01dkit.com)**
 
@@ -119,7 +119,7 @@
 
 ```
 analyzers/                Python 数据爬取/解析/LLM 分析模块
-cache/                    爬取缓存（pickle, SHA-256 索引；见 cache.zip）
+cache/                    爬取缓存（pickle, SHA-256 索引；被 git 忽略，仅存于本地）
 official_cache/           来自官方的 CSV / BIB 文件
 src/assets/data/          前端使用的 JSON 数据
   data.json               全量论文（不含摘要，节省体积）
@@ -147,7 +147,7 @@ uv sync                     # 安装 Python 依赖
 uv run main.py --analyze    # 爬取/解析并重新生成 src/assets/data/ 下的 JSON
 ```
 
-为加快本地爬取速度，可解压 `cache.zip` 至仓库根目录复用缓存。
+爬取过的页面会缓存在 `cache/`（被 git 忽略）下，之后再跑 `--analyze` 会直接复用、不再重新抓取；`data.yml` 中某个场次设置了 `use_cache: false` 时除外。
 
 ### 更新非论文信息
 
@@ -162,7 +162,6 @@ uv run main.py --analyze    # 爬取/解析并重新生成 src/assets/data/ 下�
 API_KEY=...
 MODEL=...
 BASE_URL=...
-PRIVATE_ZIP_PASSWD=...   # 用于 cache.zip 加密
 ```
 
 分析结果会缓存为 JSONL，避免重复请求。`--llm-analyze` 与 `--llm-tag` 默认同时发送 8 个并发请求，可用 `--llm-concurrency N` 调整（服务商返回 429 限流时调低即可）。
@@ -186,8 +185,7 @@ npm run build            # 生产构建到 dist/
 npm run preview          # 预览构建结果
 npm run check            # astro check
 npm test                 # vitest run
-npm run deploy           # 将 dist/ 发布到 GitHub Pages（--cname sec.c01dkit.com）
-npm run deploy:cf        # 将 dist/ 直传到 Cloudflare Pages（wrangler；--project-name sec-papers-collection）
+npm run deploy           # 先构建，再将 dist/ 直传到 Cloudflare Pages（wrangler；--project-name sec-papers-collection）
 ```
 
 网站基于 Astro 实现，手写 CSS，无 UI 框架、无 Tailwind；图表使用 Chart.js。
@@ -195,11 +193,14 @@ npm run deploy:cf        # 将 dist/ 直传到 Cloudflare Pages（wrangler；--p
 ## 完整发布流程
 
 ```bash
-uv run main.py --analyze --upload
-npm run deploy           # Fork 后请同步修改 package.json 中的 --cname
+uv run main.py --analyze --llm-analyze --llm-tag   # 仅当有新论文需要 LLM 分析时
+uv run main.py --analyze --upload                  # 把 LLM 结果并入 JSON，再上传
+npm run deploy           # 用新数据重新构建并发布；Fork 后请同步修改 package.json 中的 --project-name
 git add .
 git commit -m "update $DATE"
 git push origin main
 ```
 
-若部署到 Cloudflare Pages，把 `npm run deploy` 换成 `npm run deploy:cf`（需本机装有 wrangler；令牌从 `.env` 的 `CLOUDFLARE_API_TOKEN` 读取，见 `.env.example`）。Cloudflare 自带的 Git 联动构建在本仓库无法成功：`src/assets/data/` 下生成的数据 JSON 被 git 忽略，只存在于跑过 `--analyze` 的机器上，因此请在 Pages 项目里关闭自动部署，改为本地构建后直传 `dist/`。
+`main.py` 总是按 `--analyze` → `--llm-analyze` → `--llm-tag` → `--upload` 的顺序执行，一次跑完的话，LLM 结果赶不上本次的 JSON 导出，所以需要第二次 `--analyze`。`--upload` 只更新浏览器从 CDN 拉取的论文列表和摘要；统计、筛选项和场次列表是构建时写进页面的，因此每次改完数据都要 `npm run deploy`。
+
+`npm run deploy` 需本机装有 wrangler，令牌从 `.env` 的 `CLOUDFLARE_API_TOKEN` 读取（见 `.env.example`）。Cloudflare 自带的 Git 联动构建在本仓库无法成功：`src/assets/data/` 下生成的数据 JSON 被 git 忽略，只存在于跑过 `--analyze` 的机器上，因此请在 Pages 项目里关闭自动部署，改为本地构建后直传 `dist/`。

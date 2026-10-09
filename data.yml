@@ -162,11 +162,13 @@ usenix_security:
   id_prefix: IU
   sites:
     - year: 2026
-      url: https://www.usenix.org/conference/usenixsecurity26/cycle1-accepted-papers
-      title_xpath: //article/h2/a
-      link_xpath: //article/h2/a/@href
+      url: https://www.usenix.org/conference/usenixsecurity26/technical-sessions
+      # 锚点要求「论文节点 + 有 Available Media + 有摘要」：Test of Time 讨论环节
+      # （tot-discussion，2016 年的旧论文）也挂了视频，但没有摘要，旧锚点会让标题比摘要多一条。
+      title_xpath: //article[contains(@class,"node-paper")][.//div[@class="usenix-schedule-media media-header"]][.//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]]/h2/a
+      link_xpath: //article[contains(@class,"node-paper")][.//div[@class="usenix-schedule-media media-header"]][.//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]]/h2/a/@href
+      abstract_xpath: //article[contains(@class,"node-paper")][.//div[@class="usenix-schedule-media media-header"]][.//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]]//div[@class="field field-name-field-paper-description-long field-type-text-long field-label-hidden"]
       link_prefix: https://www.usenix.org
-      abstract_xpath: //article/h2/a/../../div/div/div[last()]
     - year: 2025
       #      url: https://www.usenix.org/conference/usenixsecurity25/cycle1-accepted-papers
       #      title_xpath: //article/h2/a
