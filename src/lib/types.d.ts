@@ -57,6 +57,9 @@ export interface Paper {
   abstract?: string;
   /** LLM 译写的中文摘要，同样只在 meta_json 里；对不上或未分析的论文为空串。 */
   abstract_zh?: string;
+  /** awards.json 里的原始奖项名（如 'Distinguished Paper Award'），同样只在 meta_json 里；
+   *  没获奖为空数组。tag 第 4 位只是它折成的一个字母。 */
+  awards?: string[];
 }
 
 // ── src/assets/data/submission-timeline.json ──────────────────────

@@ -2,7 +2,9 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import { LOCALES, t } from '@/i18n/index.js';
 import { groupVenues } from '@/lib/venue-groups.js';
+import { codeNames } from '@/lib/tags.js';
 import stats from '@/assets/data/data-statistics.json';
+import taxonomy from '@/assets/data/topics.json';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -10,6 +12,11 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const groups = groupVenues(stats);
+
+// 论文标题与摘要之间的「#主题 #类型」标签用的 码 -> 名，与检索页的 #ptTax 同一份构造。
+// 内容全来自本仓库的 topics.json，但 set:html 不转义，照检索页的做法把 < 转掉，免得哪天
+// 某个主题名里出现 </script> 提前闭合标签。
+const tagNames = JSON.stringify(codeNames(taxonomy, lang)).replaceAll('<', '\\u003c');
 
 // 结果区（骨架屏、错误/空态提示、论文列表）整个由 abstract-view.js 用
 // createElement 构建，那些元素永远拿不到本文件模板的 scope 属性 ——
@@ -71,7 +78,10 @@ const groups = groupVenues(stats);
     // 不是文案，是「跟随页面」档要跟的那个语言。放在这里而不是读 <html lang>：
     // 那个值是 zh-CN / en，与设置里的 zh / en 不同名，少一次映射少一处漂移。
     pageLang: lang,
+    // 也不是文案：主题 / 类型标签链去的检索页，查询串由脚本用 writeSearchParams 拼
+    searchHref: `/${lang}/search/`,
   })} />
+  <script is:inline type="application/json" id="abTax" set:html={tagNames} />
 </PageLayout>
 
 <style>
@@ -152,5 +162,20 @@ const groups = groupVenues(stats);
     overflow-wrap: anywhere;
   }
   #abResult .abs--none { font-style: italic; color: var(--faint); }
+  /* 标题与摘要之间的「#主题 #类型 #奖项」。不做胶囊、不加框：hashtag 本身就是标签的
+     样子，再套一层边框在摘要列表里会显得很吵。主题 / 类型是链接，悬浮与主题索引页的
+     .name a 同一套（底色 + 下划线贴字）；奖项用金色 —— 检索页的收藏星也是这支金。 */
+  #abResult .tags {
+    display: flex; flex-wrap: wrap; gap: 0.15rem 0.75rem; margin: 0.3rem 0 0;
+    font-family: var(--font-sans); font-size: var(--fs-kicker); line-height: 1.5;
+  }
+  #abResult .tg { color: var(--faint); overflow-wrap: anywhere; }
+  #abResult a.tg { text-decoration: none; }
+  #abResult a.tg:hover {
+    color: var(--accent); background: var(--accent-wash);
+    border-bottom: 1px solid var(--accent); padding-bottom: 0.08em;
+  }
+  #abResult a.tg:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #abResult .tg--award { color: var(--gold); }
   #abResult .skel { height: 0.7rem; background: var(--hairline-soft); margin: 0.4rem 0; }
 </style>

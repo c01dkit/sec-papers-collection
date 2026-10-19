@@ -37,6 +37,17 @@ describe('applyFilters', () => {
     expect(applyFilters(ROWS, { query: '(' })).toEqual([]);
   });
 
+  it('regex: true 时查询按正则匹配标题', () => {
+    expect(applyFilters(ROWS, { query: '^(bridge|camveil):', regex: true }).map((r) => r.id)).toEqual([R1, R2]);
+    expect(applyFilters(ROWS, { query: 'fuzz(ing)?$', regex: true }).map((r) => r.id)).toEqual([R2, R3]);
+  });
+
+  it('regex: true 下的无效正则不参与筛选，其他维度照常', () => {
+    expect(() => applyFilters(ROWS, { query: '(fuzz', regex: true })).not.toThrow();
+    expect(applyFilters(ROWS, { query: '(fuzz', regex: true })).toHaveLength(5);
+    expect(applyFilters(ROWS, { query: '(fuzz', regex: true, publications: ['NDSS'] }).map((r) => r.id)).toEqual([R4]);
+  });
+
   it('会议多选取并集', () => {
     expect(applyFilters(ROWS, { publications: ['ACM CCS'] }).map((r) => r.id)).toEqual([R3, R5]);
     expect(applyFilters(ROWS, { publications: ['ACM CCS', 'NDSS'] }).map((r) => r.id)).toEqual([R3, R4, R5]);

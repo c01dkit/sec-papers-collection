@@ -1,5 +1,6 @@
 import { applyFilters, sortRows, paginate, loadPapers } from '@/lib/papers.js';
 import { highlightSegments } from '@/lib/highlight.js';
+import { compileTitleQuery } from '@/lib/title-query.js';
 import { parseTag } from '@/lib/tags.js';
 import { readSearchParams, writeSearchParams } from '@/lib/search-url.js';
 import { getSettings, getFavorites, toggleFavorite, isPersistent } from './settings-store.js';
@@ -13,6 +14,7 @@ const initialState = () => ({
   favorites: new Set(),
   keywords: [],
   query: '',
+  regex: false,      // 查询词按正则解释（#qRe 开关，URL 里的 re=1）
   publications: [],
   years: [],
   topics: [],        // tag 第 2-3 位的码
@@ -65,15 +67,18 @@ function readJson(el, fallback) {
   }
 }
 
-function renderTitle(td, title) {
-  // 必须用 trim 后的查询。applyFilters 内部会 trim，而这里不 trim 的话，
-  // 输入一个空格：什么都不会被筛掉（对的），但每个标题里的每个空格都被标成命中；
-  // 反过来 "fuzz " 能正确筛选却一处都高亮不出来。
-  const q = state.query.trim();
-  const patterns = [
-    ...(q ? [{ text: q, cls: 'q-hit' }] : []),
+// 一次 render 里所有标题共用的高亮 pattern：检索词在前（同一处命中时 cls 归它），关键词在后。
+// 检索词的 pattern 取自 compileTitleQuery，与 applyFilters 的筛选同出一处 ——
+// 两边都先 trim，否则输入一个空格时什么都不筛，却把每个标题的每个空格标成命中；
+// 无效正则时它给 null，于是只高亮关键词，与「这一维不筛」一致。
+function titlePatterns(titleQuery) {
+  return [
+    ...(titleQuery.highlight ? [{ ...titleQuery.highlight, cls: 'q-hit' }] : []),
     ...state.keywords.map((k) => ({ text: k, cls: 'hl' })),
   ];
+}
+
+function renderTitle(td, title, patterns) {
   const frag = document.createDocumentFragment();
   for (const seg of highlightSegments(title, patterns)) {
     if (!seg.hit) {
@@ -117,7 +122,7 @@ function buildMeta(row) {
   return meta;
 }
 
-function buildRow(row) {
+function buildRow(row, patterns) {
   const tr = document.createElement('tr');
   tr.dataset.id = String(row.id);
 
@@ -137,7 +142,7 @@ function buildRow(row) {
   tdTitle.className = 'c-title';
   const span = document.createElement('span');
   span.dataset.title = '';
-  renderTitle(span, row.title);
+  renderTitle(span, row.title, patterns);
   tdTitle.appendChild(span);
   const meta = buildMeta(row);
   if (meta) tdTitle.appendChild(meta);
@@ -176,8 +181,15 @@ function buildRow(row) {
 }
 
 function render() {
+  const titleQuery = compileTitleQuery(state.query, state.regex);
+  // 无效正则（打到一半的 "(fuzz" 也算）只标输入框，不清空表格：查询这一维暂不参与筛选
+  els.qErr.hidden = !titleQuery.error;
+  if (titleQuery.error) els.q.setAttribute('aria-invalid', 'true');
+  else els.q.removeAttribute('aria-invalid');
+
   const filtered = applyFilters(state.rows, {
     query: state.query,
+    regex: state.regex,
     publications: state.publications,
     years: state.years,
     topics: state.topics,
@@ -189,7 +201,8 @@ function render() {
   const page = paginate(ordered, state.page, state.perPage);
   state.page = page.page;
 
-  els.tbody.replaceChildren(...page.rows.map(buildRow));
+  const patterns = titlePatterns(titleQuery);
+  els.tbody.replaceChildren(...page.rows.map((row) => buildRow(row, patterns)));
   els.empty.hidden = page.total > 0;
 
   // 三态都要如实写出来。原先在未加载时保留旧文本，结果 CDN 失败后计数永远停在
@@ -308,6 +321,8 @@ export async function initPaperTable() {
     pgPrev: document.getElementById('pgPrev'),
     pgNext: document.getElementById('pgNext'),
     q: document.getElementById('q'),
+    qRe: document.getElementById('qRe'),
+    qErr: document.getElementById('qErr'),
     fPub: document.getElementById('fPub'),
     fYear: document.getElementById('fYear'),
     fTopic: document.getElementById('fTopic'),
@@ -344,6 +359,13 @@ export async function initPaperTable() {
     }
   };
 
+  // 正则开关：aria-pressed 是唯一的状态表达（样式也挂在它上面），占位文案跟着换，
+  // 免得开着正则时用户还以为在做子串搜索。
+  const paintRegex = () => {
+    els.qRe.setAttribute('aria-pressed', state.regex ? 'true' : 'false');
+    els.q.placeholder = state.regex ? i18n.searchPlaceholderRegex : i18n.searchPlaceholder;
+  };
+
   // 先用内嵌的种子数据当数据源，这样 CDN 失败也有内容可筛
   state.rows = readSeed();
 
@@ -358,7 +380,9 @@ export async function initPaperTable() {
     types: valuesOf(els.fType),
   });
   state.query = fromUrl.query;
+  state.regex = fromUrl.regex;
   els.q.value = fromUrl.query;
+  paintRegex();
   for (const [details, field, placeholder] of dropdowns) {
     const want = new Set(fromUrl[field]);
     for (const input of details.querySelectorAll('input[value]')) input.checked = want.has(input.value);
@@ -385,6 +409,14 @@ export async function initPaperTable() {
     }, 120);
   });
 
+  els.qRe.addEventListener('click', () => {
+    state.regex = !state.regex;
+    paintRegex();
+    state.page = 1;
+    render();
+    syncUrl();
+  });
+
   for (const [details, field, placeholder] of dropdowns) {
     details.addEventListener('change', (e) => {
       if (e.target?.type !== 'checkbox') return;   // 过滤框的 change 不是筛选变化
@@ -407,6 +439,7 @@ export async function initPaperTable() {
 
   els.clearAll.addEventListener('click', () => {
     state.query = '';
+    state.regex = false;
     state.publications = [];
     state.years = [];
     state.topics = [];
@@ -415,6 +448,7 @@ export async function initPaperTable() {
     state.sortKey = null;
     state.page = 1;
     els.q.value = '';
+    paintRegex();
     for (const [details, , placeholder] of dropdowns) {
       details.querySelectorAll('input:checked').forEach((i) => (i.checked = false));
       details.open = false;

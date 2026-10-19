@@ -18,6 +18,7 @@ describe('CHANGELOG', () => {
   // 顺带防住「版本号对了但日期抄错行」。发新版本时要在这里补一行——这条守卫
   // 就是靠「改了 changelog.js 却忘了改这里」变红来提醒你两边都动过。
   const EXPECTED = [
+    ['v0.5.1', '2026-10-11'],
     ['v0.5.0', '2026-09-03'],
     ['v0.4.1', '2026-07-28'],
     ['v0.4.0', '2026-07-25'],
@@ -32,7 +33,7 @@ describe('CHANGELOG', () => {
     ['v0.1.1', '2023-06-19'], ['v0.1.0', '2023-05-15'],
   ];
 
-  it('29 条版本与日期逐条对得上源数据 —— 一条都不许漏', () => {
+  it('30 条版本与日期逐条对得上源数据 —— 一条都不许漏', () => {
     expect(CHANGELOG.zh.map((e) => [e.version, e.date])).toEqual(EXPECTED);
     expect(CHANGELOG.en.map((e) => [e.version, e.date])).toEqual(EXPECTED);
   });

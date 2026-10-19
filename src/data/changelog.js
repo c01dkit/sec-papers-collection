@@ -5,6 +5,14 @@
 /** @type {Record<string, import('@/lib/types.d.ts').ChangelogEntry[]>} */
 export const CHANGELOG = {
   zh: [
+    { version: 'v0.5.1', date: '2026-10-11', items: [
+      '✨ 论文摘要页新增中文摘要（大模型译写），每篇可一键切换中 / EN；设置页可选默认语言，也可关闭切换按钮',
+      '✨ 论文摘要页在标题与摘要之间以标签展示主题、类型与所获奖项（如 #模糊测试与漏洞挖掘 #Distinguished Paper Award），点主题或类型直达检索结果',
+      '标题检索支持正则表达式：点搜索框右侧的 .* 开启，命中处高亮，正则写错时即时提示',
+      '首页覆盖矩阵的格子可点击，直达该届论文摘要',
+      '字号设置新增「超大」档',
+      '新增 ICSE 2026（322 篇）、ISSTA 2026（210 篇）、SOSP 2026（62 篇），更新 USENIX Sec 2026（378 篇）',
+    ] },
     { version: 'v0.5.0', date: '2026-09-03', items: [
       '✨ 新增「主题检索」页：按 安全 / 软工 / 系统 三个领域、15 个分组、198 个主题浏览全部论文，附各主题篇数',
       '标题检索新增「主题」「类型」筛选；每行显示论文类型与主题，点主题名即按该主题筛选',
@@ -51,6 +59,14 @@ export const CHANGELOG = {
     { version: 'v0.1.0', date: '2023-05-15', items: ['首次发布 sec.c01dkit.com', '使用 mkdocs 作为网站生成器'] },
   ],
   en: [
+    { version: 'v0.5.1', date: '2026-10-11', items: [
+      '✨ Abstract page adds Chinese abstracts (LLM-translated) with a per-paper 中 / EN switch; Settings picks the default language and can hide the switch',
+      "✨ Abstract page shows each paper's topic, type and awards as tags between the title and the abstract (e.g. #Fuzzing and vulnerability discovery #Distinguished Paper Award); topic and type tags open the matching search",
+      'Title search supports regular expressions: turn on the .* toggle in the search box; matches are highlighted and an invalid pattern is flagged as you type',
+      "Cells in the home page's coverage matrix now open that edition's abstracts",
+      'New "Extra large" font size',
+      'Add ICSE 2026 (322 papers), ISSTA 2026 (210) and SOSP 2026 (62); update USENIX Sec 2026 (378)',
+    ] },
     { version: 'v0.5.0', date: '2026-09-03', items: [
       '✨ New Topics page: browse every paper by field (security / SE / systems), group and topic, with per-topic counts',
       'Search gains Topic and Type filters; each row shows its type and topic, click the topic to filter by it',

@@ -2,8 +2,12 @@ import { highlightSegments } from '@/lib/highlight.js';
 import { getSettings } from './settings-store.js';
 import { DATA_BASE } from '@/lib/cdn.js';
 import { readAbstractParams, writeAbstractParams } from '@/lib/abstract-url.js';
+import { parseTag } from '@/lib/tags.js';
+import { writeSearchParams } from '@/lib/search-url.js';
 
 let i18n = {};
+// 当前语言的 码 -> 名（#abTax），与检索页的 #ptTax 同一份构造。
+let tax = { types: {}, topics: {} };
 let keywords = [];
 // 摘要页用到的两项设置（abstractLang / abstractSwitch）。与 keywords 一样，
 // 每次 init 从库里重读 —— 设置页改完软导航回来就是新值，不需要监听广播。
@@ -100,6 +104,38 @@ function renderAbstractBlock(li, p) {
   li.appendChild(abs);
 }
 
+/**
+ * 标题行与摘要之间的「#主题 #类型 #奖项」。主题 / 类型是去检索页按该码筛选的链接
+ * （URL 用 writeSearchParams 拼，与检索页读 URL 的规则同出一处）；奖项是 awards.json
+ * 的原始英文名（meta_json 的 awards 字段），不是链接。未分类主题 00、待分析类型 0 不出标签；
+ * 一个都没有时返回 null，不留一条空行。
+ * awards 不是数组时（CDN 上还是加这个字段之前的旧数据）当作没有。
+ */
+function buildTags(p) {
+  const tag = parseTag(p.tag);
+  const chips = [];
+  const link = (kind, code, names, params) => {
+    const a = document.createElement('a');
+    a.className = `tg tg--${kind}`;
+    a.href = i18n.searchHref + writeSearchParams(params);
+    a.textContent = `#${names[code] ?? code}`;
+    chips.push(a);
+  };
+  if (tag.topic !== '00') link('topic', tag.topic, tax.topics, { topics: [tag.topic] });
+  if (tag.type !== '0') link('type', tag.type, tax.types, { types: [tag.type] });
+  for (const name of Array.isArray(p.awards) ? p.awards : []) {
+    const span = document.createElement('span');
+    span.className = 'tg tg--award';
+    span.textContent = `#${name}`;
+    chips.push(span);
+  }
+  if (!chips.length) return null;
+  const row = document.createElement('div');
+  row.className = 'tags';
+  row.append(...chips);
+  return row;
+}
+
 function renderSkeleton(box) {
   box.replaceChildren();
   const p = document.createElement('p');
@@ -161,6 +197,9 @@ function renderPapers(box, venue, year, papers) {
     }
     trow.appendChild(tmain);
     li.appendChild(trow);
+
+    const tags = buildTags(p);
+    if (tags) li.appendChild(tags);
 
     renderAbstractBlock(li, p);
 
@@ -236,6 +275,7 @@ export async function initAbstractView() {
   picker.dataset.bound = '1';
 
   i18n = JSON.parse(document.getElementById('abI18n').textContent);
+  tax = JSON.parse(document.getElementById('abTax')?.textContent || 'null') || { types: {}, topics: {} };
   const settings = await getSettings();
   keywords = settings.keywords;
   prefs = { abstractLang: settings.abstractLang, abstractSwitch: settings.abstractSwitch };

@@ -1,11 +1,13 @@
 import { DATA_BASE } from './cdn.js';
 import { parseTag } from './tags.js';
+import { compileTitleQuery } from './title-query.js';
 
 const DEFAULT_PAGE_SIZE = 15;
 
 export function applyFilters(rows, criteria) {
   const c = criteria || {};
-  const query = String(c.query || '').trim().toLowerCase();
+  // 子串 / 正则两种模式见 title-query.js；无效正则时 match 为 null，查询这一维不筛
+  const { match } = compileTitleQuery(c.query, Boolean(c.regex));
   // 空数组表示「这一维不筛」，不是「筛掉全部」
   const pubSet = c.publications && c.publications.length ? new Set(c.publications) : null;
   const yearSet = c.years && c.years.length ? new Set(c.years.map(Number)) : null;
@@ -15,8 +17,7 @@ export function applyFilters(rows, criteria) {
   const typeSet = c.types && c.types.length ? new Set(c.types) : null;
 
   return rows.filter((row) => {
-    // 用 includes 而非正则：用户可能输入 C++ 或 ( ，正则会误匹配甚至抛错
-    if (query && !String(row.title).toLowerCase().includes(query)) return false;
+    if (match && !match(row.title)) return false;
     if (pubSet && !pubSet.has(row.publication)) return false;
     if (yearSet && !yearSet.has(Number(row.year))) return false;
     if (favoritesOnly && !(favorites && favorites.has(row.id))) return false;

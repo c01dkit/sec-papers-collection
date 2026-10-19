@@ -74,6 +74,53 @@ describe('highlightSegments', () => {
     expect(segs[0]).toEqual({ text: 'fuzz', hit: true, cls: 'hl' });
   });
 
+  describe('RegExp pattern（{ re }）', () => {
+    it('按正则命中，保留原文大小写', () => {
+      const segs = highlightSegments('Fuzzing and FUZZER', [{ re: /fuzz\w*/i, cls: 'q' }]);
+      expect(hits(segs)).toEqual(['Fuzzing', 'FUZZER']);
+      expect(segs.find((s) => s.hit).cls).toBe('q');
+      expect(text(segs)).toBe('Fuzzing and FUZZER');
+    });
+
+    it('不带 g 标志的 RegExp 也能命中多处，且不改动传入的对象', () => {
+      const re = /a/i;
+      expect(hits(highlightSegments('a b a', [{ re }]))).toEqual(['a', 'a']);
+      expect(re.flags).toBe('i');
+      expect(re.lastIndex).toBe(0);
+    });
+
+    it('反向引用不受其他 pattern 影响（不能拼进同一个大正则）', () => {
+      const segs = highlightSegments('a llama tool', [{ re: /(\w)\1/i, cls: 'q' }, { text: 'tool', cls: 'kw' }]);
+      expect(hits(segs)).toEqual(['ll', 'tool']);
+      expect(segs.find((s) => s.text === 'll').cls).toBe('q');
+      expect(segs.find((s) => s.text === 'tool').cls).toBe('kw');
+    });
+
+    it('与字面 pattern 混用：最左优先，同起点取更长的', () => {
+      const segs = highlightSegments('a fuzzing tool', [{ re: /fuzz/i, cls: 'q' }, { text: 'fuzzing tool', cls: 'kw' }]);
+      expect(hits(segs)).toEqual(['fuzzing tool']);
+      expect(segs.find((s) => s.hit).cls).toBe('kw');
+    });
+
+    it('同起点同长度时排在前面的 pattern 胜出', () => {
+      const segs = highlightSegments('fuzz', [{ re: /fuzz/i, cls: 'q' }, { text: 'fuzz', cls: 'kw' }]);
+      expect(segs).toEqual([{ text: 'fuzz', hit: true, cls: 'q' }]);
+    });
+
+    it('一个 pattern 的命中被更长的命中吞掉后，它在后面的命中仍然要算', () => {
+      // 'aa' 单独扫描只得到 [1,3]；被 'xa' 的 [0,2] 挡掉后，[2,4] 那一处不能丢
+      const segs = highlightSegments('xaaa', [{ text: 'xa' }, { text: 'aa' }]);
+      expect(hits(segs)).toEqual(['xa', 'aa']);
+    });
+
+    it('只能零宽匹配的正则不高亮、不死循环', () => {
+      for (const re of [/^/, /a*/, /\b/, /(?=b)/]) {
+        const segs = highlightSegments('bbb', [{ re }]);
+        expect(segs, String(re)).toEqual([{ text: 'bbb', hit: false, cls: '' }]);
+      }
+    });
+  });
+
   it('相邻命中之间不插入空段', () => {
     const segs = highlightSegments('ab', [{ text: 'a' }, { text: 'b' }]);
     expect(segs.every((s) => s.text.length > 0)).toBe(true);

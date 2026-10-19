@@ -71,7 +71,7 @@ class TagStore:
     def __init__(self, advanced=None, cached=None, awards=None):
         self.advanced: dict[str, dict] = advanced or {}
         self.cached: dict[str, dict] = cached or {}
-        self.awards: dict[str, str] = awards or {}
+        self.awards: dict[str, list[str]] = awards or {}
 
     # -- 加载 ---------------------------------------------------------------
 
@@ -172,14 +172,20 @@ class TagStore:
             return cached
         return self.advanced.get(key, {}).get('topic', taxonomy.TOPIC_UNCLASSIFIED)
 
-    def award_code(self, publication: str, year, title: str) -> str:
-        """按发表年份和年份通配两个键各查一次，合并后取优先级最高的。
+    def award_names_for(self, publication: str, year, title: str) -> list[str]:
+        """`awards.json` 里的原始奖项名，供 meta_json 的 `awards` 字段（摘要页的奖项标签）。
 
-        一篇 2015 年的论文可能既有当年的杰出论文奖，又在 2025 年拿到时间检验奖。
+        按发表年份和年份通配两个键各查一次：一篇 2015 年的论文可能既有当年的杰出论文奖，
+        又在 2025 年拿到时间检验奖。同年的在前、通配的在后，各自保持 `awards.json` 的顺序；
+        重复的名字只留第一个（手工维护的文件里同一篇录两遍不该显示两个标签）。
         """
         names = list(self.awards.get(store_key(publication, year, title), ()))
         names += self.awards.get(store_key(publication, ANY_YEAR, title), ())
-        return taxonomy.award_code(names)
+        return list(dict.fromkeys(names))
+
+    def award_code(self, publication: str, year, title: str) -> str:
+        """奖项名折成一个字母，多个奖取优先级最高的。与 `award_names_for` 同一份名单。"""
+        return taxonomy.award_code(self.award_names_for(publication, year, title))
 
     def abstract_zh_for(self, publication: str, year, title: str) -> str:
         """LLM 回写的中文摘要；没对上或该行没有就给空串。"""

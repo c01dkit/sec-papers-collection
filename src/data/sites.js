@@ -1,6 +1,7 @@
 export const SITES = [
   { key: 'bestPaperAwards', url: 'https://jeffhuang.com/best_paper_awards/' },
   { key: 'ccfddl', url: 'https://ccfddl.top/' },
+  { key: 'ccfddl2', url: 'https://ccfddl.com/' },
   { key: 'ccfRecommend', url: 'https://ccf.atom.im/' },
   { key: 'connectedPapers', url: 'https://www.connectedpapers.com/' },
   { key: 'wisPaper', url: 'https://wispaper.ai/' },

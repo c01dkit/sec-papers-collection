@@ -46,6 +46,21 @@ export function typeLabel(taxonomy, code, lang) {
   return localName(taxonomy?.types?.[code], lang) ?? code;
 }
 
+/**
+ * 当前语言的 码 -> 名，类型与主题各一张。检索页（#ptTax）与摘要页（#abTax）把它内嵌给
+ * 页面脚本，预渲染与运行期造出来的行才用同一份文字。约 6KB 未压缩。
+ *
+ * @param {import('./types.d.ts').Taxonomy} taxonomy
+ * @param {string} lang
+ * @returns {{ types: Record<string, string>, topics: Record<string, string> }}
+ */
+export function codeNames(taxonomy, lang) {
+  /** @param {Record<string, import('./types.d.ts').TaxonomyName>} table */
+  const names = (table) =>
+    Object.fromEntries(Object.entries(table).map(([code, n]) => [code, localName(n, lang) ?? code]));
+  return { types: names(taxonomy.types), topics: names(taxonomy.topics) };
+}
+
 // 2 位大写 hex 的字典序就是数值序，所以直接比字符串
 const inRange = (code, lo, hi) => code >= lo && code <= hi;
 const sum = (xs) => xs.reduce((s, x) => s + x.count, 0);

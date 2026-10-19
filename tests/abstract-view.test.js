@@ -5,7 +5,11 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 const I18N = {
   loading: 'loading', failed: 'failed', noData: 'nodata', count: '__N__ papers',
   noAbstract: 'no-abstract', openPaper: 'open', langSwitch: 'switch lang', langZh: '中', langEn: 'EN',
-  pageLang: 'zh',
+  pageLang: 'zh', searchHref: '/zh/search/',
+};
+const TAX = {
+  types: { 0: '待分析', 1: '方法设计', 6: 'SoK' },
+  topics: { '00': '未分类', '07': '物联网安全', 23: '模糊测试与漏洞挖掘' },
 };
 
 const BOTH = { id: 'IO26001', tag: '107N', title: 'Fuzzing the kernel', paper: 'https://x/1',
@@ -19,6 +23,7 @@ function mount(pageLang = 'zh') {
     <nav class="picker"><button class="yr" data-venue="IEEE S&P" data-year="2026">2026</button></nav>
     <div id="abResult"><p class="hint">hint</p></div>
     <script type="application/json" id="abI18n">${JSON.stringify({ ...I18N, pageLang })}</script>
+    <script type="application/json" id="abTax">${JSON.stringify(TAX)}</script>
   `;
 }
 
@@ -189,5 +194,61 @@ describe('URL 深链', () => {
     expect(location.search).toBe('?pub=NDSS&year=2025');
     expect(location.pathname).toBe('/zh/abstract/');
     expect(history.length).toBe(before);
+  });
+});
+
+describe('标题与摘要之间的标签行', () => {
+  const tagsOf = (li) => li.querySelector('.tags');
+  const texts = (li) => [...tagsOf(li).children].map((el) => el.textContent);
+
+  it('依次是 #主题、#类型、#奖项，夹在标题行与摘要之间', async () => {
+    await boot([{ ...BOTH, tag: '623D', awards: ['Distinguished Paper Award', 'Best Student Paper Award'] }]);
+    const li = items()[0];
+    expect([...li.children].map((el) => el.className)).toEqual(['trow', 'tags', 'abs']);
+    expect(texts(li)).toEqual(['#模糊测试与漏洞挖掘', '#SoK', '#Distinguished Paper Award', '#Best Student Paper Award']);
+  });
+
+  it('主题与类型是去检索页按该码筛选的链接', async () => {
+    await boot([{ ...BOTH, tag: '623N' }]);
+    const [topic, type] = tagsOf(items()[0]).children;
+    expect(topic.tagName).toBe('A');
+    expect(topic.getAttribute('href')).toBe('/zh/search/?topic=23');
+    expect(type.tagName).toBe('A');
+    expect(type.getAttribute('href')).toBe('/zh/search/?type=6');
+  });
+
+  it('奖项是原始英文名，不是链接，带 tg--award 以区别样式', async () => {
+    await boot([{ ...BOTH, tag: '107D', awards: ['Distinguished Paper Award'] }]);
+    const award = tagsOf(items()[0]).querySelector('.tg--award');
+    expect(award.tagName).toBe('SPAN');
+    expect(award.textContent).toBe('#Distinguished Paper Award');
+  });
+
+  it('未分类主题（00）与待分析类型（0）不出标签', async () => {
+    await boot([{ ...BOTH, tag: '007N', awards: [] }, { ...BOTH, id: 'IO26009', tag: '100N' }]);
+    const [a, b] = items();
+    expect(texts(a)).toEqual(['#物联网安全']);
+    expect(texts(b)).toEqual(['#方法设计']);
+  });
+
+  it('什么标签都没有时不画这一行', async () => {
+    await boot([{ ...BOTH, tag: '000N', awards: [] }]);
+    const li = items()[0];
+    expect(tagsOf(li)).toBeNull();
+    expect([...li.children].map((el) => el.className)).toEqual(['trow', 'abs']);
+  });
+
+  it('畸形 tag、缺 awards 字段（CDN 上的旧数据）都安全降级', async () => {
+    await boot([{ ...BOTH, tag: 'oops' }, { ...BOTH, id: 'IO26009', tag: '107D', awards: 'Best Paper Award' }]);
+    const [a, b] = items();
+    expect(tagsOf(a)).toBeNull();
+    expect(texts(b)).toEqual(['#物联网安全', '#方法设计']);   // awards 不是数组时忽略，不把字符串逐字拆开
+  });
+
+  it('奖项名按文本插入，不当 HTML 解析', async () => {
+    await boot([{ ...BOTH, tag: '000D', awards: ['<img src=x onerror=alert(1)>'] }]);
+    const li = items()[0];
+    expect(li.querySelector('img')).toBeNull();
+    expect(texts(li)).toEqual(['#<img src=x onerror=alert(1)>']);
   });
 });

@@ -66,7 +66,17 @@ class PaperInfo:
     #: LLM 回写的中文摘要（`official_cache/advanced_data/*.jsonl` 的 `abstract_zh`），
     #: 按 `tag_store.store_key` 对上原文标题才有，对不上为空串。只进 meta_json，不进 data.json（体积）。
     abstract_zh: str = ''
+    #: `awards.json` 里的原始奖项名（`TagStore.award_names_for`），摘要页据此显示奖项标签。
+    #: tag 第 4 位把 Best / Distinguished / Best Student 都折成了 D，原名只能从这里拿。只进 meta_json。
+    awards: list[str] = field(default_factory=list)
     status: str = 'notchecked'
+
+#: 只进 meta_json、不进 data.json / data-quick-view.json 的字段（体积：一万五千多行）。
+META_ONLY_FIELDS = ('abstract', 'abstract_zh', 'awards')
+
+def list_record(paper_info: PaperInfo) -> dict:
+    """data.json / data-quick-view.json 里的一行：去掉 `META_ONLY_FIELDS`。"""
+    return {k: v for k, v in asdict(paper_info).items() if k not in META_ONLY_FIELDS}
 
 _TAG_RE = re.compile(r'^[0-9][0-9A-F]{2}[A-Z]$')   # 与 src/lib/tags.js 的 TAG_RE 一致
 
@@ -318,6 +328,7 @@ def fetch_one_paper_in_config(config, ledger=None, tag_store=None, on_edition=No
                 one_paper_info.id = assigned_id
                 one_paper_info.tag = tag_store.tag_for(name, year, one_paper_info.title)
                 one_paper_info.abstract_zh = tag_store.abstract_zh_for(name, year, one_paper_info.title)
+                one_paper_info.awards = tag_store.award_names_for(name, year, one_paper_info.title)
                 yield one_paper_info
 
 def export_data_json(project_base):
@@ -350,8 +361,8 @@ def export_data_json(project_base):
             publication = paper_info.publication
             year = str(paper_info.year)
 
-            # No abstract (either language) for small file
-            no_abs_one_paper_info = {k:v for k,v in asdict(paper_info).items() if k not in ('abstract', 'abstract_zh')}
+            # No abstract (either language) / award names for small file
+            no_abs_one_paper_info = list_record(paper_info)
 
             # Full paper info
             json_all.append(no_abs_one_paper_info)

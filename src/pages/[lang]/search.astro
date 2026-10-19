@@ -6,7 +6,7 @@ import { LOCALES, t } from '@/i18n/index.js';
 import stats from '@/assets/data/data-statistics.json';
 import quickView from '@/assets/data/data-quick-view.json';
 import { compareIds } from '@/lib/papers.js';
-import { topicOptions, typeOptions, localName } from '@/lib/tags.js';
+import { topicOptions, typeOptions, codeNames } from '@/lib/tags.js';
 import taxonomy from '@/assets/data/topics.json';
 
 export function getStaticPaths() {
@@ -48,10 +48,8 @@ const topicGroups = topicOptions(taxonomy, stats, lang, t(lang, 'topicsPage.sent
 const typeOpts = typeOptions(taxonomy, stats, lang);
 
 // 当前语言的 码 -> 名。PaperRow（预渲染）与 paper-table.js 的 buildRow（运行期，经 #ptTax）
-// 共用这一份，两边文字才会一致。约 6KB 未压缩。
-const names = (table: Record<string, { en: string; zh: string }>) =>
-  Object.fromEntries(Object.entries(table).map(([code, n]) => [code, localName(n, lang) ?? code]));
-const labels = { types: names(taxonomy.types), topics: names(taxonomy.topics) };
+// 共用这一份，两边文字才会一致。
+const labels = codeNames(taxonomy, lang);
 
 // 排序表头必须是 <th> 里的原生 <button>，不能把 click 绑在裸 <th> 上。
 // 实测（真实 Chrome，/zh/search/）：五个 <th> 全是 tabindex=null / role=null /
@@ -82,12 +80,17 @@ const sortCols = [
             lead={t(lang, 'search.lead')}>
 
   <div class="toolbar">
-    <label class="q">
-      <span class="ic" aria-hidden="true">⌕</span>
-      <input type="search" id="q" aria-label={t(lang, 'search.searchLabel')}
-             placeholder={t(lang, 'search.searchPlaceholder')}
-             autocomplete="off" spellcheck="false" />
-    </label>
+    <div class="q">
+      <label class="qin">
+        <span class="ic" aria-hidden="true">⌕</span>
+        <input type="search" id="q" aria-label={t(lang, 'search.searchLabel')}
+               aria-describedby="qErr"
+               placeholder={t(lang, 'search.searchPlaceholder')}
+               autocomplete="off" spellcheck="false" />
+      </label>
+      <button type="button" id="qRe" class="re" aria-pressed="false"
+              title={t(lang, 'search.regexToggle')} aria-label={t(lang, 'search.regexToggle')}>.*</button>
+    </div>
 
     <FilterDropdown id="fPub" label={t(lang, 'search.publication')}
                     options={publications} placeholder={t(lang, 'search.anyPublication')} />
@@ -105,6 +108,7 @@ const sortCols = [
     <button type="button" id="clearAll" class="tgl">{t(lang, 'search.clearFilters')}</button>
   </div>
 
+  <p class="qerr" id="qErr" hidden role="status">{t(lang, 'search.regexInvalid')}</p>
   <p class="notice" id="notice" hidden></p>
 
   <div class="table-scroll">
@@ -163,6 +167,8 @@ const sortCols = [
     anyTopic: t(lang, 'search.anyTopic'),
     anyType: t(lang, 'search.anyType'),
     filterByTopic: t(lang, 'search.filterByTopic'),
+    searchPlaceholder: t(lang, 'search.searchPlaceholder'),
+    searchPlaceholderRegex: t(lang, 'search.searchPlaceholderRegex'),
   })} />
 </PageLayout>
 
@@ -177,10 +183,29 @@ const sortCols = [
     border: 1px solid var(--hairline); border-radius: var(--radius); padding: 0.4rem 0.6rem;
   }
   .q:focus-within { border-color: var(--ink); }
+  /* 开关不能放进 <label> 里：button 本身是可标注元素，label 内只许有它所标注的那一个。
+     所以框是 div，label 只包图标与输入框，点图标照旧聚焦输入框。 */
+  .qin { display: flex; align-items: center; gap: 0.4rem; flex: 1 1 auto; min-width: 0; }
   .q .ic { color: var(--faint); }
   .q input {
     border: 0; background: none; color: var(--ink); font: inherit;
     font-size: var(--fs-small); width: 100%; outline: none;
+  }
+  /* 正则开关：等宽的 .*，按下时与「仅看收藏」同一套 accent 语汇 */
+  .re {
+    flex: none; background: none; cursor: pointer;
+    border: 1px solid transparent; border-radius: var(--radius);
+    padding: 0 0.3rem; margin: -0.15rem -0.25rem -0.15rem 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: var(--fs-kicker); line-height: 1.6; color: var(--faint);
+  }
+  .re:hover { color: var(--ink); border-color: var(--hairline); }
+  .re[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); background: var(--accent-wash); }
+  .re:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  /* 无效正则：框线与提示用覆盖矩阵「系统」段那支红 —— 调色板里唯一的红，深浅两套主题都已调过 */
+  .q:has(input[aria-invalid='true']) { border-color: rgb(var(--mx-sys-rgb)); }
+  .qerr {
+    margin: -0.5rem 0 1rem; font-size: var(--fs-kicker); color: rgb(var(--mx-sys-rgb));
   }
   .tgl {
     background: none; cursor: pointer; font: inherit; font-size: var(--fs-small);

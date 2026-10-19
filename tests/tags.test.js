@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   parseTag, localName, topicLabel, typeLabel, topicOptions, typeOptions, buildTopicIndex, SENTINEL_TOPICS,
+  codeNames,
 } from '@/lib/tags.js';
 import realTaxonomy from '@/assets/data/topics.json';
 import realStats from '@/assets/data/data-statistics.json';
@@ -72,6 +73,21 @@ describe('标签查表', () => {
     expect(typeLabel(TAX, '6', 'en')).toBe('SoK');
     expect(typeLabel(TAX, '8', 'en')).toBe('8');
     expect(topicLabel(undefined, '01', 'zh')).toBe('01');
+  });
+});
+
+describe('codeNames', () => {
+  it('把码表压成当前语言的 码 -> 名（类型与主题各一张），供页面内嵌给脚本', () => {
+    expect(codeNames(TAX, 'zh')).toEqual({
+      types: { 0: '待分析', 1: '方法设计', 6: 'SoK' },
+      topics: { '00': '未分类', '01': '系统安全', '02': '操作系统安全', 10: '网络安全', C0: '操作系统设计', FF: '其他' },
+    });
+    expect(codeNames(TAX, 'en').topics.C0).toBe('OS design');
+  });
+
+  it('zh 缺名时退回 en', () => {
+    const tax = { ...TAX, topics: { '01': { en: 'Only en' } }, types: {} };
+    expect(codeNames(tax, 'zh')).toEqual({ types: {}, topics: { '01': 'Only en' } });
   });
 });
 

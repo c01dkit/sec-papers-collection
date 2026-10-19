@@ -12,6 +12,7 @@ const I18N = {
   total: 'total __N__', pageOf: '__P__/__C__', selected: 'sel __N__',
   anyPublication: 'anyPub', anyYear: 'anyYear', anyTopic: 'anyTopic', anyType: 'anyType',
   copied: 'copied', notPersistent: 'np', openPaper: 'open', toggleFavorite: 'fav', filterByTopic: 'byTopic',
+  searchPlaceholder: 'ph', searchPlaceholderRegex: 'ph-re',
 };
 const TAX = {
   types: { 1: '方法设计', 6: 'SoK' },
@@ -31,6 +32,7 @@ function mount() {
   document.body.innerHTML = `
     <div class="toolbar">
       <input type="search" id="q" />
+      <button id="qRe" aria-pressed="false"></button>
       ${flat('fPub', opt('IEEE S&P', 'IEEE S&P') + opt('ACM CCS', 'ACM CCS'))}
       ${flat('fYear', opt('2026', '2026') + opt('2025', '2025'))}
       ${grouped('fTopic', [['基础设施', opt('07', '物联网安全')], ['软件', opt('23', '模糊测试与漏洞挖掘')]])}
@@ -38,6 +40,7 @@ function mount() {
       <button id="favOnly" aria-pressed="false"><span>☆</span></button>
       <button id="clearAll"></button>
     </div>
+    <p id="qErr" hidden></p>
     <p id="notice" hidden></p>
     <table class="pt"><tbody id="ptBody"></tbody></table>
     <p id="ptEmpty" hidden></p>
@@ -178,5 +181,80 @@ describe('paper-table：主题 / 类型 / URL', () => {
     box.dispatchEvent(new Event('change', { bubbles: true }));
     expect(checked('fTopic')).toEqual(['23']);
     expect(rowIds()).toEqual(['IO26002', 'IC25001']);
+  });
+});
+
+describe('paper-table：正则检索', () => {
+  const q = () => document.getElementById('q');
+  const re = () => document.getElementById('qRe');
+  const err = () => document.getElementById('qErr');
+  // 脚本里的 120ms 防抖（同上，不用假计时器）
+  const type = async (value) => {
+    q().value = value;
+    q().dispatchEvent(new Event('input'));
+    await new Promise((r) => setTimeout(r, 150));
+  };
+
+  it('从 URL 回填正则模式：开关按下、按正则筛选', async () => {
+    await boot('?q=%5E(fuzz%7Csok)&re=1');
+    expect(re().getAttribute('aria-pressed')).toBe('true');
+    expect(q().value).toBe('^(fuzz|sok)');
+    expect(rowIds()).toEqual(['IO26002', 'IC25001']);
+  });
+
+  it('默认是子串模式：同一个查询词按字面匹配', async () => {
+    await boot('?q=%5E(fuzz%7Csok)');
+    expect(re().getAttribute('aria-pressed')).toBe('false');
+    expect(rowIds()).toEqual([]);
+  });
+
+  it('点开关切到正则模式：结果、占位文案与 URL 跟着变，再点切回', async () => {
+    await boot();
+    await type('fuzz|taint');
+    expect(rowIds()).toEqual([]);
+    expect(q().placeholder).toBe('ph');
+    re().click();
+    expect(re().getAttribute('aria-pressed')).toBe('true');
+    expect(q().placeholder).toBe('ph-re');
+    expect(rowIds()).toEqual(['IO26001', 'IO26002', 'IC25001']);
+    expect(location.search).toBe('?q=fuzz%7Ctaint&re=1');
+    re().click();
+    expect(re().getAttribute('aria-pressed')).toBe('false');
+    expect(rowIds()).toEqual([]);
+    expect(location.search).toBe('?q=fuzz%7Ctaint');
+  });
+
+  it('无效正则：输入框标无效、显示提示，查询这一维不筛；改对后复原', async () => {
+    await boot('?re=1&q=fuzz&pub=ACM+CCS');
+    await type('(fuzz');
+    expect(err().hidden).toBe(false);
+    expect(q().getAttribute('aria-invalid')).toBe('true');
+    expect(rowIds()).toEqual(['IC25001']);   // 会议筛选照常
+    await type('^sok');
+    expect(err().hidden).toBe(true);
+    expect(q().hasAttribute('aria-invalid')).toBe(false);
+    expect(rowIds()).toEqual(['IC25001']);
+  });
+
+  it('子串模式下输入 ( 不算无效', async () => {
+    await boot();
+    await type('(fuzz');
+    expect(err().hidden).toBe(true);
+    expect(q().hasAttribute('aria-invalid')).toBe(false);
+  });
+
+  it('正则命中的片段被高亮', async () => {
+    await boot('?q=fuzz%5Cw*&re=1');
+    const hits = [...document.querySelectorAll('#ptBody b.q-hit')].map((b) => b.textContent);
+    expect(hits).toEqual(['Fuzzing', 'fuzzing']);
+  });
+
+  it('「清除筛选」把开关一起复位', async () => {
+    await boot('?q=%5Esok&re=1');
+    document.getElementById('clearAll').click();
+    expect(re().getAttribute('aria-pressed')).toBe('false');
+    expect(q().placeholder).toBe('ph');
+    expect(location.search).toBe('');
+    expect(rowIds()).toHaveLength(3);
   });
 });
